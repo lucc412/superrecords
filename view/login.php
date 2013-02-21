@@ -10,7 +10,7 @@
 		// page header
 		?><div align="center" style="margin-top:20px;padding-bottom:45px;"><a href="../index.php"><img src="../images_user/header-logo.png"></a></div>
 
-		<form name="objForm" method="post" action="home.php" onsubmit="javascript:return checkValidation();">
+		<form name="objForm" id="objForm" method="post" action="home.php" onsubmit="javascript:return checkValidation();">
 			<div align="center"><?
 
 				// error message if login attempt fails
@@ -27,18 +27,30 @@
 
 					<table cellpadding="10px" width="80%">
 						<tr>
-							<td class="logintd">Email Address</td>
-							<td><input type="text" name="txtName" id="txtName"></td>
+							<td class="logintd">User Name </td>
+							<td><input type="text" name="txtName" id="txtName">
+							<span style="color:red">
+							*
+							</span>
+							<br>
+							<div name="val_username" id="val_username" style=" color:red; font-size:11px;padding-bottom:15px;"></div>
+							</td>
 						</tr>
 						<tr>
 							<td class="logintd">Password</td>
-							<td><input type="password" name="txtPassword" id="txtPassword"></td>
+							<td><input type="password" name="txtPassword" id="txtPassword" onblur="password()">
+							<span style="color:red">
+							*
+							</span>
+							<br>
+							<span name="val_password" id="val_password" style=" color:red; font-size:11px;"></span>
+							</td>
 						</tr>
 						<tr><td>&nbsp;</td></tr>
 					</table>
 					<div>
 						<span style="margin-right:12px;"><button align="right" type="reset" value="Reset">Reset</button></span>
-						<span><button align="right" type="submit" value="Login">Login</button></span>
+						<span><button align="right" type="submit"  value="Login">Login</button></span>
 					</div>
 				</div>
 			</div>

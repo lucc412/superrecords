@@ -56,7 +56,7 @@
 		<tr>
 			<td class="hr">State<font style="color:red;" size="2">*</font></td>
 			<td class="dr">
-				<select name="lstState">
+				<select name="lstState" id="lstState">
 					<option value="">Select State</option><?php
 					foreach($objCallData->arrStates AS $code => $state){
 						?><option value="<?=$code?>"><?=$state?></option><?php 
@@ -110,15 +110,19 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Email</td>
+			<td class="hr">User Name
+			<font style="color:red;" size="2">*</font>
+			</td>
 			<td class="dr">
-				<input type="text" name="email" value="">
+				
+				<input type="text" name="email" id="uname">
+				
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Password</td>
+			<td class="hr">Password<font style="color:red;" size="2">*</font></td>
 			<td class="dr">
-				<input type="text" name="password" value="">
+				<input type="text" name="password" id="password" value="">
 			</td>
 		</tr>
 		<tr>

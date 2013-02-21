@@ -114,7 +114,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Email</td>
+			<td class="hr">User Name</td>
 			<td class="dr">
 				<input type="text" name="email" value="<?=$arrPracticeData['email']?>">
 			</td>

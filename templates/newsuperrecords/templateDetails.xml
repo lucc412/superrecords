@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 2.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
+<extension version="2.5" type="template" client="site">
+	<name>NEW SUPERRECORDS</name>
+	<creationDate>25 November 2009</creationDate>
+	<author>Angie Radtke</author>
+	<authorEmail>a.radtke@derauftritt.de</authorEmail>
+	<authorUrl>http://www.der-auftritt.de</authorUrl>
+	<copyright>Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>2.5.0</version>
+	<description>TPL_BEEZ2_XML_DESCRIPTION</description>
+
+	<files>
+		<folder>css</folder>
+		<folder>fonts</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+
+		<filename>index.html</filename>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
+		<filename>favicon.ico</filename>
+	</files>
+
+	<positions>
+		<position>p0</position>
+		<position>p1</position>
+		<position>p2</position>
+		<position>p3</position>
+		<position>p4</position>
+		<position>p5</position>
+		<position>p2-right</position>
+		<position>p3-right</position>
+		<position>p4-right</position>
+		<position>p5-right</position>
+		<position>SMSF-packages-right</position>
+		<position>benifits-right</position>
+		<position>p6</position>
+		<position>p7</position>
+		<position>p8</position>
+		<position>p9</position>
+		<position>p10</position>
+		<position>p11</position>
+		<position>p12</position>
+		<position>p13</position>
+		<position>p14</position>
+		<position>p15</position>
+		<position>home-banner</position>
+		<position>about-home</position>
+		<position>Benefits-home</position>
+		<position>SMSF-Packages-home</position>
+		<position>contact-us-home</position>
+		<position>contact-us-other-page</position>
+		<position>banner-middle</position>
+		
+	</positions>
+	
+</extension>

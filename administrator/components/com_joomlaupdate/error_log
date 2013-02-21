@@ -1,0 +1,6 @@
+[15-Feb-2013 07:08:39] PHP Warning:  Cannot load module 'XCache' because conflicting module 'eAccelerator' is already loaded in Unknown on line 0
+[15-Feb-2013 07:08:40] PHP Warning:  Cannot load module 'XCache' because conflicting module 'eAccelerator' is already loaded in Unknown on line 0
+[15-Feb-2013 07:08:40] PHP Warning:  fseek(): supplied argument is not a valid stream resource in /home/superrec/public_html/joomla/administrator/components/com_joomlaupdate/restore.php on line 1541
+[15-Feb-2013 07:15:01] PHP Warning:  Cannot load module 'XCache' because conflicting module 'eAccelerator' is already loaded in Unknown on line 0
+[15-Feb-2013 07:15:02] PHP Warning:  Cannot load module 'XCache' because conflicting module 'eAccelerator' is already loaded in Unknown on line 0
+[15-Feb-2013 07:15:02] PHP Warning:  fseek(): supplied argument is not a valid stream resource in /home/superrec/public_html/joomla/administrator/components/com_joomlaupdate/restore.php on line 1541

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+	type="module" version="2.5" client="site" method="upgrade">
+	<name>mod_jmcontact</name>
+	<author>Jm-Experts</author>
+	<creationDate>March 2012</creationDate>
+	<copyright>Copyright (C) 2006 - 2012 JoomDev Corp. All rights reserved.</copyright>
+	<license>GNU General Public License</license>
+	<authorEmail>info@jm-experts.com</authorEmail>
+	<authorUrl>www.jm-experts.com</authorUrl>
+	<version>1.0.3</version>
+	<description>MOD_JMCONTACT_XML_DESCRIPTION</description>
+	
+	<files>
+		<filename module="mod_jmcontact">mod_jmcontact.php</filename>
+		<folder>tmpl</folder>
+		<folder>upload</folder>
+		<folder>helper</folder>
+		<filename>index.html</filename>
+		<filename>mod_jmcontact.xml</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.mod_jmcontact.ini</language>
+		<language tag="en-GB">en-GB.mod_jmcontact.sys.ini</language>
+	</languages>
+	
+	<config>
+	<fields name="params">
+		<fieldset name="basic">
+		<field	
+			name="layout"	
+			type="list"	
+			label="MOD_JMCONTACT_LABEL_SELECT_LAYOUT" 
+			default="default" 
+			description="MOD_JMCONTACT_DESC_SELECT_LAYOUT" >
+			
+				<option value="default">MOD_JMCONTACT_PARAM_LAYOUT_DEFAULT</option>
+				<option value="business">MOD_JMCONTACT_PARAM_LAYOUT_BUSINESS</option>
+					
+		</field>
+				
+				<field	name="moduleclass_sfx"
+					type="text"
+					label="MOD_JMCONTACT_LABEL_SELECT_MODULE_CLASS_SUFFIX"
+					description="MOD_JMCONTACT_DESC_SELECT_MODULE_CLASS_SUFFIX" />
+				<field
+					name="pretext"
+					type="textarea"
+					filter="safehtml"
+					cols="30"
+					rows="5"
+					label="MOD_JMCONTACT_LABEL_PRETEXT"
+					description="MOD_JMCONTACT_DESC_PRETEXT" />
+				<field
+					name="PostText"
+					type="textarea"
+					filter="safehtml"
+					cols="30"
+					rows="5"
+					label="MOD_JMCONTACT_LABEL_POSTTEXT"
+					description="MOD_JMCONTACT_DESC_POSTTEXT" />
+		 
+			<field
+				name="emailTo"
+				type="text"
+				size="40" 
+				default=""  
+				label="MOD_JMCONTACT_LABEL_SEND_EMAIL" 
+				description="MOD_JMCONTACT_DESC_SEND_EMAIL"/>
+				
+				 <field 
+				 name="emailCC"  
+				 type="text" 
+				 size="40" 
+				 default=""  
+				 label="MOD_JMCONTACT_LABEL_SEND_EMAIL_CC" 
+				 
+				description="MOD_JMCONTACT_DESC_SEND_EMAIL_CC" />
+				 
+                <field 
+					name="emailBCC"  
+					type="text" 
+					size="40" 
+					default=""  
+					label="MOD_JMCONTACT_LABEL_SEND_EMAIL_BCC" 
+					description="MOD_JMCONTACT_DESC_SEND_EMAIL_BCC" />
+												 
+				  <field 
+					name="subjectlabel" 
+					type="text" 
+					size="40"  
+					default="Subject" 	
+					label="MOD_JMCONTACT_LABEL_SUBJECT" 
+					description="MOD_JMCONTACT_DESC_SUBJECT" />
+				  
+				  	
+			<field 
+				type="text" 
+				name="thankmsg" 
+				default="Thank You" 
+				label="MOD_JMCONTACT_LABEL_THANK_YOU" 
+				size="40"  
+				description="MOD_JMCONTACT_DESC_THANK_YOU" />
+				
+		<field 
+			type="text" 
+			name="redirecturl" 
+			default="index.php" 
+			label="MOD_JMCONTACT_LABEL_REDIRECT" 
+			size="40"  
+			description="MOD_JMCONTACT_DESC_REDIRECT" />
+				  
+				 <field 
+					name="Reset_button"  
+					type="radio" 
+					default="Y" 
+					label="MOD_JMCONTACT_LABEL_RESET_BUTTON" 
+					description="MOD_JMCONTACT_DESC_RESET_BUTTON"  >
+						<option value="Y">MOD_JMCONTACT_PARAM_RESET_BUTTON_YES</option>
+						<option value="N">MOD_JMCONTACT_PARAM_RESET_BUTTON_NO</option>
+					
+				</field>
+				<field 
+					name="copymestatus"  
+					type="radio" 
+					default="Y" 
+					label="MOD_JMCONTACT_LABEL_SHOW_HIDE_COPY" 
+					description="MOD_JMCONTACT_DESC_SHOW_HIDE_COPY"  >
+						<option value="Y">MOD_JMCONTACT_PARAM_SHOW_HIDE_YES</option>
+						<option value="N">MOD_JMCONTACT_PARAM_SHOW_HIDE_NO</option>
+					
+				</field>
+				
+				
+				<field 
+					name="copymelabel" 
+					type="text" 
+					size="40"  
+					default="Copy Me" 
+					label="MOD_JMCONTACT_LABEL_SENT_COPY" 
+					description="MOD_JMCONTACT_DESC_SENT_COPY" />
+				
+
+				 
+				 
+			</fieldset>	
+			
+				<fieldset name="Personal" 
+				label="MOD_JMCONTACT_LABEL_PERSONAL_LAYOUT">
+				<field 
+					type="text" 
+					name="namelbl" 
+					default="Name"
+					label="MOD_JMCONTACT_LABEL_NAME" 
+					size="40" 
+					description="MOD_JMCONTACT_DESC_NAME" />
+			
+				
+				
+				<field 
+					type="radio" 
+					name="namestatus" 
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_NAME_SHOW"  
+					description="MOD_JMCONTACT_DESC_NAME_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+		<field 
+			type="text" 
+			name="companylbl" 
+			size="40" 
+			default="Company" 
+			label="MOD_JMCONTACT_LABEL_FOR_COMPANY"  
+			description="MOD_JMCONTACT_DESC_FOR_COMPANY" />
+		<field 
+			type="radio" 
+			name="companystatus" 
+			default='Y' 
+			label="MOD_JMCONTACT_LABEL_SHOW_COMPANY"  
+			description="MOD_JMCONTACT_DESC_SHOW_COMPANY" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				<field 
+					type="text" 
+					name="phonelbl" 
+					size="40" 
+					default="Phone" 
+					label="MOD_JMCONTACT_LABEL_PHONE"  
+					description="MOD_JMCONTACT_DESC_PHONE" />
+					
+		<field 
+			type="radio" 
+			name="phonestatus" 
+			default='Y' 
+			label="MOD_JMCONTACT_LABEL_PHONE_SHOW"  
+			description="MOD_JMCONTACT_DESC_PHONE_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				<field 
+				type="text"
+				name="Emaillbl" 
+				size="40" 
+				default='Email'
+				label="MOD_JMCONTACT_LABEL_FOR_EMAIL"  
+				description="MOD_JMCONTACT_DESC_FOR_EMAIL" />
+				
+				<field 
+					type="radio" 
+					name="Email" 
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_FOR_EMAIL_SHOW"  
+					description="MOD_JMCONTACT_DESC_FOR_EMAIL_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+				
+			<field 
+				type="text" 
+				name="mobilelbl" 
+				size="40" 
+				default='Mobile'
+				label="MOD_JMCONTACT_LABEL_FOR_MOBILE"  
+				description="MOD_JMCONTACT_DESC_FOR_MOBILE" />
+				
+		<field 
+		type="radio" 
+		name="mobilestatus" 
+		default='Y' 
+		label="MOD_JMCONTACT_LABEL_FOR_MOBILE_SHOW"  
+		description="MOD_JMCONTACT_DESC_FOR_MOBILE_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+			<field 
+			type="text" 
+			name="websitelbl" 
+			size="40" 
+			default='Website' 
+			label="MOD_JMCONTACT_LABEL_FOR_WEBSITE" 
+			description="MOD_JMCONTACT_DESC_FOR_WEBSITE" />
+			
+			<field 
+				type="radio" 
+				name="websitestatus" 				
+				default='Y' 
+				label="MOD_JMCONTACT_LABEL_FOR_WEBSITE_SHOW"  
+				description="MOD_JMCONTACT_DESC_FOR_WEBSITE_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+			<field 
+				type="text" 
+				name="messagelbl" 
+				size="40" 
+				default='Message' 
+				label="MOD_JMCONTACT_LABEL_FOR_MESSAGE"  
+				description="MOD_JMCONTACT_DESC_FOR_MESSAGE" />
+				
+			<field 
+				type="radio" 
+				name="messagestatus" 
+				default='Y' 
+				label="MOD_JMCONTACT_LABEL_FOR_MESSAGE_SHOW"  
+				description="MOD_JMCONTACT_DESC_FOR_MESSAGE_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+			<field type="text" 
+				name="filelbl"
+				size="40" 
+				default='Attachment' 
+				label="MOD_JMCONTACT_LABEL_CUSTOM_FILE" 
+				description="MOD_JMCONTACT_DESC_CUSTOM_FILE" />
+					
+				<field type="radio"
+					name="filelbl_required" 
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_CUSTOM_FILE_SHOW_HIDE"  
+					description="MOD_JMCONTACT_LABEL_CUSTOM_FILE_SHOW_HIDE_DESC" >
+		
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+						
+				</field>
+				
+				
+	</fieldset>	
+	
+
+			
+				<fieldset name="Business" label="MOD_JMCONTACT_LABEL_BUSINESS_LAYOUT">
+				
+				<field type="text" 
+					name="bnamelbl" 
+					default="Name" 
+					label="MOD_JMCONTACT_LABEL_BUSINESS_NAME" 
+					size="40" 
+					description="MOD_JMCONTACT_DESC_BUSINESS_NAME" />
+			
+				
+				
+				<field type="radio" 
+				name="bnamestatus"
+				default='Y' 
+				label="MOD_JMCONTACT_LABEL_BUSINESS_NAME_SHOW" 
+				description="MOD_JMCONTACT_DESC_BUSINESS_NAME_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+			<field type="text"
+				name="bcompanylbl" 
+				size="40" 
+				default="Company" 
+				label="MOD_JMCONTACT_LABEL_BUSINESS_COMPANY"  
+				description="MOD_JMCONTACT_DESC_BUSINESS_COMPANY" />
+		
+				<field type="radio"
+					name="bcompanystatus" 
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_BUSINESS_COMPANY_SHOW" 
+					description="MOD_JMCONTACT_DESC_BUSINESS_COMPANY_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+				<field type="text"
+					name="bphonelbl" 
+					size="40" 
+					default="Phone" 
+					label="MOD_JMCONTACT_LABEL_PHONE"  
+					description="MOD_JMCONTACT_DESC_PHONE" />
+				
+				<field type="radio" 
+					name="bphonestatus" 
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_PHONE_SHOW"  
+					description="MOD_JMCONTACT_DESC_PHONE_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+				<field 
+					type="text" 
+					name="bEmaillbl"
+					size="40" 
+					default='Email' 
+					label="MOD_JMCONTACT_LABEL_BUSINESS_COMPANY_EMAIL" 
+					description="MOD_JMCONTACT_DESC_BUSINESS_COMPANY_EMAIL" />
+				
+				<field type="radio"
+					name="bEmail"
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_BUSINESS_COMPANY_EMAIL_SHOW" 
+					description="MOD_JMCONTACT_DESC_BUSINESS_COMPANY_EMAIL_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+					
+				<field type="text" 
+				name="bmobilelbl"
+				size="40" 
+				default='Mobile' 
+				label="MOD_JMCONTACT_LABEL_FOR_MOBILE" 
+				description="MOD_JMCONTACT_DESC_FOR_MOBILE" />
+			
+			<field type="radio"
+				name="bmobilestatus"
+				default='Y' 
+				label="MOD_JMCONTACT_LABEL_BUSINESS_COMPANY_MOBILE_SHOW" 
+				description="MOD_JMCONTACT_DESC_BUSINESS_COMPANY_MOBILE_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+						
+			</field>
+				
+			<field type="text" 
+				name="bwebsitelbl" 
+				size="40" 
+				default='Website' 
+				label="MOD_JMCONTACT_LABEL_BUSINESS_WEBSITE"  
+				description="MOD_JMCONTACT_DESC_BUSINESS_WEBSITE" />
+				
+				<field type="radio" 
+					name="bwebsitestatus" 
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_BUSINESS_WEBSITE_SHOW" 
+					description="MOD_JMCONTACT_DESC_BUSINESS_WEBSITE_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+				<field type="text"
+					name="bmessagelbl" 
+					size="40" 
+					default='Message'
+					label="MOD_JMCONTACT_LABEL_BUSINESS_MESSAGE" 
+					description="MOD_JMCONTACT_DESC_BUSINESS_MESSAGE" />
+		
+				<field type="radio" 
+					name="bmessagestatus"
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_BUSINESS_MESSAGE_SHOW" 
+					description="MOD_JMCONTACT_DESC_BUSINESS_MESSAGE_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>	
+				</field>
+				
+				<field type="text" 
+					name="customfieldfirst" 
+					size="40" 
+					default='Custom Field First' 
+					label="MOD_JMCONTACT_LABEL_CUSTOM_FIRST"  
+					description="MOD_JMCONTACT_DESC_CUSTOM_FIRST" />
+				
+				<field type="radio" 
+					name="customfieldfirst_status" 
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_CUSTOM_FIRST_SHOW" 
+					description="MOD_JMCONTACT_DESC_CUSTOM_FIRST_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+				<field type="text" 
+					name="customfieldsecond" 
+					size="40" 
+					default='Custom Field Second' 
+					label="MOD_JMCONTACT_LABEL_CUSTOM_SECOND" 
+					description="MOD_JMCONTACT_DESC_CUSTOM_SECOND" />
+					
+				<field type="radio"
+					name="customfieldsecond_status" 
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_CUSTOM_SECOND_SHOW"  
+					description="MOD_JMCONTACT_DESC_CUSTOM_SECOND_SHOW" >
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>	
+				</field>
+				
+				<field type="text" 
+				name="bfilelbl"
+				size="40" 
+				default='Attachment' 
+				label="MOD_JMCONTACT_LABEL_CUSTOM_FILE" 
+				description="MOD_JMCONTACT_DESC_CUSTOM_FILE" />
+					
+				<field type="radio"
+					name="bfilelbl_required" 
+					default='Y' 
+					label="MOD_JMCONTACT_LABEL_CUSTOM_FILE_SHOW_HIDE"  
+					description="MOD_JMCONTACT_LABEL_CUSTOM_FILE_SHOW_HIDE_DESC" >		
+				<option value="N">MOD_JMCONTACT_PARAM_NAME_SHOW_N</option>
+				<option value="Y">MOD_JMCONTACT_PARAM_NAME_SHOW_Y</option>
+				<option value="R">MOD_JMCONTACT_PARAM_NAME_SHOW_R</option>
+				</field>
+				
+				
+				
+		
+				
+				
+	</fieldset>	
+	
+		
+	
+	<fieldset name="RECAPTCHA" label="MOD_JMCONTACT_LABEL_RECAPTCHA">
+		
+				<field name="enablecap" 
+				type="radio" default="0" 
+				label="MOD_JMCONTACT_LABEL_ENABLE_RECAPTCH"
+				description="MOD_JMCONTACT_DESC_ENABLE_RECAPTCH">
+						<option value="0">MOD_JMCONTACT_PARAM_ENABLE_RECAPTCH_NO</option>
+						<option value="1">MOD_JMCONTACT_PARAM_ENABLE_RECAPTCH_YES</option>
+				</field>
+				
+			<field type="text" 
+				name="public"
+				default='' 
+				size="60" 
+				label="MOD_JMCONTACT_LABEL_RECAPTCHA_PUBLIC"  
+				description="MOD_JMCONTACT_DESC_RECAPTCHA_PUBLIC" />
+			
+			<field type="text"
+				name="private"
+				default=''
+				size="60" 
+				label="MOD_JMCONTACT_LABEL_RECAPTCHA_PRIVATE" 
+				description="MOD_JMCONTACT_DESC_RECAPTCHA_PRIVATE" />
+		
+			<field type="list"
+				name="jmtheme"
+				default="0" 
+				label="MOD_JMCONTACT_LABEL_RECAPTCHA_THEME"
+				description="MOD_JMCONTACT_DESC_RECAPTCHA_THEME">
+					<option value="0">MOD_JMCONTACT_PARAM_RECAPTCHA_THEME_R</option>
+					<option value="1">MOD_JMCONTACT_PARAM_RECAPTCHA_THEME_W</option>
+					<option value="2">MOD_JMCONTACT_PARAM_RECAPTCHA_THEME_B</option>
+					<option value="3">MOD_JMCONTACT_PARAM_RECAPTCHA_THEME_C</option>
+			</field>
+	</fieldset>	 
+</fields>
+</config>		 
+				
+</extension>			
+				

@@ -1,0 +1,130 @@
+<?php  
+    include 'common/varDeclare.php';
+    include 'dbclass/commonFunctions_class.php';
+    include 'dbclass/cases_content_class.php';
+    include 'dbclass/cases_db_class.php';
+    include 'dbclass/client_mail_class.php';
+  if($_SESSION['validUser'])
+  {
+          if (isset($_GET["order"])) $order = @$_GET["order"];
+          if (isset($_GET["type"])) $ordtype = @$_GET["type"];
+          if (isset($_POST["filter"])) $filter = @$_POST["filter"];
+          if (isset($_POST["filter_field"])) $filterfield = @$_POST["filter_field"];
+          $wholeonly = false;
+          if (isset($_POST["wholeonly"])) $wholeonly = @$_POST["wholeonly"];
+          if (!isset($order) && isset($_SESSION["order"])) $order = $_SESSION["order"];
+          if (!isset($ordtype) && isset($_SESSION["type"])) $ordtype = $_SESSION["type"];
+          if (!isset($filter) && isset($_SESSION["filter"])) $filter = $_SESSION["filter"];
+          if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_SESSION["filter_field"];
+        ?>
+        <html>
+            <head>
+                <title>Tickets</title>
+                <meta name="generator" http-equiv="content-type" content="text/html">
+                <LINK href="<?php echo $styleSheet; ?>Style.css" rel="stylesheet" type="text/css">
+                <LINK href="<?php echo $styleSheet; ?>tooltip.css" rel="stylesheet" type="text/css">
+                <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-1.4.2.min.js"></script>
+                <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-ui-1.8.custom.min.js"></script>
+                <link rel="stylesheet" href="as/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
+                <script type="text/javascript" src="as/js/bsn.AutoSuggest_2.1.3.js" charset="utf-8"></script>
+                <script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
+                <script language="JavaScript" src="<?php echo $javaScript; ?>datetimepicker.js"></script>
+                <script language="JavaScript" src="<?php echo $javaScript; ?>cases.js"></script>
+            </head>
+            <body>
+                <?php include ("includes/header.php");?><br>
+                 <?php
+                    //Get FormCode
+                  $formcode=$commonUses->getFormCode("Cases");
+                  //Call CheckAccess function by passing $_SESSION of staff code and form code
+                  $access_file_level=$commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+                  if($access_file_level==0)
+                  {
+                  //If View, Add, Edit, Delete all set to N
+                  echo "<br>You are not authorised to view this file.";
+                  }
+                  else if(is_array($access_file_level)==1)
+                  {
+                  //If any one of View, Add, Edit, Delete set to Y or N
+                  $showrecs = 20;
+                  $pagerange = 10;
+                  $a = @$_GET["a"];
+                  $recid = @$_GET["recid"];
+                  $page = @$_GET["page"];
+                  if (!isset($page)) $page = 1;
+                  $sql = @$_POST["sql"];
+                  $mode=@$_GET["mode"];
+                  if($mode=="delete")
+                    if($access_file_level['stf_Delete']=="Y")
+                         {
+                            $casesDbcontent->sql_delete($_REQUEST['recid']);
+                         }
+                    else
+                         {
+                            echo "You are not authorised to delete the record.";
+                         }
+                  switch ($sql) {
+                    case "insert":
+                        $casesDbcontent->sql_insert();
+                      break;
+                    case "update":
+                        $casesDbcontent->sql_update();
+                      break;
+                   }
+                  switch ($a) {
+                    case "add":
+                         if($access_file_level['stf_Add']=="Y")
+                          {
+                            $casesContent->addrec();
+                           }
+                          else
+                          {
+                            echo "You are not authorised to add a record.";
+                          }
+                      break;
+                    case "view":
+                         if($access_file_level['stf_View']=="Y")
+                          {
+                            $casesContent->viewrec($recid,$access_file_level);
+                           }
+                           else
+                          {
+                            echo "You are not authorised to view the record.";
+                          }
+                      break;
+                    case "edit":
+                         if($access_file_level['stf_Edit']=="Y")
+                          {
+                            $casesContent->editrec($recid);
+                           }
+                           else
+                          {
+                            echo "You are not authorised to edit record.";
+                          }
+                      break;
+                    default:
+                         if($access_file_level['stf_View']=="Y")
+                          {
+                            $casesContent->select($access_file_level);
+                           }
+                           else
+                          {
+                            echo "You are not authorised to view the record.";
+                          }
+                      break;
+                  }
+                  if (isset($order)) $_SESSION["order"] = $order;
+                  if (isset($ordtype)) $_SESSION["type"] = $ordtype;
+                  if (isset($filter)) $_SESSION["filter"] = $filter;
+                  if (isset($filterfield)) $_SESSION["filter_field"] = $filterfield;
+                  if (isset($wholeonly)) $_SESSION["wholeonly"] = $wholeonly;
+                    mysql_close();
+                }
+				include("includes/footer.php");
+			 }  
+        else
+        {
+            header("Location:index.php?msg=timeout");
+        }
+?>
+ 

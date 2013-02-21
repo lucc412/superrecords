@@ -1,0 +1,23 @@
+Dhiraj:
+=======
+1.
+(From Joomla Admin)
+- Create Article for Superrecords
+- Crearte Menus for superroecds 
+
+2.
+**INSTALL ANOTHER JOOMLA 2.5 in local (befreesuper)***
+- Create vHOST file enty
+- Create hosts file entry
+- Create Aticle for befreesuperc.om.au
+- Create Menu for befreesuperc.om.au
+
+3.
+- Get Joomla template from YOgi. (suprerecords)
+- Get Joomla template from YOgi. (befreesuper)
+
+4.
+Integrate Joomla menu , Artilece with new template for both sites
+
+Remove all default Joomla Artile + menus from both sites
+***********************************************************************************************

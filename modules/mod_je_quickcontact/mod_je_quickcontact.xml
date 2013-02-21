@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="module" client="site">
+	<name>JE Quick Contact</name> 
+	<author>jExtensions.com</author> 
+	<creationDate>2012 October</creationDate> 
+	<copyright>jExtensions.com</copyright> 
+	<license>This extension in released under the GNU/GPL License - http://www.gnu.org/copyleft/gpl.html</license> 
+	<authorEmail>support@jExtensions.com</authorEmail> 
+	<authorUrl>www.jExtensions.com</authorUrl> 
+	<version>2.5.0</version> 
+	<description>
+	<![CDATA[
+	<h1>JE Quick Contact Module</h1>
+	<div style="margin:0 0 0 10px; font-size:15px;">Download more free extensions at <a href="http://jextensions.com" target="_blank">jExtensions.com</a>;
+	<br/><br/>Get support for this Joomla module on the official <a href="http://jextensions.com/jquery-ajax-quick-contact-module/" target="_blank">Quick Contact Module</a> page.</div><br/>
+	<div style="margin:0 0 0 10px; font-size:11px;"></div>
+	<br/>
+		]]>
+	</description>
+	
+	<files>
+		<filename module="mod_je_quickcontact">mod_je_quickcontact.php</filename>
+		<filename>index.html</filename>
+		<folder>css/</folder>
+		<folder>js/</folder>
+		<folder>php/</folder>
+		<folder>images/</folder>
+	</files>
+
+	<config>
+		<fields name="params" addfieldpath="/modules/mod_je_quickcontact/php">
+			<fieldset name="basic">
+				<field name="jQuery" type="list" default="1" label="jQuery" description="Enable or disable jQuery plugin on this module.">
+					<option value="1">jQuery Latest Version</option>
+					<option value="2">Disable jQuery Plugin</option>
+				</field>
+				<field type="spacer" name="&lt;div class=&quot;sub-heading&quot;&gt;Contact Form&lt;/div&gt;" />
+				<field name="name" type="text" default="Name" label="Name Label" description="Change name label text." />
+				<field name="email" type="text" default="Email" label="Email Label" description="Change email lable text." />
+				<field name="message" type="text" default="Message" label="Message Label" description="Change message label text." />
+				<field name="captcha_label" type="list" default="1" label="Captcha" description="Enable or Disable captcha.">
+					<option value="1">Enable</option>
+					<option value="2">Disable</option>
+				</field>				
+				<field name="captcha" type="text" default="Captcha" label="Captcha Label" description="Change captcha lable text." />
+				<field name="submit" type="text" default="Send" label="Submit Button Text" description="Change submit button text." />
+				
+				<field type="spacer" name="&lt;div class=&quot;sub-heading&quot;&gt;Email&lt;/div&gt;" />
+				
+				<field name="recipient" type="email" default="" label="Recipient Email" description="Email address to receive the emails sent via JE Quick Contact." />
+				<field name="subject" type="text" default="JE Quick Contact" label="Email Subject" description="Subject of Quick Contact emails." />
+				
+				<field type="spacer" name="&lt;div class=&quot;sub-heading&quot;&gt;Colors and Styles&lt;/div&gt;" />
+				<field name="label_text" type="jscolor" default="#333333" label="Label Text Color" description="" />
+				<field name="input_bg" type="jscolor" default="#ffffff" label="Input Background" description="" />
+				<field name="input_brd" type="jscolor" default="#cccccc" label="Input Border Color" description="" />
+				<field name="input_text" type="jscolor" default="#333333" label="Input Text Color" description="" />
+
+				<field name="button_style" type="list" default="default" label="Button Style" description="Select style of Submit Button.">
+					<option value="default">Default (white)</option>
+					<option value="primary">Blue</option>
+					<option value="warning">Orange</option>
+					<option value="danger">Red</option>
+					<option value="success">Green</option>
+					<option value="info">Light Blue</option>
+					<option value="inverse">Dark (black)</option>
+				</field>	
+							
+				<field type="asset" />
+			</fieldset>		
+		</fields>
+	</config>
+</extension>

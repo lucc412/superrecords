@@ -247,9 +247,6 @@ function select($access_file_level) {
 </form>
 <p>&nbsp;</p>
 <br><br>
-<table class="fieldtable_outer" align="center">
-<tr>
-<td>
 <?php 
   if($access_file_level['stf_Add']=="Y")
 	  {  

@@ -368,7 +368,7 @@ switch ($viewSection)
 					</td>
 				</tr>
 			</table>
-				<button type="submit" value="Update" name="btnJob" class="cancelbutton">Updatess</button></td>
+				<button type="submit" value="Update" name="btnJob" class="cancelbutton">Update</button></td>
 				<input type="hidden" name="sql" value="update">
 				<input type="hidden" name="recid" value="<?=$_REQUEST["jobId"]?>">
 				<input type="hidden" name="a" value="edit">
@@ -785,8 +785,9 @@ switch ($viewSection)
 					</td>
 				</tr>
 			</table>
-			
-		<br><br><span class="frmheading">Add Query</span><hr size="1" noshade>
+		<div class="frmheading" style="padding-top:45px;">
+			<h1>Add Query</h1>
+		</div>
 		
 		<form method="POST" name="frmQueriesList" action="job.php?a=add&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
 			

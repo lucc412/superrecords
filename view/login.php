@@ -3,6 +3,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title>Practice Login</title>
 		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
+		<link href="../images_user/favicon.ico" rel="shortcut icon" />
 		<script type="text/javascript" src="../js/login_validation.js"></script>
 	</head>
 	<body class="pagebackground"><?

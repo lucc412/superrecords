@@ -114,13 +114,16 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">User Name</td>
+			<td class="hr">User Name<font style="color:red;" size="2">*</font></td>
+			
+		
 			<td class="dr">
 				<input type="text" name="email" value="<?=$arrPracticeData['email']?>">
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Password</td>
+			<td class="hr">Password<font style="color:red;" size="2">*</font></td>
+			
 			<td class="dr">
 				<input type="text" name="password" value="<?=$arrPracticeData['password']?>">
 			</td>

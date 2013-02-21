@@ -20,7 +20,7 @@ function checkValidation() {
 	
 	if(password.value == "") 
 	{
-		document.getElementById('val_password').innerHTML = "Please Provide Pass Word";
+		document.getElementById('val_password').innerHTML = "Please Provide Password";
 		document.getElementById('txtPassword').focus();
 		password.className = "errclass";
 		flagReturn = false;

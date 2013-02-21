@@ -566,7 +566,12 @@ switch ($viewSection)
 					<td class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["report_title"])?></td>	
 					<td width="23%" align="center" class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["date"])?></td>
 					<td width="10%" class="<?=$style?> blueBG" align="center">
-							<a href="job.php?a=reset&doAction=documents&filePath=<?=$arrInfo["file_path"]?>&flagType=R" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
+					<?
+					$fileName = $arrInfo['file_path'];
+					$filePath = "../uploads/reports/".$fileName;
+					?>
+					
+							<a href="<?php echo $filePath;?>" target="_blank" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
 					  </td>
 				</tr><?
 			}

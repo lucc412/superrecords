@@ -11,7 +11,8 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=9" />
 		<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
-		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" /> 
+		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
+		<link href="../images_user/favicon.ico" rel="shortcut icon" />
 		<!-- Main CSS-->
 		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css"/>
 		<!-- Google Webfont -->

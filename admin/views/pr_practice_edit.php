@@ -96,7 +96,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Contact Phone No</td>
+	 		<td class="hr">Contact Phone No</td>
 			<td class="dr">
 				<input type="text" name="phoneNo" value="<?=$arrPracticeData['phone_no']?>">
 			</td>
@@ -114,7 +114,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">User Name<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Email (User Name)<font style="color:red;" size="2">*</font></td>
 			
 		
 			<td class="dr">

@@ -41,7 +41,7 @@
 	</tr>
 	<tr>
 		<td class="hr">Main Contact Name</td>
-		<td class="dr"><?=htmlspecialchars($arrPracticeData["main_contact_name"])?></td>
+	 	<td class="dr"><?=htmlspecialchars($arrPracticeData["main_contact_name"])?></td>
 	</tr>
 	<tr>
 		<td class="hr">Other Contact Name</td>
@@ -60,7 +60,7 @@
 		<td class="dr"><?=htmlspecialchars($arrPracticeData["fax"])?></td>
 	</tr>
 	<tr>
-		<td class="hr">User Name</td>
+		<td class="hr">Email (User Name)</td>
 		<td class="dr"><?=htmlspecialchars($arrPracticeData["email"])?></td>
 	</tr>
 	<tr>

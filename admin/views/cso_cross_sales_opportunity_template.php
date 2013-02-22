@@ -37,7 +37,7 @@
                         <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-ui-1.8.custom.min.js"></script>
                         <script type="text/javascript" src="<?php echo $javaScript; ?>plugins/localisation/jquery.localisation-min.js"></script>
                         <script type="text/javascript" src="<?php echo $javaScript; ?>plugins/scrollTo/jquery.scrollTo-min.js"></script>
-                        <script type="text/javascript" src="<?php echo $javaScript; ?>ui.multiselect.js"></script>
+                        <!--<script type="text/javascript" src="<?php echo $javaScript; ?>ui.multiselect.js"></script>-->
                         <script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
                         <script language="JavaScript" src="<?php echo $javaScript; ?>datetimepicker.js"></script>
                         <script language="JavaScript" src="<?php echo $javaScript; ?>sales_opportunity_validate.js"></script>
@@ -154,8 +154,8 @@
                         }
                     break;
                }
-?>
-            </body>
+		     include("includes/footer.php");
+		  ?></body>
         </html>
 <?php
       }

@@ -35,7 +35,7 @@ function validateFormOnSubmit() {
 	
 	
 	else if (document.managepractice.email.value == "") {
-		alert("Enter User Name");
+		alert("Enter Email (User Name)");
 		document.managepractice.email.focus();
 		return false;
 	}

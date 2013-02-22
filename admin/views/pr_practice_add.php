@@ -110,7 +110,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">User Name
+			<td class="hr">Email (User Name)
 			<font style="color:red;" size="2">*</font>
 			</td>
 			<td class="dr">

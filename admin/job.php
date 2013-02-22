@@ -116,7 +116,12 @@ if($_SESSION['validUser']) {
 
 					break;
 			}
-		include("includes/footer.php");
+		
+		if($_REQUEST["doAction"] != "uploadReports")
+		{
+		include("includes/footer.php");	
+		}
+		//include("includes/footer.php");
 }  
 else {
 	header("Location:index.php?msg=timeout");

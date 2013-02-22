@@ -18,27 +18,55 @@ $client_id = $objCallData->arrJob[$_REQUEST["jobId"]]["client_id"];
 
 if($viewSection != "list" && $viewSection != "add_job")
 {
-if($viewSection == "uploadReports")
-{
-	?><br /><br /><?
-}
-	?><table border="0" cellspacing="0" cellpadding="4" align="left" style="margin-left:-5px" width="100%">
+	if($viewSection == "uploadReports")
+	{
+		?><br /><br />
+		
+		<table align="center" width="100%" border="0">
 		<tr>
-			<td align="left">
-				<span style="font-weight:bold; font-size:10pt;"> Practice Name: </span>
-				<span class="frmheading" style="font-size:10pt;"><?=$objCallData->arrPractice[$objCallData->arrClient[$client_id]["id"]]["name"]?></span>
+		
+			<td>
+		
+		<span style="font-weight:bold; font-size:14pt;"> Practice Name: </span>
+					<span class="frmheading" style="font-size:14pt;"><?=$objCallData->arrPractice[$objCallData->arrClient[$client_id]["id"]]["name"]?></span>
+			
 			</td>
-			
 			<td align="right">
-				<span style="font-weight:bold; font-size:10pt;"> Job Name: </span><?
-			$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
-			$jobName = '<b style="color:#b30000;">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</b> - <b style="color:#0411ff;">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</b> - <b style="color:#006a0e;">' . $objCallData->arrJobType[$arrJobParts[2]].'</b>';
 			
-			 ?><span style="font-size:10pt;"><?=$jobName?></span>
-			</td>				
-		</tr>
-	</table>
-	<br /><hr size="2" noshade>	<?
+					<span style="font-weight:bold; font-size:14pt;"> Job Name: </span><?
+				$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
+				$jobName = '<b style="color:#b30000;">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</b> - <b style="color:#0411ff;">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</b> - <b style="color:#006a0e;">' . $objCallData->arrJobType[$arrJobParts[2]].'</b>';
+		   ?>
+		   <span style="font-size:14pt;"><?=$jobName?></span>
+		  </td>
+		  
+		  </tR>
+		  
+		  </table>
+		  
+		   <?
+		   
+	}
+	else
+	{
+		?><table border="0" cellspacing="0" cellpadding="4" align="left" style="margin-left:-5px" width="100%">
+			<tr>
+				<td align="left">
+					<span style="font-weight:bold; font-size:10pt;"> Practice Name: </span>
+					<span class="frmheading" style="font-size:10pt;"><?=$objCallData->arrPractice[$objCallData->arrClient[$client_id]["id"]]["name"]?></span>
+				</td>
+				
+				<td align="right">
+					<span style="font-weight:bold; font-size:10pt;"> Job Name: </span><?
+				$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
+				$jobName = '<b style="color:#b30000;">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</b> - <b style="color:#0411ff;">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</b> - <b style="color:#006a0e;">' . $objCallData->arrJobType[$arrJobParts[2]].'</b>';
+				
+				 ?><span style="font-size:10pt;"><?=$jobName?></span>
+				</td>				
+			</tr>
+		</table>
+		<br /><hr size="2" noshade>	<?
+	}
 }
 
 
@@ -261,28 +289,28 @@ switch ($viewSection)
 				<tr>
 					<td>
 						<form method="POST" name="frmJobDetails" action="job.php?a=reset&doAction=details&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnDetails" value="Job Details" style="background-color:#00439d; color:#ffffff;">
+							<input type="submit" name="btnDetails" value="Job Details" style="background-color:#ee4d0f; color:#ffffff;">
 							<input type="hidden" name="doAction" value="details">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer;">
+							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="documents" style="cursor:pointer;">
 						</form>
 					</td>
 						
 					<td>
 						<form method="POST" name="frmReports" action="job.php?a=reset&doAction=reports&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer;">
+							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="reports" style="cursor:pointer;">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer;">
+							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer;color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="queries" style="cursor:pointer;">
 						</form>
 					</td>
@@ -361,21 +389,21 @@ switch ($viewSection)
 				<tr>
 					<td>
 						<form method="POST" name="frmJobDetails" action="job.php?a=reset&doAction=details&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer;">
+							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer;  color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="details">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnDocument" value="Documents" style="background-color:#00439d; color:#ffffff;">
+							<input type="submit" name="btnDocument" value="Documents" style="background-color:#ee4d0f; color:#ffffff;">
 							<input type="hidden" name="doAction" value="documents">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmReports" action="job.php?a=reset&doAction=reports&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer;">
+							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="reports" style="cursor:pointer;">
 						</form>
 					</td>
@@ -383,7 +411,7 @@ switch ($viewSection)
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer;">
+							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="queries">
 						</form>
 					</td>
@@ -490,28 +518,28 @@ switch ($viewSection)
 				<tr>
 					<td>
 						<form method="POST" name="frmJobDetails" action="job.php?a=reset&doAction=details&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer;">
+							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="details">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer;">
+							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="documents">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmReports" action="job.php?a=reset&doAction=reports&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnReports" value="Reports"  style="background-color:#00439d; color:#ffffff;">
+							<input type="submit" name="btnReports" value="Reports"  style="background-color:#ee4d0f; color:#ffffff;">
 							<input type="hidden" name="doAction" value="reports" style="cursor:pointer;">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer;">
+							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="queries">
 						</form>
 					</td>
@@ -538,7 +566,12 @@ switch ($viewSection)
 					<td class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["report_title"])?></td>	
 					<td width="23%" align="center" class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["date"])?></td>
 					<td width="10%" class="<?=$style?> blueBG" align="center">
-							<a href="job.php?a=reset&doAction=documents&filePath=<?=$arrInfo["file_path"]?>&flagType=R" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
+					<?
+					$fileName = $arrInfo['file_path'];
+					$filePath = "../uploads/reports/".$fileName;
+					?>
+					
+							<a href="<?php echo $filePath;?>" target="_blank" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
 					  </td>
 				</tr><?
 			}
@@ -560,10 +593,18 @@ switch ($viewSection)
 	// **********************************************************
 	// Case to load page for Uploading Reports, begins here.	
 	case "uploadReports":
-			
+		//currently working...
+		
+		//include("includes/header.php");
 			?>
+			
+	
+			
+			
 			<div class="frmheading">
-				<h1></h1>
+				<h1>
+				
+				</h1>
 			</div>
 
 			<form name="objForm" id="objForm" method="post" action="job.php" enctype="multipart/form-data">
@@ -574,6 +615,8 @@ switch ($viewSection)
 				<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>"/>
 			
 				<div align="center">
+				
+			
 					<table class="fieldtable" border="0" cellspacing="15" cellpadding="15" width="40%">
 						<tr>
 							<td width="15%"> Report Title </td>
@@ -609,21 +652,21 @@ switch ($viewSection)
 				<tr>
 					<td>
 						<form method="POST" name="frmJobDetails" action="job.php?a=reset&doAction=details&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer;">
+							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="details">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer;">
+							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="documents">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmReports" action="job.php?a=reset&doAction=reports&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer;">
+							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="doAction" value="reports">
 						</form>
 					</td>
@@ -631,7 +674,7 @@ switch ($viewSection)
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnQueries" value="Queries" style="background-color:#00439d; color:#ffffff;">
+							<input type="submit" name="btnQueries" value="Queries" style="background-color:#ee4d0f; color:#ffffff;">
 							<input type="hidden" name="doAction" value="queries">
 						</form>
 					</td>
@@ -727,28 +770,29 @@ switch ($viewSection)
 				<tr>
 					<td>
 						<form method="POST" name="frmJobDetails" action="job.php?a=reset&doAction=details&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer;">
+							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; background-color:#0e4d7a;color:#ffffff;">
 							<input type="hidden" name="doAction" value="details">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnDocument" value="Documents & Reports" style="cursor:pointer;">
+							<input type="submit" name="btnDocument" value="Documents & Reports" style="cursor:pointer; background-color:#0e4d7a;color:#ffffff;">
 							<input type="hidden" name="doAction" value="documents">
 						</form>
 					</td>
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
-							<input type="submit" name="btnQueries" value="Queries" style="background-color:#00439d; color:#ffffff;">
+							<input type="submit" name="btnQueries" value="Queries" style="background-color:#ee4d0f; color:#ffffff;">
 							<input type="hidden" name="doAction" value="queries">
 						</form>
 					</td>
 				</tr>
 			</table>
-			
-		<br><br><span class="frmheading">Add Query</span><hr size="1" noshade>
+		<div class="frmheading" style="padding-top:45px;">
+			<h1>Add Query</h1>
+		</div>
 		
 		<form method="POST" name="frmQueriesList" action="job.php?a=add&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
 			
@@ -761,8 +805,16 @@ switch ($viewSection)
 				</tr>
 			</table>
 
-			<input type="submit" name="btnSave" value="Save" class="button">
-			<input type="button" value="Cancel" onClick='return ComfirmCancel(<?=$_REQUEST["jobId"]?>);' class="cancelbutton"/>
+
+<button type="submit" value="Save" name="btnSave" class="cancelbutton">
+	Save
+</button>
+
+<button type="button" value="Cancel"  class="cancelbutton"  onClick='return ComfirmCancel(<?=$_REQUEST["jobId"]?>);'>
+	Cancel
+</button>
+			
+			
 		</form><?
 		break;
 	// Case to Add Query, Ends here.		

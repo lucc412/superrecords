@@ -434,6 +434,8 @@ class Job_Class extends Database
 
 		$origFileName = stripslashes($_FILES['fileReport']['name']);
 		$filePart = pathinfo($origFileName);
+		
+		$rnd = rand(1111,9999);
 		$dbFileName = $fileId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
 		$folderPath = "../uploads/reports/" . $dbFileName;
 

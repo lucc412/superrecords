@@ -60,7 +60,7 @@
 		<td class="dr"><?=htmlspecialchars($arrPracticeData["fax"])?></td>
 	</tr>
 	<tr>
-		<td class="hr">Email</td>
+		<td class="hr">User Name</td>
 		<td class="dr"><?=htmlspecialchars($arrPracticeData["email"])?></td>
 	</tr>
 	<tr>

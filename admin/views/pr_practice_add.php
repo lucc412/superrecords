@@ -107,7 +107,7 @@
 			<td class="hr">Fax Number</td>
 			<td class="dr">
 				<input type="text" name="fax" value="">
-			</td>
+	 		</td>
 		</tr>
 		<tr>
 			<td class="hr">Email (User Name)

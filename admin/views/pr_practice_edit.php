@@ -96,7 +96,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Contact Phone No</td>
+	 		<td class="hr">Contact Phone No</td>
 			<td class="dr">
 				<input type="text" name="phoneNo" value="<?=$arrPracticeData['phone_no']?>">
 			</td>

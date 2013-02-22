@@ -40,10 +40,11 @@ class CrossSales extends Database
                       $reccount = min($showrecs * $page, $count);
                     ?>
                     <br>
-                    <span class="frmheading">Cross Sales Opportunity</span>
-                    <hr size="1" noshade>
+                   <div class="frmheading">
+						<h1>Cross Sales Opportunity</h1>
+				   </div>
                     <form action="cso_cross_sales_opportunity.php" method="post">
-                        <table align="right" style="margin-right:15px;" border="0" cellspacing="1" cellpadding="4">
+                        <table class="customFilter" width="50%" align="right" border="0" cellspacing="1" cellpadding="4" style="margin-right:0px;">
                             <tr>
                                 <td><b>Custom Filter</b>&nbsp;</td>
                                 <td><input type="text" name="filter" value="<?php echo $filter ?>"></td>
@@ -58,20 +59,17 @@ class CrossSales extends Database
                                                     <option value="lp_cli_Salesperson" <?php if ($filterfield == "lp_cli_Salesperson") { echo "selected"; } ?>>Sales staff</option>
                                    </select>
                                 </td>
-                                <td><input type="checkbox" name="wholeonly"<?php echo $checkstr ?>>whole words</td>
+                                <td><input class="checkboxClass" type="checkbox" name="wholeonly"<?php echo $checkstr ?>>whole words</td>
                             </tr>
                             <tr>
                                   <td>&nbsp;</td>
-                                  <td><input type="submit" name="action" id="applyFilter" value="Apply Filter" /></td>
+                                  <td><button type="submit" name="action" id="applyFilter" value="Apply Filter">Apply Filter</button></td>
                                   <td><a href="cso_cross_sales_opportunity.php?a=reset" class="hlight">Reset Filter</a></td>
                             </tr>
                         </table>
                     </form>
                     <p>&nbsp;</p>
-                    <br><br>
-                    <table class="fieldtable_outer" align="center">
-                        <tr>
-                            <td>
+                    <br><br><br>
                                 <?php
                                         $sql = "SHOW TABLE STATUS LIKE 'cso_cross_sales_opportunity'";
                                         $result = mysql_query($sql);
@@ -86,8 +84,8 @@ class CrossSales extends Database
                                                 </a>
                                  <?php   } ?>
                                 <?php   $this->showpagenav($page, $pagecount); ?>
-                                    <table class="fieldtable" border="0" cellspacing="1" cellpadding="5">
-                                        <tr class="fieldheader">
+	                          <table class="fieldtable" align="center" width="100%">
+                                      <tr class="fieldheader">
                                             <th nowrap style="width:180px;"><a  href="cso_cross_sales_opportunity.php?order=<?php echo "cso_client_name" ?>&type=<?php echo $ordtypestr ?>">Client Name</a></th>
                                             <th nowrap style="width:180px;"><a  href="cso_cross_sales_opportunity.php?order=<?php echo "cso_date_received" ?>&type=<?php echo $ordtypestr ?>">Date Received</a></th>
                                             <th><a  href="cso_cross_sales_opportunity.php?order=<?php echo "cli_lead_status" ?>&type=<?php echo $ordtypestr ?>">Lead Status</a></th>
@@ -227,12 +225,13 @@ class CrossSales extends Database
                         global $CrossDbcontent;
                         global $commonUses;
               ?>
-                        <table width="94%">
+                        <table class="tbl" border="0" cellspacing="12" width="100%">
                             <tr>
-                                <td width="80%" valign="top" >
-                                    <span class="frmheading">View Record</span>
-                                        <hr size="1" noshade/>
-                                                <table class="tbl" border="0" cellspacing="1" cellpadding="5"width="50%">
+                                <td width="100% valign="top">
+                                    <div class="frmheading">
+										<h1>View Record</h1>
+									</div>
+                                             <table class="tbl" border="0" cellspacing="12" width="40%">
                                                    <tr>
                                                         <td ><strong>Company Name</strong></td>
                                                         <td ><?php echo stripslashes($row["cso_client_name"]) ?></td>
@@ -310,7 +309,7 @@ class CrossSales extends Database
                                                 </table>
                                         <!-- client contact details end -->
                                           <?php
-                                              echo "<br><span class='footer' style='font-size:96%;'>Created by: ".$commonUses->getFirstLastName($row["cso_created_by"])." | ". "Created on: ".$commonUses->showGridDateFormat($row["cso_created_date"])." | ". "Lastmodified by: ".$commonUses->getFirstLastName($row["cso_modified_by"])." | ". "Lastmodified on: ".$commonUses->showGridDateFormat($row["cso_modified_date"])."</span>";
+                                              echo "<span class='footer' style='font-size:96%;'>Created by: ".$commonUses->getFirstLastName($row["cso_created_by"])." | ". "Created on: ".$commonUses->showGridDateFormat($row["cso_created_date"])." | ". "Lastmodified by: ".$commonUses->getFirstLastName($row["cso_modified_by"])." | ". "Lastmodified on: ".$commonUses->showGridDateFormat($row["cso_modified_date"])."</span>";
                                           ?>
                                 </td>
                            </tr>
@@ -409,14 +408,13 @@ class CrossSales extends Database
                 $_SESSION['order']="";
                 $_SESSION['type']="";
             ?><br>
-            <span class="frmheading">
-                Add Record
-            </span>
-            <hr size="1" noshade>
-            <div style="position:absolute; top:140px; right:-50px; width:300px; height:300px;">
-                <font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked mandatory</font>
+            <div class="frmheading">
+				<h1>Add Record</h1>
+			</div>
+            <div style="position:absolute; top:20; right:-90px; width:300; height:300;">
+                <font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font>
             </div>
-            <form enctype="multipart/form-data" action="cso_cross_sales_opportunity.php" method="post" name="salesOpp" onSubmit="return validateSales()">
+            <form enctype="multipart/form-data" action="cso_cross_sales_opportunity.php?a=reset" method="post" name="salesOpp" onSubmit="return validateSales()">
                 <?php
                 $row = array(
                   "id" => "",
@@ -441,7 +439,8 @@ class CrossSales extends Database
                 ?>
                 <br>
                 <input type="hidden" name="sql" value="insert" id="insert"> <input type="hidden" name="recid" value="<?php echo $_GET['recid']?>" id="recid">
-                <input type="submit" name="action" value="Save" class="button"><input type="button" value="Cancel" onClick='javascript:history.back(-1);' class="cancelbutton"/>
+				<button type="button" value="Cancel" onClick="javascript:history.back(-1);" class="cancelbutton">Cancel</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" name="action" value="Save" class="button">Save</button>
             </form>
                     <br><br>
                          <?php
@@ -459,25 +458,24 @@ class CrossSales extends Database
                   $row = mysql_fetch_assoc($res);
             
             ?><br>
-            <span class="frmheading">
-                Edit Record
-            </span>
-            <hr size="1" noshade>
-            <div style="position:absolute; top:140px; right:-50px; width:300px; height:300px;">
-                <font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked mandatory</font>
+           <div class="frmheading">
+				<h1>Edit Record</h1>
+			</div>
+            <div style="position:absolute; top:20; right:-90px; width:300; height:300;">
+                <font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font>
             </div>
             <form enctype="multipart/form-data" action="cso_cross_sales_opportunity.php?a=<?php echo $_GET['a']?>&recid=<?php echo $_GET['recid']?>&cli_code=<?php echo $_GET['cli_code']?>" method="post" name="salesForm" id="salesForm" onSubmit="return validateSales()">
                 <?php
                     $this->editrow($row, true);
                 ?>
-                <br/>
                         <input type="hidden" name="sql" value="update">
                         <input type="hidden" name="xcli_Code" value="<?php echo $row["id"] ?>">
                         <input type="hidden" name="recid" value="<?php echo $_GET["recid"] ?>">
                 
-                        <input type="submit" name="action" id="action" value="Update" class="button"/> <input type="button" value="Cancel" onClick='return ComfirmCancel();' class="cancelbutton"/>
+			 		 	<button type="button" value="Cancel" onClick='return ComfirmCancel();' class="cancelbutton">Cancel</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				        <button type="submit" name="action" id="action" value="Update" class="button">Update</button>
             </form>
-                    <br><br>
+                    <br>
                          <?php
          }
          // client view record content
@@ -495,8 +493,11 @@ class CrossSales extends Database
                      ?>
                     <br>
                         <?php $this->showrow($row, $recid) ?>
-            <br>
-            <hr size="1" noshade>
+            
+            <div class="frmheading">
+				<h1></h1>
+			</div>
+
             <table class="bd" border="0" cellspacing="1" cellpadding="4">
             <tr>
             <?php
@@ -518,7 +519,9 @@ class CrossSales extends Database
             <?php }?>
             </tr>
             </table>
-            <hr size="1" noshade>
+            <div class="frmheading">
+				<h1></h1>
+			</div>
                     <?php
                         mysql_free_result($res);
         }
@@ -536,14 +539,14 @@ class CrossSales extends Database
                         <table class="tbl" border="0" cellspacing="1" cellpadding="5" width="100%">
                             <tr>
                                 <td>
-                                                <table class="tbl" border="0" cellspacing="1" cellpadding="5">
+                                                <table class="tbl" border="0" cellspacing="10" width="70%">
                                                     <tr>
                                                         <td><strong>Company Name</strong><font style="color:red;" size="2">*</font></td>
                                                         <td class="dr">
                                                         <?php
                                                         if($row["cso_client_code"]!="")
                                                         {
-                                                           $sql = "select `cli_Code`, `name` from `jos_users` where cli_Code=".$row["cso_client_code"]." ORDER BY name ASC";
+                                                           $sql = "select client_id AS cli_Code, client_name AS name from client where client_id=".$row["cso_client_code"]." ORDER BY client_name ASC";
                                                            $res = mysql_query($sql) or die(mysql_error());
                                                            $companyname=@mysql_result( $res,0,'name');
                                                           }
@@ -641,22 +644,23 @@ class CrossSales extends Database
 										$output_array[$no]['svr_Description'] = $display;
 										$no++;
 								  }
+								  
 								  for($j=0;$j<count($output_array);$j++)
 								  {
 									 $id = $output_array[$j]['svr_Code'];
 									 $display = $output_array[$j]['svr_Description'];
-										$selected = $CrossDbcontent->multiServiceSelect($id,$row['cso_client_code']);
-											$sales_cont .= "<option value='$id' $selected >".$display. "</option>";
+										//$selected = $CrossDbcontent->multiServiceSelect($id,$row['cso_client_code']);
+										$selected = '';
+										if($id == $row['cso_client_code'])
+											$selected = 'selected';
+										
+										$sales_cont .= "<option value='$id' $selected >".$display. "</option>";
 								  }
-							?>
-                                                        
-                                                        <select name="cso_service_required[]" id="cso_service_required" class="multiservice" multiple="multiple" >
+										?><select name="cso_service_required" id="cso_service_required" class="multiservice" multiple="multiple">
                                                             <?php echo $sales_cont; ?>
-                                                        </select>
+                                                        </select> <a class="tooltip" href="#" style="position:relative; left:0px;"><img src="images/help.png"><span class="help">Select the Service's required for the client. Click <b>+</b> on services on the right to select</span></a>
 														</td>
-														<td>
-                                                        <a class="tooltip" href="#" style="position:relative; left:0px;"><img src="images/help.png"><span class="help">Select the Service's required for the client. Click <b>+</b> on services on the right to select</span></a>
-                                                    </td>
+
                                                  </tr>
                                                                <tr>
                                                                     <td ><strong>Stage</strong><font style="color:red;" size="2">*</font></td>

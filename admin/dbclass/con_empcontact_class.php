@@ -52,7 +52,7 @@ class empcontactContentList extends Database
                             <option value="<?php echo "con_Firstname" ?>"<?php if ($filterfield == "con_Firstname") { echo "selected"; } ?>>First Name</option>
                             <option value="<?php echo "con_Middlename" ?>"<?php if ($filterfield == "con_Middlename") { echo "selected"; } ?>>Middle Name</option>
                             <option value="<?php echo "con_Lastname" ?>"<?php if ($filterfield == "con_Lastname") { echo "selected"; } ?>>Last Name</option>
-                            <option value="<?php echo "con_Build" ?>"<?php if ($filterfield == "con_Build") { echo "selected"; } ?>>Unit/Build Number</option>
+                            <option value="<?php echo "con_Build" ?>"<?php if ($filterfield == "con_Build") { echo "selected"; } ?>>Unit Number</option>
                             <option value="<?php echo "con_Address" ?>"<?php if ($filterfield == "con_Address") { echo "selected"; } ?>>Street Name</option>
                             <option value="<?php echo "con_City" ?>"<?php if ($filterfield == "con_City") { echo "selected"; } ?>>Suburb</option>
                             <option value="<?php echo "con_State" ?>"<?php if ($filterfield == "con_State") { echo "selected"; } ?>>State</option>
@@ -166,7 +166,7 @@ class empcontactContentList extends Database
                         <td class="dr"><?php echo stripslashes($row["con_Lastname"]) ?></td>
                     </tr>
                     <tr>
-                        <td class="hr">Unit/Build Number</td>
+                        <td class="hr">Unit Number</td>
                         <td class="dr"><?php echo stripslashes($row["con_Build"]) ?></td>
                     </tr>
                     <tr>
@@ -286,7 +286,7 @@ class empcontactContentList extends Database
                         </td>
                     </tr>
                     <tr>
-                        <td class="hr" nowrap>Unit/Build Number<font style="color:red;" size="2">*</font></td>
+                        <td class="hr" nowrap>Unit Number<font style="color:red;" size="2">*</font></td>
                         <td class="dr">
                         <input type="text" name="con_Build" maxlength="50" value="<?php echo stripslashes($row["con_Build"]) ?>">
                         <a class="tooltip" href="#"><img src="images/help.png"><span class="help">Street Number</span></a>

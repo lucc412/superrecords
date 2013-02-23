@@ -4,20 +4,6 @@ class Landing_Class extends Database {
 	public function __construct() {
 		
   	}
-	
-	public function fetchSrManager() {		
-
-		$qrySel = "SELECT t1.con_Code, t1.con_Firstname, t1.con_Lastname 
-					FROM con_contact as t1 
-					LEFT JOIN cnt_contacttype AS t2 ON t1.con_Type = t2.cnt_Code 
-					WHERE t2.cnt_Description like 'Employee'";
-
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrSrManager[$rowData['con_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
-		}
-		return $arrSrManager;	
-	}
 
 	public function sql_select() {		
 

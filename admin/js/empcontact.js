@@ -20,7 +20,7 @@
 				return(false);
 			}
 			else if(document.contact.con_Build.value == "") {
-				alert( "Enter Unit/Build Number" );
+				alert( "Enter Unit Number" );
 				document.contact.con_Build.focus();
 				return(false);
 			}

@@ -757,7 +757,7 @@ if($_SESSION['validUser']) {
 								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],76,1);
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="cso_cross_sales_opportunity.php?a=reset">Cross Sales Opp</a></li><?
+										?><!--<li><a href="cso_cross_sales_opportunity.php?a=reset">Cross Sales Opp</a></li>--><?
 									}
 								}
 

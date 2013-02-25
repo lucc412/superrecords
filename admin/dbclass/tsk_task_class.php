@@ -209,7 +209,7 @@ class Task_Class extends Database {
 			$ClientID = $this->arrJobDetails[$_REQUEST["jobId"]]["client_id"];
 			$PracticeID = $this->arrClientDetails[$ClientID]["id"];
 			
-			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, created_date)
+			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, last_reports_sent, current_job_in_hand, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, created_date)
 					VALUES (
 					'" . $_REQUEST['txtTaskName'] . "', 
 					'" . $PracticeID . "', 
@@ -217,6 +217,8 @@ class Task_Class extends Database {
 					'" . $_REQUEST["jobId"] . "', 
 					'" . $_REQUEST['lstMasterActivity'] . "', 
 					'" . $_REQUEST['lstSubActivity'] . "', 
+					'" . $_REQUEST['txtReportsSent'] . "', 
+					'" . $_REQUEST['txtJobInHand'] . "', 
 					'" . $_REQUEST['txtNotes'] . "', 
 					'" . $_REQUEST['lstSrManager'] . "', 
 					'" . $_REQUEST['lstSrIndiaManager'] . "', 
@@ -230,7 +232,7 @@ class Task_Class extends Database {
 		}	
 		else
 		{
-			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, created_date)
+			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, last_reports_sent, current_job_in_hand, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, created_date)
 					VALUES (
 					'" . $_REQUEST['txtTaskName'] . "', 
 					'" . $_REQUEST['lstPractice'] . "', 
@@ -238,6 +240,8 @@ class Task_Class extends Database {
 					'" . $_REQUEST['lstJob'] . "', 
 					'" . $_REQUEST['lstMasterActivity'] . "', 
 					'" . $_REQUEST['lstSubActivity'] . "', 
+					'" . $_REQUEST['txtReportsSent'] . "', 
+					'" . $_REQUEST['txtJobInHand'] . "', 
 					'" . $_REQUEST['txtNotes'] . "', 
 					'" . $_REQUEST['lstSrManager'] . "', 
 					'" . $_REQUEST['lstSrIndiaManager'] . "', 
@@ -269,6 +273,8 @@ class Task_Class extends Database {
 					job_id = '" . $_REQUEST["jobId"] . "',
 					mas_Code = '" . $_REQUEST['lstMasterActivity'] . "',
 					sub_Code = '" . $_REQUEST['lstSubActivity'] . "',
+					last_reports_sent = '" . $_REQUEST['txtReportsSent'] . "',
+					current_job_in_hand = '" . $_REQUEST['txtJobInHand'] . "',
 					notes = '" . $_REQUEST['txtNotes'] . "',
 					manager_id = '" . $_REQUEST['lstSrManager'] . "',
 					india_manager_id = '" . $_REQUEST['lstSrIndiaManager'] . "',
@@ -288,6 +294,8 @@ class Task_Class extends Database {
 					job_id = '" . $_REQUEST['lstJob'] . "',
 					mas_Code = '" . $_REQUEST['lstMasterActivity'] . "',
 					sub_Code = '" . $_REQUEST['lstSubActivity'] . "',
+					last_reports_sent = '" . $_REQUEST['txtReportsSent'] . "',
+					current_job_in_hand = '" . $_REQUEST['txtJobInHand'] . "',
 					notes = '" . $_REQUEST['txtNotes'] . "',
 					manager_id = '" . $_REQUEST['lstSrManager'] . "',
 					india_manager_id = '" . $_REQUEST['lstSrIndiaManager'] . "',

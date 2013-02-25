@@ -27,7 +27,7 @@
 		<th align="left" class="fieldheader">SR Manager</th>
 		<th align="left" class="fieldheader">SR India Manager</th>
 		<th align="left" class="fieldheader">SR Team Member</th>
-		<th class="fieldheader">Due Date</th>
+		<th class="fieldheader">External Due Date</th>
 		<th class="fieldheader">Created Date</th>
 		<th  class="fieldheader" colspan="3" align="center">Actions</th>
 	</tr><?

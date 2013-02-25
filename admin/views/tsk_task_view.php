@@ -2,7 +2,7 @@
 //  Task          : Page for Listing details of Task
 //  Modified By   : Dhiraj Sahu
 //  Created on    : 28-Dec-2012
-//  Last Modified : 30-Jan-2013
+//  Last Modified : 25-Feb-2013
 //************************************************************************************************-->
 
 <div class="frmheading">
@@ -59,12 +59,12 @@
 	</tr>
 	
 	<tr>
-		<td class="hr">SR India Manager</td>
+		<td class="hr">India Manager</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrSrManager[$arrTaskData["india_manager_id"]])?></td>
 	</tr>
 	
 	<tr>
-		<td class="hr">SR Team Manager</td>
+		<td class="hr">Team Manager</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrSrManager[$arrTaskData["team_member_id"]])?></td>
 	</tr>
 	
@@ -87,7 +87,7 @@
 	
 		
 	<tr>
-		<td class="hr">Due Date</td>
+		<td class="hr">External Due Date</td>
 		<td class="dr"><?=htmlspecialchars($arrTaskData["due_date"])?></td>
 	</tr>
 	
@@ -97,7 +97,17 @@
 	</tr>
 	
 	<tr>
-		<td class="hr">Notes</td>
+		<td class="hr">Last Reports Sent</td>
+		<td class="dr"><?=htmlspecialchars($arrTaskData["last_reports_sent"])?></td>
+	</tr>
+	
+	<tr>
+		<td class="hr">Current Job in Hand</td>
+		<td class="dr"><?=htmlspecialchars($arrTaskData["current_job_in_hand"])?></td>
+	</tr>
+	
+	<tr>
+		<td class="hr">SR India Manager Notes</td>
 		<td class="dr"><?=htmlspecialchars($arrTaskData["notes"])?></td>
 	</tr>
 </table>

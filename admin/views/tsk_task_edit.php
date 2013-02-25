@@ -151,29 +151,29 @@
 		</tr>
 		
 		<tr>
-			<td class="hr">SR India Manager<font style="color:red;" size="2">*</font></td>
+			<td class="hr">India Manager<font style="color:red;" size="2">*</font></td>
 			<td><select name="lstSrIndiaManager">
-					<option value="0">--- Select SR India Manager ---</option><?php
+					<option value="0">--- Select India Manager ---</option><?php
 					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
 						$selectStr = '';
 						if($typeId == $arrTaskData['india_manager_id']) $selectStr = 'selected';									?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Senior India Manager for Task.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select India Manager for Task.</span></a>
 			</td>
 		</tr>
 
 		<tr>
-			<td class="hr">SR Team Member<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Team Member<font style="color:red;" size="2">*</font></td>
 			<td><select name="lstSrTeamMember">
-					<option value="0">--- Select SR Team Member ---</option><?php
+					<option value="0">--- Select Team Member ---</option><?php
 					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
 						$selectStr = '';
 						if($typeId == $arrTaskData['team_member_id']) $selectStr = 'selected';	
 						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Senior Team Member for Task.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Team Member for Task.</span></a>
 			</td>
 		</tr>
 
@@ -225,7 +225,7 @@
 		
 		
 		<tr>
-			<td class="hr">Due Date</td>
+			<td class="hr">External Due Date</td>
 				<td class="dr"><?						
 					$arrDate = explode("-", $arrTaskData['due_date']);
 					$strDate = $arrDate[2]."/".$arrDate[1]."/".$arrDate[0];
@@ -235,8 +235,22 @@
 				</td>
 		</tr>
 
+<tr>
+			<td class="hr">Last Reports Sent</td>
+			<td class="dr">
+				<textarea name="txtReportsSent" rows="3" cols="25"><?=$arrTaskData['last_reports_sent']?></textarea>
+			</td>
+		</tr>
+		
 		<tr>
-			<td class="hr">Notes</td>
+			<td class="hr">Current Job in Hand</td>
+			<td class="dr">
+				<textarea name="txtJobInHand" rows="3" cols="25"><?=$arrTaskData['current_job_in_hand']?></textarea>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="hr">SR India Manager Notes</td>
 			<td class="dr">
 				<textarea name="txtNotes" rows="3" cols="25"><?=$arrTaskData['notes']?></textarea>
 			</td>

@@ -125,26 +125,26 @@
 		</tr>
 		
 		<tr>
-			<td class="hr">SR India Manager<font style="color:red;" size="2">*</font></td>
+			<td class="hr">India Manager<font style="color:red;" size="2">*</font></td>
 			<td><select name="lstSrIndiaManager">
-					<option value="0">--- Select SR India Manager ---</option><?php
+					<option value="0">--- Select India Manager ---</option><?php
 					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Senior India Manager for Task.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select India Manager for Task.</span></a>
 			</td>
 		</tr>
 
 		<tr>
-			<td class="hr">SR Team Member<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Team Member<font style="color:red;" size="2">*</font></td>
 			<td><select name="lstSrTeamMember">
-					<option value="0">--- Select SR Team Member ---</option><?php
+					<option value="0">--- Select Team Member ---</option><?php
 					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Senior Team Member for Task.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Team Member for Task.</span></a>
 			</td>
 		</tr>
 
@@ -187,7 +187,7 @@
 		
 		
 		<tr>
-			<td class="hr">Due Date</td>
+			<td class="hr">External Due Date</td>
 				<td class="dr">						
 						<input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
 				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
@@ -195,12 +195,31 @@
 				</td>
 		</tr>
 		
+		
 		<tr>
-			<td class="hr">Notes</td>
+			<td class="hr">Last Reports Sent</td>
 			<td class="dr">
-				<textarea name="txtNotes" rows="3" cols="25">&nbsp;</textarea>
+				<textarea name="txtReportsSent" rows="3" cols="25"></textarea>
 			</td>
 		</tr>
+		
+		
+		<tr>
+			<td class="hr">Current Job in Hand</td>
+			<td class="dr">
+				<textarea name="txtJobInHand" rows="3" cols="25"></textarea>
+			</td>
+		</tr>
+		
+		
+		<tr>
+			<td class="hr">SR India Manager Notes</td>
+			<td class="dr">
+				<textarea name="txtNotes" rows="3" cols="25"></textarea>
+			</td>
+		</tr>
+		
+		
 		<tr>
 			<td><button type="button" value="Cancel" onClick='return ComfirmCancel("<?=$_REQUEST["jobId"]?>");' class="cancelbutton">Cancel</button></td>
 			<td><button type="submit" name="action" value="Save" class="button">Save</button></td>

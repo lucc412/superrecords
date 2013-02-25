@@ -7,7 +7,7 @@
 -------------------------------------------------------------------------*/
 #jmcontactform {}
 #jmcontactform .formrow .row_inner {}
-#jmcontactform .formrow {padding:5px;width:100%;float:left;}
+#jmcontactform .formrow {padding:2px;width:100%;float:left;}
 #jmcontactform .formrow#submit div {float:left;width:50%;}
 #jmcontactform .formrow #label {}
 #jmcontactform .formrow #input {}

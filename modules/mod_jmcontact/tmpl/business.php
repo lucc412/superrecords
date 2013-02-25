@@ -106,12 +106,11 @@ function jm_getthem($params)
 	
 	<!-- Name -->
 	<?php  if ($params->get('bnamestatus') == 'Y' || $params->get('bnamestatus') == 'R' ) : ?>
-		<!-- <div class="formrow"> -->
-			<!-- <div class="row_inner" id="label"><?php  echo $result->namelbl; ?>:</div> -->
-			<!-- <div class="row_inner" id="input"> -->
-			<input type="text" name="Name" id="Name" value="Full Name *"  class="input cleardefault inputbox <?php  if($params->get('bnamestatus') == 'R' ) echo 'required';  ?>" />
-			<!-- </div> -->
-		<!-- </div> -->
+		<div class="formrow">
+			<!--<div class="row_inner" id="label"><?php  echo $result->namelbl; ?>:</div>-->
+			<div class="row_inner" id="input">
+			<input type="text" name="Name" id="Name" placeholder="Full Name *" value="" class="inputbox cleardefault <?php  if($params->get('bnamestatus') == 'R' ) echo 'required';  ?>" /></div>
+		</div>
 	<?php endif; ?>
 	<!-- Name Ends-->
 	<!-- Company -->
@@ -134,24 +133,20 @@ function jm_getthem($params)
 	
 	<!-- Email Starts -->
 	<?php  if($params->get('bEmail') == 'Y' || $params->get('bEmail') == 'R') : ?>
-		<!-- <div class="formrow"> -->
-			<!-- <div class="row_inner" id="label"><?php  echo $result->Emaillbl; ?>:</div> -->
-			<!-- <div class="row_inner" id="input"> -->
-			<input  type="text" name="Email" id="Email" onfocus="if(this.value == 'Email *') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Email *'; }" class="input cleardefault inputbox <?php  if($params->get('bEmail') == 'R' ) echo 'required validate-email';  ?>" value="Email *" />
-			<!-- </div> -->
-		<!-- </div> -->
+		<div class="formrow">
+			<!--<div class="row_inner" id="label"><?php  echo $result->Emaillbl; ?>:</div>-->
+			<div class="row_inner" id="input"><input  type="text" name="Email" id="Email" class="inputbox <?php  if($params->get('bEmail') == 'R' ) echo 'required validate-email';  ?>" placeholder="Email *" value="" /></div>
+		</div>
 	<?php endif;  ?>
 	<!-- Email ends -->
 	
 	
 	<!-- Mobile -->
 	<?php  if ($params->get('bmobilestatus') == 'Y' || $params->get('bmobilestatus') == 'R' ) : ?>
-		<!-- <div class="formrow"> -->
-			<!-- <div class="row_inner" id="label"><?php  echo $result->mobilelbl; ?>:</div> -->
-			<!-- <div class="row_inner" id="input"> -->
-			<input  type="text" name="Mobile" id="Telephone" value="Telephone *" class="input cleardefault inputbox <?php  if($params->get('bmobilestatus') == 'R' ) echo 'required validate-numeric';  ?>" />
-			<!-- </div> -->
-		<!-- </div> -->
+		<div class="formrow">
+			<!--<div class="row_inner" id="label"><?php  echo $result->mobilelbl; ?>:</div>-->
+			<div class="row_inner" id="input"><input  type="text" name="Mobile" id="Telephone" placeholder="Telephone *" value="" class="inputbox <?php  if($params->get('bmobilestatus') == 'R' ) echo 'required validate-numeric';  ?>" /></div>
+		</div>
 	<?php  endif; ?>
 	<!-- Mobile Ends -->
 		
@@ -183,12 +178,11 @@ function jm_getthem($params)
 	<!-- custom Field Second end -->
 	<!-- Mesage -->
 	<?php  if ($params->get('bmessagestatus') == 'Y' || $params->get('bmessagestatus') == 'R' ) : ?>
-		<!-- <div class="formrow"> -->
-			<!-- <div class="row_inner" id="label"><?php  echo $result->messagelbl; ?>:</div> -->
-			<!-- <div class="row_inner" id="input"> -->
-			<textarea  style="height: 65px;" name="Message" id="Comments" onblur="if(this.value == '') { this.value = 'Comments'; }" onfocus="if(this.value == 'Comments') { this.value = ''; }" class="inputbox <?php  if($params->get('bmessagestatus') == 'R' ) echo 'required';  ?>" cols="20" rows="4">Comments</textarea>
-			<!-- </div> -->
-		<!-- </div> -->
+		<div class="formrow">
+			<!--<div class="row_inner" id="label"><?php  echo $result->messagelbl; ?>:</div>-->
+			<div class="row_inner" id="input">
+			<textarea placeholder="Comments" name="Message" id="Message" class="inputbox <?php  if($params->get('bmessagestatus') == 'R' ) echo 'required';  ?>" cols="20" rows="4"></textarea></div>
+		</div>
 	<?php  endif; ?>
 	<!-- Mesage Ends-->
 	<!-- Upload -->
@@ -213,8 +207,8 @@ function jm_getthem($params)
 			  endif;
 			 echo '</div></div>';
 
-		 endif; ?>
-		<!-- <div class="formrow"><div id="myDiv" style="color: #CF1919;  font-weight: bold;   margin: 0 0 0 20px;   padding: 0 0 0 20px; "></div></div> -->
+		 endif; ?><br> 
+		<div class="formrow"><div id="myDiv" style="color: #CF1919;  font-weight: bold;   margin: 0 0 0 20px;   padding: 0 0 0 20px; "></div></div>
 	<!-- captcha -->
 	<!-- copy me -->
 
@@ -227,13 +221,15 @@ function jm_getthem($params)
 	<!-- copy me ends -->
 
 	<!-- Send & Reset button -->
-		<!-- <div class="formrow" id="submit">	 -->
-			<!-- <div class="row_inner" id="input"> -->
-			<input type="hidden" name="chkpost" value="1" />
-			<!-- <input class="button" type="submit" name="send" id="send" value="submit" /> -->
-			<button type="submit" value="submit" name="send" id="send">Submit</button>
-			<!-- </div> -->
-		<!-- </div> -->
+		<div class="formrow" id="submit">	
+			<?php
+			if ($params->get('Reset_button') == 'Y' ) :
+			?>
+			<div class="row_inner" id="label"><input type="reset" name="Clear" id="Clear" value="Reset" class="button" /></div>
+			<?php  endif; ?>
+			<div class="row_inner" id="input"><input type="hidden" name="chkpost" value="1" />
+			<button type="submit" value="submit" name="send" id="send">Submit</button></div>
+		</div>
 	<!-- Send & Reset button Ends -->
 
 

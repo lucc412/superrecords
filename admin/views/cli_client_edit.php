@@ -47,7 +47,7 @@
 			<td class="hr">India Manager</td>
 			<td><select name="lstInManager">
 					<option value="">Select India Manager</option><?php
-					foreach($objCallData->arrSrManager AS $userId => $typeDesc){
+					foreach($objCallData->arrEmployees AS $userId => $typeDesc){
 						$strSelected = '';
 						if($userId == $arrClientData['india_manager']) $strSelected = 'selected';
 						?><option <?=$strSelected?> value="<?=$userId?>"><?=$typeDesc?></option><?

@@ -28,7 +28,8 @@ class Referrer_Class extends Database {
 		$qrySel = "SELECT t1.con_Code, t1.con_Firstname, t1.con_Lastname 
 					FROM con_contact as t1 
 					LEFT JOIN cnt_contacttype AS t2 ON t1.con_Type = t2.cnt_Code 
-					WHERE t2.cnt_Description like 'Employee'";
+					WHERE t2.cnt_Description like 'Employee'
+					AND t1.con_Designation = 24";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

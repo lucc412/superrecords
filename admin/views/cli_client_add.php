@@ -41,7 +41,7 @@
 			<td class="hr">India Manager</td>
 			<td><select name="lstInManager">
 					<option value="">Select India Manager</option><?php
-					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
+					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>

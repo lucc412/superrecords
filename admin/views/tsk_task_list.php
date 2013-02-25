@@ -21,15 +21,12 @@
 		
 	?><tr class="fieldheader">
 		<th align="left" class="fieldheader">Task Name</th>
-		<th align="left" class="fieldheader">Practice Name</th>
-		<th align="left" class="fieldheader">Client Name</th>
+		<th style="width:150px;" align="left" class="fieldheader">Practice Name</th>
+		<th style="width:150px;" align="left" class="fieldheader">Client Name</th>
 		<th align="left" class="fieldheader">Job Name</th>
-		<th align="left" class="fieldheader">SR Manager</th>
-		<th align="left" class="fieldheader">SR India Manager</th>
-		<th align="left" class="fieldheader">SR Team Member</th>
-		<th class="fieldheader">Due Date</th>
-		<th class="fieldheader">Created Date</th>
-		<th  class="fieldheader" colspan="3" align="center">Actions</th>
+		<th style="width:95px;" align="left" class="fieldheader">SR Manager</th>
+		<th style="width:67px;" align="center" class="fieldheader">Due Date</th>
+		<th class="fieldheader" colspan="3" align="center">Actions</th>
 	</tr><?
 
 	$countRow = 0;
@@ -51,13 +48,7 @@
 		  ?><td class="<?=$style?>"><?=$jobName?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrSrManager[$arrInfo["manager_id"]])?></td>
 			
-			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrEmployees[$arrInfo["india_manager_id"]])?></td>
-			
-			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrEmployees[$arrInfo["team_member_id"]])?></td>
-			
-			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["due_date"])?></td>
-			
-			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["created_date"])?></td><?
+			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["due_date"])?></td><?
 			
 			if($access_file_level['stf_View'] == "Y") {
 				?><td>

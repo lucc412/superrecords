@@ -85,10 +85,11 @@ class Job_Class extends Database
 
 		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id,				j1.job_due_date, j1.job_received, c1.id, j1.period
 					FROM job j1, client c1 {$fromStr}
-					WHERE j1.client_id = c1.client_id AND discontinue_date IS NULL  
+					WHERE j1.client_id = c1.client_id 
+					AND j1.discontinue_date IS NULL  
 					{$whereStr}
 					GROUP BY j1.job_id
-					ORDER BY job_name";
+					ORDER BY job_id desc";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -102,7 +103,6 @@ class Job_Class extends Database
 		$qrySel = "SELECT sa.sub_Code, sa.sub_Description
 					FROM mas_masteractivity ma, sub_subactivity sa
 					WHERE ma.mas_Code = sa.sas_Code
-					AND ma.Code = 'SMSF'
 					ORDER BY sa.sub_Order";
 
 		$fetchResult = mysql_query($qrySel);		
@@ -262,8 +262,13 @@ class Job_Class extends Database
 	// Discontinue Job
 	public function discontinue_job($queryId)
 	{
+		// set discontinue date of jobs 
 		$qryUpdate = "UPDATE job SET discontinue_date=NOW() WHERE job_id=".$_REQUEST["jobId"];
 		mysql_query($qryUpdate);
+
+		// set discontinue date of task 
+		$qryDel = "UPDATE task SET discontinue_date=NOW() WHERE job_id=".$_REQUEST["jobId"];
+		mysql_query($qryDel);
 	}
 	
 //************************************************************************************************

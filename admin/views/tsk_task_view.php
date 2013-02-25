@@ -59,12 +59,12 @@
 	</tr>
 	
 	<tr>
-		<td class="hr">SR India Manager</td>
+		<td class="hr">India Manager</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrEmployees[$arrTaskData["india_manager_id"]])?></td>
 	</tr>
 	
 	<tr>
-		<td class="hr">SR Team Manager</td>
+		<td class="hr">Team Manager</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrEmployees[$arrTaskData["team_member_id"]])?></td>
 	</tr>
 	
@@ -102,7 +102,9 @@
 	</tr>
 </table>
 
-<br><hr size="1" noshade>
+<div class="frmheading">
+	<h1></h1>
+</div>
 <table class="bd" border="0" cellspacing="1" cellpadding="4">
 	<tr>
 		<td><a class="hlight"  href="tsk_task.php?a=add&jobId=<?=$_REQUEST["jobId"]?>">Add Record</a></td>

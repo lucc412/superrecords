@@ -3,7 +3,8 @@
 class Practice_Class extends Database { 	
 	public function __construct() {
 		$this->arrTypes = $this->fetchType();
-		$this->arrSrManager = $this->fetchSrManager();
+		$this->arrSrManager = $this->fetchEmployees(true);
+		$this->arrEmployees = $this->fetchEmployees(false);
 		$this->arrStepsList = $this->fetchStepsList();
 		$this->arrPractice = $this->fetchPractice();
   	}	
@@ -33,18 +34,24 @@ class Practice_Class extends Database {
 		return $arrPractice;
 	}
 	
-	public function fetchSrManager() {		
+	public function fetchEmployees($flagManager) {
+		
+		if($flagManager) { 
+			$appendStr = 'AND t1.con_Designation = 24';
+		}
 
 		$qrySel = "SELECT t1.con_Code, t1.con_Firstname, t1.con_Lastname 
 					FROM con_contact as t1 
 					LEFT JOIN cnt_contacttype AS t2 ON t1.con_Type = t2.cnt_Code 
-					WHERE t2.cnt_Description like 'Employee'";
+					WHERE t2.cnt_Description like 'Employee'
+					{$appendStr}
+					";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrSrManager[$rowData['con_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
+			$arrEmployees[$rowData['con_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
 		}
-		return $arrSrManager;	
+		return $arrEmployees;	
 	} 
 
 	public function fetchStepsList() {		

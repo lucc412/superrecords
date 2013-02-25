@@ -192,13 +192,14 @@ class Task_Class extends Database {
 	public function sql_select($jobId) {		
 	
 		if($jobId)
-			$strWhere = "WHERE job_id={$jobId}";
+			$strWhere = "AND job_id={$jobId}";
 		else
 			$strWhere = "";
 			
 			$qrySel = "SELECT * 
-						FROM task {$strWhere} 
+						FROM task
 						WHERE discontinue_date IS NULL 
+						{$strWhere} 
 						ORDER BY task_id desc";
 
 		$fetchResult = mysql_query($qrySel);		

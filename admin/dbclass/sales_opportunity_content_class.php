@@ -43,7 +43,7 @@ class CrossSales extends Database
                    <div class="frmheading">
 						<h1>Cross Sales Opportunity</h1>
 				   </div>
-                    <form action="cso_cross_sales_opportunity.php" method="post">
+                    <form action="cso_cross_sales_opportunity.php?a=reset" method="post">
                         <table class="customFilter" width="50%" align="right" border="0" cellspacing="1" cellpadding="4" style="margin-right:0px;">
                             <tr>
                                 <td><b>Custom Filter</b>&nbsp;</td>
@@ -215,7 +215,9 @@ class CrossSales extends Database
                     </table>
                     <br>
                     <?php
-              }
+              
+			  return true;
+			  }
               // client record view content
              function showrow($row, $recid)
              {
@@ -256,9 +258,26 @@ class CrossSales extends Database
                                                         <td ><strong>Cross Sale Service Required</strong></td>
                                                         <td>
                                                         <?php
-                                                            $ser_query = "SELECT cli_ClientCode,cli_ServiceRequiredCode FROM `cli_allservicerequired` where `cli_ClientCode`=".$row['cso_client_code']." AND cli_Form='Sales Opportunity'";
-                                                            $cli_serclicode = mysql_query($ser_query);
-                                                           while($service_required = mysql_fetch_array($cli_serclicode))
+$serReq = $row['cso_service_required'];
+$serReq = explode(',',$serReq);
+$serQuery = "select * from cli_servicerequired";
+$serRun = mysql_query($serQuery);
+
+while($serRow = mysql_fetch_assoc($serRun))
+{
+	if(in_array($serRow['svr_Code'],$serReq))
+	{
+		
+		echo $serRow['svr_Description']."&nbsp;,&nbsp;";
+	}
+	
+}
+
+//echo $serQuery;
+/*anuj working $ser_query = "SELECT cli_ClientCode,cli_ServiceRequiredCode FROM `cli_allservicerequired` where `cli_ClientCode`=".$row['cso_client_code']." AND cli_Form='Sales Opportunity'";
+$cli_serclicode = mysql_query($ser_query);
+
+while($service_required = mysql_fetch_array($cli_serclicode))
                                                            {
                                                                 $svr_query = "SELECT c1.`cli_ServiceRequiredCode`, s1.`svr_Description` FROM `cli_allservicerequired` AS c1 LEFT OUTER JOIN `cli_servicerequired` AS s1 ON (c1.`cli_ServiceRequiredCode` = s1.`svr_Code`) where `cli_ServiceRequiredCode`=".$service_required['cli_ServiceRequiredCode'];
                                                                 $cli_service = mysql_query($svr_query);
@@ -266,7 +285,7 @@ class CrossSales extends Database
                                                                 $servicename .= $service_name["svr_Description"].",";
                                                             }
                                                                 echo substr($servicename,0,-1);
-                                                    ?>
+                                                   */ ?>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -535,6 +554,27 @@ class CrossSales extends Database
                 $cli_id = $row['cso_client_code'];
                 $contact_id = $row['cso_contact_code'];
                 $entity_id = $row['cso_entity'];
+				$dbCsoServiceId = $row['cso_service_required'];
+				
+				$customId = $_GET["cli_code"];
+				$customQuery ="select cso_service_required FROM cso_cross_sales_opportunity where id ='$customId'";
+				
+				//echo $customQuery;
+				
+				$RcustomQuery = mysql_query($customQuery);
+				
+				while($customRow = mysql_fetch_assoc($RcustomQuery))
+				{
+					
+					$allService = $customRow['cso_service_required'];	
+				}
+			//	echo $allService;
+				
+				$myReqService = explode(",",$allService);
+				
+			//	var_dump($myReqService);
+				
+				
                 ?>
                         <table class="tbl" border="0" cellspacing="1" cellpadding="5" width="100%">
                             <tr>
@@ -551,9 +591,11 @@ class CrossSales extends Database
                                                            $companyname=@mysql_result( $res,0,'name');
                                                           }
                                                         ?>
-                                                                <input type="hidden" id="cso_client_code" name="cso_client_code" value="" />
-                                                                <input type="hidden" id="cso_client_code" name="cso_Company_old" value="<?php echo $row["cso_client_code"];?>"/>
-                                                                <input style="width: 200px" type="text" name="comp_name" id="comp_name" value="<?php echo $companyname?>"   onBlur="checkKeycode(event);"/>
+     
+	 <input type="hidden" id="cso_client_code" name="cso_client_code" value="" />
+                         
+	   <input type="hidden" id="cso_client_code" name="cso_Company_old" value="<?php echo $row["cso_client_code"];?>"/>
+                                     <input style="width: 200px" type="text" name="comp_name" id="comp_name" value="<?php echo $companyname?>"   onBlur="checkKeycode(event);"/>
                                                                 <a class="tooltip" href="#"><img src="images/help.png"><span class="help">Start typing to view existing clients. On selecting client/company name, Contact and entity will be populated automatically based on the Client record.</span></a>
                                                         <script type="text/javascript">
                                                                 var options = {
@@ -632,9 +674,49 @@ class CrossSales extends Database
                                                     <td nowrap><strong>Cross Sale Service Required</strong><font style="color:red;" size="2">*</font>
                                                     </td>
                                                     <td >
+													
+						<select multiple="multiple" name="cso_service_required[]" id="cso_service_required">
+									
 							 <?php
-								 $sales_qry = "select `svr_Code`, `svr_Description` from `cli_servicerequired` ORDER BY svr_Order ASC";
-								  $sales_result = mysql_query($sales_qry);
+							 
+		$sales_qry = "select `svr_Code`, `svr_Description` from `cli_servicerequired` ";
+		
+		//echo $sales_qry;
+		
+		$RunQuery = mysql_query($sales_qry);
+		while($myRow = mysql_fetch_assoc($RunQuery))
+		{
+		//	echo "Anuj Jaha works : ".$myRow['svr_Description'];
+		
+			if(in_array($myRow['svr_Code'],$myReqService))
+			{
+			?>
+			
+			<option selected="<? echo $myRow['svr_Description'];?>" value="<? echo $myRow['svr_Code'];?>">
+			<? echo $myRow['svr_Description'];?>
+			</option>
+			<?php
+			}
+			else
+			{
+			
+			?>
+			
+			<option value="<? echo $myRow['svr_Code'];?>">
+				<? echo $myRow['svr_Description'];?>
+			</option>
+			
+			<?
+			}
+			?>
+		
+		<?	
+			
+		}
+		
+		//me working.
+
+								  /*$sales_result = mysql_query($sales_qry);
 								  $sales_cont = "";
 								  $no = 0;
 								  $output_array = array();
@@ -655,10 +737,22 @@ class CrossSales extends Database
 											$selected = 'selected';
 										
 										$sales_cont .= "<option value='$id' $selected >".$display. "</option>";
-								  }
-										?><select name="cso_service_required" id="cso_service_required" class="multiservice" multiple="multiple">
-                                                            <?php echo $sales_cont; ?>
-                                                        </select> <a class="tooltip" href="#" style="position:relative; left:0px;"><img src="images/help.png"><span class="help">Select the Service's required for the client. Click <b>+</b> on services on the right to select</span></a>
+								  }*/
+								  			
+								  
+										?>
+										</select>
+										
+										<?// echo  "My Anuj :".$serviceId;?>
+										
+<!--<select name="cso_service_required[]" id="cso_service_required" class="multiservice" multiple="multiple">
+          <?php // echo $sales_cont; ?>
+		</select>-->
+														 <a class="tooltip" href="#" style="position:relative; left:0px;">
+														 <img src="images/help.png"><span class="help">
+														 Select the Service's required for the client. Click <b>+</b> on services on the right to select
+														 </span>
+														 </a>
 														</td>
 
                                                  </tr>

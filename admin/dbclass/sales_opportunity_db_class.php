@@ -68,19 +68,64 @@ class CrossSalesDetails extends Database
                                           global $commonUses;
                                           global $ClientEmailcontent;
                                           
-                                          $last_contact_date = $commonUses->getDateFormat($_POST["cso_last_contact_date"]);
-                                          $Createdon=date( 'Y-m-d H:i:s' );
-                                          $future_contact_date = $commonUses->getDateFormat($_POST["cso_future_contact_date"]);
-                                          $date_received = $commonUses->getDateFormat($_POST["cso_date_received"]);
+$last_contact_date = $commonUses->getDateFormat($_POST["cso_last_contact_date"]);
+$Createdon=date( 'Y-m-d H:i:s' );
+$future_contact_date = $commonUses->getDateFormat($_POST["cso_future_contact_date"]);
+$date_received = $commonUses->getDateFormat($_POST["cso_date_received"]);
                                           /*Get client type*/
-                                          $fields=array('cso_client_code','cso_entity','cso_date_received','cso_stage','cso_lead_status');
-                                          $postvalue=array(mysql_real_escape_string($_POST['cso_client_code']),mysql_real_escape_string($_POST['cso_entity']),mysql_real_escape_string($date_received),mysql_real_escape_string($_POST['cso_stage']),mysql_real_escape_string($_POST['cso_lead_status']));
-                                          $where= " where ".$fields[0]."='".$postvalue[0]."' and ".$fields[1]."='".$postvalue[1]."' and ".$fields[2]."='".$postvalue[2]."' and ".$fields[3]."='".$postvalue[3]."' and ".$fields[4]."='".$postvalue[4]."'";
-                                          $duplicate_entry = $commonUses->checkDuplicateMultiple('cso_cross_sales_opportunity',$fields,$postvalue,$where);
+$fields=array('cso_client_code','cso_entity','cso_date_received','cso_stage','cso_lead_status');
+
+$postvalue=array(mysql_real_escape_string($_POST['cso_client_code']),mysql_real_escape_string($_POST['cso_entity']),mysql_real_escape_string($date_received),mysql_real_escape_string($_POST['cso_stage']),mysql_real_escape_string($_POST['cso_lead_status']));
+
+$where= " where ".$fields[0]."='".$postvalue[0]."' and ".$fields[1]."='".$postvalue[1]."' and ".$fields[2]."='".$postvalue[2]."' and ".$fields[3]."='".$postvalue[3]."' and ".$fields[4]."='".$postvalue[4]."'";
+
+$duplicate_entry = $commonUses->checkDuplicateMultiple('cso_cross_sales_opportunity',$fields,$postvalue,$where);
+//Add The cso_service_required Field to store choice fill by Users.by Anuj Jaha
+//var_dump($selectedservice);
+//echo "<pre>";
+//var_dump($_POST['cso_service_required']);
+$multiValue = $_POST['cso_service_required'];
+//print_r($multiValue);
+foreach($multiValue as $mKeyIndex => $multiTrueValue)
+{
+	if($mKeyIndex == '0')
+	{
+		$crossSaleService = $multiTrueValue;
+	}
+	else
+	{
+	$crossSaleService = $crossSaleService .",".$multiTrueValue;	
+	}
+	
+}
+
+ ?>
+ 
+ <input  type="button" onclick="data()" value="Click me" name="btn"/>      
+ Click Me
+ </input>                          
+ 
+ <?
+//echo $crossSaleService;
+//echo "<br><br>Test <br><br>";
+//$exQuery ="select svr_Code from cli_servicerequired where svr_Description IN (".$crossSaleService.")";
+
+//echo $exQuery;
+//echo "<br><br>Test <br><br>";
                                           if($duplicate_entry==0)
                                           {
-                                                   $sql = "INSERT INTO `cso_cross_sales_opportunity` (`cso_client_code`, `cso_contact_code`, `cso_entity`, `cso_date_received`, `cso_day_received`, `cso_lead_status`, `cso_source`, `cso_stage`, `cso_generated_lead`, `cso_method_of_contact`, `cso_sales_person`, `cso_last_contact_date`, `cso_future_contact_date`, `cso_notes`, `cso_created_by`, `cso_created_date`, `cso_modified_by`, `cso_modified_date`) values ('".mysql_real_escape_string(@$_POST["cso_client_code"])."', '".mysql_real_escape_string(@$_POST["cso_contact_code"])."', '".mysql_real_escape_string(@$_POST["cso_entity"])."', '".mysql_real_escape_string($date_received)."', '".mysql_real_escape_string(@$_POST["cso_day_received"])."', '".mysql_real_escape_string(@$_POST["cso_lead_status"])."', '".mysql_real_escape_string(@$_POST["cso_source"])."', '".mysql_real_escape_string(@$_POST["cso_stage"])."', '".mysql_real_escape_string(@$_POST["cso_generated_lead"])."', '".mysql_real_escape_string(@$_POST["cso_method_of_contact"])."', '".mysql_real_escape_string(@$_POST["cso_sales_person"])."', '".mysql_real_escape_string($last_contact_date)."', '".mysql_real_escape_string($future_contact_date)."', '".mysql_real_escape_string(@$_POST["cso_notes"])."', '".mysql_real_escape_string($_SESSION[staffcode])."', '".mysql_real_escape_string($Createdon)."', '".mysql_real_escape_string($_SESSION[staffcode])."', '".mysql_real_escape_string($Createdon)."')";
-                                                   $insertresult=mysql_query($sql) or die(mysql_error());
+										  
+										  
+                                                   $sql = "INSERT INTO `cso_cross_sales_opportunity` (`cso_client_code`, `cso_contact_code`, `cso_entity`, `cso_date_received`, `cso_day_received`, `cso_lead_status`, `cso_source`, `cso_stage`, `cso_generated_lead`, `cso_method_of_contact`, `cso_sales_person`, `cso_last_contact_date`, `cso_future_contact_date`, `cso_notes`, `cso_created_by`, `cso_created_date`, `cso_modified_by`, `cso_modified_date`,`cso_service_required`) values ('".mysql_real_escape_string(@$_POST["cso_client_code"])."', '".mysql_real_escape_string(@$_POST["cso_contact_code"])."', '".mysql_real_escape_string(@$_POST["cso_entity"])."', '".mysql_real_escape_string($date_received)."', '".mysql_real_escape_string(@$_POST["cso_day_received"])."', '".mysql_real_escape_string(@$_POST["cso_lead_status"])."', '".mysql_real_escape_string(@$_POST["cso_source"])."', '".mysql_real_escape_string(@$_POST["cso_stage"])."', '".mysql_real_escape_string(@$_POST["cso_generated_lead"])."', '".mysql_real_escape_string(@$_POST["cso_method_of_contact"])."', '".mysql_real_escape_string(@$_POST["cso_sales_person"])."', '".mysql_real_escape_string($last_contact_date)."', '".mysql_real_escape_string($future_contact_date)."', '".mysql_real_escape_string(@$_POST["cso_notes"])."', '".mysql_real_escape_string($_SESSION[staffcode])."', '".mysql_real_escape_string($Createdon)."', '".mysql_real_escape_string($_SESSION[staffcode])."', '".mysql_real_escape_string($Createdon)."','".$crossSaleService."')";
+   
+   // $sql ="insert into cso_cross_sales_opportunity values('','.$_POST['cso_client_code'].','.$_POST['cso_contact_code'].','.$_POST['cso_entity'].','$date_received','.$_POST['cso_day_received'].','.$_POST['cso_lead_status'].','.$_POST['cso_source'].','.$_POST['cso_stage'].','.$_POST['cso_generated_lead'].','.$_POST['cso_method_of_contact'].',.'$_POST['cso_sales_person'].','$last_contact_date','$future_contact_date','.$_POST['cso_notes'].','.$_SESSION['staffcode'].','$Createdon','.$_SESSION['staffcode'].','$Createdon','')";
+									// echo $sql;
+									// echo $_POST['cso_service_required'];
+									//print_r($_POST['cso_service_required']);
+									//echo "<pre>";
+									//var_dump($_POST['cso_service_required']);
+					
+				      $insertresult=mysql_query($sql) or die(mysql_error());
                                                     //Insert this service required code in details table
                                                            $selectedservice=$_POST['cso_service_required'];
                                                            if($selectedservice!="")
@@ -95,7 +140,8 @@ class CrossSalesDetails extends Database
                                                                 $ClientEmailcontent->newCrossSales($_POST['cso_generated_lead'],$_POST['cso_sales_person'],$date_received,$_POST['comp_name'],$_POST['cso_client_code'],$_POST['cso_method_of_contact']);
                                                             }
                                            }
-                                 }
+                               
+								 }
                                  //client update follow
                                     function sql_update()
                                     {
@@ -122,8 +168,29 @@ class CrossSalesDetails extends Database
                                                     $cso_Company="";
                                                  }
                                               
-                                                        $sql = "UPDATE `cso_cross_sales_opportunity` SET `cso_client_code`='" .mysql_real_escape_string($cso_Company)."', `cso_contact_code`='" .mysql_real_escape_string(@$_POST["cso_contact_code"])."', `cso_entity`='" .mysql_real_escape_string(@$_POST["cso_entity"])."', `cso_date_received`='" .mysql_real_escape_string($date_received)."', `cso_day_received`='" .mysql_real_escape_string(@$_POST["cso_day_received"])."', `cso_lead_status`='" .mysql_real_escape_string(@$_POST["cso_lead_status"])."', `cso_source`='" .mysql_real_escape_string(@$_POST["cso_source"])."', `cso_stage`='" .mysql_real_escape_string(@$_POST["cso_stage"])."', `cso_generated_lead`='" .mysql_real_escape_string(@$_POST["cso_generated_lead"])."', `cso_method_of_contact`='" .mysql_real_escape_string(@$_POST["cso_method_of_contact"])."', `cso_sales_person`='" .mysql_real_escape_string(@$_POST["cso_sales_person"])."', `cso_last_contact_date`='" .mysql_real_escape_string($last_contact_date)."', `cso_future_contact_date`='".mysql_real_escape_string($future_contact_date)."', `cso_notes`='" .mysql_real_escape_string(@$_POST["cso_notes"])."', `cso_modified_by`='" .mysql_real_escape_string($_SESSION[staffcode])."', `cso_modified_date`='" .mysql_real_escape_string($Lastmodifiedon)."' where id=".$_POST['xcli_Code'];
-                                                        mysql_query($sql) or die(mysql_error());
+     
+	 
+//echo "<pre>";
+//var_dump($_POST['cso_service_required']);
+$multiValue = $_POST['cso_service_required'];
+//print_r($multiValue);
+foreach($multiValue as $mKeyIndex => $multiTrueValue)
+{
+	if($mKeyIndex == '0')
+	{
+		$crossSaleService = $multiTrueValue;
+	}
+	else
+	{
+	$crossSaleService = $crossSaleService .",".$multiTrueValue;	
+	}
+	
+}
+	 
+	                                                    $sql = "UPDATE `cso_cross_sales_opportunity` SET `cso_client_code`='" .mysql_real_escape_string($cso_Company)."', `cso_contact_code`='" .mysql_real_escape_string(@$_POST["cso_contact_code"])."', `cso_entity`='" .mysql_real_escape_string(@$_POST["cso_entity"])."', `cso_date_received`='" .mysql_real_escape_string($date_received)."', `cso_day_received`='" .mysql_real_escape_string(@$_POST["cso_day_received"])."', `cso_lead_status`='" .mysql_real_escape_string(@$_POST["cso_lead_status"])."', `cso_source`='" .mysql_real_escape_string(@$_POST["cso_source"])."', `cso_stage`='" .mysql_real_escape_string(@$_POST["cso_stage"])."', `cso_generated_lead`='" .mysql_real_escape_string(@$_POST["cso_generated_lead"])."', `cso_method_of_contact`='" .mysql_real_escape_string(@$_POST["cso_method_of_contact"])."', `cso_sales_person`='" .mysql_real_escape_string(@$_POST["cso_sales_person"])."', `cso_last_contact_date`='" .mysql_real_escape_string($last_contact_date)."', `cso_future_contact_date`='".mysql_real_escape_string($future_contact_date)."', `cso_notes`='" .mysql_real_escape_string(@$_POST["cso_notes"])."', `cso_modified_by`='" .mysql_real_escape_string($_SESSION[staffcode])."', `cso_modified_date`='" .mysql_real_escape_string($Lastmodifiedon)."', `cso_service_required`='" .$crossSaleService."' where id=".$_POST['xcli_Code'];
+                                
+						//echo $sql;
+ mysql_query($sql) or die(mysql_error());
                                                         //Update service required code in details table
                                                          $selectedservice=$_POST['cso_service_required'];
 

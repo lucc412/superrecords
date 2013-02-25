@@ -100,6 +100,10 @@
                 }
                 break;
             }
+			
+			
+			// print_r($_REQUEST);
+			
                 // Manage Clients
                 switch ($sql) {
                     case "insert":
@@ -143,17 +147,28 @@
                             echo "You are not authorised to edit record.";
                         }
                    break;
-                    default:
-                        if($access_file_level['stf_View']=="Y")
-                        {
-                            $crossSales->select();
-                        }
-                        else
-                        {
-                            echo "You are not authorised to view the record.";
-                        }
+				   	
+					
+					
+					
+                    case "reset" :
+					echo "<script></script>";
+					  if($access_file_level['stf_View']=="Y")
+					   {
+					  	 	$crossSales->select();
+					   }
+                     else
+                      {
+                       echo "You are not authorised to view the record.";
+                   	  }
                     break;
+					
+					default:
+					echo "No case Found";
+					break;
                }
+			   
+			 
 		     include("includes/footer.php");
 		  ?></body>
         </html>

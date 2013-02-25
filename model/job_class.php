@@ -144,14 +144,14 @@ class Job {
 					'" . $period . "',  
 					'" . $jobName . "',  
 					1,   
-					208,
+					385,
 					NOW()
 					)";
 
 		mysql_query($qryIns);
 		$jobId = mysql_insert_id();
 
-		$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId);
+		$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType, $typeId);
 		
 		// upload documents & checklist here
 		$this->add_checkList($jobId);
@@ -160,17 +160,20 @@ class Job {
 		return true;
 	}
 
-	public function add_task($typeId, $period, $practiceId, $clientId, $jobId) {
+	public function add_task($typeId, $period, $practiceId, $clientId, $jobId, $cliType, $typeId) {
 		$arrJobType = $this->fetchType();
 		$arrClients = $this->fetch_associated_clients();
 
 		$taskName = $arrClients[$clientId] . ' - ' . $period . ' - ' . $arrJobType[$typeId];
 	
-		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id) 
+		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, manager_id) 
 					VALUES ('" . $taskName . "',
 					'" . $practiceId . "',
 					'" . $clientId . "',
-					'" . $jobId . "'
+					'" . $jobId . "',
+					'" . $cliType . "',
+					'" . $typeId . "',
+					'385'
 					)";
 		mysql_query($qryIns);			
 	}

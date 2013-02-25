@@ -128,7 +128,7 @@
 			<td class="hr">SR India Manager<font style="color:red;" size="2">*</font></td>
 			<td><select name="lstSrIndiaManager">
 					<option value="0">--- Select SR India Manager ---</option><?php
-					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
+					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>
@@ -140,7 +140,7 @@
 			<td class="hr">SR Team Member<font style="color:red;" size="2">*</font></td>
 			<td><select name="lstSrTeamMember">
 					<option value="0">--- Select SR Team Member ---</option><?php
-					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
+					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>

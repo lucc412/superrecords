@@ -51,9 +51,9 @@
 		  ?><td class="<?=$style?>"><?=$jobName?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrSrManager[$arrInfo["manager_id"]])?></td>
 			
-			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrSrManager[$arrInfo["india_manager_id"]])?></td>
+			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrEmployees[$arrInfo["india_manager_id"]])?></td>
 			
-			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrSrManager[$arrInfo["team_member_id"]])?></td>
+			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrEmployees[$arrInfo["team_member_id"]])?></td>
 			
 			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["due_date"])?></td>
 			

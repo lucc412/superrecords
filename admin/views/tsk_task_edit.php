@@ -154,7 +154,7 @@
 			<td class="hr">SR India Manager<font style="color:red;" size="2">*</font></td>
 			<td><select name="lstSrIndiaManager">
 					<option value="0">--- Select SR India Manager ---</option><?php
-					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
+					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
 						$selectStr = '';
 						if($typeId == $arrTaskData['india_manager_id']) $selectStr = 'selected';									?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
@@ -167,7 +167,7 @@
 			<td class="hr">SR Team Member<font style="color:red;" size="2">*</font></td>
 			<td><select name="lstSrTeamMember">
 					<option value="0">--- Select SR Team Member ---</option><?php
-					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
+					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
 						$selectStr = '';
 						if($typeId == $arrTaskData['team_member_id']) $selectStr = 'selected';	
 						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?php 

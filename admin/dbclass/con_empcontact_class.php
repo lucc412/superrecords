@@ -86,11 +86,10 @@ class empcontactContentList extends Database
                     <br><br>
                     <table width="100%" class="fieldtable" align="center" border="0" cellspacing="1" cellpadding="5" >
                          <tr class="fieldheader">
-                            <th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "lp_con_Designation" ?>&type=<?php echo $ordtypestr ?>">Designation</a></th
-                            ><th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "con_Firstname" ?>&type=<?php echo $ordtypestr ?>">First Name</a></th>
-                            <th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "con_Lastname" ?>&type=<?php echo $ordtypestr ?>">Last Name</a></th>
-                            <th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "con_Phone" ?>&type=<?php echo $ordtypestr ?>">Phone</a></th>
-                            <th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "con_Mobile" ?>&type=<?php echo $ordtypestr ?>">Mobile</a></th>
+                            <th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "con_Firstname" ?>&type=<?php echo $ordtypestr ?>">First Name</a></th>
+                            <th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "con_Lastname" ?>&type=<?php echo $ordtypestr ?>">Last Name</a></th><th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "lp_con_Designation" ?>&type=<?php echo $ordtypestr ?>">Designation</a></th
+                            >	
+                            <th align="left" class="fieldheader"><a href="con_empcontact.php?order=<?php echo "con_Email" ?>&type=<?php echo $ordtypestr ?>">Email</a></th>
                             <th class="fieldheader" colspan="3" align="center">Actions</th>
                         </tr>
                         <?php
@@ -104,11 +103,10 @@ class empcontactContentList extends Database
 
                         ?>
                         <tr class="<?=$trClass?>">
-                            <td class="<?php echo $style ?>"><?php echo stripslashes($row["lp_con_Designation"]) ?></td>
                             <td class="<?php echo $style ?>"><?php echo stripslashes($row["con_Salutation"]); if($row["con_Salutation"]=="") { echo ""; } else { echo ".";  echo "&nbsp;&nbsp;"; } echo stripslashes($row["con_Firstname"]) ?></td>
                             <td class="<?php echo $style ?>"><?php echo stripslashes($row["con_Lastname"]) ?></td>
-                            <td class="<?php echo $style ?>"><?php echo stripslashes($row["con_Phone"]) ?></td>
-                            <td class="<?php echo $style ?>"><?php echo stripslashes($row["con_Mobile"]) ?></td>
+                            <td class="<?php echo $style ?>"><?php echo stripslashes($row["lp_con_Designation"]) ?></td>
+                            <td class="<?php echo $style ?>"><?php echo stripslashes($row["con_Email"]) ?></td>
                             <?php
                             if($access_file_level['stf_View']=="Y")
                             {

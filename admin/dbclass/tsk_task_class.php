@@ -193,8 +193,6 @@ class Task_Class extends Database {
 	
 		if($jobId)
 			$strWhere = "AND job_id={$jobId}";
-		else
-			$strWhere = "";
 			
 			$qrySel = "SELECT * 
 						FROM task
@@ -209,17 +207,22 @@ class Task_Class extends Database {
 		return $arrTask;	
 	}
 
-	public function sql_insert()
-	{	
-		$arrDate = explode("/", $_REQUEST["dateSignedUp"]);
-		$strDate = $arrDate[2]."-".$arrDate[1]."-".$arrDate[0];
+	public function sql_insert() {	
+
+		// external due date
+		$arrExtDate = explode("/", $_REQUEST["dateSignedUp"]);
+		$strExtDate = $arrExtDate[2]."-".$arrExtDate[1]."-".$arrExtDate[0];
+
+		// befree due date
+		$arrBefreeDate = explode("/", $_REQUEST["befreeDueDate"]);
+		$strBefreeDate = $arrBefreeDate[2]."-".$arrBefreeDate[1]."-".$arrBefreeDate[0];
 		
-		if($_REQUEST["jobId"])
-		{
+		if($_REQUEST["jobId"]) {
+
 			$ClientID = $this->arrJobDetails[$_REQUEST["jobId"]]["client_id"];
 			$PracticeID = $this->arrClientDetails[$ClientID]["id"];
 			
-			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, last_reports_sent, current_job_in_hand, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, created_date)
+			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, last_reports_sent, current_job_in_hand, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
 					VALUES (
 					'" . $_REQUEST['txtTaskName'] . "', 
 					'" . $PracticeID . "', 
@@ -236,13 +239,14 @@ class Task_Class extends Database {
 					'" . $_REQUEST['lstTaskStatus'] . "', 
 					'" . $_REQUEST['lstPriority'] . "', 
 					'" . $_REQUEST['lstProcessingCycle'] . "', 
-					'" . $strDate . "',
+					'" . $strExtDate . "',
+					'" . $strBefreeDate . "',
 					NOW() 
 					)";
 		}	
-		else
-		{
-			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, last_reports_sent, current_job_in_hand, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, created_date)
+		else {
+
+			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, last_reports_sent, current_job_in_hand, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
 					VALUES (
 					'" . $_REQUEST['txtTaskName'] . "', 
 					'" . $_REQUEST['lstPractice'] . "', 
@@ -259,7 +263,8 @@ class Task_Class extends Database {
 					'" . $_REQUEST['lstTaskStatus'] . "', 
 					'" . $_REQUEST['lstPriority'] . "', 
 					'" . $_REQUEST['lstProcessingCycle'] . "', 
-					'" . $strDate . "',
+					'" . $strExtDate . "',
+					'" . $strBefreeDate . "',
 					NOW()  
 					)";
 		}
@@ -268,11 +273,17 @@ class Task_Class extends Database {
 
 	public function sql_update()
 	{	
-		$arrDate = explode("/", $_REQUEST["dateSignedUp"]);
-		$strDate = $arrDate[2]."-".$arrDate[1]."-".$arrDate[0];
+
+		// external due date
+		$arrExtDate = explode("/", $_REQUEST["dateSignedUp"]);
+		$strExtDate = $arrExtDate[2]."-".$arrExtDate[1]."-".$arrExtDate[0];
+
+		// befree due date
+		$arrBefreeDate = explode("/", $_REQUEST["befreeDueDate"]);
+		$strBefreeDate = $arrBefreeDate[2]."-".$arrBefreeDate[1]."-".$arrBefreeDate[0];
 	
-		if($_REQUEST["jobId"])
-		{
+		if($_REQUEST["jobId"]) {
+
 			$ClientID = $this->arrJobDetails[$_REQUEST["jobId"]]["client_id"];
 			$PracticeID = $this->arrClientDetails[$ClientID]["id"];
 
@@ -292,11 +303,12 @@ class Task_Class extends Database {
 					task_status_id = '" . $_REQUEST['lstTaskStatus'] . "',
 					priority_id = '" . $_REQUEST['lstPriority'] . "',
 					process_id = '" . $_REQUEST['lstProcessingCycle'] . "',
-					due_date = '" . $strDate . "'
+					due_date = '" . $strExtDate . "',
+					befree_due_date = '" . $strBefreeDate . "'
 					WHERE task_id = '" . $_REQUEST['recid'] . "'";
 		}
-		else
-		{
+		else {
+
 			$qryUpd = "UPDATE task
 					SET task_name = '" . $_REQUEST['txtTaskName'] . "',
 					id = '" . $_REQUEST['lstPractice'] . "',
@@ -313,7 +325,8 @@ class Task_Class extends Database {
 					task_status_id = '" . $_REQUEST['lstTaskStatus'] . "',
 					priority_id = '" . $_REQUEST['lstPriority'] . "',
 					process_id = '" . $_REQUEST['lstProcessingCycle'] . "',
-					due_date = '" . $strDate . "'
+					due_date = '" . $strExtDate . "',
+					befree_due_date = '" . $strBefreeDate . "'
 					WHERE task_id = '" . $_REQUEST['recid'] . "'";
 		}			
 		mysql_query($qryUpd);	

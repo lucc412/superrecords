@@ -220,10 +220,6 @@
 			</td>
 		</tr>
 		
-		
-		
-		
-		
 		<tr>
 			<td class="hr">External Due Date</td>
 				<td class="dr"><?						
@@ -235,7 +231,18 @@
 				</td>
 		</tr>
 
-<tr>
+		<tr>
+			<td class="hr">Befree Due Date</td>
+				<td class="dr"><?						
+					$arrDate = explode("-", $arrTaskData['befree_due_date']);
+					$strDate = $arrDate[2]."/".$arrDate[1]."/".$arrDate[0];
+						?><input type="text" name="befreeDueDate" id="befreeDueDate" value="<?=$strDate?>">&nbsp;<a href="javascript:NewCal('befreeDueDate','ddmmyyyy',false,24)">
+				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+					
+				</td>
+		</tr>
+
+		<tr>
 			<td class="hr">Last Reports Sent</td>
 			<td class="dr">
 				<textarea name="txtReportsSent" rows="3" cols="25"><?=$arrTaskData['last_reports_sent']?></textarea>
@@ -250,7 +257,7 @@
 		</tr>
 
 		<tr>
-			<td class="hr">SR India Manager Notes</td>
+			<td class="hr">SR Manager Notes</td>
 			<td class="dr">
 				<textarea name="txtNotes" rows="3" cols="25"><?=$arrTaskData['notes']?></textarea>
 			</td>

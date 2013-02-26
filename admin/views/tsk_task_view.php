@@ -83,21 +83,28 @@
 		<td class="dr"><?=htmlspecialchars($objCallData->arrProcessingCycle[$arrTaskData["process_id"]])?></td>
 	</tr>
 	
-	
-	
-		
 	<tr>
-		<td class="hr">Due Date</td>
+		<td class="hr">External Due Date</td>
 		<td class="dr"><?=htmlspecialchars($arrTaskData["due_date"])?></td>
 	</tr>
-	
+		
 	<tr>
-		<td class="hr">Created Date</td>
-		<td class="dr"><?=htmlspecialchars($arrTaskData["created_date"])?></td>
+		<td class="hr">Befree Due Date</td>
+		<td class="dr"><?=htmlspecialchars($arrTaskData["befree_due_date"])?></td>
+	</tr>
+
+	<tr>
+		<td class="hr">Last Reports Sent</td>
+		<td class="dr"><?=htmlspecialchars($arrTaskData["last_reports_sent"])?></td>
 	</tr>
 	
 	<tr>
-		<td class="hr">Notes</td>
+		<td class="hr">Current Job in Hand</td>
+		<td class="dr"><?=htmlspecialchars($arrTaskData["current_job_in_hand"])?></td>
+	</tr>
+
+	<tr>
+		<td class="hr">SR Manager Notes</td>
 		<td class="dr"><?=htmlspecialchars($arrTaskData["notes"])?></td>
 	</tr>
 </table>

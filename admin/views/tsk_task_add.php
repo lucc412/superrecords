@@ -160,7 +160,6 @@
 			</td>
 		</tr>
 		
-		
 		<tr>
 			<td class="hr">Priority <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstPriority">
@@ -185,16 +184,21 @@
 			</td>
 		</tr>
 		
-		
 		<tr>
 			<td class="hr">External Due Date</td>
 				<td class="dr">						
-						<input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
-				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
-					
+					<input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
+					<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="hr">Befree Due Date</td>
+				<td class="dr">						
+					<input type="text" name="befreeDueDate" id="befreeDueDate" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('befreeDueDate','ddmmyyyy',false,24)">
+					<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 				</td>
 		</tr>
-		
 		
 		<tr>
 			<td class="hr">Last Reports Sent</td>
@@ -202,8 +206,7 @@
 				<textarea name="txtReportsSent" rows="3" cols="25"></textarea>
 			</td>
 		</tr>
-		
-		
+	
 		<tr>
 			<td class="hr">Current Job in Hand</td>
 			<td class="dr">
@@ -211,14 +214,12 @@
 			</td>
 		</tr>
 		
-		
 		<tr>
-			<td class="hr">SR India Manager Notes</td>
+			<td class="hr">SR Manager Notes</td>
 			<td class="dr">
 				<textarea name="txtNotes" rows="3" cols="25"></textarea>
 			</td>
 		</tr>
-		
 		
 		<tr>
 			<td><button type="button" value="Cancel" onClick='return ComfirmCancel("<?=$_REQUEST["jobId"]?>");' class="cancelbutton">Cancel</button></td>

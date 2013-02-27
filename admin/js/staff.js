@@ -24,6 +24,15 @@
 		}
 
 	}
+
+function showHideAccessSection(accessType) {
+	if(accessType == 2) {
+		document.getElementById('permissionSection').style.display = 'none';
+	}
+	else {
+		document.getElementById('permissionSection').style.display = '';
+	}
+}
  function CheckAll_Row(rowid)
 {
 if(document.getElementById('Check_ctr_row['+rowid+"]").checked==true)

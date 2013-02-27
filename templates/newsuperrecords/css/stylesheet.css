@@ -329,6 +329,31 @@ a img{
 	color:#888;
 }
 
+/* System Standard Messages(From \..\..\..\media\system\css\system.css) 
+	redefined for contact us thank you message [27-Feb-13 By Disha Goyal]
+*/
+#system-message {
+	margin-bottom: -25px;
+	padding: 0;
+}
+
+#system-message > dd > ul {
+	color: rgb(37, 187, 0);
+	background-position: 4px top;
+	background-repeat: no-repeat;
+	margin-bottom: 10px;
+	list-style: none;
+	padding: 10px;
+	border:	2px solid rgb(54, 155, 29);
+	font-size:	11px;
+}
+
+#system-message > .message > ul {
+	background-position:left center; 
+	text-indent:1.5em;
+	background-color: rgba(241, 199, 165, 0.52);
+	background-image: url(../images/notice-info.png);
+}
 
 /* Content */
 

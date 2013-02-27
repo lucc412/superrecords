@@ -120,7 +120,7 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 				</div> <!--branding-->
 				<div class="user">
 					<li class="contact"><a href="#">Contact Us</a></li>
-					<li class="login"><a href="controller/login.php">Practice Login</a></li>
+					<li class="login"><a href="jobtracker/">Practice Login</a></li>
 				</div> <!--user-->
 				<div class="phone"><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/header-phone.png" /></div> <!--phone-->
 			</div> <!--container-->
@@ -152,15 +152,23 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 		<?php $isHomePage = $this->countModules('home-banner'); ?>
 		
 		<?php if($isHomePage > 0): ?>	
-			<!--Home page 4 Blocks Start -->
+			<!-- Home page 4 Blocks Start -->
 			<div class="content">
 				<jdoc:include type="modules" name="about-home" />	
 				<jdoc:include type="modules" name="Benefits-home" />	
-				<jdoc:include type="modules" name="SMSF-Packages-home" />	
+				<jdoc:include type="modules" name="SMSF-Packages-home" />
+
+				<!-- Displays Thank You message for Contact Us Form-->
+				<div width="20px" style="float:left;padding-top:25px;">
+					<div align="right">
+						<jdoc:include type="message" />
+					</div>
+				</div>
+
 				<jdoc:include type="modules" name="contact-us-home" />	
 				<div class="clear"></div> <!--clear float-->     
 			</div>
-			<!--Home page 4 Blocks End -->
+			<!-- Home page 4 Blocks End -->
 			
 		<?php else: ?>	
 			
@@ -185,6 +193,13 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 						<jdoc:include type="modules" name="benifits-right" />
 					</div> <!--ac-container-->                  
         	
+					<!-- Displays Thank You message for below Contact Us Form-->
+					<div width="20px" style="float:left;padding-top:25px;">
+						<div align="right">
+							<jdoc:include type="message" />
+						</div>
+					</div>
+
 					<!-- contact form for Other page start-->
 		        	<div class="contactform">
 						<jdoc:include type="modules" name="contact-us-other-page" />

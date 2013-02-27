@@ -112,7 +112,7 @@ class staffDbquery extends Database
                   
 				$stf_Lastmodifiedon=date( 'Y-m-d H:i:s' );
 				$updatesql = "UPDATE `stf_staff` 
-							SET `stf_CCode`=" .$commonUses->sqlvalue(@$_POST["stf_CCode"], false).", `stf_AccessType`=" .$commonUses->sqlvalue(@$_POST["stf_AccessType"], false).", `stf_Login`=" .$commonUses->sqlvalue(@$_POST["stf_Login"], true).", `stf_Password`=" .$commonUses->sqlvalue(@$_POST["stf_Password"], true).", `stf_Lastmodifiedby`='" . $_SESSION['user']."', `stf_Lastmodifiedon`='".$stf_Lastmodifiedon."', `stf_Disabled`='".@$_POST["chkDisabled"]."', `stf_Viewall`='".@$_POST["chkViewall"]."', `stf_Upload`='".@$_POST["chkUpload"]."', `stf_LoginStatus`='".@$_POST["chkLoginStatus"]."' where " .$this->primarykeycondition();
+							SET `stf_AccessType`=" .$commonUses->sqlvalue(@$_POST["stf_AccessType"], false).", `stf_Login`=" .$commonUses->sqlvalue(@$_POST["stf_Login"], true).", `stf_Password`=" .$commonUses->sqlvalue(@$_POST["stf_Password"], true).", `stf_Lastmodifiedby`='" . $_SESSION['user']."', `stf_Lastmodifiedon`='".$stf_Lastmodifiedon."', `stf_Disabled`='".@$_POST["chkDisabled"]."', `stf_Viewall`='".@$_POST["chkViewall"]."', `stf_Upload`='".@$_POST["chkUpload"]."', `stf_LoginStatus`='".@$_POST["chkLoginStatus"]."' where " .$this->primarykeycondition();
 				$updateResult = mysql_query($updatesql) or die(mysql_error());
 
                 foreach($_POST['stf_Code'] as $id) {

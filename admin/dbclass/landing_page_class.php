@@ -12,7 +12,7 @@ class Landing_Class extends Database {
 					LEFT JOIN cnt_contacttype AS t2 ON (cc.con_Type = t2.cnt_Code
 					AND t2.cnt_Description like 'Employee')
 					WHERE st.stf_CCode = cc.con_Code
-					ORDER BY st.stf_Code desc";
+					ORDER BY cc.con_Firstname asc";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

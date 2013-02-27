@@ -164,9 +164,13 @@ class staffContentList extends Database
 					<td class="dr"><?php echo htmlspecialchars($row["stf_LoginStatus"]) ?></td>
 				</tr>-->
 			</table>
-			<br>
+			<br><?
 
-			<table border="0" cellspacing="0" cellpadding="0" align="center" class="fieldtable">
+			if ($row["stf_AccessType"] == 2) {
+				$hideSection = "style='display:none'"; 
+			}
+
+			?><table border="0" cellspacing="0" <?=$hideSection?> cellpadding="0" id="permissionSection" align="center" class="fieldtable">
 				<tr class="fieldheader">
 					<td width="300" rowspan="2" align="center" > <b>Forms to be shown</b></span>
 					<td colspan="4" class="helpBod"><div align="center"><b>View Permissions </b></div></td>
@@ -326,34 +330,71 @@ class staffContentList extends Database
 					<tr>
 						<td class="hr">Contact<font style="color:red;" size="2">*</font>
 						</td>
-						<td class="dr"><select name="stf_CCode"  onChange="genUserPwd(this.value)"> <option value="0">Select User Name</option>
-						<?php
-						  $sql = "select t1.`con_Code`, t1.`con_Firstname`, t1.`con_Lastname` from `con_contact` as t1 LEFT JOIN cnt_contacttype AS t2 on t1.con_Type=t2.cnt_Code where t2.cnt_Description like 'Employee'";
-						  $res = mysql_query($sql) or die(mysql_error());
+						<td class="dr"><?
+							if($iseditmode) {
+								$sql = "SELECT t1.`con_Code`, CONCAT_WS(' ', t1.`con_Firstname`, t1.`con_Lastname`) contactName
+										FROM `con_contact` as t1 
+										LEFT JOIN cnt_contacttype AS t2 
+										ON t1.con_Type = t2.cnt_Code 
+										WHERE t2.cnt_Description like 'Employee'";
+							}
+							else {
+								$sql = "SELECT t1.`con_Code`, t1.`con_Firstname`, t1.`con_Lastname` 
+									FROM con_contact t1, cnt_contacttype t3
+									WHERE t3.cnt_Code = t1.con_Type
+									AND t3.cnt_Description = 'Employee'
+									AND t1.`con_Code` NOT IN (SELECT stf_CCode FROM stf_staff t2)";
+							}
+							$res = mysql_query($sql) or die(mysql_error());
 
-						  while ($lp_row = mysql_fetch_assoc($res)){
-						  $val = $lp_row["con_Code"];
-						  $caption = $lp_row["con_Firstname"]." ".$lp_row["con_Lastname"];
-						  if ($row["stf_CCode"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
-						 ?><option value="<?php echo $val ?>"<?php echo $selstr ?>><?php echo $caption ?></option>
-						<?php } ?></select>
-							<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Contact Person (Staff) of the User.</span></a>
+							if($iseditmode) {
+								while ($lp_row = mysql_fetch_assoc($res)) {
+									$arrContacts[$lp_row["con_Code"]] = $lp_row["contactName"];
+								}
+								echo $arrContacts[$row["stf_CCode"]];
+							}
+							else {
+								?><select name="stf_CCode" onChange="genUserPwd(this.value)" <?=$disabledTxt?>> 
+									<option value="0">Select Contact</option><?
+							  
+									while ($lp_row = mysql_fetch_assoc($res)) {
+										$val = $lp_row["con_Code"];
+										$caption = $lp_row["con_Firstname"]." ".$lp_row["con_Lastname"];
+										if ($row["stf_CCode"] == $val) {
+											$selstr = " selected"; 
+										}
+										else {
+											$selstr = ""; 
+										}
+										?><option value="<?php echo $val ?>"<?php echo $selstr ?>><?php echo $caption ?></option><?
+									} 
+								?></select><?
+							}
+							?>&nbsp;<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Contact Person (Staff) of the User.</span></a>
 						</td>
 					</tr>
 					<tr>
 						<td class="hr">Access Type<font style="color:red;" size="2">*</font>
 						</td>
-						<td class="dr"><select name="stf_AccessType" ><option value="0">Select Access Type</option>
-						<?php
-						  $sql = "select `aty_Code`, `aty_Description` from `aty_accesstype` where aty_Description not like 'Super Administrator' ORDER BY aty_Description ASC";
-						  $res = mysql_query($sql) or die(mysql_error());
+						<td class="dr">
+							<select name="stf_AccessType" onchange="javascript:showHideAccessSection(this.value);">
+								<option value="0">Select Access Type</option><?php
+						
+								$sql = "select `aty_Code`, `aty_Description` from `aty_accesstype` where aty_Description not like 'Super Administrator' ORDER BY aty_Description ASC";
+								$res = mysql_query($sql) or die(mysql_error());
 
-						  while ($lp_row = mysql_fetch_assoc($res)){
-						  $val = $lp_row["aty_Code"];
-						  $caption = $lp_row["aty_Description"];
-						  if ($row["stf_AccessType"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
-						 ?><option value="<?php echo $val ?>"<?php echo $selstr ?>><?php if ($caption=="Staff") echo "User"; else echo $caption ?></option>
-						<?php } ?></select>
+								while ($lp_row = mysql_fetch_assoc($res)) {
+										$val = $lp_row["aty_Code"];
+										$caption = $lp_row["aty_Description"];
+										if ($row["stf_AccessType"] == $val) {
+											$selstr = " selected"; 
+										} 
+										else {
+											$selstr = ""; 
+										}
+										?><option value="<?php echo $val ?>"<?php echo $selstr ?>><?php if ($caption=="Staff") echo "User"; else echo $caption ?></option><?php
+								} 
+							?></select>
 							<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Permission of the User. If type <b>Administrator</b> the user has full access rights for all forms. If type <b>User</b> user has limited permissions based on the rights selected for each form.</span></a>
 						</td>
 					</tr>
@@ -373,7 +414,7 @@ class staffContentList extends Database
 						<td class="hr">Disabled<font style="color:red;" size="2"></font></td>
 						<td class="dr"><input type="checkbox" class="checkboxClass" name="stf_Disabled" id="stf_Disabled" <?php if($row["stf_Disabled"]=='Y'){echo "checked";} ?> >
 							<input type="hidden" name="chkDisabled" />
-							<a class="tooltip" href="#"><img src="images/help.png"><span class="help">if checked the user is In-Active and cannot access the befree app.</span></a>
+							<a class="tooltip" href="#"><img src="images/help.png"><span class="help">if checked the user is disabled, it cannot access the SR App.</span></a>
 						</td>
 					</tr>
 					<!--<tr>
@@ -410,7 +451,7 @@ class staffContentList extends Database
 					$formres_chkcode_delete = mysql_query($formquery_chkcode_delete);
 
 					if(!$iseditmode) {
-					 ?><table border="0" cellspacing="0" cellpadding="0" align="center" class="fieldtable">
+					 ?><table border="0" cellspacing="0" id="permissionSection" cellpadding="0" align="center" class="fieldtable">
 						  <tr class="fieldheader">
 								<td width="300" rowspan="2" align="center" > <b>Forms to be shown</b></span>
 								<td colspan="4" class="helpBod"><div align="center"><b>Add Permissions </b></div></td>
@@ -483,7 +524,11 @@ class staffContentList extends Database
 				}
 			
 				if($iseditmode) { 
-					?><table border="0" cellspacing="0" cellpadding="0" align="center" class="fieldtable">
+					if ($row["stf_AccessType"] == 2) {
+						$hideSection = "style='display:none'"; 
+					}
+
+					?><table border="0" cellspacing="0" cellpadding="0" <?=$hideSection?> id="permissionSection" align="center" class="fieldtable">
 						<tr class="fieldheader">
 							<td width="300" rowspan="2" align="center" > <b>Forms to be shown</b></span>
 							<td colspan="4" class="helpBod"><div align="center"><b>Edit Permissions </b></div></td>

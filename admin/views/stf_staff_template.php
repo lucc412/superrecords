@@ -66,12 +66,18 @@
       $staffQuery->sql_insert();
       break;
     case "update":
-      $staffQuery->sql_update();
+		if(!in_array($_REQUEST['stf_Login'], $_SESSION['USERLOGIN'])) {
+      		$staffQuery->sql_update();
+	 	}
+		else
+		{
+			header("location: stf_staff.php?a=edit&recid={$_REQUEST['recid']}&flagDuplicate=Y");
+		}
       break;
    }
   switch ($a) {
     case "add":
-      if($access_file_level['stf_Add']=="Y")
+	  if($access_file_level['stf_Add']=="Y")
 	  {    
         $staffContent->addrec();
 	  }

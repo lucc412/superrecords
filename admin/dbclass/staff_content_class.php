@@ -400,8 +400,19 @@ class staffContentList extends Database
 					</tr>
 					<tr>
 						<td class="hr">Login<font style="color:red;" size="2">*</font></td>
-						<td class="dr"><input type="text" name="stf_Login" id="stf_Login" maxlength="50" value="<?php echo str_replace('"', '&quot;', trim($row["stf_Login"])) ?>">
-						<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Login name of the User.</span></a>
+						<td class="dr"><? 
+							$updateValue = trim($row["stf_Login"]);
+							
+							if(!empty($updateValue))
+								$mode = "edit";
+							else
+								$mode = "add";
+						
+						?><input type="text" onblur="javascript:checkUnique(this,'<?php echo $mode?>','<?php echo $updateValue?>')" name="stf_Login" id="stf_Login" maxlength="50" value="<?php echo str_replace('"', '&quot;', trim($row["stf_Login"])) ?>">
+							<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Login name of the User.</span></a> &nbsp;&nbsp;
+							<span id="enableText" class="successmsg"></span>
+							<span id="disableText" class="errmsg"></span>
+							
 						</td>
 					</tr>
 					<tr>
@@ -749,6 +760,7 @@ class staffContentList extends Database
 	}
 
 	function addrec() {
+		global $staffQuery;
 		 ?><div class="frmheading">
 			<h1>Add Record</h1>
 		</div>
@@ -772,8 +784,10 @@ class staffContentList extends Database
 		$this->showroweditor($row, false);
 		?>
 		<button style="margin-right:32px;" type="button" value="Cancel" onClick='javascript:history.back(-1);' class="cancelbutton">Cancel</button>
-		<button type="submit" name="action" value="Save" class="button">Save</button>
+		<button type="submit" id="btnSave" name="action" value="Save" class="" style="width:115px;">Save</button>
 		</form><?
+		if(isset($_SESSION["USERLOGIN"])) unset($_SESSION["USERLOGIN"]);
+		$_SESSION["USERLOGIN"] = $staffQuery->fetch_login_name();
 	} 
 
 	function viewrec($recid,$access_file_level) {
@@ -827,10 +841,19 @@ class staffContentList extends Database
 		<form enctype="multipart/form-data" action="stf_staff.php<?php echo "?a=".$_GET['a']."&recid=".$_GET['recid'];?>" method="post"  name="staff" onSubmit="return validateFormOnSubmit()">
 			<input type="hidden" name="sql" value="update">
 			<input type="hidden" name="xstf_Code" value="<?php echo $row["stf_Code"] ?>">
+			<?
+				// error message
+				if(!empty($_REQUEST['flagDuplicate'])) {
+					?><div class="errorMsg"><img src="../images_user/errorIcon.gif"> &nbsp;Client already exists.</div><?	
+				}
+					
+			?>
 			<?php $this->showroweditor($row, true); ?>
 			<button style="margin-right:32px;" type="button" value="Cancel" onClick='return ComfirmCancel();' class="cancelbutton">Cancel</button>
-			<button type="submit" name="action" value="Update" class="button">Update</button>
+			<button type="submit" id="btnUpdate" name="action" value="Update" style="width:115px;" class="button">Update</button>
 		</form><?
+		$_SESSION["USERLOGIN"] = $staffQuery->fetch_login_name($row["stf_Code"]);
+		
 		mysql_free_result($res);
 	}
 }

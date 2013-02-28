@@ -232,6 +232,21 @@ class staffDbquery extends Database
 		return $makepass;
 	}
 
+	public function fetch_login_name($recid=NULL) {
+		
+		if(!empty($recid)) $appendStr = "WHERE t1.stf_Code <> '{$recid}'";
+
+		$qrySel = "SELECT t1.stf_Login
+					FROM stf_staff t1
+					{$appendStr}";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrLogin[] = $rowData['stf_Login'];
+		}
+		return $arrLogin;	
+	}
+
 }
 $staffQuery = new staffDbquery();
 ?>

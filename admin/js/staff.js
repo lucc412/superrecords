@@ -1,4 +1,53 @@
-  function genUserPwd(contactname)
+// This function is used to check unique login name by ajax
+function checkUnique(eletxt,mode,updateValue)
+{
+	var that = document.getElementById("stf_Login");
+	var searchVal = eletxt.value;
+
+	
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+			var xmlhttp=new XMLHttpRequest();
+		}
+		else {// code for IE6, IE5
+		  	var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				var response = xmlhttp.responseText;
+				
+				alert(response);
+				
+				if(response == 'success')
+				{
+					document.getElementById("enableText").innerHTML= 'Congratulations, You can proceed. This Login name is available.';
+					document.getElementById("disableText").innerHTML= '';
+					document.getElementById("btnSave").disabled = false;
+					document.getElementById("btnUpdate").disabled = false;
+				}
+				else
+				{
+				document.getElementById("disableText").innerHTML= 'Sorry, You cannot proceed. This Login name is NOT available.';
+					document.getElementById("enableText").innerHTML= '';
+					document.getElementById("btnSave").disabled = true;
+					document.getElementById("btnSave").className = 'disbtnclass';
+					document.getElementById("btnUpdate").className = 'disbtnclass';
+					document.getElementById("stf_Login").focus();
+				}
+		    }
+		}
+	
+	if (searchVal == that.value)
+	{	
+		xmlhttp.open("GET","ajax_staff.php?inputValue="+searchVal+"&mode="+mode+"&updateValue="+updateValue,true);
+		xmlhttp.send();
+	}
+}
+
+
+function genUserPwd(contactname)
 	{
 		var strURL="includes/genuserpwd.php?contactname="+contactname;
   		var req = getXMLHTTP();

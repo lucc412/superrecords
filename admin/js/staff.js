@@ -18,18 +18,16 @@ function checkUnique(eletxt,mode,updateValue)
 			{
 				var response = xmlhttp.responseText;
 				
-				alert(response);
-				
 				if(response == 'success')
 				{
-					document.getElementById("enableText").innerHTML= 'Congratulations, You can proceed. This Login name is available.';
+					document.getElementById("enableText").innerHTML= 'Congratulations, You can proceed. This Login is available.';
 					document.getElementById("disableText").innerHTML= '';
 					document.getElementById("btnSave").disabled = false;
 					document.getElementById("btnUpdate").disabled = false;
 				}
 				else
 				{
-				document.getElementById("disableText").innerHTML= 'Sorry, You cannot proceed. This Login name is NOT available.';
+				document.getElementById("disableText").innerHTML= 'Sorry, You cannot proceed. This Login is NOT available.';
 					document.getElementById("enableText").innerHTML= '';
 					document.getElementById("btnSave").disabled = true;
 					document.getElementById("btnSave").className = 'disbtnclass';

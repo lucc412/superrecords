@@ -716,7 +716,7 @@ if($_SESSION['validUser']) {
 						</li><?
 					}
 
-					// Administration Menu (check access by passing $_SESSION of staff code and form code)
+					// Administration Menu (check access by passing staff code and form code)
 					$formcode_sys="21,50,4,43,76,57,98";
 					$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);
 
@@ -729,7 +729,7 @@ if($_SESSION['validUser']) {
 									?><li><a href="stf_staff.php?a=reset">Users</a></li><?
 								}
 
-								// Employees Submenu (Check access by passing $_SESSION of staff code and form code)
+								// Employees Submenu (Check access by passing staff code and form code)
 								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],50,1);
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
@@ -737,7 +737,7 @@ if($_SESSION['validUser']) {
 									}
 								} 
 
-								// Task Status Submenu (Check access by passing $_SESSION of staff code and form code)
+								// Task Status Submenu (Check access by passing staff code and form code)
 								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],4,1);
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
@@ -745,7 +745,7 @@ if($_SESSION['validUser']) {
 									}
 								} 
 
-								// Tickets Submenu (Check access by passing $_SESSION of staff code and form code)
+								// Tickets Submenu (Check access by passing staff code and form code)
 								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],43,1);
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
@@ -753,7 +753,7 @@ if($_SESSION['validUser']) {
 									}
 								} 
 
-								// Cross Sales Opp Submenu (Check access by passing $_SESSION of staff code and form code)
+								// Cross Sales Opp Submenu (Check access by passing staff code and form code)
 								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],76,1);
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
@@ -761,7 +761,7 @@ if($_SESSION['validUser']) {
 									}
 								}
 
-								// IP Address Submenu (Check access by passing $_SESSION of staff code and form code)
+								// IP Address Submenu (Check access by passing staff code and form code)
 								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],57,1);
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
@@ -769,9 +769,14 @@ if($_SESSION['validUser']) {
 									}
 								} 
 
-								// Default Landing URL Submenu (show only to administrator) 
+								// Default Landing URL Submenu 
 								if($_SESSION['usertype'] == 'Administrator') {
 									?><li><a href="landing_page.php">Default Landing URL</a></li><?
+								}
+
+								// Manage Emails Submenu
+								if($_SESSION['usertype'] == 'Administrator') {
+									?><li><a href="manage_emails.php">Manage Emails</a></li><?
 								}
 						
 							?></ul>

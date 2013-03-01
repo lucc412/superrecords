@@ -103,18 +103,18 @@ class staffContentList extends Database
 						<td class="<?php echo $style ?>"><?php if ($row["lp_stf_AccessType"]=="Staff") echo "User"; else echo htmlspecialchars($row["lp_stf_AccessType"]) ?></td><?
 						if($access_file_level['stf_View']=="Y")
 						{
-							?><td><a href="stf_staff.php?a=view&recid=<?php echo $i ?>"><img src="images/view.png" border="0"  alt="View" name="View" title="View" align="middle" /></a></td><?
+							?><td align="center"><a href="stf_staff.php?a=view&recid=<?php echo $i ?>"><img src="images/view.png" border="0"  alt="View" name="View" title="View" align="middle" /></a></td><?
 						}
 
 						if($access_file_level['stf_Edit']=="Y")
 						{
-							?><td><a href="stf_staff.php?a=edit&recid=<?php echo $i ?>"><img src="images/edit.png" border="0"  alt="Edit" name="Edit" title="Edit" align="middle" /></a>
+							?><td align="center"><a href="stf_staff.php?a=edit&recid=<?php echo $i ?>"><img src="images/edit.png" border="0"  alt="Edit" name="Edit" title="Edit" align="middle" /></a>
 							</td><?
 						} 
 
 						if($access_file_level['stf_Delete']=="Y")
 						{
-							?><td><a onClick="performdelete('stf_staff.php?mode=delete&recid=<?php echo htmlspecialchars($row["stf_Code"]) ?>'); return false;" href="#"><img src="images/erase.png" border="0"  alt="Delete" name="Delete" title="Delete" align="middle" /></a>
+							?><td align="center"><a onClick="performdelete('stf_staff.php?mode=delete&recid=<?php echo htmlspecialchars($row["stf_Code"]) ?>'); return false;" href="#"><img src="images/erase.png" border="0"  alt="Delete" name="Delete" title="Delete" align="middle" /></a>
 							</td><? 
 						} 
 					?></tr><?

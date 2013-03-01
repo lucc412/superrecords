@@ -250,6 +250,13 @@
 		</tr>
 		
 		<tr>
+			<td class="hr">Resolution</td>
+			<td class="dr">
+				<textarea name="txtResolution" rows="3" cols="25"><?=$arrTaskData['resolution']?></textarea>
+			</td>
+		</tr>
+		
+		<tr>
 			<td class="hr">Current Job in Hand</td>
 			<td class="dr">
 				<textarea name="txtJobInHand" rows="3" cols="25"><?=$arrTaskData['current_job_in_hand']?></textarea>
@@ -260,6 +267,13 @@
 			<td class="hr">SR Manager Notes</td>
 			<td class="dr">
 				<textarea name="txtNotes" rows="3" cols="25"><?=$arrTaskData['notes']?></textarea>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="hr">Related Cases</td>
+			<td class="dr">
+				<textarea name="txtRelatedCases" rows="3" cols="25"><?=$arrTaskData['related_cases']?></textarea>
 			</td>
 		</tr>
 		

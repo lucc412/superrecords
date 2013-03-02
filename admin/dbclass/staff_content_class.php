@@ -103,18 +103,18 @@ class staffContentList extends Database
 						<td class="<?php echo $style ?>"><?php if ($row["lp_stf_AccessType"]=="Staff") echo "User"; else echo htmlspecialchars($row["lp_stf_AccessType"]) ?></td><?
 						if($access_file_level['stf_View']=="Y")
 						{
-							?><td><a href="stf_staff.php?a=view&recid=<?php echo $i ?>"><img src="images/view.png" border="0"  alt="View" name="View" title="View" align="middle" /></a></td><?
+							?><td align="center"><a href="stf_staff.php?a=view&recid=<?php echo $i ?>"><img src="images/view.png" border="0"  alt="View" name="View" title="View" align="middle" /></a></td><?
 						}
 
 						if($access_file_level['stf_Edit']=="Y")
 						{
-							?><td><a href="stf_staff.php?a=edit&recid=<?php echo $i ?>"><img src="images/edit.png" border="0"  alt="Edit" name="Edit" title="Edit" align="middle" /></a>
+							?><td align="center"><a href="stf_staff.php?a=edit&recid=<?php echo $i ?>"><img src="images/edit.png" border="0"  alt="Edit" name="Edit" title="Edit" align="middle" /></a>
 							</td><?
 						} 
 
 						if($access_file_level['stf_Delete']=="Y")
 						{
-							?><td><a onClick="performdelete('stf_staff.php?mode=delete&recid=<?php echo htmlspecialchars($row["stf_Code"]) ?>'); return false;" href="#"><img src="images/erase.png" border="0"  alt="Delete" name="Delete" title="Delete" align="middle" /></a>
+							?><td align="center"><a onClick="performdelete('stf_staff.php?mode=delete&recid=<?php echo htmlspecialchars($row["stf_Code"]) ?>'); return false;" href="#"><img src="images/erase.png" border="0"  alt="Delete" name="Delete" title="Delete" align="middle" /></a>
 							</td><? 
 						} 
 					?></tr><?
@@ -193,6 +193,9 @@ class staffContentList extends Database
 				$permres = mysql_query($permquery);
 
 				while ($row_perm=mysql_fetch_array($permres)) {
+
+					if($row_perm['frm_Code']==98 || $row_perm['frm_Code']==99 || $row_perm['frm_Code'] == 21 || $row_perm['frm_Code']==76) continue;
+
 					//echo $i;
 					if($i==0)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>System Setup</div></i></b></td></tr>";
@@ -208,7 +211,7 @@ class staffContentList extends Database
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
 					if($i==26)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
-					if($i==33)
+					if($i==40)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
 
 					?><tr>
@@ -486,6 +489,9 @@ class staffContentList extends Database
 							while ($row_form = @mysql_fetch_array($formres))
 							{
 								//echo $i;
+								// hide users, default landing URL, Manage Emails from this list
+								if($row_form['frm_Code']==98 || $row_form['frm_Code']==99 || $row_form['frm_Code'] == 21 || $row_form['frm_Code']==76) continue;
+
 								if($i==0)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>System Setup</div></i></b></td></tr>";
 								if($i==2)
@@ -500,7 +506,7 @@ class staffContentList extends Database
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
 								if($i==26)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
-								if($i==33)
+								if($i==40)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
 								
 								?><tr>
@@ -577,6 +583,8 @@ class staffContentList extends Database
 							<input type="hidden" name="stf_FormCode<?php echo $row_perm['stf_Code']; ?>" value="<?php echo $row_perm['stf_FormCode']; ?>" />
 							<input type="hidden" name="count" value="<?php echo $count;?>"><?
 
+							if($row_perm['frm_Code']==98 || $row_perm['frm_Code']==99 || $row_perm['frm_Code'] == 21 || $row_perm['frm_Code']==76) continue;
+
 							//echo $i;
 							if($i==0)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>System Setup</div></i></b></td></tr>";
@@ -592,7 +600,7 @@ class staffContentList extends Database
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
 							if($i==26)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
-							if($i==33)
+							if($i==40)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
 
 							?><tr><td width="300px">

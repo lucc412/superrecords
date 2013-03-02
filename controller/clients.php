@@ -27,11 +27,20 @@ switch ($sql) {
 				//It will Get Email Id from Which Email Id the Email will Send.
 				$fromEmail = get_email_id($_SESSION['PRACTICEID']);
 
+				//It will Get All Details in array format for Send Email	
+				$arrEmailInfo = get_email_info('1');
+
+				$from = $fromEmail;
+				$to = $arrEmailInfo['event_to'];
+				$cc = $arrEmailInfo['event_cc'];
+				$subject = $arrEmailInfo['event_subject'];
+				$content = $arrEmailInfo['event_content'];
+
 				//Include Send Mail File For To Generate Email
 				include_once('../include/send_mail.php');
 				
 				//It will Get all Necessary Information and Send Email to Admin Person
-				sent_mail($fromEmail);
+				send_mail($from, $to, $cc, $subject, $content);
 			}
 		}
 		else 

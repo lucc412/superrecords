@@ -42,16 +42,14 @@ function get_email_id($pr_id)
 function get_email_info($eventId)
 {
 	//It will Generate Query and will get Require Details From Database
-	$myQuery = "SELECT event_name,event_subject,event_content, event_to,event_cc
+	$myQuery = "SELECT event_name,event_subject,event_content, event_to,event_cc,event_from
 				FROM email_events 
 				WHERE event_id = '$eventId'";
 	
 	$runQuery = mysql_query($myQuery);
-		while($row = mysql_fetch_assoc($runQuery))
-		{
-			$arrEmailInfo = $row;
-		}
-		//It will Return all Necessary Information in form of Array
-		return $arrEmailInfo;
+	$arrEmailInfo = mysql_fetch_assoc($runQuery);
+		
+	//It will Return all Necessary Information in form of Array
+	return $arrEmailInfo;
 }
 ?>

@@ -35,11 +35,19 @@
 			?><tr>
 				<td>Content</td>
 				<td>
-					<textarea cols="80" id="txtContent" name="txtContent" rows="10"><?=$arrEventInfo["event_content"]?></textarea>
-					<br/><span style="color:orange"><u>Below are the pre-defined constants that can be used in the content:</u></span>
+					<textarea cols="80" id="txtContent" name="txtContent" rows="10"><?=$arrEventInfo["event_content"]?></textarea><br/>
+
+					<span style="color:orange"><u>Below are the pre-defined constants that can be used in the content:</u></span>
+
 					<div style="padding-top:10px;padding-bottom:5px;"><b style="color:red">@fromName</b> - Sets name of FROM email address</div>
-					<div style="padding-bottom:5px;"><b style="color:red">@toName</b> - Sets name of TO email address</div>
-					<script type="text/javascript">
+
+					<div style="padding-bottom:5px;"><b style="color:red">@toName</b> - Sets name of TO email address</div><?
+
+					if($_REQUEST['eventId'] == '4') {
+						?><div style="padding-bottom:5px;"><b style="color:red">@jobStatus</b> - Sets STATUS of job</div><?
+					}
+
+					?><script type="text/javascript">
 					//<![CDATA[
 
 						CKEDITOR.replace( 'txtContent',

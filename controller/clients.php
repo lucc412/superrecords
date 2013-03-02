@@ -23,11 +23,15 @@ switch ($sql) {
 			
 			if($flagSet) //If Flag or Event Active it will Execute
 			{
+				
+				//It will Get Email Id from Which Email Id the Email will Send.
+				$fromEmail = get_email_id($_SESSION['PRACTICEID']);
+
 				//Include Send Mail File For To Generate Email
 				include_once('../include/send_mail.php');
 				
 				//It will Get all Necessary Information and Send Email to Admin Person
-				sent_mail($arrEmailInfo, $email_id);
+				sent_mail($fromEmail);
 			}
 		}
 		else 

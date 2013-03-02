@@ -35,6 +35,7 @@ class Manage_Emails extends Database {
 	   Date Created -> 01-Mar-13 [Disha Goyal]
 	*/
 	public function sql_update($eventId, $frmEmail, $toEmail, $ccEmail) {
+
 		$qryUpd = "UPDATE email_events
 				SET event_from = '" . addslashes($frmEmail) . "',
 					event_to = '" . addslashes($toEmail) . "',

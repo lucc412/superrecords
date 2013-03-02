@@ -32,6 +32,7 @@ class Job_Class extends Database
 		}
 		return $arrPractice;	
 	} 
+
 	// Function to fetch all Documents
 	public function sql_select() {		
 		$qrySel = "SELECT * FROM documents ORDER BY document_id";
@@ -137,6 +138,20 @@ class Job_Class extends Database
 			$arrQuery[$rowData['query_id']] = $rowData;
 		}
 		return $arrQuery;	
+	} 
+
+	// function to fetch contact name as per user email address
+	public function fetchFromName($email) {		
+
+		$qrySel = "SELECT CONCAT_WS(' ', con_Firstname, con_Middlename, con_Lastname) contactName
+					FROM con_contact
+					WHERE con_email = '{$email}'";
+
+		$fetchResult = mysql_query($qrySel);		
+		$rowData = mysql_fetch_assoc($fetchResult);
+		$contactName = $rowData['contactName'];
+		
+		return $contactName;	
 	} 
 	
 	// Function to Add new Query

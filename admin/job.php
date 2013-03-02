@@ -7,8 +7,8 @@
 //************************************************************************************************
 
 ob_start();
-include '../include/php_functions.php';
 include 'common/varDeclare.php';
+include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/job_class.php';
 
@@ -48,24 +48,34 @@ if($_SESSION['validUser']) {
 				$queryStatus = $_REQUEST['rdStatus' . $queryId];
 
 				if($queryStatus) {
+					// check if event is active or inactive [This will return TRUE or FALSE as per result]
 					$flagSet = getEventStatus('6');
 
-					//It will Get All Details in array format for Send Email	
-					$arrEmailInfo = get_email_info('6');
+					// if event is active it go for mail function
+					if($flagSet) {
 
-					//It will Get Email Id from Which Email Id the Email will Send.
-					$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
-					$toEmail = get_email_id($practiceId);
+						//It will Get All Details in array format for Send Email	
+						$arrEmailInfo = get_email_info('6');
 
-					$from = $arrEmailInfo['event_from'];
-					$to = $toEmail;
-					$cc = $arrEmailInfo['event_cc'];
-					$subject = $arrEmailInfo['event_subject'];
-					$content = $arrEmailInfo['event_content'];
+						//It will Get Email Id from Which Email Id the Email will Send.
+						$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
+						$toEmail = get_email_id($practiceId);
 
-					if($flagSet) 
-					{
-						include_once('../include/send_mail.php');
+						$from = $arrEmailInfo['event_from'];
+						$to = $toEmail;
+						$cc = $arrEmailInfo['event_cc'];
+						$subject = $arrEmailInfo['event_subject'];
+						$content = $arrEmailInfo['event_content'];
+
+						// replace variable @fromName with name of administrator
+						$fromName = $objCallData->fetchFromName($from);
+						$content = str_replace('@fromName', $fromName, $content);
+
+						// replace variable @toName with name of practice
+						$toName = $objCallData->arrPracticeName[$practiceId];
+						$content = str_replace('@toName', $toName, $content);
+					
+						include_once(MAIL);
 						send_mail($from, $to, $cc, $subject, $content);
 					}
 				}
@@ -82,25 +92,42 @@ if($_SESSION['validUser']) {
 					$objCallData->sql_update($_REQUEST["recid"]);
 
 					/* send mail function starts here */
+
+					// check if event is active or inactive [This will return TRUE or FALSE as per result]
 					$flagSet = getEventStatus('4');
 
-					//It will Get All Details in array format for Send Email	
-					$arrEmailInfo = get_email_info('4');
+					// if event is active it go for mail function
+					if($flagSet) {
 
-					//It will Get Email Id from Which Email Id the Email will Send.
-					$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
-					$toEmail = get_email_id($practiceId);
+						//It will Get All Details in array format for Send Email	
+						$arrEmailInfo = get_email_info('4');
 
-					$from = $arrEmailInfo['event_from'];
-					$to = $toEmail;
-					$cc = $arrEmailInfo['event_cc'];
-					$subject = $arrEmailInfo['event_subject'];
-					$content = $arrEmailInfo['event_content'];
+						//It will Get Email Id from Which Email Id the Email will Send.
+						$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
+						$toEmail = get_email_id($practiceId);
 
-					if($flagSet) 
-					{
-						include_once('../include/send_mail.php');
+						$from = $arrEmailInfo['event_from'];
+						$to = $toEmail;
+						$cc = $arrEmailInfo['event_cc'];
+						$subject = $arrEmailInfo['event_subject'];
+						$content = $arrEmailInfo['event_content'];
+
+						// replace variable @jobStatus with updated status of job 
+						$jobStatusId = $_REQUEST['lstJobStatus'];
+						$jobStatus = $objCallData->arrJobStatus[$jobStatusId]['job_status'];
+						$content = str_replace('@jobStatus', $jobStatus, $content);
+
+						// replace variable @fromName with name of administrator
+						$fromName = $objCallData->fetchFromName($from);
+						$content = str_replace('@fromName', $fromName, $content);
+
+						// replace variable @toName with name of practice
+						$toName = $objCallData->arrPracticeName[$practiceId];
+						$content = str_replace('@toName', $toName, $content);
+
+						include_once(MAIL);
 						send_mail($from, $to, $cc, $subject, $content);
+						
 					}
 					/* send mail function ends here */
 
@@ -130,24 +157,34 @@ if($_SESSION['validUser']) {
 					$objCallData->add_query();
 
 					/* send mail function starts here */
+
+					// check if event is active or inactive [This will return TRUE or FALSE as per result]
 					$flagSet = getEventStatus('5');
 
-					//It will Get All Details in array format for Send Email	
-					$arrEmailInfo = get_email_info('5');
+					// if event is active it go for mail function
+					if($flagSet) {
+						//It will Get All Details in array format for Send Email	
+						$arrEmailInfo = get_email_info('5');
 
-					//It will Get Email Id from Which Email Id the Email will Send.
-					$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
-					$toEmail = get_email_id($practiceId);
+						//It will Get Email Id from Which Email Id the Email will Send.
+						$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
+						$toEmail = get_email_id($practiceId);
 
-					$from = $arrEmailInfo['event_from'];
-					$to = $toEmail;
-					$cc = $arrEmailInfo['event_cc'];
-					$subject = $arrEmailInfo['event_subject'];
-					$content = $arrEmailInfo['event_content'];
+						$from = $arrEmailInfo['event_from'];
+						$to = $toEmail;
+						$cc = $arrEmailInfo['event_cc'];
+						$subject = $arrEmailInfo['event_subject'];
+						$content = $arrEmailInfo['event_content'];
 
-					if($flagSet) 
-					{
-						include_once('../include/send_mail.php');
+						// replace variable @fromName with name of administrator
+						$fromName = $objCallData->fetchFromName($from);
+						$content = str_replace('@fromName', $fromName, $content);
+
+						// replace variable @toName with name of practice
+						$toName = $objCallData->arrPracticeName[$practiceId];
+						$content = str_replace('@toName', $toName, $content);
+
+						include_once(MAIL);
 						send_mail($from, $to, $cc, $subject, $content);
 					}
 					/* send mail function ends here */

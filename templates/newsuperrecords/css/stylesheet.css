@@ -338,21 +338,20 @@ a img{
 }
 
 #system-message > dd > ul {
-	color: rgb(37, 187, 0);
+	color: #F1592A;
 	background-position: 4px top;
 	background-repeat: no-repeat;
 	margin-bottom: 10px;
 	list-style: none;
-	padding: 10px;
-	border:	2px solid rgb(54, 155, 29);
+	padding: 6px;
 	font-size:	11px;
+	margin-left: 6px;
 }
 
 #system-message > .message > ul {
 	background-position:left center; 
-	text-indent:1.5em;
-	background-color: rgba(241, 199, 165, 0.52);
-	background-image: url(../images/notice-info.png);
+	text-indent:0.5em;
+	background-color: #ffffff;
 }
 
 /* Content */

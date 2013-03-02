@@ -27,8 +27,6 @@
 	margin-bottom: 10px;
 	list-style: none;
 	padding: 10px;
-	border-top: 3px solid #84A7DB;
-	border-bottom: 3px solid #84A7DB;
 }
 
 #system-message > dd > ul > li {
@@ -38,7 +36,6 @@
 /* System Standard Messages */
 #system-message > .message > ul {
 	background-color: #C3D2E5;
-	background-image: url(../images/notice-info.png);
 }
 
 /* System Error Messages */

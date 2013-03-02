@@ -1,6 +1,7 @@
 <?
 include("../include/connection.php");
 include("../model/client_class.php");
+include("../include/php_functions.php");
 
 $objScr = new Client();
 
@@ -10,9 +11,19 @@ $sql = $_REQUEST["sql"]?$_REQUEST["sql"]:'';
 
 switch ($sql) {
 	case "insert":
+	
 		$_SESSION['CLIENTNAME'] = $objScr->fetch_client_name();
-		if(!in_array($_REQUEST['txtName'], $_SESSION['CLIENTNAME'])) {
+		if(!in_array($_REQUEST['txtName'], $_SESSION['CLIENTNAME'])) 
+		{
+			//Insert Query
 			$objScr->sql_insert();
+		
+			$flagSet = getEventStatus('1');
+			if(flagSet) 
+			{
+				include_once('../include/send_mail.php');
+				sent_mail($arrEmailInfo, $email_id);
+			}
 		}
 		else {
 			header("location: clients.php?a=add&flagDuplicate=Y");

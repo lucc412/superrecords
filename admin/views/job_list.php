@@ -806,14 +806,13 @@ switch ($viewSection)
 			</table>
 
 
-<button type="submit" value="Save" name="btnSave" class="cancelbutton">
-	Save
-</button>
+			<button type="submit" value="Save" name="btnSave" class="cancelbutton">
+				Save
+			</button>
 
-<button type="button" value="Cancel"  class="cancelbutton"  onClick='return ComfirmCancel(<?=$_REQUEST["jobId"]?>);'>
-	Cancel
-</button>
-			
+			<button type="button" value="Cancel"  class="cancelbutton"  onClick='return ComfirmCancel(<?=$_REQUEST["jobId"]?>);'>
+				Cancel
+			</button>
 			
 		</form><?
 		break;

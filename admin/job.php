@@ -7,6 +7,7 @@
 //************************************************************************************************
 
 ob_start();
+include '../include/php_functions.php';
 include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/job_class.php';
@@ -37,18 +38,67 @@ if($_SESSION['validUser']) {
 			$sql = $_REQUEST["sql"];
 			$filter = $_REQUEST["filter"];
 			$doAction = $_REQUEST["list"];
-			
 					
 			if($_REQUEST["queryId"])
 			{
 				$objCallData->update_query($_REQUEST["queryId"]);	
+
+				/* send mail function starts here */
+				$flagSet = getEventStatus('6');
+
+				//It will Get All Details in array format for Send Email	
+				$arrEmailInfo = get_email_info('6');
+
+				//It will Get Email Id from Which Email Id the Email will Send.
+				$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
+				$toEmail = get_email_id($practiceId);
+
+				$from = $arrEmailInfo['event_from'];
+				$to = $toEmail;
+				$cc = $arrEmailInfo['event_cc'];
+				$subject = $arrEmailInfo['event_subject'];
+				$content = $arrEmailInfo['event_content'];
+
+				if($flagSet) 
+				{
+					include_once('../include/send_mail.php');
+					send_mail($from, $to, $cc, $subject, $content);
+				}
+				/* send mail function ends here */
+
 				header('Location: job.php?a=reset&doAction=queries&jobId='.$_REQUEST["jobId"]);	
 			}
 			
+			// db query as per request
 			switch ($sql)
 			{
 				case "update":
+					
 					$objCallData->sql_update($_REQUEST["recid"]);
+
+					/* send mail function starts here */
+					$flagSet = getEventStatus('4');
+
+					//It will Get All Details in array format for Send Email	
+					$arrEmailInfo = get_email_info('4');
+
+					//It will Get Email Id from Which Email Id the Email will Send.
+					$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
+					$toEmail = get_email_id($practiceId);
+
+					$from = $arrEmailInfo['event_from'];
+					$to = $toEmail;
+					$cc = $arrEmailInfo['event_cc'];
+					$subject = $arrEmailInfo['event_subject'];
+					$content = $arrEmailInfo['event_content'];
+
+					if($flagSet) 
+					{
+						include_once('../include/send_mail.php');
+						send_mail($from, $to, $cc, $subject, $content);
+					}
+					/* send mail function ends here */
+
 					break;
 					
 				case "add":
@@ -67,11 +117,36 @@ if($_SESSION['validUser']) {
 					$objCallData->insert_job();
 					break;
 			}
-						
+				
+			// display pages content as per request
 			switch($a)
 			{
 				case "add":
 					$objCallData->add_query();
+
+					/* send mail function starts here */
+					$flagSet = getEventStatus('5');
+
+					//It will Get All Details in array format for Send Email	
+					$arrEmailInfo = get_email_info('5');
+
+					//It will Get Email Id from Which Email Id the Email will Send.
+					$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
+					$toEmail = get_email_id($practiceId);
+
+					$from = $arrEmailInfo['event_from'];
+					$to = $toEmail;
+					$cc = $arrEmailInfo['event_cc'];
+					$subject = $arrEmailInfo['event_subject'];
+					$content = $arrEmailInfo['event_content'];
+
+					if($flagSet) 
+					{
+						include_once('../include/send_mail.php');
+						send_mail($from, $to, $cc, $subject, $content);
+					}
+					/* send mail function ends here */
+
 					header('Location: job.php?a=reset&doAction=queries&jobId='.$_REQUEST["jobId"]);
 					break;
 					
@@ -119,9 +194,8 @@ if($_SESSION['validUser']) {
 		
 		if($_REQUEST["doAction"] != "uploadReports")
 		{
-		include("includes/footer.php");	
+			include("includes/footer.php");	
 		}
-		//include("includes/footer.php");
 }  
 else {
 	header("Location:index.php?msg=timeout");

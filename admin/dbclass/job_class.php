@@ -111,6 +111,21 @@ class Job_Class extends Database
 		}
 		return $arrTypes;
 	} 
+
+	// Function to fetch all Queries
+	public function fetchPracticeId($jobId)
+	{
+		$qrySel = "SELECT pr.id practiceId
+					FROM job jb, client cl, pr_practice pr
+					WHERE jb.client_id = cl.client_id
+					AND cl.id = pr.id";
+
+		$fetchResult = mysql_query($qrySel);		
+		$fetchRow = mysql_fetch_row($fetchResult);
+		$practiceId = $fetchRow[0];
+
+		return $practiceId;
+	} 
 	
 	// Function to fetch all Queries
 	public function fetchQueries()
@@ -225,8 +240,9 @@ class Job_Class extends Database
 		global $commonUses;
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 		
-	    $qryUpd = "UPDATE job SET job_status_id=".$_REQUEST["lstJobStatus"].", 
-				   job_due_date='".$dateSignedUp."' 
+	    $qryUpd = "UPDATE job 
+					SET job_status_id=".$_REQUEST["lstJobStatus"].", 
+						job_due_date='".$dateSignedUp."' 
 				   WHERE job_id=".$jobId;
 		mysql_query($qryUpd);
 	}

@@ -346,12 +346,15 @@ a img{
 	padding: 6px;
 	font-size:	11px;
 	margin-left: 6px;
+	border-top: #ffffff;
+	border-bottom: #ffffff;
 }
 
 #system-message > .message > ul {
 	background-position:left center; 
 	text-indent:0.5em;
 	background-color: #ffffff;
+	background-image: none;
 }
 
 /* Content */

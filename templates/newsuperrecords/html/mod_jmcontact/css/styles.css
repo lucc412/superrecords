@@ -1,0 +1,13 @@
+/*------------------------------------------------------------------------
+# mod_jmcontact - JM contact Module
+# ------------------------------------------------------------------------
+# author    JM-Experts.com
+# copyright Copyright (C) 2011 JM-Experts.com. All Rights Reserved.
+# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+-------------------------------------------------------------------------*/
+#jmcontactform {}
+#jmcontactform .formrow .row_inner {}
+#jmcontactform .formrow {padding:2px;width:100%;float:left;}
+#jmcontactform .formrow#submit div {float:left;width:50%;}
+#jmcontactform .formrow #label {}
+#jmcontactform .formrow #input {}

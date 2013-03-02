@@ -15,17 +15,23 @@ switch ($sql) {
 		$_SESSION['CLIENTNAME'] = $objScr->fetch_client_name();
 		if(!in_array($_REQUEST['txtName'], $_SESSION['CLIENTNAME'])) 
 		{
-			//Insert Query
+			//Insert New Client By Practice Login into Database
 			$objScr->sql_insert();
-		
+			
+			//Get Event Status if Event is Active we Get 1 Else 0
 			$flagSet = getEventStatus('1');
-			if(flagSet) 
+			
+			if($flagSet) //If Flag or Event Active it will Execute
 			{
+				//Include Send Mail File For To Generate Email
 				include_once('../include/send_mail.php');
+				
+				//It will Get all Necessary Information and Send Email to Admin Person
 				sent_mail($arrEmailInfo, $email_id);
 			}
 		}
-		else {
+		else 
+		{
 			header("location: clients.php?a=add&flagDuplicate=Y");
 		}
 		break;

@@ -271,7 +271,10 @@ class Job_Class extends Database
 		$strQuery = $_REQUEST["txtQuery".$queryId];
 		$strStatus = $_REQUEST["rdStatus".$queryId];
 		
-		$qrySel = "UPDATE queries SET query='{$strQuery}', status='{$strStatus}' WHERE query_id=".$queryId;
+		$qrySel = "UPDATE queries 
+					SET query='{$strQuery}', 
+						status='{$strStatus}' 
+					WHERE query_id=".$queryId;
 		mysql_query($qrySel);
 	}
 	

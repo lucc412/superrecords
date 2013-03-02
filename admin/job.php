@@ -41,28 +41,33 @@ if($_SESSION['validUser']) {
 					
 			if($_REQUEST["queryId"])
 			{
-				$objCallData->update_query($_REQUEST["queryId"]);	
+				$queryId = $_REQUEST["queryId"];
+				$objCallData->update_query($queryId);	
 
 				/* send mail function starts here */
-				$flagSet = getEventStatus('6');
+				$queryStatus = $_REQUEST['rdStatus' . $queryId];
 
-				//It will Get All Details in array format for Send Email	
-				$arrEmailInfo = get_email_info('6');
+				if($queryStatus) {
+					$flagSet = getEventStatus('6');
 
-				//It will Get Email Id from Which Email Id the Email will Send.
-				$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
-				$toEmail = get_email_id($practiceId);
+					//It will Get All Details in array format for Send Email	
+					$arrEmailInfo = get_email_info('6');
 
-				$from = $arrEmailInfo['event_from'];
-				$to = $toEmail;
-				$cc = $arrEmailInfo['event_cc'];
-				$subject = $arrEmailInfo['event_subject'];
-				$content = $arrEmailInfo['event_content'];
+					//It will Get Email Id from Which Email Id the Email will Send.
+					$practiceId = $objCallData->fetchPracticeId($_REQUEST["recid"]);
+					$toEmail = get_email_id($practiceId);
 
-				if($flagSet) 
-				{
-					include_once('../include/send_mail.php');
-					send_mail($from, $to, $cc, $subject, $content);
+					$from = $arrEmailInfo['event_from'];
+					$to = $toEmail;
+					$cc = $arrEmailInfo['event_cc'];
+					$subject = $arrEmailInfo['event_subject'];
+					$content = $arrEmailInfo['event_content'];
+
+					if($flagSet) 
+					{
+						include_once('../include/send_mail.php');
+						send_mail($from, $to, $cc, $subject, $content);
+					}
 				}
 				/* send mail function ends here */
 

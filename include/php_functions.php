@@ -26,16 +26,13 @@ function get_email_id($pr_id)
 	$myQueryPrId = "SELECT email 
 					FROM pr_practice 
 					WHERE id = '$pr_id'";
-	
 
 	$myRunQueryPrId = mysql_query($myQueryPrId);
-		while($myRowPrId = mysql_fetch_assoc($myRunQueryPrId))
-		{
-			//It will Fetch Email id of Practice User
-			$prEmailId = $myRowPrId['email'];
-		}
-		//It will Return Email Id of Practice User
-		return $prEmailId;
+	$fetchRow = mysql_fetch_assoc($myRunQueryPrId);
+	 $prEmailId = $fetchRow['email'];
+
+	//It will Return Email Id of Practice User
+	return $prEmailId;
 }
 
 //It will Get All Information Regarding Event like TO , FROM , CC , Subject , Message etc It will Return all those Details in Array Form.

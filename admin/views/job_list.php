@@ -6,46 +6,33 @@
 //  Last Modified : 07-Jan-2013 
 //************************************************************************************************
 
-$viewSection = $_REQUEST["doAction"];
 //*************************************************************************************************
-//  Task          : Switch case to load Tabs inside Job page while editing.
-//  Modified By   : Dhiraj Sahu
-//  Created on    : 02-Jan-2013 
-//  Last Modified : 07-Jan-2013 
+//  Task          : Made all URLs clean
+//  Modified By   : Disha Goyal
+//  Created on    : 01-Jan-2013 
+//  Last Modified : 04-Mar-13
 //************************************************************************************************
 
 $client_id = $objCallData->arrJob[$_REQUEST["jobId"]]["client_id"];
 
-if($viewSection != "list" && $viewSection != "add_job")
-{
-	if($viewSection == "uploadReports")
-	{
+if(!empty($a) && $a != 'addJob') {
+	if($a == "uploadReports") {
 		?><br /><br />
-		
 		<table align="center" width="100%" border="0">
-		<tr>
-		
-			<td>
-		
-		<span style="font-weight:bold; font-size:14pt;"> Practice Name: </span>
+			<tr>
+				<td>
+					<span style="font-weight:bold; font-size:14pt;"> Practice Name: </span>
 					<span class="frmheading" style="font-size:14pt;"><?=$objCallData->arrPractice[$objCallData->arrClient[$client_id]["id"]]["name"]?></span>
-			
-			</td>
-			<td align="right">
-			
+				</td>
+				<td align="right">
 					<span style="font-weight:bold; font-size:14pt;"> Job Name: </span><?
-				$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
-				$jobName = '<b style="color:#b30000;">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</b> - <b style="color:#0411ff;">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</b> - <b style="color:#006a0e;">' . $objCallData->arrJobType[$arrJobParts[2]].'</b>';
-		   ?>
-		   <span style="font-size:14pt;"><?=$jobName?></span>
-		  </td>
-		  
-		  </tR>
-		  
-		  </table>
-		  
-		   <?
-		   
+					$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
+					$jobName = '<b style="color:#b30000;">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</b> - <b style="color:#0411ff;">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</b> - <b style="color:#006a0e;">' . $objCallData->arrJobType[$arrJobParts[2]].'</b>';
+					?><span style="font-size:14pt;"><?=$jobName?></span>
+			  </td>
+			  
+			</tr>
+		</table><?
 	}
 	else
 	{
@@ -69,117 +56,17 @@ if($viewSection != "list" && $viewSection != "add_job")
 	}
 }
 
-
-switch ($viewSection)
+switch ($a)
 {
-	// **********************************************************
-	// Case to load list of Jobs with edit button, Begins here.
-	case "list":
-
-			?><body><form method="POST" name="frmJobList" action="job.php?a=reset&doAction=list">
-			<div class="frmheading">
-				<h1>Job List</h1>
-			</div>
-			
-			
-			<table class="customFilter" width="50%" align="right" border="0" cellspacing="1" cellpadding="4" style="margin-right:0px;">
-				<tr>
-					<td><b>Custom Filter</b>&nbsp;</td>
-					<td><input type="text" name="filter" value="<?php echo $filter ?>"></td>
-					<td>
-						<select name="filter_field">
-							<option value="">All Fields</option>
-							<option value="<?="practice"?>"<?if ($_REQUEST['filter_field'] == "practice") { echo "selected"; } ?>>Practice Name</option>
-							<option value="<?="job"?>"<?if ($_REQUEST['filter_field'] == "job") { echo "selected"; } ?>>Job Name</option>
-							<option value="<?="status"?>"<?if ($_REQUEST['filter_field'] == "status") { echo "selected"; } ?>>Job Status</option>
-						</select>
-					</td>
-					<td align="right">
-						<input type="checkbox" style="width:20px;" name="wholeonly" <?if ($_REQUEST['wholeonly']) { echo "checked"; } ?>>Whole words only
-					</td>
-				</tr>
-				
-				<tr>
-					<td>&nbsp;</td>
-					<td><button type="submit" name="action" value="Apply Filter">Apply Filter</button>
-					</td>
-					<td colspan="2"><a href="job.php?a=reset&doAction=list" class="hlight">Reset Filter</a></td>
-				</tr>
-			</table>
-			
-			<p>&nbsp;</p><br/><br/>
-
-			<table class="fieldtable" align="center" width="100%"><?
-
-				if($access_file_level['stf_Add'] == "Y") {
-					?><tr>
-						<td style="padding:7px;"><a href="job.php?a=addJob" class="hlight"><img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom">&nbsp;Add Record</a>
-					</tr><?
-				}
-				
-				?><tr class="fieldheader">
-					<th class="fieldheader" align="left">Practice Name</th>
-					<th class="fieldheader" align="left">Job Name</th>
-					<th class="fieldheader" align="left">Job Status</th>
-					<th class="fieldheader">Date Received</th>
-					<th class="fieldheader">Due Date</th>
-					<th class="fieldheader" colspan="2">Actions</th>
-				</tr><?
-
-				foreach ($arrJob AS $jobId => $arrInfo) {
-					?><tr class="trclass"><?
-					$arrJobParts = explode('::', $arrInfo["job_name"]);
-					$jobName = '<b style="color:#b30000">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</b> - <b style="color:#0411ff">' . $arrInfo["period"] . '</b> - <b style="color:#006a0e">' . $objCallData->arrJobType[$arrJobParts[2]].'</b>';
-					
-					?><td class="<?=$style?> yellowBG"><?=$arrPractice[$arrInfo['id']]['name']?></td>	
-					<td class="<?=$style?> yellowBG"><?=$jobName?></td>	
-					<td class="<?=$style?> blueBG"><?=htmlspecialchars($objCallData->arrJobStatus[$arrInfo["job_status_id"]]["job_status"])?></td><?
-
-					if(!empty($arrInfo["job_received"])){
-						?><td align="center" class="<?=$style?> yellowBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_received"])))?></td><?
-					}
-					else{
-						?><td class="<?=$style?> yellowBG"></td><?
-					}
-
-					if(!empty($arrInfo["job_due_date"])){
-						?><td align="center" class="<?=$style?> blueBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_due_date"])))?></td><?
-					}
-					else{
-						?><td class="<?=$style?> blueBG"></td><?
-					}
-
-					if($access_file_level['stf_Edit'] == "Y") {
-						?><td width="5%" class="blueBG" align="center">
-							<a href="job.php?a=reset&doAction=details&jobId=<?=$jobId?>"><img src="images/edit.png" height="23px" width="20px" border="0"  alt="Edit" name="Edit" title="Edit" align="middle" /></a>
-						</td><?
-					}
-
-					if($access_file_level['stf_Delete'] == "Y") {
-						?><td width="5%" class="blueBG" align="center"><?
-							$jsFunc = "javascript:performdelete('job.php?a=reset&doAction=list&sql=discon&jobId=".$jobId."');";
-						  ?><a onClick="<?=$jsFunc?>" href="javascript:;">
-							  	<img src="images/erase.png"  border="0" height="23px" width="20px" alt="Delete" name="Delete" title="Delete" align="middle" />
-						   </a>
-						</td><?
-					}
-
-					?></tr><?
-				}
-			?></table><br></form></body><?
-		break;
-	// Case to load list of Jobs with edit button, Ends here.
-	// **********************************************************
 	
-
 	// **********************************************************
 	// Case to load page for Adding new Job, Begins here.
-	case "add_job":
+	case "addJob":
 	
 	?><div class="frmheading">
 		<h1>Add Record</h1>
    	  </div>
-			<form name="objForm" id="objForm" method="post" action="job.php?a=reset&doAction=list" onSubmit="javascript:return validateFormOnSubmit();" enctype="multipart/form-data">
+			<form name="objForm" id="objForm" method="post" action="job.php" onSubmit="javascript:return validateFormOnSubmit();" enctype="multipart/form-data">
  	
 		 <input type="hidden" name="sql" value="insertJob">
 		 
@@ -270,7 +157,7 @@ switch ($viewSection)
 		
 	// **********************************************************
 	// Case to load Job details tab of selected Job, begins here.	
-	case "details":
+	case "editJob":
 				
 			$client_id = $objCallData->arrJob[$_REQUEST["jobId"]]["client_id"];
 			
@@ -288,30 +175,34 @@ switch ($viewSection)
 			<table border="0" cellspacing="1" cellpadding="4" align="left">
 				<tr>
 					<td>
-						<form method="POST" name="frmJobDetails" action="job.php?a=reset&doAction=details&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmJobDetails" action="job.php">
 							<input type="submit" name="btnDetails" value="Job Details" style="background-color:#ee4d0f; color:#ffffff;">
-							<input type="hidden" name="doAction" value="details">
+							<input type="hidden" name="a" value="editJob">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmDocuments" action="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmDocuments" action="job.php">
 							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="documents" style="cursor:pointer;">
+							<input type="hidden" name="a" value="documents">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 						
 					<td>
-						<form method="POST" name="frmReports" action="job.php?a=reset&doAction=reports&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmReports" action="job.php">
 							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="reports" style="cursor:pointer;">
+							<input type="hidden" name="a" value="reports">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmQueries" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmQueries" action="job.php">
 							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer;color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="queries" style="cursor:pointer;">
+							<input type="hidden" name="a" value="queries">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 				</tr>
@@ -369,8 +260,8 @@ switch ($viewSection)
 				</tr>
 			</table>
 				<button type="submit" value="Update" name="btnJob" class="cancelbutton">Update</button></td>
-				<input type="hidden" name="sql" value="update">
-				<input type="hidden" name="recid" value="<?=$_REQUEST["jobId"]?>">
+				<input type="hidden" name="sql" value="updateJob">
+				<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 				<input type="hidden" name="a" value="edit">
 			</form></body>
 	<?php
@@ -381,38 +272,40 @@ switch ($viewSection)
 	// **********************************************************
 	// Case to load Documents tab, begins here.	
 	case "documents":
-
-		$objCallData->arrDocument = $objCallData->fetchDocument();
-		$objCallData->arrChecklist = $objCallData->fetchChecklists();
+			$objCallData->arrDocument = $objCallData->fetchDocument();
+			$objCallData->arrChecklist = $objCallData->fetchChecklists();
 			
 		   ?><table border="0" cellspacing="1" cellpadding="4" align="left" style="margin-left:-5px">
 				<tr>
 					<td>
-						<form method="POST" name="frmJobDetails" action="job.php?a=reset&doAction=details&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmJobDetails" action="job.php">
 							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer;  color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="details">
+							<input type="hidden" name="a" value="editJob">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmDocuments" action="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmDocuments" action="job.php">
 							<input type="submit" name="btnDocument" value="Documents" style="background-color:#ee4d0f; color:#ffffff;">
-							<input type="hidden" name="doAction" value="documents">
+							<input type="hidden" name="a" value="documents">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmReports" action="job.php?a=reset&doAction=reports&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmReports" action="job.php">
 							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="reports" style="cursor:pointer;">
+							<input type="hidden" name="a" value="reports">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
-
 					
 					<td>
-						<form method="POST" name="frmQueries" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmQueries" action="job.php">
 							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="queries">
+							<input type="hidden" name="a" value="queries">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 				</tr>
@@ -463,7 +356,7 @@ switch ($viewSection)
 			    ?><td width="10%" align="center" class="<?=$style?> blueBG" <?=$strView?>><?=$viewed?></td>	
 			  
 			 	<td width="5%" class="<?=$style?> blueBG" align="center">
-					<a href="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>&docId=<?=$arrInfo["document_id"]?>&filePath=<?=$arrInfo["file_path"]?>&flagType=S" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
+					<a href="job.php?a=download&jobId=<?=$_REQUEST["jobId"]?>&docId=<?=$arrInfo["document_id"]?>&filePath=<?=$arrInfo["file_path"]?>&flagType=S" title="Click to view this document"><img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
 				</td>
 			</tr><?
 		}	
@@ -497,7 +390,7 @@ switch ($viewSection)
 			 	<td width="5%" class="<?=$style?> blueBG" align="center"><?
 				$folderPath = "../uploads/checklists/".$arrInfo['checklist'];
 				if(!empty($arrInfo['checklist']) && file_exists($folderPath)) {
-					?><a href="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>&filePath=<?=$arrInfo["checklist"]?>&flagType=C" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a><?
+					?><a href="job.php?a=download&jobId=<?=$_REQUEST["jobId"]?>&filePath=<?=$arrInfo["checklist"]?>&flagType=C" title="Click to view this document"><img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a><?
 					}
 				?></td>
 			</tr><?
@@ -517,30 +410,34 @@ switch ($viewSection)
 			?><table border="0" cellspacing="1" cellpadding="4" align="left" style="margin-left:-5px">
 				<tr>
 					<td>
-						<form method="POST" name="frmJobDetails" action="job.php?a=reset&doAction=details&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmJobDetails" action="job.php">
 							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="details">
+							<input type="hidden" name="a" value="editJob">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmDocuments" action="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmDocuments" action="job.php">
 							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="documents">
+							<input type="hidden" name="a" value="documents">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmReports" action="job.php?a=reset&doAction=reports&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmReports" action="job.php">
 							<input type="submit" name="btnReports" value="Reports"  style="background-color:#ee4d0f; color:#ffffff;">
-							<input type="hidden" name="doAction" value="reports" style="cursor:pointer;">
+							<input type="hidden" name="a" value="reports">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmQueries" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmQueries" action="job.php">
 							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="queries">
+							<input type="hidden" name="a" value="queries">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 				</tr>
@@ -565,13 +462,11 @@ switch ($viewSection)
 				?><tr>
 					<td class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["report_title"])?></td>	
 					<td width="23%" align="center" class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["date"])?></td>
-					<td width="10%" class="<?=$style?> blueBG" align="center">
-					<?
-					$fileName = $arrInfo['file_path'];
-					$filePath = "../uploads/reports/".$fileName;
-					?>
-					
-							<a href="<?php echo $filePath;?>" target="_blank" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
+					<td width="10%" class="<?=$style?> blueBG" align="center"><?
+						$fileName = $arrInfo['file_path'];
+						$filePath = "../uploads/reports/".$fileName;
+
+						?><a href="<?php echo $filePath;?>" target="_blank" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
 					  </td>
 				</tr><?
 			}
@@ -579,9 +474,7 @@ switch ($viewSection)
 	?></table></table>
 		<table  class="fieldtable" align="center"  border="0" cellspacing="1" cellpadding="4" >
 			<tr><td width="10%" align="center">
-						<a href="">
-							<img src="images/upload.png" border="0" alt="Upload" name="upload" title="Upload" align="middle" height="33px" width="117px" onclick="JavaScript:newPopup('job.php?a=reset&doAction=uploadReports&jobId=<?=$_REQUEST["jobId"]?>');"/>
-						</a>
+				<a href=""><img src="images/upload.png" border="0" alt="Upload" name="upload" title="Upload" align="middle" height="33px" width="117px" onclick="JavaScript:newPopup('job.php?a=uploadReports&jobId=<?=$_REQUEST["jobId"]?>');"/></a>
 			</td></tr>
 		</table><?
 	
@@ -593,30 +486,18 @@ switch ($viewSection)
 	// **********************************************************
 	// Case to load page for Uploading Reports, begins here.	
 	case "uploadReports":
-		//currently working...
-		
-		//include("includes/header.php");
-			?>
-			
-	
-			
-			
-			<div class="frmheading">
+			?><div class="frmheading">
 				<h1>
 				
 				</h1>
 			</div>
 
 			<form name="objForm" id="objForm" method="post" action="job.php" enctype="multipart/form-data">
-			
-				<input type="hidden" name="a" value="reset"/>
-				<input type="hidden" name="sql" value="add"/>
-				<input type="hidden" name="doAction" value="reports"/>
+				<input type="hidden" name="sql" value="insertReport"/>
+				<input type="hidden" name="a" value="reports"/>
 				<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>"/>
 			
 				<div align="center">
-				
-			
 					<table class="fieldtable" border="0" cellspacing="15" cellpadding="15" width="40%">
 						<tr>
 							<td width="15%"> Report Title </td>
@@ -651,31 +532,35 @@ switch ($viewSection)
 			?><table border="0" cellspacing="1" cellpadding="4" align="left" style="margin-left:-5px">
 				<tr>
 					<td>
-						<form method="POST" name="frmJobDetails" action="job.php?a=reset&doAction=details&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmJobDetails" action="job.php">
 							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="details">
+							<input type="hidden" name="a" value="editJob">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmDocuments" action="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmDocuments" action="job.php">
 							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="documents">
+							<input type="hidden" name="a" value="documents">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmReports" action="job.php?a=reset&doAction=reports&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmReports" action="job.php">
 							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
-							<input type="hidden" name="doAction" value="reports">
+							<input type="hidden" name="a" value="reports">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 
 					
 					<td>
-						<form method="POST" name="frmQueries" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmQueries" action="job.php">
 							<input type="submit" name="btnQueries" value="Queries" style="background-color:#ee4d0f; color:#ffffff;">
-							<input type="hidden" name="doAction" value="queries">
+							<input type="hidden" name="a" value="queries">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 				</tr>
@@ -685,12 +570,14 @@ switch ($viewSection)
 			<h1>Queries</h1>
 		</div>
 	
-<a href="job.php?a=reset&doAction=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight"><img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom">&nbsp;Add Record</a>
+		<a href="job.php?a=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight"><img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom">&nbsp;Add Record</a>
 		<br><br>		
 		
-		<form method="POST" name="frmQueriesList" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
+		<form method="POST" name="frmQueriesList" action="job.php">
 			
 			<input type="hidden" name="queryId" id="queryId" value="">
+			<input type="hidden" name="sql" value="updateQuery">
+			<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 			
 			
 			 <table class="fieldtable" align="center" width="100%" border="0" cellspacing="1" cellpadding="4">
@@ -721,7 +608,7 @@ switch ($viewSection)
 					
 					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
 					if(!empty($arrInfo["file_path"])) {
-						?><a href="job.php?a=reset&doAction=queries&filePath=<?=$arrInfo["file_path"]?>&flagType=Q" title="Click to view this document"><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
+						?><a href="job.php?a=queries&filePath=<?=$arrInfo["file_path"]?>&flagType=Q" title="Click to view this document"><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
 					}
 					?></td><?
 						
@@ -752,7 +639,7 @@ switch ($viewSection)
 					<td width="6%" class="<?=$style?> blueBG" align="center">
 						<input type="button" name="btnSave" value="Save" style="background-color:#07aff8; border:solid; color:#ffffff; width:70px;" onclick="javascript:updateQuery(<?=$queryId?>)">
 					</td>						
-						</tr><?
+					</tr><?
 				}
 			}
 			?></table></table>
@@ -769,23 +656,26 @@ switch ($viewSection)
 		   ?><table border="0" cellspacing="1" cellpadding="4" align="left" style="margin-left:-5px">
 				<tr>
 					<td>
-						<form method="POST" name="frmJobDetails" action="job.php?a=reset&doAction=details&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmJobDetails" action="job.php">
 							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; background-color:#0e4d7a;color:#ffffff;">
-							<input type="hidden" name="doAction" value="details">
+							<input type="hidden" name="a" value="editJob">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmDocuments" action="job.php?a=reset&doAction=documents&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmDocuments" action="job.php">
 							<input type="submit" name="btnDocument" value="Documents & Reports" style="cursor:pointer; background-color:#0e4d7a;color:#ffffff;">
-							<input type="hidden" name="doAction" value="documents">
+							<input type="hidden" name="a" value="documents">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 					
 					<td>
-						<form method="POST" name="frmQueries" action="job.php?a=reset&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
+						<form method="POST" name="frmQueries" action="job.php">
 							<input type="submit" name="btnQueries" value="Queries" style="background-color:#ee4d0f; color:#ffffff;">
-							<input type="hidden" name="doAction" value="queries">
+							<input type="hidden" name="a" value="queries">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
 				</tr>
@@ -794,7 +684,10 @@ switch ($viewSection)
 			<h1>Add Query</h1>
 		</div>
 		
-		<form method="POST" name="frmQueriesList" action="job.php?a=add&doAction=queries&jobId=<?=$_REQUEST["jobId"]?>">
+		<form method="POST" name="frmQueriesList" action="job.php">
+			<input type="hidden" name="sql" value="insertQuery">
+			<input type="hidden" name="a" value="queries">
+			<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 			
 			<table class="tbl" border="0" cellspacing="1" cellpadding="5"width="40%">
 				<tr>
@@ -817,6 +710,102 @@ switch ($viewSection)
 		</form><?
 		break;
 	// Case to Add Query, Ends here.		
-	// **********************************************************	
+	// **********************************************************
+	
+	// Case to load list of Jobs with edit button, Begins here.
+	default:
+
+			?><body><form method="POST" name="frmJobList" action="job.php">
+			<div class="frmheading">
+				<h1>Job List</h1>
+			</div>
+			
+			
+			<table class="customFilter" width="50%" align="right" border="0" cellspacing="1" cellpadding="4" style="margin-right:0px;">
+				<tr>
+					<td><b>Custom Filter</b>&nbsp;</td>
+					<td><input type="text" name="filter" value="<?php echo $filter ?>"></td>
+					<td>
+						<select name="filter_field">
+							<option value="">All Fields</option>
+							<option value="<?="practice"?>"<?if ($_REQUEST['filter_field'] == "practice") { echo "selected"; } ?>>Practice Name</option>
+							<option value="<?="job"?>"<?if ($_REQUEST['filter_field'] == "job") { echo "selected"; } ?>>Job Name</option>
+							<option value="<?="status"?>"<?if ($_REQUEST['filter_field'] == "status") { echo "selected"; } ?>>Job Status</option>
+						</select>
+					</td>
+					<td align="right">
+						<input type="checkbox" style="width:20px;" name="wholeonly" <?if ($_REQUEST['wholeonly']) { echo "checked"; } ?>>Whole words only
+					</td>
+				</tr>
+				
+				<tr>
+					<td>&nbsp;</td>
+					<td><button type="submit" name="action" value="Apply Filter">Apply Filter</button>
+					</td>
+					<td colspan="2"><a href="job.php" class="hlight">Reset Filter</a></td>
+				</tr>
+			</table>
+			
+			<p>&nbsp;</p><br/><br/>
+
+			<table class="fieldtable" align="center" width="100%"><?
+
+				if($access_file_level['stf_Add'] == "Y") {
+					?><tr>
+						<td style="padding:7px;"><a href="job.php?a=addJob" class="hlight"><img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom">&nbsp;Add Record</a>
+					</tr><?
+				}
+				
+				?><tr class="fieldheader">
+					<th class="fieldheader" align="left">Practice Name</th>
+					<th class="fieldheader" align="left">Job Name</th>
+					<th class="fieldheader" align="left">Job Status</th>
+					<th class="fieldheader">Date Received</th>
+					<th class="fieldheader">Due Date</th>
+					<th class="fieldheader" colspan="2">Actions</th>
+				</tr><?
+
+				foreach ($arrJob AS $jobId => $arrInfo) {
+					?><tr class="trclass"><?
+					$arrJobParts = explode('::', $arrInfo["job_name"]);
+					$jobName = '<b style="color:#b30000">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</b> - <b style="color:#0411ff">' . $arrInfo["period"] . '</b> - <b style="color:#006a0e">' . $objCallData->arrJobType[$arrJobParts[2]].'</b>';
+					
+					?><td class="<?=$style?> yellowBG"><?=$arrPractice[$arrInfo['id']]['name']?></td>	
+					<td class="<?=$style?> yellowBG"><?=$jobName?></td>	
+					<td class="<?=$style?> blueBG"><?=htmlspecialchars($objCallData->arrJobStatus[$arrInfo["job_status_id"]]["job_status"])?></td><?
+
+					if(!empty($arrInfo["job_received"])){
+						?><td align="center" class="<?=$style?> yellowBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_received"])))?></td><?
+					}
+					else{
+						?><td class="<?=$style?> yellowBG"></td><?
+					}
+
+					if(!empty($arrInfo["job_due_date"])){
+						?><td align="center" class="<?=$style?> blueBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_due_date"])))?></td><?
+					}
+					else{
+						?><td class="<?=$style?> blueBG"></td><?
+					}
+
+					if($access_file_level['stf_Edit'] == "Y") {
+						?><td width="5%" class="blueBG" align="center">
+							<a href="job.php?a=editJob&jobId=<?=$jobId?>"><img src="images/edit.png" height="23px" width="20px" border="0"  alt="Edit" name="Edit" title="Edit" align="middle" /></a>
+						</td><?
+					}
+
+					if($access_file_level['stf_Delete'] == "Y") {
+						?><td width="5%" class="blueBG" align="center"><?
+							$jsFunc = "javascript:performdelete('job.php?sql=deleteJob&jobId=".$jobId."');";
+						  ?><a onClick="<?=$jsFunc?>" href="javascript:;">
+							  	<img src="images/erase.png"  border="0" height="23px" width="20px" alt="Delete" name="Delete" title="Delete" align="middle" />
+						   </a>
+						</td><?
+					}
+
+					?></tr><?
+				}
+			?></table><br></form></body><?
+		break;
 }
 ?>

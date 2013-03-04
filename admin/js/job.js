@@ -100,9 +100,9 @@ function updateQuery(queryId)
 function ComfirmCancel(jobId)
 {
    if(jobId)
-		url = "job.php?a=reset&doAction=queries&jobId="+jobId;
+		url = "job.php?a=queries&jobId="+jobId;
    else
-   		url	= "job.php?a=reset&doAction=list";
+   		url	= "job.php";
 		
    var r = confirm("Are you sure you want to cancel?");
    if(r == true)

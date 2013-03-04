@@ -45,20 +45,19 @@ if($_SESSION['validUser']) {
 					break;
 
 				case "updateJob":
-					
 					$objCallData->sql_update($_REQUEST["jobId"]);
-
 					/* send mail function starts here */
-
+					$pageUrl = basename($_SERVER['REQUEST_URI']);		
 					// check if event is active or inactive [This will return TRUE or FALSE as per result]
-					$flagSet = getEventStatus('4');
+					$flagSet = getEventStatus($pageUrl);
+					
 
 					// if event is active it go for mail function
 					if($flagSet) {
 
 						//It will Get All Details in array format for Send Email	
-						$arrEmailInfo = get_email_info('4');
-
+						$arrEmailInfo = get_email_info($pageUrl);
+						
 						//It will Get Email Id from Which Email Id the Email will Send.
 						$practiceId = $objCallData->fetchPracticeId($_REQUEST["jobId"]);
 						$toEmail = get_email_id($practiceId);
@@ -81,7 +80,8 @@ if($_SESSION['validUser']) {
 						// replace variable @toName with name of practice
 						$toName = $objCallData->arrPracticeName[$practiceId];
 						$content = str_replace('@toName', $toName, $content);
-
+						
+						
 						include_once(MAIL);
 						send_mail($from, $to, $cc, $subject, $content);
 					}
@@ -119,21 +119,20 @@ if($_SESSION['validUser']) {
 				case "insertQuery":
 
 					$objCallData->add_query();
-
+				
 					/* send mail function starts here */
-
+					$pageUrl = basename($_SERVER['REQUEST_URI']);
+		
 					// check if event is active or inactive [This will return TRUE or FALSE as per result]
-					$flagSet = getEventStatus('5');
-
+					$flagSet = getEventStatus($pageUrl);
 					// if event is active it go for mail function
 					if($flagSet) {
 						//It will Get All Details in array format for Send Email	
-						$arrEmailInfo = get_email_info('5');
+						$arrEmailInfo = get_email_info($pageUrl);
 
 						//It will Get Email Id from Which Email Id the Email will Send.
 						$practiceId = $objCallData->fetchPracticeId($_REQUEST["jobId"]);
 						$toEmail = get_email_id($practiceId);
-
 						$from = $arrEmailInfo['event_from'];
 						$to = $toEmail;
 						$cc = $arrEmailInfo['event_cc'];
@@ -157,23 +156,25 @@ if($_SESSION['validUser']) {
 					break;
 
 				case "updateQuery":
-			
+					
 					$queryId = $_REQUEST["queryId"];
 					$objCallData->update_query($queryId);	
 
 					/* send mail function starts here */
 					$queryStatus = $_REQUEST['rdStatus' . $queryId];
-
+					
 					if($queryStatus) {
 						// check if event is active or inactive [This will return TRUE or FALSE as per result]
-						$flagSet = getEventStatus('6');
-
+						$pageUrl = basename($_SERVER['REQUEST_URI']);	
+						
+						$flagSet = getEventStatus($pageUrl);
 						// if event is active it go for mail function
 						if($flagSet) {
+						
 
 							//It will Get All Details in array format for Send Email	
-							$arrEmailInfo = get_email_info('6');
-
+							$arrEmailInfo = get_email_info($pageUrl);
+						
 							//It will Get Email Id from Which Email Id the Email will Send.
 							$practiceId = $objCallData->fetchPracticeId($_REQUEST["jobId"]);
 							$toEmail = get_email_id($practiceId);

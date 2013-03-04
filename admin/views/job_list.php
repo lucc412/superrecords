@@ -52,7 +52,7 @@ if(!empty($a) && $a != 'addJob') {
 				</td>				
 			</tr>
 		</table>
-		<br /><hr size="2" noshade>	<?
+		<br /><?
 	}
 }
 
@@ -74,7 +74,7 @@ switch ($a)
 			<tr>
 			   <td class="hr">Practice Name<font style="color:red;" size="2">*</font></td>
 				  <td colspan="2">
-				  	<select id="lstPractice" name="lstPractice" onchange="javascript:selectOptions('Client');">
+				  	<select id="lstPractice" name="lstPractice" onChange="javascript:selectOptions('Client');">
 						<option value="">----- Select Practice -----</option><?php
 						foreach($objCallData->arrPracticeName AS $practice_id => $practice_name) {
 							?><option value="<?=$practice_id?>"><?=$practice_name?></option><?php 
@@ -135,7 +135,7 @@ switch ($a)
 						<div id="parentDiv"></div>
 					</td>
 					<td>
-						<button type="button" title="Click here to upload new source document" name="addBtn" onclick="javascript:addElement();" value="Add" class="button1"/>Add</button>
+						<button type="button" title="Click here to upload new source document" name="addBtn" onClick="javascript:addElement();" value="Add" class="button1"/>Add</button>
 					</td>
 				</tr>
 				
@@ -213,10 +213,10 @@ switch ($a)
 			</div>
 			 
 			 <form method="POST" name="frmJobDetails" action="tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>">
-			 <input type="button" name="btnTasks" value="View Associated Tasks" style="background-color:#70b4ae; color:#ffffff; cursor:pointer;" onclick="JavaScript:newPopup('tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>');"><br/><br/>
+			 <input type="button" name="btnTasks" value="View Associated Tasks" style="background-color:#70b4ae; color:#ffffff; cursor:pointer;" onClick="JavaScript:newPopup('tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>');"><br/><br/>
 			</form>
 			
-			<form method="POST" name="frmJobDetails" action="job.php">
+			<form method="POST" name="frmJobDetails" action="job.php?sql=updateJob">
 			<table class="tbl" border="0" cellspacing="10" width="70%">
 				<tr>
 					<td class="hr">Client Name</td>
@@ -260,7 +260,6 @@ switch ($a)
 				</tr>
 			</table>
 				<button type="submit" value="Update" name="btnJob" class="cancelbutton">Update</button></td>
-				<input type="hidden" name="sql" value="updateJob">
 				<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 				<input type="hidden" name="a" value="edit">
 			</form></body>
@@ -355,8 +354,23 @@ switch ($a)
 				}
 			    ?><td width="10%" align="center" class="<?=$style?> blueBG" <?=$strView?>><?=$viewed?></td>	
 			  
-			 	<td width="5%" class="<?=$style?> blueBG" align="center">
-					<a href="job.php?a=download&jobId=<?=$_REQUEST["jobId"]?>&docId=<?=$arrInfo["document_id"]?>&filePath=<?=$arrInfo["file_path"]?>&flagType=S" title="Click to view this document"><img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
+              	<?php
+					$fileName = $arrInfo['file_path'];
+					$filePath = "../uploads/sourcedocs/".$fileName;
+					//echo $filePath;
+					//exit;
+					
+				?>
+              <?php /*
+			 	<!--<td width="5%" class="<?=$style?> blueBG" align="center">
+					<a href="job.php?a=download&jobId=<?=$_REQUEST["jobId"]?>&docId=<?=$arrInfo["document_id"]?>&filePath=<?=$arrInfo["file_path"]?>&flagType=S" title="Click to view this document">
+                    <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
+				</td>--> */?>
+                
+              <td width="5%" class="<?=$style?> blueBG" align="center">
+					<a href="<?php echo $filePath;?>" title="Click to view this document" target="_blank">
+                    <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/>
+                    </a>
 				</td>
 			</tr><?
 		}	
@@ -390,7 +404,15 @@ switch ($a)
 			 	<td width="5%" class="<?=$style?> blueBG" align="center"><?
 				$folderPath = "../uploads/checklists/".$arrInfo['checklist'];
 				if(!empty($arrInfo['checklist']) && file_exists($folderPath)) {
-					?><a href="job.php?a=download&jobId=<?=$_REQUEST["jobId"]?>&filePath=<?=$arrInfo["checklist"]?>&flagType=C" title="Click to view this document"><img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a><?
+				
+					//echo "<pre>";
+					$fileName = $arrInfo['checklist'];
+					$filePath = "../uploads/checklists/".$fileName;
+					?>
+                    <a href="<?php echo $filePath;?>" title="Click to view this document" target="_blank">
+                    <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/>
+                    
+                    <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a><?
 					}
 				?></td>
 			</tr><?
@@ -474,7 +496,7 @@ switch ($a)
 	?></table></table>
 		<table  class="fieldtable" align="center"  border="0" cellspacing="1" cellpadding="4" >
 			<tr><td width="10%" align="center">
-				<a href=""><img src="images/upload.png" border="0" alt="Upload" name="upload" title="Upload" align="middle" height="33px" width="117px" onclick="JavaScript:newPopup('job.php?a=uploadReports&jobId=<?=$_REQUEST["jobId"]?>');"/></a>
+				<a href="#"><img src="images/upload.png" border="0" alt="Upload" name="upload" title="Upload" align="middle" height="33px" width="117px" onClick="JavaScript:newPopup('job.php?a=uploadReports&jobId=<?=$_REQUEST["jobId"]?>');"/></a>
 			</td></tr>
 		</table><?
 	
@@ -511,7 +533,7 @@ switch ($a)
 						
 						<tr>
 							<td colspan="2" align="center">
-								<button class="button" type="button" name="btnSubmit" value="Submit" onclick="javascript:return checkReportValidation();">Submit</button>
+								<button class="button" type="button" name="btnSubmit" value="Submit" onClick="javascript:return checkReportValidation();">Submit</button>
 							</td>
 						</tr>
 					</table>
@@ -573,10 +595,9 @@ switch ($a)
 		<a href="job.php?a=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight"><img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom">&nbsp;Add Record</a>
 		<br><br>		
 		
-		<form method="POST" name="frmQueriesList" action="job.php">
+		<form method="POST" name="frmQueriesList" action="job.php?sql=updateQuery">
 			
 			<input type="hidden" name="queryId" id="queryId" value="">
-			<input type="hidden" name="sql" value="updateQuery">
 			<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 			
 			
@@ -608,7 +629,11 @@ switch ($a)
 					
 					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
 					if(!empty($arrInfo["file_path"])) {
-						?><a href="job.php?a=queries&filePath=<?=$arrInfo["file_path"]?>&flagType=Q" title="Click to view this document"><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
+						?>
+                        <?php
+						$filePath = "../uploads/queries/".$arrInfo['file_path'];
+						?>
+                        <a href="<?php echo $filePath;?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
 					}
 					?></td><?
 						
@@ -637,7 +662,7 @@ switch ($a)
 					?></td>
 						
 					<td width="6%" class="<?=$style?> blueBG" align="center">
-						<input type="button" name="btnSave" value="Save" style="background-color:#07aff8; border:solid; color:#ffffff; width:70px;" onclick="javascript:updateQuery(<?=$queryId?>)">
+						<input type="button" name="btnSave" value="Save" style="background-color:#07aff8; border:solid; color:#ffffff; width:70px;" onClick="javascript:updateQuery(<?=$queryId?>)">
 					</td>						
 					</tr><?
 				}
@@ -684,8 +709,7 @@ switch ($a)
 			<h1>Add Query</h1>
 		</div>
 		
-		<form method="POST" name="frmQueriesList" action="job.php">
-			<input type="hidden" name="sql" value="insertQuery">
+		<form method="POST" name="frmQueriesList" action="job.php?sql=insertQuery">
 			<input type="hidden" name="a" value="queries">
 			<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 			

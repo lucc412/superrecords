@@ -119,7 +119,8 @@ class Job_Class extends Database
 		$qrySel = "SELECT pr.id practiceId
 					FROM job jb, client cl, pr_practice pr
 					WHERE jb.client_id = cl.client_id
-					AND cl.id = pr.id";
+					AND cl.id = pr.id
+					AND jb.job_id = {$jobId}";
 
 		$fetchResult = mysql_query($qrySel);		
 		$fetchRow = mysql_fetch_row($fetchResult);
@@ -255,7 +256,7 @@ class Job_Class extends Database
 		global $commonUses;
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 		
-	    $qryUpd = "UPDATE job 
+		$qryUpd = "UPDATE job 
 					SET job_status_id=".$_REQUEST["lstJobStatus"].", 
 						job_due_date='".$dateSignedUp."' 
 				   WHERE job_id=".$jobId;

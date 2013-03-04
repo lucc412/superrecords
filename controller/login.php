@@ -1,6 +1,5 @@
-<?
-include("../include/connection.php");
-
+<?php
+include("../include/common.php");
 if($_REQUEST['a'] == 'logout') {
 	unset($_SESSION['PRACTICEID']);
 	unset($_SESSION['PRACTICE']);
@@ -11,6 +10,6 @@ if(isset($_SESSION['PRACTICEID'])) {
 	header('Location: home.php');
 }
 else {
-	include("../view/login.php");
+	include(VIEW."login.php");
 }
 ?>

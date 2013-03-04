@@ -1,4 +1,4 @@
-<?
+<?php
 class Client {
  
 	public function __construct() {
@@ -70,5 +70,7 @@ class Client {
 
 		mysql_query($qryUpd);	
 	} 
+	
+	
 }
 ?>

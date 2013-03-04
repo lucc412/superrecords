@@ -1,4 +1,6 @@
-<?include('../include/topbar.php');?>
+<?
+include(TOPBAR);
+?>
 
 <div class="paddingtopbtm" align="center">
 	<span style="font-weight: bold; font-size: 36px;">Super</span>
@@ -6,4 +8,6 @@
 	<p style="color:#888">is a specialist self-managed super fund administrator.</p>
 </div>
 
-<?include('../include/footer.php');?>
+<?php
+include (FOOTER);
+?>

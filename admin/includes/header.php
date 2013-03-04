@@ -660,7 +660,7 @@ if($_SESSION['validUser']) {
 								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],95,1);
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="job.php?a=reset&doAction=list">Job List</a></li><?
+										?><li><a href="job.php">Job List</a></li><?
 									}
 								}
 

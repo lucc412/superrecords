@@ -24,7 +24,7 @@
 			?><tr>
 				<td>Subject</td>
 				<td>
-					<input size="90" type="text" name="txtSubject" value="<?=htmlspecialchars($arrEventInfo["event_subject"])?>" />
+					<input size="90" maxlength="200" type="text" name="txtSubject" value="<?=htmlspecialchars($arrEventInfo["event_subject"])?>" />
 				</td>
 			</tr><?
 	

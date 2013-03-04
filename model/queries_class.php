@@ -1,4 +1,4 @@
-<?
+<?php
 class Query {
  
 	public function __construct() {
@@ -78,10 +78,12 @@ class Query {
 	}
 
 	public function sql_update($queryId) {	
+		$responseDate = date('Y-m-d');
 
 		$qryUpd = "UPDATE queries
-					SET response = '" . addslashes($_REQUEST['txtResponse'.$queryId]) . "'
+					SET response = '" . addslashes($_REQUEST['txtResponse'.$queryId]) . "',date_answered= '" .$responseDate. "'
 					WHERE query_id = '" . $queryId . "'";
+					
 		mysql_query($qryUpd);
 
 		foreach($_FILES AS $fieldName => $imageInfo){

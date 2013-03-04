@@ -1,6 +1,6 @@
 <?
 // include topbar file
-include('../include/topbar.php');
+include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
@@ -102,5 +102,5 @@ include('../include/topbar.php');
 ?></form><?
 	
 // include footer file
-include('../include/footer.php');	
+include(FOOTER);
 ?>

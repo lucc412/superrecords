@@ -1,6 +1,6 @@
-<?
-include("../include/connection.php");
-include("../model/home_class.php");
+<?php
+include("../include/common.php");
+include(MODEL."home_class.php");
 $objScr = new Home();
 	
 if(isset($_REQUEST['txtName']) && isset($_REQUEST['txtPassword'])) {
@@ -16,7 +16,7 @@ if(isset($_REQUEST['txtName']) && isset($_REQUEST['txtPassword'])) {
 		$prName = $objScr->get_Practice_Name();
 		if(isset($_SESSION['PRACTICE'])) unset($_SESSION['PRACTICE']);
 		$_SESSION['PRACTICE'] = $prName;
-		include("../view/home.php");
+		include(VIEW."home.php");
 	}
 	else {
 		// file inclusion for displaying login form with error message
@@ -24,7 +24,7 @@ if(isset($_REQUEST['txtName']) && isset($_REQUEST['txtPassword'])) {
 	}
 }
 else if(isset($_SESSION['PRACTICEID']) && isset($_SESSION['PRACTICE'])) {
-	include("../view/home.php");
+	include(VIEW."home.php");
 }
 else {
 	// file inclusion for displaying login form with error message

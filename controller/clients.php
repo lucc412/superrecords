@@ -1,7 +1,6 @@
-<?
-include("../include/connection.php");
-include("../model/client_class.php");
-include("../include/php_functions.php");
+<?php
+include("../include/common.php");
+include(MODEL."client_class.php");
 
 $objScr = new Client();
 
@@ -15,11 +14,12 @@ switch ($sql) {
 		$_SESSION['CLIENTNAME'] = $objScr->fetch_client_name();
 		if(!in_array($_REQUEST['txtName'], $_SESSION['CLIENTNAME'])) 
 		{
+			
 			//Insert New Client By Practice Login into Database
 			$objScr->sql_insert();
-			
-			//Get Event Status if Event is Active we Get 1 Else 0
-			$flagSet = getEventStatus('1');
+			$pageUrl = basename($_SERVER['PHP_SELF']); 
+			//Get Event Status according Page Url 
+			$flagSet = getEventStatus($pageUrl);
 			
 			if($flagSet) //If Flag or Event Active it will Execute
 			{
@@ -28,16 +28,22 @@ switch ($sql) {
 				$fromEmail = get_email_id($_SESSION['PRACTICEID']);
 
 				//It will Get All Details in array format for Send Email	
-				$arrEmailInfo = get_email_info('1');
+				$arrEmailInfo = get_email_info($pageUrl);
 
 				$from = $fromEmail;
 				$to = $arrEmailInfo['event_to'];
 				$cc = $arrEmailInfo['event_cc'];
 				$subject = $arrEmailInfo['event_subject'];
 				$content = $arrEmailInfo['event_content'];
-
+				
+				//It will fetch Registered User Name according their Email id Set in to Event Manager.
+				$toName = to_name($to);
+				$fromName = $_SESSION['PRACTICE'];
+				//it will replace @toName , @fromName to Appropriate Registered User Name
+				$content = replace_to($content,$toName,$fromName);
+				
 				//Include Send Mail File For To Generate Email
-				include_once('../include/send_mail.php');
+				include_once(MAIL);
 				
 				//It will Get all Necessary Information and Send Email to Admin Person
 				send_mail($from, $to, $cc, $subject, $content);
@@ -68,7 +74,7 @@ switch ($a) {
 case "add":
 	$_SESSION['CLIENTNAME'] = $objScr->fetch_client_name();
 	$arrClientType = $objScr->fetchType();
-	include('../view/clients_add.php');
+	include(VIEW.'clients_add.php');
 	break;
 
 case "edit":
@@ -76,13 +82,13 @@ case "edit":
 	$arrClients = $objScr->sql_select();
 	$arrClientsData = $arrClients[$recid];
 	$arrClientType = $objScr->fetchType();
-	include('../view/clients_edit.php');
+	include(VIEW.'clients_edit.php');
 	break;
 
 default:
 	$arrClients = $objScr->sql_select();
 	$arrClientType = $objScr->fetchType();
-	include('../view/clients_list.php');
+	include(VIEW.'clients_list.php');
 	break;
 }
 ?>

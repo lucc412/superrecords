@@ -1,4 +1,4 @@
-<?
+<?php
 class Job {
  
 	public function __construct() {
@@ -149,6 +149,8 @@ class Job {
 					)";
 
 		mysql_query($qryIns);
+		
+		
 		$jobId = mysql_insert_id();
 
 		$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType, $typeId);

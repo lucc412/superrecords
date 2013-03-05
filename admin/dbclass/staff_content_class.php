@@ -188,15 +188,12 @@ class staffContentList extends Database
 							FROM stf_staffforms a,frm_forms b  
 							WHERE a.stf_SCode =".$row['stf_Code']. " 
 							AND b.frm_Code = a.stf_FormCode 
-							AND frm_Code NOT IN (45,53,65,73,74,77)
+							AND frm_Code NOT IN (45,53,65,73,74,77,98,21,76)
 							ORDER BY b.frm_Order ";
 				$permres = mysql_query($permquery);
 
 				while ($row_perm=mysql_fetch_array($permres)) {
 
-					if($row_perm['frm_Code']==98 || $row_perm['frm_Code']==99 || $row_perm['frm_Code'] == 21 || $row_perm['frm_Code']==76) continue;
-
-					//echo $i;
 					if($i==0)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>System Setup</div></i></b></td></tr>";
 					if($i==2)
@@ -484,13 +481,10 @@ class staffContentList extends Database
 						  </tr>
 							<?php
 							 //show permission settings
-							$formquery="SELECT * FROM frm_forms WHERE frm_Code NOT IN (45,53,65,73,74,77) ORDER BY frm_Order";
+							$formquery="SELECT * FROM frm_forms WHERE frm_Code NOT IN (45,53,65,73,74,77,98,21,76) ORDER BY frm_Order";
 							$formres=@mysql_query($formquery);
 							while ($row_form = @mysql_fetch_array($formres))
 							{
-								//echo $i;
-								// hide users, default landing URL, Manage Emails from this list
-								if($row_form['frm_Code']==98 || $row_form['frm_Code']==99 || $row_form['frm_Code'] == 21 || $row_form['frm_Code']==76) continue;
 
 								if($i==0)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>System Setup</div></i></b></td></tr>";
@@ -570,7 +564,7 @@ class staffContentList extends Database
 									FROM stf_staffforms a,frm_forms b 
 									WHERE a.stf_SCode =".$row['stf_Code']. " 
 									AND b.frm_Code = a.stf_FormCode 
-									AND b.frm_Code NOT IN (45,53,65,73,74,77)
+									AND b.frm_Code NOT IN (45,53,65,73,74,77,98,21,76)
 									ORDER BY b.frm_Order";
 
 						$permres = mysql_query($permquery);
@@ -583,9 +577,6 @@ class staffContentList extends Database
 							<input type="hidden" name="stf_FormCode<?php echo $row_perm['stf_Code']; ?>" value="<?php echo $row_perm['stf_FormCode']; ?>" />
 							<input type="hidden" name="count" value="<?php echo $count;?>"><?
 
-							if($row_perm['frm_Code']==98 || $row_perm['frm_Code']==99 || $row_perm['frm_Code'] == 21 || $row_perm['frm_Code']==76) continue;
-
-							//echo $i;
 							if($i==0)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>System Setup</div></i></b></td></tr>";
 							if($i==2)

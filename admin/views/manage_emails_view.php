@@ -24,11 +24,16 @@
 				<th align="left" width="45%" class="fieldheader">Name of Event</th>
 				<th class="fieldheader">From</th>
 				<th class="fieldheader">To</th>
-				<th class="fieldheader">CC</th>
-				<th width="10%" class="fieldheader">Status</th>
-				<th width="10%" class="fieldheader" align="center">Set Template</th>
-				<th width="10%" class="fieldheader" align="center">Action</th>
-			</tr><?
+				<th class="fieldheader">CC</th><?
+				if($access_file_level['stf_Delete'] == "Y") {
+					?><th width="10%" class="fieldheader">Status</th><?
+				}
+
+				if($access_file_level['stf_Edit'] == "Y") {
+					?><th width="10%" class="fieldheader" align="center">Set Template</th>
+					<th width="10%" class="fieldheader" align="center">Action</th><?
+				}
+			?></tr><?
 
 			$countRow = 0;
 			foreach ($arrEvents AS $arrInfo) {
@@ -65,31 +70,36 @@
 					?><td><textarea cols="10" rows="20" name="txtCc~<?=$eventId?>"><?=htmlspecialchars($arrInfo["event_cc"])?></textarea></td><?
 
 					/* Status of event */
-					?><td align="center"><?
-						
-						if(empty($arrInfo["event_status"])) {
-							$eventStatus = 'InActive';
-							$hrefTitle = 'Click to activate the event';
-							$hrefStyle = 'style="color:red"';
-						}
-						else {
-							$eventStatus = 'Active';
-							$hrefTitle = 'Click to inactivate the event';
-							$hrefStyle = 'style="color:#005b17"';
-						}
-						
-						?><a href="manage_emails.php?doAction=changeStatus&eventId=<?=$eventId?>&status=<?=$arrInfo["event_status"]?>" title="<?=$hrefTitle?>"><b <?=$hrefStyle?>><?=$eventStatus;?></a>
+					if($access_file_level['stf_Delete'] == "Y") {
+						?><td align="center"><?
+							
+							if(empty($arrInfo["event_status"])) {
+								$eventStatus = 'InActive';
+								$hrefTitle = 'Click to activate the event';
+								$hrefStyle = 'style="color:red"';
+							}
+							else {
+								$eventStatus = 'Active';
+								$hrefTitle = 'Click to inactivate the event';
+								$hrefStyle = 'style="color:#005b17"';
+							}
+							
+							?><a href="manage_emails.php?doAction=changeStatus&eventId=<?=$eventId?>&status=<?=$arrInfo["event_status"]?>" title="<?=$hrefTitle?>"><b <?=$hrefStyle?>><?=$eventStatus;?></a>
 
-					</td><?
+						</td><?
+					}
 
-					/* Save & Edit content button */
-					?><td align="center">
-						<a href="manage_emails.php?action=edit&eventId=<?=$eventId?>"><b style="color:#005b17"><img title="Click to set mail template" src="images/email_content.png"/></b></a>
-					</td>
-					<td align="center">
-						<button type="submit" value="save" onclick="javascript:saveEmailEvent(<?=$eventId?>)">Save</button>
-					</td>
-				</tr><?
+					if($access_file_level['stf_Edit'] == "Y") {
+
+						/* Save & Edit content button */
+						?><td align="center">
+							<a href="manage_emails.php?action=edit&eventId=<?=$eventId?>"><b style="color:#005b17"><img title="Click to set mail template" src="images/email_content.png"/></b></a>
+						</td>
+						<td align="center">
+							<button type="submit" value="save" onclick="javascript:saveEmailEvent(<?=$eventId?>)">Save</button>
+						</td><?
+					}
+				?></tr><?
 				$countRow++;
 			}
 		?></table>

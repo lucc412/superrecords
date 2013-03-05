@@ -106,9 +106,19 @@ if($_SESSION['validUser']) {
 				// view case [to show email events]
 				default:
 
-					// DB function to fetch all events here 
-					$arrEvents = $objCallData->sql_select();
-					include('views/manage_emails_view.php');
+					//Get FormCode
+					$formcode = $commonUses->getFormCode("Manage Emails");
+					$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+
+					//If View, Add, Edit, Delete all set to N
+					if($access_file_level == 0) {
+						echo "You are not authorised to view this file.";
+					}
+					else {
+						// DB function to fetch all events here 
+						$arrEvents = $objCallData->sql_select();
+						include('views/manage_emails_view.php');
+					}
 
 					break;
 			}

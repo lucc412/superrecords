@@ -1,1 +1,1 @@
-this is upload directory where all documents will be stroed.
+this is upload directory where all source documents uploaded by practice will be stroed.

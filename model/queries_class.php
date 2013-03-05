@@ -15,7 +15,7 @@ class Query {
 			$appendWhrStr = "AND j1.job_id = {$_REQUEST['lstJob']}";
 		}
 
-		$qrySel = "SELECT t1.query_id, t1.query, t1.response, t1.file_path, j1.job_name
+		$qrySel = "SELECT t1.query_id, t1.query, t1.response,t1.report_file_path, t1.file_path, j1.job_name
 					FROM queries t1, job j1, client c1
 					WHERE t1.job_id = j1.job_id
 					AND j1.client_id = c1.client_id
@@ -143,9 +143,14 @@ class Query {
 		}
 	}
 
-	public function doc_download($fileName) {
-	
-		$folderPath = "../uploads/queries/" . $fileName;
+	public function doc_download($fileName)
+	{
+		if($_REQUEST['flagType'] == 'PRQ')
+			$folderPath = "../uploads/queries/" . $fileName;
+		
+		if($_REQUEST['flagType'] == 'SRQ')
+			$folderPath = "../uploads/srqueries/" . $fileName;
+			
 		$arrFileName = explode('~', $fileName);
 		$origFileName = $arrFileName[1];
 		header("Expires: 0");

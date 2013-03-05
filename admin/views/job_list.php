@@ -409,7 +409,7 @@ switch ($a)
 					$fileName = $arrInfo['checklist'];
 					$filePath = "../uploads/checklists/".$fileName;
 					?>
-                    <a href="<?php echo $filePath;?>" title="Click to view this document" target="_blank">
+                    <a href="job.php?sql=download&flagType=C&filePath=<?=$arrInfo['checklist']?>" title="Click to view this document" target="_blank">
                     <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/>
                     
                     <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a><?
@@ -484,11 +484,8 @@ switch ($a)
 				?><tr>
 					<td class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["report_title"])?></td>	
 					<td width="23%" align="center" class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["date"])?></td>
-					<td width="10%" class="<?=$style?> blueBG" align="center"><?
-						$fileName = $arrInfo['file_path'];
-						$filePath = "../uploads/reports/".$fileName;
-
-						?><a href="<?php echo $filePath;?>" target="_blank" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
+					<td width="10%" class="<?=$style?> blueBG" align="center">
+					<a href="job.php?sql=download&flagType=R&filePath=<?=$arrInfo['file_path']?>" target="_blank" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
 					  </td>
 				</tr><?
 			}
@@ -606,7 +603,8 @@ switch ($a)
 					<!--<th class="fieldheader">S. No.</th>-->
 					<th class="fieldheader" align="center" width="30%">Query</th>
 					<th class="fieldheader">Reponse</th>
-					<th class="fieldheader" align="center">Download</th>
+					<th class="fieldheader" align="center">Uploaded by SR</th>
+					<th class="fieldheader" align="center">Supporting Doc</th>
 					<th class="fieldheader">Date Answered</th>
 					<th class="fieldheader">Answered?</th>
 					<th class="fieldheader" align="center">Save</th>
@@ -628,15 +626,16 @@ switch ($a)
 					<td class="<?=$style?> yellowBG"><?=$arrInfo["response"]?></td>
 					
 					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
+					if(!empty($arrInfo["report_file_path"])) {
+						?><a href="job.php?sql=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
+					}
+					?></td>
+					
+					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
 					if(!empty($arrInfo["file_path"])) {
-						?>
-                        <?php
-						$filePath = "../uploads/queries/".$arrInfo['file_path'];
-						?>
-                        <a href="<?php echo $filePath;?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
+						?><a href="job.php?sql=download&flagType=Q&filePath=<?=$arrInfo['file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
 					}
 					?></td><?
-						
 						if(!empty($arrInfo["date_answered"]) && $arrInfo["date_answered"] != '0000-00-00') {
 							?><td width="10%" class="<?=$style?> yellowBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["date_answered"])))?></td><?
 						}
@@ -709,25 +708,29 @@ switch ($a)
 			<h1>Add Query</h1>
 		</div>
 		
-		<form method="POST" name="frmQueriesList" action="job.php?sql=insertQuery">
+		<form method="POST" name="frmAddQueries" id="frmAddQueries" action="job.php?sql=insertQuery" enctype="multipart/form-data">
 			<input type="hidden" name="a" value="queries">
 			<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 			
-			<table class="tbl" border="0" cellspacing="1" cellpadding="5"width="40%">
+			<table class="tbl" border="0" cellspacing="15" cellpadding="5"width="40%">
 				<tr>
 					<td class="hr">Query</td>
 					<td class="dr">
 						<textarea name="txtQuery" rows="5" cols="50"></textarea>
 					</td>
 				</tr>
+				
+				<tr>
+					<td width="15%"> Select Document </td>
+					<td width="15%"> <input type="file" name="fileReport" id="fileReport" size="30px" /> </td>
+				</tr>
 			</table>
-
 
 			<button type="submit" value="Save" name="btnSave" class="cancelbutton">
 				Save
 			</button>
 
-			<button type="button" value="Cancel"  class="cancelbutton"  onClick='return ComfirmCancel(<?=$_REQUEST["jobId"]?>);'>
+			<button type="button" value="Cancel"  class="cancelbutton" onClick='return ComfirmCancel(<?=$_REQUEST["jobId"]?>);'>
 				Cancel
 			</button>
 			

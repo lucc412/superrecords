@@ -162,7 +162,31 @@ class Job_Class extends Database
 		$value = $_REQUEST["txtQuery"];
 		
 		$qrySel = "INSERT INTO queries(job_id, query) VALUES({$jobId}, '{$value}')";
-		mysql_query($qrySel);		
+		mysql_query($qrySel);
+		
+		// Fetching last report ID.
+		$qrySel = "SELECT max(query_id) as queryId FROM queries";
+		$fetchResult = mysql_query($qrySel);
+		$arrInfo = mysql_fetch_assoc($fetchResult);
+  		$fileId = $arrInfo['queryId'];
+
+		$origFileName = stripslashes($_FILES['fileReport']['name']);
+		$filePart = pathinfo($origFileName);
+		
+		$dbFileName = $fileId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
+		$folderPath = "../uploads/srqueries/" . $dbFileName;
+
+		if(file_exists($_FILES['fileReport']['tmp_name']))
+		{
+			if(move_uploaded_file($_FILES['fileReport']['tmp_name'], $folderPath))
+			{	
+				// Inserting file name in Table in file_path field.
+				$qryUpdate = "UPDATE queries SET report_file_path='{$dbFileName}'  
+				               WHERE query_id={$fileId}";
+
+				mysql_query($qryUpdate);
+			}
+		}
 	} 
 	
 	// Function to fetch all Job status
@@ -422,19 +446,23 @@ class Job_Class extends Database
 	
 	public function doc_download($fileName)
 	{
-		if($_REQUEST['flagType'] == 'C'){
-			$folderPath = "../uploads/checklists/" . $fileName;
-		}
-		else if($_REQUEST['flagType'] == 'S') {
-			$folderPath = "../uploads/sourcedocs/" . $fileName;
-		}
-		else if($_REQUEST['flagType'] == 'R') {
-			$folderPath = "../uploads/reports/" . $fileName;
-		}
-		else if($_REQUEST['flagType'] == 'Q') {
-			$folderPath = "../uploads/queries/" . $fileName;
-		}
+		$folderPath = substr($_SERVER["HTTP_REFERER"], 0, strpos($_SERVER["HTTP_REFERER"],"admin"));
 
+		if($_REQUEST['flagType'] == 'C')
+			$folderPath .= "uploads/checklists/" . $fileName;
+				
+		if($_REQUEST['flagType'] == 'S')
+			$folderPath .= "uploads/sourcedocs/" . $fileName;
+				
+		if($_REQUEST['flagType'] == 'R')
+			$folderPath .= "uploads/reports/" . $fileName;
+				
+		if($_REQUEST['flagType'] == 'Q')
+			$folderPath .= "uploads/queries/" . $fileName;
+		
+		if($_REQUEST['flagType'] == 'SRQ')
+			$folderPath .= "uploads/srqueries/" . $fileName;
+			
 		$arrFileName = explode('~', $fileName);
 		$origFileName = $arrFileName[1];
 	
@@ -450,7 +478,7 @@ class Job_Class extends Database
 		header('Content-disposition: attachment; filename="'.$origFileName.'"');  
 		readfile($folderPath);  
 		// Exit script. So that no useless data is output-ed.  
-		exit; 
+		exit;
 	}
 
 //************************************************************************************************

@@ -43,7 +43,7 @@ include(TOPBAR);
 						?><option <?=$selectStr?> value="<?=$jobId?>"><?=$jobDispName?></option><?php 
 					}
 				?></select>
-				<button align="right" type="button" onclick="javascript:this.form.submit();" value="Save All">Save All</button>
+				<button align="right" type="button" style="width:100px;" onclick="javascript:this.form.submit();" value="Save All">Save All</button>
 			</td>
 		</tr>
 	</table></br><?
@@ -57,7 +57,8 @@ include(TOPBAR);
 				<td class="td_title">Job</td>
 				<td class="td_title">Query</td>
 				<td class="td_title">Response</td>
-				<td class="td_title">Supporting Doc</td>
+				<td class="td_title" align="center">Uploaded by SR</td>
+				<td class="td_title" align="center">Supporting Doc</td>
 				<td class="td_title" align="center">Save</td>
 			</tr><?
 
@@ -74,6 +75,14 @@ include(TOPBAR);
 					?></td>
 					<td class="tddata"><?=$arrInfo['query']?></td>
 					<td class="tddata"><textarea name="txtResponse<?=$queryId?>"><?=$arrInfo['response']?></textarea></td>
+					
+					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
+					if(!empty($arrInfo["report_file_path"])) {
+						?>
+                        <a href="queries.php?action=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="../admin/images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
+					}
+					?></td>
+					
 					<td class="tddata"><?
 					$folderPath = "../uploads/queries/".$arrInfo['file_path'];
 					if(empty($arrInfo['file_path']) || !file_exists($folderPath)) {
@@ -83,11 +92,11 @@ include(TOPBAR);
 						$arrFileName = explode('~', $arrInfo['file_path']);
 						$origFileName = $arrFileName[1];
 						$docTitle = $origFileName;
-						?><p><a href="queries.php?action=download&filePath=<?=$arrInfo['file_path']?>" title="Click to view this document"><?=$docTitle?></a></p>
+						?><p><a href="queries.php?action=download&flagType=PRQ&filePath=<?=$arrInfo['file_path']?>" title="Click to view this document"><?=$docTitle?></a></p>
 						<!--<span style="margin-left:20px;"><a title="Click to delete this document" href="queries.php?filePath=<?=$arrInfo['file_path']?>&queryId=<?=$queryId?>&action=deleteDoc" onclick="javascript:return unlinkFile();">X</a></span>--><?
 					}
 					?></td>
-					<td class="tddata" align="center"><button type="button" onclick="javascript:updateQuery(<?=$queryId?>);" value="Save">Save</button></td>
+					<td class="tddata" align="center"><button type="button" style="width:100px;" onclick="javascript:updateQuery(<?=$queryId?>);" value="Save">Save</button></td>
 				</tr><?
 				$countRow++;
 			}

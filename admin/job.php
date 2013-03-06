@@ -16,19 +16,23 @@ include 'dbclass/job_class.php';
 $objCallData = new Job_Class();
 
 if($_SESSION['validUser']) {
-	?><html>
-		<head>
-			<title>Job List</title>
-			<meta name="generator" http-equiv="content-type" content="text/html">
-			<LINK href="<?php echo $styleSheet; ?>stylesheet.css" rel="stylesheet" type="text/css">
-			<LINK href="<?php echo $styleSheet; ?>tooltip.css" rel="stylesheet" type="text/css">
-			<script type="text/javascript" src="<?php echo $javaScript;?>datetimepicker.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript;?>validate.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript;?>job.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript;?>jquery-1.4.2.min.js"></script>
-		</head>
 
-		<body><?
+	// do not include below code when file 'download' case is called
+	if($_REQUEST['sql'] != 'download') {
+		?><html>
+			<head>
+				<title>Job List</title>
+				<meta name="generator" http-equiv="content-type" content="text/html">
+				<LINK href="<?php echo $styleSheet; ?>stylesheet.css" rel="stylesheet" type="text/css">
+				<LINK href="<?php echo $styleSheet; ?>tooltip.css" rel="stylesheet" type="text/css">
+				<script type="text/javascript" src="<?php echo $javaScript;?>datetimepicker.js"></script>
+				<script type="text/javascript" src="<?php echo $javaScript;?>validate.js"></script>
+				<script type="text/javascript" src="<?php echo $javaScript;?>job.js"></script>
+				<script type="text/javascript" src="<?php echo $javaScript;?>jquery-1.4.2.min.js"></script>
+			</head>
+
+			<body><?
+	}
 
 			$a = $_REQUEST["a"];
 			$sql = $_REQUEST["sql"];
@@ -99,11 +103,10 @@ if($_SESSION['validUser']) {
 						if($_REQUEST['flagType'] == 'S') { 
 							$objCallData->update_document($_REQUEST["docId"]);
 						}
-						else {
+						else if($_REQUEST['flagType'] == 'C') { 
 							$objCallData->update_checklist_status($_REQUEST["jobId"]);
 						}
 						$objCallData->doc_download($_REQUEST["filePath"]);
-						exit;
 						header('Location: job.php?a=documents&jobId='.$_REQUEST["jobId"]);
 					}
 					break;
@@ -111,9 +114,9 @@ if($_SESSION['validUser']) {
 				case "insertReport":
 					$objCallData->upload_report();
 					?><script>
-						window.opener.location.reload();
-						self.close();
-					</script><?
+					  window.opener.document.location= 'job.php?a=reports&jobId=<?php echo  $_REQUEST["jobId"];?>'; 
+					  self.close();
+					 </script><?
 					break;
 
 				case "insertQuery":

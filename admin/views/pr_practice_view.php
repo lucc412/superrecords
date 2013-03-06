@@ -20,6 +20,14 @@
 		<td class="dr"><?=htmlspecialchars($objCallData->arrSrManager[$arrPracticeData["sr_manager"]])?></td>
 	</tr>
 	<tr>
+		<td class="hr">India Manager</td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrInManager[$arrPracticeData["india_manager"]])?></td>
+	</tr>
+	<tr>
+		<td class="hr">Team Member</td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrTeamMember[$arrPracticeData["team_member"]])?></td>
+	</tr>
+	<tr>
 		<td class="hr">Street Address</td>
 		<td class="dr"><?=htmlspecialchars($arrPracticeData["street_adress"])?></td>
 	</tr>

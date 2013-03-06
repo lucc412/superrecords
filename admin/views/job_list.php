@@ -325,7 +325,6 @@ switch ($a)
 			<th class="fieldheader" align="center">Download</th>
 		</tr><?
 
-
 	foreach ($objCallData->arrDocument AS $docId => $arrInfo)
 	{
 		if($arrInfo["job_id"] == $_REQUEST["jobId"])
@@ -354,21 +353,8 @@ switch ($a)
 				}
 			    ?><td width="10%" align="center" class="<?=$style?> blueBG" <?=$strView?>><?=$viewed?></td>	
 			  
-              	<?php
-					$fileName = $arrInfo['file_path'];
-					$filePath = "../uploads/sourcedocs/".$fileName;
-					//echo $filePath;
-					//exit;
-					
-				?>
-              <?php /*
-			 	<!--<td width="5%" class="<?=$style?> blueBG" align="center">
-					<a href="job.php?a=download&jobId=<?=$_REQUEST["jobId"]?>&docId=<?=$arrInfo["document_id"]?>&filePath=<?=$arrInfo["file_path"]?>&flagType=S" title="Click to view this document">
-                    <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
-				</td>--> */?>
-                
-              <td width="5%" class="<?=$style?> blueBG" align="center">
-					<a href="<?php echo $filePath;?>" title="Click to view this document" target="_blank">
+              	<td width="5%" class="<?=$style?> blueBG" align="center">
+					<a href="job.php?sql=download&flagType=S&filePath=<?=$arrInfo['file_path']?>&docId=<?=$arrInfo['document_id']?>" title="Click to view this document" target="_blank">
                     <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/>
                     </a>
 				</td>
@@ -404,16 +390,8 @@ switch ($a)
 			 	<td width="5%" class="<?=$style?> blueBG" align="center"><?
 				$folderPath = "../uploads/checklists/".$arrInfo['checklist'];
 				if(!empty($arrInfo['checklist']) && file_exists($folderPath)) {
-				
-					//echo "<pre>";
-					$fileName = $arrInfo['checklist'];
-					$filePath = "../uploads/checklists/".$fileName;
-					?>
-                    <a href="job.php?sql=download&flagType=C&filePath=<?=$arrInfo['checklist']?>" title="Click to view this document" target="_blank">
-                    <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/>
-                    
-                    <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a><?
-					}
+					?><a href="job.php?sql=download&flagType=C&filePath=<?=$arrInfo['checklist']?>&jobId=<?=$_REQUEST['jobId']?>" title="Click to view this document" target="_blank"><img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a><?
+				}
 				?></td>
 			</tr><?
 		}	

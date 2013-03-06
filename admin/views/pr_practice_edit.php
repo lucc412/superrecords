@@ -43,6 +43,32 @@
 			</td>
 		</tr>
 		<tr>
+			<td class="hr">India Manager<font style="color:red;" size="2">*</font></td>
+			<td><select name="lstManager">
+					<option value="">Select India Manager</option><?php
+					foreach($objCallData->arrInManager AS $typeId => $typeDesc){
+						$selectStr = '';
+						if($typeId == $arrPracticeData['india_manager']) $selectStr = 'selected';
+						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select india manager for Practice.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Team Member<font style="color:red;" size="2">*</font></td>
+			<td><select name="lstMember">
+					<option value="">Select Team Member</option><?php
+					foreach($objCallData->arrTeamMember AS $typeId => $typeDesc){
+						$selectStr = '';
+						if($typeId == $arrPracticeData['team_member']) $selectStr = 'selected';
+						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select team member for Practice.</span></a>
+			</td>
+		</tr>
+		<tr>
 			<td class="hr">Street Address</td>
 			<td class="dr">
 				<input type="text" name="street_Address" value="<?=$arrPracticeData['street_adress']?>">

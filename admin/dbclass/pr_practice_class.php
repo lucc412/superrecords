@@ -3,11 +3,13 @@
 class Practice_Class extends Database { 	
 	public function __construct() {
 		$this->arrTypes = $this->fetchType();
-		$this->arrSrManager = $this->fetchSrManager();
+		$this->arrSrManager = $this->fetchEmployees('srmanager');
+		$this->arrSalesPerson = $this->fetchEmployees('salesmanager');
+		$this->arrInManager = $this->fetchEmployees('indiamanager');
+		$this->arrTeamMember = $this->fetchEmployees('teammember');
 		$this->arrServices = $this->fetchServices();
 		$this->arrItemList = $this->fetchItemList();
 		$this->arrStates = $this->fetchStates();
-		$this->arrSalesPerson = $this->fetchSalesPerson();
   	}	
 
 	public function fetchType() {		
@@ -22,20 +24,39 @@ class Practice_Class extends Database {
 		}
 		return $arrTypes;	
 	} 
-	
-	public function fetchSrManager() {		
 
-		$qrySel = "SELECT t1.con_Code, t1.con_Firstname, t1.con_Lastname 
-					FROM con_contact as t1 
-					LEFT JOIN cnt_contacttype AS t2 ON t1.con_Type = t2.cnt_Code 
-					WHERE t2.cnt_Description like 'Employee'
-					AND t1.con_Designation = 24";
+	public function fetchEmployees($flagManager) {
+		
+		// if employees are fetched that are SR Manager
+		if($flagManager == 'srmanager') { 
+			$appendStr = 'AND c1.con_Designation = 24';
+		}
+		// if employees are fetched that are Sales Manager
+		else if($flagManager == 'salesmanager') { 
+			$appendStr = 'AND c1.con_Designation = 14';
+		}
+		// if employees are fetched that are Sales Manager
+		else if($flagManager == 'indiamanager') { 
+			$appendStr = 'AND c1.con_Designation = 27';
+		}
+		// if employees are fetched that are Sales Manager
+		else if($flagManager == 'teammember') { 
+			$appendStr = 'AND c1.con_Designation = 29';
+		}
+
+		$qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
+					FROM stf_staff t1, aty_accesstype t2, con_contact c1
+					WHERE t1.stf_AccessType = t2.aty_Code 
+					AND t1.stf_CCode = c1.con_Code 
+					AND t2.aty_Description like 'Staff'
+					{$appendStr}
+					ORDER BY stf_Code";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrSrManager[$rowData['con_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
+			$arrEmployees[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
 		}
-		return $arrSrManager;	
+		return $arrEmployees;	
 	} 
 
 	public function fetchServices() {		
@@ -77,26 +98,18 @@ class Practice_Class extends Database {
 		return $arrStates;	
 	} 
 
-	public function fetchSalesPerson() {		
+	public function sql_select() {
 
-		$qrySel = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname 
-					FROM stf_staff t1 
-					LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code 
-					LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code 
-					WHERE (c1.con_Designation=14 || c1.con_Designation=19) 
-					AND t2.aty_Description LIKE '%Staff%' 
-					ORDER BY stf_Code";
+		if($_SESSION['usertype'] == 'Staff')
+			$appendStr = "WHERE ( t1.sr_manager = {$_SESSION['staffcode']} 
+						OR t1.india_manager = {$_SESSION['staffcode']}
+						OR t1.team_member = {$_SESSION['staffcode']}
+						OR t1.sales_person = {$_SESSION['staffcode']})";
 
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrSalesPerson[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
-		}
-		return $arrSalesPerson;
-	}
-
-	public function sql_select() {		
-
-		$qrySel = "SELECT t1.* FROM pr_practice t1 ORDER BY t1.id desc";
+		$qrySel = "SELECT t1.* 
+					FROM pr_practice t1 
+					{$appendStr}
+					ORDER BY t1.id desc";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -129,11 +142,13 @@ class Practice_Class extends Database {
 
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
-		$qryIns = "INSERT INTO pr_practice(type, name, sr_manager, street_adress, suburb, state, postcode, postal_address, main_contact_name, other_contact_name, phone_no, alternate_no, fax, email, password, date_signed_up, agreed_services, sent_items, sales_person)
+		$qryIns = "INSERT INTO pr_practice(type, name, sr_manager, india_manager, team_member, street_adress, suburb, state, postcode, postal_address, main_contact_name, other_contact_name, phone_no, alternate_no, fax, email, password, date_signed_up, agreed_services, sent_items, sales_person)
 					VALUES (
 					'" . $_REQUEST['lstType'] . "', 
 					'" . $_REQUEST['refName'] . "', 
 					'" . $_REQUEST['lstSrManager'] . "', 
+					'" . $_REQUEST['lstManager'] . "', 
+					'" . $_REQUEST['lstMember'] . "', 
 					'" . $_REQUEST['street_Address'] . "', 
 					'" . $_REQUEST['suburb'] . "', 
 					'" . $_REQUEST['lstState'] . "', 
@@ -184,6 +199,8 @@ class Practice_Class extends Database {
 				SET type = '" . $_REQUEST['lstType'] . "',
 				name = '" . $_REQUEST['refName'] . "',
 				sr_manager = '" . $_REQUEST['lstSrManager'] . "',
+				india_manager = '" . $_REQUEST['lstManager'] . "',
+				team_member = '" . $_REQUEST['lstMember'] . "',
 				street_adress = '" . $_REQUEST['street_Address'] . "',
 				suburb = '" . $_REQUEST['suburb'] . "',
 				state = '" . $_REQUEST['lstState'] . "',

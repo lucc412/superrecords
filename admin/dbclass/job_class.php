@@ -83,12 +83,29 @@ class Job_Class extends Database
 							AND s1.job_status = '".$_REQUEST['filter']."'";
 			}
 		}
-
-		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id,				j1.job_due_date, j1.job_received, c1.id, j1.period
+		
+		
+/*$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id,				j1.job_due_date, j1.job_received, c1.id, j1.period
 					FROM job j1, client c1 {$fromStr}
 					WHERE j1.client_id = c1.client_id 
 					AND j1.discontinue_date IS NULL  
 					{$whereStr}
+					GROUP BY j1.job_id
+					ORDER BY job_id desc";
+*/	
+		
+		$userId = $_SESSION["staffcode"];
+		
+		if($_SESSION["usertype"]=="Staff")
+			$strWhere=" AND (c1.sr_manager=".$userId." or c1.india_manager=".$userId." or c1.team_member=".$userId.")";
+					
+		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id,			            j1.job_due_date, j1.job_received, 
+		            c1.id,c1.sr_manager, c1.india_manager, c1.team_member, j1.period
+					FROM job j1, client c1 {$fromStr}
+					WHERE j1.client_id = c1.client_id 
+					AND j1.discontinue_date IS NULL  
+					{$strWhere} 
+					{$whereStr} 
 					GROUP BY j1.job_id
 					ORDER BY job_id desc";
 

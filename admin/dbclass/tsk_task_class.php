@@ -14,8 +14,11 @@ class Task_Class extends Database {
 		$this->arrJobDetails = $this->fetchJobDetails();
 		$this->arrMasterActivity = $this->fetchMasterActivity();
 		$this->arrSubActivity = $this->fetchSubActivity();
-		$this->arrSrManager = $this->fetchEmployees(true);
-		$this->arrEmployees = $this->fetchEmployees(false);
+		
+		$this->arrSrManager = $this->fetchEmployees('srmanager');
+		$this->arrIndiaManager = $this->fetchEmployees('indiamanager');
+		$this->arrEmployees = $this->fetchEmployees('teammember');
+		
 		$this->arrJobType = $this->fetchJobType();
 		$this->arrTaskStatus = $this->fetchTaskStatus();
 		$this->arrPriority = $this->fetchPriority();
@@ -170,31 +173,50 @@ class Task_Class extends Database {
 		return $arrSubActivity;	
 	}  
 		
-	public function fetchEmployees($flagManager) {
+	public function fetchEmployees($flagManager)
+	{
+		$appendStr = "";
 		
-		if($flagManager) { 
-			$appendStr = 'AND t1.con_Designation = 24';
-		}
+        // if employees are fetched that are SR Manager
+        if($flagManager == 'srmanager') { 
+                        $appendStr = 'AND c1.con_Designation = 24';
+        }
+        // if employees are fetched that are Sales Manager
+        else if($flagManager == 'indiamanager') { 
+                        $appendStr = 'AND c1.con_Designation = 27';
+        }
+        // if employees are fetched that are Sales Manager
+        else if($flagManager == 'teammember') { 
+                        $appendStr = 'AND c1.con_Designation = 29';
+        }
 
-		$qrySel = "SELECT t1.con_Code, t1.con_Firstname, t1.con_Lastname 
-					FROM con_contact as t1 
-					LEFT JOIN cnt_contacttype AS t2 ON t1.con_Type = t2.cnt_Code 
-					WHERE t2.cnt_Description like 'Employee'
-					{$appendStr}";
+		$qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
+				     FROM stf_staff t1, aty_accesstype t2, con_contact c1
+				     WHERE t1.stf_AccessType = t2.aty_Code 
+				     AND t1.stf_CCode = c1.con_Code 
+				     AND t2.aty_Description like 'Staff' 
+					 {$appendStr} 
+				     ORDER BY stf_Code";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrSrManager[$rowData['con_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
+			$arrSrManager[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
 		}
 		return $arrSrManager;	
 	} 
 
-	public function sql_select($jobId) {		
+	public function sql_select($jobId)
+	{		
+		$userId = $_SESSION["staffcode"];
+		
+		$strWhere = "";		
+		if($_SESSION["usertype"]=="Staff")
+			$strWhere="AND manager_id=".$userId." or india_manager_id=".$userId." or team_member_id=".$userId;
 	
 		if($jobId)
-			$strWhere = "AND job_id={$jobId}";
+			$strWhere .= "AND job_id={$jobId}";
 			
-			$qrySel = "SELECT * 
+		$qrySel = "SELECT * 
 						FROM task
 						WHERE discontinue_date IS NULL 
 						{$strWhere} 

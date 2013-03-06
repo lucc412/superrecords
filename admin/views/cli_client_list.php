@@ -12,9 +12,9 @@
 	}
 
 	?><tr class="fieldheader">
-		<th class="fieldheader" align="left">Type</th>
-		<th class="fieldheader" align="left">Practice</th>
 		<th class="fieldheader" align="left">Client Name</th>
+		<th class="fieldheader" align="left">Practice</th>
+		<th class="fieldheader" align="left">Type</th>
 		<th class="fieldheader" align="left">SR Manager</th>
 		<th class="fieldheader">Date Signed Up</th>
 		<th  class="fieldheader" colspan="3" align="center">Actions</th>
@@ -26,9 +26,10 @@
 		else $trClass = "";
  
 		?><tr class="<?=$trClass?>">
-			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrTypes[$arrInfo["client_type_id"]])?></td>
-			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrPractice[$arrInfo["id"]])?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["client_name"])?></td>
+			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrPractice[$arrInfo["id"]])?></td>
+			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrTypes[$arrInfo["client_type_id"]])?></td>
+			
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrSrManager[$arrInfo["sr_manager"]])?></td>
 			<td align="center" class="<?=$style?>"><?
 				$dateSignedUp = "";

@@ -44,7 +44,7 @@ function validateFormOnSubmit()
 	}
 	
 	// Code for Reason box
-	else if(document.frmlead.lead_status.value == 3 && document.frmlead.lead_reason.value == ""){
+	else if(document.frmlead.lead_status.value == 6 && document.frmlead.lead_reason.value == ""){
 		alert("Enter Reason");
 		document.frmlead.lead_reason.focus();
 		flagReturn = false;
@@ -64,6 +64,17 @@ function validateFormOnSubmit()
 	return flagReturn;
 }
 
+function showreason()
+{
+	if(document.getElementById('lead_status').value == 6)
+	{
+		document.getElementById('reasondiv').style.display = 'table-row';
+	}else
+	{
+		document.getElementById('reasondiv').style.display = 'none';
+	}
+}
+				
 function ComfirmCancel(){
    var r = confirm("Are you sure you want to cancel?");
    if(r == true) {

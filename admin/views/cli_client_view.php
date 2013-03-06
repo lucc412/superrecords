@@ -17,7 +17,11 @@
 	</tr>
 	<tr>
 		<td class="hr">India Manager</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrEmployees[$arrClientData["india_manager"]])?></td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrIndiaManager[$arrClientData["india_manager"]])?></td>
+	</tr>
+	<tr>
+		<td class="hr">Team Member</td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrEmployees[$arrClientData["team_member"]])?></td>
 	</tr>
 	<tr>
 		<td class="hr">Client Name</td>
@@ -49,6 +53,10 @@
 		}
 		$strSteps = implode(',', $arrSteps);
 		?><td class="dr"><?=$strSteps?></td>
+	</tr>
+	<tr>
+		<td class="hr">Sales Person</td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrSalesPerson[$arrClientData["sales_person"]])?></td>
 	</tr>
 </table>
 

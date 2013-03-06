@@ -128,7 +128,7 @@
 			<td class="hr">India Manager<font style="color:red;" size="2">*</font></td>
 			<td><select name="lstSrIndiaManager">
 					<option value="0">--- Select India Manager ---</option><?php
-					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
+					foreach($objCallData->arrIndiaManager AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>

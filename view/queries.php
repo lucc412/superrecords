@@ -76,10 +76,13 @@ include(TOPBAR);
 					<td class="tddata"><?=$arrInfo['query']?></td>
 					<td class="tddata"><textarea name="txtResponse<?=$queryId?>"><?=$arrInfo['response']?></textarea></td>
 					
-					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
-					if(!empty($arrInfo["report_file_path"])) {
-						?>
-                        <a href="queries.php?action=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="../admin/images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
+					<td width="9%" class="<?=$style?> yellowBG"><?
+					if(!empty($arrInfo["report_file_path"]))
+					{
+						/*$arrFileName = explode('~', $arrInfo['report_file_path']);
+						$origFileName = $arrFileName[1];
+						$docTitle = $origFileName;*/
+					?><p><b><a href="queries.php?action=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>" title="Click to view this document">Document</a></b></p><?
 					}
 					?></td>
 					
@@ -89,10 +92,10 @@ include(TOPBAR);
 						?><input type="file" name="doc_<?=$queryId?>"><?
 					}
 					else {
-						$arrFileName = explode('~', $arrInfo['file_path']);
+						/*$arrFileName = explode('~', $arrInfo['file_path']);
 						$origFileName = $arrFileName[1];
-						$docTitle = $origFileName;
-						?><p><a href="queries.php?action=download&flagType=PRQ&filePath=<?=$arrInfo['file_path']?>" title="Click to view this document"><?=$docTitle?></a></p>
+						$docTitle = $origFileName;*/
+						?><p><a href="queries.php?action=download&flagType=PRQ&filePath=<?=$arrInfo['file_path']?>" title="Click to view this document">Document</a></p>
 						<!--<span style="margin-left:20px;"><a title="Click to delete this document" href="queries.php?filePath=<?=$arrInfo['file_path']?>&queryId=<?=$queryId?>&action=deleteDoc" onclick="javascript:return unlinkFile();">X</a></span>--><?
 					}
 					?></td>

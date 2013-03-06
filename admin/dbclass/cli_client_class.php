@@ -1,10 +1,15 @@
 <?php
-
-class Practice_Class extends Database { 	
-	public function __construct() {
+class Practice_Class extends Database
+{ 	
+	public function __construct()
+	{
 		$this->arrTypes = $this->fetchType();
-		$this->arrSrManager = $this->fetchEmployees(true);
-		$this->arrEmployees = $this->fetchEmployees(false);
+		
+		$this->arrSrManager = $this->fetchEmployees('srmanager');
+		$this->arrIndiaManager = $this->fetchEmployees('indiamanager');
+		$this->arrEmployees = $this->fetchEmployees('teammember');
+		$this->arrSalesPerson = $this->fetchEmployees('salesperson');
+		
 		$this->arrStepsList = $this->fetchStepsList();
 		$this->arrPractice = $this->fetchPractice();
   	}	
@@ -34,22 +39,37 @@ class Practice_Class extends Database {
 		return $arrPractice;
 	}
 	
-	public function fetchEmployees($flagManager) {
+	public function fetchEmployees($flagManager)
+	{	
+		$appendStr = "";
 		
-		if($flagManager) { 
-			$appendStr = 'AND t1.con_Designation = 24';
-		}
-
-		$qrySel = "SELECT t1.con_Code, t1.con_Firstname, t1.con_Lastname 
-					FROM con_contact as t1 
-					LEFT JOIN cnt_contacttype AS t2 ON t1.con_Type = t2.cnt_Code 
-					WHERE t2.cnt_Description like 'Employee'
-					{$appendStr}
-					";
+        // if employees are fetched that are SR Manager
+        if($flagManager == 'srmanager') { 
+                        $appendStr = 'AND c1.con_Designation = 24';
+        }
+        // if employees are fetched that are Sales Manager
+        else if($flagManager == 'indiamanager') { 
+                        $appendStr = 'AND c1.con_Designation = 27';
+        }
+        // if employees are fetched that are Sales Manager
+        else if($flagManager == 'teammember') { 
+                        $appendStr = 'AND c1.con_Designation = 29';
+        }
+		// if employees are fetched that are Sales Manager
+        else if($flagManager == 'salesperson') { 
+                        $appendStr = 'AND c1.con_Designation = 14';
+        }
+		 $qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
+			         FROM stf_staff t1, aty_accesstype t2, con_contact c1
+			         WHERE t1.stf_AccessType = t2.aty_Code 
+			         AND t1.stf_CCode = c1.con_Code 
+			         AND t2.aty_Description like 'Staff' 
+			      	 {$appendStr} 
+			         ORDER BY stf_Code";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrEmployees[$rowData['con_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
+			$arrEmployees[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
 		}
 		return $arrEmployees;	
 	} 
@@ -67,10 +87,16 @@ class Practice_Class extends Database {
 		return $arrItemList;	
 	} 
 
-	public function sql_select() {		
+	public function sql_select()
+	{		
+		$userId = $_SESSION["staffcode"];
+		
+		$strWhere = "";		
+		if($_SESSION["usertype"]=="Staff")
+			$strWhere="WHERE sr_manager=".$userId." or india_manager=".$userId." or team_member=".$userId;
 
 		$qrySel = "SELECT t1.* 
-				FROM client t1";
+				FROM client t1 {$strWhere}";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -95,13 +121,15 @@ class Practice_Class extends Database {
 
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
-		$qryIns = "INSERT INTO client(client_type_id, client_name, id, sr_manager, india_manager, client_notes, client_received, steps_done)
+		$qryIns = "INSERT INTO client(client_type_id, client_name, id, sr_manager, india_manager, team_member, sales_person, client_notes, client_received, steps_done)
 					VALUES (
 					'" . $_REQUEST['lstType'] . "', 
 					'" . $_REQUEST['cliName'] . "',
 					'" . $_REQUEST['lstPractice'] . "', 
 					'" . $_REQUEST['lstSrManager'] . "', 
 					'" . $_REQUEST['lstInManager'] . "', 
+					'" . $_REQUEST['lstTeamMember'] . "', 
+					'" . $_REQUEST['lstSalesPerson'] . "', 
 					'" . $_REQUEST['client_notes'] . "',
 					'" . $dateSignedUp . "',  
 					'" . $strSteps . "'
@@ -133,6 +161,8 @@ class Practice_Class extends Database {
 				id = '" . $_REQUEST['lstPractice'] . "',
 				sr_manager = '" . $_REQUEST['lstSrManager'] . "',
 				india_manager = '" . $_REQUEST['lstInManager'] . "',
+				team_member = '" . $_REQUEST['lstTeamMember'] . "',
+				sales_person = '" . $_REQUEST['lstSalesPerson'] . "',
 				client_notes = '" . $_REQUEST['client_notes'] . "',
 				client_received = '" . $dateSignedUp . "',
 				steps_done = '" . $strSteps . "'

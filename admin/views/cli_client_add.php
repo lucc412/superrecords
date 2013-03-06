@@ -41,11 +41,22 @@
 			<td class="hr">India Manager</td>
 			<td><select name="lstInManager">
 					<option value="">Select India Manager</option><?php
-					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
+					foreach($objCallData->arrIndiaManager AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select India manager for Client.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Team Member</td>
+			<td><select name="lstTeamMember">
+					<option value="0">Select Team Member</option><?php
+					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
+						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Team Member for Task.</span></a>
 			</td>
 		</tr>
 		<tr>
@@ -87,6 +98,18 @@
 					?><input class="checkboxClass" type="checkbox" name="step:<?=$stepId?>" id="<?=$stepName?>" /><label for="<?=$stepName?>"><?=$stepName?></label><br/><?
 				}
 			?></td>
+		</tr>
+		<tr>
+			<td class="hr">Sales Person</td>
+			<td>
+				<select name="lstSalesPerson">
+					<option value="">Select Sales Person</option><?
+					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
+						?><option value="<?=$stfCode?>"><?=$stfName?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>
+			</td>
 		</tr>
 		<tr>
 			<td><button type="button" value="Cancel" onClick='return ComfirmCancel();' class="cancelbutton">Cancel</button></td>

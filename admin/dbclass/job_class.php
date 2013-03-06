@@ -372,7 +372,7 @@ class Job_Class extends Database
 	
 	public function add_task($typeId, $period, $practiceId, $clientId, $jobId) {
 		
-		$taskName = $this->arrClient[$clientId] . ' - ' . $period . ' - ' . $this->arrJobType[$typeId];
+		$taskName = $this->arrClient[$clientId]["client_name"] . ' - ' . $period . ' - ' . $this->arrJobType[$typeId];
 	
 		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id) 
 					VALUES ('" . $taskName . "',

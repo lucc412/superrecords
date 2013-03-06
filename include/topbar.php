@@ -94,6 +94,7 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 									<li><a href="jobs.php?a=add">Submit a Job</a></li>
 									<li><a href="jobs.php?a=pending">Pending Jobs</a></li>
 									<li><a href="jobs.php?a=completed">Completed Jobs</a></li>
+									<li><a href="jobs.php?a=document">My Document</a></li>
 								</ul>
 							</li>
 							<li><a href="queries.php">View All Queries</a></li> 

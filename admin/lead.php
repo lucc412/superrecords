@@ -17,15 +17,6 @@ if($_SESSION['validUser']) {
 			<script type="text/javascript" src="<?php echo $javaScript; ?>lead_validate.js"></script>
 			
 			<!-- Added by Yogi 24-1-2013 for Not succefull drop down -->
-			<script type="text/javascript">
-				function showreason(){
-					if(document.getElementById('lead_status').value == 3){
-						document.getElementById('reasondiv').style.display = 'table-row';
-					}else{
-						document.getElementById('reasondiv').style.display = 'none';
-					}
-				}
-			</script>	
 		</head>
 
 		<body><?

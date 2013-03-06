@@ -94,6 +94,15 @@ case "completed":
 	include(VIEW.'jobs_completed.php');
 	break;
 
+case "document":
+	$arrJobs = $objScr->sql_select('completed');
+	$arrJobType = $objScr->fetchType();
+	$arrClientType = $objScr->fetchClientType();
+	$arrClients = $objScr->fetch_associated_clients('completed');
+	$arrJobStatus = $objScr->fetchStatus();
+	include(VIEW.'jobs_document.php');
+	break;
+
 case "download":
 	$objScr->doc_download($_REQUEST["filePath"], $_REQUEST['flagChecklist']);
 	include(VIEW.'jobs_edit.php');

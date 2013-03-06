@@ -446,26 +446,26 @@ class Job_Class extends Database
 	
 	public function doc_download($fileName)
 	{
-		$folderPath = substr($_SERVER["HTTP_REFERER"], 0, strpos($_SERVER["HTTP_REFERER"],"admin"));
 
 		if($_REQUEST['flagType'] == 'C')
-			$folderPath .= "uploads/checklists/" . $fileName;
+			$folderPath = "../uploads/checklists/" . $fileName;
 				
 		if($_REQUEST['flagType'] == 'S')
-			$folderPath .= "uploads/sourcedocs/" . $fileName;
+			$folderPath = "../uploads/sourcedocs/" . $fileName;
 				
 		if($_REQUEST['flagType'] == 'R')
-			$folderPath .= "uploads/reports/" . $fileName;
+			$folderPath = "../uploads/reports/" . $fileName;
 				
 		if($_REQUEST['flagType'] == 'Q')
-			$folderPath .= "uploads/queries/" . $fileName;
+			$folderPath = "../uploads/queries/" . $fileName;
 		
 		if($_REQUEST['flagType'] == 'SRQ')
-			$folderPath .= "uploads/srqueries/" . $fileName;
+			$folderPath = "../uploads/srqueries/" . $fileName;
 			
 		$arrFileName = explode('~', $fileName);
 		$origFileName = $arrFileName[1];
 
+		ob_clean();
 		header("Expires: 0");
 		header("Last-Modified: " . gmdate("D, d M Y H:i(worry)") . " GMT");  
 		header("Cache-Control: no-store, no-cache, must-revalidate");  

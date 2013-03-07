@@ -60,7 +60,7 @@ function ComfirmCancel(){
 
 <?php
   //Get FormCode
-  $formcode=$commonUses->getFormCode("Task Status");
+  $formcode=$commonUses->getFormCode("Job Status");
 
 //update service required order
         if(isset($_POST['gridedit']) && $_POST['gridedit']=="save")

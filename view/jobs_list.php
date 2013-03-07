@@ -38,7 +38,6 @@ include(TOPBAR);
 			<tr>
 				<td class="td_title">Job Name</td>
 				<td class="td_title">Job Status</td>
-				<td class="td_title" width="90px;">Checklist</td>
 				<td class="td_title">Source Documents</td>
 				<td class="td_title" width="80px;">Reports</td>
 				<td class="td_title" align="center">Date Created</td>
@@ -57,13 +56,6 @@ include(TOPBAR);
 					<td class="tddata"><?=$jobName?></td>
 
 					<td class="tddata"><?=$arrJobStatus[$arrJobDetails['job_status_id']]?></td>
-
-					<td class="tddata"><?
-						$folderPath = "../uploads/checklists/".$arrJobDetails['checklist'];
-						if(!empty($arrJobDetails['checklist']) && file_exists($folderPath)) {
-							?><p><a href="jobs.php?a=download&filePath=<?=$arrJobDetails['checklist']?>&flagChecklist=C" title="Click to view this checklist">Checklist</a></p><?
-						}
-					?></td>
 
 					<td class="tddata"><?
 						$arrSourceDocs = $objScr->fetch_documents($jobId);

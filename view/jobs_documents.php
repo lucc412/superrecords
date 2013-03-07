@@ -87,7 +87,7 @@ switch($_REQUEST['a'])
 		?><div class="pageheader">
 			<h1>Upload Documents</h1>
 			<span>
-				<b>Welcome to the Super Records upload documents.</b></br>Below you can upload documents for your job.
+				<b>Welcome to the Super Records upload documents page.</b></br>Below you can upload documents for your job.
 			<span>
 		</div>
 		

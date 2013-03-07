@@ -123,10 +123,7 @@ switch ($a)
 					<td class="hr">Period<font style="color:red;" size="2">*</font></td>
 					<td colspan="2"><input title="Specify period of job" type="text" name="txtPeriod" id="txtPeriod" value=""></td>
 				</tr>
-				<tr>
-					<td class="hr">Checklist</td>
-					<td colspan="2"><input type="file" name="fileChecklist" id="fileChecklist"></td>
-				</tr>
+				
 				<tr>
 					<td class="hr">Source Documents</td>
 					<td colspan="2"><input type="text" name="textSource_50" title="Specify name of source document">
@@ -272,7 +269,6 @@ switch ($a)
 	// Case to load Documents tab, begins here.	
 	case "documents":
 			$objCallData->arrDocument = $objCallData->fetchDocument();
-			$objCallData->arrChecklist = $objCallData->fetchChecklists();
 			
 		   ?><table border="0" cellspacing="1" cellpadding="4" align="left" style="margin-left:-5px">
 				<tr>
@@ -358,41 +354,6 @@ switch ($a)
                     <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/>
                     </a>
 				</td>
-			</tr><?
-		}	
-	}
-
-	foreach ($objCallData->arrChecklist AS $jobId => $arrInfo)
-	{
-		if($arrInfo["job_id"] == $_REQUEST["jobId"])
-		{
-			?><tr>
-				<td class="yellowBG" width="10%">Checklist</td><?
-				$arrFileName = explode('~', $arrInfo['checklist']);
-				$origFileName = $arrFileName[1];
-				$docName = $origFileName;
-				?><td class="yellowBG" width="20%"><?=$docName?></td>
-					
-				<td class="yellowBG" width="10%" align="center"><?=date('Y-m-d', strtotime($arrInfo["job_received"]))?></td><?
-
-				if($arrInfo["checklist_status"]==0)
-				{
-					$viewed = 'No';
-					$strView = 'style="color:red;"';
-				}
-				else
-				{
-					$viewed = 'Yes';
-					$strView = 'style="color:green;"';
-				}
-			    ?><td width="10%" align="center" class="<?=$style?> blueBG" <?=$strView?>><?=$viewed?></td>	
-			  
-			 	<td width="5%" class="<?=$style?> blueBG" align="center"><?
-				$folderPath = "../uploads/checklists/".$arrInfo['checklist'];
-				if(!empty($arrInfo['checklist']) && file_exists($folderPath)) {
-					?><a href="job.php?sql=download&flagType=C&filePath=<?=$arrInfo['checklist']?>&jobId=<?=$_REQUEST['jobId']?>" title="Click to view this document" target="_blank"><img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a><?
-				}
-				?></td>
 			</tr><?
 		}	
 	}

@@ -64,13 +64,6 @@ include(TOPBAR);
 		<tr><td>&nbsp;</td></tr>
 
 		<tr>
-			<td><strong>Checklist</strong></td>
-			<td><input type="file" name="fileChecklist" id="fileChecklist" title="Upload checklist"></td>
-		</tr>
-
-		<tr><td>&nbsp;</td></tr>
-
-		<tr>
 			<td><strong>Source Documents</strong></td>
 			<td><span class="docheader">Description</span></td>
 			<td><span class="docheader">File Path</span></td>

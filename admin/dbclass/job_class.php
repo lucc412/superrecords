@@ -266,19 +266,6 @@ class Job_Class extends Database
 		return $arrDocument;
 	} 
 
-	// Function to fetch all Documents
-	public function fetchChecklists()
-	{	
-		$qrySel = "SELECT job_id, checklist, checklist_status, job_received
-					FROM job WHERE discontinue_date IS NULL ";
-
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrDocument[$rowData['job_id']] = $rowData;
-		}
-		return $arrDocument;	
-	} 
-	
 	// Function to fetch all Reports
 	public function fetchReport()
 	{	
@@ -313,15 +300,6 @@ class Job_Class extends Database
 		mysql_query($qryUpd);
 	}
 
-	// Update viewed status with 1 in Document table
-	public function update_checklist_status($jobId)
-	{
-		$qryUpd = "UPDATE job 
-					SET checklist_status = 1 
-					WHERE job_id=".$jobId;
-		mysql_query($qryUpd);
-	}
-	
 	// Update Queries
 	public function update_query($queryId)
 	{
@@ -380,8 +358,6 @@ class Job_Class extends Database
 
 		$this->add_task($jobType, $period, $_REQUEST["lstPractice"], $client_Id, $jobId);
 		
-		// upload documents & checklist here
-		$this->add_checkList($jobId);
 		$this->add_source_Docs($jobId);
 		
 		//return true;
@@ -400,26 +376,7 @@ class Job_Class extends Database
 		mysql_query($qryIns);			
 	}
 
-	public function add_checkList($jobId) {
-		foreach($_FILES AS $fieldName => $imageInfo){
-			if($fieldName == 'fileChecklist') {
-				$origFileName = stripslashes($_FILES[$fieldName]['name']);
-				$filePart = pathinfo($origFileName);
-				$dbFileName = $jobId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
-				$folderPath = "../uploads/checklists/" . $dbFileName;
-
-				if(file_exists($_FILES[$fieldName]['tmp_name'])) {
-					if(move_uploaded_file($_FILES[$fieldName]['tmp_name'], $folderPath)) {
-						$qryUpd = "UPDATE job
-									SET checklist = '" . $dbFileName . "'
-									WHERE job_id = '" . $jobId . "'";
-						mysql_query($qryUpd);
-					}
-				}
-			}	
-		}
-	}
-
+	
 	public function add_source_Docs($jobId) {
 
 		$qrySel = "SELECT max(document_id) docId 
@@ -462,11 +419,7 @@ class Job_Class extends Database
 //************************************************************************************************  
 	
 	public function doc_download($fileName)
-	{
-
-		if($_REQUEST['flagType'] == 'C')
-			$folderPath = "../uploads/checklists/" . $fileName;
-				
+	{		
 		if($_REQUEST['flagType'] == 'S')
 			$folderPath = "../uploads/sourcedocs/" . $fileName;
 				

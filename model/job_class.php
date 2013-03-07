@@ -18,7 +18,7 @@ class Job {
 			$appendSelStr = "AND t1.client_id = {$_REQUEST['lstClientType']}";
 		}
 
-		$qrySel = "SELECT t1.job_id, t1.job_name, t1.job_received, t1.job_type_id, t1.client_id, t1.period, t1.job_status_id, t1.checklist, t1.mas_Code
+		$qrySel = "SELECT t1.job_id, t1.job_name, t1.job_received, t1.job_type_id, t1.client_id, t1.period, t1.job_status_id, t1.mas_Code
 					FROM job t1, client c1
 					WHERE c1.id = '{$_SESSION['PRACTICEID']}'
 					AND t1.client_id = c1.client_id
@@ -168,8 +168,7 @@ class Job {
 
 		$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType, $typeId);
 		
-		// upload documents & checklist here
-		$this->add_checkList($jobId);
+		// upload documents here
 		$this->add_source_Docs($jobId);
 		
 		return true;
@@ -193,25 +192,6 @@ class Job {
 		mysql_query($qryIns);			
 	}
 
-	public function add_checkList($jobId) {
-		foreach($_FILES AS $fieldName => $imageInfo){
-			if($fieldName == 'fileChecklist') {
-				$origFileName = stripslashes($_FILES[$fieldName]['name']);
-				$filePart = pathinfo($origFileName);
-				$dbFileName = $jobId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
-				$folderPath = "../uploads/checklists/" . $dbFileName;
-
-				if(file_exists($_FILES[$fieldName]['tmp_name'])) {
-					if(move_uploaded_file($_FILES[$fieldName]['tmp_name'], $folderPath)) {
-						$qryUpd = "UPDATE job
-									SET checklist = '" . $dbFileName . "'
-									WHERE job_id = '" . $jobId . "'";
-						mysql_query($qryUpd);
-					}
-				}
-			}	
-		}
-	}
 
 	public function add_source_Docs($jobId) {
 
@@ -291,8 +271,7 @@ class Job {
 
 		mysql_query($qryUpd);
 
-		// upload documents & checklist here
-		$this->add_checkList($_REQUEST['recid']);
+		// upload documents here
 		$this->add_source_Docs($_REQUEST['recid']);
 
 		return $returnstr;
@@ -300,10 +279,7 @@ class Job {
 
 	public function doc_download($fileName, $flagChecklist) {
 	
-		if($flagChecklist == 'C') {
-			$folderPath = "../uploads/checklists/" . $fileName;
-		}
-		else if($flagChecklist == 'S') {
+		if($flagChecklist == 'S') {
 			$folderPath = "../uploads/sourcedocs/" . $fileName;
 		}
 		else if($flagChecklist == 'R') {
@@ -330,23 +306,14 @@ class Job {
 
 	public function delete_doc($fileName, $flagChecklist) {
 
-		if($flagChecklist == 'C') {
-			$folderPath = "../uploads/checklists/" . $fileName;
-		}
-		else if($flagChecklist == 'S') {
+		if($flagChecklist == 'S') {
 			$folderPath = "../uploads/sourcedocs/" . $fileName;
 		}
 	
 		if(file_exists($folderPath)) {
 			unlink($folderPath);
 
-			if($flagChecklist == 'C') {
-				$qryUpd = "UPDATE job
-							SET checklist = NULL
-							WHERE job_id = '" . $_REQUEST['recid'] . "'";
-				mysql_query($qryUpd);
-			}
-			else if($flagChecklist == 'S') {
+			if($flagChecklist == 'S') {
 				$qryDel = "DELETE FROM documents 
 							WHERE document_id = '" . $_REQUEST['documentId'] . "'";
 				mysql_query($qryDel);

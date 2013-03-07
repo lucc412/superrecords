@@ -45,7 +45,7 @@ class Job {
 		return $arrClients;	
 	}
 
-	public function fetch_documents($jobId) {		
+/*	public function fetch_documents($jobId) {		
 
 		$qrySel = "SELECT t1.document_id, t1.document_title, t1.file_path
 					FROM documents t1
@@ -56,7 +56,33 @@ class Job {
 			$arrDocs[$rowData['document_id']] = $rowData;
 		}
 		return $arrDocs;	
+	}*/
+
+
+	public function fetch_documents($jobId)
+	{
+		if($jobId)
+			$strJobId = "AND t1.job_id = '{$jobId}'";
+			
+		if(!empty($_REQUEST['lstJob'])) {
+			$appendWhrStr = "AND j1.job_id = {$_REQUEST['lstJob']}";
+		}
+
+		$qrySel = "SELECT t1.document_id, t1.document_title, t1.file_path, t1.file_path,j1.job_id, j1.job_name 
+					FROM documents t1, job j1, client c1
+					WHERE t1.job_id = j1.job_id
+					AND j1.client_id = c1.client_id
+					AND c1.id = '{$_SESSION['PRACTICEID']}' 
+					{$strJobId} 
+					{$appendWhrStr}";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult))
+			$arrDocs[$rowData['document_id']] = $rowData;
+
+		return $arrDocs;	
 	}
+
 
 	public function fetch_reports($jobId) {		
 
@@ -232,6 +258,37 @@ class Job {
 			}
 		}
 	}
+
+	public function upload_document()
+	{
+		$qrySel = "SELECT max(document_id) docId 
+					FROM documents";
+		$objResult = mysql_query($qrySel);
+		$arrInfo = mysql_fetch_assoc($objResult);
+		$fileId = $arrInfo['docId'];
+
+		$fileId++;
+		$origFileName = stripslashes($_FILES['fileDoc']['name']);
+		$filePart = pathinfo($origFileName);
+		$fileName =  $fileId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
+		$folderPath = "../uploads/sourcedocs/" . $fileName;
+
+		if(file_exists($_FILES['fileDoc']['tmp_name']))
+		{
+			if(move_uploaded_file($_FILES['fileDoc']['tmp_name'], $folderPath))
+			{
+				$qryIns = "INSERT INTO documents(job_id, document_title, file_path, date)
+						VALUES(
+						".$_REQUEST['lstJob'].", 
+						'".$_REQUEST['txtDocTitle']."', 
+						'".$fileName."', 
+						NOW() 
+						)";
+				mysql_query($qryIns);
+			}
+		}
+	}
+	
 
 	public function sql_update() {	
 

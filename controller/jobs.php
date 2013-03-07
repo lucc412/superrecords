@@ -58,6 +58,11 @@ switch ($sql) {
 		$objScr->sql_delete($_REQUEST['recid']);
 		header('location: jobs.php');
 		break;
+	
+	case "insertDoc":
+		$objScr->upload_document();
+		header('location: jobs.php?a=document');
+		break;
 }
 
 switch ($a) {
@@ -95,12 +100,18 @@ case "completed":
 	break;
 
 case "document":
-	$arrJobs = $objScr->sql_select('completed');
+	$arrjobs = $objScr->sql_select();
+	$arrDoc = $objScr->fetch_documents();
 	$arrJobType = $objScr->fetchType();
-	$arrClientType = $objScr->fetchClientType();
 	$arrClients = $objScr->fetch_associated_clients('completed');
-	$arrJobStatus = $objScr->fetchStatus();
-	include(VIEW.'jobs_document.php');
+	include(VIEW.'jobs_documents.php');
+	break;
+
+case "uploadDoc":
+	$arrjobs = $objScr->sql_select();
+	$arrJobType = $objScr->fetchType();
+	$arrClients = $objScr->fetch_associated_clients('completed');
+	include(VIEW.'jobs_documents.php');
 	break;
 
 case "download":

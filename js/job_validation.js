@@ -72,6 +72,32 @@ function checkValidation() {
 	return flagReturn;
 }
 
+function checkDocValidation()
+{	
+	flagReturn = true;
+
+	// do field validation  
+	if (document.objForm.lstJob.value == 0)
+	{
+		alert("Select Job");
+		document.objForm.lstJob.focus();
+		flagReturn = false;
+	}
+	else if (document.objForm.fileDoc.value == "")
+	{		
+		alert("Select Document");
+		document.objForm.fileDoc.focus();
+		flagReturn = false;
+	}
+	
+	if(flagReturn)
+	{
+		document.objForm.submit();
+	}
+	
+	return flagReturn;
+}
+
 // This function is used to perform validations
 function unlinkFile() {
 

@@ -144,7 +144,7 @@ class Job {
 					'" . $period . "',  
 					'" . $jobName . "',  
 					1,   
-					385,
+					113,
 					NOW()
 					)";
 
@@ -175,7 +175,7 @@ class Job {
 					'" . $jobId . "',
 					'" . $cliType . "',
 					'" . $typeId . "',
-					'385'
+					'113'
 					)";
 		mysql_query($qryIns);			
 	}

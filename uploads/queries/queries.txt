@@ -1,1 +1,1 @@
-this is upload directory where all documents related to queries that are uploaded by practice will be stroed.
+this is upload directory where all documents related to queries that are uploaded by practice will be stored.

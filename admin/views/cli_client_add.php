@@ -30,7 +30,7 @@
 					<option value="">Select SR Manager</option><?php
 					foreach($objCallData->arrSrManager AS $userId => $typeDesc) {
 						$strSelected = '';
-						if($userId == '385') $strSelected = 'selected';
+						if($userId == '113') $strSelected = 'selected';
 						?><option <?=$strSelected?> value="<?=$userId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>

@@ -9,7 +9,63 @@ class Lead_Class extends Database {
 		$this->arrSource = $this->fetchSource();
 		$this->arrStates = $this->fetchStates();
 		$this->arrSalesPerson = $this->fetchSalesPerson();
-  	}	
+		$this->arrSrManager = $this->fetchEmployees('srmanager');
+	  	$this->arrIndiaManager = $this->fetchEmployees('indiamanager');
+		$this->arrEmployees = $this->fetchEmployees('teammember');
+  	}
+	
+
+	
+	
+	public function fetchEmployees($flagManager) {
+	
+	$appendStr = "";
+  
+        // if employees are fetched that are SR Manager
+        if($flagManager == 'srmanager') { 
+                        $appendStr = 'AND c1.con_Designation = 24';
+        }
+        // if employees are fetched that are Sales Manager
+        else if($flagManager == 'indiamanager') { 
+                        $appendStr = 'AND c1.con_Designation = 27';
+        }
+        // if employees are fetched that are Sales Manager
+        else if($flagManager == 'teammember') { 
+                        $appendStr = 'AND c1.con_Designation = 29';
+        }
+
+$qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
+         FROM stf_staff t1, aty_accesstype t2, con_contact c1
+         WHERE t1.stf_AccessType = t2.aty_Code 
+         AND t1.stf_CCode = c1.con_Code 
+         AND t2.aty_Description like 'Staff' 
+         {$appendStr} 
+         ORDER BY stf_Code";
+		 
+		
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrSrManager[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
+		}
+		
+		return $arrSrManager;	
+	} 
+	
+	public function fetchSrManager() {		
+
+		$qrySel = "SELECT t1.con_Code, t1.con_Firstname, t1.con_Lastname 
+					FROM con_contact as t1 
+					LEFT JOIN cnt_contacttype AS t2 ON t1.con_Type = t2.cnt_Code 
+					WHERE t2.cnt_Description like 'Employee'
+					AND t1.con_Designation = 24";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrSrManager[$rowData['con_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
+		}
+		return $arrSrManager;	
+	} 
 
 	public function fetchType() {		
 
@@ -106,14 +162,21 @@ class Lead_Class extends Database {
 		return $arrSalesPerson;
 	}
 
-	public function sql_select() {		
+	public function sql_select() {	
+	
+		$userId = $_SESSION["staffcode"];
+  
+		  $strWhere = "";  
+  if($_SESSION["usertype"]=="Staff")
+   $strWhere="WHERE sr_manager=".$userId." or india_manager=".$userId." or team_member=".$userId;	
 
-		$qrySel = "SELECT t1.* FROM lead t1 ORDER BY t1.id desc";
+		$qrySel = "SELECT t1.* FROM lead t1 {$strWhere} ORDER BY t1.id desc";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
 			$arrLead[$rowData['id']] = $rowData;
 		}
+		
 		return $arrLead;	
 	}
 
@@ -142,12 +205,18 @@ class Lead_Class extends Database {
 		$dateReceived	 	= $commonUses->getDateFormat($_REQUEST["date_received"]);
 		$lastContactDate 	= $commonUses->getDateFormat($_REQUEST["last_contact_date"]);
 		$futureContactdate	= $commonUses->getDateFormat($_REQUEST["future_contact_date"]);
-		echo "<pre>";
-		print_r($_REQUEST);
-		$qryIns = "INSERT INTO lead(lead_type, lead_name, sales_person, street_adress, suburb, state, postcode, postal_address, main_contact_name, other_contact_name, phone_no, alternate_phone_no, fax, email, date_received, day_received, lead_industry, lead_status,lead_reason,lead_stage,lead_source,contact_method,last_contact_date,future_contact_date,note)
+		
+		
+		
+
+		
+		$qryIns = "INSERT INTO lead(lead_type, lead_name,sr_manager,india_manager,team_member, sales_person, street_adress, suburb, state, postcode, postal_address, main_contact_name, other_contact_name, phone_no, alternate_phone_no, fax, email, date_received, day_received, lead_industry, lead_status,lead_reason,lead_stage,lead_source,contact_method,last_contact_date,future_contact_date,note)
 					VALUES (
 					'" . $_REQUEST['lead_type'] . "', 
-					'" . $_REQUEST['lead_name'] . "', 
+					'" . $_REQUEST['lead_name'] . "',
+					'" . $_REQUEST['lstSrManager'] . "',
+					'" . $_REQUEST['lstSrIndiaManager'] . "',
+					'" . $_REQUEST['lstSrTeamMember'] . "',
 					'" . $_REQUEST['sales_person'] . "', 
 					'" . $_REQUEST['street_adress'] . "', 
 					'" . $_REQUEST['suburb'] . "', 
@@ -173,7 +242,7 @@ class Lead_Class extends Database {
 					'" . $_REQUEST['note'] . "'
 					)";
 		
-
+		
 		mysql_query($qryIns);
 	} 
 
@@ -196,10 +265,16 @@ class Lead_Class extends Database {
 		$dateReceived	 	= $commonUses->getDateFormat($_REQUEST["date_received"]);
 		$lastContactDate 	= $commonUses->getDateFormat($_REQUEST["last_contact_date"]);
 		$futureContactdate	= $commonUses->getDateFormat($_REQUEST["future_contact_date"]);
-
+		
+	
 		$qryUpd = "UPDATE lead
 				SET lead_type = '" . $_REQUEST['lead_type'] . "',
 				lead_name = '" . $_REQUEST['lead_name'] . "',
+				
+				sr_manager = '" . $_REQUEST['lstSrManager']  . "',
+				india_manager = '" . $_REQUEST['lstSrIndiaManager'] . "',
+				team_member = '" . $_REQUEST['lstSrTeamMember'] . "',
+				
 				sales_person = '" . $_REQUEST['sales_person'] . "',
 				street_adress = '" . $_REQUEST['street_adress'] . "',
 				suburb = '" . $_REQUEST['suburb'] . "',
@@ -224,7 +299,8 @@ class Lead_Class extends Database {
 				future_contact_date = '" . $futureContactdate . "',
 				note = '" . $_REQUEST['note'] . "'
 				WHERE id = '" . $_REQUEST['recid'] . "'";
-
+				
+			
 		mysql_query($qryUpd);
 		header("location:lead.php");
 	} 

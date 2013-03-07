@@ -20,7 +20,9 @@
 			<td class="hr">Type<font style="color:red;" size="2">*</font></td>
 			<td><select name="lead_type">
 					<option value="">Select Type</option><?php
-					foreach($objCallData->arrTypes AS $typeId => $typeDesc){
+					foreach($objCallData->arrTypes AS $typeId => $typeDesc)
+					{
+					
 						$selectStr = '';
 						if($typeId == $arrLeadData['lead_type']) $selectStr = 'selected';?>
 						<option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
@@ -36,6 +38,69 @@
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Lead.</span></a>
 			</td>
 		</tr>
+        
+        
+        <tr>
+			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
+			<td><select name="lstSrManager">
+					<?php
+					foreach($objCallData->arrSrManager AS $typeId => $typeDesc)
+					{
+					
+						$selectStr = '';
+						if($typeId == $arrLeadData['sr_manager']) $selectStr = 'selected';?>
+						<option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select senior manager for Practice.</span></a>
+			</td>
+		</tr>
+        
+        
+        <tr>
+			<td class="hr">India Manager<font style="color:red;" size="2">*</font></td>
+			<td>
+            
+            <select name="lstSrIndiaManager">
+					
+                    <?php
+					foreach($objCallData->arrIndiaManager AS $typeId => $typeDesc)
+					{
+					
+						$selectStr = '';
+						if($typeId == $arrLeadData['india_manager']) $selectStr = 'selected';?>
+						<option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
+					} 
+					?>
+                </select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select India Manager for Task.</span></a>
+			</td>
+		</tr>
+        
+        
+    
+    
+   <tr>
+			<td class="hr">Team Member<font style="color:red;" size="2">*</font></td>
+			<td>
+            
+            <select name="lstSrTeamMember" >
+          		<?php
+				
+					foreach($objCallData->arrEmployees AS $typeId => $typeDesc)
+					{
+					
+						$selectStr = '';
+						if($typeId == $arrLeadData['team_member']) $selectStr = 'selected';?>
+						<option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
+					} 
+					?>
+                     </select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Team Member for Task.</span></a>
+			</td>
+		</tr>
+    
+        
 		<tr>
 			<td class="hr">Street Address</td>
 			<td class="dr">

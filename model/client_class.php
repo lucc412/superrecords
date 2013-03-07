@@ -54,7 +54,7 @@ class Client {
 					" . $_REQUEST['lstType'] . ", 
 					'" . $_REQUEST['txtName'] . "', 
 					" . $_SESSION['PRACTICEID'] . ", 
-					385,
+					113,
 					NOW()
 					)";
 

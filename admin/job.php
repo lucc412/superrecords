@@ -117,45 +117,13 @@ if($_SESSION['validUser']) {
 					  window.opener.document.location= 'job.php?a=reports&jobId=<?php echo  $_REQUEST["jobId"];?>'; 
 					  self.close();
 					 </script><?
+
 					break;
 
 				case "insertQuery":
-
 					$objCallData->add_query();
-				
-					/* send mail function starts here */
-					$pageUrl = basename($_SERVER['REQUEST_URI']);
-		
-					// check if event is active or inactive [This will return TRUE or FALSE as per result]
-					$flagSet = getEventStatus($pageUrl);
-					// if event is active it go for mail function
-					if($flagSet) {
-						//It will Get All Details in array format for Send Email	
-						$arrEmailInfo = get_email_info($pageUrl);
-
-						//It will Get Email Id from Which Email Id the Email will Send.
-						$practiceId = $objCallData->fetchPracticeId($_REQUEST["jobId"]);
-						$toEmail = get_email_id($practiceId);
-						$from = $arrEmailInfo['event_from'];
-						$to = $toEmail;
-						$cc = $arrEmailInfo['event_cc'];
-						$subject = $arrEmailInfo['event_subject'];
-						$content = $arrEmailInfo['event_content'];
-
-						// replace variable @fromName with name of administrator
-						$fromName = $objCallData->fetchFromName($from);
-						$content = str_replace('@fromName', $fromName, $content);
-
-						// replace variable @toName with name of practice
-						$toName = $objCallData->arrPracticeName[$practiceId];
-						$content = str_replace('@toName', $toName, $content);
-
-						include_once(MAIL);
-						send_mail($from, $to, $cc, $subject, $content);
-					}
-					/* send mail function ends here */
-
 					header('Location: job.php?a=queries&jobId='.$_REQUEST["jobId"]);
+
 					break;
 
 				case "updateQuery":

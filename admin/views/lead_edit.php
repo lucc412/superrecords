@@ -41,8 +41,11 @@
         
         
         <tr>
-			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
-			<td><select name="lstSrManager">
+			<td class="hr">SR Manager</font></td>
+			<td>
+            <?php //print $arrLeadData['sr_manager'];?>
+            <select name="lstSrManager">
+                <option value="0">Select SR Manager</option>
 					<?php
 					foreach($objCallData->arrSrManager AS $typeId => $typeDesc)
 					{
@@ -51,18 +54,20 @@
 						if($typeId == $arrLeadData['sr_manager']) $selectStr = 'selected';?>
 						<option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
 					} 
-				?></select>
+					
+				?>
+                </select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select senior manager for Practice.</span></a>
 			</td>
 		</tr>
         
         
         <tr>
-			<td class="hr">India Manager<font style="color:red;" size="2">*</font></td>
+			<td class="hr">India Manager</font></td>
 			<td>
             
             <select name="lstSrIndiaManager">
-					
+					<option value="0">Select India Manager</option>
                     <?php
 					foreach($objCallData->arrIndiaManager AS $typeId => $typeDesc)
 					{
@@ -72,6 +77,7 @@
 						<option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
 					} 
 					?>
+                    
                 </select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select India Manager for Task.</span></a>
 			</td>
@@ -81,10 +87,11 @@
     
     
    <tr>
-			<td class="hr">Team Member<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Team Member</font></td>
 			<td>
             
             <select name="lstSrTeamMember" >
+	            <option value="0">Select Team Member</option>
           		<?php
 				
 					foreach($objCallData->arrEmployees AS $typeId => $typeDesc)
@@ -95,6 +102,7 @@
 						<option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
 					} 
 					?>
+                    
                      </select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Team Member for Task.</span></a>
 			</td>

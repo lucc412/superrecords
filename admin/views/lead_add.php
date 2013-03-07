@@ -33,9 +33,9 @@
 		</tr>
         
       <tr>
-			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
+			<td class="hr">SR Manager</font></td>
 			<td><select name="lstSrManager">
-					<option value="">Select SR Manager</option><?php
+					<option value="0">Select SR Manager</option><?php
 					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
@@ -49,9 +49,9 @@
         
         
         <tr>
-			<td class="hr">India Manager<font style="color:red;" size="2">*</font></td>
+			<td class="hr">India Manager</font></td>
 			<td><select name="lstSrIndiaManager">
-					<option value="0">--- Select India Manager ---</option><?php
+					<option value="0">Select India Manager</option><?php
 					foreach($objCallData->arrIndiaManager AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
@@ -61,9 +61,9 @@
 		</tr>
 
 		<tr>
-			<td class="hr">Team Member<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Team Member</font></td>
 			<td><select name="lstSrTeamMember">
-            <option value="">---Select Team Member---</option>
+            <option value="0">Select Team Member</option>
 					<?php
 					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 

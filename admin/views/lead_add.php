@@ -31,6 +31,50 @@
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Lead.</span></a>
 			</td>
 		</tr>
+        
+      <tr>
+			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
+			<td><select name="lstSrManager">
+					<option value="">Select SR Manager</option><?php
+					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
+						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select senior manager for Practice.</span></a>
+			</td>
+		</tr>
+        
+        
+        
+        
+        
+        <tr>
+			<td class="hr">India Manager<font style="color:red;" size="2">*</font></td>
+			<td><select name="lstSrIndiaManager">
+					<option value="0">--- Select India Manager ---</option><?php
+					foreach($objCallData->arrIndiaManager AS $typeId => $typeDesc){
+						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select India Manager for Task.</span></a>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="hr">Team Member<font style="color:red;" size="2">*</font></td>
+			<td><select name="lstSrTeamMember">
+            <option value="">---Select Team Member---</option>
+					<?php
+					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
+						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Team Member for Task.</span></a>
+			</td>
+		</tr>
+        
+        
+        
 		<tr>
 			<td class="hr">Street Address</td>
 			<td class="dr">

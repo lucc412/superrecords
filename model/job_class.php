@@ -45,19 +45,6 @@ class Job {
 		return $arrClients;	
 	}
 
-/*	public function fetch_documents($jobId) {		
-
-		$qrySel = "SELECT t1.document_id, t1.document_title, t1.file_path
-					FROM documents t1
-					WHERE t1.job_id = '{$jobId}'";
-
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrDocs[$rowData['document_id']] = $rowData;
-		}
-		return $arrDocs;	
-	}*/
-
 
 	public function fetch_documents($jobId)
 	{

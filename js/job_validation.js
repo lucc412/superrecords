@@ -6,7 +6,6 @@ function checkValidation() {
 	var clientType = document.getElementById('lstCliType');
 	var lstJobType = document.getElementById('lstJobType');
 	var txtPeriod = document.getElementById('txtPeriod');
-	var fileChecklist = document.getElementById('fileChecklist');
 
 	if(lstClientType.value == 0) {
 		lstClientType.className = "errclass";
@@ -38,15 +37,6 @@ function checkValidation() {
 	}
 	else {
 		txtPeriod.className = "";
-	}
-
-	// validation for checklist upload
-	if(flagReturn && fileChecklist.value == "") {
-		flagReturn = confirm('You have not uploaded any Checklist. Are you sure you want to continue?');
-
-		if(!flagReturn) {
-			fileChecklist.focus();
-		}
 	}
 
 	// validation for source doc upload

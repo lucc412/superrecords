@@ -103,9 +103,6 @@ if($_SESSION['validUser']) {
 						if($_REQUEST['flagType'] == 'S') { 
 							$objCallData->update_document($_REQUEST["docId"]);
 						}
-						else if($_REQUEST['flagType'] == 'C') { 
-							$objCallData->update_checklist_status($_REQUEST["jobId"]);
-						}
 						$objCallData->doc_download($_REQUEST["filePath"]);
 						header('Location: job.php?a=documents&jobId='.$_REQUEST["jobId"]);
 					}

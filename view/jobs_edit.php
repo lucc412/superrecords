@@ -75,24 +75,6 @@ include(TOPBAR);
 		<tr><td>&nbsp;</td></tr>
 
 		<tr>
-			<td><strong>Checklist</strong></td>
-			<td><?
-				$folderPath = "../uploads/checklists/".$arrJobsData['checklist'];
-				if(empty($arrJobsData['checklist']) || !file_exists($folderPath)) {
-					?><input type="file" name="fileChecklist" id="fileChecklist"><?
-				}
-				else {
-					$filePath = $arrJobsData['checklist'];
-
-					?><p><a href="jobs.php?a=download&filePath=<?=$arrJobsData['checklist']?>&flagChecklist=C" title="Click to view this checklist">Checklist</a></p>
-					<!--<span style="margin-left:20px;"><a title="Click to delete this document" href="jobs.php?filePath=<?=$filePath?>&recid=<?=$jobId?>&a=deleteDoc&flagChecklist=C" onclick="javascript:return unlinkFile();">X</a></span>--><?
-				}
-			?></td>
-		</tr>
-
-		<tr><td>&nbsp;</td></tr>
-
-		<tr>
 			<td><strong>Source Documents</strong></td>
 			<td><?
 				$arrSourceDocs = $objScr->fetch_documents($jobId);

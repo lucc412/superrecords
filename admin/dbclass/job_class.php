@@ -198,7 +198,7 @@ class Job_Class extends Database
 	// Function to fetch all Job status
 	public function fetchJobStatus()
 	{
-		$qrySel = "SELECT * FROM job_status";
+		$qrySel = "SELECT * FROM job_status js ORDER BY js.order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

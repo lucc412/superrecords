@@ -649,7 +649,7 @@ if($_SESSION['validUser']) {
 					}
 
 					// Job Menu (check access by passing $_SESSION of staff code and form code)
-					$formcode_sys="95,96,97,7,8,11,12";
+					$formcode_sys="95,96,97,7,8,11,12,100";
 					$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);
 
 					if($access_menu_level=="true") {
@@ -709,6 +709,14 @@ if($_SESSION['validUser']) {
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
 										?><li><a href="sub_subactivity.php?a=reset">Sub Activity</a></li><?
+									}
+								} 
+
+								// Job Status Submenu (Check access by passing $_SESSION of staff code and form code)
+								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],100,1);
+								if(is_array($access_submenu_level)==1) {
+									if(in_array("Y",$access_submenu_level)) {   
+										?><li><a href="job_status.php?a=reset">Job Status</a></li><?
 									}
 								} 
 						

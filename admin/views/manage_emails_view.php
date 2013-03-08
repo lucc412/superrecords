@@ -1,7 +1,7 @@
 <?
 /*	
-	Created Date: 01-Mar-13										
-	Created By: Disha Goyal										
+	Created By -> 01-Mar-13 [Disha Goyal]
+	Last Modified By -> 07-Mar-13 [Disha Goyal]									
 	Description: This is view file for page 'Manage Emails' to show all events in editable form
 */
 
@@ -21,10 +21,10 @@
 
 			/* Headers of page */
 			?><tr class="fieldheader">
-				<th align="left" width="45%" class="fieldheader">Name of Event</th>
-				<th class="fieldheader">From</th>
-				<th class="fieldheader">To</th>
-				<th class="fieldheader">CC</th><?
+				<th align="left" width="25%" class="fieldheader">Name of Event</th>
+				<th class="fieldheader" width="18%">From</th>
+				<th class="fieldheader" width="20%">To</th>
+				<th class="fieldheader" width="15%">CC</th><?
 				if($access_file_level['stf_Delete'] == "Y") {
 					?><th width="10%" class="fieldheader">Status</th><?
 				}
@@ -47,27 +47,27 @@
 					?><td><?=htmlspecialchars($arrInfo["event_name"])?></td><?
 
 					/* From Email Address */
-					?><td align="center"><?
-						if($eventId == '1' || $eventId == '2' || $eventId == '3') {
-							echo 'Email Address of Practice';
-						}
-						else {
-							?><input size="90" type="text" name="txtFrm~<?=$eventId?>" value="<?=htmlspecialchars($arrInfo["event_from"])?>" /><?
-						}
-					?></td><?
+					?><td align="center">noreply@superrecords.com.au</td><?
 
 					/* To Email Address */
-					?><td align="center"><?
-						if($eventId == '4' || $eventId == '5' || $eventId == '6') {
-							echo 'Email Address of Practice';
+					?><td style="padding:5px 10px;"><?
+
+						if($eventId == '1' || $eventId == '3') {
+							echo 'SR Manager';
 						}
-						else {
-							?><textarea cols="10" rows="20" name="txtTo~<?=$eventId?>" ><?=htmlspecialchars($arrInfo["event_to"])?></textarea><?
+						else if($eventId == '2') {
+							echo 'SR Manager, Salesperson';
+						}
+						else if($eventId == '4' || $eventId == '5') {
+							echo 'SR Manager, India Manager';
+						}
+						else if($eventId == '6' || $eventId == '7') {
+							echo 'Practice';
 						}
 					?></td><?
 
 					/* CC Email Address */
-					?><td><textarea cols="10" rows="20" name="txtCc~<?=$eventId?>"><?=htmlspecialchars($arrInfo["event_cc"])?></textarea></td><?
+					?><td align="center"><textarea cols="10" rows="20" name="txtCc~<?=$eventId?>" ><?=htmlspecialchars($arrInfo["event_cc"])?></textarea></td><?
 
 					/* Status of event */
 					if($access_file_level['stf_Delete'] == "Y") {

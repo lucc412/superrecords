@@ -12,42 +12,36 @@ switch ($sql) {
 	case "insert":
 	
 		$_SESSION['CLIENTNAME'] = $objScr->fetch_client_name();
-		if(!in_array($_REQUEST['txtName'], $_SESSION['CLIENTNAME'])) 
-		{
+		if(!in_array($_REQUEST['txtName'], $_SESSION['CLIENTNAME'])) {
 			
 			//Insert New Client By Practice Login into Database
-			$objScr->sql_insert();
-			$pageUrl = basename($_SERVER['PHP_SELF']); 
-			//Get Event Status according Page Url 
-			$flagSet = getEventStatus($pageUrl);
+			$clientId = $objScr->sql_insert();
+
+			/* send mail function starts here */
+			$pageUrl = basename($_SERVER['REQUEST_URI']);	
 			
-			if($flagSet) //If Flag or Event Active it will Execute
-			{
-				
-				//It will Get Email Id from Which Email Id the Email will Send.
-				$fromEmail = get_email_id($_SESSION['PRACTICEID']);
+			// check if event is active or inactive [This will return TRUE or FALSE as per result]
+			$flagSet = getEventStatus($pageUrl);
+
+			// if event is active it go for mail function
+			if($flagSet) {
 
 				//It will Get All Details in array format for Send Email	
 				$arrEmailInfo = get_email_info($pageUrl);
+				
+				// TO mail parameter
+				$srManagerEmail = fetchStaffInfo('113', 'email');
+				$to = $srManagerEmail;
 
-				$from = $fromEmail;
-				$to = $arrEmailInfo['event_to'];
 				$cc = $arrEmailInfo['event_cc'];
 				$subject = $arrEmailInfo['event_subject'];
 				$content = $arrEmailInfo['event_content'];
+				$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], $clientId);
 				
-				//It will fetch Registered User Name according their Email id Set in to Event Manager.
-				$toName = to_name($to);
-				$fromName = $_SESSION['PRACTICE'];
-				//it will replace @toName , @fromName to Appropriate Registered User Name
-				$content = replace_to($content,$toName,$fromName);
-				
-				//Include Send Mail File For To Generate Email
 				include_once(MAIL);
-				
-				//It will Get all Necessary Information and Send Email to Admin Person
-				send_mail($from, $to, $cc, $subject, $content);
+				send_mail($to, $cc, $subject, $content);
 			}
+			/* send mail function ends here */
 		}
 		else 
 		{

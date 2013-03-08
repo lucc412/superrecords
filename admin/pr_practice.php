@@ -1,6 +1,7 @@
 <?php 
 ob_start();
 include 'common/varDeclare.php';
+include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/pr_practice_class.php';
 
@@ -26,7 +27,36 @@ if($_SESSION['validUser']) {
 
 			switch ($sql) {
 				case "insert":
-					$objCallData->sql_insert();
+					$practiceId = $objCallData->sql_insert();
+
+					/* send mail function starts here */
+					$pageUrl = basename($_SERVER['REQUEST_URI']);	
+					
+					// check if event is active or inactive [This will return TRUE or FALSE as per result]
+					$flagSet = getEventStatus($pageUrl);
+
+					// if event is active it go for mail function
+					if($flagSet) {
+
+						//It will Get All Details in array format for Send Email	
+						$arrEmailInfo = get_email_info($pageUrl);
+						
+						// TO mail parameter
+						if(!empty($_REQUEST['lstSrManager'])) {
+							$srManagerEmail = fetchStaffInfo($_REQUEST["lstSrManager"], 'email');
+						}
+						$to = $srManagerEmail;
+
+						$cc = $arrEmailInfo['event_cc'];
+						$subject = $arrEmailInfo['event_subject'];
+						$content = $arrEmailInfo['event_content'];
+						$content = replaceContent($content, $_REQUEST["lstSalesPerson"], $practiceId);
+						
+						include_once(MAIL);
+						send_mail($to, $cc, $subject, $content);
+					}
+					/* send mail function ends here */
+
 					header('location: pr_practice.php');
 					break;
 

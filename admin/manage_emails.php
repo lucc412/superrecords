@@ -1,7 +1,7 @@
 <?
 /*	
-	Created Date: 01-Mar-13										
-	Created By: Disha Goyal										
+	Created By -> 01-Mar-13 [Disha Goyal]
+	Last Modified By -> 07-Mar-13 [Disha Goyal]									
 	Description: This is controller file for page 'Manage Emails'	
 */
 
@@ -45,7 +45,6 @@ if($_SESSION['validUser']) {
 					// set to, cc, from email variables to update in database 
 					$eventId = $_REQUEST["eventId"];
 					$frmEmail = $_REQUEST["txtFrm~".$eventId];
-					$toEmail = $_REQUEST["txtTo~".$eventId];
 					$ccEmail = $_REQUEST["txtCc~".$eventId];
 					
 					$arrFrmEmail = explode(',', $frmEmail);

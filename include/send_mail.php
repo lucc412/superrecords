@@ -1,16 +1,26 @@
 <?php
-//It will Send Email according Information given to Function.
-function send_mail($from, $to, $cc=NULL, $subject, $content)
+
+// send mail function
+function send_mail($to, $cc=NULL, $subject, $content)
 {	
+	$from = "noreply@superrecords.com.au";
+
 	//It will set the Header From Which Email Id main will send also it will Set CC
-	
 	$headers = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset: utf8\r\n";
 	$headers .= "From: ".$from . "\r\n" ."CC:".$cc."";
-	//mail function will Send Email as Information given to Mail Function.
-//	$content = htmlentities($content, ENT_QUOTES);
-	
-	
+
+	print('<pre>');
+	print_r('to:: '.$to);
+	print('<pre>');
+	print_r('subject:: '.$subject);
+	print('<pre>');
+	print_r('content:: '.$content);
+	print('<pre>');
+	print_r('headers:: '.$headers);
+	print('</pre>');exit;
+
+	// this will send e-mail as per parameters passed to mail function.
 	mail($to,$subject,$content,$headers);
 }
 

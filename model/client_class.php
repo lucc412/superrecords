@@ -59,6 +59,9 @@ class Client {
 					)";
 
 		mysql_query($qryIns);
+		$clientId = mysql_insert_id();
+
+		return $clientId;
 	} 
 
 	public function sql_update() {	

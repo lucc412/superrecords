@@ -498,7 +498,7 @@ class staffContentList extends Database
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Client</div></i></b></td></tr>";
 								if($i==19)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
-								if($i==26)
+								if($i==27)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
 								if($i==40)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
@@ -560,7 +560,7 @@ class staffContentList extends Database
 						</tr>
 						<?php
 						 //show permission settings
-						 $permquery="SELECT a. *,b.* 
+						 $permquery="SELECT a.*,b.* 
 									FROM stf_staffforms a,frm_forms b 
 									WHERE a.stf_SCode =".$row['stf_Code']. " 
 									AND b.frm_Code = a.stf_FormCode 
@@ -589,7 +589,7 @@ class staffContentList extends Database
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Client</div></i></b></td></tr>";
 							if($i==19)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
-							if($i==26)
+							if($i==27)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
 							if($i==40)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";

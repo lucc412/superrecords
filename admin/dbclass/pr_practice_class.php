@@ -166,9 +166,11 @@ class Practice_Class extends Database {
 					'" . $strItems . "', 
 					'" . $_REQUEST['lstSalesPerson'] . "'
 					)";
-		
 
 		mysql_query($qryIns);
+		$practiceId = mysql_insert_id();
+
+		return $practiceId;
 	} 
 
 	public function sql_update() {	

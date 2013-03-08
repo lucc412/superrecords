@@ -1,7 +1,7 @@
 <?
 /*	
-	Created Date: 01-Mar-13										
-	Created By: Disha Goyal										
+	Created By -> 01-Mar-13 [Disha Goyal]
+	Last Modified By -> 07-Mar-13 [Disha Goyal]									
 	Description: This is view file for page 'Manage Emails' to edit subject, content of events
 */
 
@@ -34,17 +34,26 @@
 			/* Event content */
 			?><tr>
 				<td>Content</td>
-				<td>
-					<textarea cols="80" id="txtContent" name="txtContent" rows="10"><?=$arrEventInfo["event_content"]?></textarea><br/>
+				<td><?
+					$eventId = $arrEventInfo["event_id"];
+					?><textarea cols="80" id="txtContent" name="txtContent" rows="10"><?=$arrEventInfo["event_content"]?></textarea><br/>
 
-					<span style="color:orange"><u>Below are the pre-defined constants that can be used in the content:</u></span>
+					<span style="color:orange"><u>Below are the dynamic fields for this content:</u></span><?
 
-					<div style="padding-top:10px;padding-bottom:5px;"><b style="color:red">@fromName</b> - Sets name of FROM email address</div>
+					if($eventId != '6' && $eventId != '7') {
+						?><div style="padding-bottom:5px;color:red;font-weight:bold">PRACTICENAME</div><?
+					}
 
-					<div style="padding-bottom:5px;"><b style="color:red">@toName</b> - Sets name of TO email address</div><?
-
-					if($_REQUEST['eventId'] == '4') {
-						?><div style="padding-bottom:5px;"><b style="color:red">@jobStatus</b> - Sets STATUS of job</div><?
+					if($eventId == '1') {
+						?><div style="padding-bottom:5px;color:red;font-weight:bold">SALESPERSONNAME</div><?
+					}
+					
+					if($eventId == '2') {
+						?><div style="padding-bottom:5px;color:red;font-weight:bold">CLIENTNAME</div><?
+					}
+					
+					if($eventId != '1' && $eventId != '2') {
+						?><div style="padding-bottom:5px;color:red;font-weight:bold">JOBNAME</div><?
 					}
 
 					?><script type="text/javascript">

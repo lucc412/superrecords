@@ -9,7 +9,6 @@ class Practice_Class extends Database
 		$this->arrIndiaManager = $this->fetchEmployees('indiamanager');
 		$this->arrEmployees = $this->fetchEmployees('teammember');
 		$this->arrSalesPerson = $this->fetchEmployees('salesperson');
-		
 		$this->arrStepsList = $this->fetchStepsList();
 		$this->arrPractice = $this->fetchPractice();
   	}	
@@ -41,25 +40,25 @@ class Practice_Class extends Database
 	
 	public function fetchEmployees($flagManager)
 	{	
-		$appendStr = "";
 		
         // if employees are fetched that are SR Manager
         if($flagManager == 'srmanager') { 
-                        $appendStr = 'AND c1.con_Designation = 24';
+			$appendStr = 'AND c1.con_Designation = 24';
         }
-        // if employees are fetched that are Sales Manager
+        // if employees are fetched that are India Manager
         else if($flagManager == 'indiamanager') { 
-                        $appendStr = 'AND c1.con_Designation = 27';
+			$appendStr = 'AND c1.con_Designation = 27';
         }
-        // if employees are fetched that are Sales Manager
+        // if employees are fetched that are Team Member
         else if($flagManager == 'teammember') { 
-                        $appendStr = 'AND c1.con_Designation = 29';
+			$appendStr = 'AND c1.con_Designation = 29';
         }
 		// if employees are fetched that are Sales Manager
         else if($flagManager == 'salesperson') { 
-                        $appendStr = 'AND c1.con_Designation = 14';
+			$appendStr = 'AND c1.con_Designation = 14';
         }
-		 $qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
+
+		$qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
 			         FROM stf_staff t1, aty_accesstype t2, con_contact c1
 			         WHERE t1.stf_AccessType = t2.aty_Code 
 			         AND t1.stf_CCode = c1.con_Code 
@@ -93,10 +92,10 @@ class Practice_Class extends Database
 		
 		$strWhere = "";		
 		if($_SESSION["usertype"]=="Staff")
-			$strWhere="WHERE sr_manager=".$userId." or india_manager=".$userId." or team_member=".$userId;
+			$strWhere="WHERE sr_manager=".$userId." or india_manager=".$userId." or team_member=".$userId ." or sales_person=".$userId;
 
 		$qrySel = "SELECT t1.* 
-				FROM client t1 {$strWhere}";
+					FROM client t1 {$strWhere}";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

@@ -71,14 +71,14 @@ include(TOPBAR);
 
 		<tr>
 			<td>&nbsp;</td>
-			<td><input type="text" name="textSource_50" title="Specify name of source document"></td>
+			<td width="274px"><input type="text" name="textSource_50" title="Specify name of source document"></td>
 			<td><input type="file" name="sourceDoc_50" id="sourceDoc_50" title="Upload source document"></td>
-			<td><button type="button" title="Click here to upload new source document" onclick="javascript:addElement();" value="Add">Upload New +</button></td>
+			<td><button type="button" style="margin-top:-6px;" title="Click here to upload new source document" onclick="javascript:addElement();" value="Add">Upload New +</button></td>
 		</tr>
 
 		<tr>
 			<td>&nbsp;</td>
-			<td colspan="3"><div id="parentDiv">&nbsp;</div></td>
+			<td colspan="3"><div id="parentDiv" style="margin-top:-17px;">&nbsp;</div></td>
 		</tr>
 
 		<tr>

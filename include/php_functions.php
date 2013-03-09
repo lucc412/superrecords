@@ -40,7 +40,7 @@ function get_email_info($pageUrl)
 	//It will Generate Query and will get Require Details From Database
 	$myQuery = "SELECT event_name,event_subject,event_content, event_cc
 				FROM email_events 
-				WHERE event_url = '$pageUrl'";
+				WHERE event_url LIKE '%{$pageUrl}%'";
 	
 	$runQuery = mysql_query($myQuery);
 	$arrEmailInfo = mysql_fetch_assoc($runQuery);

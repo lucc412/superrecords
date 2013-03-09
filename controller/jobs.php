@@ -1,50 +1,44 @@
 <?php
 include("../include/common.php");
 include(MODEL."job_class.php");
+
 $objScr = new Job();
 
 $a = $_REQUEST["a"];
 $recid = $_REQUEST["recid"];
 $sql = $_REQUEST["sql"]?$_REQUEST["sql"]:'';
 
-switch ($sql) {
+switch ($sql)
+{
 	case "insert":
-		$objScr->sql_insert();
-			$pageUrl = basename($_SERVER['PHP_SELF']); 
-			//Get Event Status according Page Url 
-			$flagSet = getEventStatus($pageUrl);
-
+		$jobId = $objScr->sql_insert();
 			
-			if($flagSet) //If Flag or Event Active it will Execute
-			{
-				//It will Get Email Id from Which Email Id the Email will Send.
-				$fromEmail = get_email_id($_SESSION['PRACTICEID']);
-
-				//It will Get All Details in array format for Send Email	
-				$arrEmailInfo = get_email_info($pageUrl);
-				
-				$from = $fromEmail;
-				$to = $arrEmailInfo['event_to'];
-				$cc = $arrEmailInfo['event_cc'];
-				$subject = $arrEmailInfo['event_subject'];
-				$content = $arrEmailInfo['event_content'];
-				
-				
-				//It will fetch Registered User Name according their Email id Set in to Event Manager.
-				$toName = to_name($to);
-				$fromName = $_SESSION['PRACTICE'];
+		/* send mail function starts here */
+		$pageUrl = basename($_SERVER['REQUEST_URI']);	
 		
-				//it will replace @toName , @fromName to Appropriate Registered User Name
-				$content = replace_to($content,$toName,$fromName);
+		// check if event is active or inactive [This will return TRUE or FALSE as per result]
+		$flagSet = getEventStatus($pageUrl);
+		
+		// if event is active it go for mail function
+		if($flagSet)
+		{
+			//It will Get All Details in array format for Send Email	
+			$arrEmailInfo = get_email_info($pageUrl);
+			
+			// TO mail parameter
+			$srManagerEmail = fetchStaffInfo('113', 'email');
+			
+			$to = $srManagerEmail;
 
-				//Include Send Mail File For To Generate Email
-				include_once(MAIL);
-				
-				//It will Get all Necessary Information and Send Email to Admin Person
-				send_mail($from, $to, $cc, $subject, $content);
-			}
-			
-			
+			$cc = $arrEmailInfo['event_cc'];
+			$subject = $arrEmailInfo['event_subject'];
+			$content = $arrEmailInfo['event_content'];
+			$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $jobId);
+
+			include_once(MAIL);
+			send_mail($to, $cc, $subject, $content);
+		}
+		/* send mail function ends here */		
 			
 		header('location: jobs.php');
 		break;
@@ -60,7 +54,39 @@ switch ($sql) {
 		break;
 	
 	case "insertDoc":
+	
 		$objScr->upload_document();
+		
+		/* send mail function starts here */
+		$pageUrl = basename($_SERVER['REQUEST_URI']);	
+		
+		// check if event is active or inactive [This will return TRUE or FALSE as per result]
+		$flagSet = getEventStatus($pageUrl);
+		
+		// if event is active it go for mail function
+		if($flagSet)
+		{
+			//It will Get All Details in array format for Send Email	
+			$arrEmailInfo = get_email_info($pageUrl);
+			
+			$arrIds = $objScr->fetch_manager_ids($_REQUEST['lstJob']);
+			
+			// TO mail parameter
+			$srManagerEmail = fetchStaffInfo($arrIds[0]['sr_manager'], 'email');
+			$IndiaManagerEmail = fetchStaffInfo($arrIds[0]['india_manager'], 'email');
+			
+			$to = $srManagerEmail.",".$IndiaManagerEmail;
+
+			$cc = $arrEmailInfo['event_cc'];
+			$subject = $arrEmailInfo['event_subject'];
+			$content = $arrEmailInfo['event_content'];
+			$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_REQUEST['lstJob']);
+
+			include_once(MAIL);
+			send_mail($to, $cc, $subject, $content);
+		}
+		/* send mail function ends here */		
+
 		header('location: jobs.php?a=document');
 		break;
 }

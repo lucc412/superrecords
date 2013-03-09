@@ -91,8 +91,8 @@ switch($_REQUEST['a'])
 			<span>
 		</div>
 		
-		<form name="objForm" method="post" action="jobs.php" enctype="multipart/form-data" onSubmit="javascript:return checkDocValidation();">
-			<input type="hidden" name="sql" value="insertDoc">
+		<form name="objForm" method="post" action="jobs.php?sql=insertDoc" enctype="multipart/form-data" onSubmit="javascript:return checkDocValidation();">
+			<!--<input type="hidden" name="sql" value="insertDoc">-->
 
 			<table align="center" width="70%" class="fieldtable" cellpadding="10px;">
 				<tr>

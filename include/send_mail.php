@@ -10,16 +10,6 @@ function send_mail($to, $cc=NULL, $subject, $content)
 	$headers .= "Content-type: text/html; charset: utf8\r\n";
 	$headers .= "From: ".$from . "\r\n" ."CC:".$cc."";
 
-	/*print('<pre>');
-	print_r('to:: '.$to);
-	print('<pre>');
-	print_r('subject:: '.$subject);
-	print('<pre>');
-	print_r('content:: '.$content);
-	print('<pre>');
-	print_r('headers:: '.$headers);
-	print('</pre>');exit;*/
-
 	// this will send e-mail as per parameters passed to mail function.
 	mail($to,$subject,$content,$headers);
 }

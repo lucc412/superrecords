@@ -63,6 +63,32 @@ class Query {
 		return $arrJobs;
 	}
 
+	public function fetch_manager_ids($practiceId) {
+		$qrySel = "SELECT pr.sr_manager, pr.india_manager
+					FROM pr_practice pr
+					WHERE pr.id = {$practiceId}";
+
+		$fetchResult = mysql_query($qrySel);  
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrManagerIds = $rowData;
+		}
+
+		return $arrManagerIds; 
+	}
+
+	public function fetchJobId($queryId) {		
+ 		$qrySel = "SELECT j.job_id jobId
+					FROM job j, queries q
+					WHERE j.job_id = q.job_id
+					AND q.query_id = {$queryId}";
+
+		$fetchResult = mysql_query($qrySel);		
+		$rowData = mysql_fetch_assoc($fetchResult);
+		$jobId = $rowData['jobId'];
+		
+		return $jobId;
+	}
+
 	public function fetchType() {		
  		$qrySel = "SELECT sa.sub_Code, sa.sub_Description
 					FROM mas_masteractivity ma, sub_subactivity sa

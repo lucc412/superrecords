@@ -7,42 +7,40 @@ $objScr = new Query();
 if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 	if(!empty($_REQUEST["queryId"])) {
 		$objScr->sql_update($_REQUEST["queryId"]);
+	
+		/* send mail function starts here */
+		$pageUrl = basename($_SERVER['REQUEST_URI']);
 		
-		$pageUrl = basename($_SERVER['PHP_SELF']); 
-			//Get Event Status according Page Url 
+		// check if event is active or inactive [This will return TRUE or FALSE as per result]
 		$flagSet = getEventStatus($pageUrl);
 
-			if($flagSet) //If Flag or Event Active it will Execute
-			{
-				//It will Get Email Id from Which Email Id the Email will Send.
-				$fromEmail = get_email_id($_SESSION['PRACTICEID']);
+		// if event is active it go for mail function
+		if($flagSet) {
+
+			//It will Get All Details in array format for Send Email	
+			$arrEmailInfo = get_email_info($pageUrl);
 			
-				//It will Get All Details in array format for Send Email	
-				$arrEmailInfo = get_email_info($pageUrl);
-				
-				$from = $fromEmail;
-				$to = $arrEmailInfo['event_to'];
-				$cc = $arrEmailInfo['event_cc'];
-				$subject = $arrEmailInfo['event_subject'];
-				$content = $arrEmailInfo['event_content'];
-				
-				//It will fetch Registered User Name according their Email id Set in to Event Manager.
-				$toName = to_name($to);
-				$fromName = $_SESSION['PRACTICE'];
-				
-				//it will replace @toName , @fromName to Appropriate Registered User Name
-				$content = replace_to($content,$toName,$fromName);
-				
-				
-				
-				//Include Send Mail File For To Generate Email
-				include_once(MAIL);
-				
-				//It will Get all Necessary Information and Send Email to Admin Person
-				send_mail($from, $to, $cc, $subject, $content);
+			// TO mail parameter
+			$arrManagerIds = $objScr->fetch_manager_ids($_SESSION["PRACTICEID"]);
+			foreach($arrManagerIds AS $managerId) {
+				$srManagerEmail = fetchStaffInfo($managerId, 'email');
+				$to .= $srManagerEmail . ',';
 			}
-			header("Location: queries.php?flagUpdate=Y");
+			$to = rtrim($to, ',');
+			
+			$cc = $arrEmailInfo['event_cc'];
+			$subject = $arrEmailInfo['event_subject'];
+			$content = $arrEmailInfo['event_content'];
+			$jobId = $objScr->fetchJobId($_REQUEST["queryId"]);
+			$content = replaceContent($content, NULL, $_SESSION["PRACTICEID"], NULL, $jobId);
+			
+			include_once(MAIL);
+			send_mail($to, $cc, $subject, $content);
 		}
+		/* send mail function ends here */
+
+		header("Location: queries.php?flagUpdate=Y");
+	}
 	else {
 		foreach($_REQUEST AS $varName => $varValue) {
 			if(strstr($varName, 'txtResponse')) {
@@ -50,38 +48,40 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 				$arrResponse[$queryId] = $varValue;
 			}
 		}
-		$objScr->sql_update_all($arrResponse);
-		$pageUrl = basename($_SERVER['PHP_SELF']); 
-		$flagSet = getEventStatus($pageUrl);
-			
-			if($flagSet) //If Flag or Event Active it will Execute
-			{
-				//It will Get Email Id from Which Email Id the Email will Send.
-				$fromEmail = get_email_id($_SESSION['PRACTICEID']);
-			
-				//It will Get All Details in array format for Send Email	
-				$arrEmailInfo = get_email_info($pageUrl);
-				
-				$from = $fromEmail;
-				$to = $arrEmailInfo['event_to'];
-				$cc = $arrEmailInfo['event_cc'];
-				$subject = $arrEmailInfo['event_subject'];
-				$content = $arrEmailInfo['event_content'];
-				
-				//It will fetch Registered User Name according their Email id Set in to Event Manager.
-				$toName = to_name($to);
-				$fromName = $_SESSION['PRACTICE'];
-		
-				//it will replace @toName , @fromName to Appropriate Registered User Name
-				$content = replace_to($content,$toName,$fromName);
 
-				
-				//Include Send Mail File For To Generate Email
-				include_once(MAIL);
-				
-				//It will Get all Necessary Information and Send Email to Admin Person
-				send_mail($from, $to, $cc, $subject, $content);
+		$objScr->sql_update_all($arrResponse);
+
+		/* send mail function starts here */
+		$pageUrl = basename($_SERVER['REQUEST_URI']);
+		
+		// check if event is active or inactive [This will return TRUE or FALSE as per result]
+		$flagSet = getEventStatus($pageUrl);
+
+		// if event is active it go for mail function
+		if($flagSet) {
+
+			//It will Get All Details in array format for Send Email	
+			$arrEmailInfo = get_email_info($pageUrl);
+			
+			// TO mail parameter
+			$arrManagerIds = $objScr->fetch_manager_ids($_SESSION["PRACTICEID"]);
+			foreach($arrManagerIds AS $managerId) {
+				$srManagerEmail = fetchStaffInfo($managerId, 'email');
+				$to .= $srManagerEmail . ',';
 			}
+			$to = rtrim($to, ',');
+			
+			$cc = $arrEmailInfo['event_cc'];
+			$subject = $arrEmailInfo['event_subject'];
+			$content = $arrEmailInfo['event_content'];
+			$content = str_replace('of JOBNAME', '', $content);
+			$content = replaceContent($content, NULL, $_SESSION["PRACTICEID"]);
+			
+			include_once(MAIL);
+			send_mail($to, $cc, $subject, $content);
+		}
+		/* send mail function ends here */
+
 		header("Location: queries.php?flagUpdate=A");
 	}
 }

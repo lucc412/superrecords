@@ -48,7 +48,7 @@ if($_SESSION['validUser']) {
 						//It will Get Email Id from Which Email Id the Email will Send.
 						$salePersonEmailId = fetchStaffInfo($salePerson,'email');
 						$srManagerEmailId = fetchStaffInfo('113','email');
-						$to = $salePersonEmailId.','.$srManagerEmailId.','.'er.anujjaha@gmail.com';
+						$to = $salePersonEmailId.','.$srManagerEmailId;
 						$cc = $arrEmailInfo['event_cc'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];

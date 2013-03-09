@@ -610,6 +610,15 @@ input {
 	color:#999;
 }
 
+select {
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    color: #999999;
+    margin-bottom: 5px;
+    padding: 8px;
+    width: 170px;
+}
+
 #Name {
 	background:url(../images/icon-name.jpg) center left no-repeat;
 	padding-left:33px;

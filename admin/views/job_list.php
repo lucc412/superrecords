@@ -70,7 +70,7 @@ switch ($a)
  	
 		 <input type="hidden" name="sql" value="insertJob">
 		 
-		 <table class="tbl" width="70%" cellspacing="10">
+		 <table class="tbl" width="72%" cellspacing="10">
 			<tr>
 			   <td class="hr">Practice Name<font style="color:red;" size="2">*</font></td>
 				  <td colspan="2">
@@ -124,15 +124,14 @@ switch ($a)
 					<td colspan="2"><input title="Specify period of job" type="text" name="txtPeriod" id="txtPeriod" value=""></td>
 				</tr>
 				
-				<tr>
+				<tr style="vertical-align:top;">
 					<td class="hr">Source Documents</td>
-					<td colspan="2"><input type="text" name="textSource_50" title="Specify name of source document">
-						<input type="file" name="sourceDoc_50" id="sourceDoc_50">
+					<td colspan="2"><input type="text" name="textSource_50" title="Specify name of source document"><input type="file" name="sourceDoc_50" id="sourceDoc_50">
 						<span style="margin-left:20px;"></span>
 						<div id="parentDiv"></div>
 					</td>
 					<td>
-						<button type="button" title="Click here to upload new source document" name="addBtn" onClick="javascript:addElement();" value="Add" class="button1"/>Add</button>
+						<button type="button" style="margin-top:0px;" title="Click here to upload new source document" name="addBtn" onClick="javascript:addElement();" value="Add" class="button1"/>Add</button>
 					</td>
 				</tr>
 				

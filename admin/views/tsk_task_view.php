@@ -60,7 +60,7 @@
 	
 	<tr>
 		<td class="hr">India Manager</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrEmployees[$arrTaskData["india_manager_id"]])?></td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrIndiaManager[$arrTaskData["india_manager_id"]])?></td>
 	</tr>
 	
 	<tr>
@@ -94,28 +94,8 @@
 	</tr>
 
 	<tr>
-		<td class="hr">Last Reports Sent</td>
-		<td class="dr"><?=htmlspecialchars($arrTaskData["last_reports_sent"])?></td>
-	</tr>
-	
-	<tr>
-		<td class="hr">Resolution</td>
-		<td class="dr"><?=htmlspecialchars($arrTaskData["resolution"])?></td>
-	</tr>
-	
-	<tr>
-		<td class="hr">Current Job in Hand</td>
-		<td class="dr"><?=htmlspecialchars($arrTaskData["current_job_in_hand"])?></td>
-	</tr>
-
-	<tr>
 		<td class="hr">SR Manager Notes</td>
 		<td class="dr"><?=htmlspecialchars($arrTaskData["notes"])?></td>
-	</tr>
-	
-	<tr>
-		<td class="hr">Related Cases</td>
-		<td class="dr"><?=htmlspecialchars($arrTaskData["related_cases"])?></td>
 	</tr>
 </table>
 

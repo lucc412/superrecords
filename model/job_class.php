@@ -46,6 +46,20 @@ class Job {
 	}
 
 
+	public function fetch_manager_ids($jobId)
+	{
+		$qrySel = "SELECT c.sr_manager, c.india_manager
+					FROM client c, job j
+					WHERE c.client_id = j.client_id
+					AND j.job_id = {$jobId}";
+
+		$fetchResult = mysql_query($qrySel);  
+		while($rowData = mysql_fetch_assoc($fetchResult))
+			$arrIds[] = $rowData;
+
+		return $arrIds; 
+	}
+
 	public function fetch_documents($jobId)
 	{
 		if($jobId)
@@ -171,7 +185,7 @@ class Job {
 		// upload documents here
 		$this->add_source_Docs($jobId);
 		
-		return true;
+		return $jobId;
 	}
 
 	public function add_task($typeId, $period, $practiceId, $clientId, $jobId, $cliType, $typeId) {

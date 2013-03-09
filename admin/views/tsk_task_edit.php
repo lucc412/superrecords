@@ -243,40 +243,12 @@
 		</tr>
 
 		<tr>
-			<td class="hr">Last Reports Sent</td>
-			<td class="dr">
-				<textarea name="txtReportsSent" rows="3" cols="25"><?=$arrTaskData['last_reports_sent']?></textarea>
-			</td>
-		</tr>
-		
-		<tr>
-			<td class="hr">Resolution</td>
-			<td class="dr">
-				<textarea name="txtResolution" rows="3" cols="25"><?=$arrTaskData['resolution']?></textarea>
-			</td>
-		</tr>
-		
-		<tr>
-			<td class="hr">Current Job in Hand</td>
-			<td class="dr">
-				<textarea name="txtJobInHand" rows="3" cols="25"><?=$arrTaskData['current_job_in_hand']?></textarea>
-			</td>
-		</tr>
-
-		<tr>
 			<td class="hr">SR Manager Notes</td>
 			<td class="dr">
 				<textarea name="txtNotes" rows="3" cols="25"><?=$arrTaskData['notes']?></textarea>
 			</td>
 		</tr>
-		
-		<tr>
-			<td class="hr">Related Cases</td>
-			<td class="dr">
-				<textarea name="txtRelatedCases" rows="3" cols="25"><?=$arrTaskData['related_cases']?></textarea>
-			</td>
-		</tr>
-		
+				
 		<tr>
 			<td><button type="button" value="Cancel" onClick='return ComfirmCancel("<?=$_REQUEST["jobId"]?>");' class="cancelbutton">Cancel</button></td>
 			<td><button type="submit" name="action" value="Update" class="button">Update</button></td>

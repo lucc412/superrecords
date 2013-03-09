@@ -111,7 +111,9 @@ class Task_Class extends Database {
 	
 	public function fetchTaskStatus()
 	{		
-		$qrySel = "SELECT * FROM task_status ORDER BY description";
+		$qrySel = "SELECT t1.id, t1.description, t1.order 
+		           FROM task_status t1 
+				   ORDER BY t1.order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -122,7 +124,9 @@ class Task_Class extends Database {
 	
 	public function fetchPriority()
 	{		
-		$qrySel = "SELECT * FROM pri_priority ORDER BY pri_Description";
+		$qrySel = "SELECT t1.pri_Code, t1.pri_Description, t1.pri_Order 
+		            FROM pri_priority t1 
+					ORDER BY t1.pri_Order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -133,7 +137,9 @@ class Task_Class extends Database {
 	
 	public function fetchProcessingCycle()
 	{		
-		$qrySel = "SELECT * FROM prc_processcycle ORDER BY prc_Description";
+		$qrySel = "SELECT t1.prc_Code, t1.prc_Description, t1.prc_Order 
+		            FROM prc_processcycle t1 
+					ORDER BY t1.prc_Order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -244,7 +250,7 @@ class Task_Class extends Database {
 			$ClientID = $this->arrJobDetails[$_REQUEST["jobId"]]["client_id"];
 			$PracticeID = $this->arrClientDetails[$ClientID]["id"];
 			
-			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, last_reports_sent, current_job_in_hand, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, befree_due_date, resolution, related_cases, created_date)
+			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
 					VALUES (
 					'" . $_REQUEST['txtTaskName'] . "', 
 					'" . $PracticeID . "', 
@@ -252,8 +258,6 @@ class Task_Class extends Database {
 					'" . $_REQUEST["jobId"] . "', 
 					'" . $_REQUEST['lstMasterActivity'] . "', 
 					'" . $_REQUEST['lstSubActivity'] . "', 
-					'" . $_REQUEST['txtReportsSent'] . "', 
-					'" . $_REQUEST['txtJobInHand'] . "', 
 					'" . $_REQUEST['txtNotes'] . "', 
 					'" . $_REQUEST['lstSrManager'] . "', 
 					'" . $_REQUEST['lstSrIndiaManager'] . "', 
@@ -263,14 +267,12 @@ class Task_Class extends Database {
 					'" . $_REQUEST['lstProcessingCycle'] . "', 
 					'" . $strExtDate . "',
 					'" . $strBefreeDate . "',
-					'" . $_REQUEST['txtResolution'] . "', 
-					'" . $_REQUEST['txtRelatedCases'] . "', 
 					NOW(),
 					)";
 		}	
 		else {
 
-			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, last_reports_sent, current_job_in_hand, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, befree_due_date, resolution, related_cases, created_date)
+			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
 					VALUES (
 					'" . $_REQUEST['txtTaskName'] . "', 
 					'" . $_REQUEST['lstPractice'] . "', 
@@ -278,8 +280,6 @@ class Task_Class extends Database {
 					'" . $_REQUEST['lstJob'] . "', 
 					'" . $_REQUEST['lstMasterActivity'] . "', 
 					'" . $_REQUEST['lstSubActivity'] . "', 
-					'" . $_REQUEST['txtReportsSent'] . "', 
-					'" . $_REQUEST['txtJobInHand'] . "', 
 					'" . $_REQUEST['txtNotes'] . "', 
 					'" . $_REQUEST['lstSrManager'] . "', 
 					'" . $_REQUEST['lstSrIndiaManager'] . "', 
@@ -289,8 +289,6 @@ class Task_Class extends Database {
 					'" . $_REQUEST['lstProcessingCycle'] . "', 
 					'" . $strExtDate . "',
 					'" . $strBefreeDate . "',
-					'" . $_REQUEST['txtResolution'] . "', 
-					'" . $_REQUEST['txtRelatedCases'] . "', 
 					NOW()  
 					)";
 		}
@@ -320,8 +318,6 @@ class Task_Class extends Database {
 					job_id = '" . $_REQUEST["jobId"] . "',
 					mas_Code = '" . $_REQUEST['lstMasterActivity'] . "',
 					sub_Code = '" . $_REQUEST['lstSubActivity'] . "',
-					last_reports_sent = '" . $_REQUEST['txtReportsSent'] . "',
-					current_job_in_hand = '" . $_REQUEST['txtJobInHand'] . "',
 					notes = '" . $_REQUEST['txtNotes'] . "',
 					manager_id = '" . $_REQUEST['lstSrManager'] . "',
 					india_manager_id = '" . $_REQUEST['lstSrIndiaManager'] . "',
@@ -330,8 +326,6 @@ class Task_Class extends Database {
 					priority_id = '" . $_REQUEST['lstPriority'] . "',
 					process_id = '" . $_REQUEST['lstProcessingCycle'] . "',
 					due_date = '" . $strExtDate . "',
-					resolution = '" . $_REQUEST['txtResolution'] . "',
-					related_cases = '" . $_REQUEST['txtRelatedCases'] . "',
 					befree_due_date = '" . $strBefreeDate . "'
 					WHERE task_id = '" . $_REQUEST['recid'] . "'";
 		}
@@ -344,8 +338,6 @@ class Task_Class extends Database {
 					job_id = '" . $_REQUEST['lstJob'] . "',
 					mas_Code = '" . $_REQUEST['lstMasterActivity'] . "',
 					sub_Code = '" . $_REQUEST['lstSubActivity'] . "',
-					last_reports_sent = '" . $_REQUEST['txtReportsSent'] . "',
-					current_job_in_hand = '" . $_REQUEST['txtJobInHand'] . "',
 					notes = '" . $_REQUEST['txtNotes'] . "',
 					manager_id = '" . $_REQUEST['lstSrManager'] . "',
 					india_manager_id = '" . $_REQUEST['lstSrIndiaManager'] . "',
@@ -354,8 +346,6 @@ class Task_Class extends Database {
 					priority_id = '" . $_REQUEST['lstPriority'] . "',
 					process_id = '" . $_REQUEST['lstProcessingCycle'] . "',
 					due_date = '" . $strExtDate . "',
-					resolution = '" . $_REQUEST['txtResolution'] . "',
-					related_cases = '" . $_REQUEST['txtRelatedCases'] . "',
 					befree_due_date = '" . $strBefreeDate . "'
 					WHERE task_id = '" . $_REQUEST['recid'] . "'";
 		}			

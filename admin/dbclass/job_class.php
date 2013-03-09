@@ -349,7 +349,7 @@ class Job_Class extends Database
 		
 		$this->add_source_Docs($jobId);
 		
-		//return true;
+		return $jobId;
 	}
 	
 	public function add_task($typeId, $period, $practiceId, $clientId, $jobId) {

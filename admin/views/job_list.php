@@ -66,9 +66,9 @@ switch ($a)
 	?><div class="frmheading">
 		<h1>Add Record</h1>
    	  </div>
-			<form name="objForm" id="objForm" method="post" action="job.php" onSubmit="javascript:return validateFormOnSubmit();" enctype="multipart/form-data">
+			<form name="objForm" id="objForm" method="post" action="job.php?sql=insertJob" onSubmit="javascript:return validateFormOnSubmit();" enctype="multipart/form-data">
  	
-		 <input type="hidden" name="sql" value="insertJob">
+		 <!--<input type="hidden" name="sql" value="insertJob">-->
 		 
 		 <table class="tbl" width="70%" cellspacing="10">
 			<tr>
@@ -450,7 +450,7 @@ switch ($a)
 				</h1>
 			</div>
 
-			<form name="objForm" id="objForm" method="post" action="job.php" enctype="multipart/form-data">
+			<form name="objForm" id="objForm" method="post" action="job.php?a=UploadReportDone" enctype="multipart/form-data">
 				<input type="hidden" name="sql" value="insertReport"/>
 				<input type="hidden" name="a" value="reports"/>
 				<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>"/>
@@ -463,7 +463,7 @@ switch ($a)
 						</tr>
 						
 						<tr>
-							<td width="15%"> Select Report <font style="color:red;" size="2">*</font> </td>
+							<td width="15%"> Select Report<font style="color:red;" size="2">*</font> </td>
 							<td width="15%"> <input type="file" name="fileReport" id="fileReport" size="30px" /> </td>
 						</tr>
 						
@@ -525,11 +525,21 @@ switch ($a)
 			</table>
 
 		<div class="frmheading" style="padding-top:45px;">
-			<h1>Queries</h1>
+			<h1>Queriess</h1>
 		</div>
-	
+		
+        <div>
 		<a href="job.php?a=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight"><img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom">&nbsp;Add Record</a>
-		<br><br>		
+        
+        <span style="margin-left:800px;">
+	       <a href="job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>">
+            <button type="button" name="sendEmail" value="Send Email" style="width:180px;" > 
+            	Send Mail to Practice
+            </button>
+            </a>
+           </span>
+        </div>	
+		<br>
 		
 		<form method="POST" name="frmQueriesList" action="job.php?sql=updateQuery">
 			
@@ -773,5 +783,7 @@ switch ($a)
 				}
 			?></table><br></form></body><?
 		break;
+		
+		
 }
 ?>

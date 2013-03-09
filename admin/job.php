@@ -43,53 +43,84 @@ if($_SESSION['validUser']) {
 			
 			// db query as per request
 			switch ($sql) {
-
-				case "insertJob":
-					$objCallData->insert_job();
+			
+				case "sendMail":
+					/* send mail function starts here */
+					//It will Get Email Id from Which Email Id the Email will Send.
+					$jobId = $_REQUEST['jobId'];
+					$practiceId = $objCallData->fetchPracticeId($jobId);
+					$to = get_email_id($practiceId);
+					$subject = 'Query Submitted to Practice';
+					$content = 'You have pending queries for JOBNAME. Please log into the Super Records Job Tracker via http://superrecords.com.au/jobtracker/ to view and resolve your pending queries.';
+					$content = replaceContent($content,NULL,NULL,NULL,$jobId);
+					include_once(MAIL);
+					send_mail($to, $cc, $subject, $content);
+					/* send mail function ends here */
 					break;
 
-				case "updateJob":
-					$objCallData->sql_update($_REQUEST["jobId"]);
+				case "insertJob":
+					$jobId = $objCallData->insert_job();
+					
 					/* send mail function starts here */
-					$pageUrl = basename($_SERVER['REQUEST_URI']);		
+					$pageUrl = basename($_SERVER['REQUEST_URI']);
+					$arrPageUrl = explode('&',$pageUrl);	
+					$pageUrl = $arrPageUrl[0];
+					
 					// check if event is active or inactive [This will return TRUE or FALSE as per result]
 					$flagSet = getEventStatus($pageUrl);
 					
-
 					// if event is active it go for mail function
 					if($flagSet) {
 
 						//It will Get All Details in array format for Send Email	
 						$arrEmailInfo = get_email_info($pageUrl);
+						$srManagerEmailId = fetchStaffInfo('113','email');
 						
-						//It will Get Email Id from Which Email Id the Email will Send.
-						$practiceId = $objCallData->fetchPracticeId($_REQUEST["jobId"]);
-						$toEmail = get_email_id($practiceId);
-
-						$from = $arrEmailInfo['event_from'];
-						$to = $toEmail;
+						$to = $srManagerEmailId;
 						$cc = $arrEmailInfo['event_cc'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
-
-						// replace variable @jobStatus with updated status of job 
-						$jobStatusId = $_REQUEST['lstJobStatus'];
-						$jobStatus = $objCallData->arrJobStatus[$jobStatusId]['job_status'];
-						$content = str_replace('@jobStatus', $jobStatus, $content);
-
-						// replace variable @fromName with name of administrator
-						$fromName = $objCallData->fetchFromName($from);
-						$content = str_replace('@fromName', $fromName, $content);
-
-						// replace variable @toName with name of practice
-						$toName = $objCallData->arrPracticeName[$practiceId];
-						$content = str_replace('@toName', $toName, $content);
-						
+						$content =replaceContent($content, NULL, $_REQUEST['lstPractice'], NULL, $jobId);
 						
 						include_once(MAIL);
-						send_mail($from, $to, $cc, $subject, $content);
+						send_mail($to, $cc, $subject, $content);
 					}
 					/* send mail function ends here */
+					
+					break;
+
+				case "updateJob":
+					
+					$jobStatus = $_POST['lstJobStatus'];
+					if($jobStatus == '7')
+					{
+						/* send mail function starts here */
+						$pageUrl = basename($_SERVER['REQUEST_URI']);
+						$arrPageUrl = explode('&',$pageUrl);	
+						$pageUrl = $arrPageUrl[0];
+						// check if event is active or inactive [This will return TRUE or FALSE as per result]
+						$flagSet = getEventStatus($pageUrl);
+						// if event is active it go for mail function
+						if($flagSet) {
+							//It will Get All Details in array format for Send Email
+							$arrEmailInfo = get_email_info($pageUrl);
+							//It will Get Email Id from Which Email Id the Email will Send.
+							$jobId = $_REQUEST['jobId'];
+							$practiceId = $objCallData->fetchPracticeId($jobId);
+							$toEmail = get_email_id($practiceId);
+							$to = $toEmail;
+							$cc = $arrEmailInfo['event_cc'];
+							$subject = $arrEmailInfo['event_subject'];
+							$content = $arrEmailInfo['event_content'];
+							$content = replaceContent($content,NULL,$practiceId,NULL,$jobId);
+							include_once(MAIL);
+							send_mail($to, $cc, $subject, $content);
+							
+						}
+					/* send mail function ends here */
+					}
+					
+					$objCallData->sql_update($_REQUEST["jobId"]);
 
 					header('Location: job.php?a=editJob&jobId='.$_REQUEST["jobId"]);
 					break;
@@ -110,6 +141,39 @@ if($_SESSION['validUser']) {
 					
 				case "insertReport":
 					$objCallData->upload_report();
+					
+					/* send mail function starts here */
+					$pageUrl = basename($_SERVER['REQUEST_URI']);
+					$arrPageUrl = explode('&',$pageUrl);	
+					$pageUrl = $arrPageUrl[0];
+					
+					// check if event is active or inactive [This will return TRUE or FALSE as per result]
+					$flagSet = getEventStatus($pageUrl);
+					
+					// if event is active it go for mail function
+					if($flagSet) {
+
+						//It will Get All Details in array format for Send Email	
+						$arrEmailInfo = get_email_info($pageUrl);
+						
+						//It will Get Email Id from Which Email Id the Email will Send.
+						$jobId = $_REQUEST['jobId'];
+						$practiceId = $objCallData->fetchPracticeId($jobId);
+				
+						$toEmail = get_email_id($practiceId);
+				
+						$to = $toEmail;
+						$cc = $arrEmailInfo['event_cc'];
+						$subject = $arrEmailInfo['event_subject'];
+						$content = $arrEmailInfo['event_content'];	
+						$content = replaceContent($content,NULL,$practiceId,NULL,$jobId);
+						
+						include_once(MAIL);
+						send_mail($to, $cc, $subject, $content);
+						
+					}
+					/* send mail function ends here */
+					
 					?><script>
 					  window.opener.document.location= 'job.php?a=reports&jobId=<?php echo  $_REQUEST["jobId"];?>'; 
 					  self.close();
@@ -162,7 +226,7 @@ if($_SESSION['validUser']) {
 							$content = str_replace('@toName', $toName, $content);
 						
 							include_once(MAIL);
-							send_mail($from, $to, $cc, $subject, $content);
+							send_mail($to, $cc, $subject, $content);
 						}
 					}
 					/* send mail function ends here */

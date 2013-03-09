@@ -6,8 +6,8 @@
 	<font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font>
 </div>
 
-<form action="cli_client.php" method="POST" name="manageclient" onSubmit="return validateFormOnSubmit()">
-	<p><input type="hidden" name="sql" value="insert"></p>
+<form action="cli_client.php?sql=insert" method="POST" name="manageclient" onSubmit="return validateFormOnSubmit()">
+	<!--<p><input type="hidden" name="sql" value="insert"></p>-->
 	<table class="tbl" border="0" cellspacing="10" width="70%">
 		<tr>
 			<td class="hr">Client</td>

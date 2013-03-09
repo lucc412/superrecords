@@ -3,7 +3,7 @@ ob_start();
 include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/cli_client_class.php';
-include ('../include/php_functions.php');
+include (PHPFUNCTION);
 
 // create class object for class function access
 $objCallData = new Practice_Class();

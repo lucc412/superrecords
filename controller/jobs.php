@@ -8,11 +8,13 @@ $a = $_REQUEST["a"];
 $recid = $_REQUEST["recid"];
 $sql = $_REQUEST["sql"]?$_REQUEST["sql"]:'';
 
+
 switch ($sql)
 {
-	case "insert":
+	
+	case "insertJob":
 		$jobId = $objScr->sql_insert();
-			
+		
 		/* send mail function starts here */
 		$pageUrl = basename($_SERVER['REQUEST_URI']);	
 		
@@ -27,9 +29,7 @@ switch ($sql)
 			
 			// TO mail parameter
 			$srManagerEmail = fetchStaffInfo('113', 'email');
-			
 			$to = $srManagerEmail;
-
 			$cc = $arrEmailInfo['event_cc'];
 			$subject = $arrEmailInfo['event_subject'];
 			$content = $arrEmailInfo['event_content'];

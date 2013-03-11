@@ -528,16 +528,27 @@ switch ($a)
 		</div>
 		
         <div>
-		<a href="job.php?a=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight"><img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom">&nbsp;Add Record</a>
+		<a href="job.php?a=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight">
+        <img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom" height="22px" style="margin-top:-5px;" >&nbsp;Add Record</a>
         
         <span style="margin-left:800px;">
 	       <a href="job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>">
-            <button type="button" name="sendEmail" value="Send Email" style="width:180px;" > 
-            	Send Mail to Practice
+            <input type="button" name="sendEmail" value="Send Mail to Practice" style="width:170px; height:29px; background-image:url(images/mail.png); color:#FFFFFF; font-weight:bold;" > 
+            	
             </button>
             </a>
            </span>
-        </div>	
+           <br>
+           <span style="margin-left:930px; color:#FF0000; font-size:13px; font-weight:bold;">
+           <?php 
+		   $lastDate = $objCallData->view_send_mail_practice($_REQUEST["jobId"]);
+		   if($lastDate != '0000-00-00')
+		    {
+				echo 'Last Sent : '.$lastDate;
+			}
+		   ?>
+           </span>
+	    </div>	
 		<br>
 		
 		<form method="POST" name="frmQueriesList" action="job.php?sql=updateQuery">
@@ -550,10 +561,11 @@ switch ($a)
 				<tr class="fieldheader">
 					<!--<th class="fieldheader">S. No.</th>-->
 					<th class="fieldheader" align="center" width="30%">Query</th>
-					<th class="fieldheader">Reponse</th>
+                    <th class="fieldheader">Reponse</th>
 					<th class="fieldheader" align="center">Uploaded by SR</th>
 					<th class="fieldheader" align="center">Supporting Doc</th>
-					<th class="fieldheader">Date Answered</th>
+					<th class="fieldheader" align="center" >Date Added</th>
+                    <th class="fieldheader">Date Answered</th>
 					<th class="fieldheader">Answered?</th>
 					<th class="fieldheader" align="center">Save</th>
 				</tr><?
@@ -583,7 +595,17 @@ switch ($a)
 					if(!empty($arrInfo["file_path"])) {
 						?><a href="job.php?sql=download&flagType=Q&filePath=<?=$arrInfo['file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
 					}
-					?></td><?
+					?></td>
+					
+					 <?
+						if(!empty($arrInfo["date_added"]) && $arrInfo["date_added"] != '0000-00-00') {
+							?><td align="center" width="10%" class="<?=$style?> yellowBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["date_added"])))?></td><?
+						}
+						else {
+							?><td width="10%" align="center" class="<?=$style?> yellowBG"></td><?
+						}
+					 ?>
+					<?
 						if(!empty($arrInfo["date_answered"]) && $arrInfo["date_answered"] != '0000-00-00') {
 							?><td width="10%" class="<?=$style?> yellowBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["date_answered"])))?></td><?
 						}
@@ -591,6 +613,10 @@ switch ($a)
 							?><td width="10%" class="<?=$style?> yellowBG"></td><?
 						}
 					 ?>
+                     
+                     
+                    
+                     
 					 
 					 <td width="9%" class="<?=$style?> blueBG" align="center"><?
 					 

@@ -45,6 +45,8 @@ if($_SESSION['validUser']) {
 			switch ($sql) {
 			
 				case "sendMail":
+					$objCallData->send_mail_practice($_REQUEST['jobId']);
+					
 					/* send mail function starts here */
 					//It will Get Email Id from Which Email Id the Email will Send.
 					$jobId = $_REQUEST['jobId'];
@@ -56,6 +58,7 @@ if($_SESSION['validUser']) {
 					include_once(MAIL);
 					send_mail($to, $cc, $subject, $content);
 					/* send mail function ends here */
+					header('Location: job.php?a=queries&jobId='.$_REQUEST["jobId"]);
 					break;
 
 				case "insertJob":

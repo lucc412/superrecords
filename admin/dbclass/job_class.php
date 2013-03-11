@@ -164,10 +164,12 @@ class Job_Class extends Database
 	// Function to Add new Query
 	public function add_query()
 	{
+	
 		$jobId = $_REQUEST["jobId"];
 		$value = $_REQUEST["txtQuery"];
 		
-		$qrySel = "INSERT INTO queries(job_id, query) VALUES({$jobId}, '{$value}')";
+		$qrySel = "INSERT INTO queries(job_id, query,date_added) VALUES({$jobId}, '{$value}',NOW())";
+		
 		mysql_query($qrySel);
 		
 		// Fetching last report ID.
@@ -477,6 +479,29 @@ class Job_Class extends Database
 			}
 		}
 	} 
+	
+	public function send_mail_practice($jobId)
+	{
+		 $query ="UPDATE job
+				  SET sent_mail_date=NOW()
+				  WHERE job_id='$jobId'
+  				 ";
+		$runQuery = mysql_query($query);
+	}
+	
+	public function view_send_mail_practice($jobId)
+	{
+		$query ="SELECT sent_mail_date
+				 FROM job
+				 WHERE job_id='$jobId'
+				";
+		$runQuery = mysql_query($query);
+		
+		$sent_mail_date = mysql_fetch_assoc($runQuery);
+		$sent_mail_date = $sent_mail_date['sent_mail_date'];
+		return $sent_mail_date ;
+	}
+	
 
 }
 ?>

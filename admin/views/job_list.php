@@ -524,7 +524,7 @@ switch ($a)
 			</table>
 
 		<div class="frmheading" style="padding-top:45px;">
-			<h1>Queriess</h1>
+			<h1>Queries</h1>
 		</div>
 		
         <div>

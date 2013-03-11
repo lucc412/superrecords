@@ -25,7 +25,7 @@ class Client {
 		$qrySel = "SELECT t1.client_name
 					FROM client t1
 					WHERE id = '{$_SESSION['PRACTICEID']}'
-					{$appendStr}";
+					{$appendStr} ORDER BY t1.client_name";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

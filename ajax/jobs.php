@@ -24,7 +24,7 @@ function sql_select_subActivity($itemId)
 			FROM sub_subactivity 
 			WHERE sas_Code=".$itemId."
 			AND display_in_practice = 'yes'
-			ORDER BY sub_Description";
+			ORDER BY sub_Order";
 		
 	$res = mysql_query($sql) or die(mysql_error());
 	$count = mysql_num_rows($res);

@@ -78,6 +78,11 @@ a img{
 .clear {
 	clear:both;
 }
+
+.item-510, .item-511{
+     display: none;
+}
+
 /* Header */
 
 .header {
@@ -820,6 +825,7 @@ button {
         padding: 20px 35px 55px;
       }
 /* Liquid Slider */
+
 
 
 

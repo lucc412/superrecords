@@ -528,26 +528,19 @@ switch ($a)
 		</div>
 		
         <div>
-		<a href="job.php?a=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight">
-        <img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom" height="22px" style="margin-top:-5px;" >&nbsp;Add Record</a>
-        
-        <span style="margin-left:800px;">
-	       <a href="job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>">
-            <input type="button" name="sendEmail" value="Send Mail to Practice" style="width:170px; height:29px; background-image:url(images/mail.png); color:#FFFFFF; font-weight:bold;" > 
-            	
-            </button>
-            </a>
-           </span>
-           <br>
-           <span style="margin-left:930px; color:#FF0000; font-size:13px; font-weight:bold;">
-           <?php 
-		   $lastDate = $objCallData->view_send_mail_practice($_REQUEST["jobId"]);
-		   if($lastDate != '0000-00-00')
-		    {
-				echo 'Last Sent : '.$lastDate;
+			<a href="job.php?a=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight">
+			<img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom" height="22px" style="margin-top:-5px;" >&nbsp;Add Record</a>
+			
+			<span style="margin-left:800px;">
+			   <a href="job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>"><input type="button" name="sendEmail" value="Send Mail to Practice" class="sendMailBtn"></a>
+			</span><br>
+
+			<span class="boldtext"><?php 
+			$lastDate = $objCallData->view_send_mail_practice($_REQUEST["jobId"]);
+			if($lastDate != '0000-00-00') {
+				echo 'Last Sent : '.date('d-M-Y', strtotime($lastDate));
 			}
-		   ?>
-           </span>
+		   ?></span>
 	    </div>	
 		<br>
 		

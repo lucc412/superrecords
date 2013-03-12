@@ -158,12 +158,12 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 				<jdoc:include type="modules" name="Benefits-home" />	
 				<jdoc:include type="modules" name="SMSF-Packages-home" />
 
-				<!-- Displays Thank You message for Contact Us Form-->
+				<!-- Displays Thank You message for Contact Us Form
 				<div width="20px" style="float:left;padding-top:25px;">
 					<div align="right">
 						<jdoc:include type="message" />
 					</div>
-				</div>
+				</div>-->
 
 				<jdoc:include type="modules" name="contact-us-home" />	
 				<div class="clear"></div> <!--clear float-->     
@@ -193,12 +193,12 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 						<jdoc:include type="modules" name="benifits-right" />
 					</div> <!--ac-container-->                  
         	
-					<!-- Displays Thank You message for below Contact Us Form-->
+					<!-- Displays Thank You message for below Contact Us Form
 					<div width="20px" style="float:left;padding-top:25px;">
 						<div align="right">
 							<jdoc:include type="message" />
 						</div>
-					</div>
+					</div>-->
 
 					<!-- contact form for Other page start-->
 		        	<div class="contactform">

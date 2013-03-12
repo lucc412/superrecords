@@ -38,6 +38,23 @@ a.hlight
 color:#208EB3;
 }
 
+.boldtext
+{
+	margin-left:920px;
+	color:#F05729; 
+	font-size:13px; 
+	font-weight:bold;
+}
+
+.sendMailBtn
+{
+	width:170px; 
+	height:29px; 
+	background-image:url(../images/mail.png); 
+	color:#FFFFFF; 
+	font-weight:bold;
+}
+
 .hr
 {
     color: black;

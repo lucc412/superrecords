@@ -605,13 +605,7 @@ switch ($a)
 						else {
 							?><td width="10%" class="<?=$style?> yellowBG"></td><?
 						}
-					 ?>
-                     
-                     
-                    
-                     
-					 
-					 <td width="9%" class="<?=$style?> blueBG" align="center"><?
+					 ?><td width="9%" class="<?=$style?> blueBG" align="center"><?
 					 
 					 if($arrInfo["status"] == 1)
 					 {
@@ -648,7 +642,7 @@ switch ($a)
 				<tr>
 					<td>
 						<form method="POST" name="frmJobDetails" action="job.php">
-							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; background-color:#0e4d7a;color:#ffffff;">
+							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="a" value="editJob">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -656,11 +650,20 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php">
-							<input type="submit" name="btnDocument" value="Documents & Reports" style="cursor:pointer; background-color:#0e4d7a;color:#ffffff;">
+							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
 							<input type="hidden" name="a" value="documents">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
 					</td>
+					
+					<td>
+						<form method="POST" name="frmReports" action="job.php">
+							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input type="hidden" name="a" value="reports">
+							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
+						</form>
+					</td>
+
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php">

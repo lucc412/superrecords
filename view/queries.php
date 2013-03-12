@@ -32,15 +32,22 @@ include(TOPBAR);
 						if($clientId == $_REQUEST['lstCliType']) $selectStr = 'selected';
 						?><option <?=$selectStr?> value="<?=$clientId?>"><?=$clientName?></option><?php 
 					}
-				?></select>
-				<select name="lstJob" id="lstJob" onchange="javascript:submitForm();">
+				?></select><?
+					$arrJobNames = array();
+					foreach($arrJobs AS $jobId => $jobName)
+					{
+						$arrJobParts = explode('::', $jobName);
+						$arrJobNames[$jobId] = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
+					}
+					asort($arrJobNames);
+				?><select name="lstJob" id="lstJob" onchange="javascript:submitForm();">
 					<option value="0">Select Job</option><?
-					foreach($arrJobs AS $jobId => $jobName){
+					foreach($arrJobNames AS $jobId => $jobName){
 						$selectStr = '';
 						if($jobId == $_REQUEST['lstJob']) $selectStr = 'selected';
-						$arrJobParts = explode('::', $jobName);
-						$jobDispName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
-						?><option <?=$selectStr?> value="<?=$jobId?>"><?=$jobDispName?></option><?php 
+						//$arrJobParts = explode('::', $jobName);
+						//$jobDispName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
+						?><option <?=$selectStr?> value="<?=$jobId?>"><?=$jobName?></option><?php 
 					}
 				?></select>
 				<button align="right" type="button" style="width:100px;" onclick="javascript:this.form.submit();" value="Save All">Save All</button>

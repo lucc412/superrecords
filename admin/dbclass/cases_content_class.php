@@ -452,7 +452,7 @@ class casesContentList extends Database
                         <td>
                          <select name="cas_BillingPerson" id="cas_BillingPerson"><option value="0">Select User</option>
                             <?php
-                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE t2.aty_Description LIKE '%Staff%' ORDER BY stf_Code";
+                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE t2.aty_Description LIKE '%Staff%' ORDER BY c1.con_Firstname";
                               $res = mysql_query($sql) or die(mysql_error());
                               while ($lp_row = mysql_fetch_assoc($res)){
                               $val = $lp_row["stf_Code"];
@@ -475,7 +475,7 @@ class casesContentList extends Database
                         <td>
                          <select name="cas_AustraliaManager" id="cas_AustraliaManager"><option value="0">Select User</option>
                             <?php
-                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE c1.con_Designation=18 AND t2.aty_Description LIKE '%Staff%' ORDER BY stf_Code";
+                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE c1.con_Designation=18 AND t2.aty_Description LIKE '%Staff%' ORDER BY c1.con_Firstname";
                               $res = mysql_query($sql) or die(mysql_error());
                               while ($lp_row = mysql_fetch_assoc($res)){
                               $val = $lp_row["stf_Code"];
@@ -498,7 +498,7 @@ class casesContentList extends Database
                         <td>
                          <select name="cas_ManagerInChrge" id="cas_ManagerInChrge"><option value="0">Select User</option>
                             <?php
-                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE c1.con_Designation=17 AND t2.aty_Description LIKE '%Staff%' ORDER BY stf_Code";
+                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE c1.con_Designation=17 AND t2.aty_Description LIKE '%Staff%' ORDER BY c1.con_Firstname";
                               $res = mysql_query($sql) or die(mysql_error());
                               while ($lp_row = mysql_fetch_assoc($res)){
                               $val = $lp_row["stf_Code"];
@@ -521,7 +521,7 @@ class casesContentList extends Database
                         <td>
                          <select name="cas_SeniorInCharge" id="cas_SeniorInCharge"><option value="0">Select User</option>
                             <?php
-                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE t2.aty_Description LIKE '%Staff%' ORDER BY stf_Code";
+                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE t2.aty_Description LIKE '%Staff%' ORDER BY c1.con_Firstname";
                               $res = mysql_query($sql) or die(mysql_error());
                               while ($lp_row = mysql_fetch_assoc($res)){
                               $val = $lp_row["stf_Code"];
@@ -544,7 +544,7 @@ class casesContentList extends Database
                         <td>
                          <select name="cas_TeamInCharge" id="cas_TeamInCharge"><option value="0">Select User</option>
                             <?php
-                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE t2.aty_Description LIKE '%Staff%' ORDER BY stf_Code";
+                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE t2.aty_Description LIKE '%Staff%' ORDER BY c1.con_Firstname";
                               $res = mysql_query($sql) or die(mysql_error());
                               while ($lp_row = mysql_fetch_assoc($res)){
                               $val = $lp_row["stf_Code"];
@@ -591,7 +591,7 @@ class casesContentList extends Database
                         <td>
                          <select name="cas_SalesPerson" id="cas_SalesPerson"><option value="0">Select User</option>
                             <?php
-                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE (c1.con_Designation=14 || c1.con_Designation=19) AND t2.aty_Description LIKE '%Staff%' ORDER BY stf_Code";
+                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE (c1.con_Designation=14 || c1.con_Designation=19) AND t2.aty_Description LIKE '%Staff%' ORDER BY c1.con_Firstname";
                               $res = mysql_query($sql) or die(mysql_error());
                               while ($lp_row = mysql_fetch_assoc($res)){
                               $val = $lp_row["stf_Code"];
@@ -614,7 +614,7 @@ class casesContentList extends Database
                         <td>
                             <select name="cas_MasterActivity" id="cas_MasterActivity" onChange="getSubActivityTasks(this.value,-1)"><option value="0">Select Master Activity</option>
                                 <?php
-                                  $sql = "select `mas_Code`, `mas_Description`, Code from `mas_masteractivity` ORDER BY mas_Order ASC";
+                                  $sql = "select `mas_Code`, `mas_Description`, Code from `mas_masteractivity` ORDER BY mas_Order";
                                   $res = mysql_query($sql) or die(mysql_error());
                                   while ($lp_row = mysql_fetch_assoc($res)){
                                   $val = $lp_row["mas_Code"];
@@ -652,7 +652,7 @@ class casesContentList extends Database
                         <td>
                             <select name="cas_Priority" id="cas_Priority"><option value="0">Select Priority</option>
                                 <?php
-                                  $sql = "select `pri_Code`, `pri_Description` from `pri_priority` ORDER BY pri_Order ASC";
+                                  $sql = "select `pri_Code`, `pri_Description` from `pri_priority` ORDER BY pri_Order";
                                   $res = mysql_query($sql) or die(mysql_error());
                                   while ($lp_row = mysql_fetch_assoc($res)){
                                   $val = $lp_row["pri_Code"];
@@ -670,7 +670,7 @@ class casesContentList extends Database
                         <td>
                             <select name="cas_Status" id="cas_Status" onChange="statusComplete(<?php echo $_SESSION['staffcode']?>,'<?php echo $_SESSION['usertype']?>','<?php echo $row["cas_Createdby"]?>','<?php echo $row["cas_Status"]?>')"><option value="0">Select Status</option>
                                 <?php
-                                  $sql = "select `cas_Code`, `cas_Description` from `cas_casestatus` ORDER BY cas_Order ASC";
+                                  $sql = "select `cas_Code`, `cas_Description` from `cas_casestatus` ORDER BY cas_Order";
                                   $res = mysql_query($sql) or die(mysql_error());
                                   while ($lp_row = mysql_fetch_assoc($res)){
                                   $val = $lp_row["cas_Code"];
@@ -906,7 +906,7 @@ class casesContentList extends Database
                                                 <td>
                                                      <select name="cas_Staff[]" id="cas_Staff"><option value="0">Select User</option>
                                                         <?php
-                                                          $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE t2.aty_Description LIKE '%Staff%' ORDER BY stf_Code";
+                                                          $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE t2.aty_Description LIKE '%Staff%' ORDER BY c1.con_Firstname";
                                                           $res = mysql_query($sql) or die(mysql_error());
                                                           while ($lp_row = mysql_fetch_assoc($res)){
                                                           $val = $lp_row["stf_Code"];
@@ -930,7 +930,7 @@ class casesContentList extends Database
                                     <td>
                                          <select name="cas_Staff[]" id="cas_Staff"><option value="0">Select User</option>
                                             <?php
-                                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE t2.aty_Description LIKE '%Staff%' ORDER BY stf_Code";
+                                              $sql = "SELECT stf_Code, stf_Login, c1.con_Firstname, c1.con_Lastname FROM `stf_staff` t1 LEFT JOIN aty_accesstype AS t2 ON t1.stf_AccessType = t2.aty_Code LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code WHERE t2.aty_Description LIKE '%Staff%' ORDER BY c1.con_Firstname";
                                               $res = mysql_query($sql) or die(mysql_error());
                                               while ($lp_row = mysql_fetch_assoc($res)){
                                               $val = $lp_row["stf_Code"];

@@ -195,20 +195,18 @@ class staffContentList extends Database
 				while ($row_perm=mysql_fetch_array($permres)) {
 
 					if($i==0)
-					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>System Setup</div></i></b></td></tr>";
-					if($i==2)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Lead</div></i></b></td></tr>";
-					if($i==8)
+					if($i==6)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Referrer Partner</div></i></b></td></tr>";
-					if($i==12)
+					if($i==10)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Practice</div></i></b></td></tr>";
-					if($i==16)
+					if($i==14)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Client</div></i></b></td></tr>";
-					if($i==19)
+					if($i==17)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
-					if($i==26)
+					if($i==25)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
-					if($i==40)
+					if($i==38)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
 
 					?><tr>
@@ -336,14 +334,16 @@ class staffContentList extends Database
 										FROM `con_contact` as t1 
 										LEFT JOIN cnt_contacttype AS t2 
 										ON t1.con_Type = t2.cnt_Code 
-										WHERE t2.cnt_Description like 'Employee'";
+										WHERE t2.cnt_Description like 'Employee' 
+										ORDER BY t1.con_Firstname";
 							}
 							else {
 								$sql = "SELECT t1.`con_Code`, t1.`con_Firstname`, t1.`con_Lastname` 
 									FROM con_contact t1, cnt_contacttype t3
 									WHERE t3.cnt_Code = t1.con_Type
 									AND t3.cnt_Description = 'Employee'
-									AND t1.`con_Code` NOT IN (SELECT stf_CCode FROM stf_staff t2)";
+									AND t1.`con_Code` NOT IN (SELECT stf_CCode FROM stf_staff t2) 
+									ORDER BY t1.con_Firstname";
 							}
 							$res = mysql_query($sql) or die(mysql_error());
 
@@ -380,7 +380,7 @@ class staffContentList extends Database
 							<select name="stf_AccessType" onchange="javascript:showHideAccessSection(this.value);">
 								<option value="0">Select Access Type</option><?php
 						
-								$sql = "select `aty_Code`, `aty_Description` from `aty_accesstype` where aty_Description not like 'Super Administrator' ORDER BY aty_Description ASC";
+								$sql = "select `aty_Code`, `aty_Description` from `aty_accesstype` where aty_Description not like 'Super Administrator' ORDER BY aty_Description";
 								$res = mysql_query($sql) or die(mysql_error());
 
 								while ($lp_row = mysql_fetch_assoc($res)) {
@@ -487,20 +487,18 @@ class staffContentList extends Database
 							{
 
 								if($i==0)
-								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>System Setup</div></i></b></td></tr>";
-								if($i==2)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Lead</div></i></b></td></tr>";
-								if($i==8)
+								if($i==6)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Referrer Partner</div></i></b></td></tr>";
-								if($i==12)
+								if($i==10)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Practice</div></i></b></td></tr>";
-								if($i==16)
+								if($i==14)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Client</div></i></b></td></tr>";
-								if($i==19)
+								if($i==17)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
-								if($i==27)
+								if($i==25)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
-								if($i==40)
+								if($i==38)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
 								
 								?><tr>
@@ -578,20 +576,18 @@ class staffContentList extends Database
 							<input type="hidden" name="count" value="<?php echo $count;?>"><?
 
 							if($i==0)
-							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>System Setup</div></i></b></td></tr>";
-							if($i==2)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Lead</div></i></b></td></tr>";
-							if($i==8)
+							if($i==6)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Referrer Partner</div></i></b></td></tr>";
-							if($i==12)
+							if($i==10)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Practice</div></i></b></td></tr>";
-							if($i==16)
+							if($i==14)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Client</div></i></b></td></tr>";
-							if($i==19)
+							if($i==17)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
-							if($i==27)
+							if($i==25)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
-							if($i==40)
+							if($i==38)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
 
 							?><tr><td width="300px">

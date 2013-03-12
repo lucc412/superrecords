@@ -218,7 +218,7 @@ header("Location:index.php?msg=timeout");
 <tr>
 <td>&nbsp;</td>
 <td><button type="submit" name="action" value="Apply Filter">Apply Filter</button></td>
-<td><a href="cas_casestatus.php?a=reset" class="hlight">Reset Filter</a></td>
+<td><a href="cli_type.php?a=reset" class="hlight">Reset Filter</a></td>
 </tr>
 </table>
 </form>

@@ -97,14 +97,20 @@ switch($_REQUEST['a'])
 			<table align="center" width="70%" class="fieldtable" cellpadding="10px;">
 				<tr>
 					<td><strong> Select Job <font style="color:red;" size="2">*</font></strong></td>
-					<td>
-						<select name="lstJob" id="lstJob">
+					<td><?
+						$arrJobNames = array();
+						foreach($arrjobs AS $jobId => $jobName)
+						{
+							$arrJobParts = explode('::', $jobName["job_name"]);
+							$arrJobNames[$jobId] = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
+						}
+						// Code to sort Job Names array in ascending order
+						asort($arrJobNames);
+					?><select name="lstJob" id="lstJob">
 							<option value="0">Select Job</option><?
-							foreach($arrjobs AS $jobId => $jobName)
+							foreach($arrJobNames AS $jobId => $jobName)
 							{
-								$arrJobParts = explode('::', $jobName["job_name"]);
-								$jobDispName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
-								?><option <?=$selectStr?> value="<?=$jobId?>"><?=$jobDispName?></option><?php 
+								?><option <?=$selectStr?> value="<?=$jobId?>"><?=$jobName?></option><?php 
 							}
 						?></select>
 					</td>

@@ -85,8 +85,15 @@ function sql_select_job($itemId)
 		{
 		   $arrJobParts = explode('::', $rowData['job_name']);
 		   $jobName = $arrClient[$arrJobParts[0]] . ' - ' . $arrJobParts[1]. ' - ' . $arrJobType[$arrJobParts[2]];
-		   $strReturn .= $rowData['job_id'] . '_' . $jobName . '+';
+		   $arrJobNames[$rowData['job_id']] = $jobName;
 		}
+
+		// Sort array of Job names in ascending order		
+		asort($arrJobNames);
+		
+		foreach($arrJobNames AS $jobId => $jobName)
+			$strReturn .= $jobId . '_' . $jobName . '+';
+
 		$strReturn = rtrim($strReturn, '+');
 	}
 	return $strReturn;

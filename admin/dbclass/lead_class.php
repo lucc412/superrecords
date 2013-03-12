@@ -39,7 +39,7 @@ class Lead_Class extends Database {
 					 AND t1.stf_CCode = c1.con_Code 
 					 AND t2.aty_Description like 'Staff' 
 					 {$appendStr} 
-					 ORDER BY stf_Code";
+					 ORDER BY c1.con_Firstname";
 		 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -118,7 +118,7 @@ class Lead_Class extends Database {
 
 		$qrySel = "SELECT cs.cst_Code, cs.cst_Description
 					FROM cli_state cs
-					ORDER BY cs.cst_Description ASC";
+					ORDER BY cs.cst_Description";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

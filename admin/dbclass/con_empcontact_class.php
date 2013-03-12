@@ -239,7 +239,7 @@ class empcontactContentList extends Database
                         <td>
                             <select name="con_Designation"><option value="0">Select Designation</option>
                                 <?php
-                                  $sql = "select `dsg_Code`, `dsg_Description` from `dsg_designation` ORDER BY dsg_Order ASC";
+                                  $sql = "select `dsg_Code`, `dsg_Description` from `dsg_designation` ORDER BY dsg_Order";
                                   $res = mysql_query($sql) or die(mysql_error());
                                   while ($lp_row = mysql_fetch_assoc($res)){
                                   $val = $lp_row["dsg_Code"];
@@ -306,7 +306,7 @@ class empcontactContentList extends Database
                                                         <td >State</td>
                                                             <td>
                                                                 <?php
-                                                                $state_query ="select `cst_Code`,`cst_Description` from `cli_state` ORDER BY cst_Description ASC";
+                                                                $state_query ="select `cst_Code`,`cst_Description` from `cli_state` ORDER BY cst_Description";
                                                                 $state_result=mysql_query($state_query) or die(mysql_error());
                                                                   ?>
                                                                 <select name="con_State" ><option value="">Select State</option>

@@ -29,7 +29,8 @@ class Practice_Class extends Database
 	public function fetchPractice() {		
 
 		$qrySel = "SELECT ct.id, ct.name 
-					FROM pr_practice ct";
+					FROM pr_practice ct 
+					ORDER BY ct.name";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -64,7 +65,7 @@ class Practice_Class extends Database
 			         AND t1.stf_CCode = c1.con_Code 
 			         AND t2.aty_Description like 'Staff' 
 			      	 {$appendStr} 
-			         ORDER BY stf_Code";
+			         ORDER BY c1.con_Firstname";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

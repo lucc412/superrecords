@@ -29,7 +29,8 @@ class Referrer_Class extends Database {
 					FROM con_contact as t1 
 					LEFT JOIN cnt_contacttype AS t2 ON t1.con_Type = t2.cnt_Code 
 					WHERE t2.cnt_Description like 'Employee'
-					AND t1.con_Designation = 24";
+					AND t1.con_Designation = 24 
+					ORDER BY t1.con_Firstname";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -68,7 +69,7 @@ class Referrer_Class extends Database {
 
 		$qrySel = "SELECT cs.cst_Code, cs.cst_Description
 					FROM cli_state cs
-					ORDER BY cs.cst_Description ASC";
+					ORDER BY cs.cst_Description";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -85,7 +86,7 @@ class Referrer_Class extends Database {
 					LEFT JOIN con_contact AS c1 ON t1.stf_CCode = c1.con_Code 
 					WHERE (c1.con_Designation=14 || c1.con_Designation=19) 
 					AND t2.aty_Description LIKE '%Staff%' 
-					ORDER BY stf_Code";
+					ORDER BY c1.con_Firstname";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

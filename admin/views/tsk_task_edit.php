@@ -86,17 +86,22 @@
 				}
 				else
 				{
-			   		?><span id="spanJob">
-							<select id="lstJob" name="lstJob">
+			   		?><span id="spanJob"><?
+						$arrJobNames = array();
+						foreach($arrFewJob AS $jobId => $job_name)
+						{
+							$arrJobParts = explode('::', $job_name);
+							$arrJobNames[$jobId] = $objCallData->arrClient[$arrJobParts[0]] . ' - ' . $arrJobParts[1]. ' - ' . $objCallData->arrJobType[$arrJobParts[2]]["sub_Description"];
+						}
+						// Code to sort Job Names array in ascending order
+						asort($arrJobNames);
+						?><select id="lstJob" name="lstJob">
 								<option value="0">----- Select Job -----</option><?php
-								foreach($arrFewJob AS $job_id => $job_name)
+								foreach($arrJobNames AS $job_id => $job_name)
 								{
-									$arrJobParts = explode('::', $job_name);
-									$jobName = '<b style="color:#b30000">'.$objCallData->arrClient[$arrJobParts[0]] . '</b> - <b style="color:#0411ff">' . $arrJobParts[1]. '</b> - <b style="color:#006a0e">' . $objCallData->arrJobType[$arrJobParts[2]]["sub_Description"].'</b>';
-								
 									$selectStr = '';
 									if($job_id == $arrTaskData['job_id']) $selectStr = 'selected';		
-									?><option <?=$selectStr?> value="<?=$job_id?>"><?=$jobName?></option><?php 
+									?><option <?=$selectStr?> value="<?=$job_id?>"><?=$job_name?></option><?php 
 								} 
 							?></select>
 					  </span>

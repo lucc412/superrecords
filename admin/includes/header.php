@@ -435,35 +435,6 @@ if($_SESSION['validUser']) {
 			<div class="container">
 				<ul></ul>
 				<ul><?
-
-					// System Setup Menu (check access by passing $_SESSION of staff code and form code)
-					$formcode_sys="2,75";
-					$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);
-
-					if($access_menu_level=="true") {   
-						?><li class="dropdown"><a href="#">System Setup</a>      
-							<ul class="sub"><?
-
-								// Case Status Submenu (Check access by passing $_SESSION of staff code and form code)
-								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],2,1);
-								if(is_array($access_submenu_level)==1) {
-									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="cas_casestatus.php?a=reset">Case Status</a></li><?
-									}
-								} 
-
-								// Lead Closure Reason Submenu (Check access by passing $_SESSION of staff code and form code)
-								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],75,1);
-								if(is_array($access_submenu_level)==1) {
-									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="lcr_leadclosurereason.php?a=reset">Lead Closure Reason</a></li><?
-									}
-								} 
-						
-							?></ul>
-						</li><?
-					}
-
 					// Lead Menu (check access by passing $_SESSION of staff code and form code)
 					$formcode_sys="78,79,80,81,82,83";
 					$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);

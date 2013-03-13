@@ -101,18 +101,25 @@ document.getElementById('stf_Delete['+rowid+"]").checked=false;
 function CheckAll_View(chk)
 {
 var string=chk.split("|");
+
 if(document.staff.Check_ctr_view.checked==true)
 {
 for (i = 0; i < string.length; i++)
 {
-document.getElementById('stf_View['+string[i]+"]").checked=true;
+	if(document.getElementById('stf_View['+string[i]+"]"))
+	{
+		document.getElementById('stf_View['+string[i]+"]").checked=true;
+	}
 }
 }
 else
 {
 for (i = 0; i < string.length; i++)
 {
-document.getElementById('stf_View['+string[i]+"]").checked=false;
+	if(document.getElementById('stf_View['+string[i]+"]"))
+	{
+		document.getElementById('stf_View['+string[i]+"]").checked=false;
+	}
 }
 }
 }
@@ -123,14 +130,20 @@ if(document.staff.Check_ctr_add.checked==true)
 {
 for (i = 0; i < string.length; i++)
 {
-document.getElementById('stf_Add['+string[i]+"]").checked=true;
+	if(document.getElementById('stf_Add['+string[i]+"]"))
+	{
+		document.getElementById('stf_Add['+string[i]+"]").checked=true;
+	}
 }
 }
 else
 {
 for (i = 0; i < string.length; i++)
 {
-document.getElementById('stf_Add['+string[i]+"]").checked=false;
+	if(document.getElementById('stf_Add['+string[i]+"]"))
+	{
+		document.getElementById('stf_Add['+string[i]+"]").checked=false;
+	}
 }
 }
 }
@@ -141,14 +154,20 @@ if(document.staff.Check_ctr_edit.checked==true)
 {
 for (i = 0; i < string.length; i++)
 {
-document.getElementById('stf_Edit['+string[i]+"]").checked=true;
+	if(document.getElementById('stf_Edit['+string[i]+"]"))
+	{
+	document.getElementById('stf_Edit['+string[i]+"]").checked=true;
+	}
 }
 }
 else
 {
 for (i = 0; i < string.length; i++)
 {
-document.getElementById('stf_Edit['+string[i]+"]").checked=false;
+	if(document.getElementById('stf_Edit['+string[i]+"]"))
+	{
+		document.getElementById('stf_Edit['+string[i]+"]").checked=false;
+	}
 }
 }
 }
@@ -159,14 +178,20 @@ if(document.staff.Check_ctr_delete.checked==true)
 {
 for (i = 0; i < string.length; i++)
 {
-document.getElementById('stf_Delete['+string[i]+"]").checked=true;
+	if(document.getElementById('stf_Delete['+string[i]+"]"))
+	{
+		document.getElementById('stf_Delete['+string[i]+"]").checked=true;
+	}	
 }
 }
 else
 {
 for (i = 0; i < string.length; i++)
 {
-document.getElementById('stf_Delete['+string[i]+"]").checked=false;
+	if(document.getElementById('stf_Delete['+string[i]+"]"))
+	{
+	document.getElementById('stf_Delete['+string[i]+"]").checked=false;
+	}	
 }
 }
 }

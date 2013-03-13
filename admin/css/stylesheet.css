@@ -214,7 +214,7 @@ a img{
 	z-index: 9999;
 	margin: 0; 
 	list-style: none;
-	background:url(../images/spacer.gif);
+	background:url(../images_user/spacer.gif);
 }
 .nav .container li { 
 	margin: 0; 
@@ -236,7 +236,7 @@ a img{
 
 .nav .container > ul > li {
     float: left;
-    margin-left: 25px;
+    margin-left: 0px;
     position: relative;
 	z-index:9999;
 	border-left: 1px solid #032a4a;
@@ -250,7 +250,7 @@ a img{
 
 
 .nav .container .dropdown{
-	/* background: url(../images/menu-dropdown.jpg) 89% 25px no-repeat; */
+	 background: url(../images/menu-dropdown.jpg) 89% 25px no-repeat; 
 }
 
 .nav .container > ul > li > a {
@@ -258,7 +258,7 @@ a img{
 	font-size: 16px;
 	font-family: 'Open Sans Condensed', 'OpenSansCondensedLight', sans-serif;
 	font-weight: 600;
-	padding: 0px 27px;
+	padding: 7px 28px;
 	-webkit-transition: color .15s;
 	-moz-transition: color .15s;
 	-o-transition: color .15s;
@@ -282,7 +282,7 @@ a img{
     position: absolute;
 	top: 35px;
 	left: 64%;
-	margin-left: -92px;
+	margin-left: -115px;
 	width: 188px;
 	-webkit-transition: all .3s .1s;
   	-moz-transition: all .3s .1s;

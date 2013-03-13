@@ -55,7 +55,7 @@ $_SESSION['timeout'] = time();
    var visibleMenus = new Array(); 
    var activeMenuItem = false; 
    var timeBeforeAutoHide = 1200; // Microseconds from mouse leaves menu to auto hide. 
-   var dhtmlgoodies_menu_arrow = 'images/arrow.gif'; 
+   //var dhtmlgoodies_menu_arrow = 'images/arrow.gif'; 
     
    var MSIE = navigator.userAgent.indexOf('MSIE')>=0?true:false; 
    var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox')>=0?true:false; 
@@ -434,7 +434,9 @@ if($_SESSION['validUser']) {
 		?><div class="nav">
 			<div class="container">
 				<ul></ul>
-				<ul><?
+				<ul>
+					<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li><?
+	
 					// Lead Menu (check access by passing $_SESSION of staff code and form code)
 					$formcode_sys="78,79,80,81,82,83";
 					$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);

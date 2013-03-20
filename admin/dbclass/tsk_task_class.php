@@ -267,7 +267,7 @@ class Task_Class extends Database {
 					'" . $_REQUEST['lstProcessingCycle'] . "', 
 					'" . $strExtDate . "',
 					'" . $strBefreeDate . "',
-					NOW(),
+					NOW()
 					)";
 		}	
 		else {

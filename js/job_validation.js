@@ -69,15 +69,24 @@ function checkDocValidation()
 	// do field validation  
 	if (document.objForm.lstJob.value == 0)
 	{
-		alert("Select Job");
-		document.objForm.lstJob.focus();
+		//alert("Select Job");
+		lstJob.className = "errclass";
+		//document.objForm.lstJob.focus();
 		flagReturn = false;
 	}
-	else if (document.objForm.fileDoc.value == "")
+	else {
+		lstJob.className = "drop_down_select";
+	}
+	
+	if (document.objForm.fileDoc.value == "")
 	{		
-		alert("Select Document");
-		document.objForm.fileDoc.focus();
+		//alert("Select Document");
+		fileDoc.className = "errclass";
+		//document.objForm.fileDoc.focus();
 		flagReturn = false;
+	}
+	else {
+		fileDoc.className = "";
 	}
 	
 	if(flagReturn)

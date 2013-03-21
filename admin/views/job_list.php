@@ -125,7 +125,8 @@ switch ($a)
 				</tr>
 				
 				<tr style="vertical-align:top;">
-					<td class="hr">Source Documents</td>
+					<td class="hr">
+					</td>
 					<td colspan="2"><input type="text" name="textSource_50" title="Specify name of source document"><input type="file" name="sourceDoc_50" id="sourceDoc_50">
 						<span style="margin-left:20px;"></span>
 						<div id="parentDiv"></div>
@@ -314,7 +315,7 @@ switch ($a)
 		<table  class="fieldtable" align="center"  border="0" cellspacing="1" cellpadding="4" >
 		<tr class="fieldheader">
 			<th class="fieldheader" align="left">Type</th>
-			<th class="fieldheader">Document</th>
+			<th class="fieldheader" align="left">Document</th>
 			<th class="fieldheader" align="center">Date Uploaded by Practice</th>
 			<th class="fieldheader" align="center">Viewed by Super Records</th>
 			<th class="fieldheader" align="center">Download</th>

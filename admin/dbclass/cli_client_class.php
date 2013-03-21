@@ -48,7 +48,7 @@ class Practice_Class extends Database
         }
         // if employees are fetched that are India Manager
         else if($flagManager == 'indiamanager') { 
-			$appendStr = 'AND c1.con_Designation = 27';
+			$appendStr = 'AND c1.con_Designation = 28';
         }
         // if employees are fetched that are Team Member
         else if($flagManager == 'teammember') { 
@@ -96,7 +96,9 @@ class Practice_Class extends Database
 			$strWhere="WHERE sr_manager=".$userId." or india_manager=".$userId." or team_member=".$userId ." or sales_person=".$userId;
 
 		$qrySel = "SELECT t1.* 
-					FROM client t1 {$strWhere}";
+			FROM client t1 
+			{$strWhere}
+			ORDER BY t1.client_id DESC";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

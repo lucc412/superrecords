@@ -22,7 +22,7 @@ class Lead_Class extends Database {
         }
         // if employees are fetched that are India Manager
         else if($flagManager == 'indiamanager') { 
-			$appendStr = 'AND c1.con_Designation = 27';
+			$appendStr = 'AND c1.con_Designation = 28';
         }
         // if employees are fetched that are Team Member
         else if($flagManager == 'teammember') { 

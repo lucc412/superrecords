@@ -16,7 +16,7 @@ $objCallData = new Task_Class();
 if($_SESSION['validUser']) {
 	?><html>
 		<head>
-			<title>Manage Task</title>
+			<title>Task</title>
 			<meta name="generator" http-equiv="content-type" content="text/html">
 			<LINK href="<?php echo $styleSheet; ?>stylesheet.css" rel="stylesheet" type="text/css">
 			<LINK href="<?php echo $styleSheet; ?>tooltip.css" rel="stylesheet" type="text/css">

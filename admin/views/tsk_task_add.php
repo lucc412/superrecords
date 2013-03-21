@@ -156,7 +156,7 @@
 						?><option value="<?=$id?>"><?=$desc?></option><?php 
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Description of Task Status.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select task status.</span></a>
 			</td>
 		</tr>
 		
@@ -168,19 +168,19 @@
 						?><option value="<?=$id?>"><?=$desc?></option><?php 
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Description of Priority of task.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select priority of task.</span></a>
 			</td>
 		</tr>
 		
 		<tr>
-			<td class="hr">Processing Cycle <font style="color:red;" size="2">*</font></td>
+			<td class="hr">Process Cycle <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstProcessingCycle">
-					<option value="0">--- Select Processing Cycle ---</option><?php
+					<option value="0">--- Select Process Cycle ---</option><?php
 					foreach($objCallData->arrProcessingCycle AS $id => $desc){
 						?><option value="<?=$id?>"><?=$desc?></option><?php 
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Description of Processing Cycle.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select process cycle of task.</span></a>
 			</td>
 		</tr>
 		

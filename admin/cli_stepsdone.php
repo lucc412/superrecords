@@ -22,7 +22,7 @@
 
 <html>
 <head>
-<title>Steps Done</title>
+<title>Client Steps</title>
 <meta name="generator" http-equiv="content-type" content="text/html">
 <script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
 <script>
@@ -206,7 +206,7 @@ header("Location:index.php?msg=timeout");
   $reccount = min($showrecs * $page, $count);
 ?>
 <div class="frmheading">
-	<h1>Steps Done</h1>
+	<h1>Client Steps</h1>
 </div>
 <form action="cli_stepsdone.php" method="post">
 <table class="customFilter" border="0" cellspacing="1" cellpadding="4" align="right" style="margin-right:15px; ">
@@ -479,7 +479,7 @@ default:
 }
 ?>
 <div class="frmheading">
-	<h1><?php echo $title?> Steps Done</h1>
+	<h1><?php echo $title?> Client Steps</h1>
 </div>
 
 </span>

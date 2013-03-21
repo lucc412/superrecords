@@ -79,7 +79,7 @@
 	</tr>
 	
 	<tr>
-		<td class="hr">Processing Cycle</td>
+		<td class="hr">Process Cycle</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrProcessingCycle[$arrTaskData["process_id"]])?></td>
 	</tr>
 	

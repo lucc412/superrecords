@@ -43,7 +43,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">India Manager<font style="color:red;" size="2">*</font></td>
+			<td class="hr">India Manager</td>
 			<td><select name="lstManager">
 					<option value="">Select India Manager</option><?php
 					foreach($objCallData->arrInManager AS $typeId => $typeDesc){
@@ -56,7 +56,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Team Member<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Team Member</td>
 			<td><select name="lstMember">
 					<option value="">Select Team Member</option><?php
 					foreach($objCallData->arrTeamMember AS $typeId => $typeDesc){

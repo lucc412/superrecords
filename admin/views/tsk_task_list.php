@@ -1,4 +1,3 @@
-
 <!--*************************************************************************************************
 //  Task          : Page for Listing details of Task
 //  Modified By   : Dhiraj Sahu 
@@ -7,7 +6,7 @@
 //************************************************************************************************-->
 
 <div class="frmheading">
-	<h1>Manage Task</h1>
+	<h1>Task</h1>
 </div>
 
 <table class<table class="fieldtable" width="100%" align="center"  border="0" cellspacing="1" cellpadding="5"><?

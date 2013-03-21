@@ -471,7 +471,7 @@ default:
 		break;
 }
 ?>
-<?php echo $title?> Steps
+<?php echo $title?> Task Status
 </span>
 <div class="frmheading">
 	<h1></h1>

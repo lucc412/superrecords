@@ -3,42 +3,35 @@ function validateFormOnSubmit() {
 
 	// do field validation  
 	if (document.manageclient.lstPractice.value == "") {
-		alert("Select practice");
+		alert("Select Practice");
 		document.manageclient.lstPractice.focus();
 		flagReturn = false;
 	}
 
 	// do field validation  
 	else if (document.manageclient.lstSrManager.value == "") {
-		alert("Select SR manager");
+		alert("Select SR Manager");
 		document.manageclient.lstSrManager.focus();
 		flagReturn = false;
 	}
 
 	// do field validation  
 	else if (document.manageclient.cliName.value == "") {
-		alert("Enter client name");
+		alert("Enter Client Name");
 		document.manageclient.cliName.focus();
 		flagReturn = false;
 	}
 
 	// do field validation
 	else if (document.manageclient.lstType.value == "") {
-		alert("Select entity type");
+		alert("Select Entity Type");
 		document.manageclient.lstType.focus();
 		flagReturn = false;
 	}
 
 	// do field validation  
-	else if (document.manageclient.lstSrManager.value == "") {
-		alert("Select SR manager");
-		document.manageclient.lstSrManager.focus();
-		flagReturn = false;
-	}
-
-	// do field validation  
 	else if (document.manageclient.dateSignedUp.value == "") {
-		alert("Enter date client received");
+		alert("Enter Date Client Received");
 		document.manageclient.dateSignedUp.focus();
 		flagReturn = false;
 	}

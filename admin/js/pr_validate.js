@@ -2,19 +2,19 @@ function validateFormOnSubmit() {
 	
 	if (document.managepractice.lstType.value == "")
 	 {
-		alert("Select type");
+		alert("Select Type");
 		document.managepractice.lstType.focus();
 		return false;
 	}
 	
 	else if (document.managepractice.refName.value == "") {
-		alert("Enter practice name");
+		alert("Enter Practice Name");
 		document.managepractice.refName.focus();
 		return  false;
 	}
 	
 	else if (document.managepractice.lstSrManager.value == "") {
-		alert("Select SR manager");
+		alert("Select SR Manager");
 		document.managepractice.lstSrManager.focus();
 		return false;
 	}
@@ -27,7 +27,7 @@ function validateFormOnSubmit() {
 	}
 	
 	else if (document.managepractice.mainContactName.value == "") {
-		alert("Enter name of main contact");
+		alert("Enter Main Contact Name");
 		document.managepractice.mainContactName.focus();
 		return false;
 	}
@@ -47,13 +47,13 @@ function validateFormOnSubmit() {
 	}
 	
 	else if (document.managepractice.dateSignedUp.value == "") {
-		alert("Enter date signed up");
+		alert("Enter Date Signed Up");
 		document.managepractice.dateSignedUp.focus();
 		return  false;
 	}
 	
 	else if (document.managepractice.lstSalesPerson.value == "") {
-		alert("Select sales person");
+		alert("Select Sales Person");
 		document.managepractice.lstSalesPerson.focus();
 		return false;
 	}
@@ -62,9 +62,6 @@ function validateFormOnSubmit() {
 	{
 		return true;
 	}
-	
-	
-
 	
 }
 

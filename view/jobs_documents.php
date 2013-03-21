@@ -23,8 +23,8 @@ switch($_REQUEST['a'])
 				?><div class="errorMsg"><?=ERRORICON?>&nbsp;No documents uploaded...!</div><?	
 			}
 			else {
-				?><a href="jobs.php?a=uploadDoc" title="Click to view this document">
-				<button type="button" title="Click here to upload new source document" onclick="javascript:addElement();" value="Add">Upload Document +</button></a>
+				?><a href="jobs.php?a=uploadDoc">
+				<button type="button" title="Click here to upload new source document" value="Add">Upload Document +</button></a>
 					</br></br>
 					
 				<table width="100%" class="resources">
@@ -126,7 +126,7 @@ switch($_REQUEST['a'])
 				<tr><td>&nbsp;</td></tr>
 				
 				<tr>
-					<td><strong> Select Document <font style="color:red;" size="2">*</font> </strong></td>
+					<td><strong> Source Document <font style="color:red;" size="2">*</font> </strong></td>
 					<td> <input type="file" name="fileDoc" id="fileDoc" size="30px" /> </td>
 				</tr>
 				

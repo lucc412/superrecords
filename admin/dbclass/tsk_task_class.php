@@ -27,7 +27,7 @@ class Task_Class extends Database {
 
 	public function fetchJobType()
 	{
-		$qrySel = "SELECT * FROM sub_subactivity";
+		$qrySel = "SELECT * FROM sub_subactivity order by sub_Order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -152,7 +152,7 @@ class Task_Class extends Database {
 
 		$qrySel = "SELECT mas_Code, mas_Description 
 					FROM mas_masteractivity 
-					ORDER BY mas_Description";
+					ORDER BY mas_Order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -170,7 +170,7 @@ class Task_Class extends Database {
 	
 		$qrySel = "SELECT sub_Code, sub_Description 
 					FROM sub_subactivity ".$strWhere."
-					ORDER BY sub_Description";
+					ORDER BY sub_Order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -189,7 +189,7 @@ class Task_Class extends Database {
         }
         // if employees are fetched that are Sales Manager
         else if($flagManager == 'indiamanager') { 
-                        $appendStr = 'AND c1.con_Designation = 27';
+                        $appendStr = 'AND c1.con_Designation = 28';
         }
         // if employees are fetched that are Sales Manager
         else if($flagManager == 'teammember') { 

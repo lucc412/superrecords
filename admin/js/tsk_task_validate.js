@@ -58,14 +58,14 @@ function validateFormOnSubmit() {
 
 	// do field validation  
 	else if (document.managetask.lstSrIndiaManager.value == 0) {
-		alert("Select Sr India Manager");
+		alert("Select India Manager");
 		document.managetask.lstSrIndiaManager.focus();
 		flagReturn = false;
 	}
 	
 	// do field validation  
 	else if (document.managetask.lstSrTeamMember.value == 0) {
-		alert("Select Sr Team Member");
+		alert("Select Team Member");
 		document.managetask.lstSrTeamMember.focus();
 		flagReturn = false;
 	}
@@ -86,7 +86,7 @@ function validateFormOnSubmit() {
 	
 	// do field validation  
 	else if (document.managetask.lstProcessingCycle.value == 0) {
-		alert("Select Processing Cycle");
+		alert("Select Process Cycle");
 		document.managetask.lstProcessingCycle.focus();
 		flagReturn = false;
 	}

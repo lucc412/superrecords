@@ -34,6 +34,12 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 			else if($qryStr == 'a=completed') {
 				?><title>Completed Jobs</title><?
 			}
+			else if($qryStr == 'a=document') {
+				?><title>My Documents</title><?
+			}
+			else if($qryStr == 'a=uploadDoc') {
+				?><title>Upload Document</title><?
+			}
 			else {
 				?><title>View My Job List</title><?
 			}

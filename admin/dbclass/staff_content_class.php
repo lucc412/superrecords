@@ -58,6 +58,7 @@ class staffContentList extends Database
 							<option value="">All Fields</option>
 							<option value="<?php echo "lp_stf_CCode" ?>"<?php if ($filterfield == "lp_stf_CCode") { echo "selected"; } ?>>Contact Name</option>
 							<option value="<?php echo "lp_stf_AccessType" ?>"<?php if ($filterfield == "lp_stf_AccessType") { echo "selected"; } ?>>Access Type</option>
+							<option value="<?php echo "dsg_Description" ?>"<?php if ($filterfield == "dsg_Description") { echo "selected"; } ?>>Designation</option>
 							<!--
 							<option value="<?php echo "stf_Login" ?>"<?php if ($filterfield == "stf_Login") { echo "selected"; } ?>>Login</option>
 							<option value="<?php echo "stf_Password" ?>"<?php if ($filterfield == "stf_Password") { echo "selected"; } ?>>Password</option>
@@ -88,6 +89,7 @@ class staffContentList extends Database
 				<tr class="fieldheader">
 					<th align="left" class="fieldheader"><a href="stf_staff.php?order=<?php echo "lp_stf_CCode" ?>&type=<?php echo $ordtypestr ?>">Contact Name</a></th>
 					<th align="left" class="fieldheader"><a  href="stf_staff.php?order=<?php echo "lp_stf_AccessType" ?>&type=<?php echo $ordtypestr ?>">AccessType</a></th>
+					<th align="left" class="fieldheader"><a  href="stf_staff.php?order=<?php echo "dsg_Description" ?>&type=<?php echo $ordtypestr ?>">Designation</a></th>
 					<th width="12%" class="fieldheader" colspan="3" align="center">Actions</th>
 				</tr><?
 
@@ -100,7 +102,8 @@ class staffContentList extends Database
 
 					?><tr class="<?=$trClass?>">
 						<td class="<?php echo $style ?>"><?php echo $commonUses->getFirstLastName($row["stf_Code"]) ?></td>
-						<td class="<?php echo $style ?>"><?php if ($row["lp_stf_AccessType"]=="Staff") echo "User"; else echo htmlspecialchars($row["lp_stf_AccessType"]) ?></td><?
+						<td class="<?php echo $style ?>"><?php if ($row["lp_stf_AccessType"]=="Staff") echo "User"; else echo htmlspecialchars($row["lp_stf_AccessType"]) ?></td>
+						<td class="<?php echo $style ?>"><?=$row["dsg_Description"]?></td><?
 						if($access_file_level['stf_View']=="Y")
 						{
 							?><td align="center"><a href="stf_staff.php?a=view&recid=<?php echo $i ?>"><img src="images/view.png" border="0"  alt="View" name="View" title="View" align="middle" /></a></td><?

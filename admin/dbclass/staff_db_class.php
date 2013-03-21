@@ -13,7 +13,15 @@ class staffDbquery extends Database
 
           $filterstr = $commonUses->sqlstr($filter);
           if (!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
-          $sql = "SELECT * FROM (SELECT t1.`stf_Code`, t1.`stf_CCode`, CONCAT_WS(' ',lp1.`con_Firstname`,lp1.`con_Lastname`) AS `lp_stf_CCode`, t1.`stf_AccessType`, lp2.`aty_Description` AS `lp_stf_AccessType`, t1.`stf_Login`, t1.`stf_Password`, t1.`stf_Createdby`, t1.`stf_Createdon`, t1.`stf_Lastmodifiedby`, t1.`stf_Lastmodifiedon`, t1.`stf_Disabled`, t1.`stf_Viewall`, t1.`stf_Upload`, t1.`stf_LoginStatus` FROM `stf_staff` AS t1 LEFT OUTER JOIN `con_contact` AS lp1 ON (t1.`stf_CCode` = lp1.`con_Code`) LEFT OUTER JOIN `aty_accesstype` AS lp2 ON (t1.`stf_AccessType` = lp2.`aty_Code`) where lp2.`aty_Description` not like 'Super Administrator') subq";
+          $sql = "SELECT * FROM (SELECT t1.`stf_Code`, t1.`stf_CCode`, CONCAT_WS(' ',lp1.`con_Firstname`,lp1.`con_Lastname`) AS `lp_stf_CCode`, t1.`stf_AccessType`, lp2.`aty_Description` AS `lp_stf_AccessType`, t1.`stf_Login`, t1.`stf_Password`, t1.`stf_Createdby`, t1.`stf_Createdon`, t1.`stf_Lastmodifiedby`, t1.`stf_Lastmodifiedon`, t1.`stf_Disabled`, t1.`stf_Viewall`, t1.`stf_Upload`, t1.`stf_LoginStatus`, dsg.dsg_Description
+		  
+		  FROM `stf_staff` AS t1, `aty_accesstype` lp2, `con_contact` AS lp1
+		  LEFT JOIN dsg_designation dsg ON lp1.`con_Designation` = dsg.`dsg_Code`
+		  WHERE t1.`stf_CCode` = lp1.`con_Code`
+		  AND t1.`stf_AccessType` = lp2.`aty_Code`
+		  AND lp2.`aty_Description` not like 'Super Administrator'
+		  GROUP BY lp1.con_Code) subq";
+
           if (isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
             $sql .= " where " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";
           } elseif (isset($filterstr) && $filterstr!='') {

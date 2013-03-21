@@ -230,8 +230,8 @@ class Job {
 						$qryIns = "INSERT INTO documents(job_id, document_title, file_path, date)
 									VALUES(
 									".$jobId.", 
-									'".$_REQUEST['textSource_'.$uploadCnt]."', 
-									'".$fileName."', 
+									'". addslashes($_REQUEST['textSource_'.$uploadCnt]) ."', 
+									'". addslashes($fileName) ."', 
 									NOW() 
 									)";
 						mysql_query($qryIns);
@@ -262,8 +262,8 @@ class Job {
 				$qryIns = "INSERT INTO documents(job_id, document_title, file_path, date)
 						VALUES(
 						".$_REQUEST['lstJob'].", 
-						'".$_REQUEST['txtDocTitle']."', 
-						'".$fileName."', 
+						'". addslashes($_REQUEST['txtDocTitle']) ."', 
+						'". addslashes($fileName) ."', 
 						NOW() 
 						)";
 				mysql_query($qryIns);

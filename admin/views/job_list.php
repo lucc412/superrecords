@@ -530,19 +530,25 @@ switch ($a)
 		
         <div>
 			<a href="job.php?a=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight">
-			<img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom" height="22px" style="margin-top:-5px;" >&nbsp;Add Record</a>
-			
-			<span style="margin-left:800px;">
-			   <a href="job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>"><input type="button" name="sendEmail" value="Send Mail to Practice" class="sendMailBtn"></a>
-			</span><br>
+			<img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom" height="22px" style="margin-top:-5px;" >&nbsp;Add Record</a><?
 
-			<span class="boldtext"><?php 
-			$lastDate = $objCallData->view_send_mail_practice($_REQUEST["jobId"]);
-			if($lastDate != '0000-00-00') {
-				echo 'Last Sent : '.date('d-M-Y', strtotime($lastDate));
+			// check if event is active or inactive [This will return TRUE or FALSE as per result]
+			$pageUrl = "job.php?sql=sendMail";	
+			$flagSet = getEventStatus($pageUrl);
+			
+			if($flagSet) {
+				?><span style="margin-left:800px;">
+				   <a href="job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>"><input type="button" name="sendEmail" value="Send Mail to Practice" class="sendMailBtn"></a>
+				</span><br>
+
+				<span class="boldtext"><?php 
+				$lastDate = $objCallData->view_send_mail_practice($_REQUEST["jobId"]);
+				if($lastDate != '0000-00-00') {
+					echo 'Last Sent : '.date('d-M-Y', strtotime($lastDate));
+				}
+			   ?></span><?
 			}
-		   ?></span>
-	    </div>	
+	    ?></div>	
 		<br>
 		
 		<form method="POST" name="frmQueriesList" action="job.php?sql=updateQuery">

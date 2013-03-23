@@ -38,9 +38,9 @@
 					$eventId = $arrEventInfo["event_id"];
 					?><textarea cols="80" id="txtContent" name="txtContent" rows="10"><?=$arrEventInfo["event_content"]?></textarea><br/>
 
-					<span style="color:orange"><u>Below are the dynamic fields for this content:</u></span><?
+					<span style="color:orange"><u>Below are the dynamic fields applicable to this content:</u></span><?
 
-					if($eventId != '6' && $eventId != '7') {
+					if($eventId != '6' && $eventId != '7' && $eventId != '8') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">PRACTICENAME</div><?
 					}
 

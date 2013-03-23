@@ -61,7 +61,7 @@
 						else if($eventId == '4' || $eventId == '5') {
 							echo 'SR Manager, India Manager';
 						}
-						else if($eventId == '6' || $eventId == '7') {
+						else if($eventId == '6' || $eventId == '7' || $eventId == '8') {
 							echo 'Practice';
 						}
 					?></td><?

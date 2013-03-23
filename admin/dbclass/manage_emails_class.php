@@ -22,7 +22,8 @@ class Manage_Emails extends Database {
 
 		$qrySel = "SELECT ee.*
 					FROM email_events ee
-					{$appendStr}";
+					{$appendStr}
+					ORDER By event_order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

@@ -568,6 +568,7 @@ switch ($a)
                     <th class="fieldheader">Date Answered</th>
 					<th class="fieldheader">Answered?</th>
 					<th class="fieldheader" align="center">Save</th>
+					<th class="fieldheader" align="center">Action</th>
 				</tr><?
 				
 			$srNo = 0;
@@ -612,24 +613,34 @@ switch ($a)
 						else {
 							?><td width="10%" class="<?=$style?> yellowBG"></td><?
 						}
-					 ?><td width="9%" class="<?=$style?> blueBG" align="center"><?
+					  
+					  if($arrInfo["status"] == 1)
+					  	$yesNo = "background-color:#d5f2cc;";
+					  else
+						$yesNo = "background-color:#ffe1dd;";
+						
+					 ?><td width="9%" class="<?=$style?> blueBG" style="<?=$yesNo?>" align="center"><?
 					 
 					 if($arrInfo["status"] == 1)
 					 {
-  			      		?><img src="images/right.png" border="0"  alt="View" name="View" title="View" align="middle" height="20px" width="20px"/></br></br>
-						  <input class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="1" checked="true"/>Yes
+  			      		?><input class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="1" checked="true"/>Yes
 						  <input class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="0"/>No<?
 					 }
 					 else
 					 {
-						?><img src="images/wrong.png" border="0"  alt="View" name="View" title="View" align="middle" height="20px" width="20px"/></br></br>
-						<input class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="1"/>Yes
+						?><input class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="1"/>Yes
 						  <input class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="0" checked="true"/>No<?				 
 					 }		
 					?></td>
 						
 					<td width="6%" class="<?=$style?> blueBG" align="center">
 						<input type="button" name="btnSave" value="Save" style="background-color:#07aff8; border:solid; color:#ffffff; width:70px;" onClick="javascript:updateQuery(<?=$queryId?>)">
+					</td>
+					<td align="center"><?
+					  	  $jsFunc = "javascript:performdelete('job.php?sql=deleteQuery&jobId=".$_REQUEST["jobId"]."&queryId=".$queryId."');";
+						  ?><a onClick="<?=$jsFunc?>" href="javascript:;">
+							  	<img src="images/erase.png"  border="0" height="23px" width="20px" alt="Delete" name="Delete" title="Delete" align="middle" />
+						   </a>
 					</td>						
 					</tr><?
 				}

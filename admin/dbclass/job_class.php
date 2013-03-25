@@ -316,6 +316,22 @@ class Job_Class extends Database
 		mysql_query($qryDel);
 	}
 	
+	// Delete Query
+	public function delete_query()
+	{
+		$qrySel = "SELECT report_file_path FROM queries WHERE query_id=".$_REQUEST["queryId"];
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult))
+			$fileName[] = $rowData["report_file_path"];
+
+		$file = "../uploads/srqueries/" . $fileName[0];
+		unlink($file);
+
+		$qryDel = "DELETE FROM queries WHERE query_id=".$_REQUEST["queryId"];
+		mysql_query($qryDel);
+	}
+	
 //************************************************************************************************
 //  Task          : Function to Insert new Job
 //  Modified By   : Dhiraj Sahu 

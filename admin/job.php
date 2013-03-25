@@ -115,6 +115,11 @@ if($_SESSION['validUser']) {
 					$objCallData->discontinue_job();
 					break;
 
+				case "deleteQuery":
+					$objCallData->delete_query();
+					header('Location: job.php?a=queries&jobId='.$_REQUEST["jobId"]);
+					break;
+
 				case "download":
 					if($_REQUEST["filePath"]) {
 						if($_REQUEST['flagType'] == 'S') { 
@@ -170,7 +175,6 @@ if($_SESSION['validUser']) {
 				case "insertQuery":
 					$objCallData->add_query();
 					header('Location: job.php?a=queries&jobId='.$_REQUEST["jobId"]);
-
 					break;
 
 				case "updateQuery":

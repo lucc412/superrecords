@@ -34,12 +34,6 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 			else if($qryStr == 'a=completed') {
 				?><title>Completed Jobs</title><?
 			}
-			else if($qryStr == 'a=document') {
-				?><title>My Documents</title><?
-			}
-			else if($qryStr == 'a=uploadDoc') {
-				?><title>Upload Document</title><?
-			}
 			else {
 				?><title>View My Job List</title><?
 			}
@@ -66,7 +60,16 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 		else {
 			?><title>Home</title><?
 		}
-	?></head>
+	?>
+		<script>
+			// This function is used to redirect page
+			function urlRedirect(url)
+			{
+				window.location.href = url;
+			}
+		</script>
+		
+	</head>
 	<body><?
 		include("path.php");
 		?><div class="wrapper"><?
@@ -80,7 +83,7 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 							<span style="color:#074263">Welcome,</span> <span><?=$_SESSION['PRACTICE'];?></span>
 						</div> <!--user-->
 						<div class="phone">
-							<a href="login.php?a=logout"><button class="logoutbtn" type="submit" value="Submit">Logout</button></a>
+							<button class="logoutbtn" onclick="javascript:urlRedirect('login.php?a=logout');" type="submit" value="Submit">Logout</button>
 						</div> <!--phone-->
 					</div> <!--container-->
 				</div> <!--header-->

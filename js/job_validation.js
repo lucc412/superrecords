@@ -1,3 +1,10 @@
+// This function is used to redirect page
+function urlRedirect(url)
+{
+	window.location.href = url;
+}
+
+
 // This function is used to perform validations
 function checkValidation() {
 
@@ -66,31 +73,29 @@ function checkDocValidation()
 {	
 	flagReturn = true;
 
+	var lstJob = document.getElementById('lstJob');
+	var fileDoc = document.getElementById('fileDoc');
+	
 	// do field validation  
-	if (document.objForm.lstJob.value == 0)
+	if (lstJob.value == 0)
 	{
-		//alert("Select Job");
 		lstJob.className = "errclass";
-		//document.objForm.lstJob.focus();
 		flagReturn = false;
 	}
 	else {
 		lstJob.className = "drop_down_select";
 	}
 	
-	if (document.objForm.fileDoc.value == "")
+	if (fileDoc.value == "")
 	{		
-		//alert("Select Document");
 		fileDoc.className = "errclass";
-		//document.objForm.fileDoc.focus();
 		flagReturn = false;
 	}
 	else {
 		fileDoc.className = "";
 	}
 	
-	if(flagReturn)
-	{
+	if(flagReturn) {
 		document.objForm.submit();
 	}
 	

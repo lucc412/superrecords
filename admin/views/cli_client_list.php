@@ -30,7 +30,7 @@
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrPractice[$arrInfo["id"]])?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrTypes[$arrInfo["client_type_id"]])?></td>
 			
-			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrSrManager[$arrInfo["sr_manager"]])?></td>
+			<td class="<?=$style?>"><?=htmlspecialchars($arrEmployees[$arrInfo["sr_manager"]])?></td>
 			<td align="center" class="<?=$style?>"><?
 				$dateSignedUp = "";
 				if (isset($arrInfo["client_received"]) && $arrInfo["client_received"] != "") {

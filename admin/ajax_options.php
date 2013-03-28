@@ -1,10 +1,11 @@
 <?php
-//************************************************************************************************
-//  Task          : Functions to select details from table based on parameter received.
-//  Modified By   : Dhiraj Sahu 
-//  Created on    : 29-Dec-2012
-//  Last Modified : 26-Jan-2013 
-//************************************************************************************************
+/*
+	Task : Functions to load associative clients, jobs as per selected practice [Pages: clients, jobs, tasks]
+	Created By	: Dhiraj Sahu 
+	Modified By : Disha Goyal
+	Created on  : 29-Dec-2012
+	Modified on : 26-Jan-2013 
+*/
 
 include("dbclass/commonFunctions_class.php");
 include("dbclass/tsk_task_class.php");
@@ -23,6 +24,10 @@ switch($doAction) {
 			
 	case 'SubActivity':
 			$returnStr = sql_select_subActivity($itemId);
+			break;
+
+	case 'LoadPanel':
+			$returnStr = sql_select_panel($itemId);
 			break;
 }
 
@@ -121,5 +126,46 @@ function sql_select_subActivity($itemId)
 	}
 	return $strReturn;
 }
+
+// fetch sr manager, india manager, sales manager, team member for selected practice
+function sql_select_panel($itemId)
+{
+	$sql = "SELECT id, sr_manager, team_member, india_manager, sales_person
+			FROM pr_practice
+			WHERE id=".$itemId;
+			
+	$res = mysql_query($sql) or die(mysql_error());
+	$count = mysql_num_rows($res);
+
+	if(!empty($count))
+	{
+		// fetch array of name of all employees
+		$arrEmployees = fetchEmployees();
+
+		$rowData = mysql_fetch_assoc($res);
+		$srManager = $arrEmployees[$rowData['sr_manager']];
+		$salesPrson = $arrEmployees[$rowData['sales_person']];
+		$inManager = $arrEmployees[$rowData['india_manager']];
+		$teamMember = $arrEmployees[$rowData['team_member']];
+
+		// set string of srManager, salesPrson, inManager, teamMember
+		$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember;
+	}
+	return $strReturn;
+}
+
+function fetchEmployees() {	
+
+	$qrySel = "SELECT ss.stf_Code, CONCAT_WS(' ', cc.con_Firstname, cc.con_Lastname) staffName 
+				 FROM stf_staff ss, con_contact cc
+				 WHERE ss.stf_CCode = cc.con_Code ";
+
+	$fetchResult = mysql_query($qrySel);		
+	while($rowData = mysql_fetch_assoc($fetchResult)) {
+		$arrEmployees[$rowData['stf_Code']] = $rowData['staffName'];
+	}
+	return $arrEmployees;	
+} 
+
 print($returnStr);
 ?>

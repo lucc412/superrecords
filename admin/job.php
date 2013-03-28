@@ -48,6 +48,7 @@ if($_SESSION['validUser']) {
 					$jobId = $objCallData->insert_job();
 					
 					/* send mail function starts here */
+					$practiceId = $_REQUEST['lstPractice'];
 					$pageUrl = basename($_SERVER['REQUEST_URI']);
 					$arrPageUrl = explode('&',$pageUrl);	
 					$pageUrl = $arrPageUrl[0];
@@ -60,13 +61,17 @@ if($_SESSION['validUser']) {
 
 						//It will Get All Details in array format for Send Email	
 						$arrEmailInfo = get_email_info($pageUrl);
-						$srManagerEmailId = fetchStaffInfo('113','email');
-						
+
+						// fetch email id of sr manager
+						$strPanelInfo = sql_select_panel($practiceId);
+						$arrPanelInfo = explode('~', $strPanelInfo);
+						$srManagerEmailId = $arrPanelInfo[0];
+
 						$to = $srManagerEmailId;
 						$cc = $arrEmailInfo['event_cc'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
-						$content =replaceContent($content, NULL, $_REQUEST['lstPractice'], NULL, $jobId);
+						$content =replaceContent($content, NULL, $practiceId, NULL, $jobId);
 						
 						include_once(MAIL);
 						send_mail($to, $cc, $subject, $content);

@@ -74,7 +74,7 @@ switch ($a)
 			<tr>
 			   <td class="hr">Practice Name<font style="color:red;" size="2">*</font></td>
 				  <td colspan="2">
-				  	<select id="lstPractice" name="lstPractice" onChange="javascript:selectOptions('Client');">
+				  	<select id="lstPractice" name="lstPractice" onChange="javascript:selectOptions('Client');selectPanel();">
 						<option value="">----- Select Practice -----</option><?php
 						foreach($objCallData->arrPracticeName AS $practice_id => $practice_name) {
 							?><option value="<?=$practice_id?>"><?=$practice_name?></option><?php 
@@ -92,6 +92,19 @@ switch ($a)
 						</span>
 						<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Client.</span></a>
 					</td>
+				</tr>
+
+				<tr>
+					<td class="hr">SR Manager</td>
+					<td class="dr" id="tdSrManager">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="hr">India Manager</td>
+					<td class="dr" id="tdInManager">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="hr">Team Member</td>
+					<td class="dr" id="tdTeamMember">&nbsp;</td>
 				</tr>
 			
 				<tr>
@@ -138,10 +151,10 @@ switch ($a)
 				
 				<tr>
 					<td>
-						<button type="submit" title="Click here to add new job" value="Save" class="button1">Save</button>
+						<button type="reset" title="Click here to cancel" value="Cancel" class="button1" onClick='return ComfirmCancel();'>Cancel</button>
 					</td>
 					<td>
-						<button type="reset" title="Click here to cancel" value="Cancel" class="button1" onClick='return ComfirmCancel();'>Cancel</button>
+						<button type="submit" title="Click here to add new job" value="Save" class="button1">Save</button>
 					</td>
 				</tr>
 			</table>
@@ -155,6 +168,13 @@ switch ($a)
 	// **********************************************************
 	// Case to load Job details tab of selected Job, begins here.	
 	case "editJob":
+			
+			$strPanelInfo = $objCallData->sql_select_panel($arrJob[$_REQUEST['jobId']]['id']);
+			$arrPanelInfo = explode('~', $strPanelInfo);
+			$srManager = $arrPanelInfo[0];
+			$salePerson = $arrPanelInfo[1];
+			$indManager = $arrPanelInfo[2];
+			$teamMember = $arrPanelInfo[3];
 				
 			$client_id = $objCallData->arrJob[$_REQUEST["jobId"]]["client_id"];
 			
@@ -217,17 +237,30 @@ switch ($a)
 			<table class="tbl" border="0" cellspacing="10" width="70%">
 				<tr>
 					<td class="hr">Client Name</td>
-					<td class="dr"><b><?=$objCallData->arrClient[$client_id]["client_name"]?></b></td>
+					<td class="dr"><?=$objCallData->arrClient[$client_id]["client_name"]?></td>
+				</tr>
+
+				<tr>
+					<td class="hr">SR Manager</td>
+					<td class="dr" id="tdSrManager"><?=$srManager?></td>
+				</tr>
+				<tr>
+					<td class="hr">India Manager</td>
+					<td class="dr" id="tdInManager"><?=$indManager?></td>
+				</tr>
+				<tr>
+					<td class="hr">Team Member</td>
+					<td class="dr" id="tdTeamMember"><?=$teamMember?></td>
 				</tr>
 				
 				<tr>
 					<td class="hr">Job Type</td>
-					<td class="dr"><b><?=$objCallData->arrJobType[$arrJob[$_REQUEST["jobId"]]["job_type_id"]]?></b></td>
+					<td class="dr"><?=$objCallData->arrJobType[$arrJob[$_REQUEST["jobId"]]["job_type_id"]]?></td>
 				</tr>
 
 				<tr>
 					<td class="hr">Period</td>
-					<td class="dr"><b><?=$arrJob[$_REQUEST["jobId"]]["period"]?></b></td>
+					<td class="dr"><?=$arrJob[$_REQUEST["jobId"]]["period"]?></td>
 				</tr>
 
 				<tr>
@@ -246,7 +279,7 @@ switch ($a)
 
 				<tr>
 					<td class="hr">Job Received Date</td>
-					<td class="dr"><b><?=$rec_date?></b></td>
+					<td class="dr"><?=$rec_date?></td>
 				</tr>
 
 				<tr>

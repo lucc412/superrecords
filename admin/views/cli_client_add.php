@@ -7,7 +7,6 @@
 </div>
 
 <form action="cli_client.php?sql=insert" method="POST" name="manageclient" onSubmit="return validateFormOnSubmit()">
-	<!--<p><input type="hidden" name="sql" value="insert"></p>-->
 	<table class="tbl" border="0" cellspacing="10" width="70%">
 		<tr>
 			<td class="hr">Client</td>
@@ -15,7 +14,7 @@
 		</tr>
 		<tr>
 			<td class="hr">Practice<font style="color:red;" size="2">*</font></td>
-			<td><select name="lstPractice">
+			<td><select name="lstPractice" id="lstPractice" onchange="javascript:selectPanel();">
 					<option value="">Select Practice</option><?php
 					foreach($objCallData->arrPractice AS $practiceId => $typeDesc){
 						?><option value="<?=$practiceId?>"><?=$typeDesc?></option><?php 
@@ -25,39 +24,16 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
-			<td><select name="lstSrManager">
-					<option value="">Select SR Manager</option><?php
-					foreach($objCallData->arrSrManager AS $userId => $typeDesc) {
-						$strSelected = '';
-						if($userId == '113') $strSelected = 'selected';
-						?><option <?=$strSelected?> value="<?=$userId?>"><?=$typeDesc?></option><?php 
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select senior manager for Client.</span></a>
-			</td>
+			<td class="hr">SR Manager</td>
+			<td class="dr" id="tdSrManager">&nbsp;</td>
 		</tr>
 		<tr>
 			<td class="hr">India Manager</td>
-			<td><select name="lstInManager">
-					<option value="">Select India Manager</option><?php
-					foreach($objCallData->arrIndiaManager AS $typeId => $typeDesc){
-						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select India manager for Client.</span></a>
-			</td>
+			<td class="dr" id="tdInManager">&nbsp;</td>
 		</tr>
 		<tr>
 			<td class="hr">Team Member</td>
-			<td><select name="lstTeamMember">
-					<option value="0">Select Team Member</option><?php
-					foreach($objCallData->arrEmployees AS $typeId => $typeDesc){
-						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Team Member for Task.</span></a>
-			</td>
+			<td class="dr" id="tdTeamMember">&nbsp;</td>
 		</tr>
 		<tr>
 			<td class="hr">Client Name<font style="color:red;" size="2">*</font></td>
@@ -101,15 +77,7 @@
 		</tr>
 		<tr>
 			<td class="hr">Sales Person</td>
-			<td>
-				<select name="lstSalesPerson">
-					<option value="">Select Sales Person</option><?
-					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
-						?><option value="<?=$stfCode?>"><?=$stfName?></option><?
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>
-			</td>
+			<td class="dr" id="tdSalesPrson"></td>
 		</tr>
 		<tr>
 			<td><button type="button" value="Cancel" onClick='return ComfirmCancel();' class="cancelbutton">Cancel</button></td>

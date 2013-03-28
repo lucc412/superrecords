@@ -13,15 +13,15 @@
 	</tr>
 	<tr>
 		<td class="hr">SR Manager</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrSrManager[$arrClientData["sr_manager"]])?></td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sr_manager"]])?></td>
 	</tr>
 	<tr>
 		<td class="hr">India Manager</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrIndiaManager[$arrClientData["india_manager"]])?></td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["india_manager"]])?></td>
 	</tr>
 	<tr>
 		<td class="hr">Team Member</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrEmployees[$arrClientData["team_member"]])?></td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["team_member"]])?></td>
 	</tr>
 	<tr>
 		<td class="hr">Client Name</td>
@@ -56,7 +56,7 @@
 	</tr>
 	<tr>
 		<td class="hr">Sales Person</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrSalesPerson[$arrClientData["sales_person"]])?></td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sales_person"]])?></td>
 	</tr>
 </table>
 

@@ -43,7 +43,7 @@
 			?><td class="<?=$style?>"><?=$jobName?></td>
 
 			<td class="<?=$style?>">
-				<?=htmlspecialchars($objCallData->arrSrManager[$arrInfo["manager_id"]])?>
+				<?=htmlspecialchars($arrEmployees[$arrInfo["sr_manager"]])?>
 			</td><?
 			
 			if($access_file_level['stf_View'] == "Y") {

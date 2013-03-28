@@ -27,14 +27,16 @@ if($_SESSION['validUser']) {
 
 			switch ($sql) {
 				case "insert":
+
+					// insert new client
+					$objCallData->sql_insert();
 				
+					$srManager = $_REQUEST['lstSrManager'];
+					$salePerson = $_REQUEST['lstSalesPerson'];
+					$practiceId = $_REQUEST['lstPractice'];
+					$clientName = $_REQUEST['cliName'];
 				
-				$srManager = $_REQUEST['lstSrManager'];
-				$salePerson = $_REQUEST['lstSalesPerson'];
-				$practiceId = $_REQUEST['lstPractice'];
-				$clientName = $_REQUEST['cliName'];
-				
-				/* send mail function starts here */
+					/* send mail function starts here */
 					$pageUrl = basename($_SERVER['REQUEST_URI']);
 					$arrPageUrl = explode('&',$pageUrl);	
 					$pageUrl = $arrPageUrl[0];
@@ -43,12 +45,16 @@ if($_SESSION['validUser']) {
 					// if event is active it go for mail function
 					if($flagSet) {
 
-						//It will Get All Details in array format for Send Email	
+						// It will Get All Details in array format for Send Email	
 						$arrEmailInfo = get_email_info($pageUrl);
-						//It will Get Email Id from Which Email Id the Email will Send.
-						$salePersonEmailId = fetchStaffInfo($salePerson,'email');
-						$srManagerEmailId = fetchStaffInfo('113','email');
-						$to = $salePersonEmailId.','.$srManagerEmailId;
+
+						// fetch email id of sr manager & sales person of practice
+						$strPanelInfo = sql_select_panel($practiceId);
+						$arrPanelInfo = explode('~', $strPanelInfo);
+						$srManagerEmailId = $arrPanelInfo[0];
+						$salePersonEmailId = $arrPanelInfo[1];
+
+						$to = $srManagerEmailId.','.$salePersonEmailId;
 						$cc = $arrEmailInfo['event_cc'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
@@ -59,7 +65,6 @@ if($_SESSION['validUser']) {
 						send_mail($to, $cc, $subject, $content);
 					}
 					/* send mail function ends here */
-					$objCallData->sql_insert();
 					
 					header('location: cli_client.php');
 					break;
@@ -82,12 +87,14 @@ if($_SESSION['validUser']) {
 			case "view":
 				$arrClient = $objCallData->sql_select();
 				$arrClientData = $arrClient[$recid];
+				$arrEmployees = $objCallData->fetchEmployees();
 				include('views/cli_client_view.php');
 				break;
 
 			case "edit":
 				$arrClient = $objCallData->sql_select();
 				$arrClientData = $arrClient[$recid];
+				$arrEmployees = $objCallData->fetchEmployees();
 				include('views/cli_client_edit.php');
 				break;
 
@@ -102,6 +109,7 @@ if($_SESSION['validUser']) {
 				}
 				else {
 					$arrClient = $objCallData->sql_select();
+					$arrEmployees = $objCallData->fetchEmployees();
 					include('views/cli_client_list.php');
 				}
 

@@ -55,17 +55,17 @@
 	
 	<tr>
 		<td class="hr">SR Manager</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrSrManager[$arrTaskData["manager_id"]])?></td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["sr_manager"]])?></td>
 	</tr>
 	
 	<tr>
 		<td class="hr">India Manager</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrIndiaManager[$arrTaskData["india_manager_id"]])?></td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["india_manager"]])?></td>
 	</tr>
 	
 	<tr>
 		<td class="hr">Team Manager</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrEmployees[$arrTaskData["team_member_id"]])?></td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["team_member"]])?></td>
 	</tr>
 	
 	<tr>

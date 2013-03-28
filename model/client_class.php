@@ -49,12 +49,11 @@ class Client {
 
 	public function sql_insert() {
 
-		$qryIns = "INSERT INTO client(client_type_id, client_name, id, sr_manager, client_received)
+		$qryIns = "INSERT INTO client(client_type_id, client_name, id, client_received)
 					VALUES (
 					" . $_REQUEST['lstType'] . ", 
 					'" . $_REQUEST['txtName'] . "', 
 					" . $_SESSION['PRACTICEID'] . ", 
-					113,
 					NOW()
 					)";
 

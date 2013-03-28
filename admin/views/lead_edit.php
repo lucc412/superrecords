@@ -289,8 +289,9 @@
 				<select name="sales_person">
 					<option value="">Select Sales Person</option><?
 					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
-						if($stfCode == $arrLeadData['sales_person']) $selectStr = 'selected';?>
-					<option <?=$selectStr?> value="<?=$stfCode?>"><?=$stfName?></option><?
+						$selectStr = "";
+						if($stfCode == $arrLeadData['sales_person']) $selectStr = 'selected';
+						?><option <?=$selectStr?> value="<?=$stfCode?>"><?=$stfName?></option><?
 					} 
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>

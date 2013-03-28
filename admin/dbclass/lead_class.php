@@ -132,8 +132,11 @@ class Lead_Class extends Database {
 		$userId = $_SESSION["staffcode"];
   
 		$strWhere = "";
-		if($_SESSION["usertype"]=="Staff")
-		$strWhere="WHERE sr_manager=".$userId." or india_manager=".$userId." or team_member=".$userId . " or sales_person=".$userId;
+		if($_SESSION["usertype"]=="Staff") {
+			if($_SESSION['staffcode'] != '112' && $_SESSION['staffcode'] != '114') {
+				$strWhere="WHERE sr_manager=".$userId." or india_manager=".$userId." or team_member=".$userId;
+			}
+		}
 
 		$qrySel = "SELECT t1.* FROM lead t1 {$strWhere} ORDER BY t1.id desc";
 

@@ -18,13 +18,13 @@ if($_SESSION['validUser']) {
 		<head>
 			<title>Task</title>
 			<meta name="generator" http-equiv="content-type" content="text/html">
-			<LINK href="<?php echo $styleSheet; ?>stylesheet.css" rel="stylesheet" type="text/css">
-			<LINK href="<?php echo $styleSheet; ?>tooltip.css" rel="stylesheet" type="text/css">
+			<LINK href="<?=$styleSheet;?>stylesheet.css" rel="stylesheet" type="text/css">
+			<LINK href="<?=$styleSheet;?>tooltip.css" rel="stylesheet" type="text/css">
 	
-			<script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript; ?>tsk_task_validate.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript;?>datetimepicker.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript; ?>jquery-1.4.2.min.js"></script>
+			<script type="text/javascript" src="<?=$javaScript;?>validate.js"></script>
+			<script type="text/javascript" src="<?=$javaScript;?>tsk_task_validate.js"></script>
+			<script type="text/javascript" src="<?=$javaScript;?>datetimepicker.js"></script>
+			<script type="text/javascript" src="<?=$javaScript;?>jquery-1.4.2.min.js"></script>
 		</head>
 
 		<body><?
@@ -58,6 +58,7 @@ if($_SESSION['validUser']) {
 			case "view":
 				$arrTask = $objCallData->sql_select();
 				$arrTaskData = $arrTask[$recid];
+				$arrEmployees = $objCallData->fetchEmployees();
 				include('views/tsk_task_view.php');
 				break;
 
@@ -67,6 +68,7 @@ if($_SESSION['validUser']) {
 				$arrFewClient = $objCallData->fetchClient($arrTaskData["id"]);
 				$arrFewJob = $objCallData->fetchJob($arrTaskData["client_id"]);
 				$arrFewSubActivity = $objCallData->fetchSubActivity($arrTaskData["mas_Code"]);
+				$arrEmployees = $objCallData->fetchEmployees();
 				include('views/tsk_task_edit.php');
 				break;
 
@@ -80,6 +82,7 @@ if($_SESSION['validUser']) {
 					echo "You are not authorised to view this file.";
 				}
 				else {
+					$arrEmployees = $objCallData->fetchEmployees();
 					$arrTask = $objCallData->sql_select($_REQUEST["jobId"]);
 					include('views/tsk_task_list.php');
 				}

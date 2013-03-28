@@ -26,9 +26,12 @@ switch ($sql)
 		{
 			//It will Get All Details in array format for Send Email	
 			$arrEmailInfo = get_email_info($pageUrl);
-			
-			// TO mail parameter
-			$srManagerEmail = fetchStaffInfo('113', 'email');
+
+			// fetch email id of sr manager
+			$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
+			$arrPanelInfo = explode('~', $strPanelInfo);
+			$srManagerEmail = $arrPanelInfo[0];
+
 			$to = $srManagerEmail;
 			$cc = $arrEmailInfo['event_cc'];
 			$subject = $arrEmailInfo['event_subject'];
@@ -64,8 +67,7 @@ switch ($sql)
 		$flagSet = getEventStatus($pageUrl);
 		
 		// if event is active it go for mail function
-		if($flagSet)
-		{
+		if($flagSet) {
 			//It will Get All Details in array format for Send Email	
 			$arrEmailInfo = get_email_info($pageUrl);
 			
@@ -74,9 +76,14 @@ switch ($sql)
 			// TO mail parameter
 			$srManagerEmail = fetchStaffInfo($arrIds[0]['sr_manager'], 'email');
 			$IndiaManagerEmail = fetchStaffInfo($arrIds[0]['india_manager'], 'email');
-			
-			$to = $srManagerEmail.",".$IndiaManagerEmail;
 
+			// fetch email id of sr manager & india manager of practice
+			$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
+			$arrPanelInfo = explode('~', $strPanelInfo);
+			$srManagerEmail = $arrPanelInfo[0];
+			$inManagerEmail = $arrPanelInfo[2];
+			
+			$to = $srManagerEmail.",".$inManagerEmail;
 			$cc = $arrEmailInfo['event_cc'];
 			$subject = $arrEmailInfo['event_subject'];
 			$content = $arrEmailInfo['event_content'];

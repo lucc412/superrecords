@@ -29,10 +29,13 @@ switch ($sql) {
 				//It will Get All Details in array format for Send Email	
 				$arrEmailInfo = get_email_info($pageUrl);
 				
-				// TO mail parameter
-				$srManagerEmail = fetchStaffInfo('113', 'email');
-				$to = $srManagerEmail;
+				// fetch email id of sr manager & sales person of practice
+				$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
+				$arrPanelInfo = explode('~', $strPanelInfo);
+				$srManagerEmailId = $arrPanelInfo[0];
+				$salePersonEmailId = $arrPanelInfo[1];
 
+				$to = $srManagerEmailId.','.$salePersonEmailId;
 				$cc = $arrEmailInfo['event_cc'];
 				$subject = $arrEmailInfo['event_subject'];
 				$content = $arrEmailInfo['event_content'];

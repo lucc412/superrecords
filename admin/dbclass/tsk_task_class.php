@@ -14,11 +14,6 @@ class Task_Class extends Database {
 		$this->arrJobDetails = $this->fetchJobDetails();
 		$this->arrMasterActivity = $this->fetchMasterActivity();
 		$this->arrSubActivity = $this->fetchSubActivity();
-		
-		$this->arrSrManager = $this->fetchEmployees('srmanager');
-		$this->arrIndiaManager = $this->fetchEmployees('indiamanager');
-		$this->arrEmployees = $this->fetchEmployees('teammember');
-		
 		$this->arrJobType = $this->fetchJobType();
 		$this->arrTaskStatus = $this->fetchTaskStatus();
 		$this->arrPriority = $this->fetchPriority();
@@ -178,55 +173,27 @@ class Task_Class extends Database {
 		}
 		return $arrSubActivity;	
 	}  
-		
-	public function fetchEmployees($flagManager)
-	{
-		$appendStr = "";
-		
-        // if employees are fetched that are SR Manager
-        if($flagManager == 'srmanager') { 
-                        $appendStr = 'AND c1.con_Designation = 24';
-        }
-        // if employees are fetched that are Sales Manager
-        else if($flagManager == 'indiamanager') { 
-                        $appendStr = 'AND c1.con_Designation = 28';
-        }
-        // if employees are fetched that are Sales Manager
-        else if($flagManager == 'teammember') { 
-                        $appendStr = 'AND c1.con_Designation = 29';
-        }
-
-		$qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
-				     FROM stf_staff t1, aty_accesstype t2, con_contact c1
-				     WHERE t1.stf_AccessType = t2.aty_Code 
-				     AND t1.stf_CCode = c1.con_Code 
-				     AND t2.aty_Description like 'Staff' 
-					 {$appendStr} 
-				     ORDER BY c1.con_Firstname";
-
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrSrManager[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
-		}
-		return $arrSrManager;	
-	} 
 
 	public function sql_select($jobId)
 	{		
-		$userId = $_SESSION["staffcode"];
 		
 		$strWhere = "";		
-		if($_SESSION["usertype"]=="Staff")
-			$strWhere="AND manager_id=".$userId." or india_manager_id=".$userId." or team_member_id=".$userId;
+		if($_SESSION["usertype"] == "Staff") {	
+			$userId = $_SESSION["staffcode"];
+			$strWhere .="AND (pr.sr_manager =".$userId." OR pr.india_manager =".$userId." OR pr.team_member =".$userId . ")";
+		}
 	
 		if($jobId)
 			$strWhere .= "AND job_id={$jobId}";
 			
-		$qrySel = "SELECT * 
-						FROM task
-						WHERE discontinue_date IS NULL 
-						{$strWhere} 
-						ORDER BY task_id desc";
+		$qrySel = "SELECT t.*, pr.sr_manager, pr.india_manager, pr.team_member
+					FROM task t, job j, client c, pr_practice pr
+					WHERE t.discontinue_date IS NULL 
+					AND t.job_id = j.job_id
+					AND j.client_id = c.client_id
+					AND c.id = pr.id 
+					{$strWhere} 
+					ORDER BY t.task_id desc";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -234,6 +201,19 @@ class Task_Class extends Database {
 		}
 		return $arrTask;	
 	}
+
+	public function fetchEmployees() {	
+
+		$qrySel = "SELECT ss.stf_Code, CONCAT_WS(' ', cc.con_Firstname, cc.con_Lastname) staffName 
+					 FROM stf_staff ss, con_contact cc
+					 WHERE ss.stf_CCode = cc.con_Code ";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrEmployees[$rowData['stf_Code']] = $rowData['staffName'];
+		}
+		return $arrEmployees;	
+	} 
 
 	public function sql_insert() {	
 
@@ -250,7 +230,7 @@ class Task_Class extends Database {
 			$ClientID = $this->arrJobDetails[$_REQUEST["jobId"]]["client_id"];
 			$PracticeID = $this->arrClientDetails[$ClientID]["id"];
 			
-			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
+			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
 					VALUES (
 					'" . $_REQUEST['txtTaskName'] . "', 
 					'" . $PracticeID . "', 
@@ -259,9 +239,6 @@ class Task_Class extends Database {
 					'" . $_REQUEST['lstMasterActivity'] . "', 
 					'" . $_REQUEST['lstSubActivity'] . "', 
 					'" . $_REQUEST['txtNotes'] . "', 
-					'" . $_REQUEST['lstSrManager'] . "', 
-					'" . $_REQUEST['lstSrIndiaManager'] . "', 
-					'" . $_REQUEST['lstSrTeamMember'] . "', 
 					'" . $_REQUEST['lstTaskStatus'] . "', 
 					'" . $_REQUEST['lstPriority'] . "', 
 					'" . $_REQUEST['lstProcessingCycle'] . "', 
@@ -272,7 +249,7 @@ class Task_Class extends Database {
 		}	
 		else {
 
-			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, manager_id, india_manager_id, team_member_id, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
+			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
 					VALUES (
 					'" . $_REQUEST['txtTaskName'] . "', 
 					'" . $_REQUEST['lstPractice'] . "', 
@@ -281,9 +258,6 @@ class Task_Class extends Database {
 					'" . $_REQUEST['lstMasterActivity'] . "', 
 					'" . $_REQUEST['lstSubActivity'] . "', 
 					'" . $_REQUEST['txtNotes'] . "', 
-					'" . $_REQUEST['lstSrManager'] . "', 
-					'" . $_REQUEST['lstSrIndiaManager'] . "', 
-					'" . $_REQUEST['lstSrTeamMember'] . "',
 					'" . $_REQUEST['lstTaskStatus'] . "', 
 					'" . $_REQUEST['lstPriority'] . "', 
 					'" . $_REQUEST['lstProcessingCycle'] . "', 
@@ -319,9 +293,6 @@ class Task_Class extends Database {
 					mas_Code = '" . $_REQUEST['lstMasterActivity'] . "',
 					sub_Code = '" . $_REQUEST['lstSubActivity'] . "',
 					notes = '" . $_REQUEST['txtNotes'] . "',
-					manager_id = '" . $_REQUEST['lstSrManager'] . "',
-					india_manager_id = '" . $_REQUEST['lstSrIndiaManager'] . "',
-					team_member_id = '" . $_REQUEST['lstSrTeamMember'] . "', 
 					task_status_id = '" . $_REQUEST['lstTaskStatus'] . "',
 					priority_id = '" . $_REQUEST['lstPriority'] . "',
 					process_id = '" . $_REQUEST['lstProcessingCycle'] . "',
@@ -339,9 +310,6 @@ class Task_Class extends Database {
 					mas_Code = '" . $_REQUEST['lstMasterActivity'] . "',
 					sub_Code = '" . $_REQUEST['lstSubActivity'] . "',
 					notes = '" . $_REQUEST['txtNotes'] . "',
-					manager_id = '" . $_REQUEST['lstSrManager'] . "',
-					india_manager_id = '" . $_REQUEST['lstSrIndiaManager'] . "',
-					team_member_id = '" . $_REQUEST['lstSrTeamMember'] . "', 
 					task_status_id = '" . $_REQUEST['lstTaskStatus'] . "',
 					priority_id = '" . $_REQUEST['lstPriority'] . "',
 					process_id = '" . $_REQUEST['lstProcessingCycle'] . "',

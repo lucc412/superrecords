@@ -164,7 +164,7 @@ class Job {
 
 		$jobName = $clientId .'::'. $period .'::'. $typeId;
 
-		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, job_name, job_status_id, sr_manager, job_received)
+		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, job_name, job_status_id, job_received)
 					VALUES (
 					" . $clientId . ", 
 					" . $cliType . ", 
@@ -172,18 +172,15 @@ class Job {
 					'" . $period . "',  
 					'" . $jobName . "',  
 					1,   
-					113,
 					NOW()
 					)";
 
 		mysql_query($qryIns);
-		
-		
 		$jobId = mysql_insert_id();
 
 		$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType, $typeId);
 		
-		// upload documents here
+		// add source documents
 		$this->add_source_Docs($jobId);
 		
 		return $jobId;
@@ -195,14 +192,13 @@ class Job {
 
 		$taskName = $arrClients[$clientId] . ' - ' . $period . ' - ' . $arrJobType[$typeId];
 	
-		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, manager_id) 
+		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code) 
 					VALUES ('" . $taskName . "',
 					'" . $practiceId . "',
 					'" . $clientId . "',
 					'" . $jobId . "',
 					'" . $cliType . "',
-					'" . $typeId . "',
-					'113'
+					'" . $typeId . "'
 					)";
 		mysql_query($qryIns);			
 	}

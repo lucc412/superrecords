@@ -19,15 +19,14 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 
 			//It will Get All Details in array format for Send Email	
 			$arrEmailInfo = get_email_info($pageUrl);
-			
-			// TO mail parameter
-			$arrManagerIds = $objScr->fetch_manager_ids($_SESSION["PRACTICEID"]);
-			foreach($arrManagerIds AS $managerId) {
-				$srManagerEmail = fetchStaffInfo($managerId, 'email');
-				$to .= $srManagerEmail . ',';
-			}
-			$to = rtrim($to, ',');
-			
+
+			// fetch email id of sr manager
+			$strPanelInfo = sql_select_panel($_SESSION["PRACTICEID"]);
+			$arrPanelInfo = explode('~', $strPanelInfo);
+			$srManagerEmail = $arrPanelInfo[0];
+			$inManagerEmail = $arrPanelInfo[2];
+
+			$to = $srManagerEmail.",".$inManagerEmail;
 			$cc = $arrEmailInfo['event_cc'];
 			$subject = $arrEmailInfo['event_subject'];
 			$content = $arrEmailInfo['event_content'];

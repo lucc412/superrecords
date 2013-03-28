@@ -84,15 +84,20 @@ class Job_Class extends Database
 			}
 		}
 		
-		$userId = $_SESSION["staffcode"];
-		if($_SESSION["usertype"]=="Staff")
-			$strWhere=" AND (c1.sr_manager=".$userId." or c1.india_manager=".$userId." or c1.team_member=".$userId." or c1.sales_person=".$userId.")";
+		
+		if($_SESSION["usertype"] == "Staff") {
+			$userId = $_SESSION["staffcode"];
+			$strFrom = ",pr_practice p1";
+			$strWhere = " AND p1.id = c1.id
+						  AND (p1.sr_manager=".$userId." 
+						  OR p1.india_manager=".$userId." 
+						  OR p1.team_member=".$userId.")";
+		}
 					
-		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id,			            j1.job_due_date, j1.job_received, 
-		            c1.id,c1.sr_manager, c1.india_manager, c1.team_member, j1.period
-					FROM job j1, client c1 {$fromStr}
+		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id,			            j1.job_due_date, j1.job_received, c1.id, j1.period
+					FROM job j1, client c1 {$fromStr} {$strFrom}
 					WHERE j1.client_id = c1.client_id 
-					AND j1.discontinue_date IS NULL  
+					AND j1.discontinue_date IS NULL
 					{$strWhere} 
 					{$whereStr} 
 					GROUP BY j1.job_id
@@ -160,6 +165,46 @@ class Job_Class extends Database
 		
 		return $contactName;	
 	} 
+
+	// fetch sr manager, india manager, sales manager, team member for selected practice
+	function sql_select_panel($itemId)
+	{
+		$sql = "SELECT id, sr_manager, team_member, india_manager, sales_person
+				FROM pr_practice
+				WHERE id=".$itemId;
+				
+		$res = mysql_query($sql) or die(mysql_error());
+		$count = mysql_num_rows($res);
+
+		if(!empty($count))
+		{
+			// fetch array of name of all employees
+			$arrEmployees = $this->fetchEmployees();
+
+			$rowData = mysql_fetch_assoc($res);
+			$srManager = $arrEmployees[$rowData['sr_manager']];
+			$salesPrson = $arrEmployees[$rowData['sales_person']];
+			$inManager = $arrEmployees[$rowData['india_manager']];
+			$teamMember = $arrEmployees[$rowData['team_member']];
+
+			// set string of srManager, salesPrson, inManager, teamMember
+			$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember;
+		}
+		return $strReturn;
+	}
+
+	function fetchEmployees() {	
+
+		$qrySel = "SELECT ss.stf_Code, CONCAT_WS(' ', cc.con_Firstname, cc.con_Lastname) staffName 
+					 FROM stf_staff ss, con_contact cc
+					 WHERE ss.stf_CCode = cc.con_Code ";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrEmployees[$rowData['stf_Code']] = $rowData['staffName'];
+		}
+		return $arrEmployees;	
+	}
 	
 	// Function to Add new Query
 	public function add_query()
@@ -348,15 +393,14 @@ class Job_Class extends Database
 		$masCode = $_REQUEST["lstClientType"];
 		$jobType = $_REQUEST["lstJob"];
 
-		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, job_name, job_status_id, sr_manager, job_received)
+		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, job_name, job_status_id, job_received)
 					VALUES (
 					" . $client_Id . ", 
 					" . $masCode . ", 
 					" . $jobType . ", 
 					'" . $period . "',  
 					'" . $jobName . "',  
-					1,   
-					208,
+					1,  
 					NOW()
 					)";
 

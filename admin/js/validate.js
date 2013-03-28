@@ -206,6 +206,37 @@ function echeck(str) {
 		 }
 
  		 return true					
+}
+
+function selectPanel() {
+	var selObj = document.getElementById('lstPractice');
+	var item_id = selObj.value;
+
+	if(item_id != '')
+	{
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+			var xmlhttp=new XMLHttpRequest();
+		}
+		else {// code for IE6, IE5
+			var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				var strResponse = xmlhttp.responseText;
+
+				if(strResponse) {
+					var arrResponse = strResponse.split('~');
+
+					document.getElementById("tdSrManager").innerHTML = arrResponse[0];
+					if(document.getElementById("tdSalesPrson")) {
+						document.getElementById("tdSalesPrson").innerHTML = arrResponse[1];
+					}
+					document.getElementById("tdInManager").innerHTML = arrResponse[2];
+					document.getElementById("tdTeamMember").innerHTML = arrResponse[3];
+				}
+			}
+		}
+		xmlhttp.open("GET","ajax_options.php?doAction=LoadPanel&itemId="+item_id,true);
+		xmlhttp.send();
 	}
-	
- 
+}

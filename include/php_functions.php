@@ -99,6 +99,45 @@ function fetchStaffInfo($staffId, $flagType) {
 	return $staffInfo;	
 }
 
+// fetch sr manager, india manager, sales manager, team member for selected practice
+function sql_select_panel($itemId) {
+	$sql = "SELECT id, sr_manager, team_member, india_manager, sales_person
+			FROM pr_practice
+			WHERE id=".$itemId;
+			
+	$res = mysql_query($sql) or die(mysql_error());
+	$count = mysql_num_rows($res);
+
+	if(!empty($count))
+	{
+		// fetch array of name of all employees
+		$arrEmployees = fetchEmployees();
+
+		$rowData = mysql_fetch_assoc($res);
+		$srManager = $arrEmployees[$rowData['sr_manager']];
+		$salesPrson = $arrEmployees[$rowData['sales_person']];
+		$inManager = $arrEmployees[$rowData['india_manager']];
+		$teamMember = $arrEmployees[$rowData['team_member']];
+
+		// set string of srManager, salesPrson, inManager, teamMember
+		$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember;
+	}
+	return $strReturn;
+}
+
+function fetchEmployees() {	
+
+	$qrySel = "SELECT ss.stf_Code, CONCAT_WS(' ', cc.con_Firstname, cc.con_Lastname) staffName, cc.con_Email
+				FROM stf_staff ss, con_contact cc
+				WHERE ss.stf_CCode = cc.con_Code ";
+
+	$fetchResult = mysql_query($qrySel);		
+	while($rowData = mysql_fetch_assoc($fetchResult)) {
+		$arrEmployees[$rowData['stf_Code']] = $rowData['con_Email'];
+	}
+	return $arrEmployees;	
+} 
+
 // this is used to replace the dynamic variables used in mail content
 function replaceContent($content, $salesPersonId=NULL, $practiceId=NULL, $clientId=NULL, $jobId=NULL) {
 	

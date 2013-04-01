@@ -64,6 +64,13 @@ include(TOPBAR);
 		<tr><td>&nbsp;</td></tr>
 
 		<tr>
+			<td><strong>Notes</strong></td>
+			<td><textarea id="txtNotes" name="txtNotes"></textarea>  </td>
+		</tr>
+
+		<tr><td>&nbsp;</td></tr>
+
+		<tr>
 			<td><strong>Source Documents</strong></td>
 			<td><span class="docheader">Description</span></td>
 			<td><span class="docheader">File Path</span></td>

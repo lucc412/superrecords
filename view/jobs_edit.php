@@ -73,6 +73,13 @@ include(TOPBAR);
 		</tr>
 
 		<tr><td>&nbsp;</td></tr>
+		
+		<tr>
+			<td><strong>Notes</strong></td>
+			<td> <textarea id="txtNotes" name="txtNotes"> <?=$arrJobsData['notes']?> </textarea>
+		</tr>
+
+		<tr><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Source Documents</strong></td>

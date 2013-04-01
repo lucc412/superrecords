@@ -18,7 +18,7 @@ class Job {
 			$appendSelStr = "AND t1.client_id = {$_REQUEST['lstClientType']}";
 		}
 
-		$qrySel = "SELECT t1.job_id, t1.job_name, t1.job_received, t1.job_type_id, t1.client_id, t1.period, t1.job_status_id, t1.mas_Code
+		$qrySel = "SELECT t1.job_id, t1.job_name, t1.job_received, t1.job_type_id, t1.client_id, t1.period, t1.job_status_id, t1.mas_Code, t1.notes
 					FROM job t1, client c1
 					WHERE c1.id = '{$_SESSION['PRACTICEID']}'
 					AND t1.client_id = c1.client_id
@@ -161,15 +161,17 @@ class Job {
 		$typeId = $_REQUEST['lstJobType'];
 		$period = $_REQUEST['txtPeriod'];
 		$cliType = $_REQUEST['lstCliType'];
-
+		$notes = $_REQUEST['txtNotes'];
+		
 		$jobName = $clientId .'::'. $period .'::'. $typeId;
 
-		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, job_name, job_status_id, job_received)
+		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, notes, job_name, job_status_id, job_received)
 					VALUES (
 					" . $clientId . ", 
 					" . $cliType . ", 
 					" . $typeId . ", 
 					'" . $period . "',  
+					'" . $notes . "',  
 					'" . $jobName . "',  
 					1,   
 					NOW()
@@ -277,6 +279,7 @@ class Job {
 				mas_Code = '" . $_REQUEST['lstCliType'] . "',
 				client_id = '" . $_REQUEST['lstClientType'] . "',
 				period = '" . $_REQUEST['txtPeriod'] . "',
+				notes = '" . $_REQUEST['txtNotes'] . "',
 				job_name = '" . $jobName . "'
 				WHERE job_id = '" . $_REQUEST['recid'] . "'";
 

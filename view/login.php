@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=9" />
 		<title>Practice Login</title>
 		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
 		<link href="../images_user/favicon.ico" rel="shortcut icon" />

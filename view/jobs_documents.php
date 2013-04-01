@@ -23,7 +23,7 @@ switch($_REQUEST['a'])
 				?><div class="errorMsg"><?=ERRORICON?>&nbsp;No documents uploaded...!</div><?	
 			}
 			else {
-				?><button type="button" onclick="javascript:urlRedirect('jobs.php?a=uploadDoc');" title="Click here to upload new source document" value="Add">Upload Document +</button>
+				?><button class="logoutbtn" type="button" onclick="javascript:urlRedirect('jobs.php?a=uploadDoc');" title="Click here to upload new source document" value="Add">Add</button>
   				  </br></br>
 					
 				<table width="100%" class="resources">
@@ -93,7 +93,7 @@ switch($_REQUEST['a'])
 		<form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertDoc" enctype="multipart/form-data" onSubmit="javascript:return checkDocValidation();">
 			<!--<input type="hidden" name="sql" value="insertDoc">-->
 
-			<table align="center" width="70%" class="fieldtable" cellpadding="10px;">
+			<table width="70%" class="fieldtable" cellpadding="10px;">
 				<tr>
 					<td><strong> Select Job <font style="color:red;" size="2">*</font></strong></td>
 					<td><?

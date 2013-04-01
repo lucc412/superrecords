@@ -98,10 +98,11 @@ function jm_getthem($params)
 }
 
 ?>
+
 <div class="<?php echo $params->get('moduleclass_sfx');?>" id="jmcontactform">
 <div class="ptext"><?php echo $params->get('pretext') ;  ?></div>
 <div><?php echo $msg;   ?></div>
-<h1 class="title">Contact Us</h1>
+<h1 class="title">Learn More</h1>
 <form method="post" action="" name="josForm"  id="myForm" class="form-validate" enctype="multipart/form-data"  onSubmit=" return checkcapcha(this);" >
 	
 	<!-- Name -->
@@ -109,7 +110,7 @@ function jm_getthem($params)
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->namelbl; ?>:</div>-->
 			<div class="row_inner" id="input">
-			<input type="text" name="Name" id="Name" placeholder="Full Name *" value="" class="inputbox cleardefault <?php  if($params->get('bnamestatus') == 'R' ) echo 'required';  ?>" /></div>
+			<input type="text" name="Name" id="Name" title="Enter full name" value="" class="inputbox cleardefault <?php  if($params->get('bnamestatus') == 'R' ) echo 'required';  ?>" /></div>
 		</div>
 	<?php endif; ?>
 	<!-- Name Ends-->
@@ -135,7 +136,7 @@ function jm_getthem($params)
 	<?php  if($params->get('bEmail') == 'Y' || $params->get('bEmail') == 'R') : ?>
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->Emaillbl; ?>:</div>-->
-			<div class="row_inner" id="input"><input  type="text" name="Email" id="Email" class="inputbox <?php  if($params->get('bEmail') == 'R' ) echo 'required validate-email';  ?>" placeholder="Email *" value="" /></div>
+			<div class="row_inner" id="input"><input  type="text" name="Email" id="Email" class="inputbox <?php  if($params->get('bEmail') == 'R' ) echo 'required validate-email';  ?>" title="Enter email" value="" /></div>
 		</div>
 	<?php endif;  ?>
 	<!-- Email ends -->
@@ -145,7 +146,7 @@ function jm_getthem($params)
 	<?php  if ($params->get('bmobilestatus') == 'Y' || $params->get('bmobilestatus') == 'R' ) : ?>
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->mobilelbl; ?>:</div>-->
-			<div class="row_inner" id="input"><input  type="text" name="Mobile" id="Telephone" placeholder="Telephone *" value="" class="inputbox <?php  if($params->get('bmobilestatus') == 'R' ) echo 'required validate-numeric';  ?>" /></div>
+			<div class="row_inner" id="input"><input  type="text" name="Mobile" id="Telephone" title="Enter telephone" value="" class="inputbox <?php  if($params->get('bmobilestatus') == 'R' ) echo 'required validate-numeric';  ?>" /></div>
 		</div>
 	<?php  endif; ?>
 	<!-- Mobile Ends -->
@@ -181,7 +182,7 @@ function jm_getthem($params)
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->messagelbl; ?>:</div>-->
 			<div class="row_inner" id="input">
-			<textarea placeholder="Comments" name="Message" id="Message" class="inputbox <?php  if($params->get('bmessagestatus') == 'R' ) echo 'required';  ?>" cols="20" rows="4"></textarea></div>
+			<textarea title="Enter comments" name="Message" id="Message" class="inputbox <?php  if($params->get('bmessagestatus') == 'R' ) echo 'required';  ?>" cols="20" rows="4"></textarea></div>
 		</div>
 	<?php  endif; ?>
 	<!-- Mesage Ends-->

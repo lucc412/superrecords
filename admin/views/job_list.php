@@ -772,7 +772,7 @@ switch ($a)
 	
 	// Case to load list of Jobs with edit button, Begins here.
 	default:
-
+	
 			?><body><form method="POST" name="frmJobList" action="job.php">
 			<div class="frmheading">
 				<h1>Job List</h1>
@@ -785,7 +785,7 @@ switch ($a)
 					<td><input type="text" name="filter" value="<?php echo $filter ?>"></td>
 					<td>
 						<select name="filter_field">
-							<option value="">All Fields</option>
+							<option value="<?="all"?>"<?if ($_REQUEST['filter_field'] == "all") { echo "selected"; } ?>>All Fields</option>
 							<option value="<?="practice"?>"<?if ($_REQUEST['filter_field'] == "practice") { echo "selected"; } ?>>Practice Name</option>
 							<option value="<?="job"?>"<?if ($_REQUEST['filter_field'] == "job") { echo "selected"; } ?>>Job Name</option>
 							<option value="<?="status"?>"<?if ($_REQUEST['filter_field'] == "status") { echo "selected"; } ?>>Job Status</option>

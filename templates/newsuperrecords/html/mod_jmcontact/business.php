@@ -76,6 +76,50 @@ xmlhttp.send();
  }
 }
 
+function validation()
+{
+	var name = document.getElementById("Name").value;
+	var email =document.getElementById("Email").value;
+	var phone = document.getElementById("Telephone").value;
+	var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	
+	if(name == "")
+	{
+		alert("Please specify Name");
+		document.getElementById("Name").focus();
+		return false;
+	}
+	else if(email == "")
+	{
+		alert("Please specify Email Address");
+		document.getElementById("Email").focus();
+		return false;
+	}
+	else if(reg.test(email) == false)
+	{
+        alert("Please specify valid Email Address");
+		document.getElementById("Email").focus();
+		return false;
+	}
+	else if(phone == "")
+	{
+		alert("Please specify Phone Number");
+		document.getElementById("Telephone").focus();
+		return false;
+	}
+	else if((isNaN(phone)))
+	{
+		alert("Please specify Phone Number in digits only");
+		document.getElementById("Telephone").value="";
+		document.getElementById("Telephone").focus();
+		return false;
+	}
+	else
+	{
+		
+		return true;
+	}
+}
 </script>');
 
 function jm_getthem($params)
@@ -103,14 +147,14 @@ function jm_getthem($params)
 <div class="ptext"><?php echo $params->get('pretext') ;  ?></div>
 <div><?php echo $msg;   ?></div>
 <h1 class="title">Learn More</h1>
-<form method="post" action="" name="josForm"  id="myForm" class="form-validate" enctype="multipart/form-data"  onSubmit=" return checkcapcha(this);" >
+<form method="post" action="" name="josForm"  id="myForm" class="form-validate" enctype="multipart/form-data"  onSubmit="return validation()" >
 	
 	<!-- Name -->
 	<?php  if ($params->get('bnamestatus') == 'Y' || $params->get('bnamestatus') == 'R' ) : ?>
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->namelbl; ?>:</div>-->
 			<div class="row_inner" id="input">
-			<input type="text" name="Name" id="Name" title="Enter full name" value="" class="inputbox cleardefault <?php  if($params->get('bnamestatus') == 'R' ) echo 'required';  ?>" /></div>
+			<input type="text" name="Name" id="Name" title="Enter Name" value="" class="inputbox cleardefault <?php  if($params->get('bnamestatus') == 'R' ) echo '';  ?>" /></div>
 		</div>
 	<?php endif; ?>
 	<!-- Name Ends-->
@@ -136,7 +180,7 @@ function jm_getthem($params)
 	<?php  if($params->get('bEmail') == 'Y' || $params->get('bEmail') == 'R') : ?>
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->Emaillbl; ?>:</div>-->
-			<div class="row_inner" id="input"><input  type="text" name="Email" id="Email" class="inputbox <?php  if($params->get('bEmail') == 'R' ) echo 'required validate-email';  ?>" title="Enter email" value="" /></div>
+			<div class="row_inner" id="input"><input  type="text" name="Email" id="Email" class="inputbox <?php  if($params->get('bEmail') == 'R' ) echo '';  ?>" title="Enter Email Address" value="" /></div>
 		</div>
 	<?php endif;  ?>
 	<!-- Email ends -->
@@ -146,7 +190,7 @@ function jm_getthem($params)
 	<?php  if ($params->get('bmobilestatus') == 'Y' || $params->get('bmobilestatus') == 'R' ) : ?>
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->mobilelbl; ?>:</div>-->
-			<div class="row_inner" id="input"><input  type="text" name="Mobile" id="Telephone" title="Enter telephone" value="" class="inputbox <?php  if($params->get('bmobilestatus') == 'R' ) echo 'required validate-numeric';  ?>" /></div>
+			<div class="row_inner" id="input"><input  type="text" name="Mobile" id="Telephone" title="Enter Phone Number" value="" class="inputbox <?php  if($params->get('bmobilestatus') == 'R' ) echo 'validate-numeric';  ?>" /></div>
 		</div>
 	<?php  endif; ?>
 	<!-- Mobile Ends -->

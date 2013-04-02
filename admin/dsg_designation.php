@@ -22,7 +22,7 @@ if($_SESSION['validUser'])
 
 <html>
 <head>
-<title>Designation</title>
+<title>Designations</title>
 <meta name="generator" http-equiv="content-type" content="text/html">
 <script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
 <script>
@@ -203,7 +203,7 @@ header("Location:index.php?msg=timeout");
   $reccount = min($showrecs * $page, $count);
 ?>
 <div class="frmheading">
-	<h1>Designation</h1>
+	<h1>Designations</h1>
 </div>
 <form action="dsg_designation.php" method="post">
 <table class="customFilter" align="right" style="margin-right:15px; " border="0" cellspacing="1" cellpadding="4">
@@ -255,31 +255,35 @@ header("Location:index.php?msg=timeout");
  <td class="<?php echo $style ?>"><?php echo htmlspecialchars($row["dsg_Description"]) ?></td>
  <td align="center">
 <?php
-                                if($_GET['page']!="")
-                                    $updatequery="?page=".$_GET['page'];
-                                if($_GET['order']!="" && $_GET['type']!="")
-                                    $updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
+	 if($access_file_level['stf_Edit']=="Y") {
+	if($_GET['page']!="")
+		$updatequery="?page=".$_GET['page'];
+	if($_GET['order']!="" && $_GET['type']!="")
+		$updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
 
 ?>
-                                <form action="dsg_designation.php<?php echo $updatequery; ?>" method="post">
-                                    <select name="dsg_Order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='dsg_designation.php?a=reset'}"  ><option value="0">Select Order</option>
-                                    <?php
-                                       // $count = sql_getrecordcount();
-                                    $count = mysql_num_rows($res);
-                                        for($c=1; $c<=$count; $c++)
-                                            {
-                                                $val = $c;
-                                                if ($row["dsg_Order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
+	<form action="dsg_designation.php<?php echo $updatequery; ?>" method="post">
+		<select name="dsg_Order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='dsg_designation.php?a=reset'}"  ><option value="0">Select Order</option>
+		<?php
+		   // $count = sql_getrecordcount();
+		$count = mysql_num_rows($res);
+			for($c=1; $c<=$count; $c++)
+				{
+					$val = $c;
+					if ($row["dsg_Order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
 
-                                    ?>
-                                        <option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
-                                    <?php } ?>
-                                    </select>
-                                            <input type="hidden" name="dsgcode" value="<?php echo $row["dsg_Code"]; ?>">
-                                            <button type="submit" name="gridedit" value="save">Save</button>
-                                </form>
-
- </td>
+		?>
+			<option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
+		<?php } ?>
+		</select>
+				<input type="hidden" name="dsgcode" value="<?php echo $row["dsg_Code"]; ?>">
+				<button type="submit" name="gridedit" value="save">Save</button>
+	</form><?
+ }
+else {
+	echo $row["dsg_Order"];
+}
+?></td>
  <?php 
   if($access_file_level['stf_View']=="Y")
 	  {  

@@ -698,23 +698,26 @@ if($_SESSION['validUser']) {
 					}
 
 					// Administration Menu (check access by passing staff code and form code)
-					$formcode_sys="50,4,43,76,57,99";
+					$formcode_sys="50,4,43,76,57,99,21,98";
 					$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);
 
 					if($access_menu_level=="true") {
 						?><li class="dropdown"><a href="#">Administration</a>      
 							<ul class="sub"><?
 
-								// Users Submenu (show only to administrator) 
-								if($_SESSION['usertype'] == 'Administrator') {
-									?><li><a href="stf_staff.php?a=reset">Users</a></li><?
-								}
+								// Users Submenu (Check access by passing staff code and form code)
+								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],21,1);
+								if(is_array($access_submenu_level)==1) {
+									if(in_array("Y",$access_submenu_level)) {   
+										?><li><a href="stf_staff.php?a=reset">Users</a></li><?
+									}
+								} 
 
 								// Employees Submenu (Check access by passing staff code and form code)
 								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],50,1);
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="con_empcontact.php?a=reset">Employees</a></li><?
+										?><li><a href="con_empcontact.php?a=reset">Employee Contact</a></li><?
 									}
 								} 
 
@@ -750,21 +753,19 @@ if($_SESSION['validUser']) {
 									}
 								} 
 
-								// Default Landing URL Submenu 
-								if($_SESSION['usertype'] == 'Administrator') {
-									?><li><a href="landing_page.php">Default Landing URL</a></li><?
-								}
+								// Landing URL Submenu (Check access by passing staff code and form code)
+								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],98,1);
+								if(is_array($access_submenu_level)==1) {
+									if(in_array("Y",$access_submenu_level)) {   
+										?><li><a href="landing_page.php">Default Landing URL</a></li><?
+									}
+								} 
 
 								// Manage Emails Submenu
-								if($_SESSION['usertype'] == 'Administrator') {
-									?><li><a href="manage_emails.php">Manage Emails</a></li><?
-								}
-								else {
-									$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],99,1);
-									if(is_array($access_submenu_level)==1) {
-										if(in_array("Y",$access_submenu_level)) { 
-											?><li><a href="manage_emails.php">Manage Emails</a></li><?
-										}
+								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],99,1);
+								if(is_array($access_submenu_level)==1) {
+									if(in_array("Y",$access_submenu_level)) { 
+										?><li><a href="manage_emails.php">Manage Emails</a></li><?
 									}
 								}
 						

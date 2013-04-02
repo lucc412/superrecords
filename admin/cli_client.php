@@ -85,6 +85,11 @@ if($_SESSION['validUser']) {
 				break;
 
 			case "view":
+
+				//Get FormCode
+				$formcode = $commonUses->getFormCode("Manage Client");
+				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+
 				$arrClient = $objCallData->sql_select();
 				$arrClientData = $arrClient[$recid];
 				$arrEmployees = $objCallData->fetchEmployees();
@@ -99,6 +104,7 @@ if($_SESSION['validUser']) {
 				break;
 
 			default:
+
 				//Get FormCode
 				$formcode = $commonUses->getFormCode("Manage Client");
 				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);

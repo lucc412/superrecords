@@ -46,6 +46,11 @@ if($_SESSION['validUser']) {
 				break;
 
 			case "view":
+
+				//Get FormCode
+				$formcode = $commonUses->getFormCode("Manage Referrer");
+				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+
 				$arrReferer = $objCallData->sql_select();
 				$arrRefererData = $arrReferer[$recid];
 				include('views/rf_referrer_view.php');
@@ -58,6 +63,7 @@ if($_SESSION['validUser']) {
 				break;
 
 			default:
+
 				//Get FormCode
 				$formcode = $commonUses->getFormCode("Manage Referrer");
 				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);

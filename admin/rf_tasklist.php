@@ -257,30 +257,35 @@ header("Location:index.php?msg=timeout");
  <td class="<?php echo $style ?>"><?php echo htmlspecialchars($row["task_Description"]) ?></td>
  <td align="center">
 <?php
-                                if($_GET['page']!="")
-                                    $updatequery="?page=".$_GET['page'];
-                                if($_GET['order']!="" && $_GET['type']!="")
-                                    $updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
+	if($access_file_level['stf_Edit']=="Y") {
+	if($_GET['page']!="")
+		$updatequery="?page=".$_GET['page'];
+	if($_GET['order']!="" && $_GET['type']!="")
+		$updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
 
 ?>
-                                <form action="rf_tasklist.php<?php echo $updatequery; ?>" method="post">
-                                    <select name="task_Order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='rf_tasklist.php?a=reset'}"  ><option value="0">Select Order</option>
-                                    <?php
-                                        //$count = sql_getrecordcount();
-                                    $count = mysql_num_rows($res);
-                                        for($c=1; $c<=$count; $c++)
-                                            {
-                                                $val = $c;
-                                                if ($row["task_Order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
+	<form action="rf_tasklist.php<?php echo $updatequery; ?>" method="post">
+		<select name="task_Order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='rf_tasklist.php?a=reset'}"  ><option value="0">Select Order</option>
+		<?php
+			//$count = sql_getrecordcount();
+		$count = mysql_num_rows($res);
+			for($c=1; $c<=$count; $c++)
+				{
+					$val = $c;
+					if ($row["task_Order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
 
-                                    ?>
-                                        <option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
-                                    <?php } ?>
-                                    </select>
-                                            <input type="hidden" name="clscode" value="<?php echo $row["task_Id"]; ?>">
-                                            <button type="submit" name="gridedit" value="save">Save</button>
-                                </form>
-</td>
+		?>
+			<option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
+		<?php } ?>
+		</select>
+				<input type="hidden" name="clscode" value="<?php echo $row["task_Id"]; ?>">
+				<button type="submit" name="gridedit" value="save">Save</button>
+	</form><?
+}
+else {
+	echo $row["task_Order"];
+}
+?></td>
 
 <?php 
   if($access_file_level['stf_View']=="Y")

@@ -8,8 +8,8 @@
 	<div align="left">
 		<table class="fieldtable" border="0" cellspacing="1" cellpadding="5" width="80%">
 			<tr class="fieldheader">
-				<th width="45%" class="fieldheader">Contact Name</th>
-				<th width="30%" align="center" class="fieldheader">Landing URL</th>
+				<th width="30%" align="left" class="fieldheader">Contact Name</th>
+				<th width="45%" class="fieldheader">Landing URL</th>
 				<th width="15%" class="fieldheader" colspan="3" align="center">Action</th>
 			</tr><?
 
@@ -20,7 +20,7 @@
 
 				?><tr class="<?=$trClass?>">
 					<td name="<?=$empId?>"><?=htmlspecialchars($arrInfo["empName"])?></td>
-					<td align="center"><input size="90" type="text" name="<?=$arrInfo["landingUrl"]?>" id="landingUrl<?=$empId?>" value="<?=htmlspecialchars($arrInfo["landingUrl"])?>" /></td>
+					<td align="center"><input style="width:350px;" type="text" name="<?=$arrInfo["landingUrl"]?>" id="landingUrl<?=$empId?>" value="<?=htmlspecialchars($arrInfo["landingUrl"])?>" /></td>
 					<td align="center">
 						<button type="submit" name="gridedit" value="save" onclick="javascript:saveDefaultUrl(<?=$empId?>)">Save</button>
 					</td>

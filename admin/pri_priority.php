@@ -257,30 +257,35 @@ $countRow = 0;
  <td class="<?php echo $style ?>"><?php echo htmlspecialchars($row["pri_Description"]) ?></td>
 <td align="center">
 <?php
-                                if($_GET['page']!="")
-                                    $updatequery="?page=".$_GET['page'];
-                                if($_GET['order']!="" && $_GET['type']!="")
-                                    $updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
+	if($access_file_level['stf_Edit']=="Y") {
+	if($_GET['page']!="")
+		$updatequery="?page=".$_GET['page'];
+	if($_GET['order']!="" && $_GET['type']!="")
+		$updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
 
 ?>
-                                <form action="pri_priority.php<?php echo $updatequery; ?>" method="post">
-                                    <select name="pri_Order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='pri_priority.php?a=reset'}"  ><option value="0">Select Order</option>
-                                    <?php
-                                        //$count = sql_getrecordcount();
-                                    $count = mysql_num_rows($res);
-                                        for($c=1; $c<=$count; $c++)
-                                            {
-                                                $val = $c;
-                                                if ($row["pri_Order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
+	<form action="pri_priority.php<?php echo $updatequery; ?>" method="post">
+		<select name="pri_Order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='pri_priority.php?a=reset'}"  ><option value="0">Select Order</option>
+		<?php
+			//$count = sql_getrecordcount();
+		$count = mysql_num_rows($res);
+			for($c=1; $c<=$count; $c++)
+				{
+					$val = $c;
+					if ($row["pri_Order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
 
-                                    ?>
-                                        <option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
-                                    <?php } ?>
-                                    </select>
-                                            <input type="hidden" name="pricode" value="<?php echo $row["pri_Code"]; ?>">
-                                            <button type="submit" name="gridedit" value="save">Save</button>
-                                </form>
-</td>
+		?>
+			<option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
+		<?php } ?>
+		</select>
+				<input type="hidden" name="pricode" value="<?php echo $row["pri_Code"]; ?>">
+				<button type="submit" name="gridedit" value="save">Save</button>
+	</form><?
+ }
+else {
+	echo $row["pri_Order"];
+}
+?></td>
 
 <?php 
   if($access_file_level['stf_View']=="Y")

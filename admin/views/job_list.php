@@ -345,7 +345,7 @@ switch ($a)
 		
 		<table class="fieldtable_outer" align="center">
 
-		<table  class="fieldtable" align="center"  border="0" cellspacing="1" cellpadding="4" >
+		<table  class="fieldtable" align="center" width="100%" border="0" cellspacing="1" cellpadding="4" >
 		<tr class="fieldheader">
 			<th class="fieldheader" align="left">Type</th>
 			<th class="fieldheader" align="left">Document</th>
@@ -593,15 +593,15 @@ switch ($a)
 			 <table class="fieldtable" align="center" width="100%" border="0" cellspacing="1" cellpadding="4">
 				<tr class="fieldheader">
 					<!--<th class="fieldheader">S. No.</th>-->
-					<th class="fieldheader" align="center" width="30%">Query</th>
-                    <th class="fieldheader">Reponse</th>
-					<th class="fieldheader" align="center">Uploaded by SR</th>
-					<th class="fieldheader" align="center">Supporting Doc</th>
-					<th class="fieldheader" align="center" >Date Added</th>
+					<th class="fieldheader" width="30%">Query</th>
+                    <th class="fieldheader" align="left">Reponse</th>
+					<th class="fieldheader">Uploaded by SR</th>
+					<th class="fieldheader">Supporting Doc</th>
+					<th class="fieldheader">Date Added</th>
                     <th class="fieldheader">Date Answered</th>
 					<th class="fieldheader">Answered?</th>
-					<th class="fieldheader" align="center">Save</th>
-					<th class="fieldheader" align="center">Action</th>
+					<th class="fieldheader">Save</th>
+					<th class="fieldheader">Action</th>
 				</tr><?
 				
 			$srNo = 0;
@@ -809,9 +809,12 @@ switch ($a)
 					<th class="fieldheader" align="left">Job Name</th>
 					<th class="fieldheader" align="left">Job Status</th>
 					<th class="fieldheader">Date Received</th>
-					<th class="fieldheader">Due Date</th>
-					<th class="fieldheader" colspan="2">Actions</th>
-				</tr><?
+					<th class="fieldheader">Due Date</th><?
+
+					if($access_file_level['stf_Edit'] == "Y" || $access_file_level['stf_Delete'] == "Y") {
+						?><th class="fieldheader" colspan="2">Actions</th><?
+					}
+				?></tr><?
 
 				foreach ($arrJob AS $jobId => $arrInfo) {
 					?><tr class="trclass"><?

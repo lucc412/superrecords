@@ -475,7 +475,7 @@ class empcontactContentList extends Database
             <table class="bd" border="0" cellspacing="1" cellpadding="4">
                 <tr>
                 <?php
-                  if($access_file_level['stf_View']=="Y")
+                  if($access_file_level['stf_Add']=="Y")
                   {
                 ?>
                 <td><a href="con_empcontact.php?a=add" class="hlight">Add Record</a></td>
@@ -485,7 +485,7 @@ class empcontactContentList extends Database
                 ?>
                 <td><a href="con_empcontact.php?a=edit&recid=<?php echo $recid ?>" class="hlight">Edit Record</a></td>
                 <?php }
-                  if($access_file_level['stf_View']=="Y")
+                  if($access_file_level['stf_Delete']=="Y")
                   {
                 ?>
                 <td><a onClick="performdelete('con_empcontact.php?mode=delete&recid=<?php echo stripslashes($row["con_Code"]) ?>'); return false;" href="#"  class="hlight">Delete Record</a></td>

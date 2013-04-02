@@ -103,9 +103,18 @@
 	<h1></h1>
 </div>
 <table class="bd" border="0" cellspacing="1" cellpadding="4">
-	<tr>
-		<td><a class="hlight"  href="tsk_task.php?a=add&jobId=<?=$_REQUEST["jobId"]?>">Add Record</a></td>
-		<td><a class="hlight"  href="tsk_task.php?a=edit&jobId=<?=$_REQUEST["jobId"]?>&recid=<?=$recid?>">Edit Record</a></td>
-		<td><a class="hlight"  onClick="performdelete('tsk_task.php?sql=delete&jobId=<?=$_REQUEST["jobId"]?>&recid=<?=$recid?>'); return false;" href="#" >Delete Record</a></td>
-	</tr>
+	<tr><?
+
+		if($access_file_level['stf_Add'] == "Y") {
+			?><td><a class="hlight"  href="tsk_task.php?a=add&jobId=<?=$_REQUEST["jobId"]?>">Add Record</a></td><?
+		}
+
+		if($access_file_level['stf_Edit'] == "Y") {
+			?><td><a class="hlight"  href="tsk_task.php?a=edit&jobId=<?=$_REQUEST["jobId"]?>&recid=<?=$recid?>">Edit Record</a></td><?
+		}
+
+		if($access_file_level['stf_Delete'] == "Y") {
+			?><td><a class="hlight"  onClick="performdelete('tsk_task.php?sql=delete&jobId=<?=$_REQUEST["jobId"]?>&recid=<?=$recid?>'); return false;" href="#" >Delete Record</a></td><?
+		}
+	?></tr>
 </table>

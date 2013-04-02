@@ -69,6 +69,11 @@ if($_SESSION['validUser']) {
 				break;
 
 			case "view":
+
+				//Get FormCode
+				$formcode = $commonUses->getFormCode("Manage Practice");
+				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+
 				$arrPractice = $objCallData->sql_select();
 				$arrPracticeData = $arrPractice[$recid];
 				include('views/pr_practice_view.php');
@@ -81,6 +86,7 @@ if($_SESSION['validUser']) {
 				break;
 
 			default:
+
 				//Get FormCode
 				$formcode = $commonUses->getFormCode("Manage Practice");
 				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);

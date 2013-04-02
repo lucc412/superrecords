@@ -56,6 +56,11 @@ if($_SESSION['validUser']) {
 				break;
 
 			case "view":
+
+				//Get FormCode
+				$formcode = $commonUses->getFormCode("Task");
+				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+
 				$arrTask = $objCallData->sql_select();
 				$arrTaskData = $arrTask[$recid];
 				$arrEmployees = $objCallData->fetchEmployees();

@@ -262,35 +262,40 @@ $countRow = 0;
  <td class="<?php echo $style ?>"><?php echo htmlspecialchars($row["prc_Description"]) ?></td>
 <td>
 <?php
-                                if($_GET['page']!="")
-                                    $updatequery="?page=".$_GET['page'];
-                                if($_GET['order']!="" && $_GET['type']!="")
-                                    $updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
+	 if($access_file_level['stf_Edit']=="Y") {
+	if($_GET['page']!="")
+		$updatequery="?page=".$_GET['page'];
+	if($_GET['order']!="" && $_GET['type']!="")
+		$updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
 
 ?>
-                                <form action="prc_processcycle.php<?php echo $updatequery; ?>" method="post">
-                                    <select name="prc_Order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='prc_processcycle.php?a=reset'}"  ><option value="0">Select Order</option>
-                                    <?php
-                                        //$count = sql_getrecordcount();
-                                    $count = mysql_num_rows($res);
-                                        for($c=1; $c<=$count; $c++)
-                                            {
-                                                $val = $c;
-                                                if ($row["prc_Order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
+	<form action="prc_processcycle.php<?php echo $updatequery; ?>" method="post">
+		<select name="prc_Order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='prc_processcycle.php?a=reset'}"  ><option value="0">Select Order</option>
+		<?php
+			//$count = sql_getrecordcount();
+		$count = mysql_num_rows($res);
+			for($c=1; $c<=$count; $c++)
+				{
+					$val = $c;
+					if ($row["prc_Order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
 
-                                    ?>
-                                        <option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
-                                    <?php } ?>
-                                    </select>
-                                            <input type="hidden" name="prccode" value="<?php echo $row["prc_Code"]; ?>">
-                                            <button type="submit" name="gridedit" value="save">Save</button>
-                                </form>
-</td>
+		?>
+			<option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
+		<?php } ?>
+		</select>
+				<input type="hidden" name="prccode" value="<?php echo $row["prc_Code"]; ?>">
+				<button type="submit" name="gridedit" value="save">Save</button>
+	</form><?
+ }
+else {
+	echo $row["prc_Order"];
+}
+?></td>
 
 <?php 
   if($access_file_level['stf_View']=="Y")
 	  {  
-?><td>
+?><td align="center">
 <a href="prc_processcycle.php?a=view&recid=<?php echo $i ?>">
 <img src="images/view.png" border="0"  alt="View" name="View" title="View" align="middle" /></a></td>
 <?php } ?>
@@ -299,7 +304,7 @@ $countRow = 0;
 <?php 
   if($access_file_level['stf_Edit']=="Y")
 	  {  
-?><td>
+?><td align="center">
 <a href="prc_processcycle.php?a=edit&recid=<?php echo $i ?>">
 <img src="images/edit.png" border="0"  alt="Edit" name="Edit" title="Edit" align="middle" /></a></td>
 <?php } ?>
@@ -307,7 +312,7 @@ $countRow = 0;
 <?php 
   if($access_file_level['stf_Delete']=="Y")
 	  {  
-?><td>
+?><td align="center">
 
 <a onClick="performdelete('prc_processcycle.php?mode=delete&recid=<?php echo htmlspecialchars($row["prc_Code"]) ?>'); return false;" href="#">
 <img src="images/erase.png" border="0"  alt="Delete" name="Delete" title="Delete" align="middle" /></a>

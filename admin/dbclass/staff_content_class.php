@@ -191,7 +191,7 @@ class staffContentList extends Database
 							FROM stf_staffforms a,frm_forms b  
 							WHERE a.stf_SCode =".$row['stf_Code']. " 
 							AND b.frm_Code = a.stf_FormCode 
-							AND frm_Code NOT IN (45,53,65,73,74,77,98,21,76)
+							AND frm_Code NOT IN (45,53,65,73,74,77,76)
 							ORDER BY b.frm_Order ";
 				$permres = mysql_query($permquery);
 
@@ -284,7 +284,7 @@ class staffContentList extends Database
 						echo "<div style='float:left; margin-left:55px;'>Tax & Accounting</div>";
 						else if($row_perm['frm_Code']==64)
 						echo "<div style='float:left; margin-left:55px;'>Hosting</div>";
-						else if($row_perm['frm_Description']=="Staff") echo "User";
+						else if($row_perm['frm_Description']=="Staff") echo "Users";
 						else if($row_perm['frm_Description']=="Client Status") echo "Lead Stage";
 						else if($row_perm['frm_Description']=="Client Report") echo "Sales Report";
 						else if($row_perm['frm_Description']=="Cases") echo "Tickets";
@@ -484,7 +484,7 @@ class staffContentList extends Database
 						  </tr>
 							<?php
 							 //show permission settings
-							$formquery="SELECT * FROM frm_forms WHERE frm_Code NOT IN (45,53,65,73,74,77,98,21,76) ORDER BY frm_Order";
+							$formquery="SELECT * FROM frm_forms WHERE frm_Code NOT IN (45,53,65,73,74,77,76) ORDER BY frm_Order";
 							$formres=@mysql_query($formquery);
 							while ($row_form = @mysql_fetch_array($formres))
 							{
@@ -499,7 +499,7 @@ class staffContentList extends Database
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Client</div></i></b></td></tr>";
 								if($i==17)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
-								if($i==25)
+								if($i==24)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
 								if($i==38)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
@@ -508,7 +508,7 @@ class staffContentList extends Database
 									<td width="300px">&nbsp;&nbsp;
 									<span style="margin-left:20px;">
 									<div style="margin-left:60px; float:left"><?
-										if($row_form['frm_Description']=="Staff") echo "User";
+										if($row_form['frm_Description']=="Staff") echo "Users";
 										else if($row_form['frm_Description']=="Client Status") echo "Lead Stage";
 										else if($row_form['frm_Description']=="Client Report") echo "Sales Report";
 										else if($row_form['frm_Description']=="Cases") echo "Tickets";
@@ -565,7 +565,7 @@ class staffContentList extends Database
 									FROM stf_staffforms a,frm_forms b 
 									WHERE a.stf_SCode =".$row['stf_Code']. " 
 									AND b.frm_Code = a.stf_FormCode 
-									AND b.frm_Code NOT IN (45,53,65,73,74,77,98,21,76)
+									AND b.frm_Code NOT IN (45,53,65,73,74,77,76)
 									ORDER BY b.frm_Order";
 
 						$permres = mysql_query($permquery);
@@ -663,7 +663,7 @@ class staffContentList extends Database
 							echo "<div style='float:left; margin-left:55px;'>Tax & Accounting</div>";
 							else if($row_perm['frm_Code']==64)
 							echo "<div style='float:left; margin-left:55px;'>Hosting</div>";
-							else if($row_perm['frm_Description']=="Staff") echo "User";
+							else if($row_perm['frm_Description']=="Staff") echo "Users";
 							else if($row_perm['frm_Description']=="Client Status") echo "Lead Stage";
 							else if($row_perm['frm_Description']=="Client Report") echo "Sales Report";
 							else if($row_perm['frm_Description']=="Cases") echo "Tickets";

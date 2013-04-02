@@ -225,14 +225,12 @@ header("Location:index.php?msg=timeout");
 </form>
  <p>&nbsp;</p>
 
-<br><br><br>
-<?php
-  if($access_file_level['stf_Add']=="Y")
-	  {
-?>
-<a href="lead_type.php?a=add" class="hlight"  ><img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom">&nbsp;Add Record</a>
-<?php } ?>
-<?php showpagenav($page, $pagecount); ?><br>
+<br><br><br><?
+if($access_file_level['stf_Add']=="Y") {
+	?><a href="lead_type.php?a=add" class="hlight"  ><img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom">&nbsp;Add Record</a><?
+} 
+showpagenav($page, $pagecount); 
+?><br>
 <br>
 <table  class="fieldtable" cellspacing="1" cellpadding="5" align="center" width="100%">
 <tr class="fieldheader">
@@ -242,65 +240,58 @@ header("Location:index.php?msg=timeout");
 </tr>
 <?php
 $countRow = 0;
-  for ($i = $startrec; $i < $reccount; $i++)
-  {
+for ($i = $startrec; $i < $reccount; $i++) {
 	if($countRow%2 == 0) $trClass = "trcolor";
 	else $trClass = "";
 
-    $row = mysql_fetch_assoc($res);
- ?>
-<tr class="<?=$trClass?>">
-<td><?php echo htmlspecialchars($row["description"]) ?></td>
-<td align="center">
-<?php
-                                if($_GET['page']!="")
-                                    $updatequery="?page=".$_GET['page'];
-                                if($_GET['order']!="" && $_GET['type']!="")
-                                    $updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
+	$row = mysql_fetch_assoc($res);
+	?>
+	<tr class="<?=$trClass?>">
+	<td><?php echo htmlspecialchars($row["description"]) ?></td>
+	<td align="center"><?
+	if($access_file_level['stf_Edit']=="Y") {
+		if($_GET['page']!="")
+		$updatequery="?page=".$_GET['page'];
+		if($_GET['order']!="" && $_GET['type']!="")
+		$updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
 
-?>
-                                <form action="lead_type.php<?php echo $updatequery; ?>" method="post">
-                                    <select name="order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='lead_type.php?a=reset'}"  ><option value="0">Select Order</option>
-                                    <?php
-                                        //$count = sql_getrecordcount();
-                                    $count = mysql_num_rows($res);
-                                        for($c=1; $c<=$count; $c++)
-                                            {
-                                                $val = $c;
-                                                if ($row["order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
 
-                                    ?>
-                                        <option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
-                                    <?php } ?>
-                                    </select>
-                                            <input type="hidden" name="svrcode" value="<?php echo $row["id"]; ?>">
-											<button type="submit" name="gridedit" value="save">Save</button>
-                                </form>
-</td>
+		?><form action="lead_type.php<?php echo $updatequery; ?>" method="post">
+		<select name="order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='lead_type.php?a=reset'}"  ><option value="0">Select Order</option>
+		<?php
+		//$count = sql_getrecordcount();
+		$count = mysql_num_rows($res);
+		for($c=1; $c<=$count; $c++)
+		{
+		$val = $c;
+		if ($row["order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
 
-<?php
-  if($access_file_level['stf_View']=="Y")
-	  {
-?>
-<td align="center"><a href="lead_type.php?a=view&recid=<?php echo $i ?>"><img src="images/view.png" border="0"  alt="View" name="View" title="View" align="middle" /></a></td>
-<?php }?>
-<?php
-  if($access_file_level['stf_Edit']=="Y")
-	  {
-?>
-<td align="center"><a href="lead_type.php?a=edit&recid=<?php echo $i ?>"><img src="images/edit.png" border="0"  alt="Edit" name="Edit" title="Edit" align="middle" /></a></td>
-<?php } ?>
-<?php
-  if($access_file_level['stf_Delete']=="Y")
-	  {
-?>
-<td align="center"><a onClick="performdelete('lead_type.php?mode=delete&recid=<?php echo htmlspecialchars($row["id"]) ?>'); return false;" href="#"><img src="images/erase.png" border="0"  alt="Delete" name="Delete" title="Delete" align="middle" /></a></td>
-<?php }?>
-</tr>
-<?php
+		?>
+		<option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
+		<?php } ?>
+		</select>
+		<input type="hidden" name="svrcode" value="<?php echo $row["id"]; ?>">
+		<button type="submit" name="gridedit" value="save">Save</button>
+		</form><?
+	}
+	else {
+		echo $row["order"];
+	}
+	?></td><?
+
+	if($access_file_level['stf_View']=="Y") {
+		?><td align="center"><a href="lead_type.php?a=view&recid=<?php echo $i ?>"><img src="images/view.png" border="0"  alt="View" name="View" title="View" align="middle" /></a></td><?
+	}
+	if($access_file_level['stf_Edit']=="Y") {
+		?><td align="center"><a href="lead_type.php?a=edit&recid=<?php echo $i ?>"><img src="images/edit.png" border="0"  alt="Edit" name="Edit" title="Edit" align="middle" /></a></td><?
+	} 
+	if($access_file_level['stf_Delete']=="Y") {
+		?><td align="center"><a onClick="performdelete('lead_type.php?mode=delete&recid=<?php echo htmlspecialchars($row["id"]) ?>'); return false;" href="#"><img src="images/erase.png" border="0"  alt="Delete" name="Delete" title="Delete" align="middle" /></a></td><? 
+	}
+	?></tr><?
 	$countRow++;
-  }
-  mysql_free_result($res);
+}
+mysql_free_result($res);
 ?>
 </table>
 <br>

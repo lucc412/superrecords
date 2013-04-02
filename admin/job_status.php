@@ -268,30 +268,35 @@ $countRow = 0;
 <td><?php echo htmlspecialchars($row["job_status"]) ?></td>
 <td align="center">
 <?php
-                                if($_GET['page']!="")
-                                    $updatequery="?page=".$_GET['page'];
-                                if($_GET['order']!="" && $_GET['type']!="")
-                                    $updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
+	 if($access_file_level['stf_Edit']=="Y") {
+	if($_GET['page']!="")
+		$updatequery="?page=".$_GET['page'];
+	if($_GET['order']!="" && $_GET['type']!="")
+		$updatequery="?order=".$_GET['order']."&type=".$_GET['type'];
 
 ?>
-                                <form action="job_status.php<?php echo $updatequery; ?>" method="post">
-                                    <select name="order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='job_status.php?a=reset'}"  ><option value="0">Select Order</option>
-                                    <?php
-                                        //$count = sql_getrecordcount();
-                                    $count = mysql_num_rows($res);
-                                        for($c=1; $c<=$count; $c++)
-                                            {
-                                                $val = $c;
-                                                if ($row["order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
+	<form action="job_status.php<?php echo $updatequery; ?>" method="post">
+		<select name="order" onChange="if(confirm('Save?')){this.form.gridedit.click();} else { location.href='job_status.php?a=reset'}"  ><option value="0">Select Order</option>
+		<?php
+			//$count = sql_getrecordcount();
+		$count = mysql_num_rows($res);
+			for($c=1; $c<=$count; $c++)
+				{
+					$val = $c;
+					if ($row["order"] == $val) {$selstr = " selected"; } else {$selstr = ""; }
 
-                                    ?>
-                                        <option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
-                                    <?php } ?>
-                                    </select>
-                                            <input type="hidden" name="svrcode" value="<?php echo $row["job_status_id"]; ?>">
-                                            <button type="submit" name="gridedit" value="save">Save</button>
-                                </form>
-</td>
+		?>
+			<option value="<?php echo $c ?>"<?php echo $selstr ?>><?php echo $c ?></option>
+		<?php } ?>
+		</select>
+				<input type="hidden" name="svrcode" value="<?php echo $row["job_status_id"]; ?>">
+				<button type="submit" name="gridedit" value="save">Save</button>
+	</form><?
+}
+else {
+	echo $row['order'];
+}
+?></td>
 
 <?php
   if($access_file_level['stf_View']=="Y")

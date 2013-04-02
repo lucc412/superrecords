@@ -48,6 +48,11 @@ if($_SESSION['validUser']) {
 				break;
 
 			case "view":
+
+				//Get FormCode
+				$formcode = $commonUses->getFormCode("Manage Lead");
+				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+
 				$arrLead = $objCallData->sql_select();
 				$arrLeadData = $arrLead[$recid];
 				include('views/lead_view.php');
@@ -60,6 +65,7 @@ if($_SESSION['validUser']) {
 				break;
 
 			default:
+				
 				//Get FormCode
 				$formcode = $commonUses->getFormCode("Manage Lead");
 				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);

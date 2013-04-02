@@ -64,6 +64,13 @@ include(TOPBAR);
 		<tr><td>&nbsp;</td></tr>
 
 		<tr>
+			<td><strong>Notes</strong></td>
+			<td><textarea id="txtNotes" name="txtNotes"></textarea>  </td>
+		</tr>
+
+		<tr><td>&nbsp;</td></tr>
+
+		<tr>
 			<td><strong>Source Documents</strong></td>
 			<td><span class="docheader">Description</span></td>
 			<td><span class="docheader">File Path</span></td>
@@ -72,8 +79,8 @@ include(TOPBAR);
 		<tr>
 			<td>&nbsp;</td>
 			<td width="274px"><input type="text" name="textSource_50" title="Specify name of source document"></td>
-			<td><input type="file" name="sourceDoc_50" id="sourceDoc_50" title="Upload source document"></td>
-			<td><button type="button" style="margin-top:-6px;" title="Click here to upload new source document" onclick="javascript:addElement();" value="Add">Upload New +</button></td>
+			<td width="240px"><input type="file" name="sourceDoc_50" id="sourceDoc_50" title="Upload source document"></td>
+			<td><button type="button" class="logoutbtn" style="margin-top:-6px;" title="Click here to upload new source document" onclick="javascript:addElement();" value="Add">Add</button></td>
 		</tr>
 
 		<tr>
@@ -83,7 +90,7 @@ include(TOPBAR);
 
 		<tr>
 			<td><button type="reset" value="Reset">Reset</button></td>
-			<td><button type="submit" value="Add">Add</button></td>
+			<td><button type="submit" value="Add">Submit</button></td>
 		</tr>
 
 	</table>

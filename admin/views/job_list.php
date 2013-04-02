@@ -132,14 +132,19 @@ switch ($a)
 					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Job.</span></a>
 					</td>
 				</tr>
+				
 				<tr>
 					<td class="hr">Period<font style="color:red;" size="2">*</font></td>
 					<td colspan="2"><input title="Specify period of job" type="text" name="txtPeriod" id="txtPeriod" value=""></td>
 				</tr>
 				
+				<tr>
+					<td class="hr">Notes</td>
+					<td colspan="2"><textarea id="txtNotes" name="txtNotes"></textarea></td>
+				</tr>
+				
 				<tr style="vertical-align:top;">
-					<td class="hr">
-					</td>
+					<td class="hr">Source Documents	</td>
 					<td colspan="2"><input type="text" name="textSource_50" title="Specify name of source document"><input type="file" name="sourceDoc_50" id="sourceDoc_50">
 						<span style="margin-left:20px;"></span>
 						<div id="parentDiv"></div>
@@ -263,6 +268,11 @@ switch ($a)
 					<td class="dr"><?=$arrJob[$_REQUEST["jobId"]]["period"]?></td>
 				</tr>
 
+				<tr>
+					<td class="hr">Notes</td>
+					<td class="dr"><?=$arrJob[$_REQUEST["jobId"]]["notes"]?></td>
+				</tr>
+				
 				<tr>
 					<td class="hr">Job Status</td>
 					<td class="dr">

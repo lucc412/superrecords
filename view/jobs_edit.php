@@ -4,7 +4,7 @@ include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
-	<h1>Edit Existing Job</h1>
+	<h1>Edit Job</h1>
 	<span><b>Welcome to the Super Records job edit page.</b><span>
 </div><?
 
@@ -73,12 +73,32 @@ include(TOPBAR);
 		</tr>
 
 		<tr><td>&nbsp;</td></tr>
+		
+		<tr>
+			<td><strong>Notes</strong></td>
+			<td> <textarea id="txtNotes" name="txtNotes"> <?=$arrJobsData['notes']?> </textarea>
+		</tr>
+
+		<tr><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Source Documents</strong></td>
-			<td><?
+			<?
 				$arrSourceDocs = $objScr->fetch_documents($jobId);
-				if(!empty($arrSourceDocs)) {
+				
+				//***** Code to check file uploaded but not exists -> starts here *****
+				$countFiles = 0;
+				foreach($arrSourceDocs AS $documentId => $arrDocInfo)
+				{
+					$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
+					if(file_exists($folderPath))
+						$countFiles++;					
+				}
+				//***** Code to check file uploaded but not exists -> ends here *******
+				
+				if(!empty($arrSourceDocs) && $countFiles>0) {
+			?>
+			<td><?
 					$cntFile = 0;
 					foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
 						$cntFile++;
@@ -89,23 +109,25 @@ include(TOPBAR);
 							<input type="hidden" name="sourceDoc_<?=$cntFile?>" id="sourceDoc_<?=$cntFile?>" value="<?=$arrDocInfo['file_path']?>"><?
 						}
 					}
-				}
 			?></td>
-		</tr>
 
-		<tr><td>&nbsp;</td></tr>
+		</tr><? }
+
+			if(!empty($arrSourceDocs) && $countFiles>0) {
+		?><tr><td>&nbsp;</td></tr>
 
 		<tr>
-			<td>&nbsp;</td>
-			<td><span class="docheader">Description</span></td>
+			<td>&nbsp;</td><?
+			}
+			?><td><span class="docheader">Description</span></td>
 			<td><span class="docheader">File Path</span></td>
 		</tr>
 
 		<tr>
 			<td>&nbsp;</td>
 			<td width="274px"><input type="text" name="textSource_50" title="Specify name of source document"></td>
-			<td><input type="file" name="sourceDoc_50" id="sourceDoc_50"></td>
-			<td><button type="button" title="Click here to upload new source document" onclick="javascript:addElement();" value="Add">Upload New +</button></td>
+			<td width="240px"><input type="file" name="sourceDoc_50" id="sourceDoc_50"></td>
+			<td><button type="button" class="logoutbtn" style="margin-top:-6px;" title="Click here to upload new source document" onclick="javascript:addElement();" value="Add">Add</button></td>
 		</tr>
 
 		<tr>

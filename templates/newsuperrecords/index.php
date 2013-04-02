@@ -119,7 +119,7 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 					</a>
 				</div> <!--branding-->
 				<div class="user">
-					<li class="contact"><a href="#">Contact Us</a></li>
+					<li class="contact"><a href="#">Learn More</a></li>
 					<li class="login"><a href="jobtracker/">Practice Login</a></li>
 				</div> <!--user-->
 				<div class="phone"><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/header-phone.png" /></div> <!--phone-->

@@ -80,7 +80,7 @@ include(TOPBAR);
 						$jobDispName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
 						echo $jobDispName;
 					?></td>
-					<td class="tddata"><?=$arrInfo['query']?></td>
+					<td class="tddata"><?=nl2br($arrInfo['query'])?></td>
 					<td class="tddata"><textarea name="txtResponse<?=$queryId?>"><?=$arrInfo['response']?></textarea></td>
 					
 					<td width="9%" class="<?=$style?> yellowBG"><?

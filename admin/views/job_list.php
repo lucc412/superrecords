@@ -270,7 +270,7 @@ switch ($a)
 
 				<tr>
 					<td class="hr">Notes</td>
-					<td class="dr"><?=$arrJob[$_REQUEST["jobId"]]["notes"]?></td>
+					<td class="dr"><?=nl2br($arrJob[$_REQUEST["jobId"]]["notes"])?></td>
 				</tr>
 				
 				<tr>
@@ -627,7 +627,7 @@ switch ($a)
 						<textarea name="txtQuery<?=$queryId?>" rows="5" style="width:300px; " cols="60"><?=$arrInfo["query"]?></textarea>						
 					</td>
 					
-					<td class="<?=$style?> yellowBG"><?=$arrInfo["response"]?></td>
+					<td class="<?=$style?> yellowBG"><?=nl2br($arrInfo["response"])?></td>
 					
 					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
 					if(!empty($arrInfo["report_file_path"])) {

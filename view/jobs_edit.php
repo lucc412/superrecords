@@ -76,7 +76,7 @@ include(TOPBAR);
 		
 		<tr>
 			<td><strong>Notes</strong></td>
-			<td> <textarea id="txtNotes" name="txtNotes"> <?=$arrJobsData['notes']?> </textarea>
+			<td> <textarea id="txtNotes" name="txtNotes"><?=$arrJobsData['notes']?></textarea>
 		</tr>
 
 		<tr><td>&nbsp;</td></tr>

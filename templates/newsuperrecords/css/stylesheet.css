@@ -83,6 +83,29 @@ a img{
      display: none;
 }
 
+
+.freetrlbtn{
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 5px 20px;
+	position: relative;
+	z-index: 20;
+	display: block;
+	height: 30px;
+	cursor: pointer;
+	color: #fff;
+	line-height: 33px;
+	font-size: 19px;
+	background: rgb(7,65,96); /* Old browsers */
+	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, -moz-linear-gradient(left,  rgba(7,65,96,1) 0%, rgba(19,108,144,1) 100%); /* FF3.6+ */
+	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(7,65,96,1)), color-stop(100%,rgba(19,108,144,1))); /* Chrome,Safari4+ */
+	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, -webkit-linear-gradient(left,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* Chrome10+,Safari5.1+ */
+	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, -o-linear-gradient(left,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* Opera 11.10+ */
+	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, -ms-linear-gradient(left,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* IE10+ */
+	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, linear-gradient(to right,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#074160', endColorstr='#136c90',GradientType=1 ); /* IE6-9 */	
+	width:100%;
+}
+
 /* Header */
 
 .header {
@@ -825,10 +848,3 @@ button {
         padding: 20px 35px 55px;
       }
 /* Liquid Slider */
-
-
-
-
-
-
-

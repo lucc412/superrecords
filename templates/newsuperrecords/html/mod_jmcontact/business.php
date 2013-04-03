@@ -78,47 +78,84 @@ xmlhttp.send();
 
 function validation()
 {
-	var name = document.getElementById("Name").value;
-	var email =document.getElementById("Email").value;
-	var phone = document.getElementById("Telephone").value;
+	var name = document.getElementById("Name");
+	var email =document.getElementById("Email");
+	var phone = document.getElementById("Telephone");
 	var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	flagReturn = true;
 	
-	if(name == "")
+	if(name.value == "" || name.value == "Full Name *")
 	{
-		alert("Please specify Name");
-		document.getElementById("Name").focus();
-		return false;
-	}
-	else if(email == "")
-	{
-		alert("Please specify Email Address");
-		document.getElementById("Email").focus();
-		return false;
-	}
-	else if(reg.test(email) == false)
-	{
-        alert("Please specify valid Email Address");
-		document.getElementById("Email").focus();
-		return false;
-	}
-	else if(phone == "")
-	{
-		alert("Please specify Phone Number");
-		document.getElementById("Telephone").focus();
-		return false;
-	}
-	else if((isNaN(phone)))
-	{
-		alert("Please specify Phone Number in digits only");
-		document.getElementById("Telephone").value="";
-		document.getElementById("Telephone").focus();
-		return false;
+		document.getElementById("val_name").innerHTML = "Please specify Full Name";
+		//document.getElementById("Name").focus();
+		name.className = "errclass";
+		flagReturn = false;
 	}
 	else
 	{
-		
-		return true;
+		document.getElementById("val_name").innerHTML = "";
+		name.className = "";
 	}
+	
+	if(email.value == "" || email.value == "Email *") 
+	{
+		document.getElementById("val_email").innerHTML = "Please specify Email";
+		//document.getElementById("Email").focus();
+		email.className = "errclass";
+		flagReturn = false;
+	}
+	else
+	{
+		document.getElementById("val_email").innerHTML = "";
+		email.className = "";
+	}
+	
+	if(email.value != "" && email.value != "Email *")
+	{
+		if(reg.test(email.value) == false)
+		{
+			document.getElementById("val_email").innerHTML = "Please specify valid Email";
+			//document.getElementById("Email").focus();
+			email.className = "errclass";
+			flagReturn = false;
+		}
+		else
+		{
+			document.getElementById("val_email").innerHTML = "";
+			email.className = "";
+		}
+	}
+	
+	if(phone.value == "" || phone.value == "Telephone *") 
+	{
+		document.getElementById("val_phone").innerHTML = "Please specify Telephone";
+		//document.getElementById("Telephone").focus();
+		phone.className = "errclass";
+		flagReturn = false;
+	}
+	else
+	{
+		document.getElementById("val_phone").innerHTML = "";
+		phone.className = "";
+	}
+	
+	if(phone.value != "" && phone.value != "Telephone *") 
+	{
+		if((isNaN(phone.value)))
+		{
+			document.getElementById("val_phone").innerHTML = "Please specify Telephone in digits only";
+			//document.getElementById("Telephone").focus();
+			phone.className = "errclass";
+			flagReturn = false;
+		}
+		else
+		{
+			document.getElementById("val_phone").innerHTML = "";
+			phone.className = "";
+		}
+	}
+	
+	return flagReturn;
 }
 </script>');
 
@@ -142,6 +179,12 @@ function jm_getthem($params)
 }
 
 ?>
+<style type="text/css">
+.errclass
+{
+	border:2px solid #fd0222;
+}
+</style>
 
 <div class="<?php echo $params->get('moduleclass_sfx');?>" id="jmcontactform">
 <div class="ptext"><?php echo $params->get('pretext') ;  ?></div>
@@ -149,15 +192,18 @@ function jm_getthem($params)
 <h1 class="title">Learn More</h1>
 <form method="post" action="" name="josForm"  id="myForm" class="form-validate" enctype="multipart/form-data"  onSubmit="return validation()" >
 	
-	<!-- Name -->
+	<!---- Name ---->
 	<?php  if ($params->get('bnamestatus') == 'Y' || $params->get('bnamestatus') == 'R' ) : ?>
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->namelbl; ?>:</div>-->
 			<div class="row_inner" id="input">
-			<input type="text" name="Name" id="Name" title="Enter Name" value="" class="inputbox cleardefault <?php  if($params->get('bnamestatus') == 'R' ) echo '';  ?>" /></div>
+			<input type="text" name="Name" id="Name" value="Full Name *" class="inputbox cleardefault <?php  if($params->get('bnamestatus') == 'R' ) echo '';  ?>" /></div>
+			<span name="val_name" id="val_name" style=" color:red; font-size:11px; font-weight: normal;"></span>
 		</div>
 	<?php endif; ?>
-	<!-- Name Ends-->
+	<!---- Name Ends---->
+	
+	
 	<!-- Company -->
 	<?php  if ($params->get('bcompanystatus') == 'Y' || $params->get('bcompanystatus') == 'R') : ?>
 		<div class="formrow">
@@ -176,24 +222,27 @@ function jm_getthem($params)
 	<?php  endif; ?>
 	<!-- Phone ends -->
 	
-	<!-- Email Starts -->
+	
+	<!---- Email Starts ---->
 	<?php  if($params->get('bEmail') == 'Y' || $params->get('bEmail') == 'R') : ?>
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->Emaillbl; ?>:</div>-->
-			<div class="row_inner" id="input"><input  type="text" name="Email" id="Email" class="inputbox <?php  if($params->get('bEmail') == 'R' ) echo '';  ?>" title="Enter Email Address" value="" /></div>
+			<div class="row_inner" id="input"><input  type="text" name="Email" id="Email" class="inputbox cleardefault <?php  if($params->get('bEmail') == 'R' ) echo '';  ?>" value="Email *" /></div><span name="val_email" id="val_email" style=" color:red; font-size:11px; font-weight: normal;"></span>
 		</div>
 	<?php endif;  ?>
-	<!-- Email ends -->
+	<!---- Email ends ---->
 	
 	
-	<!-- Mobile -->
+	<!---- Mobile ---->
 	<?php  if ($params->get('bmobilestatus') == 'Y' || $params->get('bmobilestatus') == 'R' ) : ?>
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->mobilelbl; ?>:</div>-->
-			<div class="row_inner" id="input"><input  type="text" name="Mobile" id="Telephone" title="Enter Phone Number" value="" class="inputbox <?php  if($params->get('bmobilestatus') == 'R' ) echo 'validate-numeric';  ?>" /></div>
+			<div class="row_inner" id="input"><input  type="text" name="Mobile" id="Telephone" value="Telephone *" class="inputbox cleardefault <?php  if($params->get('bmobilestatus') == 'R' ) echo 'validate-numeric';  ?>" /></div>
+			<span name="val_phone" id="val_phone" style=" color:red; font-size:11px; font-weight: normal;"></span>
 		</div>
 	<?php  endif; ?>
-	<!-- Mobile Ends -->
+	<!---- Mobile Ends ---->
+	
 		
 	<!-- Website -->
 	<?php  if ($params->get('bwebsitestatus') == 'Y' || $params->get('bwebsitestatus') == 'R' ) : ?>
@@ -226,7 +275,7 @@ function jm_getthem($params)
 		<div class="formrow">
 			<!--<div class="row_inner" id="label"><?php  echo $result->messagelbl; ?>:</div>-->
 			<div class="row_inner" id="input">
-			<textarea title="Enter comments" name="Message" id="Message" class="inputbox <?php  if($params->get('bmessagestatus') == 'R' ) echo 'required';  ?>" cols="20" rows="4"></textarea></div>
+			<textarea onfocus="if(this.value == 'Comments') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Comments'; }" name="Message" id="Message" class="inputbox cleardefault <?php  if($params->get('bmessagestatus') == 'R' ) echo '';  ?>" cols="20" rows="4">Comments</textarea></div>
 		</div>
 	<?php  endif; ?>
 	<!-- Mesage Ends-->

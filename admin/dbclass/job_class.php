@@ -343,11 +343,12 @@ class Job_Class extends Database
 	{
 		global $commonUses;
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
-		
+
 		$qryUpd = "UPDATE job 
 					SET job_status_id=".$_REQUEST["lstJobStatus"].", 
-						job_due_date='".$dateSignedUp."' 
+						job_due_date='". $dateSignedUp ."' 
 				   WHERE job_id=".$jobId;
+				   
 		mysql_query($qryUpd);
 	}
 	

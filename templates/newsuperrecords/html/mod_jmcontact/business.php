@@ -87,24 +87,36 @@ function validation()
 	{
 		alert("Please specify Name");
 		document.getElementById("Name").focus();
+		document.getElementById("Name").style.borderColor="#FF0000";
+		document.getElementById("Email").style.borderColor="#CCCCCC";
+		document.getElementById("Telephone").style.borderColor="#CCCCCC";
 		return false;
 	}
 	else if(email == "")
 	{
 		alert("Please specify Email Address");
 		document.getElementById("Email").focus();
+		document.getElementById("Email").style.borderColor="#FF0000";
+		document.getElementById("Name").style.borderColor="#CCCCCC";
+		document.getElementById("Telephone").style.borderColor="#CCCCCC";
 		return false;
 	}
 	else if(reg.test(email) == false)
 	{
         alert("Please specify valid Email Address");
 		document.getElementById("Email").focus();
+		document.getElementById("Email").style.borderColor="#FF0000";
+		document.getElementById("Name").style.borderColor="#CCCCCC";
+		document.getElementById("Telephone").style.borderColor="#CCCCCC";
 		return false;
 	}
 	else if(phone == "")
 	{
 		alert("Please specify Phone Number");
 		document.getElementById("Telephone").focus();
+		document.getElementById("Telephone").style.borderColor="#FF0000";
+		document.getElementById("Name").style.borderColor="#CCCCCC";
+		document.getElementById("Email").style.borderColor="#CCCCCC";
 		return false;
 	}
 	else if((isNaN(phone)))
@@ -112,11 +124,13 @@ function validation()
 		alert("Please specify Phone Number in digits only");
 		document.getElementById("Telephone").value="";
 		document.getElementById("Telephone").focus();
+		document.getElementById("Telephone").style.borderColor="#FF0000";
+		document.getElementById("Name").style.borderColor="#CCCCCC";
+		document.getElementById("Email").style.borderColor="#CCCCCC";
 		return false;
 	}
 	else
 	{
-		
 		return true;
 	}
 }

@@ -198,10 +198,19 @@
 		
 		<tr>
 			<td class="hr">External Due Date</td>
-				<td class="dr"><?						
-					$arrDate = explode("-", $arrTaskData['due_date']);
-					$strDate = $arrDate[2]."/".$arrDate[1]."/".$arrDate[0];
-						?><input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$strDate?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
+				<td class="dr">
+					<?						
+						/*$arrDate = explode("-", $arrTaskData['due_date']);
+						$strDate = $arrDate[2]."/".$arrDate[1]."/".$arrDate[0];*/
+						$due_date = "";
+						if (isset($arrTaskData["due_date"]) && $arrTaskData["due_date"] != "") {
+							if($arrTaskData["due_date"] != "0000-00-00 00:00:00") {
+								$due_date = date("d/m/Y",strtotime( $arrTaskData["due_date"]));
+							}
+						}  
+
+					?>
+                    <input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
 				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 					
 				</td>
@@ -209,10 +218,19 @@
 
 		<tr>
 			<td class="hr">Befree Due Date</td>
-				<td class="dr"><?						
-					$arrDate = explode("-", $arrTaskData['befree_due_date']);
-					$strDate = $arrDate[2]."/".$arrDate[1]."/".$arrDate[0];
-						?><input type="text" name="befreeDueDate" id="befreeDueDate" value="<?=$strDate?>">&nbsp;<a href="javascript:NewCal('befreeDueDate','ddmmyyyy',false,24)">
+				<td class="dr">
+				<?						
+					/*$arrDate = explode("-", $arrTaskData['befree_due_date']);
+					$strDate = $arrDate[2]."/".$arrDate[1]."/".$arrDate[0];*/
+					
+					$befree_due_date = "";
+					if (isset($arrTaskData["befree_due_date"]) && $arrTaskData["befree_due_date"] != "") {
+						if($arrTaskData["befree_due_date"] != "0000-00-00 00:00:00") {
+							$befree_due_date = date("d/m/Y",strtotime( $arrTaskData["befree_due_date"]));
+						}
+					}  
+			  ?>
+                        <input type="text" name="befreeDueDate" id="befreeDueDate" value="<?=$befree_due_date?>">&nbsp;<a href="javascript:NewCal('befreeDueDate','ddmmyyyy',false,24)">
 				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 					
 				</td>

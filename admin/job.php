@@ -83,6 +83,7 @@ if($_SESSION['validUser']) {
 				case "updateJob":
 					
 					$jobStatus = $_POST['lstJobStatus'];
+					
 					if($jobStatus == '7')
 					{
 						/* send mail function starts here */
@@ -104,6 +105,7 @@ if($_SESSION['validUser']) {
 							$subject = $arrEmailInfo['event_subject'];
 							$content = $arrEmailInfo['event_content'];
 							$content = replaceContent($content,NULL,$practiceId,NULL,$jobId);
+							
 							include_once(MAIL);
 							send_mail($to, $cc, $subject, $content);
 							

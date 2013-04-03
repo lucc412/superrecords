@@ -47,7 +47,28 @@ class Job_Class extends Database
 	// Function to fetch all Jobs or fetches Jobs based on arguments
 	public function fetchJob() {
 
-		if($_REQUEST['filter_field'] == 'practice') {
+		if($_REQUEST['filter_field'] == 'all') {
+			$fromStr = ", pr_practice p1, sub_subactivity sa, job_status s1";
+			if(!$_REQUEST['wholeonly']) {
+				$whereStr = "AND ((c1.id = p1.id	AND p1.name LIKE '%".$_REQUEST['filter']."%')
+						OR ((c1.client_name LIKE '%".$_REQUEST['filter']."%'
+							OR sa.sub_Description LIKE '%".$_REQUEST['filter']."%'
+							OR j1.period LIKE '%".$_REQUEST['filter']."%') 
+							AND sa.sub_Code = j1.job_type_id) 
+						OR (j1.job_status_id = s1.job_status_id
+							AND s1.job_status LIKE '%".$_REQUEST['filter']."%'))";
+			}
+			else {
+				$whereStr = "AND ((c1.id = p1.id	AND p1.name LIKE '".$_REQUEST['filter']."')
+						OR ((c1.client_name LIKE '".$_REQUEST['filter']."'
+							OR sa.sub_Description LIKE '".$_REQUEST['filter']."'
+							OR j1.period LIKE '".$_REQUEST['filter']."') 
+							AND sa.sub_Code = j1.job_type_id) 
+						OR (j1.job_status_id = s1.job_status_id
+							AND s1.job_status LIKE '".$_REQUEST['filter']."'))";
+			}
+		}
+		else if($_REQUEST['filter_field'] == 'practice') {
 			$fromStr = ", pr_practice p1";
 			if(!$_REQUEST['wholeonly']) {
 				$whereStr = "AND c1.id = p1.id
@@ -87,7 +108,10 @@ class Job_Class extends Database
 		
 		if($_SESSION["usertype"] == "Staff") {
 			$userId = $_SESSION["staffcode"];
-			$strFrom = ",pr_practice p1";
+			
+			if($_REQUEST['filter_field'] != 'practice' && $_REQUEST['filter_field'] != 'all')
+				$strFrom = ",pr_practice p1";
+				
 			$strWhere = " AND p1.id = c1.id
 						  AND (p1.sr_manager=".$userId." 
 						  OR p1.india_manager=".$userId." 

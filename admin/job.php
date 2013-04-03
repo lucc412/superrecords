@@ -65,9 +65,10 @@ if($_SESSION['validUser']) {
 						// fetch email id of sr manager
 						$strPanelInfo = sql_select_panel($practiceId);
 						$arrPanelInfo = explode('~', $strPanelInfo);
-						$srManagerEmailId = $arrPanelInfo[0];
+						$srManagerEmail = $arrPanelInfo[0];
+						$inManagerEmail = $arrPanelInfo[2];
 
-						$to = $srManagerEmailId;
+						$to = $srManagerEmail . ',' . $inManagerEmail;
 						$cc = $arrEmailInfo['event_cc'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];

@@ -189,7 +189,8 @@ switch ($a)
 				$rec_date = "";
 				
 			if(!empty($arrJob[$_REQUEST["jobId"]]["job_due_date"]))
-				$due_date = date("d/m/Y",strtotime($arrJob[$_REQUEST["jobId"]]["job_due_date"]));
+				$due_date = $arrJob[$_REQUEST["jobId"]]["job_due_date"];
+				//$due_date = date('d/m/Y', strtotime($arrJob[$_REQUEST["jobId"]]["job_due_date"]));
 			else	
 				$due_date = "";
 			
@@ -294,8 +295,16 @@ switch ($a)
 
 				<tr>
 					<td class="hr">Job Due Date</td>
-					<td class="dr">						
-						<input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+					<td class="dr">
+					<?
+						$jobDueDate = "";
+						if (isset($due_date) && $due_date != "") {
+							if($due_date != "0000-00-00 00:00:00") {
+								$jobDueDate = date("d/m/Y",strtotime($due_date));
+							}
+						} 			
+					?>
+                        <input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$jobDueDate?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 					</td>
 				</tr>
 			</table>
@@ -843,7 +852,16 @@ switch ($a)
 					}
 
 					if(!empty($arrInfo["job_due_date"])){
-						?><td align="center" class="<?=$style?> blueBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_due_date"])))?></td><?
+						?><td align="center" class="<?=$style?> blueBG"><?=
+						//date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_due_date"])))
+						$job_due_date = '';
+						if (isset($arrInfo["job_due_date"]) && $arrInfo["job_due_date"] != "") {
+							if($arrInfo["job_due_date"] != "0000-00-00 00:00:00") {
+								$job_due_date = date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_due_date"])));
+							}
+						}
+						echo $job_due_date; 	
+						?></td><?
 					}
 					else{
 						?><td class="<?=$style?> blueBG"></td><?

@@ -260,7 +260,6 @@ class Lead_Class extends Database {
 				WHERE id = '" . $_REQUEST['recid'] . "'";
 			
 		mysql_query($qryUpd);
-		header("location:lead.php");
 	} 
 
 	function sql_delete($recid) {

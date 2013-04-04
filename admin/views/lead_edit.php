@@ -6,7 +6,7 @@
 	<font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font>
 </div>
 
-<form action="lead.php" method="POST" name="frmlead" onSubmit="return validateFormOnSubmit()">
+<form action="lead.php" method="post" name="frmlead" onSubmit="return validateFormOnSubmit()">
 	<p><input type="hidden" name="sql" value="update"></p>
 	<input type="hidden" name="recid" value="<?=$recid?>">
 	<input type="hidden" name="a" value="edit">

@@ -188,8 +188,7 @@
 		</tr>
 		<tr>
 			<td class="hr">Date Received<font style="color:red;" size="2">*</font></td>
-			<td class="dr">
-			<? 
+			<td class="dr"><? 
 				$dateReceived = "";
 				if (isset($arrLeadData["date_received"]) && $arrLeadData["date_received"] != "") {
 					if($arrLeadData["date_received"] != "0000-00-00 00:00:00") {
@@ -197,9 +196,7 @@
 					}
 				}
 				
-				 
-			?>
-				<input type="text" name="date_received" id="date_received" value="<?=$dateReceived;?>">&nbsp;<a href="javascript:NewCal('date_received','ddmmyyyy',false,24)">
+				?><input type="text" name="date_received" id="date_received" value="<?=$dateReceived;?>">&nbsp;<a href="javascript:NewCal('date_received','ddmmyyyy',false,24)">
 				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Lead received date.</span></a>
 			</td>
@@ -279,13 +276,12 @@
 			<td><select name="lead_source">
 					<option value="">Select Source</option><?php
 					foreach($objCallData->arrSource AS $typeId => $typeDesc){
-						if($typeId == $arrLeadData['lead_source'])
-						{?>
-							<option selected="selected" value="<?=$typeId?>"><?=$typeDesc?></option>
-						<?php } else { ?>
-							<option value="<?=$typeId?>"><?=$typeDesc?></option>
-						<?php } ?>
-						<?php 
+						if($typeId == $arrLeadData['lead_source']){
+							?><option selected="selected" value="<?=$typeId?>"><?=$typeDesc?></option><?
+						} 
+						else { 
+							?><option value="<?=$typeId?>"><?=$typeDesc?></option><? 
+						} 
 					} 
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Source of Lead.</span></a>
@@ -309,8 +305,7 @@
 
 		<tr>
 			<td class="hr">Last Date of Contact</td>
-			<td class="dr">
-			<? 
+			<td class="dr"><? 
 				$lastContactDate = "";
 				if (isset($arrLeadData["last_contact_date"]) && $arrLeadData["last_contact_date"] != "") {
 					if($arrLeadData["last_contact_date"] != "0000-00-00 00:00:00") {
@@ -318,10 +313,7 @@
 					}
 				}
 				
-				
-				//$lastContactDate = date("d/m/Y",strtotime($arrLeadData["last_contact_date"])); 
-			?>
-				<input type="text" name="last_contact_date" id="last_contact_date" value="<?=$lastContactDate;?>">&nbsp;<a href="javascript:NewCal('last_contact_date','ddmmyyyy',false,24)">
+				?><input type="text" name="last_contact_date" id="last_contact_date" value="<?=$lastContactDate;?>">&nbsp;<a href="javascript:NewCal('last_contact_date','ddmmyyyy',false,24)">
 				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Last Contact Date.</span></a>
 			</td>
@@ -329,18 +321,15 @@
 		
 		<tr>
 			<td class="hr">Future Contact Date</td>
-			<td class="dr">
-			<? 
+			<td class="dr"><? 
 				$futureContactDate = "";
 				if (isset($arrLeadData["future_contact_date"]) && $arrLeadData["future_contact_date"] != "") {
 					if($arrLeadData["future_contact_date"] != "0000-00-00 00:00:00") {
 						$futureContactDate = date("d/m/Y",strtotime($arrLeadData["future_contact_date"])); 
 					}
 				}
-				
-				//$futureContactDate = date("d/m/Y",strtotime($arrLeadData["future_contact_date"])); 
-			?>
-				<input type="text" name="future_contact_date" id="future_contact_date" value="<?=$futureContactDate;?>">&nbsp;<a href="javascript:NewCal('future_contact_date','ddmmyyyy',false,24)">
+
+				?><input type="text" name="future_contact_date" id="future_contact_date" value="<?=$futureContactDate;?>">&nbsp;<a href="javascript:NewCal('future_contact_date','ddmmyyyy',false,24)">
 				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Future Contact Date.</span></a>
 			</td>

@@ -52,13 +52,16 @@
 					/* To Email Address */
 					?><td style="padding:5px 10px;"><?
 
-						if($eventId == '1' || $eventId == '3') {
+						if($eventId == '1') {
 							echo 'SR Manager';
+						}
+						else if($eventId == '9') {
+							echo 'India Manager';
 						}
 						else if($eventId == '2') {
 							echo 'SR Manager, Salesperson';
 						}
-						else if($eventId == '4' || $eventId == '5') {
+						else if($eventId == '4' || $eventId == '5' || $eventId == '3') {
 							echo 'SR Manager, India Manager';
 						}
 						else if($eventId == '6' || $eventId == '7' || $eventId == '8') {

@@ -20,7 +20,7 @@ if(!empty($_REQUEST['flagDuplicate'])) {
 ?><form name="objForm" method="post" action="clients.php" onSubmit="javascript:return checkValidation();">
 	<input type="hidden" name="sql" value="insert"></br>
 	
-	<table width="50%" cellpadding="10px;">
+	<table width="60%" cellpadding="10px;">
 		<tr>
 			<td><strong>Client Name</strong></td>
 			<td><input type="text" name="txtName" id="txtName" onblur="javascript:checkUnique(this.value, '')"><br/>

@@ -40,7 +40,7 @@
 
 					<span style="color:orange"><u>Below are the dynamic fields applicable to this content:</u></span><?
 
-					if($eventId != '6' && $eventId != '7' && $eventId != '8') {
+					if($eventId != '6' && $eventId != '7' && $eventId != '8' && $eventId != '9') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">PRACTICENAME</div><?
 					}
 
@@ -52,7 +52,7 @@
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">CLIENTNAME</div><?
 					}
 					
-					if($eventId != '1' && $eventId != '2') {
+					if($eventId != '1' && $eventId != '2' && $eventId == '9') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">JOBNAME</div><?
 					}
 

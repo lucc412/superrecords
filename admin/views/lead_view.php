@@ -78,13 +78,72 @@
 		<td class="dr"><?=htmlspecialchars($arrLeadData["email"])?></td>
 	</tr>
 	<tr>
-		<td class="hr">Date Signed Up</td>
-		<? $dateReceived = date("d/m/Y",strtotime( $arrLeadData["date_received"])); ?>
-		<td class="dr"><?=$dateReceived?></td>
+		<td class="hr">Date Received</td><? 
+		$dateReceived = "";
+		if (isset($arrLeadData["date_received"]) && $arrLeadData["date_received"] != "") {
+			if($arrLeadData["date_received"] != "0000-00-00 00:00:00") {
+				$dateReceived = date("d/m/Y",strtotime($arrLeadData["date_received"])); 
+			}
+		}
+		?><td class="dr"><?=$dateReceived?></td>
+	</tr>
+	<tr>
+		<td class="hr">Day Received</td>
+		<td class="dr"><?=$arrLeadData['day_received']?></td>
+	</tr>
+	<tr>
+		<td class="hr">Industry</td>
+		<td class="dr"><?=$objCallData->arrIndustry[$arrLeadData['lead_industry']]?></td>
+	</tr>
+	<tr>
+		<td class="hr">Lead Status</td>
+		<td class="dr"><?=$objCallData->arrStatus[$arrLeadData['lead_status']]?></td>
+	</tr><?
+	
+	if($arrLeadData['lead_reason'] != ''){
+		?><tr>
+			<td class="hr">Reason</td>
+			<td class="dr">
+				<input type="text" name="lead_reason" value="<?=$arrLeadData['lead_reason']?>">
+			</td>
+		</tr><?
+	}
+		
+	?><tr>
+		<td class="hr">Lead Stage</td>
+		<td class="dr"><?=$objCallData->arrStage[$arrLeadData['lead_stage']]?></td>
+	</tr>
+	<tr>
+		<td class="hr">Lead Source</td>
+		<td class="dr"><?=$objCallData->arrSource[$arrLeadData['lead_source']]?></td>
 	</tr>
 	<tr>
 		<td class="hr">Sales Person</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrSalesPerson[$arrLeadData["sales_person"]])?></td>
+	</tr>
+	<tr>
+		<td class="hr">Last Date of Contact</td><?
+		$lastContactDate = "";
+		if (isset($arrLeadData["last_contact_date"]) && $arrLeadData["last_contact_date"] != "") {
+			if($arrLeadData["last_contact_date"] != "0000-00-00 00:00:00") {
+				$lastContactDate = date("d/m/Y",strtotime($arrLeadData["last_contact_date"])); 
+			}
+		}
+		?><td class="dr"><?=$lastContactDate?></td>
+	</tr>
+	<tr>
+		<td class="hr">Future Contact Date</td><?
+		$futureContactDate = "";
+		if (isset($arrLeadData["future_contact_date"]) && $arrLeadData["future_contact_date"] != "") {
+			if($arrLeadData["future_contact_date"] != "0000-00-00 00:00:00") {
+				$futureContactDate = date("d/m/Y",strtotime($arrLeadData["future_contact_date"])); 
+			}
+		}
+		?><td class="dr"><?=$futureContactDate?></td>
+	</tr>
+	<tr>
+		<td class="hr">Notes</td>
+		<td class="dr"><?=nl2br($arrLeadData['note'])?></td>
 	</tr>
 </table>
 

@@ -11,14 +11,13 @@
 <div style="position:absolute; top:20; right:-90px; width:300; height:300;">
 <font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font></div>
 
-<form action="tsk_task.php?jobId=<?=$_REQUEST["jobId"]?>" method="POST" name="managetask" onSubmit="return validateFormOnSubmit()">
-	<p><input type="hidden" name="sql" value="insert"></p><?
-			$JobID = $_REQUEST["jobId"];
-			$ClientID = $objCallData->arrJobDetails[$_REQUEST["jobId"]]["client_id"];
-			$PracticeID =  $objCallData->arrClientDetails[$ClientID]["id"];
-	
-			$arrJobParts = explode('::', $objCallData->arrJob[$JobID]);
-			$jobName = '<b style="color:#b30000">'.$objCallData->arrClient[$ClientID] . '</b> - <b style="color:#0411ff">' . $objCallData->arrJobDetails[$_REQUEST["jobId"]]["period"]. '</b> - <b style="color:#006a0e">' . $objCallData->arrJobType[$arrJobParts[2]]["sub_Description"].'</b>';
+<form action="tsk_task.php?sql=insert&jobId=<?=$_REQUEST["jobId"]?>" method="POST" name="managetask" onSubmit="return validateFormOnSubmit()"><?
+	$JobID = $_REQUEST["jobId"];
+	$ClientID = $objCallData->arrJobDetails[$_REQUEST["jobId"]]["client_id"];
+	$PracticeID =  $objCallData->arrClientDetails[$ClientID]["id"];
+
+	$arrJobParts = explode('::', $objCallData->arrJob[$JobID]);
+	$jobName = '<b style="color:#b30000">'.$objCallData->arrClient[$ClientID] . '</b> - <b style="color:#0411ff">' . $objCallData->arrJobDetails[$_REQUEST["jobId"]]["period"]. '</b> - <b style="color:#006a0e">' . $objCallData->arrJobType[$arrJobParts[2]]["sub_Description"].'</b>';
 			
 	?><table class="tbl" border="0" cellspacing="10" width="70%">
 		<tr>
@@ -112,15 +111,15 @@
 
 		<tr>
 			<td class="hr">SR Manager</td>
-			<td class="dr" id="tdSrManager">&nbsp;</td>
+			<td class="dr" id="tdSrManager"><?=$srManagerEmail?></td>
 		</tr>
 		<tr>
 			<td class="hr">India Manager</td>
-			<td class="dr" id="tdInManager">&nbsp;</td>
+			<td class="dr" id="tdInManager"><?=$inManagerEmail?></td>
 		</tr>
 		<tr>
 			<td class="hr">Team Member</td>
-			<td class="dr" id="tdTeamMember">&nbsp;</td>
+			<td class="dr" id="tdTeamMember"><?=$teamMemberEmail?></td>
 		</tr>
 
 		<tr>

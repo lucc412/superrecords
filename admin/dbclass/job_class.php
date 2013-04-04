@@ -453,7 +453,6 @@ class Job_Class extends Database
 					)";
 		mysql_query($qryIns);			
 	}
-
 	
 	public function add_source_Docs($jobId) {
 
@@ -489,12 +488,12 @@ class Job_Class extends Database
 	}
 
 	
-//************************************************************************************************
-//  Task          : Function to download file
-//  Modified By   : Dhiraj Sahu 
-//  Created on    : 01-Jan-2013
-//  Last Modified : 08-Jan-2013
-//************************************************************************************************  
+	//************************************************************************************************
+	//  Task          : Function to download file
+	//  Modified By   : Dhiraj Sahu 
+	//  Created on    : 01-Jan-2013
+	//  Last Modified : 08-Jan-2013
+	//************************************************************************************************  
 	
 	public function doc_download($fileName)
 	{		

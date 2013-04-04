@@ -13,7 +13,7 @@ include(TOPBAR);
 // content
 ?><form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertJob" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data">
 	<!--<input type="hidden" name="sql" value="insert">-->
-	<table align="center" width="100%" class="fieldtable" cellpadding="10px;">
+	<table align="center" width="90%" class="fieldtable" cellpadding="10px;">
 
 		<tr>
 			<td><strong>Client</strong></td>

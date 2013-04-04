@@ -15,7 +15,7 @@ switch ($sql)
 	case "insertJob":
 		$jobId = $objScr->sql_insert();
 		
-		/* send mail function starts here */
+		/* send mail function starts here for ADD NEW JOB */
 		$pageUrl = basename($_SERVER['REQUEST_URI']);	
 		
 		// check if event is active or inactive [This will return TRUE or FALSE as per result]
@@ -31,8 +31,37 @@ switch ($sql)
 			$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
 			$arrPanelInfo = explode('~', $strPanelInfo);
 			$srManagerEmail = $arrPanelInfo[0];
+			$inManagerEmail = $arrPanelInfo[2];
 
-			$to = $srManagerEmail;
+			$to = $srManagerEmail. ',' .$inManagerEmail;
+			$cc = $arrEmailInfo['event_cc'];
+			$subject = $arrEmailInfo['event_subject'];
+			$content = $arrEmailInfo['event_content'];
+			$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $jobId);
+
+			include_once(MAIL);
+			send_mail($to, $cc, $subject, $content);
+		}
+		/* send mail function ends here */	
+			
+		/* send mail function starts here for ADD NEW TASK */
+		$pageUrl = "job.php?sql=addTask";
+		
+		// check if event is active or inactive [This will return TRUE or FALSE as per result]
+		$flagSet = getEventStatus($pageUrl);
+		
+		// if event is active it go for mail function
+		if($flagSet)
+		{
+			//It will Get All Details in array format for Send Email	
+			$arrEmailInfo = get_email_info($pageUrl);
+
+			// fetch email id of sr manager
+			$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
+			$arrPanelInfo = explode('~', $strPanelInfo);
+			$inManagerEmail = $arrPanelInfo[2];
+
+			$to = $inManagerEmail;
 			$cc = $arrEmailInfo['event_cc'];
 			$subject = $arrEmailInfo['event_subject'];
 			$content = $arrEmailInfo['event_content'];

@@ -15,7 +15,7 @@ include(TOPBAR);
 	<input type="hidden" name="recid" value="<?=$_REQUEST['recid']?>"><?
 	$jobId = $_REQUEST['recid'];
 
-	?><table class="resources" width="100%" cellpadding="10px;">
+	?><table class="resources" width="90%" cellpadding="10px;">
 
 		<tr>
 			<td><strong>Client</strong></td>

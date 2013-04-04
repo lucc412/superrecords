@@ -19,7 +19,7 @@ if(!empty($_REQUEST['flagDuplicate'])) {
 	<input type="hidden" name="recid" value="<?=$_REQUEST['recid']?>">
 	
 	</br>
-	<table width="50%" cellpadding="10px;">
+	<table width="60%" cellpadding="10px;">
 		<tr>
 			<td><strong>Client Name</strong></td>
 			<td><input type="text" name="txtName" id="txtName" value="<?=$arrClientsData['client_name']?>" onblur="javascript:checkUnique(this.value, '<?=$_REQUEST['recid']?>')"><br/>

@@ -184,7 +184,7 @@ class Task_Class extends Database {
 		}
 	
 		if($jobId)
-			$strWhere .= "AND job_id={$jobId}";
+			$strWhere .= "AND t.job_id={$jobId}";
 			
 		$qrySel = "SELECT t.*, pr.sr_manager, pr.india_manager, pr.team_member
 					FROM task t, job j, client c, pr_practice pr
@@ -215,7 +215,7 @@ class Task_Class extends Database {
 		return $arrEmployees;	
 	} 
 
-	public function sql_insert() {	
+	public function sql_insert($jobId, $clientId, $practiceId) {	
 
 		// external due date
 		$arrExtDate = explode("/", $_REQUEST["dateSignedUp"]);
@@ -225,47 +225,23 @@ class Task_Class extends Database {
 		$arrBefreeDate = explode("/", $_REQUEST["befreeDueDate"]);
 		$strBefreeDate = $arrBefreeDate[2]."-".$arrBefreeDate[1]."-".$arrBefreeDate[0];
 		
-		if($_REQUEST["jobId"]) {
-
-			$ClientID = $this->arrJobDetails[$_REQUEST["jobId"]]["client_id"];
-			$PracticeID = $this->arrClientDetails[$ClientID]["id"];
-			
-			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
-					VALUES (
-					'" . $_REQUEST['txtTaskName'] . "', 
-					'" . $PracticeID . "', 
-					'" . $ClientID . "', 
-					'" . $_REQUEST["jobId"] . "', 
-					'" . $_REQUEST['lstMasterActivity'] . "', 
-					'" . $_REQUEST['lstSubActivity'] . "', 
-					'" . $_REQUEST['txtNotes'] . "', 
-					'" . $_REQUEST['lstTaskStatus'] . "', 
-					'" . $_REQUEST['lstPriority'] . "', 
-					'" . $_REQUEST['lstProcessingCycle'] . "', 
-					'" . $strExtDate . "',
-					'" . $strBefreeDate . "',
-					NOW()
-					)";
-		}	
-		else {
-
-			$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
-					VALUES (
-					'" . $_REQUEST['txtTaskName'] . "', 
-					'" . $_REQUEST['lstPractice'] . "', 
-					'" . $_REQUEST['lstClient'] . "', 
-					'" . $_REQUEST['lstJob'] . "', 
-					'" . $_REQUEST['lstMasterActivity'] . "', 
-					'" . $_REQUEST['lstSubActivity'] . "', 
-					'" . $_REQUEST['txtNotes'] . "', 
-					'" . $_REQUEST['lstTaskStatus'] . "', 
-					'" . $_REQUEST['lstPriority'] . "', 
-					'" . $_REQUEST['lstProcessingCycle'] . "', 
-					'" . $strExtDate . "',
-					'" . $strBefreeDate . "',
-					NOW()  
-					)";
-		}
+		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
+				VALUES (
+				'" . $_REQUEST['txtTaskName'] . "', 
+				'" . $practiceId . "', 
+				'" . $clientId . "', 
+				'" . $jobId . "', 
+				'" . $_REQUEST['lstMasterActivity'] . "', 
+				'" . $_REQUEST['lstSubActivity'] . "', 
+				'" . $_REQUEST['txtNotes'] . "', 
+				'" . $_REQUEST['lstTaskStatus'] . "', 
+				'" . $_REQUEST['lstPriority'] . "', 
+				'" . $_REQUEST['lstProcessingCycle'] . "', 
+				'" . $strExtDate . "',
+				'" . $strBefreeDate . "',
+				NOW()  
+				)";
+		
 		mysql_query($qryIns);
 	} 
 
@@ -325,6 +301,33 @@ class Task_Class extends Database {
 		// set discontinue date of task 
 		$qryDel = "UPDATE task SET discontinue_date=NOW() WHERE task_id=".$recid;
 		mysql_query($qryDel);
+	}
+
+	// fetch sr manager, india manager, sales manager, team member for selected practice
+	function sql_select_panel($itemId)
+	{
+		$sql = "SELECT id, sr_manager, team_member, india_manager, sales_person
+				FROM pr_practice
+				WHERE id=".$itemId;
+				
+		$res = mysql_query($sql) or die(mysql_error());
+		$count = mysql_num_rows($res);
+
+		if(!empty($count))
+		{
+			// fetch array of name of all employees
+			$arrEmployees = $this->fetchEmployees();
+
+			$rowData = mysql_fetch_assoc($res);
+			$srManager = $arrEmployees[$rowData['sr_manager']];
+			$salesPrson = $arrEmployees[$rowData['sales_person']];
+			$inManager = $arrEmployees[$rowData['india_manager']];
+			$teamMember = $arrEmployees[$rowData['team_member']];
+
+			// set string of srManager, salesPrson, inManager, teamMember
+			$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember;
+		}
+		return $strReturn;
 	}
 }
 ?>

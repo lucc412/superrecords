@@ -7,6 +7,7 @@
 //************************************************************************************************
 ob_start();
 include 'common/varDeclare.php';
+include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/tsk_task_class.php';
 
@@ -36,7 +37,53 @@ if($_SESSION['validUser']) {
 
 			switch ($sql) {
 				case "insert":
-					$objCallData->sql_insert();
+
+					// set parameters when task is added from Job Page - View Associated tasks
+					if(isset($_REQUEST['jobId']) && !empty($_REQUEST['jobId'])) {
+						$jobId = $_REQUEST["jobId"];
+						$clientId = $objCallData->arrJobDetails[$jobId]["client_id"];
+						$practiceId = $objCallData->arrClientDetails[$clientId]["id"];
+					}
+					// set parameters when task is added from Task page
+					else {
+						$jobId = $_REQUEST["lstJob"];
+						$clientId = $_REQUEST["lstClient"];
+						$practiceId = $_REQUEST["lstPractice"];
+					}
+
+					// insert query for add task
+					$objCallData->sql_insert($jobId, $clientId, $practiceId);
+
+					/* send mail function starts here */
+					$pageUrl = basename($_SERVER['REQUEST_URI']);
+					$arrPageUrl = explode('&',$pageUrl);	
+					$pageUrl = $arrPageUrl[0];
+					
+					// check if event is active or inactive [This will return TRUE or FALSE as per result]
+					$flagSet = getEventStatus($pageUrl);
+					
+					// if event is active it go for mail function
+					if($flagSet) {
+
+						//It will Get All Details in array format for Send Email	
+						$arrEmailInfo = get_email_info($pageUrl);
+
+						// fetch email id of sr manager
+						$strPanelInfo = sql_select_panel($practiceId);
+						$arrPanelInfo = explode('~', $strPanelInfo);
+						$inManagerEmail = $arrPanelInfo[2];
+
+						$to = $inManagerEmail;
+						$cc = $arrEmailInfo['event_cc'];
+						$subject = $arrEmailInfo['event_subject'];
+						$content = $arrEmailInfo['event_content'];
+						$content =replaceContent($content, NULL, NULL, NULL, $jobId);
+						
+						include_once(MAIL);
+						send_mail($to, $cc, $subject, $content);
+					}
+					/* send mail function ends here */
+
 					header('location: tsk_task.php?jobId='.$_REQUEST["jobId"]);
 					break;
 
@@ -52,6 +99,20 @@ if($_SESSION['validUser']) {
 
 			switch ($a) {
 			case "add":
+
+				// get practice id of this job
+				if(isset($_REQUEST['jobId']) && !empty($_REQUEST['jobId'])) {
+					$jobId = $_REQUEST["jobId"];
+					$clientId = $objCallData->arrJobDetails[$jobId]["client_id"];
+					$practiceId = $objCallData->arrClientDetails[$clientId]["id"];
+					$strPanelInfo = $objCallData->sql_select_panel($practiceId);
+				}
+
+				// fetch name of sr manager, india manager & team member
+				$arrPanelInfo = explode('~', $strPanelInfo);
+				$srManagerEmail = $arrPanelInfo[0];
+				$inManagerEmail = $arrPanelInfo[2];
+				$teamMemberEmail = $arrPanelInfo[3];
 				include('views/tsk_task_add.php');
 				break;
 

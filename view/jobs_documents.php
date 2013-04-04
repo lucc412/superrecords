@@ -93,7 +93,7 @@ switch($_REQUEST['a'])
 		<form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertDoc" enctype="multipart/form-data" onSubmit="javascript:return checkDocValidation();">
 			<!--<input type="hidden" name="sql" value="insertDoc">-->
 
-			<table width="70%" class="fieldtable" cellpadding="10px;">
+			<table width="60%" class="fieldtable" cellpadding="10px;">
 				<tr>
 					<td><strong> Select Job <font style="color:red;" size="2">*</font></strong></td>
 					<td><?

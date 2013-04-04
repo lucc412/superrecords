@@ -47,7 +47,7 @@ if($_SESSION['validUser']) {
 				case "insertJob":
 					$jobId = $objCallData->insert_job();
 					
-					/* send mail function starts here */
+					/* send mail function starts here for ADD NEW JOB */
 					$practiceId = $_REQUEST['lstPractice'];
 					$pageUrl = basename($_SERVER['REQUEST_URI']);
 					$arrPageUrl = explode('&',$pageUrl);	
@@ -73,6 +73,36 @@ if($_SESSION['validUser']) {
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
 						$content =replaceContent($content, NULL, $practiceId, NULL, $jobId);
+						
+						include_once(MAIL);
+						send_mail($to, $cc, $subject, $content);
+					}
+					/* send mail function ends here */
+
+					/* send mail function starts here for ADD NEW TASK */
+					$practiceId = $_REQUEST['lstPractice'];	
+					$pageUrl = "job.php?sql=addTask";
+					
+					// check if event is active or inactive [This will return TRUE or FALSE as per result]
+					$flagSet = getEventStatus($pageUrl);
+					
+					// if event is active it go for mail function
+					if($flagSet) {
+
+						//It will Get All Details in array format for Send Email	
+						$arrEmailInfo = get_email_info($pageUrl);
+
+						// fetch email id of sr manager
+						$strPanelInfo = sql_select_panel($practiceId);
+						$arrPanelInfo = explode('~', $strPanelInfo);
+						$srManagerEmail = $arrPanelInfo[0];
+						$inManagerEmail = $arrPanelInfo[2];
+
+						$to = $inManagerEmail;
+						$cc = $arrEmailInfo['event_cc'];
+						$subject = $arrEmailInfo['event_subject'];
+						$content = $arrEmailInfo['event_content'];
+						$content =replaceContent($content, NULL, NULL, NULL, $jobId);
 						
 						include_once(MAIL);
 						send_mail($to, $cc, $subject, $content);

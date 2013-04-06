@@ -82,13 +82,14 @@ function validation()
 	var email =document.getElementById("Email");
 	var phone = document.getElementById("Telephone");
 	var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	var count = 0;
 	flagReturn = true;
 	
 	if(name.value == "" || name.value == "Full Name *")
 	{
 		document.getElementById("val_name").innerHTML = "Please specify Full Name";
-		//document.getElementById("Name").focus();
 		name.className = "errclass";
+		count++;
 		flagReturn = false;
 	}
 	else
@@ -100,8 +101,8 @@ function validation()
 	if(email.value == "" || email.value == "Email *") 
 	{
 		document.getElementById("val_email").innerHTML = "Please specify Email";
-		//document.getElementById("Email").focus();
 		email.className = "errclass";
+		count++;
 		flagReturn = false;
 	}
 	else
@@ -115,8 +116,8 @@ function validation()
 		if(reg.test(email.value) == false)
 		{
 			document.getElementById("val_email").innerHTML = "Please specify valid Email";
-			//document.getElementById("Email").focus();
 			email.className = "errclass";
+			count++;
 			flagReturn = false;
 		}
 		else
@@ -129,8 +130,8 @@ function validation()
 	if(phone.value == "" || phone.value == "Telephone *") 
 	{
 		document.getElementById("val_phone").innerHTML = "Please specify Telephone";
-		//document.getElementById("Telephone").focus();
 		phone.className = "errclass";
+		count++;
 		flagReturn = false;
 	}
 	else
@@ -144,8 +145,8 @@ function validation()
 		if((isNaN(phone.value)))
 		{
 			document.getElementById("val_phone").innerHTML = "Please specify Telephone in digits only";
-			//document.getElementById("Telephone").focus();
 			phone.className = "errclass";
+			count++;
 			flagReturn = false;
 		}
 		else
@@ -155,6 +156,15 @@ function validation()
 		}
 	}
 	
+	if(count == 3)
+		document.getElementById("jmcontactform").style.height = "360px";
+	if(count == 2)
+		document.getElementById("jmcontactform").style.height = "340px";
+	if(count == 1)
+		document.getElementById("jmcontactform").style.height = "320px";
+	if(count == 0)
+		document.getElementById("jmcontactform").style.height = "300px";
+		
 	return flagReturn;
 }
 </script>');

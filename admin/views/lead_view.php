@@ -21,17 +21,15 @@
 		<td class="dr"><?=htmlspecialchars($objCallData->arrSrManager[$arrLeadData["sr_manager"]])?></td>
 	</tr>
     
-    <tr>
+   <!-- <tr>
 		<td class="hr">India Manager</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrIndiaManager[$arrLeadData["india_manager"]])?></td>
 	</tr>
     
     <tr>
-		<td class="hr">Team Member
-       
-        </td>
+		<td class="hr">Team Member</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrEmployees[$arrLeadData["team_member"]])?></td>
-	</tr>
+	</tr>-->
 	
 	<tr>
 		<td class="hr">Street Address</td>

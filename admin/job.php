@@ -11,7 +11,8 @@ include 'common/varDeclare.php';
 include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/job_class.php';
-
+//print_r($_REQUEST);
+//exit;
 // create class object for class function access
 $objCallData = new Job_Class();
 
@@ -23,8 +24,6 @@ if($_SESSION['validUser']) {
 			<head>
 				<title>Job List</title>
 				<meta name="generator" http-equiv="content-type" content="text/html">
-				<LINK href="<?php echo $styleSheet; ?>stylesheet.css" rel="stylesheet" type="text/css">
-				<LINK href="<?php echo $styleSheet; ?>tooltip.css" rel="stylesheet" type="text/css">
 				<script type="text/javascript" src="<?php echo $javaScript;?>datetimepicker.js"></script>
 				<script type="text/javascript" src="<?php echo $javaScript;?>validate.js"></script>
 				<script type="text/javascript" src="<?php echo $javaScript;?>job.js"></script>
@@ -159,6 +158,7 @@ if($_SESSION['validUser']) {
 					break;
 
 				case "download":
+				
 					if($_REQUEST["filePath"]) {
 						if($_REQUEST['flagType'] == 'S') { 
 							$objCallData->update_document($_REQUEST["docId"]);

@@ -48,7 +48,7 @@
         
         
         
-        <tr>
+        <!--<tr>
 			<td class="hr">India Manager</font></td>
 			<td><select name="lstSrIndiaManager">
 					<option value="0">Select India Manager</option><?php
@@ -58,9 +58,9 @@
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select India Manager for Task.</span></a>
 			</td>
-		</tr>
+		</tr>-->
 
-		<tr>
+		<!--<tr>
 			<td class="hr">Team Member</font></td>
 			<td><select name="lstSrTeamMember">
             <option value="0">Select Team Member</option>
@@ -71,7 +71,7 @@
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Team Member for Task.</span></a>
 			</td>
-		</tr>
+		</tr>-->
         
         
         

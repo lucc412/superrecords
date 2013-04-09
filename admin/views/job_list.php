@@ -150,16 +150,16 @@ switch ($a)
 						<div id="parentDiv"></div>
 					</td>
 					<td>
-						<button type="button" style="margin-top:0px;" title="Click here to upload new source document" name="addBtn" onClick="javascript:addElement();" value="Add" class="button1"/>Add</button>
+						<button type="button" style="width:94px;margin-top:0px;" title="Click here to upload new source document" name="addBtn" onClick="javascript:addElement();" value="Add" />Add</button>
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-						<button type="reset" title="Click here to cancel" value="Cancel" class="button1" onClick='return ComfirmCancel();'>Cancel</button>
+						<button type="reset" title="Click here to cancel" value="Cancel" onClick='return ComfirmCancel();'>Cancel</button>
 					</td>
 					<td>
-						<button type="submit" title="Click here to add new job" value="Save" class="button1">Save</button>
+						<button type="submit" title="Click here to add new job" value="Save" >Save</button>
 					</td>
 				</tr>
 			</table>
@@ -197,9 +197,9 @@ switch ($a)
 			?><body>
 			<table border="0" cellspacing="1" cellpadding="4" align="left">
 				<tr>
-					<td>
+					<td><!--#0e4d7a-->
 						<form method="POST" name="frmJobDetails" action="job.php">
-							<input type="submit" name="btnDetails" value="Job Details" style="background-color:#ee4d0f; color:#ffffff;">
+							<input class="joblstbtn" type="submit" name="btnDetails" value="Job Details" style="background-color:#ee4d0f;">
 							<input type="hidden" name="a" value="editJob">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -207,7 +207,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php">
-							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnDocument" value="Documents">
 							<input type="hidden" name="a" value="documents">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -215,7 +215,7 @@ switch ($a)
 						
 					<td>
 						<form method="POST" name="frmReports" action="job.php">
-							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnReports" value="Reports">
 							<input type="hidden" name="a" value="reports">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -223,7 +223,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php">
-							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer;color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnQueries" value="Queries">
 							<input type="hidden" name="a" value="queries">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -235,10 +235,13 @@ switch ($a)
 				<h1>Job Details</h1>
 			</div>
 			 
-			 <form method="POST" name="frmJobDetails" action="tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>">
-			 <input type="button" name="btnTasks" value="View Associated Tasks" style="background-color:#70b4ae; color:#ffffff; cursor:pointer;" onClick="JavaScript:newPopup('tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>');"><br/><br/>
+			 <form method="POST" name="frmJobDetails" action="job.php?a=editJob&jobId=<?=$_REQUEST["jobId"]?>">
+			 <!--<input class="vwtaskbtn" type="button" name="btnTasks" value="View Associated Tasks" style=""; width:215px;" onClick="JavaScript:newPopup('tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>');">-->
+			 <button name="btnTasks" value="View Associated Tasks" style="width:215px;" onClick="JavaScript:newPopup('tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>');">View Associated Tasks</button>
+			 <br/><br/>
+			 
 			</form>
-			
+			<!--background-color:#70b4ae; color:#ffffff; cursor:pointer; margin: 0-->
 			<form method="POST" name="frmJobDetails" action="job.php?sql=updateJob">
 			<table class="tbl" border="0" cellspacing="10" width="70%">
 				<tr>
@@ -308,7 +311,7 @@ switch ($a)
 					</td>
 				</tr>
 			</table>
-				<button type="submit" value="Update" name="btnJob" class="cancelbutton">Update</button></td>
+				<button type="submit" value="Update" name="btnJob">Update</button></td>
 				<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 				<input type="hidden" name="a" value="edit">
 			</form></body>
@@ -326,7 +329,7 @@ switch ($a)
 				<tr>
 					<td>
 						<form method="POST" name="frmJobDetails" action="job.php">
-							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer;  color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnDetails" value="Job Details">
 							<input type="hidden" name="a" value="editJob">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -334,7 +337,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php">
-							<input type="submit" name="btnDocument" value="Documents" style="background-color:#ee4d0f; color:#ffffff;">
+							<input class="joblstbtn" type="submit" name="btnDocument" value="Documents" style="background-color:#ee4d0f;">
 							<input type="hidden" name="a" value="documents">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -342,7 +345,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmReports" action="job.php">
-							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnReports" value="Reports">
 							<input type="hidden" name="a" value="reports">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -350,7 +353,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php">
-							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnQueries" value="Queries">
 							<input type="hidden" name="a" value="queries">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -402,9 +405,11 @@ switch ($a)
 			    ?><td width="10%" align="center" class="<?=$style?> blueBG" <?=$strView?>><?=$viewed?></td>	
 			  
               	<td width="5%" class="<?=$style?> blueBG" align="center">
-					<a href="job.php?sql=download&flagType=S&filePath=<?=$arrInfo['file_path']?>&docId=<?=$arrInfo['document_id']?>" title="Click to view this document" target="_blank">
+					<!--<a href="job.php?sql=download&flagType=S&filePath=<?=$arrInfo['file_path']?>&docId=<?=$arrInfo['document_id']?>" title="Click to view this document" target="_blank">
                     <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/>
-                    </a>
+                    </a>-->
+					<button onclick="javascript:redirectURL('job.php?sql=download&flagType=S&filePath=<?=$arrInfo['file_path']?>&docId=<?=$arrInfo['document_id']?>');" title="Click to view this document" >Download</button>
+                    
 				</td>
 			</tr><?
 		}	
@@ -424,7 +429,7 @@ switch ($a)
 				<tr>
 					<td>
 						<form method="POST" name="frmJobDetails" action="job.php">
-							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnDetails" value="Job Details">
 							<input type="hidden" name="a" value="editJob">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -432,7 +437,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php">
-							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnDocument" value="Documents">
 							<input type="hidden" name="a" value="documents">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -440,7 +445,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmReports" action="job.php">
-							<input type="submit" name="btnReports" value="Reports"  style="background-color:#ee4d0f; color:#ffffff;">
+							<input class="joblstbtn" type="submit" name="btnReports" value="Reports"  style="background-color:#ee4d0f;">
 							<input type="hidden" name="a" value="reports">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -448,7 +453,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php">
-							<input type="submit" name="btnQueries" value="Queries" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnQueries" value="Queries">
 							<input type="hidden" name="a" value="queries">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -476,7 +481,8 @@ switch ($a)
 					<td class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["report_title"])?></td>	
 					<td width="23%" align="center" class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["date"])?></td>
 					<td width="10%" class="<?=$style?> blueBG" align="center">
-					<a href="job.php?sql=download&flagType=R&filePath=<?=$arrInfo['file_path']?>" target="_blank" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>
+					<!--<a href="job.php?sql=download&flagType=R&filePath=<?=$arrInfo['file_path']?>" target="_blank" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>-->
+					<button onclick="redirectURL('job.php?sql=download&flagType=R&filePath=<?=$arrInfo['file_path']?>')"title="Click to view this document" >Download</button>
 					  </td>
 				</tr><?
 			}
@@ -484,7 +490,8 @@ switch ($a)
 	?></table></table>
 		<table  class="fieldtable" align="center"  border="0" cellspacing="1" cellpadding="4" >
 			<tr><td width="10%" align="center">
-				<a href="#"><img src="images/upload.png" border="0" alt="Upload" name="upload" title="Upload" align="middle" height="33px" width="117px" onClick="JavaScript:newPopup('job.php?a=uploadReports&jobId=<?=$_REQUEST["jobId"]?>');"/></a>
+				<!--<a href="#"><img src="images/upload.png" border="0" alt="Upload" name="upload" title="Upload" align="middle" height="33px" width="117px" onClick="JavaScript:newPopup('job.php?a=uploadReports&jobId=<?=$_REQUEST["jobId"]?>');"/></a>-->
+				<button onclick="JavaScript:newPopup('job.php?a=uploadReports&jobId=<?=$_REQUEST["jobId"]?>');">Upload</button>
 			</td></tr>
 		</table><?
 	
@@ -543,7 +550,7 @@ switch ($a)
 				<tr>
 					<td>
 						<form method="POST" name="frmJobDetails" action="job.php">
-							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnDetails" value="Job Details">
 							<input type="hidden" name="a" value="editJob">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -551,7 +558,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php">
-							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnDocument" value="Documents">
 							<input type="hidden" name="a" value="documents">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -559,7 +566,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmReports" action="job.php">
-							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnReports" value="Reports">
 							<input type="hidden" name="a" value="reports">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -568,7 +575,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php">
-							<input type="submit" name="btnQueries" value="Queries" style="background-color:#ee4d0f; color:#ffffff;">
+							<input class="joblstbtn" type="submit" name="btnQueries" value="Queries" style="background-color:#ee4d0f;">
 							<input type="hidden" name="a" value="queries">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -589,8 +596,9 @@ switch ($a)
 			$flagSet = getEventStatus($pageUrl);
 			
 			if($flagSet) {
-				?><span style="margin-left:800px;">
-				   <a href="job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>"><input type="button" name="sendEmail" value="Send Mail to Practice" class="sendMailBtn"></a>
+				?><span style="margin-left:764px;">
+				   <!--<a href="job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>"><input type="button" name="sendEmail" value="Send Mail to Practice" class="sendMailBtn"></a>-->
+				   <button name="sendEmail" style="width: 222px" onclick="javascript:redirectURL('job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>')">Send Mail to Practice</button>
 				</span><br>
 
 				<span class="boldtext"><?php 
@@ -640,13 +648,19 @@ switch ($a)
 					
 					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
 					if(!empty($arrInfo["report_file_path"])) {
-						?><a href="job.php?sql=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
+						?>
+						<!--<a href="job.php?sql=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a>-->
+<button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>');" title="Cilck here To Download Document." >Download</button>
+						<?
 					}
 					?></td>
 					
 					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
 					if(!empty($arrInfo["file_path"])) {
-						?><a href="job.php?sql=download&flagType=Q&filePath=<?=$arrInfo['file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a><?
+						?>
+						<!--<a href="job.php?sql=download&flagType=Q&filePath=<?=$arrInfo['file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a>-->
+						<button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=Q&filePath=<?=$arrInfo['file_path']?>');" title="Cilck here To Download Document." >Download</button>
+						<?
 					}
 					?></td>
 					
@@ -675,18 +689,20 @@ switch ($a)
 					 
 					 if($arrInfo["status"] == 1)
 					 {
-  			      		?><input class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="1" checked="true"/>Yes
-						  <input class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="0"/>No<?
+  			      		?><label for="rdYes<?=$queryId?>"><input id="rdYes<?=$queryId?>" class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="1" checked="true"/>Yes</label>
+						  <label for="rdNo<?=$queryId?>"><input id="rdNo<?=$queryId?>" class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="0"/>No</label><?
 					 }
 					 else
 					 {
-						?><input class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="1"/>Yes
-						  <input class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="0" checked="true"/>No<?				 
+						?><label for="rdYes<?=$queryId?>"><input id="rdYes<?=$queryId?>" class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="1"/>Yes</label>
+						  <label for="rdNo<?=$queryId?>"><input id="rdNo<?=$queryId?>" class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="0" checked="true"/>No</label><?				 
 					 }		
 					?></td>
 						
 					<td width="6%" class="<?=$style?> blueBG" align="center">
-						<input type="button" name="btnSave" value="Save" style="background-color:#07aff8; border:solid; color:#ffffff; width:70px;" onClick="javascript:updateQuery(<?=$queryId?>)">
+						<!--<input type="button" name="btnSave" value="Save" style="background-color:#07aff8; border:solid; color:#ffffff; width:70px;" onClick="javascript:updateQuery(<?=$queryId?>)">-->
+						<button style="width: 70px;" onClick="javascript:updateQuery(<?=$queryId?>)">Save</button>
+						
 					</td>
 					<td align="center"><?
 					  	  $jsFunc = "javascript:performdelete('job.php?sql=deleteQuery&jobId=".$_REQUEST["jobId"]."&queryId=".$queryId."');";
@@ -712,7 +728,7 @@ switch ($a)
 				<tr>
 					<td>
 						<form method="POST" name="frmJobDetails" action="job.php">
-							<input type="submit" name="btnDetails" value="Job Details" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnDetails" value="Job Details">
 							<input type="hidden" name="a" value="editJob">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -720,7 +736,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php">
-							<input type="submit" name="btnDocument" value="Documents" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnDocument" value="Documents">
 							<input type="hidden" name="a" value="documents">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -728,7 +744,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmReports" action="job.php">
-							<input type="submit" name="btnReports" value="Reports" style="cursor:pointer; color:#ffffff; background-color:#0e4d7a">
+							<input class="joblstbtn" type="submit" name="btnReports" value="Reports">
 							<input type="hidden" name="a" value="reports">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -737,7 +753,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php">
-							<input type="submit" name="btnQueries" value="Queries" style="background-color:#ee4d0f; color:#ffffff;">
+							<input class="joblstbtn" type="submit" name="btnQueries" value="Queries" style="background-color:#ee4d0f;">
 							<input type="hidden" name="a" value="queries">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -766,11 +782,11 @@ switch ($a)
 				</tr>
 			</table>
 
-			<button type="submit" value="Save" name="btnSave" class="cancelbutton">
+			<button type="submit" value="Save" name="btnSave">
 				Save
 			</button>
 
-			<button type="button" value="Cancel"  class="cancelbutton" onClick='return ComfirmCancel(<?=$_REQUEST["jobId"]?>);'>
+			<button type="button" value="Cancel" onClick='return ComfirmCancel(<?=$_REQUEST["jobId"]?>);'>
 				Cancel
 			</button>
 			

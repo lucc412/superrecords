@@ -48,9 +48,9 @@ color:#208EB3;
 
 .sendMailBtn
 {
-	width:170px; 
-	height:29px; 
-	background-image:url(../images/mail.png); 
+	width:222px; 
+	height:25px; 
+	background:url("../images/submit-bg.jpg") no-repeat scroll left center #074165; 
 	color:#FFFFFF; 
 	font-weight:bold;
 }
@@ -503,7 +503,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .fieldheader th{
-	background-color:#0c436c;
+	background-color:#074165;
 	padding-left:3px;
 	font-size:14px; 
 	color:#fff;
@@ -829,7 +829,17 @@ button {
 	border:none;
 	margin-top:4px;
 }
+.joblstbtn{
+	width: 215px;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #074165;/* EE4D0F*/
+	cursor: pointer;
+}
 
+}
 .disbtnclass
 {
 	color: white;
@@ -854,7 +864,7 @@ button {
 	height: 21px;
 	cursor:pointer;
 	border:none;
-	margin-top:4px;s
+	margin-top:4px;
 }
 
 .loginbtn {
@@ -1074,3 +1084,4 @@ button {
         padding: 20px 35px 55px;
       }
 /* Liquid Slider */
+

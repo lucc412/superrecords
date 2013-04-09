@@ -34,6 +34,9 @@ if($_SESSION['validUser']) {
 		// set name of the main table for this report page
 		$reportPageName = 'lead';
 
+		// set name of the main table for this report page
+		$reportPageTitle = 'Lead Report';
+
 		// to display report in output as per selected criterias
 		if((isset($_REQUEST['submit']) && $_REQUEST['submit'] == "Display")) {
 

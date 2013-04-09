@@ -499,7 +499,7 @@ class staffContentList extends Database
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Client</div></i></b></td></tr>";
 								if($i==17)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
-								if($i==24)
+								if($i==25)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
 								if($i==32)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";

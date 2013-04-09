@@ -7,7 +7,7 @@
 
 ?><html>
 	<head>
-		<title>Lead Report</title>
+		<title><?=$reportPageTitle?></title>
 		<meta name="generator" http-equiv="content-type" content="text/html">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script type="text/javascript" src="<?=$javaScript;?>report_validation.js"></script>

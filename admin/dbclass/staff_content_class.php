@@ -191,7 +191,7 @@ class staffContentList extends Database
 							FROM stf_staffforms a,frm_forms b  
 							WHERE a.stf_SCode =".$row['stf_Code']. " 
 							AND b.frm_Code = a.stf_FormCode 
-							AND frm_Code NOT IN (45,53,65,73,74,77,76)
+							AND frm_Code NOT IN (45,65,73,74,77,76)
 							ORDER BY b.frm_Order ";
 				$permres = mysql_query($permquery);
 
@@ -209,7 +209,7 @@ class staffContentList extends Database
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
 					if($i==25)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
-					if($i==38)
+					if($i==32)
 					echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
 
 					?><tr>
@@ -455,13 +455,13 @@ class staffContentList extends Database
 					<br><?
 
 					//show permission settings
-					$formquery_chkcode_view = "SELECT * FROM frm_forms WHERE frm_Code NOT IN (45,53,65,73,74,77)";
+					$formquery_chkcode_view = "SELECT * FROM frm_forms WHERE frm_Code NOT IN (45,65,73,74,77)";
 					$formres_chkcode_view = mysql_query($formquery_chkcode_view);
-					$formquery_chkcode_add = "SELECT * FROM frm_forms where frm_Code NOT IN (45,53,65,73,74,77)";
+					$formquery_chkcode_add = "SELECT * FROM frm_forms where frm_Code NOT IN (45,65,73,74,77)";
 					$formres_chkcode_add = mysql_query($formquery_chkcode_add);
-					$formquery_chkcode_edit = "SELECT * FROM frm_forms where frm_Code NOT IN (45,53,65,73,74,77)";
+					$formquery_chkcode_edit = "SELECT * FROM frm_forms where frm_Code NOT IN (45,65,73,74,77)";
 					$formres_chkcode_edit = mysql_query($formquery_chkcode_edit);
-					$formquery_chkcode_delete = "SELECT * FROM frm_forms where frm_Code NOT IN (45,53,65,73,74,77)";
+					$formquery_chkcode_delete = "SELECT * FROM frm_forms where frm_Code NOT IN (45,65,73,74,77)";
 					$formres_chkcode_delete = mysql_query($formquery_chkcode_delete);
 
 					if(!$iseditmode) {
@@ -484,7 +484,7 @@ class staffContentList extends Database
 						  </tr>
 							<?php
 							 //show permission settings
-							$formquery="SELECT * FROM frm_forms WHERE frm_Code NOT IN (45,53,65,73,74,77,76) ORDER BY frm_Order";
+							$formquery="SELECT * FROM frm_forms WHERE frm_Code NOT IN (45,65,73,74,77,76) ORDER BY frm_Order";
 							$formres=@mysql_query($formquery);
 							while ($row_form = @mysql_fetch_array($formres))
 							{
@@ -501,7 +501,7 @@ class staffContentList extends Database
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
 								if($i==24)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
-								if($i==38)
+								if($i==32)
 								echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
 								
 								?><tr>
@@ -565,7 +565,7 @@ class staffContentList extends Database
 									FROM stf_staffforms a,frm_forms b 
 									WHERE a.stf_SCode =".$row['stf_Code']. " 
 									AND b.frm_Code = a.stf_FormCode 
-									AND b.frm_Code NOT IN (45,53,65,73,74,77,76)
+									AND b.frm_Code NOT IN (45,65,73,74,77,76)
 									ORDER BY b.frm_Order";
 
 						$permres = mysql_query($permquery);
@@ -590,7 +590,7 @@ class staffContentList extends Database
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Job</div></i></b></td></tr>";
 							if($i==25)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Administration</div></i></b></td></tr>";
-							if($i==38)
+							if($i==32)
 							echo "<tr><td colspan=\"8\"><b><i><div style='margin-left:10px; float:left; color:#FB5C24'>Reports</div></i></b></td></tr>";
 
 							?><tr><td width="300px">

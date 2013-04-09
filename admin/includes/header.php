@@ -774,63 +774,23 @@ if($_SESSION['validUser']) {
 					}
 
 					// Reports Menu (check access by passing $_SESSION of staff code and form code)
-					$formcode_sys="45,53,65,73,74,77";
+					$formcode_sys="53";
 					$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);
 
 					if($access_menu_level=="true") {   
-						?><!--<li class="dropdown"><a href="#">Reports</a>      
+						?><li class="dropdown"><a href="#">Reports</a>      
 							<ul class="sub"><?
 
-								// Worksheet Report Submenu (Check access by passing $_SESSION of staff code and form code)
-								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],45,1);
-								if(is_array($access_submenu_level)==1) {
-									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="wrk_worksheet_report.php?a=reset">Worksheet Report</a></li><?
-									}
-								}
-
-								// Sales Report Submenu (Check access by passing $_SESSION of staff code and form code)
+								// Lead Report Submenu (Check access by passing $_SESSION of staff code and form code)
 								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],53,1);
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="cli_client_report.php?a=reset">Sales Report</a></li><?
+										?><li><a href="lead_report.php">Lead Report</a></li><?
 									}
 								}
 
-								// Custom Sales Report Submenu (Check access by passing $_SESSION of staff code and form code)
-								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],65,1);
-								if(is_array($access_submenu_level)==1) {
-									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="sales_report.php?a=reset">Custom Sales Report</a></li><?
-									}
-								}
-
-								// Custom Worksheet Report Submenu (Check access by passing $_SESSION of staff code and form code)
-								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],73,1);
-								if(is_array($access_submenu_level)==1) {
-									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="custom_worksheet_report.php">Custom Worksheet Report</a></li><?
-									}
-								}
-
-								// Custom Tickets Report Submenu (Check access by passing $_SESSION of staff code and form code)
-								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],74,1);
-								if(is_array($access_submenu_level)==1) {
-									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="custom_cases_report.php">Custom Tickets Report</a></li><?
-									}
-								} 
-
-								// Custom Cross Sales Opp Report Report Submenu (Check access by passing $_SESSION of staff code and form code)
-								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],77,1);
-								if(is_array($access_submenu_level)==1) {
-									if(in_array("Y",$access_submenu_level)) {   
-										?><li><a href="sales_opportunity_report.php?a=reset">Custom Cross Sales Opp Report</a></li><?
-									}
-								} 
-						
 							?></ul>
-						</li>--><?
+						</li><?
 					}
 
 					if($_SESSION['usertype'] == "Administrator" || $_SESSION['staffcode'] == "69") {

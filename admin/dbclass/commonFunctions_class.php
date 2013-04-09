@@ -58,6 +58,12 @@ class commonUse extends Database
                 if(($dateformat!="0000-00-00") && $dateformat!="")
                 return (date("d/M/Y",strtotime($dateformat)));
             }
+			// This function is used to display calendar
+			function showCalendar($textBoxId, $textBoxVal=NULL) {
+				   $returnStr = '<input type="text" name="'. $textBoxId .'" id="'. $textBoxId .'" value="'. $textBoxVal .'"/>&nbsp;<a href="javascript:NewCal(\''.$textBoxId.'\',\'ddmmyyyy\',false,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>';
+				
+				return $returnStr;
+			}
             function getTaskDescription($Taskid)
             {
                 if($Taskid!=0)

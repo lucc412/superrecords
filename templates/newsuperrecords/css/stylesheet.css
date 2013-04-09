@@ -84,7 +84,7 @@ a img{
 }
 
 
-.freetrlbtn{
+.blueBtn{
 	font-family: Arial, Helvetica, sans-serif;
 	padding: 5px 20px;
 	position: relative;
@@ -95,15 +95,86 @@ a img{
 	color: #fff;
 	line-height: 33px;
 	font-size: 19px;
+	width:77%;
 	background: rgb(7,65,96); /* Old browsers */
-	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, -moz-linear-gradient(left,  rgba(7,65,96,1) 0%, rgba(19,108,144,1) 100%); /* FF3.6+ */
-	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(7,65,96,1)), color-stop(100%,rgba(19,108,144,1))); /* Chrome,Safari4+ */
-	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, -webkit-linear-gradient(left,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* Chrome10+,Safari5.1+ */
-	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, -o-linear-gradient(left,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* Opera 11.10+ */
-	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, -ms-linear-gradient(left,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* IE10+ */
-	background:url(../images/acc-arrow.jpg) 254px 11px no-repeat, linear-gradient(to right,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* W3C */
+	
+	background:-moz-linear-gradient(left,  rgba(7,65,96,1) 0%, rgba(19,108,144,1) 100%); /* FF3.6+ */
+	background:-webkit-gradient(linear, left top, right top, color-stop(0%,rgba(7,65,96,1)), color-stop(100%,rgba(19,108,144,1))); /* Chrome,Safari4+ */
+	background:-webkit-linear-gradient(left,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* Chrome10+,Safari5.1+ */
+	background:-o-linear-gradient(left,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* Opera 11.10+ */
+	background:-ms-linear-gradient(left,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* IE10+ */
+	background:linear-gradient(to right,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#074160', endColorstr='#136c90',GradientType=1 ); /* IE6-9 */	
-	width:100%;
+	
+	background-image:url(../images/acc-arrow.jpg) 254px 11px no-repeat;
+	float: left;
+}
+
+.orangeBtn{
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 5px 20px;
+	position: relative;
+	z-index: 20;
+	display: block;
+	height: 30px;
+	cursor: pointer;
+	color: #fff;
+	line-height: 33px;
+	font-size: 19px;
+	width:77%;
+	background: rgb(250,144,2); /* Old browsers */
+	
+	background:-moz-linear-gradient(left,  rgba(250,144,2,1) 0%, rgba(238,88,27,1) 100%); /* FF3.6+ */
+	background:-webkit-gradient(linear, left top, right top, color-stop(0%,rgba(250,144,2,1)), color-stop(100%,rgba(238,88,27,1))); /* Chrome,Safari4+ */
+	background:-webkit-linear-gradient(left,  rgba(250,144,2,1) 0%,rgba(238,88,27,1) 100%); /* Chrome10+,Safari5.1+ */
+	background:-o-linear-gradient(left,  rgba(250,144,2,1) 0%,rgba(238,88,27,1) 100%); /* Opera 11.10+ */
+	background:-ms-linear-gradient(left,  rgba(250,144,2,1) 0%,rgba(238,88,27,1) 100%); /* IE10+ */
+	background:linear-gradient(to right,  rgba(250,144,2,1) 0%,rgba(238,88,27,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa9002', endColorstr='#ee581b',GradientType=1 ); /* IE6-9 */	
+	
+	background-image:url(../images/acc-arrow.jpg) 254px 11px no-repeat;
+	float: left;
+}
+
+.blueArrowBtn 
+{
+	position: relative;
+	z-index: 30;
+	height: 40px;
+	width:30px;
+	float: left;
+	cursor: pointer;
+	
+	background: #126b8f url(../images/acc-arrow.jpg) right no-repeat;
+	background-position: 36% 50%;
+}
+
+.orangeArrowBtn
+{
+	position: relative;
+	z-index: 30;
+	height: 40px;
+	width:30px;
+	float: left;
+	cursor: pointer;
+	
+	background: #ef5c18 url(../images/acc-arrow-hover.jpg) right no-repeat;
+	background-position: 36% 50%;
+}
+
+.smsfDivClass
+{
+	width:205px;
+	border:1px solid gray;
+	margin:25px 0px 0px 0px; 
+	background:#fff1bb;
+	height: 52px;
+	
+	background:#074160;
+	color: #BDD4E6;
+	line-height: 18px;
+	font-size: 12px;
+	padding: 10px 15px 15px;
 }
 
 /* Header */

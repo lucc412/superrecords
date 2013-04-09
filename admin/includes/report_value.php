@@ -1,4 +1,10 @@
 <?
+/*	
+	Created By -> 09-Apr-13 [Disha Goyal]
+	Last Modified By -> 09-Apr-13 [Disha Goyal]	
+	Description: This is module file used to display value in Report conditions
+*/
+
 $valueStr = "";
 $arrCondition = array();
 

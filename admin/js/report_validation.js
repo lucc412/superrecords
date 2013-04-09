@@ -1,3 +1,9 @@
+/*	
+	Created By -> 09-Apr-13 [Disha Goyal]
+	Last Modified By -> 09-Apr-13 [Disha Goyal]	
+	Description: This is JS file for all reports page	
+*/
+
 // This function is used to move options from one listbox to other
 function moveOption(src, dest) {
 	for (var i = src.options.length - 1; i >= 0; i--) {

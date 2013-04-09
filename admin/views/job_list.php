@@ -199,7 +199,7 @@ switch ($a)
 				<tr>
 					<td><!--#0e4d7a-->
 						<form method="POST" name="frmJobDetails" action="job.php">
-							<input class="joblstbtn" type="submit" name="btnDetails" value="Job Details" style="background-color:#ee4d0f;">
+							<input class="joblstbtn" type="submit" name="btnDetails" value="Job Details" style="background-color:#F05729;">
 							<input type="hidden" name="a" value="editJob">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -337,7 +337,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmDocuments" action="job.php">
-							<input class="joblstbtn" type="submit" name="btnDocument" value="Documents" style="background-color:#ee4d0f;">
+							<input class="joblstbtn" type="submit" name="btnDocument" value="Documents" style="background-color:#F05729;">
 							<input type="hidden" name="a" value="documents">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -445,7 +445,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmReports" action="job.php">
-							<input class="joblstbtn" type="submit" name="btnReports" value="Reports"  style="background-color:#ee4d0f;">
+							<input class="joblstbtn" type="submit" name="btnReports" value="Reports"  style="background-color:#F05729;">
 							<input type="hidden" name="a" value="reports">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -575,7 +575,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php">
-							<input class="joblstbtn" type="submit" name="btnQueries" value="Queries" style="background-color:#ee4d0f;">
+							<input class="joblstbtn" type="submit" name="btnQueries" value="Queries" style="background-color:#F05729;">
 							<input type="hidden" name="a" value="queries">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>
@@ -753,7 +753,7 @@ switch ($a)
 					
 					<td>
 						<form method="POST" name="frmQueries" action="job.php">
-							<input class="joblstbtn" type="submit" name="btnQueries" value="Queries" style="background-color:#ee4d0f;">
+							<input class="joblstbtn" type="submit" name="btnQueries" value="Queries" style="background-color:#F05729;">
 							<input type="hidden" name="a" value="queries">
 							<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 						</form>

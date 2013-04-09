@@ -11,8 +11,7 @@ include 'common/varDeclare.php';
 include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/job_class.php';
-//print_r($_REQUEST);
-//exit;
+
 // create class object for class function access
 $objCallData = new Job_Class();
 
@@ -22,8 +21,11 @@ if($_SESSION['validUser']) {
 	if($_REQUEST['sql'] != 'download') {
 		?><html>
 			<head>
-				<title>Job List</title>
-				<meta name="generator" http-equiv="content-type" content="text/html">
+				<title>Job List</title><?
+				if($_REQUEST["a"] == "uploadReports") {
+					?><link rel="stylesheet" type="text/css" href="css/stylesheet.css"/><?
+				}
+				?><meta name="generator" http-equiv="content-type" content="text/html">
 				<script type="text/javascript" src="<?php echo $javaScript;?>datetimepicker.js"></script>
 				<script type="text/javascript" src="<?php echo $javaScript;?>validate.js"></script>
 				<script type="text/javascript" src="<?php echo $javaScript;?>job.js"></script>
@@ -38,6 +40,8 @@ if($_SESSION['validUser']) {
 			$filter = $_REQUEST["filter"];
 		
 			if($a != "uploadReports") include("includes/header.php");	
+			
+			
 			?><br><?
 			
 			// db query as per request

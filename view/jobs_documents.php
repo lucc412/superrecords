@@ -23,7 +23,7 @@ switch($_REQUEST['a'])
 				?><div class="errorMsg"><?=ERRORICON?>&nbsp;No documents uploaded...!</div><?	
 			}
 			else {
-				?><button class="logoutbtn" type="button" onclick="javascript:urlRedirect('jobs.php?a=uploadDoc');" title="Click here to upload new source document" value="Add">Add</button>
+				?><button style="width:94px;" type="button" onclick="javascript:urlRedirect('jobs.php?a=uploadDoc');" title="Click here to upload new source document" value="Add">Add</button>
   				  </br></br>
 					
 				<table width="100%" class="resources">

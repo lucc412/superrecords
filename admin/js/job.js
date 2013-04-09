@@ -205,3 +205,12 @@ function selectOptions(listName)
 		document.getElementById("span"+listName).innerHTML = selectStr;
 	}
 }
+
+function redirectURL(url)
+{
+	//alert("\""+url+"\"");
+	//window.location.href = url;	
+	//alert("After");
+	window.open(url);
+	
+}

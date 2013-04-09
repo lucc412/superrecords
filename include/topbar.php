@@ -89,7 +89,7 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 							<span style="color:#074263">Welcome,</span> <span><?=$_SESSION['PRACTICE'];?></span>
 						</div> <!--user-->
 						<div class="phone">
-							<button class="logoutbtn" onclick="javascript:urlRedirect('login.php?a=logout');" type="submit" value="Submit">Logout</button>
+							<button style="width:94px" onclick="javascript:urlRedirect('login.php?a=logout');" type="submit" value="Submit">Logout</button>
 						</div> <!--phone-->
 					</div> <!--container-->
 				</div> <!--header-->

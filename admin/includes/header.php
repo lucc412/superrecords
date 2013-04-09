@@ -419,7 +419,7 @@ if($_SESSION['validUser']) {
 			</div> <!--user-->
 
 			<div class="phone">
-				<a href="logout.php"><button class="logoutbtn" type="submit" value="Submit">Logout</button></a>
+				<a href="logout.php"><button style="width:94px" type="submit" value="Submit">Logout</button></a>
 			</div> <!--phone-->
 		</div>
 	</div><?

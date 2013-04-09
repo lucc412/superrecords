@@ -236,8 +236,13 @@ class Job_Class extends Database
 	
 		$jobId = $_REQUEST["jobId"];
 		$value = $_REQUEST["txtQuery"];
+		var_dump($jobId);
+		echo "--------------";
+		var_dump($value);
 		
-		$qrySel = "INSERT INTO queries(job_id, query,date_added) VALUES({$jobId}, '{$value}',NOW())";
+		$qrySel = "INSERT INTO queries(job_id, query,date_added) VALUES({$jobId},'{$value}',NOW())";
+		echo $qrySel;
+		//exit;
 		
 		mysql_query($qrySel);
 		

@@ -175,10 +175,10 @@ class staffContentList extends Database
 
 			?><table border="0" cellspacing="0" <?=$hideSection?> cellpadding="0" id="permissionSection" align="center" class="fieldtable">
 				<tr class="fieldheader">
-					<td width="300" rowspan="2" align="center" > <b>Forms to be shown</b></span>
+					<td width="300" rowspan="2" align="center" > <b style="color:#F05729;">Forms to be shown</b></span>
 					<td colspan="4" class="helpBod"><div align="center"><b>View Permissions </b></div></td>
 				</tr>
-				<tr style="background:#047EA7; color:#fff; border:0px #ffffff solid; font-weight:bold;   width:120px; border: 1px solid #C6DDF2;">
+				<tr class="fieldheader">
 					<th class="fieldheader" align="center"><b>View</b></th>
 					<th class="fieldheader" align="center"><b>Add</b></th>
 					<th class="fieldheader" align="center"><b>Edit</b></th>
@@ -467,10 +467,10 @@ class staffContentList extends Database
 					if(!$iseditmode) {
 					 ?><table border="0" cellspacing="0" id="permissionSection" cellpadding="0" align="center" class="fieldtable">
 						  <tr class="fieldheader">
-								<td width="300" rowspan="2" align="center" > <b>Forms to be shown</b></span>
-								<td colspan="4" class="helpBod"><div align="center"><b>Add Permissions </b></div></td>
+								<td width="300" rowspan="2" align="left" ><b style="color:#F05729;">Forms to be shown</b></td>
+								<td colspan="4" class="helpBod"><div align="center"><b style="color:#F05729;">Add Permissions </b></div></td>
 						  </tr>
-						  <tr style="background:#047EA7; color:#fff; border:0px #ffffff solid; font-weight:bold;   width:120px; border: 1px solid #C6DDF2;">
+						  <tr class="fieldheader">
 								<th style="width:150px;" class="fieldheader" align="center">
 									<input class="checkboxClass" type="checkbox" name="Check_ctr_view" value="yes" onClick="CheckAll_View('<?php while(list($id) = mysql_fetch_array($formres_chkcode_view))
 								{  echo $id."|"; }?>')" >
@@ -542,10 +542,10 @@ class staffContentList extends Database
 
 					?><table border="0" cellspacing="0" cellpadding="0" <?=$hideSection?> id="permissionSection" align="center" class="fieldtable">
 						<tr class="fieldheader">
-							<td width="300" rowspan="2" align="center" > <b>Forms to be shown</b></span>
-							<td colspan="4" class="helpBod"><div align="center"><b>Edit Permissions </b></div></td>
+							<td  rowspan="2" align="left" ><b style="color:#F05729;">Forms to be shown</b></td>
+							<td colspan="4" class="helpBod"><div align="center"><b style="color:#F05729;">Edit Permissions </b></div></td>
 						</tr>
-						<tr style="background:#047EA7; color:#fff; border:0px #ffffff solid; font-weight:bold;   width:120px; border: 1px solid #C6DDF2;">
+						<tr class="fieldheader">
 							<th style="width:150px;" class="fieldheader" align="center"><input class="checkboxClass" type="checkbox" name="Check_ctr_view" value="yes" onClick="CheckAll_View('<?php while(list($id) = mysql_fetch_array($formres_chkcode_view))
 							{  echo $id."|"; }?>')" >
 								&nbsp;&nbsp;<b>View</b></th>
@@ -695,7 +695,7 @@ class staffContentList extends Database
 		?><table border="0" cellspacing="1" cellpadding="4" align="right" >
 			<tr>
 				 <?php if ($page > 1) { ?>
-				<td><a href="stf_staff.php?page=<?php echo $page - 1 ?>"><span style="color:#208EB3; ">&lt;&lt;&nbsp;</span></a>&nbsp;</td>
+				<td><a href="stf_staff.php?page=<?php echo $page - 1 ?>"><span style="color:#208EB3; "></span></a>&nbsp;</td>
 				<?php } ?>
 				<?php
 				  global $pagerange;
@@ -734,9 +734,9 @@ class staffContentList extends Database
 		?><table border="0" cellspacing="1" cellpadding="4" align="right">
 			<tr>
 			 <?php if ($recid > 0) { ?>
-			<td><a href="stf_staff.php?a=<?php echo $a ?>&recid=<?php echo $recid - 1 ?>"><span style="color:#208EB3; ">&lt;&nbsp;</span></a></td>
+			<td><a href="stf_staff.php?a=<?php echo $a ?>&recid=<?php echo $recid - 1 ?>"><span style="color:#208EB3; "></span></a></td>
 			<?php } if ($recid < $count - 1) { ?>
-			<td><a href="stf_staff.php?a=<?php echo $a ?>&recid=<?php echo $recid + 1 ?>"><span style="color:#208EB3; ">&nbsp;&gt;</span></a></td>
+			<td><a href="stf_staff.php?a=<?php echo $a ?>&recid=<?php echo $recid + 1 ?>"><span style="color:#208EB3; "></span></a></td>
 			<?php } ?>
 			</tr>
 		</table><br><?
@@ -781,7 +781,7 @@ class staffContentList extends Database
 		  "stf_Lastmodifiedon" => "");
 		$this->showroweditor($row, false);
 		?>
-		<button style="margin-right:32px;" type="button" value="Cancel" onClick='javascript:history.back(-1);' class="cancelbutton">Cancel</button>
+		<button style="margin-right:32px;" type="button" value="Cancel" onClick='javascript:history.back(-1);'>Cancel</button>
 		<button type="submit" id="btnSave" name="action" value="Save" class="" style="width:115px;">Save</button>
 		</form><?
 		if(isset($_SESSION["USERLOGIN"])) unset($_SESSION["USERLOGIN"]);
@@ -847,7 +847,7 @@ class staffContentList extends Database
 					
 			?>
 			<?php $this->showroweditor($row, true); ?>
-			<button style="margin-right:32px;" type="button" value="Cancel" onClick='return ComfirmCancel();' class="cancelbutton">Cancel</button>
+			<button style="margin-right:32px;" type="button" value="Cancel" onClick='return ComfirmCancel();'>Cancel</button>
 			<button type="submit" id="btnUpdate" name="action" value="Update" style="width:115px;" class="button">Update</button>
 		</form><?
 		$_SESSION["USERLOGIN"] = $staffQuery->fetch_login_name($row["stf_Code"]);

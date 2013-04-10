@@ -191,7 +191,6 @@ class staffContentList extends Database
 							FROM stf_staffforms a,frm_forms b  
 							WHERE a.stf_SCode =".$row['stf_Code']. " 
 							AND b.frm_Code = a.stf_FormCode 
-							AND frm_Code NOT IN (45,65,73,74,77,76)
 							ORDER BY b.frm_Order ";
 				$permres = mysql_query($permquery);
 
@@ -285,10 +284,7 @@ class staffContentList extends Database
 						else if($row_perm['frm_Code']==64)
 						echo "<div style='float:left; margin-left:55px;'>Hosting</div>";
 						else if($row_perm['frm_Description']=="Staff") echo "Users";
-						else if($row_perm['frm_Description']=="Client Status") echo "Lead Stage";
-						else if($row_perm['frm_Description']=="Client Report") echo "Sales Report";
 						else if($row_perm['frm_Description']=="Cases") echo "Tickets";
-						else if($row_perm['frm_Description']=="Custom Cases Report") echo "Custom Tickets Report";
 						else echo $row_perm['frm_Description']; ?>
 						</div></span>
 					</td>
@@ -455,13 +451,13 @@ class staffContentList extends Database
 					<br><?
 
 					//show permission settings
-					$formquery_chkcode_view = "SELECT * FROM frm_forms WHERE frm_Code NOT IN (45,65,73,74,77)";
+					$formquery_chkcode_view = "SELECT * FROM frm_forms WHERE frm_Code";
 					$formres_chkcode_view = mysql_query($formquery_chkcode_view);
-					$formquery_chkcode_add = "SELECT * FROM frm_forms where frm_Code NOT IN (45,65,73,74,77)";
+					$formquery_chkcode_add = "SELECT * FROM frm_forms where frm_Code";
 					$formres_chkcode_add = mysql_query($formquery_chkcode_add);
-					$formquery_chkcode_edit = "SELECT * FROM frm_forms where frm_Code NOT IN (45,65,73,74,77)";
+					$formquery_chkcode_edit = "SELECT * FROM frm_forms where frm_Code";
 					$formres_chkcode_edit = mysql_query($formquery_chkcode_edit);
-					$formquery_chkcode_delete = "SELECT * FROM frm_forms where frm_Code NOT IN (45,65,73,74,77)";
+					$formquery_chkcode_delete = "SELECT * FROM frm_forms where frm_Code";
 					$formres_chkcode_delete = mysql_query($formquery_chkcode_delete);
 
 					if(!$iseditmode) {
@@ -484,7 +480,7 @@ class staffContentList extends Database
 						  </tr>
 							<?php
 							 //show permission settings
-							$formquery="SELECT * FROM frm_forms WHERE frm_Code NOT IN (45,65,73,74,77,76) ORDER BY frm_Order";
+							$formquery="SELECT * FROM frm_forms WHERE frm_Code ORDER BY frm_Order";
 							$formres=@mysql_query($formquery);
 							while ($row_form = @mysql_fetch_array($formres))
 							{
@@ -509,10 +505,7 @@ class staffContentList extends Database
 									<span style="margin-left:20px;">
 									<div style="margin-left:60px; float:left"><?
 										if($row_form['frm_Description']=="Staff") echo "Users";
-										else if($row_form['frm_Description']=="Client Status") echo "Lead Stage";
-										else if($row_form['frm_Description']=="Client Report") echo "Sales Report";
 										else if($row_form['frm_Description']=="Cases") echo "Tickets";
-										else if($row_form['frm_Description']=="Custom Cases Report") echo "Custom Tickets Report";
 										else echo $row_form['frm_Description']; 
 									?></div>
 									<div style=" float:right"><input type="hidden" name="id[]" value="<?php echo $row_form['frm_Code']; ?>" /><input class="checkboxClass" type="checkbox" name="Check_ctr_row[<?php echo $row_form['frm_Code']; ?>]" id="Check_ctr_row[<?php echo $row_form['frm_Code']; ?>]" value="yes" onClick="CheckAll_Row(<?php echo $row_form['frm_Code']; ?>)" ></div></span>
@@ -565,7 +558,6 @@ class staffContentList extends Database
 									FROM stf_staffforms a,frm_forms b 
 									WHERE a.stf_SCode =".$row['stf_Code']. " 
 									AND b.frm_Code = a.stf_FormCode 
-									AND b.frm_Code NOT IN (45,65,73,74,77,76)
 									ORDER BY b.frm_Order";
 
 						$permres = mysql_query($permquery);
@@ -664,10 +656,7 @@ class staffContentList extends Database
 							else if($row_perm['frm_Code']==64)
 							echo "<div style='float:left; margin-left:55px;'>Hosting</div>";
 							else if($row_perm['frm_Description']=="Staff") echo "Users";
-							else if($row_perm['frm_Description']=="Client Status") echo "Lead Stage";
-							else if($row_perm['frm_Description']=="Client Report") echo "Sales Report";
 							else if($row_perm['frm_Description']=="Cases") echo "Tickets";
-							else if($row_perm['frm_Description']=="Custom Cases Report") echo "Custom Tickets Report";
 							else echo $row_perm['frm_Description']; ?> </div></span>
 							<div style=" float:right"><input class="checkboxClass" type="checkbox" name="Check_ctr_row[<?php echo $row_perm['stf_FormCode']; ?>]" id="Check_ctr_row[<?php echo $row_perm['stf_FormCode']; ?>]"  value="yes" onClick="CheckAll_Row(<?php echo $row_perm['stf_FormCode']; ?>)" ></div>
 							</td>

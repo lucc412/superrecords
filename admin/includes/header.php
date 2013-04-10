@@ -774,7 +774,7 @@ if($_SESSION['validUser']) {
 					}
 
 					// Reports Menu (check access by passing $_SESSION of staff code and form code)
-					$formcode_sys="53";
+					$formcode_sys="53,65,45,74,76,77";
 					$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);
 
 					if($access_menu_level=="true") {   
@@ -786,6 +786,46 @@ if($_SESSION['validUser']) {
 								if(is_array($access_submenu_level)==1) {
 									if(in_array("Y",$access_submenu_level)) {   
 										?><li><a href="lead_report.php">Lead Report</a></li><?
+									}
+								}
+
+								// Practice Report Submenu (Check access by passing $_SESSION of staff code and form code)
+								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],65,1);
+								if(is_array($access_submenu_level)==1) {
+									if(in_array("Y",$access_submenu_level)) {   
+										?><li><a href="practice_report.php">Practice Report</a></li><?
+									}
+								}
+
+								// Client Report Submenu (Check access by passing $_SESSION of staff code and form code)
+								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],45,1);
+								if(is_array($access_submenu_level)==1) {
+									if(in_array("Y",$access_submenu_level)) {   
+										?><li><a href="client_report.php">Client Report</a></li><?
+									}
+								}
+
+								// Job Report Submenu (Check access by passing $_SESSION of staff code and form code)
+								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],74,1);
+								if(is_array($access_submenu_level)==1) {
+									if(in_array("Y",$access_submenu_level)) {   
+										?><li><a href="job_report.php">Job Report</a></li><?
+									}
+								}
+
+								// Task Report Submenu (Check access by passing $_SESSION of staff code and form code)
+								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],76,1);
+								if(is_array($access_submenu_level)==1) {
+									if(in_array("Y",$access_submenu_level)) {   
+										?><li><a href="task_report.php">Task Report</a></li><?
+									}
+								}
+
+								// Tickets Report Submenu (Check access by passing $_SESSION of staff code and form code)
+								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],77,1);
+								if(is_array($access_submenu_level)==1) {
+									if(in_array("Y",$access_submenu_level)) {   
+										?><li><a href="tickets_report.php">Tickets Report</a></li><?
 									}
 								}
 

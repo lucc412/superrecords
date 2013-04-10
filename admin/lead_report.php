@@ -37,6 +37,9 @@ if($_SESSION['validUser']) {
 		// set name of the main table for this report page
 		$reportPageTitle = 'Lead Report';
 
+		// set name of the main table for this report page
+		$reportPageLink = 'lead_report.php';
+
 		// to display report in output as per selected criterias
 		if((isset($_REQUEST['submit']) && $_REQUEST['submit'] == "Display")) {
 
@@ -133,11 +136,11 @@ if($_SESSION['validUser']) {
 			if(!$flagRepNameExist) {
 				$objCallUsers->saveReport($userId, $repName, $repFields, $repConditions, $repValues, $repOutputFields, $reportPageName);
 
-				header('Location: lead_report.php');
+				header('Location: '.$reportPageLink);
 				exit;
 			}
 			else {
-				header('Location: lead_report.php?flagDuplicate=Y');
+				header('Location: '.$reportPageLink.'?flagDuplicate=Y');
 				exit;
 			}
 		}
@@ -161,7 +164,7 @@ if($_SESSION['validUser']) {
 
 			$objCallUsers->updateSaveReport($reportId, $repName, $repFields, $repConditions, $repValues, $repOutputFields);
 
-			header('Location: lead_report.php');
+			header('Location: '.$reportPageLink);
 			exit;
 		}
 		// default case when page is loaded first time

@@ -99,8 +99,8 @@ function swap(type){
 }
 
 // This function is used to view selected report
-function selectedReportDisplay(reportId) {
-	window.location.href='lead_report.php?lstReport=' + reportId;
+function selectedReportDisplay(reportId, reportPageLink) {
+	window.location.href=reportPageLink+'?lstReport=' + reportId;
 }
 
 // This function is used to save report
@@ -123,13 +123,6 @@ function updateReport() {
 		eleLstReport.focus();
 		return false;
 	}
-}
-
-// This function is used to print pdf/excel report
-function printReport() {
-	url = 'lead_report.php?print=yes';
-	window.open(url, '_blank');
-  	window.focus();
 }
 
 // This function is used to submit for condition fields by ajax

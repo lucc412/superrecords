@@ -23,12 +23,12 @@
 
 		// display all columns in listbox here
 		if(!empty($_SESSION['ARRDISPFIELDS'])) {
-			?><form name="objForm" id="objForm" action="lead_report.php" method="post" onSubmit="return makeSelection();"><?
+			?><form name="objForm" id="objForm" action="<?=$reportPageLink?>" method="post" onSubmit="return makeSelection();"><?
 
 				// saved report drop-down
 				if(!empty($arrSavedReports)) {
 					?><span class="genlink" style="padding-right:20px;">Choose report:</span> 
-					<select name="lstReport" id="lstReport" onChange="javascript:selectedReportDisplay(this.value);">
+					<select name="lstReport" id="lstReport" onChange="javascript:selectedReportDisplay(this.value, '<?=$reportPageLink?>');">
 						<option value="0">--Please Select--</option><?
 						foreach ($arrSavedReports AS $reportId => $reportInfo) {
 							$selectStr = '';
@@ -115,7 +115,7 @@
 
 					if(!empty($arrReportData)) {
 						// generate button
-						?><span style="padding-left:20px;"><a href="lead_report.php?generate=generate"><img src="images/excel.png" /></a></span><?
+						?><span style="padding-left:20px;"><a href="<?=$reportPageLink?>?generate=generate"><img src="images/excel.png" /></a></span><?
 					}
 				?></div><?
                 

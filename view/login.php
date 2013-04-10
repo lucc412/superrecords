@@ -10,7 +10,7 @@
 	<body class="pagebackground"><?
 		
 		// page header
-		?><div align="center" style="margin-top:20px;padding-bottom:45px;"><a href="../index.php"><img src="../images_user/header-logo.png"></a></div>
+		?><div align="center" style="margin-top:20px;padding-bottom:45px;"><a href="http://<?=$_SERVER['SERVER_NAME']?>/index.php"><img src="../images_user/header-logo.png"></a></div>
 
 		<form name="objForm" id="objForm" method="post" action="home.php" onsubmit="javascript:return checkValidation();">
 			<div align="center"><?

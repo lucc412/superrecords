@@ -1,10 +1,4 @@
 <?
-/*	
-	Created By -> 09-Apr-13 [Disha Goyal]
-	Last Modified By -> 09-Apr-13 [Disha Goyal]	
-	Description: This page is used for 'Lead Report'	
-*/
-
 ob_start();
 include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
@@ -13,7 +7,7 @@ include 'dbclass/report_class.php';
 if($_SESSION['validUser']) {
 
 	//Get FormCode
-	$formcode = $commonUses->getFormCode("Lead Report");
+	$formcode = $commonUses->getFormCode("Client Report");
 	$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
 
 	//If View, Add, Edit, Delete all set to N
@@ -26,19 +20,19 @@ if($_SESSION['validUser']) {
 		$objCallUsers = new SR_Report();
 
 		// function call to fetch typex of each field 
-		$_SESSION['ARRFIELDTYPEX'] = $objCallUsers->fetch_field_details('lead','field_type');
+		$_SESSION['ARRFIELDTYPEX'] = $objCallUsers->fetch_field_details('client','field_type');
 
 		// function call to fetch title of each field 
-		$_SESSION['ARRDISPFIELDS'] = $objCallUsers->fetch_field_details('lead','field_title');
+		$_SESSION['ARRDISPFIELDS'] = $objCallUsers->fetch_field_details('client','field_title');
 
 		// set name of the main table for this report page
-		$reportPageName = 'lead';
-
+		$reportPageName = 'client';
+		
 		// set name of the main table for this report page
-		$reportPageTitle = 'Lead Report';
-
-		// set name of the main table for this report page
-		$reportPageLink = 'lead_report.php';
+		$reportPageTitle = 'Client Report';
+		
+		// set file path for this report path
+		$reportPagePath = 'client_report.php';
 
 		// to display report in output as per selected criterias
 		if((isset($_REQUEST['submit']) && $_REQUEST['submit'] == "Display")) {
@@ -48,7 +42,7 @@ if($_SESSION['validUser']) {
 
 			// form array of options for fields that are of DD type
 			foreach($arrSelected AS $selectedColumn) {
-				if($_SESSION['ARRFIELDTYPEX'][$selectedColumn] == 'DD') {
+				if($_SESSION['ARRFIELDTYPEX'][$selectedColumn] == 'DD' || $_SESSION['ARRFIELDTYPEX'][$selectedColumn] == 'CB') {
 
 					// include file to fetch options for drop-down
 					include(REPORTDDOPTIONS);
@@ -136,11 +130,11 @@ if($_SESSION['validUser']) {
 			if(!$flagRepNameExist) {
 				$objCallUsers->saveReport($userId, $repName, $repFields, $repConditions, $repValues, $repOutputFields, $reportPageName);
 
-				header('Location: '.$reportPageLink);
+				header('Location: client_report.php');
 				exit;
 			}
 			else {
-				header('Location: '.$reportPageLink.'?flagDuplicate=Y');
+				header('Location: client_report.php?flagDuplicate=Y');
 				exit;
 			}
 		}
@@ -164,7 +158,7 @@ if($_SESSION['validUser']) {
 
 			$objCallUsers->updateSaveReport($reportId, $repName, $repFields, $repConditions, $repValues, $repOutputFields);
 
-			header('Location: '.$reportPageLink);
+			header('Location: client_report.php');
 			exit;
 		}
 		// default case when page is loaded first time

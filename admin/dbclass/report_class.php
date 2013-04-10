@@ -37,8 +37,16 @@ class SR_Report {
 					if($_SESSION['staffcode'] != '112' && $_SESSION['staffcode'] != '114') {
 						$strWhere="AND tbl.sr_manager=".$_SESSION['staffcode'];
 					}
-						
 				break;
+				
+				// for client page report case
+				case "client":
+						$staffId = $_SESSION["staffcode"];
+						$strWhere = "AND (pr.sr_manager=".$staffId." 
+							OR pr.india_manager=".$staffId." 
+							OR pr.team_member=".$staffId ." 
+							OR pr.sales_person=".$staffId . ")";
+				break;	
 		
 			}
 		}
@@ -58,17 +66,20 @@ class SR_Report {
 		if(isset($_SESSION['OUTPUTDATA'])) unset($_SESSION['OUTPUTDATA']);
 		$_SESSION['OUTPUTDATA'] = $returnSet;
 
-		include(REPORTFETCH);
+		include(REPORTDISPLAY);
 
 		return $arrReturn;
 	}
 
 	// This will fetch possible options of fields DD control type
-	public function fetch_dd_options($tableName, $selField1, $selField2, $tableOrder) {
+	public function fetch_dd_options($tableName, $selField1, $selField2, $tableOrder=NULL) {
+		
+		if(!empty($tableOrder))
+			$strOrder = "ORDER BY tbl.{$tableOrder}";
 		
 		$qrySel = "SELECT tbl.{$selField1}, tbl.{$selField2}
 					FROM {$tableName} tbl
-					ORDER BY tbl.{$tableOrder}";
+					{$strOrder}";
 	
 		$fetchResult = mysql_query($qrySel);
 		$totRows = mysql_num_rows($fetchResult);

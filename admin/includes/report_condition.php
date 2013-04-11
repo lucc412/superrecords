@@ -11,7 +11,7 @@ $arrCondition = array();
 if($typex == 'TB' || $typex == 'TA') {
 	$arrCondition = array("Equal to","Not equal to","Starts with","Contains any part of word");
 }
-else if($typex == 'DD' || $typex == 'CB') {
+else if($typex == 'DD' || $typex == 'CB' || $typex == 'RF') {
 	$arrCondition = array("Equal to","Not equal to");
 }
 else if($typex == 'CL') {

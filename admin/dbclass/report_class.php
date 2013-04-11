@@ -27,7 +27,7 @@ class SR_Report {
 	}
   
   	// This will generate report function
-	public function view_entity_report($strColumns, $strCondition, $arrDDOptions, $reportPageName) {
+	public function view_entity_report($strColumns, $otherTable, $strCondition, $arrDDOptions, $reportPageName) {
 
 		if($_SESSION["usertype"]=="Staff") {
 			switch($reportPageName) {
@@ -51,10 +51,36 @@ class SR_Report {
 			}
 		}
 
+		// set where condition for the query [to fetch sr manager, india manager, team member]
+		if(!empty($otherTable)) {
+			switch($reportPageName) {
+				// for client page report case
+				case "client":
+						$strAnd = "	AND c.id = pr.id";
+				break;
+
+				// for job page report case
+				case "job":
+						$otherTable .= ", client c";
+						$strAnd = "	AND j.client_id = c.client_id
+									AND c.id = pr.id";
+				break;
+
+				// for task page report case
+				case "task":
+						$otherTable .= ",job j, client c";
+						$strAnd = "	AND tbl.job_id = j.job_id
+									AND j.client_id = c.client_id
+									AND c.id = pr.id";
+				break;
+			}
+		}
+
 		$qrySel = "SELECT {$strColumns}
-				   FROM {$reportPageName} tbl 
+				   FROM {$reportPageName} tbl {$otherTable}
 				   WHERE 1
 				   {$strWhere}
+				   {$strAnd}
 				   {$strCondition}
 				   ORDER BY tbl.id desc";
 			
@@ -110,6 +136,22 @@ class SR_Report {
 		}
 		
 		return $arrSrManager;	
+	} 
+
+	// This will fetch job names
+	public function fetchJobName() {
+	
+		$qrySel = "SELECT j.job_id, CONCAT_WS(' - ', c.client_name, j.period, m.mas_Description) jobName
+					 FROM job j, client c, mas_masteractivity m
+					 WHERE j.client_id = c.client_id
+					 AND j.mas_Code = m.mas_Code";
+		 
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrJobName[$rowData['job_id']] = $rowData['jobName'];
+		}
+		
+		return $arrJobName;	
 	} 
 
 	// This will fetch all saved reports

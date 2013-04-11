@@ -9,14 +9,15 @@ if(!empty($returnSet)) {
 	$tableCount = 0;
 	foreach($returnSet as $key => $arrInfo) {
 		foreach($arrInfo as $fieldName => $fieldValue) {
+			$fieldTypex = $_SESSION['ARRFIELDTYPEX'][$fieldName];
 			
 			// for drop-down control type
-			if($_SESSION['ARRFIELDTYPEX'][$fieldName] == 'DD') {
+			if($fieldTypex == 'DD' || $fieldTypex == 'RF') {
 				$arrReturn[$key][$fieldName] = $arrDDOptions[$fieldName][$fieldValue];
 			}
 			
 			// for drop-down control type
-			else if($_SESSION['ARRFIELDTYPEX'][$fieldName] == 'CB') {
+			else if($fieldTypex == 'CB') {
 				$arrCBId = explode(",",$fieldValue);
 				
 				$strCBData = '';
@@ -28,7 +29,7 @@ if(!empty($returnSet)) {
 			}
 			
 			// for calendar control type
-			else if($_SESSION['ARRFIELDTYPEX'][$fieldName] == 'CL') {
+			else if($fieldTypex == 'CL') {
 				$dateField = "";
 				if (isset($fieldValue) && $fieldValue != "") {
 					if($fieldValue != "0000-00-00 00:00:00") {
@@ -38,7 +39,7 @@ if(!empty($returnSet)) {
 				$arrReturn[$key][$fieldName] = $dateField;
 			}
 			// for text area control type
-			else if($_SESSION['ARRFIELDTYPEX'][$fieldName] == 'TA') {
+			else if($fieldTypex == 'TA') {
 				$arrReturn[$key][$fieldName] = nl2br($fieldValue);
 			}
 			else {

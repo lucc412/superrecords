@@ -11,7 +11,7 @@ $arrCondition = array();
 if($typex == 'TB' || $typex == 'TA') {   
 	$valueStr .= 'Value<input type="text" name="conditionValue' . $key . '" id="conditionValue' . $key . '" value="' . $_REQUEST['conditionValue'.$key] . '" />';
 }
-else if($typex == 'DD' || $typex == 'CB') {
+else if($typex == 'DD' || $typex == 'CB' || $typex == 'RF') {
 	$arrOptions = array();
 	$selectedColumn = $colName;
 

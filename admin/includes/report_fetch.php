@@ -60,7 +60,14 @@ $_SESSION['REPCRITERIA'] = $arrCondition;
 // form a string of selected columns to be displayed in report
 $strColumns = "";
 foreach($arrSelected AS $value) {
-	$strColumns .= 'tbl.' . $value . ",";
+	// if field typex is RF[Related Field] fetch data from 'pr_practice' table
+	if($_SESSION['ARRFIELDTYPEX'][$value] == 'RF') {
+		$otherTable = ', pr_practice pr';
+		$strColumns .= 'pr.' . $value . ",";
+	}
+	else {
+		$strColumns .= 'tbl.' . $value . ",";
+	}
 }
 $strColumns = rtrim($strColumns, ",");
 
@@ -74,37 +81,42 @@ if(!empty($arrCondition)) {
 		$fromDate = $arrInfo['fromDate'];
 		$toDate = $arrInfo['toDate'];
 
+		$tableAlias = "tbl.";
+		if($_SESSION['ARRFIELDTYPEX'][$fieldName] == 'RF') {
+			$tableAlias = "pr.";
+		}
+
 		$strCondition .= ' AND ';
 		if($condition == 'Equal to' || $condition == 'On') {
-			$strCondition .= "{$fieldName} = '{$conditionValue}' ";
+			$strCondition .= "{$tableAlias}{$fieldName} = '{$conditionValue}' ";
 		}
 		elseif($condition == 'Not equal to') {
-			$strCondition .= "{$fieldName} <> '{$conditionValue}' ";
+			$strCondition .= "{$tableAlias}{$fieldName} <> '{$conditionValue}' ";
 		}
 		elseif($condition == 'Starts with') {
-			$strCondition .= "{$fieldName} LIKE '{$conditionValue}%' ";
+			$strCondition .= "{$tableAlias}{$fieldName} LIKE '{$conditionValue}%' ";
 		}
 		elseif($condition == 'Contains any part of word') {
-			$strCondition .= "{$fieldName} LIKE '%{$conditionValue}%' ";
+			$strCondition .= "{$tableAlias}{$fieldName} LIKE '%{$conditionValue}%' ";
 		}
 		elseif($condition == 'Before') {
-			$strCondition .= "{$fieldName} < '{$conditionValue}' ";
+			$strCondition .= "{$tableAlias}{$fieldName} < '{$conditionValue}' ";
 		} 
 		elseif($condition == 'After') {
-			$strCondition .= "{$fieldName} > '{$conditionValue}' ";
+			$strCondition .= "{$tableAlias}{$fieldName} > '{$conditionValue}' ";
 		}
 		elseif($condition == 'On or Before') {
-			$strCondition .= "{$fieldName} <= '{$conditionValue}' ";
+			$strCondition .= "{$tableAlias}{$fieldName} <= '{$conditionValue}' ";
 		}
 		elseif($condition == 'On or After') {
-			$strCondition .= "{$fieldName} >= '{$conditionValue}' ";
+			$strCondition .= "{$tableAlias}{$fieldName} >= '{$conditionValue}' ";
 		}
 		elseif($condition == 'In Between') {
-			$strCondition .= "{$fieldName} BETWEEN '{$fromDate}' AND  '{$toDate}' "; 
+			$strCondition .= "{$tableAlias}{$fieldName} BETWEEN '{$fromDate}' AND  '{$toDate}' "; 
 		}
 	}
 }
 
 // function call to display all users with their entity fields selected for pdf
-$arrReportData = $objCallUsers->view_entity_report($strColumns, $strCondition, $arrDDOptions, $reportPageName);
+$arrReportData = $objCallUsers->view_entity_report($strColumns, $otherTable, $strCondition, $arrDDOptions, $reportPageName);
 ?>

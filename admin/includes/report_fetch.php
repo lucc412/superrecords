@@ -32,8 +32,14 @@ for ($key=0; $key<5; $key++) {
 	$arrCondition[$key]['typex'] = $_REQUEST['lstTypex' . $key];
 	$arrCondition[$key]['condition'] = $_REQUEST['lstCondition' . $key];
 
-	if(!empty($_REQUEST['conditionValue' . $key])) {
-		$arrCondition[$key]['conditionValue'] = $_REQUEST['conditionValue' . $key];
+		if(!empty($_REQUEST['conditionValue' . $key])) {
+		
+		if(is_array($_REQUEST['conditionValue' . $key]))
+			$arrCondition[$key]['conditionValue'] = implode(",",$_REQUEST['conditionValue' . $key]);
+		else
+			$arrCondition[$key]['conditionValue'] = $_REQUEST['conditionValue' . $key];
+	
+
 		if($_SESSION['ARRFIELDTYPEX'][$_REQUEST['lstTypex' . $key]] == 'CL') {
 			$originalDate = $_REQUEST['conditionValue' . $key];
 			$newDate = $commonUses->getDateFormat($originalDate);
@@ -75,10 +81,28 @@ if(!empty($arrCondition)) {
 		$toDate = $arrInfo['toDate'];
 
 		$strCondition .= ' AND ';
-		if($condition == 'Equal to' || $condition == 'On') {
-			$strCondition .= "{$fieldName} = '{$conditionValue}' ";
+		if($condition == 'Equal to' || $condition == 'On')
+		{
+			if($_SESSION['ARRFIELDTYPEX'][$fieldName] == 'CB')
+			{
+				if(strpos($conditionValue, ","))
+				{
+					$arrConditionValue = explode(",",$conditionValue);
+					
+					$strCondition .= '(';
+					for($i=0; $i<count($arrConditionValue); $i++)
+						$strCondition .= $fieldName.'='.$arrConditionValue[$i]." OR ";
+						
+					$strCondition = rtrim($strCondition," OR ");	
+					$strCondition .= ')';
+				}
+				else
+					$strCondition .= "{$fieldName} = {$conditionValue} ";
+			}
+			else
+				$strCondition .= "{$fieldName} = '{$conditionValue}' ";
 		}
-		elseif($condition == 'Not equal to') {
+		elseif($condition == 'Not equal to'){
 			$strCondition .= "{$fieldName} <> '{$conditionValue}' ";
 		}
 		elseif($condition == 'Starts with') {

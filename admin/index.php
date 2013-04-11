@@ -10,8 +10,8 @@ function loginUser($username,$password)
   $sql = "SELECT a. * , b.aty_Description FROM stf_staff a LEFT JOIN aty_accesstype AS b ON b.aty_Code = a.stf_AccessType WHERE a.stf_Login='".$username."' and a.stf_Password='".$password."'";
   $stat = mysql_query($sql) or die(mysql_error());
   $res= mysql_num_rows($stat);
-  //$myip = $_SERVER['REMOTE_ADDR'];
-    $myip = '182.72.96.238';
+    $myip = $_SERVER['REMOTE_ADDR'];
+    //$myip = '182.72.96.238';
    $sql1="SELECT stf_From_ip FROM stf_ipaddress WHERE stf_From_ip=INET_ATON('$myip')";
    $res1 =mysql_query($sql1);
     $ipaddress = @mysql_num_rows($res1);

@@ -43,6 +43,10 @@
 			</td>
 		</tr>
 		<tr>
+			<td class="hr">Sales Person</td>
+			<td class="dr" id="tdSalesPrson">&nbsp;</td>
+		</tr>
+		<tr>
 			<td class="hr">Client Name<font style="color:red;" size="2">*</font></td>
 			<td class="dr">
 				<input type="text" name="cliName" maxlength="50" value="">
@@ -51,7 +55,7 @@
 		</tr>
 		<tr>
 			<td class="hr">Entity Type<font style="color:red;" size="2">*</font></td>
-			<td><select name="lstType">
+			<td class="dr"><select name="lstType">
 					<option value="">Select Entity Type</option><?php
 					foreach($objCallData->arrTypes AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
@@ -81,10 +85,6 @@
 					?><input class="checkboxClass" type="checkbox" name="step:<?=$stepId?>" id="<?=$stepName?>" /><label for="<?=$stepName?>"><?=$stepName?></label><br/><?
 				}
 			?></td>
-		</tr>
-		<tr>
-			<td class="hr">Sales Person</td>
-			<td class="dr" id="tdSalesPrson"></td>
 		</tr>
 		<tr>
 			<td><button type="button" value="Cancel" onClick='return ComfirmCancel();' class="cancelbutton">Cancel</button></td>

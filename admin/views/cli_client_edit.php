@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td class="hr">Practice<font style="color:red;" size="2">*</font></td>
-			<td><select name="lstPractice" id="lstPractice" onchange="javascript:selectPanel('LoadPanel');">
+			<td class="dr"><select name="lstPractice" id="lstPractice" onchange="javascript:selectPanel('LoadPanel');">
 					<option value="">Select Practice</option><?php
 					foreach($objCallData->arrPractice AS $practiceId => $typeDesc){
 						$selectStr = '';
@@ -40,7 +40,7 @@
 		</tr>
 		<tr>
 			<td class="hr">Team Member</td>
-			<td><select name="lstTeamMember">
+			<td class="dr"><select name="lstTeamMember">
 					<option value="">Select Team Member</option><?php
 					foreach($objCallData->arrTeamMember AS $staffId => $staffName){
 						$selectStr = '';
@@ -52,6 +52,10 @@
 			</td>
 		</tr>
 		<tr>
+			<td class="hr">Sales Person</td>
+			<td class="dr" id="tdSalesPrson"><?=$arrEmployees[$arrClientData['sales_person']]?></td>
+		</tr>
+		<tr>
 			<td class="hr">Client Name<font style="color:red;" size="2">*</font></td>
 			<td class="dr">
 				<input type="text" name="cliName" maxlength="50" value="<?=$arrClientData['client_name']?>">
@@ -60,7 +64,7 @@
 		</tr>
 		<tr>
 			<td class="hr">Entity Type<font style="color:red;" size="2">*</font></td>
-			<td><select name="lstType">
+			<td class="dr"><select name="lstType">
 					<option value="">Select Entity Type</option><?php
 					foreach($objCallData->arrTypes AS $typeId => $typeDesc){
 						$strSelected = '';
@@ -101,10 +105,6 @@
 					?><input class="checkboxClass" <?=$checkedStr?> type="checkbox" name="step:<?=$stepId?>" id="<?=$stepName?>" /><label for="<?=$stepName?>"><?=$stepName?></label><br/><?
 				}
 			?></td>
-		</tr>
-		<tr>
-			<td class="hr">Sales Person</td>
-			<td class="dr" id="tdSalesPrson"><?=$arrEmployees[$arrClientData['sales_person']]?></td>
 		</tr>
 		<tr>
 			<td><button type="button" value="Cancel" onClick='return ComfirmCancel();' class="cancelbutton">Cancel</button></td>

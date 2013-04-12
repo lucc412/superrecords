@@ -13,7 +13,7 @@
 		</tr>
 		<tr>
 			<td class="hr">Type<font style="color:red;" size="2">*</font></td>
-			<td><select name="lstType">
+			<td class="dr"><select name="lstType">
 					<option value="">Select Type</option><?php
 					foreach($objCallData->arrTypes AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
@@ -31,7 +31,7 @@
 		</tr>
 		<tr>
 			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
-			<td><select name="lstSrManager">
+			<td class="dr"><select name="lstSrManager">
 					<option value="">Select SR Manager</option><?php
 					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
@@ -42,13 +42,25 @@
 		</tr>
 		<tr>
 			<td class="hr">India Manager</td>
-			<td><select name="lstManager">
+			<td class="dr"><select name="lstManager">
 					<option value="">Select India Manager</option><?php
 					foreach($objCallData->arrInManager AS $typeId => $typeDesc){
 						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
 					} 
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select india manager for Practice.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Sales Person<font style="color:red;" size="2">*</font></td>
+			<td class="dr">
+				<select name="lstSalesPerson">
+					<option value="">Select Sales Person</option><?
+					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
+						?><option value="<?=$stfCode?>"><?=$stfName?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>
 			</td>
 		</tr>
 		<tr>
@@ -159,18 +171,6 @@
 					?><input type="checkbox" class="checkboxClass" name="item:<?=$itemId?>" id="<?=$itemName?>" /><label for="<?=$itemName?>"><?=$itemName?></label><br/><?
 				}
 			?></td>
-		</tr>
-		<tr>
-			<td class="hr">Sales Person<font style="color:red;" size="2">*</font></td>
-			<td class="dr">
-				<select name="lstSalesPerson">
-					<option value="">Select Sales Person</option><?
-					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
-						?><option value="<?=$stfCode?>"><?=$stfName?></option><?
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>
-			</td>
 		</tr>
 	<tr>
 		<td>

@@ -77,7 +77,7 @@ if($_SESSION['validUser']) {
 						$cc = $arrEmailInfo['event_cc'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
-						$content =replaceContent($content, NULL, NULL, NULL, $jobId);
+						$content = replaceContent($content, NULL, NULL, NULL, $jobId);
 						
 						include_once(MAIL);
 						send_mail($to, $cc, $subject, $content);

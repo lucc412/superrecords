@@ -19,6 +19,11 @@ function validateFormOnSubmit() {
 		return false;
 	}
 	
+	else if (document.managepractice.lstSalesPerson.value == "") {
+		alert("Select Sales Person");
+		document.managepractice.lstSalesPerson.focus();
+		return false;
+	}
 	
 	else if (document.managepractice.lstState.value == "") {
 		alert("Select State");
@@ -31,8 +36,6 @@ function validateFormOnSubmit() {
 		document.managepractice.mainContactName.focus();
 		return false;
 	}
-	
-	
 	
 	else if (document.managepractice.email.value == "") {
 		alert("Enter Email (User Name)");
@@ -50,12 +53,6 @@ function validateFormOnSubmit() {
 		alert("Enter Date Signed Up");
 		document.managepractice.dateSignedUp.focus();
 		return  false;
-	}
-	
-	else if (document.managepractice.lstSalesPerson.value == "") {
-		alert("Select Sales Person");
-		document.managepractice.lstSalesPerson.focus();
-		return false;
 	}
 	
 	else

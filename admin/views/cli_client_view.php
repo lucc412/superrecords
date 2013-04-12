@@ -24,6 +24,10 @@
 		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["team_member"]])?></td>
 	</tr>
 	<tr>
+		<td class="hr">Sales Person</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sales_person"]])?></td>
+	</tr>
+	<tr>
 		<td class="hr">Client Name</td>
 		<td class="dr"><?=htmlspecialchars($arrClientData["client_name"])?></td>
 	</tr>
@@ -53,10 +57,6 @@
 		}
 		$strSteps = implode(',', $arrSteps);
 		?><td class="dr"><?=$strSteps?></td>
-	</tr>
-	<tr>
-		<td class="hr">Sales Person</td>
-		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sales_person"]])?></td>
 	</tr>
 </table>
 

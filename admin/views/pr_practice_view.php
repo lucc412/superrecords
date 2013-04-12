@@ -24,6 +24,10 @@
 		<td class="dr"><?=htmlspecialchars($objCallData->arrInManager[$arrPracticeData["india_manager"]])?></td>
 	</tr>
 	<tr>
+		<td class="hr">Sales Person</td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrSalesPerson[$arrPracticeData["sales_person"]])?></td>
+	</tr>
+	<tr>
 		<td class="hr">Street Address</td>
 		<td class="dr"><?=htmlspecialchars($arrPracticeData["street_adress"])?></td>
 	</tr>
@@ -98,10 +102,6 @@
 		}
 		$strSentItems = implode(',', $arrSentItems);
 		?><td class="dr"><?=$strSentItems?></td>
-	</tr>
-	<tr>
-		<td class="hr">Sales Person</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrSalesPerson[$arrPracticeData["sales_person"]])?></td>
 	</tr>
 </table>
 

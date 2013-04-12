@@ -31,7 +31,7 @@
 		</tr>
 		<tr>
 			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
-			<td><select name="lstSrManager">
+			<td class="dr"><select name="lstSrManager">
 					<option value="">Select SR Manager</option><?php
 					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
 						$selectStr = '';
@@ -44,7 +44,7 @@
 		</tr>
 		<tr>
 			<td class="hr">India Manager</td>
-			<td><select name="lstManager">
+			<td class="dr"><select name="lstManager">
 					<option value="">Select India Manager</option><?php
 					foreach($objCallData->arrInManager AS $typeId => $typeDesc){
 						$selectStr = '';
@@ -53,6 +53,20 @@
 					} 
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select india manager for Practice.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Sales Person<font style="color:red;" size="2">*</font></td>
+			<td class="dr">
+				<select name="lstSalesPerson">
+					<option value="">Select Sales Person</option><?php
+					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
+						$selectStr = '';
+						if($stfCode == $arrPracticeData['sales_person']) $selectStr = 'selected';
+						?><option <?=$selectStr?> value="<?=$stfCode?>"><?=$stfName?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>
 			</td>
 		</tr>
 		<tr>
@@ -176,20 +190,6 @@
 					?><input <?=$checkedStr?> type="checkbox" class="checkboxClass" name="item:<?=$itemId?>" id="<?=$itemName?>" /><label for="<?=$itemName?>"><?=$itemName?></label><br/><?
 				}
 			?></td>
-		</tr>
-		<tr>
-			<td class="hr">Sales Person<font style="color:red;" size="2">*</font></td>
-			<td class="dr">
-				<select name="lstSalesPerson">
-					<option value="">Select Sales Person</option><?php
-					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
-						$selectStr = '';
-						if($stfCode == $arrPracticeData['sales_person']) $selectStr = 'selected';
-						?><option <?=$selectStr?> value="<?=$stfCode?>"><?=$stfName?></option><?
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>
-			</td>
 		</tr>
 		
 		<tr>

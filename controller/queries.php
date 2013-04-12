@@ -9,7 +9,6 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 		$objScr->sql_update($_REQUEST["queryId"]);
 	
 		$sentTime = $objScr->fetchSentTime();
-		//$currentTime = date('Y-m-d h:m:s');
 		$currentTime = date('Y-m-d H:i:s');
 		$lastSentMin = $objScr->timeDiff($sentTime,$currentTime);
 	

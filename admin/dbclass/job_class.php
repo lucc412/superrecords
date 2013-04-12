@@ -374,8 +374,20 @@ class Job_Class extends Database
 		
 		$qrySel = "UPDATE queries 
 					SET query='{$strQuery}', 
-						status='{$strStatus}' 
+						status='{$strStatus}'
 					WHERE query_id=".$queryId;
+		
+		mysql_query($qrySel);
+	}
+	
+	// Update flag Post Querries
+	public function update_query_post($flagPost,$queryId)
+	{
+		$qrySel = "UPDATE queries 
+					SET flag_post='{$flagPost}' 
+					WHERE query_id=".$queryId;
+		
+					
 		mysql_query($qrySel);
 	}
 	

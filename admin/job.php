@@ -12,8 +12,13 @@ include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/job_class.php';
 
+
+
 // create class object for class function access
 $objCallData = new Job_Class();
+
+//print_r($_REQUEST);
+//exit;
 
 if($_SESSION['validUser']) {
 
@@ -220,9 +225,38 @@ if($_SESSION['validUser']) {
 					break;
 
 				case "updateQuery":
+					
+					$qryPost = $_REQUEST["qryPost"];
 					$queryId = $_REQUEST["queryId"];
-					$objCallData->update_query($queryId);
+					$flagPost = $_REQUEST["flagPost"];
+					
+					if((isset($qryPost)) && $qryPost != '')
+					{
+						if($qryPost == 'Y')
+							$qryPost = 'N';
+						else
+							$qryPost = 'Y';
+													
+						$objCallData->update_query_post($qryPost,$queryId);	
+					}
+					else if($qryPost == '')
+					{
+						$objCallData->update_query($queryId);
+					} 
+						
+					
 					header('Location: job.php?a=queries&jobId='.$_REQUEST["jobId"]);
+					
+					break;
+					
+				case "updateQueryPost":
+					print 'updateQueryPost------';
+					exit;
+					$queryId = $_POST["queryId"];
+					$flagPost = $_POST["flagPost"];
+					
+					$objCallData->update_query_post($flagPost,$queryId);
+					header('Location: job.php?a=queries&jobId='.$_POST["jobId"]);
 					
 					break;
 

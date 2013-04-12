@@ -106,7 +106,10 @@ switch ($a)
 					<td class="hr">Team Member</td>
 					<td class="dr" id="tdTeamMember">&nbsp;</td>
 				</tr>
-			
+				<tr>
+					<td class="hr">Sales Person</td>
+					<td class="dr" id="tdSalesPrson">&nbsp;</td>
+				</tr>
 				<tr>
 				   <td class="hr">Client Type<font style="color:red;" size="2">*</font></td>
 					   
@@ -173,15 +176,15 @@ switch ($a)
 	// **********************************************************
 	// Case to load Job details tab of selected Job, begins here.	
 	case "editJob":
+				
+			$client_id = $objCallData->arrJob[$_REQUEST["jobId"]]["client_id"];
 			
 			$strPanelInfo = $objCallData->sql_select_panel($arrJob[$_REQUEST['jobId']]['id']);
 			$arrPanelInfo = explode('~', $strPanelInfo);
 			$srManager = $arrPanelInfo[0];
 			$salePerson = $arrPanelInfo[1];
 			$indManager = $arrPanelInfo[2];
-			$teamMember = $arrPanelInfo[3];
-				
-			$client_id = $objCallData->arrJob[$_REQUEST["jobId"]]["client_id"];
+			$teamMember = $objCallData->fetch_team_member($client_id);
 			
 			if(!empty($arrJob[$_REQUEST["jobId"]]["job_received"]))
 				$rec_date = date('d/m/Y', strtotime($arrJob[$_REQUEST["jobId"]]["job_received"]));
@@ -260,6 +263,10 @@ switch ($a)
 				<tr>
 					<td class="hr">Team Member</td>
 					<td class="dr" id="tdTeamMember"><?=$teamMember?></td>
+				</tr>
+				<tr>
+					<td class="hr">Sales Person</td>
+					<td class="dr" id="tdSalesPrson"><?=$salePerson?></td>
 				</tr>
 				
 				<tr>

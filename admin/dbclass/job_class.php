@@ -115,7 +115,8 @@ class Job_Class extends Database
 			$strWhere = " AND p1.id = c1.id
 						  AND (p1.sr_manager=".$userId." 
 						  OR p1.india_manager=".$userId." 
-						  OR p1.team_member=".$userId.")";
+						  OR p1.sales_person=".$userId." 
+						  OR cl.team_member=".$userId.")";
 		}
 					
 		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id,			            j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes 
@@ -193,7 +194,7 @@ class Job_Class extends Database
 	// fetch sr manager, india manager, sales manager, team member for selected practice
 	function sql_select_panel($itemId)
 	{
-		$sql = "SELECT id, sr_manager, team_member, india_manager, sales_person
+		$sql = "SELECT id, sr_manager, india_manager, sales_person
 				FROM pr_practice
 				WHERE id=".$itemId;
 				
@@ -209,12 +210,31 @@ class Job_Class extends Database
 			$srManager = $arrEmployees[$rowData['sr_manager']];
 			$salesPrson = $arrEmployees[$rowData['sales_person']];
 			$inManager = $arrEmployees[$rowData['india_manager']];
-			$teamMember = $arrEmployees[$rowData['team_member']];
 
-			// set string of srManager, salesPrson, inManager, teamMember
-			$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember;
+			// set string of srManager, salesPrson, inManager
+			$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager;
 		}
 		return $strReturn;
+	}
+
+	// fetch team member for selected client
+	function fetch_team_member($clientId) {
+		$sql = "SELECT team_member
+				FROM client
+				WHERE client_id=".$clientId;
+				
+		$res = mysql_query($sql) or die(mysql_error());
+		$count = mysql_num_rows($res);
+
+		if(!empty($count))
+		{
+			// fetch array of name of all employees
+			$arrEmployees = $this->fetchEmployees();
+
+			$rowData = mysql_fetch_assoc($res);
+			$teamMember = $arrEmployees[$rowData['team_member']];
+		}
+		return $teamMember;
 	}
 
 	function fetchEmployees() {	

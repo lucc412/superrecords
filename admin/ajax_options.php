@@ -29,6 +29,10 @@ switch($doAction) {
 	case 'LoadPanel':
 			$returnStr = sql_select_panel($itemId);
 			break;
+
+	case 'LoadTeamMember':
+			$returnStr = fetch_team_member($itemId);
+			break;
 }
 
 // fetch Clients
@@ -60,7 +64,8 @@ function sql_select_job($itemId)
 	// fetch Job's details for selected Client
 	$sql = "SELECT job_id, job_name, period
 			FROM job  
-			WHERE client_id=".$itemId." AND discontinue_date IS NULL 
+			WHERE client_id=".$itemId." 
+			AND discontinue_date IS NULL 
 			ORDER BY job_name";
 	$res = mysql_query($sql) or die(mysql_error());
 	$count = mysql_num_rows($res);
@@ -101,6 +106,7 @@ function sql_select_job($itemId)
 
 		$strReturn = rtrim($strReturn, '+');
 	}
+	print($strReturn);
 	return $strReturn;
 }
 
@@ -130,7 +136,7 @@ function sql_select_subActivity($itemId)
 // fetch sr manager, india manager, sales manager, team member for selected practice
 function sql_select_panel($itemId)
 {
-	$sql = "SELECT id, sr_manager, team_member, india_manager, sales_person
+	$sql = "SELECT id, sr_manager, india_manager, sales_person
 			FROM pr_practice
 			WHERE id=".$itemId;
 			
@@ -146,12 +152,31 @@ function sql_select_panel($itemId)
 		$srManager = $arrEmployees[$rowData['sr_manager']];
 		$salesPrson = $arrEmployees[$rowData['sales_person']];
 		$inManager = $arrEmployees[$rowData['india_manager']];
-		$teamMember = $arrEmployees[$rowData['team_member']];
 
 		// set string of srManager, salesPrson, inManager, teamMember
 		$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember;
 	}
 	return $strReturn;
+}
+
+// fetch team member for selected client
+function fetch_team_member($clientId) {
+	$sql = "SELECT team_member
+			FROM client
+			WHERE client_id=".$clientId;
+			
+	$res = mysql_query($sql) or die(mysql_error());
+	$count = mysql_num_rows($res);
+
+	if(!empty($count))
+	{
+		// fetch array of name of all employees
+		$arrEmployees = fetchEmployees();
+
+		$rowData = mysql_fetch_assoc($res);
+		$teamMember = $arrEmployees[$rowData['team_member']];
+	}
+	return $teamMember;
 }
 
 function fetchEmployees() {	

@@ -6,7 +6,6 @@ class Practice_Class extends Database {
 		$this->arrSrManager = $this->fetchEmployees('srmanager');
 		$this->arrSalesPerson = $this->fetchEmployees('salesmanager');
 		$this->arrInManager = $this->fetchEmployees('indiamanager');
-		$this->arrTeamMember = $this->fetchEmployees('teammember');
 		$this->arrServices = $this->fetchServices();
 		$this->arrItemList = $this->fetchItemList();
 		$this->arrStates = $this->fetchStates();
@@ -38,10 +37,6 @@ class Practice_Class extends Database {
 		// if employees are fetched that are Sales Manager
 		else if($flagManager == 'indiamanager') { 
 			$appendStr = 'AND c1.con_Designation = 28';
-		}
-		// if employees are fetched that are Sales Manager
-		else if($flagManager == 'teammember') { 
-			$appendStr = 'AND c1.con_Designation = 29';
 		}
 
 		$qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
@@ -103,7 +98,6 @@ class Practice_Class extends Database {
 		if($_SESSION['usertype'] == 'Staff')
 			$appendStr = "WHERE ( t1.sr_manager = {$_SESSION['staffcode']} 
 						OR t1.india_manager = {$_SESSION['staffcode']}
-						OR t1.team_member = {$_SESSION['staffcode']}
 						OR t1.sales_person = {$_SESSION['staffcode']})";
 
 		$qrySel = "SELECT t1.* 
@@ -142,13 +136,12 @@ class Practice_Class extends Database {
 
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
-		$qryIns = "INSERT INTO pr_practice(type, name, sr_manager, india_manager, team_member, street_adress, suburb, state, postcode, postal_address, main_contact_name, other_contact_name, phone_no, alternate_no, fax, email, password, date_signed_up, agreed_services, sent_items, sales_person)
+		$qryIns = "INSERT INTO pr_practice(type, name, sr_manager, india_manager, street_adress, suburb, state, postcode, postal_address, main_contact_name, other_contact_name, phone_no, alternate_no, fax, email, password, date_signed_up, agreed_services, sent_items, sales_person)
 					VALUES (
 					'" . $_REQUEST['lstType'] . "', 
 					'" . $_REQUEST['refName'] . "', 
 					'" . $_REQUEST['lstSrManager'] . "', 
 					'" . $_REQUEST['lstManager'] . "', 
-					'" . $_REQUEST['lstMember'] . "', 
 					'" . $_REQUEST['street_Address'] . "', 
 					'" . $_REQUEST['suburb'] . "', 
 					'" . $_REQUEST['lstState'] . "', 
@@ -202,7 +195,6 @@ class Practice_Class extends Database {
 				name = '" . $_REQUEST['refName'] . "',
 				sr_manager = '" . $_REQUEST['lstSrManager'] . "',
 				india_manager = '" . $_REQUEST['lstManager'] . "',
-				team_member = '" . $_REQUEST['lstMember'] . "',
 				street_adress = '" . $_REQUEST['street_Address'] . "',
 				suburb = '" . $_REQUEST['suburb'] . "',
 				state = '" . $_REQUEST['lstState'] . "',

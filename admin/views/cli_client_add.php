@@ -33,7 +33,14 @@
 		</tr>
 		<tr>
 			<td class="hr">Team Member</td>
-			<td class="dr" id="tdTeamMember">&nbsp;</td>
+			<td class="dr"><select name="lstTeamMember">
+					<option value="">Select Team Member</option><?php
+					foreach($objCallData->arrTeamMember AS $staffId => $staffName){
+						?><option value="<?=$staffId?>"><?=$staffName?></option><?php 
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select team member of client.</span></a>
+			</td>
 		</tr>
 		<tr>
 			<td class="hr">Client Name<font style="color:red;" size="2">*</font></td>

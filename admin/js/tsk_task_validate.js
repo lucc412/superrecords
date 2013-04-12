@@ -163,7 +163,7 @@ function selectOptions(listName)
 		
 		if(listName == 'Client')
 		{
-			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\' onchange=\'javascript:selectOptions(\"Job\");\'><option>----------- Select Client -----------</option>";
+			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\' onchange=\'javascript:selectOptions(\"Job\");selectTeamMember();\'><option>----------- Select Client -----------</option>";
 		}
 		
 		if(listName == 'Job')

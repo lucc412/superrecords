@@ -56,19 +56,6 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Team Member</td>
-			<td><select name="lstMember">
-					<option value="">Select Team Member</option><?php
-					foreach($objCallData->arrTeamMember AS $typeId => $typeDesc){
-						$selectStr = '';
-						if($typeId == $arrPracticeData['team_member']) $selectStr = 'selected';
-						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select team member for Practice.</span></a>
-			</td>
-		</tr>
-		<tr>
 			<td class="hr">Street Address</td>
 			<td class="dr">
 				<input type="text" name="street_Address" value="<?=$arrPracticeData['street_adress']?>">

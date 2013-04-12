@@ -180,13 +180,13 @@ class Task_Class extends Database {
 		$strWhere = "";		
 		if($_SESSION["usertype"] == "Staff") {	
 			$userId = $_SESSION["staffcode"];
-			$strWhere .="AND (pr.sr_manager =".$userId." OR pr.india_manager =".$userId." OR pr.team_member =".$userId . ")";
+			$strWhere .="AND (pr.sr_manager =".$userId." OR pr.india_manager =".$userId." OR c.team_member =".$userId." OR pr.sales_person =".$userId . ")";
 		}
 	
 		if($jobId)
 			$strWhere .= "AND t.job_id={$jobId}";
 			
-		$qrySel = "SELECT t.*, pr.sr_manager, pr.india_manager, pr.team_member
+		$qrySel = "SELECT t.*, pr.sr_manager, pr.india_manager, pr.sales_person, c.team_member
 					FROM task t, job j, client c, pr_practice pr
 					WHERE t.discontinue_date IS NULL 
 					AND t.job_id = j.job_id
@@ -306,7 +306,7 @@ class Task_Class extends Database {
 	// fetch sr manager, india manager, sales manager, team member for selected practice
 	function sql_select_panel($itemId)
 	{
-		$sql = "SELECT id, sr_manager, team_member, india_manager, sales_person
+		$sql = "SELECT id, sr_manager, india_manager, sales_person
 				FROM pr_practice
 				WHERE id=".$itemId;
 				
@@ -322,12 +322,31 @@ class Task_Class extends Database {
 			$srManager = $arrEmployees[$rowData['sr_manager']];
 			$salesPrson = $arrEmployees[$rowData['sales_person']];
 			$inManager = $arrEmployees[$rowData['india_manager']];
-			$teamMember = $arrEmployees[$rowData['team_member']];
 
 			// set string of srManager, salesPrson, inManager, teamMember
-			$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember;
+			$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager;
 		}
 		return $strReturn;
+	}
+
+	// fetch team member for selected client
+	function fetch_team_member($clientId) {
+		$sql = "SELECT team_member
+				FROM client
+				WHERE client_id=".$clientId;
+				
+		$res = mysql_query($sql) or die(mysql_error());
+		$count = mysql_num_rows($res);
+
+		if(!empty($count))
+		{
+			// fetch array of name of all employees
+			$arrEmployees = $this->fetchEmployees();
+
+			$rowData = mysql_fetch_assoc($res);
+			$teamMember = $arrEmployees[$rowData['team_member']];
+		}
+		return $teamMember;
 	}
 }
 ?>

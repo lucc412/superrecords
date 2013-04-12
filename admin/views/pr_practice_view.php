@@ -9,7 +9,7 @@
 	</tr>
 	<tr>
 		<td class="hr">Type</td>
-		<td><?=htmlspecialchars($objCallData->arrTypes[$arrPracticeData["type"]])?></td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrTypes[$arrPracticeData["type"]])?></td>
 	</tr>
 	<tr>
 		<td class="hr">Practice Name</td>
@@ -22,10 +22,6 @@
 	<tr>
 		<td class="hr">India Manager</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrInManager[$arrPracticeData["india_manager"]])?></td>
-	</tr>
-	<tr>
-		<td class="hr">Team Member</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrTeamMember[$arrPracticeData["team_member"]])?></td>
 	</tr>
 	<tr>
 		<td class="hr">Street Address</td>

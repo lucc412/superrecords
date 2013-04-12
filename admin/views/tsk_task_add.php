@@ -121,6 +121,10 @@
 			<td class="hr">Team Member</td>
 			<td class="dr" id="tdTeamMember"><?=$teamMemberEmail?></td>
 		</tr>
+		<tr>
+			<td class="hr">Sales Person</td>
+			<td class="dr" id="tdSalesPrson"><?=$salesPersonEmail?></td>
+		</tr>
 
 		<tr>
 			<td class="hr">Task Status <font style="color:red;" size="2">*</font></td>

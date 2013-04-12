@@ -6,6 +6,7 @@ class Practice_Class extends Database
 		$this->arrTypes = $this->fetchType();
 		$this->arrStepsList = $this->fetchStepsList();
 		$this->arrPractice = $this->fetchPractice();
+		$this->arrTeamMember = $this->fetchTeamMember();
   	}	
 
 	public function fetchType() {		
@@ -47,6 +48,23 @@ class Practice_Class extends Database
 		return $arrItemList;	
 	} 
 
+	public function fetchTeamMember() {
+
+		$qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
+					FROM stf_staff t1, aty_accesstype t2, con_contact c1
+					WHERE t1.stf_AccessType = t2.aty_Code 
+					AND t1.stf_CCode = c1.con_Code 
+					AND t2.aty_Description like 'Staff'
+					AND c1.con_Designation = '29'
+					ORDER BY c1.con_Firstname";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrEmployees[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
+		}
+		return $arrEmployees;	
+	} 
+
 	public function fetchEmployees() {	
 
 		$qrySel = "SELECT ss.stf_Code, CONCAT_WS(' ', cc.con_Firstname, cc.con_Lastname) staffName 
@@ -66,11 +84,11 @@ class Practice_Class extends Database
 			$staffId = $_SESSION["staffcode"];
 			$strWhere = "AND (pr.sr_manager=".$staffId." 
 						OR pr.india_manager=".$staffId." 
-						OR pr.team_member=".$staffId ." 
+						OR cl.team_member=".$staffId ." 
 						OR pr.sales_person=".$staffId . ")";
 		}
 
-		$qrySel = "SELECT cl.*, pr.sr_manager, pr.india_manager, pr.team_member, pr.sales_person 
+		$qrySel = "SELECT cl.*, pr.sr_manager, pr.india_manager, cl.team_member, pr.sales_person 
 					FROM client cl, pr_practice pr
 					WHERE pr.id = cl.id
 					{$strWhere}
@@ -99,11 +117,12 @@ class Practice_Class extends Database
 
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
-		$qryIns = "INSERT INTO client(client_type_id, client_name, id, client_notes, client_received, steps_done)
+		$qryIns = "INSERT INTO client(client_type_id, client_name, id, team_member, client_notes, client_received, steps_done)
 					VALUES (
 					'" . $_REQUEST['lstType'] . "', 
 					'" . $_REQUEST['cliName'] . "',
 					'" . $_REQUEST['lstPractice'] . "',
+					'" . $_REQUEST['lstTeamMember'] . "',
 					'" . $_REQUEST['client_notes'] . "',
 					'" . $dateSignedUp . "',  
 					'" . $strSteps . "'
@@ -133,6 +152,7 @@ class Practice_Class extends Database
 				SET client_type_id = '" . $_REQUEST['lstType'] . "',
 				client_name = '" . $_REQUEST['cliName'] . "',
 				id = '" . $_REQUEST['lstPractice'] . "',
+				team_member = '" . $_REQUEST['lstTeamMember'] . "',
 				client_notes = '" . $_REQUEST['client_notes'] . "',
 				client_received = '" . $dateSignedUp . "',
 				steps_done = '" . $strSteps . "'

@@ -100,10 +100,10 @@ function fetchStaffInfo($staffId, $flagType) {
 }
 
 // fetch sr manager, india manager, sales manager, team member for selected practice
-function sql_select_panel($itemId) {
-	$sql = "SELECT id, sr_manager, team_member, india_manager, sales_person
+function sql_select_panel($practiceId) {
+	$sql = "SELECT sr_manager, india_manager, sales_person
 			FROM pr_practice
-			WHERE id=".$itemId;
+			WHERE id=".$practiceId;
 			
 	$res = mysql_query($sql) or die(mysql_error());
 	$count = mysql_num_rows($res);
@@ -117,12 +117,31 @@ function sql_select_panel($itemId) {
 		$srManager = $arrEmployees[$rowData['sr_manager']];
 		$salesPrson = $arrEmployees[$rowData['sales_person']];
 		$inManager = $arrEmployees[$rowData['india_manager']];
-		$teamMember = $arrEmployees[$rowData['team_member']];
 
 		// set string of srManager, salesPrson, inManager, teamMember
-		$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember;
+		$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager;
 	}
 	return $strReturn;
+}
+
+// fetch sr manager, india manager, sales manager, team member for selected practice
+function fetch_team_member($clientId) {
+	$sql = "SELECT team_member
+			FROM client
+			WHERE client_id=".$clientId;
+			
+	$res = mysql_query($sql) or die(mysql_error());
+	$count = mysql_num_rows($res);
+
+	if(!empty($count))
+	{
+		// fetch array of name of all employees
+		$arrEmployees = fetchEmployees();
+
+		$rowData = mysql_fetch_assoc($res);
+		$teamMember = $arrEmployees[$rowData['team_member']];
+	}
+	return $teamMember;
 }
 
 function fetchEmployees() {	

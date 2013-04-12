@@ -52,17 +52,6 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Team Member</td>
-			<td><select name="lstMember">
-					<option value="">Select Team Member</option><?php
-					foreach($objCallData->arrTeamMember AS $typeId => $typeDesc){
-						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select team member for Practice.</span></a>
-			</td>
-		</tr>
-		<tr>
 			<td class="hr">Street Address</td>
 			<td class="dr">
 				<input type="text" name="street_Address" value="">

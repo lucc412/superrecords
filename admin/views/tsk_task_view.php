@@ -67,6 +67,11 @@
 		<td class="hr">Team Manager</td>
 		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["team_member"]])?></td>
 	</tr>
+
+	<tr>
+		<td class="hr">Sales Person</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["sales_person"]])?></td>
+	</tr>
 	
 	<tr>
 		<td class="hr">Task Status</td>

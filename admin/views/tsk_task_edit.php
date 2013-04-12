@@ -152,7 +152,10 @@
 			<td class="hr">Team Member</td>
 			<td class="dr" id="tdTeamMember"><?=$arrEmployees[$arrTaskData['team_member']]?></td>
 		</tr>
-
+		<tr>
+			<td class="hr">Sales Person</td>
+			<td class="dr" id="tdSalesPrson"><?=$arrEmployees[$arrTaskData['sales_person']]?></td>
+		</tr>
 		<tr>
 			<td class="hr">Task Status <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstTaskStatus">

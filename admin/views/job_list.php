@@ -715,14 +715,15 @@ switch ($a)
 						
 					</td>
 					<td class=" blueBG" align="center">
-						<input type="hidden" name="flagPost" id="flagPost" value="<?=$arrInfo['flag_post']?>">
-					<?	
-					if($arrInfo["flag_post"] == 'N'){?>
-						<button id="qrPost" style="width:90px;" value="" title="click here to Post this qury to Practice" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Post</button>
-					<?}else{?>	
-						<button id="qrPost" style="width:90px;" value="" title="click here to Unpost this qury to Practice" javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Unpost</button>
-					<?}?>	
-					</td>	
+						<input type="hidden" name="flagPost" id="flagPost" value="<?=$arrInfo['flag_post']?>"><?
+						
+					if($arrInfo["flag_post"] == 'N'){
+						?><button id="qrPost" style="width:90px;" value="" title="click here to post this query to practice" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Post</button><?
+					}
+					else{	
+						?><button id="qrPost" style="width:90px;" value="" title="click here to unpost this query to practice" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Unpost</button><?
+					}
+					?></td>	
 					<td align="center"><?
 					  	  $jsFunc = "javascript:performdelete('job.php?sql=deleteQuery&jobId=".$_REQUEST["jobId"]."&queryId=".$queryId."');";
 						  ?><a onClick="<?=$jsFunc?>" href="javascript:;">

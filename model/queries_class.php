@@ -44,6 +44,42 @@ class Query {
 		return $arrClients;	
 	}
 
+	function timeDiff($firstTime,$lastTime)
+	{
+		// convert to unix timestamps
+		$firstTime=strtotime($firstTime);
+		$lastTime=strtotime($lastTime);
+
+		// perform subtraction to get the difference (in seconds) between times
+		$timeDiff=$lastTime-$firstTime;
+		$timeDiff = $timeDiff/60;
+		// return the difference
+		return $timeDiff;
+	}
+
+	public function fetchSentTime()
+	{		
+		$qrySel = "SELECT id, sent_time 
+					FROM pr_practice 
+					WHERE id = '{$_SESSION['PRACTICEID']}'";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult))
+			$arrSentTime[] = $rowData['sent_time'];
+
+		return $arrSentTime[0];	
+	}
+	
+	public function updateSentTime($crnt_time)
+	{
+		$query = "UPDATE pr_practice
+					SET sent_time = '".$crnt_time."' 
+					WHERE id = '{$_SESSION['PRACTICEID']}'";
+					
+		
+		mysql_query($query);			
+	}
+
 	public function fetch_jobs() {		
 
 		if(!empty($_REQUEST['lstCliType'])) {

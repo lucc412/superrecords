@@ -1,6 +1,7 @@
 <?php
 ini_set("display_errors", "0");
 session_start();
+date_default_timezone_set('Australia/Melbourne');
 // connect localhost connection
 $dbConn = mysql_connect("localhost","root","");
 if (!$dbConn) {

@@ -32,8 +32,14 @@ for ($key=0; $key<5; $key++) {
 	$arrCondition[$key]['typex'] = $_REQUEST['lstTypex' . $key];
 	$arrCondition[$key]['condition'] = $_REQUEST['lstCondition' . $key];
 
-	if(!empty($_REQUEST['conditionValue' . $key])) {
-		$arrCondition[$key]['conditionValue'] = $_REQUEST['conditionValue' . $key];
+		if(!empty($_REQUEST['conditionValue' . $key])) {
+		
+		if(is_array($_REQUEST['conditionValue' . $key]))
+			$arrCondition[$key]['conditionValue'] = implode(",",$_REQUEST['conditionValue' . $key]);
+		else
+			$arrCondition[$key]['conditionValue'] = $_REQUEST['conditionValue' . $key];
+	
+
 		if($_SESSION['ARRFIELDTYPEX'][$_REQUEST['lstTypex' . $key]] == 'CL') {
 			$originalDate = $_REQUEST['conditionValue' . $key];
 			$newDate = $commonUses->getDateFormat($originalDate);
@@ -87,11 +93,47 @@ if(!empty($arrCondition)) {
 		}
 
 		$strCondition .= ' AND ';
-		if($condition == 'Equal to' || $condition == 'On') {
-			$strCondition .= "{$tableAlias}{$fieldName} = '{$conditionValue}' ";
+		if($condition == 'Equal to' || $condition == 'On')
+		{
+			if($_SESSION['ARRFIELDTYPEX'][$fieldName] == 'CB')
+			{
+				if(strpos($conditionValue, ","))
+				{
+					$arrConditionValue = explode(",",$conditionValue);
+					
+					for($i=0; $i<count($arrConditionValue); $i++)
+					{
+						$strCondition .= "(SELECT FIND_IN_SET('".$arrConditionValue[$i]."',".$fieldName.")) AND ";
+					}
+						
+					$strCondition = rtrim($strCondition," AND ");	
+				}
+				else
+					$strCondition .= "(SELECT FIND_IN_SET('".$conditionValue."',".$fieldName.")) ";
+			}
+			else
+				$strCondition .= "{$fieldName} = '{$conditionValue}' ";
 		}
-		elseif($condition == 'Not equal to') {
-			$strCondition .= "{$tableAlias}{$fieldName} <> '{$conditionValue}' ";
+		elseif($condition == 'Not equal to')
+		{
+			if($_SESSION['ARRFIELDTYPEX'][$fieldName] == 'CB')
+			{
+				if(strpos($conditionValue, ","))
+				{
+					$arrConditionValue = explode(",",$conditionValue);
+					
+					for($i=0; $i<count($arrConditionValue); $i++)
+					{
+						$strCondition .= "(SELECT NOT FIND_IN_SET('".$arrConditionValue[$i]."',".$fieldName.")) AND ";
+					}
+						
+					$strCondition = rtrim($strCondition," AND ");	
+				}
+				else
+					$strCondition .= "(SELECT NOT FIND_IN_SET('".$conditionValue."',".$fieldName.")) ";
+			}
+			else
+				$strCondition .= "{$fieldName} <> '{$conditionValue}' ";
 		}
 		elseif($condition == 'Starts with') {
 			$strCondition .= "{$tableAlias}{$fieldName} LIKE '{$conditionValue}%' ";

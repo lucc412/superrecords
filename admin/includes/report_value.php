@@ -19,8 +19,19 @@ else if($typex == 'DD' || $typex == 'CB' || $typex == 'RF') {
 	include(REPORTDDOPTIONS);
 
 	$arrOptions = $arrDDOptions[$selectedColumn];
+	
+	$selectMultiple = '';
+	$selectMultipleHeight = '';
+	$selectName = '';
+	
+	if($typex == 'CB')
+	{
+		$selectMultiple = 'multiple="multiple"';
+		$selectMultipleHeight = ' style="height:36px; margin-bottom:-16px;"';
+		$selectName = '[]';
+	}
 
-	$valueStr .= 'Value<select name="conditionValue' . $key . '" id="conditionValue' . $key . '">';
+	$valueStr .= 'Value<select '.$selectMultiple.$selectMultipleHeight.' name="conditionValue' . $key .$selectName. '" id="conditionValue' . $key . '">';
 	foreach ($arrOptions AS $intKey => $strOption) {
 		$strSelected = "";
 		if($_REQUEST['conditionValue'.$key] == $intKey) $strSelected = 'selected';

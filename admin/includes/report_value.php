@@ -34,6 +34,10 @@ else if($typex == 'DD' || $typex == 'CB' || $typex == 'RF') {
 	$valueStr .= 'Value<select '.$selectMultiple.$selectMultipleHeight.' name="conditionValue' . $key .$selectName. '" id="conditionValue' . $key . '">';
 	foreach ($arrOptions AS $intKey => $strOption) {
 		$strSelected = "";
+		if($typex == 'CB')
+		{
+			if(in_array($intKey,$_REQUEST['conditionValue'.$key])) $strSelected = 'selected';
+		}
 		if($_REQUEST['conditionValue'.$key] == $intKey) $strSelected = 'selected';
 		$valueStr .= '<option ' . $strSelected . ' value=' . $intKey . '>' . $strOption . '</option>';
 	}

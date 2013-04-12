@@ -551,8 +551,8 @@ switch ($a)
 	// **********************************************************
 	// Case to load Queries tab, begins here.	
 	case "queries":
-		
 			$objCallData->arrQueries = $objCallData->fetchQueries();
+			
 			?><table border="0" cellspacing="1" cellpadding="4" align="left" style="margin-left:-5px">
 				<tr>
 					<td>
@@ -622,6 +622,7 @@ switch ($a)
 			
 			<input type="hidden" name="queryId" id="queryId" value="">
 			<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
+			<input type="hidden" name="qryPost" id="qryPost" value="">
 			
 			
 			 <table class="fieldtable" align="center" width="100%" border="0" cellspacing="1" cellpadding="4">
@@ -635,12 +636,14 @@ switch ($a)
                     <th class="fieldheader">Date Answered</th>
 					<th class="fieldheader">Answered?</th>
 					<th class="fieldheader">Save</th>
+					<th class="fieldheader">Post</th>
 					<th class="fieldheader">Action</th>
 				</tr><?
 				
 			$srNo = 0;
 			foreach ($objCallData->arrQueries AS $queryId => $arrInfo)
 			{
+				
 				if($objCallData->arrQueries[$queryId]["job_id"] == $_REQUEST["jobId"])
 				{
 					$srNo++;
@@ -711,6 +714,15 @@ switch ($a)
 						<button style="width: 70px;" onClick="javascript:updateQuery(<?=$queryId?>)">Save</button>
 						
 					</td>
+					<td class=" blueBG" align="center">
+						<input type="hidden" name="flagPost" id="flagPost" value="<?=$arrInfo['flag_post']?>">
+					<?	
+					if($arrInfo["flag_post"] == 'N'){?>
+						<button id="qrPost" style="width:90px;" value="" title="click here to Post this qury to Practice" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Post</button>
+					<?}else{?>	
+						<button id="qrPost" style="width:90px;" value="" title="click here to Unpost this qury to Practice" javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Unpost</button>
+					<?}?>	
+					</td>	
 					<td align="center"><?
 					  	  $jsFunc = "javascript:performdelete('job.php?sql=deleteQuery&jobId=".$_REQUEST["jobId"]."&queryId=".$queryId."');";
 						  ?><a onClick="<?=$jsFunc?>" href="javascript:;">

@@ -20,6 +20,7 @@ class Query {
 					WHERE t1.job_id = j1.job_id
 					AND j1.client_id = c1.client_id
 					AND t1.status = '0'
+					AND t1.flag_post = 'Y'
 					AND c1.id = '{$_SESSION['PRACTICEID']}'
 					{$appendWhrStr}";
 
@@ -42,6 +43,42 @@ class Query {
 			$arrClients[$rowData['client_id']] = $rowData['client_name'];
 		}
 		return $arrClients;	
+	}
+
+	function timeDiff($firstTime,$lastTime)
+	{
+		// convert to unix timestamps
+		$firstTime=strtotime($firstTime);
+		$lastTime=strtotime($lastTime);
+
+		// perform subtraction to get the difference (in seconds) between times
+		$timeDiff=$lastTime-$firstTime;
+		$timeDiff = $timeDiff/60;
+		// return the difference
+		return $timeDiff;
+	}
+
+	public function fetchSentTime()
+	{		
+		$qrySel = "SELECT id, sent_time 
+					FROM pr_practice 
+					WHERE id = '{$_SESSION['PRACTICEID']}'";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult))
+			$arrSentTime[] = $rowData['sent_time'];
+
+		return $arrSentTime[0];	
+	}
+	
+	public function updateSentTime($crnt_time)
+	{
+		$query = "UPDATE pr_practice
+					SET sent_time = '".$crnt_time."' 
+					WHERE id = '{$_SESSION['PRACTICEID']}'";
+					
+		
+		mysql_query($query);			
 	}
 
 	public function fetch_jobs() {		

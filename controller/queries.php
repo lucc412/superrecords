@@ -8,35 +8,45 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 	if(!empty($_REQUEST["queryId"])) {
 		$objScr->sql_update($_REQUEST["queryId"]);
 	
-		/* send mail function starts here */
-		$pageUrl = basename($_SERVER['REQUEST_URI']);
+		$sentTime = $objScr->fetchSentTime();
+		//$currentTime = date('Y-m-d h:m:s');
+		$currentTime = date('Y-m-d H:i:s');
+		$lastSentMin = $objScr->timeDiff($sentTime,$currentTime);
+	
+		if($lastSentMin > 60) {
 		
-		// check if event is active or inactive [This will return TRUE or FALSE as per result]
-		$flagSet = getEventStatus($pageUrl);
-
-		// if event is active it go for mail function
-		if($flagSet) {
-
-			//It will Get All Details in array format for Send Email	
-			$arrEmailInfo = get_email_info($pageUrl);
-
-			// fetch email id of sr manager
-			$strPanelInfo = sql_select_panel($_SESSION["PRACTICEID"]);
-			$arrPanelInfo = explode('~', $strPanelInfo);
-			$srManagerEmail = $arrPanelInfo[0];
-			$inManagerEmail = $arrPanelInfo[2];
-
-			$to = $srManagerEmail.",".$inManagerEmail;
-			$cc = $arrEmailInfo['event_cc'];
-			$subject = $arrEmailInfo['event_subject'];
-			$content = $arrEmailInfo['event_content'];
-			$jobId = $objScr->fetchJobId($_REQUEST["queryId"]);
-			$content = replaceContent($content, NULL, $_SESSION["PRACTICEID"], NULL, $jobId);
+			$objScr->updateSentTime($currentTime);
+	
+			/* send mail function starts here */
+			$pageUrl = basename($_SERVER['REQUEST_URI']);
 			
-			include_once(MAIL);
-			send_mail($to, $cc, $subject, $content);
-		}
-		/* send mail function ends here */
+			// check if event is active or inactive [This will return TRUE or FALSE as per result]
+			$flagSet = getEventStatus($pageUrl);
+
+			// if event is active it go for mail function
+			if($flagSet) {
+
+				//It will Get All Details in array format for Send Email	
+				$arrEmailInfo = get_email_info($pageUrl);
+
+				// fetch email id of sr manager
+				$strPanelInfo = sql_select_panel($_SESSION["PRACTICEID"]);
+				$arrPanelInfo = explode('~', $strPanelInfo);
+				$srManagerEmail = $arrPanelInfo[0];
+				$inManagerEmail = $arrPanelInfo[2];
+
+				$to = $srManagerEmail.",".$inManagerEmail;
+				$cc = $arrEmailInfo['event_cc'];
+				$subject = $arrEmailInfo['event_subject'];
+				$content = $arrEmailInfo['event_content'];
+				$jobId = $objScr->fetchJobId($_REQUEST["queryId"]);
+				$content = replaceContent($content, NULL, $_SESSION["PRACTICEID"], NULL, $jobId);
+				
+				include_once(MAIL);
+				send_mail($to, $cc, $subject, $content);
+			}
+			/* send mail function ends here */
+		}	
 
 		header("Location: queries.php?flagUpdate=Y");
 	}
@@ -49,37 +59,46 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 		}
 
 		$objScr->sql_update_all($arrResponse);
-
-		/* send mail function starts here */
-		$pageUrl = basename($_SERVER['REQUEST_URI']);
+		$sentTime = $objScr->fetchSentTime();
+		$currentTime = date('Y-m-d H:i:s');
+		$lastSentMin = $objScr->timeDiff($sentTime,$currentTime);
+	
+		if($lastSentMin > 60) {
 		
-		// check if event is active or inactive [This will return TRUE or FALSE as per result]
-		$flagSet = getEventStatus($pageUrl);
+			$objScr->updateSentTime($currentTime);
 
-		// if event is active it go for mail function
-		if($flagSet) {
-
-			//It will Get All Details in array format for Send Email	
-			$arrEmailInfo = get_email_info($pageUrl);
+			/* send mail function starts here */
+			$pageUrl = basename($_SERVER['REQUEST_URI']);
 			
-			// TO mail parameter
-			$arrManagerIds = $objScr->fetch_manager_ids($_SESSION["PRACTICEID"]);
-			foreach($arrManagerIds AS $managerId) {
-				$srManagerEmail = fetchStaffInfo($managerId, 'email');
-				$to .= $srManagerEmail . ',';
+			// check if event is active or inactive [This will return TRUE or FALSE as per result]
+			$flagSet = getEventStatus($pageUrl);
+
+			// if event is active it go for mail function
+			if($flagSet) {
+
+				//It will Get All Details in array format for Send Email	
+				$arrEmailInfo = get_email_info($pageUrl);
+				
+				// TO mail parameter
+				$arrManagerIds = $objScr->fetch_manager_ids($_SESSION["PRACTICEID"]);
+				foreach($arrManagerIds AS $managerId) {
+					$srManagerEmail = fetchStaffInfo($managerId, 'email');
+					$to .= $srManagerEmail . ',';
+				}
+				$to = rtrim($to, ',');
+				
+				$cc = $arrEmailInfo['event_cc'];
+				$subject = $arrEmailInfo['event_subject'];
+				$content = $arrEmailInfo['event_content'];
+				$content = str_replace('of JOBNAME', '', $content);
+				$content = replaceContent($content, NULL, $_SESSION["PRACTICEID"]);
+				
+				include_once(MAIL);
+				send_mail($to, $cc, $subject, $content);
+				
 			}
-			$to = rtrim($to, ',');
-			
-			$cc = $arrEmailInfo['event_cc'];
-			$subject = $arrEmailInfo['event_subject'];
-			$content = $arrEmailInfo['event_content'];
-			$content = str_replace('of JOBNAME', '', $content);
-			$content = replaceContent($content, NULL, $_SESSION["PRACTICEID"]);
-			
-			include_once(MAIL);
-			send_mail($to, $cc, $subject, $content);
+			/* send mail function ends here */
 		}
-		/* send mail function ends here */
 
 		header("Location: queries.php?flagUpdate=A");
 	}

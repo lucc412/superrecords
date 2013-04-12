@@ -92,6 +92,44 @@ function updateQuery(queryId)
 }
 
 //************************************************************************************************
+//  Task          : This function is used to update a query post yes or no.
+//  Modified By   : Siddhesh Champaneri 
+//  Created on    : 11-Apr-2013
+//  Last Modified : 11-Apr-2013 
+//************************************************************************************************
+function updateQueryPost(post,queryId)
+{
+	
+	var eleQueryId = document.getElementById('queryId');
+	eleQueryId.value = queryId;
+	document.getElementById('qryPost').value = post;
+	document.frmQueriesList.submit();
+	
+	//document.getElementById('flagPost').value = post;
+	
+	/*var xmlhttp;
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			alert('Successfull')
+			document.getElementById("qrPost").innerHTML='UnPost';
+		}
+	}
+	xmlhttp.open("POST","job.php?sql=updateQueryPost&flagPost="+post+"&queryId="+queryId,true);
+	xmlhttp.send();*/
+}
+
+//************************************************************************************************
 //  Task          : This function is used to redirect to listing page of Queries.
 //  Modified By   : Dhiraj Sahu 
 //  Created on    : 03-Jan-2013

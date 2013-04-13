@@ -47,13 +47,23 @@ class SR_Report {
 							OR pr.team_member=".$staffId ." 
 							OR pr.sales_person=".$staffId . ")";
 				break;	
-		
+				
+				// for practice page report case
+				case "practice":
+						$strWhere = "AND ( pr.sr_manager = {$_SESSION['staffcode']} 
+							OR pr.india_manager = {$_SESSION['staffcode']}
+							OR pr.sales_person = {$_SESSION['staffcode']})";
+				break;	
 			}
 		}
 
 		// set where condition for the query [to fetch sr manager, india manager, team member]
-		if(!empty($otherTable)) {
-			switch($reportPageName) {
+		if(!empty($otherTable))
+		{	
+			$strAnd = '';
+			
+			switch($reportPageName)
+			{
 				// for client page report case
 				case "client":
 						$strAnd = "	AND c.id = pr.id";

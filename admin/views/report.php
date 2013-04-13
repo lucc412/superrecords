@@ -25,7 +25,7 @@
 		if(!empty($_SESSION['ARRDISPFIELDS'])) {
 			?>
 			<div class="frmheading">
-				<h1>Lead Report</h1>
+				</br><h1><?=$reportPageTitle?></h1>
 			</div><br/><br/>
 			<form name="objForm" id="objForm" action="<?=$reportPageLink?>" method="post" onSubmit="return makeSelection();"><?
 

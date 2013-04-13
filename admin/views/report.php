@@ -9,7 +9,7 @@
 	<head>
 		<title><?=$reportPageTitle?></title>
 		<meta name="generator" http-equiv="content-type" content="text/html">
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<!--<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />-->
 		<script type="text/javascript" src="<?=$javaScript;?>report_validation.js"></script>
 		<script type="text/javascript" src="<?=$javaScript;?>datetimepicker.js"></script>
 	</head>
@@ -23,11 +23,15 @@
 
 		// display all columns in listbox here
 		if(!empty($_SESSION['ARRDISPFIELDS'])) {
-			?><form name="objForm" id="objForm" action="<?=$reportPageLink?>" method="post" onSubmit="return makeSelection();"><?
+			?>
+			<div class="frmheading">
+				<h1>Lead Report</h1>
+			</div><br/><br/>
+			<form name="objForm" id="objForm" action="<?=$reportPageLink?>" method="post" onSubmit="return makeSelection();"><?
 
 				// saved report drop-down
 				if(!empty($arrSavedReports)) {
-					?><span class="genlink" style="padding-right:20px;">Choose report:</span> 
+					?><span class="hr" style="padding-right:20px;">Choose report:</span> 
 					<select name="lstReport" id="lstReport" onChange="javascript:selectedReportDisplay(this.value, '<?=$reportPageLink?>');">
 						<option value="0">--Please Select--</option><?
 						foreach ($arrSavedReports AS $reportId => $reportInfo) {
@@ -40,7 +44,7 @@
 				}
 				
 				// save report text box
-				?><span class="genlink">Report Name:</span><input type="text" name="txtReportName" id="txtReportName" value="<?=$arrSavedReports[$_REQUEST['lstReport']]['report_name']?>">
+				?><span class="hr">Report Name:</span><input type="text" name="txtReportName" id="txtReportName" value="<?=$arrSavedReports[$_REQUEST['lstReport']]['report_name']?>">
 				<button type="submit" name="SaveReport" value="Save New Report" style="width:145px;" onClick="javascript:return saveReport();">Save New Report</button><br/><br/><?
 				
 				if(!empty($arrSavedReports)) {
@@ -57,7 +61,7 @@
 
 					?><div id="div<?=$key?>" class="spantext1 pd40" align="left" style="<?=$divStyle?>">
 
-						<span class="spantext1">Condition Fields
+						<span class="hr">Condition Fields
 							<select name="lstTypex<?=$key?>" id="lstTypex<?=$key?>" onChange="javascript:showCondition(this.value, <?=$key?>);showInputType(this.value, <?=$key?>);">
 								<option value="">--Please Select--</option><?
 									foreach ($_SESSION['ARRDISPFIELDS'] AS $fieldName => $fieldTitle) {
@@ -70,11 +74,11 @@
 
 						// include file to display condition drop-down
 						include(REPORTCONDITION);
-						?><span style="padding-left:20px;" id="condition<?=$key?>"><?=$conditionStr?></span><?
+						?><span style="padding-left:20px;" class="hr" id="condition<?=$key?>"><?=$conditionStr?></span><?
 
 						// include file to display value drop-down / text box / calendar
 						include(REPORTVALUE);
-						?><span style="padding-left:20px;" id="inputType<?=$key?>"><?=$valueStr?></span>	
+						?><span style="padding-left:20px;" class="hr" id="inputType<?=$key?>"><?=$valueStr?></span>	
 
 					</div><?
 
@@ -83,7 +87,7 @@
 				// display all columns here for multiple selection
 				?><div class="pd40">
 					<div style="padding-top:25px;" class="spantext1" align="left">
-						<label for="chkAll"><input class="checkboxClass" type="checkbox" name="chkAll" id="chkAll" style="width:20px;" onClick="makeAllSelection();" <?if($_REQUEST['chkAll']) echo 'checked';?>>&nbsp;Add All / Remove All</label><br/><br/>
+						<label class="hr" style="color:#F05729;" for="chkAll"><input class="checkboxClass" type="checkbox" name="chkAll" id="chkAll" style="width:20px;" onClick="makeAllSelection();" <?if($_REQUEST['chkAll']) echo 'checked';?>>&nbsp;Add All / Remove All</label><br/><br/>
 					</div><?
 
 					// select output fields here
@@ -115,7 +119,7 @@
 
 					if(!empty($arrReportData)) {
 						// generate button
-						?><span style="padding-left:20px;"><a href="<?=$reportPageLink?>?generate=generate"><img src="images/excel.png" /></a></span><?
+						?><span><a href="<?=$reportPageLink?>?generate=generate"><img style="margin-bottom:-7px; padding-left:20px;" src="images/excel.png" /></a></span><?
 					}
 				?></div><?
                 

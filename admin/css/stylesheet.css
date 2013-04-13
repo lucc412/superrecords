@@ -879,6 +879,42 @@ button {
 	border:none;
 	margin-top:10px;
 }
+.listclass {
+	border: 0 none;
+	color: #FFFFFF;
+	background: transparent;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 2px 10px;
+	background: #074165;
+}
+
+.mainselection {
+	overflow:hidden;
+	width:343px;
+	-moz-border-radius:9px 9px 9px 9px;
+	-webkit-border-radius:9px 9px 9px 9px;
+	border-radius:9px 9px 9px 9px;
+	background-color:#074165;
+	box-shadow:1px 1px 11px rgba(240, 87, 41, 0.7);
+	color:#F05729;	
+}
+
+.spantext1
+{
+	font-size:11px;
+	/*letter-spacing:1px;*/
+	color:#BE4F33;
+	font-family:Arial;
+	font-weight:bold;
+}
+
+
+
+.pd10
+{
+	padding:5px;
+}
 
 .hrClass
 {

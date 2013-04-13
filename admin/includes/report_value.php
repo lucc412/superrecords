@@ -38,6 +38,11 @@ else if($typex == 'DD' || $typex == 'CB' || $typex == 'RF') {
 		{
 			if(in_array($intKey,$_REQUEST['conditionValue'.$key])) $strSelected = 'selected';
 		}
+		if($typex == 'CB' && strstr($_REQUEST['conditionValue'.$key],"#"))
+		{
+			$arrDDFieldVal = explode("#",$_REQUEST['conditionValue'.$key]);	
+			if(in_array($intKey,$arrDDFieldVal)) $strSelected = 'selected';
+		}
 		if($_REQUEST['conditionValue'.$key] == $intKey) $strSelected = 'selected';
 		$valueStr .= '<option ' . $strSelected . ' value=' . $intKey . '>' . $strOption . '</option>';
 	}

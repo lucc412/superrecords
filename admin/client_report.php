@@ -110,7 +110,20 @@ if($_SESSION['validUser']) {
 
 				$repFields .= $_REQUEST['lstTypex' . $key] . ',';
 				$repConditions .= $_REQUEST['lstCondition' . $key] . ',';
-				$repValues .= $_REQUEST['conditionValue' . $key] . ',';
+				
+				$strCondVal = '';
+				if(is_array($_REQUEST['conditionValue' . $key]))
+				{
+					$countArr = count($_REQUEST['conditionValue' . $key]);
+
+					for ($i=0; $i<$countArr; $i++)
+						$strCondVal .= "#".$_REQUEST['conditionValue' . $key][$i];
+					
+					$repValues .= $strCondVal . ',';
+				}
+				else
+					$repValues .= $_REQUEST['conditionValue' . $key] . ',';
+
 			}
 
 			$userId = $_SESSION['staffcode'];
@@ -147,13 +160,26 @@ if($_SESSION['validUser']) {
 		// to update saved report 
 		else if(isset($_REQUEST['UpdateReport']) && $_REQUEST['UpdateReport'] == 'Update Report') {
 
-			for ($key=0; $key<5; $key++) {
-				if(empty($_REQUEST['lstTypex' . $key]) || empty($_REQUEST['lstCondition' . $key]) ) continue;
 
-				$repFields .= $_REQUEST['lstTypex' . $key] . ',';
-				$repConditions .= $_REQUEST['lstCondition' . $key] . ',';
-				$repValues .= $_REQUEST['conditionValue' . $key] . ',';
+			for ($key=0; $key<5; $key++) {
+			if(empty($_REQUEST['lstTypex' . $key]) || empty($_REQUEST['lstCondition' . $key]) ) continue;
+
+			$repFields .= $_REQUEST['lstTypex' . $key] . ',';
+			$repConditions .= $_REQUEST['lstCondition' . $key] . ',';
+			
+			$strCondVal = '';
+			if(is_array($_REQUEST['conditionValue' . $key]))
+			{
+				$countArr = count($_REQUEST['conditionValue' . $key]);
+
+				for ($i=0; $i<$countArr; $i++)
+					$strCondVal .= "#".$_REQUEST['conditionValue' . $key][$i];
+				
+				$repValues .= $strCondVal . ',';
 			}
+			else
+				$repValues .= $_REQUEST['conditionValue' . $key] . ',';
+		}
 
 			$reportId = $_REQUEST['lstReport'];
 			$repName = $_REQUEST['txtReportName'];

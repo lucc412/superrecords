@@ -48,7 +48,8 @@ if($_SESSION['validUser']) {
 
 			// form array of options for fields that are of DD type
 			foreach($arrSelected AS $selectedColumn) {
-				if($_SESSION['ARRFIELDTYPEX'][$selectedColumn] == 'DD' || $_SESSION['ARRFIELDTYPEX'][$selectedColumn] == 'CB') {
+				$fieldTypex = $_SESSION['ARRFIELDTYPEX'][$selectedColumn];
+				if($fieldTypex == 'DD' || $fieldTypex == 'CB' || $fieldTypex == 'RF') {
 
 					// include file to fetch options for drop-down
 					include(REPORTDDOPTIONS);

@@ -56,7 +56,8 @@ switch($selectedColumn) {
 	break;
 
 	case "job_id":
-		$arrDDOptions[$selectedColumn] = $objCallUsers->fetchJobName();
+	case "job_name":
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetchJobName($selectedColumn);
 	break;
 	
 	case "steps_done":
@@ -73,6 +74,10 @@ switch($selectedColumn) {
 
 	case "sub_Code":
 		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("sub_subactivity", "sub_Code", "sub_Description", "sub_Order");
+	break;
+	
+	case "job_type_id":
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("sub_subactivity", "sub_Code", "sub_Description", "sub_Order", "display_in_practice='yes'");
 	break;
 
 	case "task_status_id":

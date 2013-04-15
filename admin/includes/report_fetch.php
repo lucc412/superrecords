@@ -109,7 +109,20 @@ if(!empty($arrCondition)) {
 					$strCondition = rtrim($strCondition," AND ");	
 				}
 				else
-					$strCondition .= "(SELECT FIND_IN_SET('".$conditionValue."',".$fieldName.")) ";
+				{
+					if(strstr($conditionValue,"#"))
+					{
+						$arrDDFieldVal = explode("#",$conditionValue);
+						
+						for($i=1; $i<count($arrDDFieldVal); $i++)
+						{
+							$strCondition .= "(SELECT FIND_IN_SET('".$arrDDFieldVal[$i]."',".$fieldName.")) AND ";
+						}
+						$strCondition = rtrim($strCondition," AND ");
+					}
+					else
+					   $strCondition .= "(SELECT FIND_IN_SET('".$conditionValue."',".$fieldName.")) ";
+				}
 			}
 			else
 				$strCondition .= "{$fieldName} = '{$conditionValue}' ";

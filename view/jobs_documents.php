@@ -66,7 +66,7 @@ switch($_REQUEST['a'])
 										$docCnt++;
 										$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
 										if(file_exists($folderPath)) {
-											?><p><a href="jobs.php?a=download&filePath=<?=$arrDocInfo['file_path']?>&flagChecklist=S" title="Click to view this document">Document <?=$docCnt?></a></p><?
+											?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document">Document <?=$docCnt?></a></p><?
 										}
 									}
 								}

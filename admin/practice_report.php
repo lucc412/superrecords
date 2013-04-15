@@ -2,7 +2,7 @@
 /*	
 	Created By -> 10-Apr-13 [Dhiraj Sahu]
 	Last Modified By -> 10-Apr-13 [Dhiraj Sahu]
-	Description: This page is used for 'Client Report'	
+	Description: This page is used for 'Practice Report'	
 */
 
 ob_start();
@@ -13,7 +13,7 @@ include 'dbclass/report_class.php';
 if($_SESSION['validUser']) {
 
 	//Get FormCode
-	$formcode = $commonUses->getFormCode("Client Report");
+	$formcode = $commonUses->getFormCode("Practice Report");
 	$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
 
 	//If View, Add, Edit, Delete all set to N
@@ -26,19 +26,19 @@ if($_SESSION['validUser']) {
 		$objCallUsers = new SR_Report();
 
 		// function call to fetch typex of each field 
-		$_SESSION['ARRFIELDTYPEX'] = $objCallUsers->fetch_field_details('client','field_type');
+		$_SESSION['ARRFIELDTYPEX'] = $objCallUsers->fetch_field_details('practice','field_type');
 
 		// function call to fetch title of each field 
-		$_SESSION['ARRDISPFIELDS'] = $objCallUsers->fetch_field_details('client','field_title');
+		$_SESSION['ARRDISPFIELDS'] = $objCallUsers->fetch_field_details('practice','field_title');
 
 		// set name of the main table for this report page
-		$reportPageName = 'client';
+		$reportPageName = 'pr_practice';
 		
-		// set name of the main table for this report page
-		$reportPageTitle = 'Client Report';
+		// set name of the title for this report page
+		$reportPageTitle = 'Practice Report';
 		
 		// set file path for this report path
-		$reportPagePath = 'client_report.php';
+		$reportPagePath = 'practice_report.php';
 
 		// to display report in output as per selected criterias
 		if((isset($_REQUEST['submit']) && $_REQUEST['submit'] == "Display")) {
@@ -149,11 +149,11 @@ if($_SESSION['validUser']) {
 			if(!$flagRepNameExist) {
 				$objCallUsers->saveReport($userId, $repName, $repFields, $repConditions, $repValues, $repOutputFields, $reportPageName);
 
-				header('Location: client_report.php');
+				header('Location: practice_report.php');
 				exit;
 			}
 			else {
-				header('Location: client_report.php?flagDuplicate=Y');
+				header('Location: practice_report.php?flagDuplicate=Y');
 				exit;
 			}
 		}
@@ -190,7 +190,7 @@ if($_SESSION['validUser']) {
 
 			$objCallUsers->updateSaveReport($reportId, $repName, $repFields, $repConditions, $repValues, $repOutputFields);
 
-			header('Location: client_report.php');
+			header('Location: practice_report.php');
 			exit;
 		}
 		// default case when page is loaded first time

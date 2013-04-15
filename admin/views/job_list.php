@@ -68,8 +68,6 @@ switch ($a)
    	  </div>
 			<form name="objForm" id="objForm" method="post" action="job.php?sql=insertJob" onSubmit="javascript:return validateFormOnSubmit();" enctype="multipart/form-data">
  	
-		 <!--<input type="hidden" name="sql" value="insertJob">-->
-		 
 		 <table class="tbl" width="72%" cellspacing="10">
 			<tr>
 			   <td class="hr">Practice Name<font style="color:red;" size="2">*</font></td>
@@ -239,12 +237,10 @@ switch ($a)
 			</div>
 			 
 			 <form method="POST" name="frmJobDetails" action="job.php?a=editJob&jobId=<?=$_REQUEST["jobId"]?>">
-			 <!--<input class="vwtaskbtn" type="button" name="btnTasks" value="View Associated Tasks" style=""; width:215px;" onClick="JavaScript:newPopup('tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>');">-->
 			 <button name="btnTasks" value="View Associated Tasks" style="width:215px;" onClick="JavaScript:newPopup('tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>');">View Associated Tasks</button>
 			 <br/><br/>
 			 
 			</form>
-			<!--background-color:#70b4ae; color:#ffffff; cursor:pointer; margin: 0-->
 			<form method="POST" name="frmJobDetails" action="job.php?sql=updateJob">
 			<table class="tbl" border="0" cellspacing="10" width="70%">
 				<tr>
@@ -412,9 +408,6 @@ switch ($a)
 			    ?><td width="10%" align="center" class="<?=$style?> blueBG" <?=$strView?>><?=$viewed?></td>	
 			  
               	<td width="5%" class="<?=$style?> blueBG" align="center">
-					<!--<a href="job.php?sql=download&flagType=S&filePath=<?=$arrInfo['file_path']?>&docId=<?=$arrInfo['document_id']?>" title="Click to view this document" target="_blank">
-                    <img src="images/download1.png" border="0" alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/>
-                    </a>-->
 					<button onclick="javascript:redirectURL('job.php?sql=download&flagType=S&filePath=<?=$arrInfo['file_path']?>&docId=<?=$arrInfo['document_id']?>');" title="Click to view this document" >Download</button>
                     
 				</td>
@@ -488,8 +481,7 @@ switch ($a)
 					<td class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["report_title"])?></td>	
 					<td width="23%" align="center" class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["date"])?></td>
 					<td width="10%" class="<?=$style?> blueBG" align="center">
-					<!--<a href="job.php?sql=download&flagType=R&filePath=<?=$arrInfo['file_path']?>" target="_blank" title="Click to view this document"><img src="images/download1.png" border="0"  alt="Download" name="download" title="Download" align="middle" height="30px" width="105px"/></a>-->
-					<button onclick="redirectURL('job.php?sql=download&flagType=R&filePath=<?=$arrInfo['file_path']?>')"title="Click to view this document" >Download</button>
+					<button onclick="redirectURL('job.php?sql=download&flagType=R&filePath=<?=urlencode($arrInfo['file_path'])?>')"title="Click to view this document" >Download</button>
 					  </td>
 				</tr><?
 			}
@@ -497,7 +489,6 @@ switch ($a)
 	?></table></table>
 		<table  class="fieldtable" align="center"  border="0" cellspacing="1" cellpadding="4" >
 			<tr><td width="10%" align="center">
-				<!--<a href="#"><img src="images/upload.png" border="0" alt="Upload" name="upload" title="Upload" align="middle" height="33px" width="117px" onClick="JavaScript:newPopup('job.php?a=uploadReports&jobId=<?=$_REQUEST["jobId"]?>');"/></a>-->
 				<button onclick="JavaScript:newPopup('job.php?a=uploadReports&jobId=<?=$_REQUEST["jobId"]?>');">Upload</button>
 			</td></tr>
 		</table><?
@@ -604,7 +595,6 @@ switch ($a)
 			
 			if($flagSet) {
 				?><span style="margin-left:764px;">
-				   <!--<a href="job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>"><input type="button" name="sendEmail" value="Send Mail to Practice" class="sendMailBtn"></a>-->
 				   <button name="sendEmail" style="width: 222px" onclick="javascript:redirectURL('job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>')">Send Mail to Practice</button>
 				</span><br>
 
@@ -648,8 +638,6 @@ switch ($a)
 				{
 					$srNo++;
 				?><tr>
-					<!--<td width="5%" class="<?=$style?>"><?=$srNo?></td>-->
-										
 					<td class="<?=$style?> blueBG" align="center" width="20%">
 						<textarea name="txtQuery<?=$queryId?>" rows="5" style="width:300px; " cols="60"><?=$arrInfo["query"]?></textarea>						
 					</td>
@@ -659,7 +647,6 @@ switch ($a)
 					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
 					if(!empty($arrInfo["report_file_path"])) {
 						?>
-						<!--<a href="job.php?sql=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a>-->
 <button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>');" title="Cilck here To Download Document." >Download</button>
 						<?
 					}
@@ -668,7 +655,6 @@ switch ($a)
 					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
 					if(!empty($arrInfo["file_path"])) {
 						?>
-						<!--<a href="job.php?sql=download&flagType=Q&filePath=<?=$arrInfo['file_path']?>" target="_blank" title="Cilck here To Download Document."><img src="images/download1.png" border="0"  alt="View" name="View" title="View" align="middle" height="30px" width="105px"/></a>-->
 						<button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=Q&filePath=<?=$arrInfo['file_path']?>');" title="Cilck here To Download Document." >Download</button>
 						<?
 					}

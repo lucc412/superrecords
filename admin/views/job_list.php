@@ -695,19 +695,19 @@ switch ($a)
 					 }		
 					?></td>
 						
-					<td width="6%" class="<?=$style?> blueBG" align="center">
+					<td width="10%" class="<?=$style?> blueBG" align="center">
 						<!--<input type="button" name="btnSave" value="Save" style="background-color:#07aff8; border:solid; color:#ffffff; width:70px;" onClick="javascript:updateQuery(<?=$queryId?>)">-->
-						<button style="width: 70px;" onClick="javascript:updateQuery(<?=$queryId?>)">Save</button>
+						<button style="width: 66px;margin-right: 3px;" onClick="javascript:updateQuery(<?=$queryId?>)">Save</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to save this query</span></a>
 						
 					</td>
-					<td class=" blueBG" align="center">
+					<td class=" blueBG" align="center" width="15%">
 						<input type="hidden" name="flagPost" id="flagPost" value="<?=$arrInfo['flag_post']?>"><?
 						
 					if($arrInfo["flag_post"] == 'N'){
-						?><button id="qrPost" style="width:90px;" value="" title="click here to post this query to practice" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Post</button><?
+						?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Post</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to post this query to practice</span></a><?
 					}
 					else{	
-						?><button id="qrPost" style="width:90px;" value="" title="click here to unpost this query to practice" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Unpost</button><?
+						?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Unpost</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to unpost this query to practice</span></a><?
 					}
 					?></td>	
 					<td align="center"><?

@@ -190,7 +190,7 @@ class Practice_Class extends Database
 
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
-		print $qryUpd = "UPDATE client
+		$qryUpd = "UPDATE client
 				SET client_type_id = '" . $_REQUEST['lstType'] . "',
 				client_name = '" . addslashes($_REQUEST['cliName']) . "',
 				id = '" . $_REQUEST['lstPractice'] . "',

@@ -408,7 +408,7 @@ switch ($a)
 			    ?><td width="10%" align="center" class="<?=$style?> blueBG" <?=$strView?>><?=$viewed?></td>	
 			  
               	<td width="5%" class="<?=$style?> blueBG" align="center">
-					<button onclick="javascript:redirectURL('job.php?sql=download&flagType=S&filePath=<?=$arrInfo['file_path']?>&docId=<?=$arrInfo['document_id']?>');" title="Click to view this document" >Download</button>
+					<button onclick="javascript:redirectURL('job.php?sql=download&flagType=S&filePath=<?=urlencode($arrInfo['file_path'])?>&docId=<?=$arrInfo['document_id']?>');" title="Click to view this document" >Download</button>
                     
 				</td>
 			</tr><?
@@ -647,7 +647,7 @@ switch ($a)
 					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
 					if(!empty($arrInfo["report_file_path"])) {
 						?>
-<button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>');" title="Cilck here To Download Document." >Download</button>
+<button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=SRQ&filePath=<?=urlencode($arrInfo['report_file_path'])?>');" title="Cilck here To Download Document." >Download</button>
 						<?
 					}
 					?></td>
@@ -655,7 +655,7 @@ switch ($a)
 					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
 					if(!empty($arrInfo["file_path"])) {
 						?>
-						<button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=Q&filePath=<?=$arrInfo['file_path']?>');" title="Cilck here To Download Document." >Download</button>
+						<button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=Q&filePath=<?=urlencode($arrInfo['file_path'])?>');" title="Cilck here To Download Document." >Download</button>
 						<?
 					}
 					?></td>

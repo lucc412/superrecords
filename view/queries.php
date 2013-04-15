@@ -89,7 +89,7 @@ include(TOPBAR);
 						/*$arrFileName = explode('~', $arrInfo['report_file_path']);
 						$origFileName = $arrFileName[1];
 						$docTitle = $origFileName;*/
-					?><p><b><a href="queries.php?action=download&flagType=SRQ&filePath=<?=$arrInfo['report_file_path']?>" title="Click to view this document">Document</a></b></p><?
+					?><p><b><a href="queries.php?action=download&flagType=SRQ&filePath=<?=urlencode($arrInfo['report_file_path'])?>" title="Click to view this document">Document</a></b></p><?
 					}
 					?></td>
 					
@@ -102,8 +102,7 @@ include(TOPBAR);
 						/*$arrFileName = explode('~', $arrInfo['file_path']);
 						$origFileName = $arrFileName[1];
 						$docTitle = $origFileName;*/
-						?><p><a href="queries.php?action=download&flagType=PRQ&filePath=<?=$arrInfo['file_path']?>" title="Click to view this document">Document</a></p>
-						<!--<span style="margin-left:20px;"><a title="Click to delete this document" href="queries.php?filePath=<?=$arrInfo['file_path']?>&queryId=<?=$queryId?>&action=deleteDoc" onclick="javascript:return unlinkFile();">X</a></span>--><?
+						?><p><a href="queries.php?action=download&flagType=PRQ&filePath=<?=urlencode($arrInfo['file_path'])?>" title="Click to view this document">Document</a></p><?
 					}
 					?></td>
 					<td class="tddata" align="center"><button type="button" style="width:100px;" onclick="javascript:updateQuery(<?=$queryId?>);" value="Save">Save</button></td>

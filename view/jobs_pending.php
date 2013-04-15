@@ -65,7 +65,7 @@ include(TOPBAR);
 								$docCnt++;
 								$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
 								if(file_exists($folderPath)) {
-									?><p><a href="jobs.php?a=download&filePath=<?=$arrDocInfo['file_path']?>&flagChecklist=S" title="Click to view this document">Document <?=$docCnt?></a></p><?
+									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document">Document <?=$docCnt?></a></p><?
 								}
 							}
 						}
@@ -79,7 +79,7 @@ include(TOPBAR);
 								$reportCnt++;
 								$folderPath = "../uploads/reports/" . $arrReportInfo['file_path'];
 								if(file_exists($folderPath)) {
-									?><p><a href="jobs.php?a=download&filePath=<?=$arrReportInfo['file_path']?>&flagChecklist=R" title="Click to view this document">Report <?=$reportCnt?></a></p><?
+									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrReportInfo['file_path'])?>&flagChecklist=R" title="Click to view this document">Report <?=$reportCnt?></a></p><?
 								}
 							}
 						}

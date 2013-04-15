@@ -86,5 +86,17 @@ switch($selectedColumn) {
 	case "process_id":
 		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("prc_processcycle", "prc_Code", "prc_Description", "prc_Order");
 	break;
+	
+	case "type":
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("pr_type", "id", "description", "order");
+	break;
+	
+	case "agreed_services":
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("pr_services", "svr_Code", "svr_Description", "svr_Order");
+	break;
+	
+	case "sent_items":
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("pr_tasklist", "task_Id", "task_Description", "task_Order");
+	break;
 }
 ?>

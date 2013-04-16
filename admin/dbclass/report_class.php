@@ -48,6 +48,16 @@ class SR_Report {
 							OR pr.sales_person=".$staffId . ")";
 				break;	
 				
+				// for job page report case
+				case "job":
+						$userId = $_SESSION["staffcode"];
+						$strWhere = " AND p1.id = c1.id
+								  AND (p1.sr_manager=".$userId." 
+								  OR p1.india_manager=".$userId." 
+								  OR p1.sales_person=".$userId." 
+								  OR c1.team_member=".$userId.")";
+				break;			  
+					 
 				// for practice page report case
 				case "practice":
 						$strWhere = "AND ( pr.sr_manager = {$_SESSION['staffcode']} 
@@ -72,7 +82,7 @@ class SR_Report {
 				// for job page report case
 				case "job":
 						$otherTable .= ", client c";
-						$strAnd = "	AND j.client_id = c.client_id
+						$strAnd = "	AND tbl.client_id = c.client_id
 									AND c.id = pr.id";
 				break;
 
@@ -86,13 +96,41 @@ class SR_Report {
 			}
 		}
 
+		switch($reportPageName)
+		{
+			// for lead page report case
+			case "lead":
+				$orderBy = "ORDER BY tbl.id desc";
+				break;
+			
+			// for client page report case
+			case "client":
+					$orderBy = "ORDER BY tbl.client_id desc";
+				break;	
+			
+			// for job page report case
+			case "job":
+					$orderBy = "ORDER BY tbl.job_id desc";
+				break;			  
+				 
+			// for practice page report case
+			case "practice":
+					$orderBy = "ORDER BY tbl.id desc";
+				break;	
+				
+			// for task page report case
+			case "task":
+					$orderBy = "ORDER BY tbl.task_id desc";
+				break;
+		}
+
 		$qrySel = "SELECT {$strColumns}
 				   FROM {$reportPageName} tbl {$otherTable}
 				   WHERE 1
 				   {$strWhere}
 				   {$strAnd}
-				   {$strCondition}
-				   ORDER BY tbl.id desc";
+				   {$strCondition} 
+				   {$orderBy}";
 			
 		$fetchResult = mysql_query($qrySel);
 		while($row = mysql_fetch_assoc($fetchResult)) {
@@ -108,13 +146,17 @@ class SR_Report {
 	}
 
 	// This will fetch possible options of fields DD control type
-	public function fetch_dd_options($tableName, $selField1, $selField2, $tableOrder=NULL) {
-		
+	public function fetch_dd_options($tableName, $selField1, $selField2, $tableOrder=NULL, $strWhere=NULL)
+	{
 		if(!empty($tableOrder))
 			$strOrder = "ORDER BY tbl.{$tableOrder}";
 		
+		if(!empty($strWhere))
+			$strWhere = "WHERE ".$strWhere;
+		
 		$qrySel = "SELECT tbl.{$selField1}, tbl.{$selField2}
-					FROM {$tableName} tbl
+					FROM {$tableName} tbl 
+					{$strWhere}
 					{$strOrder}";
 	
 		$fetchResult = mysql_query($qrySel);
@@ -149,18 +191,18 @@ class SR_Report {
 	} 
 
 	// This will fetch job names
-	public function fetchJobName() {
+	public function fetchJobName($selectedColumn) {
 	
-		$qrySel = "SELECT j.job_id, CONCAT_WS(' - ', c.client_name, j.period, m.mas_Description) jobName
+		$qrySel = "SELECT j.job_id, CONCAT_WS(' - ', c.client_name, j.period, m.mas_Description) jobName, j.job_name
 					 FROM job j, client c, mas_masteractivity m
 					 WHERE j.client_id = c.client_id
 					 AND j.mas_Code = m.mas_Code";
 		 
 		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrJobName[$rowData['job_id']] = $rowData['jobName'];
+		while($rowData = mysql_fetch_assoc($fetchResult))
+		{
+			$arrJobName[$rowData[$selectedColumn]] = $rowData['jobName'];
 		}
-		
 		return $arrJobName;	
 	} 
 

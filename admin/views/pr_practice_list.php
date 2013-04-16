@@ -1,7 +1,27 @@
 <div class="frmheading">
 	<h1>Manage Practice</h1>
 </div>
-
+<form action="pr_practice.php" method="post">
+<table class="customFilter" border="0" cellspacing="1" cellpadding="4" align="right" style="margin-right:15px; ">
+<tr>
+<td><b>Custom Filter</b>&nbsp;</td>
+<td><input type="text" name="filter" value="<?php echo $filter ?>"></td>
+<td><select name="filter_field">
+<option value="">All Fields</option>
+ <option value="<?php echo "pr.name" ?>"<?php if ($filterfield == "pr.name") { echo "selected"; } ?>>Practice Name</option>
+ <option value="<?php echo "type" ?>"<?php if ($filterfield == "type") { echo "selected"; } ?>>Type</option>
+ <option value="<?php echo "sr_manager" ?>"<?php if ($filterfield == "sr_manager") { echo "selected"; } ?>>SR Manager</option>
+ <option value="<?php echo "date_signed_up" ?>"<?php if ($filterfield == "date_signed_up") { echo "selected"; } ?>>Date Signed Up</option>
+</select></td>
+<td><input class="checkboxClass" type="checkbox" name="wholeonly"<?php echo $checkstr ?>>Whole words only</td>
+</td></tr>
+<tr>
+<td>&nbsp;</td>
+<td><button type="submit" name="action" value="Apply Filter">Apply Filter</button></td>
+<td><a href="pr_practice.php?a=reset" class="hlight">Reset Filter</a></td>
+</tr>
+</table>
+</form>
 <table  class="fieldtable" width="100%" align="center"  border="0" cellspacing="1" cellpadding="5"><?
 
 	if($access_file_level['stf_Add'] == "Y") {

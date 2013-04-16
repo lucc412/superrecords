@@ -78,7 +78,7 @@ class Practice_Class extends Database
 		return $arrEmployees;	
 	} 
 
-	public function sql_select($mode,$recId) {	
+	public function sql_select($mode='',$recId='') {	
 	
 		global $filter;
 		global $filterfield;

@@ -15,6 +15,19 @@ include 'dbclass/tsk_task_class.php';
 $objCallData = new Task_Class();
 
 if($_SESSION['validUser']) {
+	
+	if (isset($_POST["filter"])) $filter = @$_POST["filter"];
+	if (isset($_POST["filter_field"])) $filterfield = @$_POST["filter_field"];
+	$wholeonly = false;
+	if (isset($_POST["wholeonly"])) $wholeonly = @$_POST["wholeonly"];
+	
+	if (!isset($filter) && isset($_SESSION["filter"])) $filter = $_SESSION["filter"];
+	if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_SESSION["filter_field"];
+
+	if (isset($filter)) $_SESSION["filter"] = $filter;
+	if (isset($filterfield)) $_SESSION["filter_field"] = $filterfield;
+	if (isset($wholeonly)) $_SESSION["wholeonly"] = $wholeonly;	
+	
 	?><html>
 		<head>
 			<title>Task</title>
@@ -123,14 +136,14 @@ if($_SESSION['validUser']) {
 				$formcode = $commonUses->getFormCode("Task");
 				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
 
-				$arrTask = $objCallData->sql_select();
+				$arrTask = $objCallData->sql_select($a,$recid);
 				$arrTaskData = $arrTask[$recid];
 				$arrEmployees = $objCallData->fetchEmployees();
 				include('views/tsk_task_view.php');
 				break;
 
 			case "edit":
-				$arrTask = $objCallData->sql_select();
+				$arrTask = $objCallData->sql_select($a,$recid);
 				$arrTaskData = $arrTask[$recid];
 				$arrFewClient = $objCallData->fetchClient($arrTaskData["id"]);
 				$arrFewJob = $objCallData->fetchJob($arrTaskData["client_id"]);
@@ -139,10 +152,40 @@ if($_SESSION['validUser']) {
 				include('views/tsk_task_edit.php');
 				break;
 
+			case "reset":
+			
+				//Get FormCode
+				$formcode = $commonUses->getFormCode("Task");
+				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+				
+				// reset filter	
+				$filter = "";
+				$filterfield = "";
+				$wholeonly = "";
+				$checkstr = "";
+				if ($wholeonly) $checkstr = " checked";
+				 
+				//If View, Add, Edit, Delete all set to N
+				if($access_file_level == 0) {
+					echo "You are not authorised to view this file.";
+				}
+				else {
+					$arrEmployees = $objCallData->fetchEmployees();
+					$arrTask = $objCallData->sql_select();
+					include('views/tsk_task_list.php');
+				}
+				
+				//header('location: lead.php');
+				break;
+
+
 			default:
 				//Get FormCode
 				$formcode = $commonUses->getFormCode("Task");
 				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+
+				$checkstr = "";
+				if ($wholeonly) $checkstr = " checked";
 
 				//If View, Add, Edit, Delete all set to N
 				if($access_file_level == 0) {

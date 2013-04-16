@@ -127,7 +127,12 @@ class Lead_Class extends Database {
 		return $arrStates;	
 	} 
 
-	public function sql_select() {	
+	public function sql_select($mode='',$recId='') {	
+	
+		global $filter;
+		global $filterfield;
+		global $wholeonly;
+		global $commonUses;	
 	
 		$userId = $_SESSION["staffcode"];
   
@@ -137,13 +142,55 @@ class Lead_Class extends Database {
 				$strWhere="WHERE sr_manager=".$userId;
 			}
 		}
-
-		$qrySel = "SELECT t1.* FROM lead t1 {$strWhere} ORDER BY t1.id desc";
 		
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrLead[$rowData['id']] = $rowData;
+		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))){
+			
+			$qrySel = "SELECT t1.* FROM lead t1 
+							WHERE t1.id = ".$recId." {$strWhere} ORDER BY t1.id DESC";
+							
+			$fetchResult = mysql_query($qrySel);		
+			while($rowData = mysql_fetch_assoc($fetchResult)) {
+				$arrLead[$rowData['id']] = $rowData;
+			}
 		}
+		else{
+			$filterstr = $commonUses->sqlstr($filter);
+			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
+			
+			$qrySel = "SELECT t1.id leadId, t1.lead_type, t1.lead_name, t1.sales_person, t1.date_received,lt.*, s.*, cnt.* 
+						FROM lead t1, lead_type lt, stf_staff s, con_contact cnt 
+						WHERE t1.lead_type = lt.id AND t1.sales_person = s.stf_Code AND s.stf_CCode = cnt.con_Code 
+						{$strWhere} ";
+			
+			if(isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
+				
+				if($commonUses->sqlstr($filterfield) == 'sales_person') {
+					$qrySel .= "AND (cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
+				}elseif($commonUses->sqlstr($filterfield) == 'lead_type'){
+					$qrySel .= "AND lt.description like '". $filterstr ."'";
+				}else{
+					$qrySel .= " AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
+				}
+				
+			}
+			elseif(isset($filterstr) && $filterstr!='') {
+				
+				$qrySel .= " AND (lt.description like '" .$filterstr ."' 
+					OR t1.lead_name like '" .$filterstr ."'
+					OR cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."'
+					OR t1.date_received like '". $filterstr ."')";
+					
+			}				
+
+			print $qrySel .= " ORDER BY leadId DESC";
+			
+			$fetchResult = mysql_query($qrySel);		
+			while($rowData = mysql_fetch_assoc($fetchResult)) {
+				$arrLead[$rowData['leadId']] = $rowData;
+			}
+			
+		}
+		
 		
 		return $arrLead;	
 	}
@@ -176,7 +223,7 @@ class Lead_Class extends Database {
 		$qryIns = "INSERT INTO lead(lead_type, lead_name,sr_manager,sales_person, street_adress, suburb, state, postcode, postal_address, main_contact_name, other_contact_name, phone_no, alternate_phone_no, fax, email, date_received, day_received, lead_industry, lead_status,lead_reason,lead_stage,lead_source,contact_method,last_contact_date,future_contact_date,note)
 					VALUES (
 					'" . $_REQUEST['lead_type'] . "', 
-					'" . $_REQUEST['lead_name'] . "',
+					'" . addslashes($_REQUEST['lead_name']) . "',
 					'" . $_REQUEST['lstSrManager'] . "',
 					'" . $_REQUEST['sales_person'] . "', 
 					'" . $_REQUEST['street_adress'] . "', 
@@ -228,7 +275,7 @@ class Lead_Class extends Database {
 	
 		$qryUpd = "UPDATE lead
 				SET lead_type = '" . $_REQUEST['lead_type'] . "',
-				lead_name = '" . $_REQUEST['lead_name'] . "',
+				lead_name = '" . addslashes($_REQUEST['lead_name']) . "',
 				sr_manager = '" . $_REQUEST['lstSrManager']  . "',
 				
 				sales_person = '" . $_REQUEST['sales_person'] . "',

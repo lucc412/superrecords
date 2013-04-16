@@ -27,61 +27,79 @@ class SR_Report {
 	}
   
   	// This will generate report function
-	public function view_entity_report($strColumns, $otherTable, $strCondition, $arrDDOptions, $reportPageName) {
+	public function view_entity_report($strColumns, $flagOtherTable, $strCondition, $arrDDOptions, $reportPageName) {
 
-		if($_SESSION["usertype"]=="Staff") {
+		if($_SESSION["usertype"] == "Staff") {
+			$flagOtherTable = true;
+			$staffId = $_SESSION["staffcode"];
+
 			switch($reportPageName) {
 
 				// for lead page report case
 				case "lead":
-					if($_SESSION['staffcode'] != '112' && $_SESSION['staffcode'] != '114') {
-						$strWhere="AND tbl.sr_manager=".$_SESSION['staffcode'];
+					if($staffId != '112' && $staffId != '114') {
+						$strWhere ="AND tbl.sr_manager=".$staffId;
 					}
 				break;
 				
+				// for practice page report case
+				case "pr_practice":
+						$strWhere = "AND ( tbl.sr_manager = ".$staffId." 
+							OR tbl.india_manager = ".$staffId."
+							OR tbl.sales_person = ".$staffId.")";
+				break;
+
 				// for client page report case
 				case "client":
-						$staffId = $_SESSION["staffcode"];
 						$strWhere = "AND (pr.sr_manager=".$staffId." 
 							OR pr.india_manager=".$staffId." 
-							OR pr.team_member=".$staffId ." 
+							OR tbl.team_member=".$staffId ." 
 							OR pr.sales_person=".$staffId . ")";
 				break;	
-				
-				// for practice page report case
-				case "practice":
-						$strWhere = "AND ( pr.sr_manager = {$_SESSION['staffcode']} 
-							OR pr.india_manager = {$_SESSION['staffcode']}
-							OR pr.sales_person = {$_SESSION['staffcode']})";
-				break;	
-			}
-		}
-
-		// set where condition for the query [to fetch sr manager, india manager, team member]
-		if(!empty($otherTable))
-		{	
-			$strAnd = '';
-			
-			switch($reportPageName)
-			{
-				// for client page report case
-				case "client":
-						$strAnd = "	AND c.id = pr.id";
-				break;
 
 				// for job page report case
 				case "job":
-						$otherTable .= ", client c";
-						$strAnd = "	AND j.client_id = c.client_id
-									AND c.id = pr.id";
+						$strWhere = "AND (pr.sr_manager=".$staffId." 
+							OR pr.india_manager=".$staffId." 
+							OR cl.team_member=".$staffId ." 
+							OR pr.sales_person=".$staffId . ")";
 				break;
 
 				// for task page report case
 				case "task":
-						$otherTable .= ",job j, client c";
+						$strWhere = "AND (pr.sr_manager=".$staffId." 
+							OR pr.india_manager=".$staffId." 
+							OR cl.team_member=".$staffId ." 
+							OR pr.sales_person=".$staffId . ")";
+				break;
+			}
+		}
+
+		// set where condition for the query [to fetch sr manager, india manager, team member]
+		if(!empty($flagOtherTable)) {
+			$strAnd = '';
+			
+			switch($reportPageName) {
+
+				// for client page report case
+				case "client":
+						$otherTable = ", pr_practice pr";
+						$strAnd = "	AND tbl.id = pr.id";
+				break;
+
+				// for job page report case
+				case "job":
+						$otherTable = ", client cl, pr_practice pr";
+						$strAnd = "	AND j.client_id = cl.client_id
+									AND cl.id = pr.id";
+				break;
+
+				// for task page report case
+				case "task":
+						$otherTable = ",job j, client cl, pr_practice pr";
 						$strAnd = "	AND tbl.job_id = j.job_id
-									AND j.client_id = c.client_id
-									AND c.id = pr.id";
+									AND j.client_id = cl.client_id
+									AND cl.id = pr.id";
 				break;
 			}
 		}

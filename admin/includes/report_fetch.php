@@ -65,14 +65,18 @@ $_SESSION['REPCRITERIA'] = $arrCondition;
 
 // form a string of selected columns to be displayed in report
 $strColumns = "";
-foreach($arrSelected AS $value) {
+$flagOtherTable = false;
+foreach($arrSelected AS $fieldOrigName) {
 	// if field typex is RF[Related Field] fetch data from 'pr_practice' table
-	if($_SESSION['ARRFIELDTYPEX'][$value] == 'RF') {
-		$otherTable = ', pr_practice pr';
-		$strColumns .= 'pr.' . $value . ",";
+	if($_SESSION['ARRFIELDTYPEX'][$fieldOrigName] == 'RF') {
+		$flagOtherTable = true;
+		if($fieldOrigName == 'team_member')
+			$strColumns .= 'cl.' . $fieldOrigName . ",";
+		else 
+			$strColumns .= 'pr.' . $fieldOrigName . ",";
 	}
 	else {
-		$strColumns .= 'tbl.' . $value . ",";
+		$strColumns .= 'tbl.' . $fieldOrigName . ",";
 	}
 }
 $strColumns = rtrim($strColumns, ",");
@@ -89,12 +93,16 @@ if(!empty($arrCondition)) {
 
 		$tableAlias = "tbl.";
 		if($_SESSION['ARRFIELDTYPEX'][$fieldName] == 'RF') {
-			$tableAlias = "pr.";
+			if($fieldName == 'team_member')
+				$tableAlias = "cl.";
+			else 
+				$tableAlias = "pr.";
 		}
 
 		$strCondition .= ' AND ';
 		if($condition == 'Equal to' || $condition == 'On')
 		{
+			// set conditions for checkbox type field
 			if($_SESSION['ARRFIELDTYPEX'][$fieldName] == 'CB')
 			{
 				if(strpos($conditionValue, ","))
@@ -125,7 +133,7 @@ if(!empty($arrCondition)) {
 				}
 			}
 			else
-				$strCondition .= "{$fieldName} = '{$conditionValue}' ";
+				$strCondition .= "{$tableAlias}{$fieldName} = '{$conditionValue}' ";
 		}
 		elseif($condition == 'Not equal to')
 		{
@@ -146,7 +154,7 @@ if(!empty($arrCondition)) {
 					$strCondition .= "(SELECT NOT FIND_IN_SET('".$conditionValue."',".$fieldName.")) ";
 			}
 			else
-				$strCondition .= "{$fieldName} <> '{$conditionValue}' ";
+				$strCondition .= "{$tableAlias}{$fieldName} <> '{$conditionValue}' ";
 		}
 		elseif($condition == 'Starts with') {
 			$strCondition .= "{$tableAlias}{$fieldName} LIKE '{$conditionValue}%' ";
@@ -173,5 +181,5 @@ if(!empty($arrCondition)) {
 }
 
 // function call to display all users with their entity fields selected for pdf
-$arrReportData = $objCallUsers->view_entity_report($strColumns, $otherTable, $strCondition, $arrDDOptions, $reportPageName);
+$arrReportData = $objCallUsers->view_entity_report($strColumns, $flagOtherTable, $strCondition, $arrDDOptions, $reportPageName);
 ?>

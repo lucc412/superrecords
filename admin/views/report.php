@@ -1,7 +1,7 @@
 <?
 /*	
 	Created By -> 09-Apr-13 [Disha Goyal]
-	Last Modified By -> 09-Apr-13 [Disha Goyal]	
+	Last Modified By -> 16-Apr-2013 [Disha Goyal]	
 	Description: This is view file for all reports page	
 */
 
@@ -59,7 +59,7 @@
 					if($_REQUEST['lstCondition'.$key] == 'In Between') $option = 'between';
 					$typex = $_SESSION['ARRFIELDTYPEX'][$colName];
 
-					?><div id="div<?=$key?>" class="spantext1 pd40" align="left" style="<?=$divStyle?>">
+					?><div id="div<?=$key?>" class="spantext1 pd40" style="margin-bottom:15px;" align="left" style="<?=$divStyle?>">
 
 						<span class="hr">Condition Fields
 							<select name="lstTypex<?=$key?>" id="lstTypex<?=$key?>" onChange="javascript:showCondition(this.value, <?=$key?>);showInputType(this.value, <?=$key?>);">

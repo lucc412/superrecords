@@ -182,7 +182,7 @@ class Lead_Class extends Database {
 					
 			}				
 
-			print $qrySel .= " ORDER BY leadId DESC";
+			$qrySel .= " ORDER BY leadId DESC";
 			
 			$fetchResult = mysql_query($qrySel);		
 			while($rowData = mysql_fetch_assoc($fetchResult)) {

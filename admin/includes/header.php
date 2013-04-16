@@ -698,7 +698,7 @@ if($_SESSION['validUser']) {
 					}
 
 					// Administration Menu (check access by passing staff code and form code)
-					$formcode_sys="50,4,43,76,57,99,21,98";
+					$formcode_sys="21,50,4,43,57,98,99";
 					$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);
 
 					if($access_menu_level=="true") {
@@ -736,14 +736,6 @@ if($_SESSION['validUser']) {
 										?><li><a href="cas_cases.php?a=reset">Tickets</a></li><?
 									}
 								} 
-
-								// Cross Sales Opp Submenu (Check access by passing staff code and form code)
-								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],76,1);
-								if(is_array($access_submenu_level)==1) {
-									if(in_array("Y",$access_submenu_level)) {   
-										?><!--<li><a href="cso_cross_sales_opportunity.php?a=reset">Cross Sales Opp</a></li>--><?
-									}
-								}
 
 								// IP Address Submenu (Check access by passing staff code and form code)
 								$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],57,1);

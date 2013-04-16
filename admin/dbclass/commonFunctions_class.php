@@ -9,12 +9,21 @@ $inc_path = get_include_path();
 include ("common/class.Database.php");
 include ("functions.php");
 include 'includes/translate.php';
+include 'includes/commonFunctionExtends.php';
 ini_set('include_path','/home/befreeco/php');
 //require_once ("Mail.php");
 set_include_path($inc_path);
 
+
+
 class commonUse extends Database
 {
+			
+			
+			/*$objFunc = new FunctionExtends();
+			$objFunc->compareURL();			*/
+			
+	
             function checkDuplicate($table,$field,$postvalue)
             {
                     $query="select ".$field." from ".$table." where ".$field."='".$postvalue."'";
@@ -818,6 +827,18 @@ class commonUse extends Database
                      break;
                 }
             }
+			
+		function compareURL($sessionURL,$crntURL)
+		{
+			//$crntURL = BASENAME($_SERVER['PHP_SELF']);
+			if(strcasecmp($sessionURL,$crntURL) != 0)
+			{
+				unset($_SESSION["filter"]);
+				unset($_SESSION["filter_field"]);
+				$_SESSION['URL'] = $crntURL; 
+			}	
+				
+		}	
     }
     $commonUses = new commonUse();
 ?>

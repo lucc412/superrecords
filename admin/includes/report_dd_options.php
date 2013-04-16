@@ -103,5 +103,9 @@ switch($selectedColumn) {
 	case "sent_items":
 		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("pr_tasklist", "task_Id", "task_Description", "task_Order");
 	break;
+	
+	case "job_status_id":
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("job_status", "job_status_id", "job_status", "Order");
+	break;
 }
 ?>

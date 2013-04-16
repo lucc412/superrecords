@@ -90,7 +90,7 @@ class SR_Report {
 				// for job page report case
 				case "job":
 						$otherTable = ", client cl, pr_practice pr";
-						$strAnd = "	AND j.client_id = cl.client_id
+						$strAnd = "	AND tbl.client_id = cl.client_id
 									AND cl.id = pr.id";
 				break;
 
@@ -104,13 +104,42 @@ class SR_Report {
 			}
 		}
 
+		// order by clause
+		switch($reportPageName)
+		{
+			// for lead page report case
+			case "lead":
+				$orderBy = "ORDER BY tbl.id desc";
+				break;
+			
+			// for client page report case
+			case "client":
+					$orderBy = "ORDER BY tbl.client_id desc";
+				break;	
+			
+			// for job page report case
+			case "job":
+					$orderBy = "ORDER BY tbl.job_id desc";
+				break;			  
+				 
+			// for practice page report case
+			case "pr_practice":
+					$orderBy = "ORDER BY tbl.id desc";
+				break;	
+				
+			// for task page report case
+			case "task":
+					$orderBy = "ORDER BY tbl.task_id desc";
+				break;
+		}
+
 		$qrySel = "SELECT {$strColumns}
 				   FROM {$reportPageName} tbl {$otherTable}
 				   WHERE 1
 				   {$strWhere}
 				   {$strAnd}
 				   {$strCondition}
-				   ORDER BY tbl.id desc";
+				   {$orderBy}";
 			
 		$fetchResult = mysql_query($qrySel);
 		while($row = mysql_fetch_assoc($fetchResult)) {
@@ -126,13 +155,17 @@ class SR_Report {
 	}
 
 	// This will fetch possible options of fields DD control type
-	public function fetch_dd_options($tableName, $selField1, $selField2, $tableOrder=NULL) {
-		
+	public function fetch_dd_options($tableName, $selField1, $selField2, $tableOrder=NULL, $strWhere=NULL) 
+	{
 		if(!empty($tableOrder))
 			$strOrder = "ORDER BY tbl.{$tableOrder}";
 		
+		if(!empty($strWhere))
+			$strWhere = "WHERE ".$strWhere;
+		
 		$qrySel = "SELECT tbl.{$selField1}, tbl.{$selField2}
-					FROM {$tableName} tbl
+					FROM {$tableName} tbl 
+					{$strWhere}
 					{$strOrder}";
 	
 		$fetchResult = mysql_query($qrySel);
@@ -167,18 +200,18 @@ class SR_Report {
 	} 
 
 	// This will fetch job names
-	public function fetchJobName() {
+	public function fetchJobName($selectedColumn) {
 	
-		$qrySel = "SELECT j.job_id, CONCAT_WS(' - ', c.client_name, j.period, m.mas_Description) jobName
+		$qrySel = "SELECT j.job_id, CONCAT_WS(' - ', c.client_name, j.period, m.mas_Description) jobName, j.job_name
 					 FROM job j, client c, mas_masteractivity m
 					 WHERE j.client_id = c.client_id
 					 AND j.mas_Code = m.mas_Code";
 		 
 		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrJobName[$rowData['job_id']] = $rowData['jobName'];
+		while($rowData = mysql_fetch_assoc($fetchResult))
+		{
+			$arrJobName[$rowData[$selectedColumn]] = $rowData['jobName'];
 		}
-		
 		return $arrJobName;	
 	} 
 

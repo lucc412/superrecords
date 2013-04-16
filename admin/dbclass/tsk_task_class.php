@@ -174,9 +174,14 @@ class Task_Class extends Database {
 		return $arrSubActivity;	
 	}  
 
-	public function sql_select($jobId)
+	public function sql_select($mode='',$recId='',$jobId='')
 	{		
-		
+		//print '$mode--->>> '.$mode.' <--$recId--> '.$recId.' <--$jobId--> '.$jobId;
+		global $filter;
+		global $filterfield;
+		global $wholeonly;
+		global $commonUses;	
+
 		$strWhere = "";		
 		if($_SESSION["usertype"] == "Staff") {	
 			$userId = $_SESSION["staffcode"];
@@ -185,16 +190,62 @@ class Task_Class extends Database {
 	
 		if($jobId)
 			$strWhere .= "AND t.job_id={$jobId}";
+
+		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))){				
 			
-		$qrySel = "SELECT t.*, pr.sr_manager, pr.india_manager, pr.sales_person, c.team_member
+			$qrySel = "SELECT t.*, pr.sr_manager, pr.india_manager, pr.sales_person, c.team_member
 					FROM task t, job j, client c, pr_practice pr
 					WHERE t.discontinue_date IS NULL 
 					AND t.job_id = j.job_id
 					AND j.client_id = c.client_id
 					AND c.id = pr.id 
+					AND t.task_id = ".$recId."
 					{$strWhere} 
-					ORDER BY t.task_id desc";
+					ORDER BY t.task_id DESC";
 
+		}else{
+			
+			$filterstr = $commonUses->sqlstr($filter);
+			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
+			
+			$qrySel = "SELECT t.*, s.*, cnt.*,j.*, pr.*, c.*, sa.*
+					FROM task t, job j, client c, pr_practice pr, stf_staff s, con_contact cnt, sub_subactivity sa
+					WHERE t.discontinue_date IS NULL 
+					AND t.job_id = j.job_id
+					AND j.client_id = c.client_id
+					AND c.id = pr.id 
+					AND sa.sub_Code = j.job_type_id
+					AND pr.sr_manager = s.stf_Code 
+					AND s.stf_CCode = cnt.con_Code 
+					{$strWhere} ";
+			
+			if(isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
+				
+				if($commonUses->sqlstr($filterfield) == 'sr_manager') {
+					$qrySel .= "AND (cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
+				}elseif($commonUses->sqlstr($filterfield) == 'job_name'){
+					$qrySel .= "AND (c.client_name like '".$filterstr."'
+								OR sa.sub_Description like '".$filterstr."'
+								OR j.period like '".$filterstr."')";
+					
+				}else{
+					$qrySel .= " AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
+				}
+				
+			}
+			elseif(isset($filterstr) && $filterstr!='') {
+				
+				$qrySel .= " AND (t.task_name like '" .$filterstr ."'
+					OR pr.name like '" .$filterstr ."' 
+					OR j.job_name like '". $filterstr ."'
+					OR cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
+					
+			}				
+
+			$qrySel .= " ORDER BY t.task_id DESC";
+				
+		}
+			
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
 			$arrTask[$rowData['task_id']] = $rowData;
@@ -227,7 +278,7 @@ class Task_Class extends Database {
 		
 		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, due_date, befree_due_date, created_date)
 				VALUES (
-				'" . $_REQUEST['txtTaskName'] . "', 
+				'" . addslashes($_REQUEST['txtTaskName']) . "', 
 				'" . $practiceId . "', 
 				'" . $clientId . "', 
 				'" . $jobId . "', 
@@ -262,7 +313,7 @@ class Task_Class extends Database {
 			$PracticeID = $this->arrClientDetails[$ClientID]["id"];
 
 			$qryUpd = "UPDATE task
-					SET task_name = '" . $_REQUEST['txtTaskName'] . "',
+					SET task_name = '" . addslashes($_REQUEST['txtTaskName']) . "',
 					id = '" . $PracticeID . "',
 					client_id = '" . $ClientID . "',
 					job_id = '" . $_REQUEST["jobId"] . "',
@@ -279,7 +330,7 @@ class Task_Class extends Database {
 		else {
 
 			$qryUpd = "UPDATE task
-					SET task_name = '" . $_REQUEST['txtTaskName'] . "',
+					SET task_name = '" . addslashes($_REQUEST['txtTaskName']) . "',
 					id = '" . $_REQUEST['lstPractice'] . "',
 					client_id = '" . $_REQUEST['lstClient'] . "',
 					job_id = '" . $_REQUEST['lstJob'] . "',

@@ -93,22 +93,70 @@ class Practice_Class extends Database {
 		return $arrStates;	
 	} 
 
-	public function sql_select() {
+	public function sql_select($mode='',$recId='') {	
+	
+		global $filter;
+		global $filterfield;
+		global $wholeonly;
+		global $commonUses;	
 
 		if($_SESSION['usertype'] == 'Staff')
 			$appendStr = "WHERE ( t1.sr_manager = {$_SESSION['staffcode']} 
 						OR t1.india_manager = {$_SESSION['staffcode']}
 						OR t1.sales_person = {$_SESSION['staffcode']})";
+						
+		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))){				
 
-		$qrySel = "SELECT t1.* 
-					FROM pr_practice t1 
-					{$appendStr}
-					ORDER BY t1.id desc";
+			$qrySel = "SELECT pr.* 
+						FROM pr_practice pr WHERE pr.id = ".$recId."
+						{$appendStr}
+						ORDER BY pr.id desc";
+			
+			$fetchResult = mysql_query($qrySel);		
+			while($rowData = mysql_fetch_assoc($fetchResult)) {
+				$arrPractices[$rowData['id']] = $rowData;
+			}
+					
+		}else{
+			
+			$filterstr = $commonUses->sqlstr($filter);
+			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
+			
+			$qrySel = "SELECT pr.id pracId, pr.type, pr.name, pr.sr_manager, pr.date_signed_up, prt.*, s.*, cnt.* 
+						FROM pr_practice pr, pr_type prt, stf_staff s, con_contact cnt 
+						WHERE pr.type = prt.id AND pr.sr_manager = s.stf_Code AND s.stf_CCode = cnt.con_Code 
+						{$strWhere} ";
+			
+			if(isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
+				
+				if($commonUses->sqlstr($filterfield) == 'sr_manager') {
+					$qrySel .= "AND (cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
+				}elseif($commonUses->sqlstr($filterfield) == 'type'){
+					$qrySel .= "AND prt.description like '". $filterstr ."'";
+				}else{
+					$qrySel .= " AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
+				}
+				
+			}
+			elseif(isset($filterstr) && $filterstr!='') {
+				
+				$qrySel .= " AND (pr.name like '" .$filterstr ."'
+					OR prt.description like '" .$filterstr ."' 
+					OR cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."'
+					OR pr.date_signed_up like '". $filterstr ."')";
+					
+			}				
 
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrPractices[$rowData['id']] = $rowData;
-		}
+			$qrySel .= " ORDER BY pracId DESC";
+			
+			$fetchResult = mysql_query($qrySel);		
+			while($rowData = mysql_fetch_assoc($fetchResult)) {
+				$arrPractices[$rowData['pracId']] = $rowData;
+			}
+			
+		}				
+
+		
 		return $arrPractices;	
 	}
 
@@ -139,7 +187,7 @@ class Practice_Class extends Database {
 		$qryIns = "INSERT INTO pr_practice(type, name, sr_manager, india_manager, street_adress, suburb, state, postcode, postal_address, main_contact_name, other_contact_name, phone_no, alternate_no, fax, email, password, date_signed_up, agreed_services, sent_items, sales_person)
 					VALUES (
 					'" . $_REQUEST['lstType'] . "', 
-					'" . $_REQUEST['refName'] . "', 
+					'" . addslashes($_REQUEST['refName']) . "', 
 					'" . $_REQUEST['lstSrManager'] . "', 
 					'" . $_REQUEST['lstManager'] . "', 
 					'" . $_REQUEST['street_Address'] . "', 
@@ -192,7 +240,7 @@ class Practice_Class extends Database {
 
 		$qryUpd = "UPDATE pr_practice
 				SET type = '" . $_REQUEST['lstType'] . "',
-				name = '" . $_REQUEST['refName'] . "',
+				name = '" . addslashes($_REQUEST['refName']) . "',
 				sr_manager = '" . $_REQUEST['lstSrManager'] . "',
 				india_manager = '" . $_REQUEST['lstManager'] . "',
 				street_adress = '" . $_REQUEST['street_Address'] . "',

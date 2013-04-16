@@ -9,6 +9,19 @@ include 'dbclass/pr_practice_class.php';
 $objCallData = new Practice_Class();
 
 if($_SESSION['validUser']) {
+	
+	if (isset($_POST["filter"])) $filter = @$_POST["filter"];
+	if (isset($_POST["filter_field"])) $filterfield = @$_POST["filter_field"];
+	$wholeonly = false;
+	if (isset($_POST["wholeonly"])) $wholeonly = @$_POST["wholeonly"];
+	
+	if (!isset($filter) && isset($_SESSION["filter"])) $filter = $_SESSION["filter"];
+	if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_SESSION["filter_field"];
+
+	if (isset($filter)) $_SESSION["filter"] = $filter;
+	if (isset($filterfield)) $_SESSION["filter_field"] = $filterfield;
+	if (isset($wholeonly)) $_SESSION["wholeonly"] = $wholeonly;	
+	
 	?><html>
 		<head>
 			<title>Manage Practice</title>
@@ -74,15 +87,40 @@ if($_SESSION['validUser']) {
 				$formcode = $commonUses->getFormCode("Manage Practice");
 				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
 
-				$arrPractice = $objCallData->sql_select();
+				$arrPractice = $objCallData->sql_select($a,$recid);
 				$arrPracticeData = $arrPractice[$recid];
 				include('views/pr_practice_view.php');
 				break;
 
 			case "edit":
-				$arrPractice = $objCallData->sql_select();
+				$arrPractice = $objCallData->sql_select($a,$recid);
 				$arrPracticeData = $arrPractice[$recid];
 				include('views/pr_practice_edit.php');
+				break;
+
+			case "reset":
+			
+				//Get FormCode
+				$formcode = $commonUses->getFormCode("Manage Practice");
+				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+				
+				// reset filter	
+				$filter = "";
+				$filterfield = "";
+				$wholeonly = "";
+				$checkstr = "";
+				if ($wholeonly) $checkstr = " checked";
+				 
+				//If View, Add, Edit, Delete all set to N
+				if($access_file_level == 0) {
+					echo "You are not authorised to view this file.";
+				}
+				else {
+					$arrPractice = $objCallData->sql_select();
+					include('views/pr_practice_list.php');
+				}
+				
+				//header('location: lead.php');
 				break;
 
 			default:
@@ -90,6 +128,9 @@ if($_SESSION['validUser']) {
 				//Get FormCode
 				$formcode = $commonUses->getFormCode("Manage Practice");
 				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+
+				$checkstr = "";
+				if ($wholeonly) $checkstr = " checked";
 
 				//If View, Add, Edit, Delete all set to N
 				if($access_file_level == 0) {

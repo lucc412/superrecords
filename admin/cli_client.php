@@ -158,19 +158,10 @@ if($_SESSION['validUser']) {
 				
 			default:
 			
-			
-			
 				//Get FormCode
 				$formcode = $commonUses->getFormCode("Manage Client");
 				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
 
-				if($a == "reset") {
-					
-					$filter = "";
-					$filterfield = "";
-					$wholeonly = "";
-				}
-				
 				$checkstr = "";
 				if ($wholeonly) $checkstr = " checked";
 				 

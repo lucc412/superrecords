@@ -2,8 +2,8 @@
 
 // define file path
 DEFINE("SITE_TITLE","Befree");
-DEFINE("PHPFUNCTION",$_SERVER['DOCUMENT_ROOT'] . "/include/php_functions.php");
-DEFINE("MAIL",$_SERVER['DOCUMENT_ROOT'] . "/include/send_mail.php");
+DEFINE("PHPFUNCTION",$_SERVER['DOCUMENT_ROOT'] . "jobtracker/include/php_functions.php");
+DEFINE("MAIL",$_SERVER['DOCUMENT_ROOT'] . "jobtracker/include/send_mail.php");
 
 DEFINE("REPORTFETCH",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/report_fetch.php");
 DEFINE("REPORTDISPLAY",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/report_display.php");

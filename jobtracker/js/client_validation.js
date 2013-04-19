@@ -54,7 +54,7 @@ function checkUnique(inputValue, entityId) {
 	var searchVal = $(this).val();
 
 	if (searchVal == $(that).val()) {
-		xmlhttp.open("GET","../ajax/clients.php?inputValue="+inputValue+"&entityId="+entityId+"&doAction=checkUnique",true);
+		xmlhttp.open("GET","/jobtracker/ajax/clients.php?inputValue="+inputValue+"&entityId="+entityId+"&doAction=checkUnique",true);
 		xmlhttp.send();
 	}
 }

@@ -24,8 +24,8 @@ RewriteEngine On
 
 ## Rule to change URL for Practice Login 
 #[27-Feb-13: Disha Goyal]
-RewriteRule ^jobtracker/$ controller/login.php
-RewriteRule ^jobtracker/(.*).php$ controller/$1.php
+RewriteRule ^jobtracker/$ jobtracker/login.php
+#RewriteRule ^jobtracker/(.*).php$ controller/$1.php
 ## Rule Ends Here
 
 ## Begin - Rewrite rules to block out some common exploits.

@@ -6,7 +6,9 @@
 //  Last Modified : 05-Feb-13
 //************************************************************************************************
 
-include '../include/connection.php';
+
+include $_SERVER['DOCUMENT_ROOT'].'jobtracker/include/connection.php';
+//include 'jobtracker/include/connection.php';
 
 $doAction = $_REQUEST['doAction'];
 $itemId = $_REQUEST['itemId'];

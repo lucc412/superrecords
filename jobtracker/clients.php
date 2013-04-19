@@ -1,5 +1,5 @@
 <?php
-include("../include/common.php");
+include("include/common.php");
 include(MODEL."client_class.php");
 
 $objScr = new Client();

@@ -1,5 +1,5 @@
 <?php
-include("../include/common.php");
+include("../../jobtracker/include/common.php");
 if($_REQUEST['a'] == 'logout') {
 	unset($_SESSION['PRACTICEID']);
 	unset($_SESSION['PRACTICE']);

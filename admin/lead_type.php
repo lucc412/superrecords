@@ -18,13 +18,7 @@ ob_start();
   if (!isset($filter) && isset($_SESSION["filter"])) $filter = $_SESSION["filter"];
   if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_SESSION["filter_field"];
 
-?>
-
-<html>
-<head>
-<title>Lead Type</title>
-<meta name="generator" http-equiv="content-type" content="text/html">
-<script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
+ include ("includes/header.php");?>
 <script>
 function validateFormOnSubmit()
 {
@@ -52,12 +46,10 @@ function ComfirmCancel(){
 }
 </script>
 
-</head>
-<body>
-<?php include ("includes/header.php");?>
+
 <br>
 
-<?php
+<?
   //Get FormCode
   $formcode=$commonUses->getFormCode("Lead Type");
 

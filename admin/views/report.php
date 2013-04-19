@@ -4,17 +4,12 @@
 	Last Modified By -> 16-Apr-2013 [Disha Goyal]	
 	Description: This is view file for all reports page	
 */
-
-?><html>
-	<head>
-		<title><?=$reportPageTitle?></title>
-		<meta name="generator" http-equiv="content-type" content="text/html">
-		<!--<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />-->
-		<script type="text/javascript" src="<?=$javaScript;?>report_validation.js"></script>
-		<script type="text/javascript" src="<?=$javaScript;?>datetimepicker.js"></script>
-	</head>
-	<body><?
-		include("includes/header.php");
+include("includes/header.php");
+?>
+	<title><?=$reportPageTitle?></title>
+	
+<?
+		
 
 		// error message if field name already exists
 		if(isset($_REQUEST['flagDuplicate']) &&  $_REQUEST['flagDuplicate'] == 'Y') {
@@ -176,5 +171,4 @@
 
 		include("includes/footer.php");
 	
-	?></body>
-</html>
+	?>

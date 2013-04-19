@@ -1,6 +1,7 @@
 <?php 
 include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
+include ("includes/header.php");
 if($_SESSION['validUser']){
 
 if (isset($_GET["order"])) $order = @$_GET["order"];
@@ -17,11 +18,6 @@ if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_S
 
 
 ?><html>
-<head>
-<title>Master Activity</title>
-<meta name="generator" http-equiv="content-type" content="text/html">
-<script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
-<script type="text/javascript" src="ajax.js"></script>
 
 <script>
 function validateFormOnSubmit()
@@ -54,9 +50,7 @@ function ComfirmCancel(){
    }
 }
 </script>
-</head>
-<body>
-<?php include ("includes/header.php");?><br>
+<br/>
 <?php
   //Get FormCode
   $formcode=$commonUses->getFormCode("Master Activity");
@@ -161,8 +155,7 @@ function ComfirmCancel(){
 include("includes/footer.php");
 ?>
 
-</body>
-</html>
+
 <?php }  
 else
 {

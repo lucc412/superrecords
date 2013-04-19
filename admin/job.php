@@ -24,30 +24,20 @@ if($_SESSION['validUser']) {
 
 	// do not include below code when file 'download' case is called
 	if($_REQUEST['sql'] != 'download') {
-		?><html>
-			<head>
-				<title>Job List</title><?
-				if($_REQUEST["a"] == "uploadReports") {
-					?><link rel="stylesheet" type="text/css" href="css/stylesheet.css"/><?
-				}
-				?><meta name="generator" http-equiv="content-type" content="text/html">
-				<script type="text/javascript" src="<?php echo $javaScript;?>datetimepicker.js"></script>
-				<script type="text/javascript" src="<?php echo $javaScript;?>validate.js"></script>
-				<script type="text/javascript" src="<?php echo $javaScript;?>job.js"></script>
-				<script type="text/javascript" src="<?php echo $javaScript;?>jquery-1.4.2.min.js"></script>
-			</head>
-
-			<body><?
-	}
-
-			$a = $_REQUEST["a"];
-			$sql = $_REQUEST["sql"];
-			$filter = $_REQUEST["filter"];
 		
-			if($a != "uploadReports") include("includes/header.php");	
-			
-			
-			?><br><?
+		
+		?><?
+		
+		if($_REQUEST["a"] == "uploadReports") {
+			?><link rel="stylesheet" type="text/css" href="css/stylesheet.css"/><?
+		}
+		
+	}
+	if($a != "uploadReports") include("includes/header.php"); 
+	$a = $_REQUEST["a"];
+	$sql = $_REQUEST["sql"];
+	$filter = $_REQUEST["filter"];
+	?><br/><?
 			
 			// db query as per request
 			switch ($sql) {

@@ -1,6 +1,7 @@
 <?php 
      include 'common/varDeclare.php';
      include 'dbclass/commonFunctions_class.php';
+	 include ("includes/header.php");
   if($_SESSION['validUser'])
   {
 
@@ -18,17 +19,7 @@
   if (!isset($filter) && isset($_SESSION["filter"])) $filter = $_SESSION["filter"];
   if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_SESSION["filter_field"];
 ?>
-
-<html>
-<head>
-<title>IP Address</title>
-<meta name="generator" http-equiv="content-type" content="text/html">
-<script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
-<script type="text/javascript" src="<?php echo $javaScript; ?>ipaddress.js"></script>
-</head>
-<body>
-<?php include ("includes/header.php");?>
-<br>
+<br/>
 
 <?php
    $myip = gethostbyname($_SERVER['SERVER_NAME']);

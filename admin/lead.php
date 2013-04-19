@@ -21,18 +21,7 @@ if($_SESSION['validUser']) {
 	if (isset($filterfield)) $_SESSION["filter_field"] = $filterfield;
 	if (isset($wholeonly)) $_SESSION["wholeonly"] = $wholeonly;	
 	
-	?><html>
-		<head>
-			<title>Manage Lead</title>
-			<meta name="generator" http-equiv="content-type" content="text/html">
-			<script type="text/javascript" src="<?php echo $javaScript; ?>datetimepicker.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript; ?>lead_validate.js"></script>
-			
-			<!-- Added by Yogi 24-1-2013 for Not succefull drop down -->
-		</head>
-
-		<body><?
+	
 			include("includes/header.php");?><br><?
 
 			$a = $_REQUEST["a"];

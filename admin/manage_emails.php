@@ -10,26 +10,14 @@ ob_start();
 /* Include common functions files */
 include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
-
+include("includes/header.php");
 /* include class file & create class object for class function access */
 include 'dbclass/manage_emails_class.php';
 $objCallData = new Manage_Emails();
 
 if($_SESSION['validUser']) {
-	?><html><?
-
-		/* Meta content of this file */
-		?><head>
-			<title>Manage Emails</title>
-			<meta name="generator" http-equiv="content-type" content="text/html">
-			<script type="text/javascript" src="<?=$javaScript;?>manage_emails.js"></script>
-			<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-		</head>
-
-		<body><?
-
-			/* include header file */
-			include("includes/header.php");?><br><?
+	
+?><br/><?
 
 			// set request variables here
 			$doAction = $_REQUEST["doAction"]?$_REQUEST["doAction"]:'';

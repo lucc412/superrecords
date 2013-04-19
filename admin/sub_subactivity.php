@@ -2,6 +2,7 @@
 session_start();
 include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
+include ("includes/header.php");
 if($_SESSION['validUser']) {
 
 	  if (isset($_GET["order"])) $order = @$_GET["order"];
@@ -21,12 +22,8 @@ if($_SESSION['validUser']) {
 		header("Location:dbclass/generate_excel_class.php?report=subactivity");
 	  }
 
-	?><html>
-	<head>
-	<title>Sub Activity</title>
-	<meta name="generator" http-equiv="content-type" content="text/html">
-	<script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
-	<script type="text/javascript" src="ajax.js"></script>
+	?>
+	
 	<script>
 	function validateFormOnSubmit()
 	{
@@ -65,10 +62,8 @@ if($_SESSION['validUser']) {
 	   }
 	}
 	</script>
-	</head>
-	<body>
-	<?php include ("includes/header.php");?>
-	<br>
+	
+	<br/>
 	<?php
 	  //Get FormCode
 	  $formcode=$commonUses->getFormCode("Sub Activity");
@@ -174,11 +169,6 @@ if($_SESSION['validUser']) {
 	  mysql_close();
 	  }
 include("includes/footer.php");
-	?>
-
-	</body>
-	</html>
-	<?php 
 }  
 else {
 	header("Location:index.php?msg=timeout");

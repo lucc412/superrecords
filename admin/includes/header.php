@@ -106,6 +106,13 @@ $_SESSION['timeout'] = time();
         <link rel="stylesheet" href="as/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
         <script type="text/javascript" src="as/js/bsn.AutoSuggest_2.1.3.js" charset="utf-8"></script>
         <script language="JavaScript" src="<?php echo $javaScript; ?>cases.js"></script><?	
+	}else if(basename($_SERVER['PHP_SELF']) == 'tickets.php') {
+		?><title>Tickets</title>
+        <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-ui-1.8.custom.min.js"></script>
+        <link rel="stylesheet" href="as/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
+        <script type="text/javascript" src="as/js/bsn.AutoSuggest_2.1.3.js" charset="utf-8"></script>
+        <script language="JavaScript" src="<?php echo $javaScript; ?>cases.js"></script><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'stf_ipaddress.php') {
 		?><title>IP Address</title>
 		<script type="text/javascript" src="<?php echo $javaScript; ?>ipaddress.js"></script><?	
@@ -459,7 +466,7 @@ $_SESSION['timeout'] = time();
 									$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],43,1);
 									if(is_array($access_submenu_level)==1) {
 										if(in_array("Y",$access_submenu_level)) {   
-											?><li><a href="cas_cases.php?a=reset">Tickets</a></li><?
+											?><li><a href="tickets.php?a=reset">Tickets</a></li><?
 										}
 									} 
 

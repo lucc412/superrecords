@@ -8,7 +8,7 @@
 
 // include all required files for this screen
 //include 'jobtracker/include/connection.php';
-include $_SERVER['DOCUMENT_ROOT'].'jobtracker/include/connection.php';
+include $_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/connection.php';
 
 // call required class file functions 
 $returnStr = "";

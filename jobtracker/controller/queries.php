@@ -1,5 +1,5 @@
 <?php
-include("../include/common.php");
+include("../../jobtracker/include/common.php");
 include(MODEL."queries_class.php");
 
 $objScr = new Query();

@@ -4,6 +4,8 @@
     include 'dbclass/cases_content_class.php';
     include 'dbclass/cases_db_class.php';
     include 'dbclass/client_mail_class.php';
+	include ("includes/header.php");
+	
   if($_SESSION['validUser'])
   {
           if (isset($_GET["order"])) $order = @$_GET["order"];
@@ -16,24 +18,7 @@
           if (!isset($ordtype) && isset($_SESSION["type"])) $ordtype = $_SESSION["type"];
           if (!isset($filter) && isset($_SESSION["filter"])) $filter = $_SESSION["filter"];
           if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_SESSION["filter_field"];
-        ?>
-        <html>
-            <head>
-                <title>Tickets</title>
-                <meta name="generator" http-equiv="content-type" content="text/html">
-                <LINK href="<?php echo $styleSheet; ?>Style.css" rel="stylesheet" type="text/css">
-                <LINK href="<?php echo $styleSheet; ?>tooltip.css" rel="stylesheet" type="text/css">
-                <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-1.4.2.min.js"></script>
-                <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-ui-1.8.custom.min.js"></script>
-                <link rel="stylesheet" href="as/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
-                <script type="text/javascript" src="as/js/bsn.AutoSuggest_2.1.3.js" charset="utf-8"></script>
-                <script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
-                <script language="JavaScript" src="<?php echo $javaScript; ?>datetimepicker.js"></script>
-                <script language="JavaScript" src="<?php echo $javaScript; ?>cases.js"></script>
-            </head>
-            <body>
-                <?php include ("includes/header.php");?><br>
-                 <?php
+        
                     //Get FormCode
                   $formcode=$commonUses->getFormCode("Cases");
                   //Call CheckAccess function by passing $_SESSION of staff code and form code

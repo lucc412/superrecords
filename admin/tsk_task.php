@@ -10,6 +10,7 @@ include 'common/varDeclare.php';
 include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/tsk_task_class.php';
+include("includes/header.php");
 
 // create class object for class function access
 $objCallData = new Task_Class();
@@ -28,21 +29,7 @@ if($_SESSION['validUser']) {
 	if (isset($filterfield)) $_SESSION["filter_field"] = $filterfield;
 	if (isset($wholeonly)) $_SESSION["wholeonly"] = $wholeonly;	
 	
-	?><html>
-		<head>
-			<title>Task</title>
-			<meta name="generator" http-equiv="content-type" content="text/html">
-			<LINK href="<?=$styleSheet;?>stylesheet.css" rel="stylesheet" type="text/css">
-			<LINK href="<?=$styleSheet;?>tooltip.css" rel="stylesheet" type="text/css">
-	
-			<script type="text/javascript" src="<?=$javaScript;?>validate.js"></script>
-			<script type="text/javascript" src="<?=$javaScript;?>tsk_task_validate.js"></script>
-			<script type="text/javascript" src="<?=$javaScript;?>datetimepicker.js"></script>
-			<script type="text/javascript" src="<?=$javaScript;?>jquery-1.4.2.min.js"></script>
-		</head>
-
-		<body><?
-			include("includes/header.php");?><br><?
+	?><br/><?
 
 			$a = $_REQUEST["a"];
 			$recid = $_REQUEST["recid"];
@@ -201,8 +188,7 @@ if($_SESSION['validUser']) {
 		
 		include("includes/footer.php");	
 		
-		?></body>
-	</html><?
+		
 }  
 else {
 	header("Location:index.php?msg=timeout");

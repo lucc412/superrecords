@@ -3,6 +3,7 @@
         include 'dbclass/commonFunctions_class.php';
         include 'dbclass/con_empcontact_class.php';
         include 'dbclass/con_empcontact_db_class.php';
+		include ("includes/header.php");
         
   if($_SESSION['validUser'])
   {
@@ -17,21 +18,7 @@
       if (!isset($filter) && isset($_SESSION["filter"])) $filter = $_SESSION["filter"];
       if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_SESSION["filter_field"];
     ?>
-
-    <html>
-        <head>
-            <title>Employee Contact</title>
-            <meta name="generator" http-equiv="content-type" content="text/html">
-            <LINK href="<?php echo $styleSheet; ?>empcontact.css" rel="stylesheet" type="text/css">
-            <link rel="stylesheet" href="as/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
-            <script language="JavaScript" src="<?php echo $javaScript; ?>datetimepicker.js"></script>
-            <script type="text/javascript" src="as/js/bsn.AutoSuggest_2.1.3.js" charset="utf-8"></script>
-            <script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
-            <script type="text/javascript" src="<?php echo $javaScript; ?>empcontact.js"></script>
-        </head>
-        <body>
-            <?php include ("includes/header.php");?>
-            <br>
+	<br/>
             <?php
               //Get FormCode
               $formcode=$commonUses->getFormCode("Employee Contact");

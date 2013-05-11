@@ -4,6 +4,7 @@ include 'common/varDeclare.php';
 include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/pr_practice_class.php';
+include("includes/header.php");
 
 // create class object for class function access
 $objCallData = new Practice_Class();
@@ -22,17 +23,8 @@ if($_SESSION['validUser']) {
 	if (isset($filterfield)) $_SESSION["filter_field"] = $filterfield;
 	if (isset($wholeonly)) $_SESSION["wholeonly"] = $wholeonly;	
 	
-	?><html>
-		<head>
-			<title>Manage Practice</title>
-			<meta name="generator" http-equiv="content-type" content="text/html">
-			<script type="text/javascript" src="<?php echo $javaScript; ?>datetimepicker.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript; ?>pr_validate.js"></script>
-		</head>
 
-		<body><?
-			include("includes/header.php");?><br><?
+			?><br/><?
 
 			$a = $_REQUEST["a"];
 			$recid = $_REQUEST["recid"];
@@ -144,8 +136,7 @@ if($_SESSION['validUser']) {
 			}
 			
 		include("includes/footer.php");
-		?></body>
-	</html><?
+		
 }  
 else {
 	header("Location:index.php?msg=timeout");

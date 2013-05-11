@@ -12,9 +12,9 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 		<meta http-equiv="X-UA-Compatible" content="IE=9" />
 		<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
 		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
-		<link href="../images_user/favicon.ico" rel="shortcut icon" />
+		<link href="images_user/favicon.ico" rel="shortcut icon" />
 		<!-- Main CSS-->
-		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css"/>
+		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
 		<!-- Google Webfont -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'><?
 
@@ -43,12 +43,12 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 			else {
 				?><title>View My Job List</title><?
 			}
-			?><script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
-			<script type="text/javascript" src="../js/job_validation.js"></script><?
+			?><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+			<script type="text/javascript" src="js/job_validation.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'queries.php') {
 			?><title>View All Queries</title>
-			<script type="text/javascript" src="../js/queries_validation.js"></script><?
+			<script type="text/javascript" src="js/queries_validation.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'clients.php') {
 			if($qryStr == 'a=add') {
@@ -60,8 +60,8 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 			else {
 				?><title>View My Client List</title><?
 			}
-			?><script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
-			<script type="text/javascript" src="../js/client_validation.js"></script><?
+			?><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+			<script type="text/javascript" src="js/client_validation.js"></script><?
 		}
 		else {
 			?><title>Home</title><?
@@ -83,7 +83,7 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 				?><div class="header">
 					<div class="container">
 						<div class="branding">
-							<a href="home.php"><img src="../images_user/header-logo.png" /></a>
+							<a href="home.php"><img src="images_user/header-logo.png" /></a>
 						</div> <!--branding-->
 						<div class="user">        	
 							<span style="color:#074263">Welcome,</span> <span><?=$_SESSION['PRACTICE'];?></span>

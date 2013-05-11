@@ -1,5 +1,5 @@
 <?php
-include("../include/common.php");
+include("include/common.php");
 include(MODEL."job_class.php");
 
 $objScr = new Job();

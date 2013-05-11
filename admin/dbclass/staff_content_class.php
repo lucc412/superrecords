@@ -133,7 +133,7 @@ class staffContentList extends Database
 		{
 			global $commonUses;
 
-			?><table align="center" border="0" cellspacing="10" cellpadding="5" width="50%">
+			?><table align="left" border="0" cellspacing="10" cellpadding="5" width="50%">
 				 <tr>
 					<td class="hr">Contact Name</td>
 					<td class="dr"><?php echo $commonUses->getFirstLastName($row["stf_Code"]) ?></td>

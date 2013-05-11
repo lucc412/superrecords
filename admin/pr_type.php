@@ -1,6 +1,8 @@
 <?php
      include 'common/varDeclare.php';
      include 'dbclass/commonFunctions_class.php';
+	 include ("includes/header.php");
+	 
   if($_SESSION['validUser'])
   {
 
@@ -20,11 +22,7 @@
 
 ?>
 
-<html>
-<head>
-<title>Practice Type</title>
-<meta name="generator" http-equiv="content-type" content="text/html">
-<script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
+
 <script>
 function validateFormOnSubmit()
 {
@@ -51,11 +49,6 @@ function ComfirmCancel(){
    }
 }
 </script>
-
-</head>
-<body>
-<?php include ("includes/header.php");?>
-
 
 <?php
   //Get FormCode
@@ -160,8 +153,6 @@ function ComfirmCancel(){
 include("includes/footer.php");
 ?>
 
-</body>
-</html>
 <?php }
 else
 {

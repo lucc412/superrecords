@@ -153,7 +153,7 @@ function selectOptions(listName) {
 
 	if(item_id != '')
 	{
-		ajaxUrl = '../ajax/jobs.php?doAction='+listName+'&itemId='+item_id;
+		ajaxUrl = '/jobtracker/ajax/jobs.php?doAction='+listName+'&itemId='+item_id;
 		var code = $('.lst'+listName).val();
 
 	  	var response = $.ajax({

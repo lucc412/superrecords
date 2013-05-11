@@ -147,7 +147,7 @@ class Query {
 		$qryUpd = "UPDATE queries
 					SET response = '" . addslashes($_REQUEST['txtResponse'.$queryId]) . "',date_answered= '" .$responseDate. "'
 					WHERE query_id = '" . $queryId . "'";
-					
+			
 		mysql_query($qryUpd);
 
 		foreach($_FILES AS $fieldName => $imageInfo){
@@ -171,17 +171,18 @@ class Query {
 	}
 
 	public function sql_update_all($arrResponse) {
+		$responseDate = date('Y-m-d');
 
 		foreach($arrResponse AS $queryId => $strResponse) {
 			$whenStr  .= " WHEN query_id = " . $queryId . " THEN '" . addslashes($strResponse) . "' ";
 		}
 
 		$qryUpd = "UPDATE queries 
-					SET response = 
+					SET date_answered = '".$responseDate."', response = 
 						CASE 
 							{$whenStr} 
 						END
-					WHERE 1";
+					WHERE 2";
 
 		mysql_query($qryUpd);
 

@@ -195,7 +195,7 @@ switch ($a)
 			else	
 				$due_date = "";
 			
-			?><body>
+			?>
 			<table border="0" cellspacing="1" cellpadding="4" align="left">
 				<tr>
 					<td><!--#0e4d7a-->
@@ -317,7 +317,7 @@ switch ($a)
 				<button type="submit" value="Update" name="btnJob">Update</button></td>
 				<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 				<input type="hidden" name="a" value="edit">
-			</form></body>
+			</form>
 	<?php
 		break;
 	// Case to load Job details tab of selected Job, Ends here.
@@ -804,7 +804,7 @@ switch ($a)
 	// Case to load list of Jobs with edit button, Begins here.
 	default:
 	
-			?><body><form method="POST" name="frmJobList" action="job.php">
+			?><form method="POST" name="frmJobList" action="job.php">
 			<div class="frmheading">
 				<h1>Job List</h1>
 			</div>
@@ -906,7 +906,7 @@ switch ($a)
 
 					?></tr><?
 				}
-			?></table><br></form></body><?
+			?></table><br></form><?
 		break;
 		
 		

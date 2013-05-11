@@ -3,22 +3,14 @@ ob_start();
 include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/rf_referrer_class.php';
+include("includes/header.php");
 
 // create class object for class function access
 $objCallData = new Referrer_Class();
 
 if($_SESSION['validUser']) {
-	?><html>
-		<head>
-			<title>Manage Referrer</title>
-			<meta name="generator" http-equiv="content-type" content="text/html">
-			<script type="text/javascript" src="<?php echo $javaScript; ?>datetimepicker.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
-			<script type="text/javascript" src="<?php echo $javaScript; ?>rf_validate.js"></script>
-		</head>
-
-		<body><?
-			include("includes/header.php");?><br><?
+	
+			?><br><?
 
 			$a = $_REQUEST["a"];
 			$recid = $_REQUEST["recid"];

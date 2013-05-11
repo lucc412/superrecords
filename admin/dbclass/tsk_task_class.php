@@ -172,11 +172,9 @@ class Task_Class extends Database {
 			$arrSubActivity[$rowData['sub_Code']] = $rowData['sub_Description'];
 		}
 		return $arrSubActivity;	
-	}  
+	}
 
-	public function sql_select($mode='',$recId='',$jobId='')
-	{		
-		//print '$mode--->>> '.$mode.' <--$recId--> '.$recId.' <--$jobId--> '.$jobId;
+	public function sql_select($mode='',$recId='',$jobId='') {		
 		global $filter;
 		global $filterfield;
 		global $wholeonly;
@@ -191,19 +189,19 @@ class Task_Class extends Database {
 		if($jobId)
 			$strWhere .= "AND t.job_id={$jobId}";
 
-		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))){				
+		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))) {				
 			
 			$qrySel = "SELECT t.*, pr.sr_manager, pr.india_manager, pr.sales_person, c.team_member
 					FROM task t, job j, client c, pr_practice pr
 					WHERE t.discontinue_date IS NULL 
 					AND t.job_id = j.job_id
 					AND j.client_id = c.client_id
-					AND c.id = pr.id 
+					AND c.id = pr.id
 					AND t.task_id = ".$recId."
-					{$strWhere} 
 					ORDER BY t.task_id DESC";
-
-		}else{
+		}
+		// listing case
+		else {
 			
 			$filterstr = $commonUses->sqlstr($filter);
 			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";

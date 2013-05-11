@@ -101,15 +101,16 @@ class Practice_Class extends Database {
 		global $commonUses;	
 
 		if($_SESSION['usertype'] == 'Staff')
-			$appendStr = "WHERE ( t1.sr_manager = {$_SESSION['staffcode']} 
-						OR t1.india_manager = {$_SESSION['staffcode']}
-						OR t1.sales_person = {$_SESSION['staffcode']})";
-						
-		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))){				
+			$appendStr = "AND ( pr.sr_manager = {$_SESSION['staffcode']} 
+						OR pr.india_manager = {$_SESSION['staffcode']}
+						OR pr.sales_person = {$_SESSION['staffcode']})";
+
+		// view & edit case				
+		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))) {				
 
 			$qrySel = "SELECT pr.* 
-						FROM pr_practice pr WHERE pr.id = ".$recId."
-						{$appendStr}
+						FROM pr_practice pr 
+						WHERE pr.id = ".$recId."
 						ORDER BY pr.id desc";
 			
 			$fetchResult = mysql_query($qrySel);		
@@ -117,45 +118,52 @@ class Practice_Class extends Database {
 				$arrPractices[$rowData['id']] = $rowData;
 			}
 					
-		}else{
+		}
+		// listing case		
+		else {
 			
 			$filterstr = $commonUses->sqlstr($filter);
 			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
 			
 			$qrySel = "SELECT pr.id pracId, pr.type, pr.name, pr.sr_manager, pr.date_signed_up, prt.*, s.*, cnt.* 
 						FROM pr_practice pr, pr_type prt, stf_staff s, con_contact cnt 
-						WHERE pr.type = prt.id AND pr.sr_manager = s.stf_Code AND s.stf_CCode = cnt.con_Code 
-						{$strWhere} ";
+						WHERE pr.type = prt.id 
+						AND pr.sr_manager = s.stf_Code 
+						AND s.stf_CCode = cnt.con_Code 
+						{$appendStr}";
 			
+			// filter on selected fields
 			if(isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
 				
 				if($commonUses->sqlstr($filterfield) == 'sr_manager') {
 					$qrySel .= "AND (cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
-				}elseif($commonUses->sqlstr($filterfield) == 'type'){
-					$qrySel .= "AND prt.description like '". $filterstr ."'";
-				}else{
-					$qrySel .= " AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
 				}
-				
+				elseif($commonUses->sqlstr($filterfield) == 'type'){
+					$qrySel .= "AND prt.description like '". $filterstr ."'";
+				}
+				else{
+					$qrySel .= "AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
+				}
 			}
+			// filter on all fields
 			elseif(isset($filterstr) && $filterstr!='') {
 				
 				$qrySel .= " AND (pr.name like '" .$filterstr ."'
-					OR prt.description like '" .$filterstr ."' 
-					OR cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."'
-					OR pr.date_signed_up like '". $filterstr ."')";
+							OR prt.description like '" .$filterstr ."' 
+							OR cnt.con_Firstname like '". $filterstr ."' 
+							OR cnt.con_Middlename like '". $filterstr ."' 
+							OR cnt.con_Lastname like '". $filterstr ."'
+							OR pr.date_signed_up like '". $filterstr ."')";
 					
-			}				
+			}			
 
 			$qrySel .= " ORDER BY pracId DESC";
-			
+	
 			$fetchResult = mysql_query($qrySel);		
 			while($rowData = mysql_fetch_assoc($fetchResult)) {
 				$arrPractices[$rowData['pracId']] = $rowData;
 			}
-			
-		}				
-
+		}	
 		
 		return $arrPractices;	
 	}

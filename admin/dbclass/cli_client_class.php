@@ -98,7 +98,6 @@ class Practice_Class extends Database
 			$qrySel = "SELECT cl.*, pr.sr_manager, pr.india_manager, cl.team_member, pr.sales_person 
 					FROM client cl, pr_practice pr
 					WHERE pr.id = cl.id AND cl.client_id = ".$recId."
-					{$strWhere}
 					ORDER BY cl.client_id DESC";	
 		}
 		else{
@@ -110,7 +109,8 @@ class Practice_Class extends Database
 				$qrySel = "SELECT cl.*, s.*, cnt.*, pr.sr_manager, pr.india_manager, cl.team_member, pr.sales_person 
 							FROM client cl, pr_practice pr, client_type clt, stf_staff s, con_contact cnt
 							WHERE cl.id = pr.id and cl.client_type_id  = clt.client_type_id
-							AND pr.sr_manager = s.stf_Code AND s.stf_CCode = cnt.con_Code 
+							AND pr.sr_manager = s.stf_Code 
+							AND s.stf_CCode = cnt.con_Code 
 							{$strWhere}";
 
 
@@ -118,7 +118,8 @@ class Practice_Class extends Database
 				
 				if($commonUses->sqlstr($filterfield) == 'sr_manager') {
 					$qrySel .= "AND (cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
-				}else{
+				}
+				else{
 					$qrySel .= " AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
 				}
 				

@@ -139,7 +139,7 @@ class Lead_Class extends Database {
 		$strWhere = "";
 		if($_SESSION["usertype"]=="Staff") {
 			if($_SESSION['staffcode'] != '112' && $_SESSION['staffcode'] != '114') {
-				$strWhere="WHERE sr_manager=".$userId;
+				$strWhere="AND sr_manager=".$userId;
 			}
 		}
 		
@@ -153,7 +153,7 @@ class Lead_Class extends Database {
 				$arrLead[$rowData['id']] = $rowData;
 			}
 		}
-		else{
+		else {
 			$filterstr = $commonUses->sqlstr($filter);
 			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
 			
@@ -162,23 +162,29 @@ class Lead_Class extends Database {
 						WHERE t1.lead_type = lt.id AND t1.sales_person = s.stf_Code AND s.stf_CCode = cnt.con_Code 
 						{$strWhere} ";
 			
+			// filter on selected fields
 			if(isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
 				
 				if($commonUses->sqlstr($filterfield) == 'sales_person') {
 					$qrySel .= "AND (cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
-				}elseif($commonUses->sqlstr($filterfield) == 'lead_type'){
+				}
+				elseif($commonUses->sqlstr($filterfield) == 'lead_type'){
 					$qrySel .= "AND lt.description like '". $filterstr ."'";
-				}else{
+				}
+				else{
 					$qrySel .= " AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
 				}
 				
 			}
+			// all fields filter
 			elseif(isset($filterstr) && $filterstr!='') {
 				
 				$qrySel .= " AND (lt.description like '" .$filterstr ."' 
-					OR t1.lead_name like '" .$filterstr ."'
-					OR cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."'
-					OR t1.date_received like '". $filterstr ."')";
+							OR t1.lead_name like '" .$filterstr ."'
+							OR cnt.con_Firstname like '". $filterstr ."' 
+							OR cnt.con_Middlename like '". $filterstr ."' 
+							OR cnt.con_Lastname like '". $filterstr ."'
+							OR t1.date_received like '". $filterstr ."')";
 					
 			}				
 
@@ -190,7 +196,6 @@ class Lead_Class extends Database {
 			}
 			
 		}
-		
 		
 		return $arrLead;	
 	}

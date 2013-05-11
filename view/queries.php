@@ -50,7 +50,7 @@ include(TOPBAR);
 						?><option <?=$selectStr?> value="<?=$jobId?>"><?=$jobName?></option><?php 
 					}
 				?></select>
-				<button align="right" type="button" style="width:100px;" onclick="javascript:this.form.submit();" value="Save All">Save All</button>
+				<!--<button align="right" type="button" style="width:100px;" onclick="javascript:this.form.submit();" value="Save All">Save All</button>-->
 			</td>
 		</tr>
 	</table></br><?

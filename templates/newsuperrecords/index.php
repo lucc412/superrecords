@@ -269,11 +269,11 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 
 		<div class="footer">
 			<div class="container">
-				<ul>
+				<!--<ul>
 					<li><a href="#">Privacy Policy</a></li>
 					<li><a href="#">Terms & Conditions</a></li>
-				</ul>
-				<span>Copyright Super Records © 2013 | <a title="Website Design Sydney" target="_blank" href="http://www.quikclicks.com.au">Web Design Sydney</a> by <a title="Web Design Company" target="_blank" href="http://www.quikclicks.com.au">Quikclicks</a></span>
+				</ul>-->
+				<span>Copyright Super Records © 2013</span>
 			</div>
 		</div> 
 	</body>

@@ -47,7 +47,7 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 			/* send mail function ends here */
 		}	
 
-		header("Location: queries.php?flagUpdate=Y");
+		header("Location: queries.php?flagUpdate=Y&lstJob={$_REQUEST['lstJob']}");
 	}
 	else {
 		foreach($_REQUEST AS $varName => $varValue) {
@@ -99,7 +99,7 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 			/* send mail function ends here */
 		}
 
-		header("Location: queries.php?flagUpdate=A");
+		header("Location: queries.php?flagUpdate=A&lstJob={$_REQUEST['lstJob']}");
 	}
 }
 else if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'download') {

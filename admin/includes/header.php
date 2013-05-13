@@ -55,7 +55,7 @@ $_SESSION['timeout'] = time();
 	}else if(basename($_SERVER['PHP_SELF']) == 'pr_practice.php') {
 		?><title>Manage Practice</title>
 		<script type="text/javascript" src="<?php echo $javaScript; ?>pr_validate.js"></script><?	
-	}else if(basename($_SERVER['PHP_SELF']) == 'pr_service.php') {
+	}else if(basename($_SERVER['PHP_SELF']) == 'pr_services.php') {
 		?><title>Practice Services</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'pr_tasklist.php') {
 		?><title>Practice Items List</title><?	
@@ -97,7 +97,7 @@ $_SESSION['timeout'] = time();
 	}else if(basename($_SERVER['PHP_SELF']) == 'stf_staff.php') {
 		?><title>Users</title>
 		<script type="text/javascript" src="<?php echo $javaScript ; ?>staff.js"></script><?	
-	}else if(basename($_SERVER['PHP_SELF']) == 'dsg_designations.php') {
+	}else if(basename($_SERVER['PHP_SELF']) == 'dsg_designation.php') {
 		?><title>Designations</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'cas_cases.php') {
 		?><title>Tickets</title>

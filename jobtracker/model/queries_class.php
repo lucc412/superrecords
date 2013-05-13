@@ -131,7 +131,6 @@ class Query {
  		$qrySel = "SELECT sa.sub_Code, sa.sub_Description
 					FROM mas_masteractivity ma, sub_subactivity sa
 					WHERE ma.mas_Code = sa.sas_Code
-					AND ma.Code = 'SMSF'
 					ORDER BY sa.sub_Order";
 
 		$fetchResult = mysql_query($qrySel);		

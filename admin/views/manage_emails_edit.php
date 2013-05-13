@@ -56,6 +56,11 @@
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">JOBNAME</div><?
 					}
 
+					if($eventId == '5') {
+						?><div style="padding-bottom:5px;color:red;font-weight:bold">DOCNAME</div>
+						<div style="padding-bottom:5px;color:red;font-weight:bold">DATETIME</div><?
+					}
+
 					?><script type="text/javascript">
 					//<![CDATA[
 

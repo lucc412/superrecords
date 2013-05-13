@@ -241,11 +241,14 @@ class Job {
 
 	public function upload_document()
 	{
-		$qrySel = "SELECT max(document_id) docId 
+		$qrySel = "SELECT max(document_id) docId
 					FROM documents";
+
 		$objResult = mysql_query($qrySel);
 		$arrInfo = mysql_fetch_assoc($objResult);
 		$fileId = $arrInfo['docId'];
+
+		$currentTime = date('Y-m-d H:i:s');
 
 		$fileId++;
 		$origFileName = stripslashes($_FILES['fileDoc']['name']);
@@ -261,12 +264,24 @@ class Job {
 						VALUES(
 						".$_REQUEST['lstJob'].", 
 						'". addslashes($_REQUEST['txtDocTitle']) ."', 
-						'". addslashes($fileName) ."', 
-						NOW() 
+						'". addslashes($fileName) ."',
+						'" . $currentTime . "'
 						)";
 				mysql_query($qryIns);
+				$docId = mysql_insert_id();
 			}
 		}
+
+		$qrySel = "SELECT date
+					FROM documents
+					WHERE document_id = {$docId}";
+
+		$objRes = mysql_query($qrySel);
+		$arrResult = mysql_fetch_row($objRes);
+		$currentTime = $arrResult['0'];
+
+		$returnPath = $origFileName . '~' . $currentTime;
+		return $returnPath;
 	}
 	
 

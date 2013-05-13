@@ -87,7 +87,7 @@ switch ($sql)
 	
 	case "insertDoc":
 	
-		$objScr->upload_document();
+		$returnPath = $objScr->upload_document();
 		
 		/* send mail function starts here */
 		$pageUrl = basename($_SERVER['REQUEST_URI']);	
@@ -116,6 +116,17 @@ switch ($sql)
 			$cc = $arrEmailInfo['event_cc'];
 			$subject = $arrEmailInfo['event_subject'];
 			$content = $arrEmailInfo['event_content'];
+
+			$arrReturnPath = explode('~', $returnPath);
+			$docName = $arrReturnPath[0];
+			$uploadedTime =	$arrReturnPath[1];
+
+			// replace DOCNAME with actual doc name
+			$content = str_replace('DOCNAME', $docName, $content);
+
+			// replace DOCNAME with actual doc name
+			$content = str_replace('DATETIME', $uploadedTime, $content);
+
 			$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_REQUEST['lstJob']);
 
 			include_once(MAIL);

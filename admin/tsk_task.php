@@ -158,11 +158,9 @@ if($_SESSION['validUser']) {
 				}
 				else {
 					$arrEmployees = $objCallData->fetchEmployees();
-					$arrTask = $objCallData->sql_select();
+					$arrTask = $objCallData->sql_select(NULL, NULL, $_REQUEST['jobId']);
 					include('views/tsk_task_list.php');
 				}
-				
-				//header('location: lead.php');
 				break;
 
 
@@ -180,7 +178,7 @@ if($_SESSION['validUser']) {
 				}
 				else {
 					$arrEmployees = $objCallData->fetchEmployees();
-					$arrTask = $objCallData->sql_select($_REQUEST["jobId"]);
+					$arrTask = $objCallData->sql_select(NULL, NULL, $_REQUEST["jobId"]);
 					include('views/tsk_task_list.php');
 				}
 				break;

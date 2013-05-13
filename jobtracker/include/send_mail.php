@@ -28,9 +28,6 @@ function send_mail($to, $cc=NULL, $subject, $content)
 
 	exit;*/
 
-	print('<pre>to::');
-	print_r($to);exit;
-
 	// this will send e-mail as per parameters passed to mail function.
 	mail($to,$subject,$content,$headers);
 }

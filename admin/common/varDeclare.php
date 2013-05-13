@@ -1,4 +1,5 @@
 <?php
+
 // define file path
 DEFINE("SITE_TITLE","Befree");
 DEFINE("PHPFUNCTION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/include/php_functions.php");

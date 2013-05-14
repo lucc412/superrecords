@@ -65,7 +65,7 @@ switch($selectedColumn) {
 	break;
 	
 	case "client_type_id":
-		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("ety_entitytype", "ety_Code", "ety_Description", "ety_Order");
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("client_type", "client_type_id", "client_type", "order");
 	break;
 
 	case "mas_Code":

@@ -16,17 +16,17 @@ switch($_REQUEST['a'])
 		</div><?
 
 		?><form name="objForm" method="post" action="jobs.php">
-			<input type="hidden" name="a" value="pending"><?
+			<input type="hidden" name="a" value="pending">
+			
+			<button style="width:94px;" type="button" onclick="javascript:urlRedirect('jobs.php?a=uploadDoc');" title="Click here to upload new source document" value="Add">Add</button>
+  			</br></br><?
 
 			// content
 			if(count($arrjobs) == 0) {
 				?><div class="errorMsg"><?=ERRORICON?>&nbsp;No documents uploaded...!</div><?	
 			}
 			else {
-				?><button style="width:94px;" type="button" onclick="javascript:urlRedirect('jobs.php?a=uploadDoc');" title="Click here to upload new source document" value="Add">Add</button>
-  				  </br></br>
-					
-				<table width="100%" class="resources">
+				?><table width="100%" class="resources">
 					<tr>
 						<td class="td_title">Job Name</td>
 						<td class="td_title">Document Title</td>

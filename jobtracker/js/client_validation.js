@@ -4,7 +4,9 @@ function checkValidation() {
 	var flagReturn = true;
 	var clientName = document.getElementById('txtName');
 	var entityType = document.getElementById('lstType');
+	var cbAuthority = document.getElementById('cbAuthority');
 
+	
 	if(clientName.value == "") {
 		clientName.className = "errclass";
 		flagReturn = false;
@@ -19,6 +21,17 @@ function checkValidation() {
 	}
 	else {
 		entityType.className = "";
+	}
+	if(!cbAuthority.checked)
+	{
+		//cbAuthority.className = "errclass";
+		alert('Please tick if you have received written authority from your client.');
+		cbAuthority.value = 0;
+		flagReturn = false;
+	}	
+	else {
+		cbAuthority.className = "";
+		cbAuthority.value = 1;
 	}
 	
 	return flagReturn;

@@ -17,7 +17,6 @@ if(!empty($_REQUEST['flagDuplicate'])) {
 ?><form name="objForm" method="post" action="clients.php" onSubmit="javascript:return checkValidation();">
 	<input type="hidden" name="sql" value="update">
 	<input type="hidden" name="recid" value="<?=$_REQUEST['recid']?>">
-	
 	</br>
 	<table width="60%" cellpadding="10px;">
 		<tr>
@@ -38,6 +37,11 @@ if(!empty($_REQUEST['flagDuplicate'])) {
 				?></select>
 			</td>
 		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+			<td align="left" colspan="2"><input id="cbAuthority" name="cbAuthority" type="checkbox" style="width: auto;margin-right: 10px;" value=""<?php if($arrClientsData['recieved_authority'] == 1){ ?>checked<?php }?> ><strong>I have received written authority from my client to utilise the services of Super Records Pty Ltd <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and its associated entities for the completion of work as requested.</strong></input></td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
 		<tr>
 			<td><button type="reset" value="Reset">Reset</button></td>
 			<td><button type="submit" id="submit" value="Edit">Edit</button></td>

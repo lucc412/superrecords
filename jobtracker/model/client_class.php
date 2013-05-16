@@ -7,7 +7,7 @@ class Client {
   
 	public function sql_select() {		
 
-		$qrySel = "SELECT t1.client_name, t1.client_id, t1.client_received, t1.client_type_id
+		$qrySel = "SELECT t1.client_name, t1.client_id, t1.client_received, t1.recieved_authority, t1.client_type_id
 					FROM client t1
 					WHERE id = '{$_SESSION['PRACTICEID']}'";
 
@@ -49,10 +49,11 @@ class Client {
 
 	public function sql_insert() {
 
-		$qryIns = "INSERT INTO client(client_type_id, client_name, id, client_received)
+		$qryIns = "INSERT INTO client(client_type_id, client_name, recieved_authority, id, client_received)
 					VALUES (
 					" . $_REQUEST['lstType'] . ", 
 					'" . $_REQUEST['txtName'] . "', 
+					" . $_REQUEST['cbAuthority'] . ",
 					" . $_SESSION['PRACTICEID'] . ", 
 					NOW()
 					)";
@@ -67,7 +68,8 @@ class Client {
 
 		$qryUpd = "UPDATE client
 				SET client_type_id = '" . $_REQUEST['lstType'] . "',
-				client_name = '" . $_REQUEST['txtName'] . "'
+				client_name = '" . $_REQUEST['txtName'] . "',
+				recieved_authority = ".$_REQUEST['cbAuthority']."
 				WHERE client_id = '" . $_REQUEST['recid'] . "'";
 
 		mysql_query($qryUpd);	

@@ -37,6 +37,11 @@
 
 }
 
+.errclass {
+    border: 2px solid #FD0222;
+}
+
+
 
 
 * {

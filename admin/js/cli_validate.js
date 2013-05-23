@@ -9,13 +9,6 @@ function validateFormOnSubmit() {
 	}
 
 	// do field validation  
-	else if (document.manageclient.lstSrManager.value == "") {
-		alert("Select SR Manager");
-		document.manageclient.lstSrManager.focus();
-		flagReturn = false;
-	}
-
-	// do field validation  
 	else if (document.manageclient.cliName.value == "") {
 		alert("Enter Client Name");
 		document.manageclient.cliName.focus();

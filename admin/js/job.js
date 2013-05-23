@@ -7,35 +7,30 @@
 function validateFormOnSubmit() { 
 	flagReturn = true;
 
-	// do field validation  
-	if (document.objForm.lstClientType.value == "") {
-		alert("Select Client type");
-		document.objForm.lstClientType.focus();
-		flagReturn = false;
-	}
-
-	// do field validation  
-	else if (document.objForm.lstPractice.value == "") {
+	if (document.objForm.lstPractice.value == "") {
 		alert("Select Practice");
 		document.objForm.lstPractice.focus();
 		flagReturn = false;
 	}
-
-	// do field validation  
+	
 	else if (document.objForm.lstClient.value == "") {
 		alert("Select Client");
 		document.objForm.lstClient.focus();
 		flagReturn = false;
 	}
+	
+	else if (document.objForm.lstClientType.value == "") {
+		alert("Select Client type");
+		document.objForm.lstClientType.focus();
+		flagReturn = false;
+	}
 
-	// do field validation  
 	else if (document.objForm.lstJob.value == "") {
 		alert("Select Job");
 		document.objForm.lstJob.focus();
 		flagReturn = false;
 	}
 
-	// do field validation  
 	else if (document.objForm.txtPeriod.value == "") {
 		alert("Enter Period");
 		document.objForm.txtPeriod.focus();
@@ -217,7 +212,7 @@ function selectOptions(listName)
 
 	if(response == 0 )
 	{
-		var selectEmptyStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option>----------- Select Client -----------</option></select>";
+		var selectEmptyStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\''>----------- Select Client -----------</option></select>";
 		document.getElementById("span"+listName).innerHTML = selectEmptyStr;
 	}
 	else
@@ -226,7 +221,7 @@ function selectOptions(listName)
 		
 		if(listName == 'Client')
 		{
-			var selectStr = "<select onChange=\'javascript:selectTeamMember();\' name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option>----------- Select Client -----------</option>";
+			var selectStr = "<select onChange=\'javascript:selectTeamMember();\' name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\''>----------- Select Client -----------</option>";
 		}
 		
 		for(var i=0; i<arrData.length; i++)

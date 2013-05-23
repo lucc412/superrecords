@@ -49,7 +49,7 @@ function validateFormOnSubmit() {
 		flagReturn = false;
 	}
 
-	// do field validation  
+	/*// do field validation  
 	else if (document.managetask.lstSrManager.value == 0) {
 		alert("Select Sr Manager");
 		document.managetask.lstSrManager.focus();
@@ -68,7 +68,7 @@ function validateFormOnSubmit() {
 		alert("Select Team Member");
 		document.managetask.lstSrTeamMember.focus();
 		flagReturn = false;
-	}
+	}*/
 	
 	// do field validation  
 	else if (document.managetask.lstTaskStatus.value == 0) {
@@ -153,7 +153,7 @@ function selectOptions(listName)
 
 	if(response == 0 )
 	{
-		var selectEmptyStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option>----------- Select "+listName+" -----------</option></select>";
+		var selectEmptyStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\'' >----------- Select "+listName+" -----------</option></select>";
 			
 		document.getElementById("span"+listName).innerHTML = selectEmptyStr;
 	}
@@ -163,17 +163,17 @@ function selectOptions(listName)
 		
 		if(listName == 'Client')
 		{
-			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\' onchange=\'javascript:selectOptions(\"Job\");selectTeamMember();\'><option>----------- Select Client -----------</option>";
+			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\' onchange=\'javascript:selectOptions(\"Job\");selectTeamMember();\'><option value=\''\''>----------- Select Client -----------</option>";
 		}
 		
 		if(listName == 'Job')
 		{
-			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option>----------- Select Job -----------</option>";
+			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\'' >----------- Select Job -----------</option>";
 		}
 		
 		if(listName == 'SubActivity')
 		{
-			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option>----------- Select Sub Activity -----------</option>";
+			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\'' >----------- Select Sub Activity -----------</option>";
 		}
 		
 		for(var i=0; i<arrData.length; i++)

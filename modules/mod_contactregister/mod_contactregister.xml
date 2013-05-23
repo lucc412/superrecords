@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5.0" client="site" method="upgrade">
+    <name>Register Contact</name>
+    <author>Be Free</author>
+	<creationDate>2013</creationDate> 
+	<copyright>All rights reserved by Tech Guy Web Solutions.</copyright> 
+	<license>GPL 2.0</license> 
+	<authorEmail>info@befree.com.au</authorEmail> 
+	<authorUrl>www.befree.com.au</authorUrl> 
+    <version>1.0.0</version>
+    <description>Registering contacts on website</description>
+    <files>
+        <filename>mod_contactregister.xml</filename>
+        <filename module="mod_contactregister">mod_contactregister.php</filename>
+        <filename>helper.php</filename>
+		<folder>tmpl</folder>
+    </files>
+		
+<config>
+                <fields name="params">
+                        <fieldset name="basic">
+                                <field type="text" size="40" name="admin-email" default="" label="Admin Email" description="Admin E-mail Address. You can add multiple E-mail address separated by commas" />
+                                <!--<field type="text" size="40" name="cc-email" default="" label="CC Email" description="Client Copy." />
+                                <field type="text" size="40" name="bcc-email" default="" label="BCC Email" description="Blind Client Copy." />-->
+                                <field type="text" size="40" name="subject" default="" label="Subject" description="Subject of E-mail." />
+						</fieldset>								
+				
+						<fieldset name="captcha"  label="Captcha Option">								
+								<field type="radio" name="captchastatus" default='1' label="Show Captcha?"  description="Do want to show captcha to contact form?" >
+									<option value="0">NO</option>
+									<option value="1">YES</option>
+								</field>
+								<!--<field type="text" size="40" name="public-key" default="" label="Public Key" description="Public key for reCaptcha." />
+								<field type="text" size="40" name="private-key" default="" label="Private Key" description="Private key for reCaptcha." />-->
+                		</fieldset>
+                </fields>
+        </config>	
+</extension>

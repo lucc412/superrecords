@@ -13,7 +13,7 @@
 	
 ?>
 
-<div class="quicklink" id="jmcontactform" style="height: 340px;">
+<div class="quicklink" id="jmcontactform" style="height: 323px;">
 <h1 class="title">Learn More</h1>
 <form method="post" action="" name="josForm"  id="myForm" class="form-validate" enctype="multipart/form-data"  onSubmit="return validation()" >
 	<input type="hidden" name="hidMsg" id="hidMsg" value="N" />
@@ -52,18 +52,16 @@
 	 if ($params->get('captchastatus') ){
 	 	?><div class="formrow">
 			<div class="row_inner" id="input">
-				<img id="siimage" style="border: 1px solid #CCC; margin-right: 15px; border-radius: 4px; height:35px; width:120px; padding: 8px;" src="<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/securimage_show.php?sid=<?php echo md5(uniqid()) ?>" alt="CAPTCHA Image" align="left" />
-				<div style="padding: 2px;float: left;height: auto;width: auto;position: relative;">
-					<object type="application/x-shockwave-flash" data="<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/securimage_play.swf?bgcol=#ffffff&amp;icon_file=<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/images/audio_icon.png&amp;audio_file=<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/securimage_play.php" height="20" width="20">
+				<img id="siimage" style="border: 1px solid #CCC; margin-right: 15px; border-radius: 4px; height:25px; width:140px; padding: 8px;" src="<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/securimage_show.php?sid=<?php echo md5(uniqid()) ?>" alt="CAPTCHA Image" align="left" />
+				<div style="padding: 2px;height: auto;width: auto;position: relative;margin-top: 3px;">
+					<object type="application/x-shockwave-flash" data="<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/securimage_play.swf?bgcol=#ffffff&amp;icon_file=<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/images/audio_icon.png&amp;audio_file=<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/securimage_play.php" height="18" width="18">
 					<param name="movie" value="<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/securimage_play.swf?bgcol=#ffffff&amp;icon_file=<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/images/audio_icon.png&amp;audio_file=./securimage_play.php" />
 					</object>
 					&nbsp;
-					<a tabindex="-1" style="border-style: none;background:none;right: 11px;top: 99%;" href="#" title="Refresh Image" onclick="document.getElementById('siimage').src = '<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/securimage_show.php?sid=' + Math.random(); this.blur(); return false"><img src="<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/images/refresh.png" alt="Reload Image" height="20" width="20" onclick="this.blur()" align="bottom" border="0" /></a>
+					<a tabindex="-1" style="border-style: none;background:none;right: 2px;top: 55%;" href="#" title="Refresh Image" onclick="document.getElementById('siimage').src = '<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/securimage_show.php?sid=' + Math.random(); this.blur(); return false"><img src="<?=$exist_url?>modules/mod_contactregister/tmpl/securimage/images/refresh.png" alt="Reload Image" height="18" width="18" onclick="this.blur()" align="bottom" border="0" /></a>
 					<br />
 				</div>
-				<br/>
-				<br/>
-				<input type="text" class="inputbox" style="margin-top: 5px;margin-bottom: 0px" id="ct_captcha" name="ct_captcha" size="12" maxlength="8" value="<?php if(isset($_REQUEST['ct_captcha'])){echo $_REQUEST['ct_captcha'];}else{ echo 'Enter Code *';}?>"  onfocus="clearText(this)" onblur="if(this.value == '') { this.value = 'Enter Code *'; }"/>
+				<input type="text" class="inputbox" style="margin-top: 5px; width:180px; margin-bottom: 0px" id="ct_captcha" name="ct_captcha" size="12" maxlength="8" value="<?php if(isset($_REQUEST['ct_captcha'])){echo $_REQUEST['ct_captcha'];}else{ echo 'Enter Code *';}?>"  onfocus="clearText(this)" onblur="if(this.value == '') { this.value = 'Enter Code *'; }"/>
 				<span style="color:red; font-size:11px; font-weight: normal;"><? if(isset($_REQUEST['hidMsg']) && $_REQUEST['hidMsg'] == 'Y') echo '<script>document.getElementById("ct_captcha").className = "errclass";</script>';?></span>
 			</div>
 		  </div><?

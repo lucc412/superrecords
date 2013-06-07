@@ -27,7 +27,7 @@ if(!empty($a) && $a != 'addJob') {
 				<td align="right">
 					<span style="font-weight:bold; font-size:14pt;"> Job Name: </span><?
 					$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
-					$jobName = '<b style="color:#b30000;">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</b> - <b style="color:#0411ff;">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</b> - <b style="color:#006a0e;">' . $objCallData->arrJobType[$arrJobParts[2]].'</b>';
+					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
 					?><span style="font-size:14pt;"><?=$jobName?></span>
 			  </td>
 			  
@@ -45,8 +45,9 @@ if(!empty($a) && $a != 'addJob') {
 				
 				<td align="right">
 					<span style="font-weight:bold; font-size:10pt;"> Job Name: </span><?
-				$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
-				$jobName = '<b style="color:#b30000;">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</b> - <b style="color:#0411ff;">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</b> - <b style="color:#006a0e;">' . $objCallData->arrJobType[$arrJobParts[2]].'</b>';
+					$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
+
+					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
 				
 				 ?><span style="font-size:10pt;"><?=$jobName?></span>
 				</td>				
@@ -379,21 +380,25 @@ switch ($a)
 			<th class="fieldheader" align="center">Download</th>
 		</tr><?
 
+	$countRow = 0;          
 	foreach ($objCallData->arrDocument AS $docId => $arrInfo)
 	{
 		if($arrInfo["job_id"] == $_REQUEST["jobId"])
 		{
+			if($countRow%2 == 0) $trClass = "trcolor";
+			else $trClass = "";
+
 			?><tr>
-				<td class="yellowBG" width="10%">Source Documents</td><?
+				<td class="<?=$trClass?>" width="10%">Source Documents</td><?
 				$docName = $arrInfo["document_title"];
 				if(empty($arrInfo["document_title"])) {
 					$arrFileName = explode('~', $arrInfo['file_path']);
 					$origFileName = $arrFileName[1];
 					$docName = $origFileName;
 				}
-				?><td class="yellowBG" width="20%"><?=$docName?></td>
+				?><td class="<?=$trClass?>" width="20%"><?=$docName?></td>
 					
-				<td class="yellowBG" width="10%" align="center"><?=htmlspecialchars($arrInfo["date"])?></td><?
+				<td class="<?=$trClass?>" width="10%" align="center"><?=htmlspecialchars($arrInfo["date"])?></td><?
 					
 				if($arrInfo["viewed"]==0)
 				{
@@ -405,13 +410,15 @@ switch ($a)
 					$viewed = 'Yes';
 					$strView = 'style="color:green;"';
 				}
-			    ?><td width="10%" align="center" class="<?=$style?> blueBG" <?=$strView?>><?=$viewed?></td>	
+			    ?><td width="10%" align="center" class="<?=$trClass?>" <?=$strView?>><?=$viewed?></td>	
 			  
-              	<td width="5%" class="<?=$style?> blueBG" align="center">
+              	<td width="5%" class="<?=$trClass?>" align="center">
 					<button onclick="javascript:redirectURL('job.php?sql=download&flagType=S&filePath=<?=urlencode($arrInfo['file_path'])?>&docId=<?=$arrInfo['document_id']?>');" title="Click to view this document" >Download</button>
                     
 				</td>
 			</tr><?
+
+			$countRow++;
 		}	
 	}
 	?></table></table><?
@@ -473,17 +480,23 @@ switch ($a)
 			<th class="fieldheader" align="center" width="15%">Download</th>
 		</tr><?
 
+		$countRow = 0;
 		foreach ($objCallData->arrReport AS $docId => $arrInfo)
 		{
 			if($arrInfo["job_id"] == $_REQUEST["jobId"])
 			{
+				if($countRow%2 == 0) $trClass = "trcolor";
+				else $trClass = "";
+
 				?><tr>
-					<td class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["report_title"])?></td>	
-					<td width="23%" align="center" class="<?=$style?> blueBG"><?=htmlspecialchars($arrInfo["date"])?></td>
-					<td width="10%" class="<?=$style?> blueBG" align="center">
+					<td class="<?=$trClass?>"><?=htmlspecialchars($arrInfo["report_title"])?></td>	
+					<td width="23%" align="center" class="<?=$trClass?>"><?=htmlspecialchars($arrInfo["date"])?></td>
+					<td width="10%" class="<?=$trClass?>" align="center">
 					<button onclick="redirectURL('job.php?sql=download&flagType=R&filePath=<?=urlencode($arrInfo['file_path'])?>')"title="Click to view this document" >Download</button>
 					  </td>
 				</tr><?
+
+				$countRow++;
 			}
 		}
 	?></table></table>
@@ -631,92 +644,98 @@ switch ($a)
 				</tr><?
 				
 			$srNo = 0;
+			$countRow = 0;
 			foreach ($objCallData->arrQueries AS $queryId => $arrInfo)
 			{
 				
 				if($objCallData->arrQueries[$queryId]["job_id"] == $_REQUEST["jobId"])
 				{
+
+					if($countRow%2 == 0) $trClass = "trcolor";
+					else $trClass = "";
 					$srNo++;
-				?><tr>
-					<td class="<?=$style?> blueBG" align="center" width="20%">
-						<textarea name="txtQuery<?=$queryId?>" rows="5" style="width:300px; " cols="60"><?=$arrInfo["query"]?></textarea>						
-					</td>
-					
-					<td class="<?=$style?> yellowBG"><?=nl2br($arrInfo["response"])?></td>
-					
-					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
-					if(!empty($arrInfo["report_file_path"])) {
-						?>
-<button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=SRQ&filePath=<?=urlencode($arrInfo['report_file_path'])?>');" title="Cilck here To Download Document." >Download</button>
+
+					?><tr>
+						<td class="<?=$trClass?>" align="center" width="20%">
+							<textarea name="txtQuery<?=$queryId?>" rows="5" style="width:300px; " cols="60"><?=$arrInfo["query"]?></textarea>						
+						</td>
+						
+						<td class="<?=$trClass?>"><?=nl2br($arrInfo["response"])?></td>
+						
+						<td width="9%" class="<?=$trClass?>" align="center"><?
+						if(!empty($arrInfo["report_file_path"])) {
+							?><button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=SRQ&filePath=<?=urlencode($arrInfo['report_file_path'])?>');" title="Cilck here To Download Document." >Download</button>
+							<?
+						}
+						?></td>
+						
+						<td width="9%" class="<?=$trClass?>" align="center"><?
+						if(!empty($arrInfo["file_path"])) {
+							?>
+							<button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=Q&filePath=<?=urlencode($arrInfo['file_path'])?>');" title="Cilck here To Download Document." >Download</button>
+							<?
+						}
+						?></td>
+						
+						 <?
+							if(!empty($arrInfo["date_added"]) && $arrInfo["date_added"] != '0000-00-00') {
+								?><td align="center" width="10%" class="<?=$trClass?>"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["date_added"])))?></td><?
+							}
+							else {
+								?><td width="10%" align="center" class="<?=$trClass?>"></td><?
+							}
+						 ?>
 						<?
-					}
-					?></td>
-					
-					<td width="9%" class="<?=$style?> yellowBG" align="center"><?
-					if(!empty($arrInfo["file_path"])) {
-						?>
-						<button style="width: 105px;" onclick="javascript:redirectURL('job.php?sql=download&flagType=Q&filePath=<?=urlencode($arrInfo['file_path'])?>');" title="Cilck here To Download Document." >Download</button>
-						<?
-					}
-					?></td>
-					
-					 <?
-						if(!empty($arrInfo["date_added"]) && $arrInfo["date_added"] != '0000-00-00') {
-							?><td align="center" width="10%" class="<?=$style?> yellowBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["date_added"])))?></td><?
+							if(!empty($arrInfo["date_answered"]) && $arrInfo["date_answered"] != '0000-00-00') {
+								?><td width="10%" class="<?=$trClass?>"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["date_answered"])))?></td><?
+							}
+							else {
+								?><td width="10%" class="<?=$trClass?>"></td><?
+							}
+						  
+						  if($arrInfo["status"] == 1)
+							$yesNo = "background-color:#d5f2cc;";
+						  else
+							$yesNo = "background-color:#ffe1dd;";
+							
+						 ?><td width="9%" class="<?=$trClass?>" style="<?=$yesNo?>" align="center"><?
+						 
+						 if($arrInfo["status"] == 1)
+						 {
+							?><label for="rdYes<?=$queryId?>"><input id="rdYes<?=$queryId?>" class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="1" checked="true"/>Yes</label>
+							  <label for="rdNo<?=$queryId?>"><input id="rdNo<?=$queryId?>" class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="0"/>No</label><?
+						 }
+						 else
+						 {
+							?><label for="rdYes<?=$queryId?>"><input id="rdYes<?=$queryId?>" class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="1"/>Yes</label>
+							  <label for="rdNo<?=$queryId?>"><input id="rdNo<?=$queryId?>" class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="0" checked="true"/>No</label><?				 
+						 }		
+						?></td>
+							
+						<td width="10%" class="<?=$trClass?>" align="center">
+							<!--<input type="button" name="btnSave" value="Save" style="background-color:#07aff8; border:solid; color:#ffffff; width:70px;" onClick="javascript:updateQuery(<?=$queryId?>)">-->
+							<button style="width: 66px;margin-right: 3px;" onClick="javascript:updateQuery(<?=$queryId?>)">Save</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to save this query</span></a>
+							
+						</td>
+						<td class="<?=$trClass?>" align="center" width="15%">
+							<input type="hidden" name="flagPost" id="flagPost" value="<?=$arrInfo['flag_post']?>"><?
+							
+						if($arrInfo["flag_post"] == 'N'){
+							?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Post</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to post this query to practice</span></a><?
 						}
-						else {
-							?><td width="10%" align="center" class="<?=$style?> yellowBG"></td><?
+						else{	
+							?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Unpost</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to unpost this query to practice</span></a><?
 						}
-					 ?>
-					<?
-						if(!empty($arrInfo["date_answered"]) && $arrInfo["date_answered"] != '0000-00-00') {
-							?><td width="10%" class="<?=$style?> yellowBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["date_answered"])))?></td><?
-						}
-						else {
-							?><td width="10%" class="<?=$style?> yellowBG"></td><?
-						}
-					  
-					  if($arrInfo["status"] == 1)
-					  	$yesNo = "background-color:#d5f2cc;";
-					  else
-						$yesNo = "background-color:#ffe1dd;";
-						
-					 ?><td width="9%" class="<?=$style?> blueBG" style="<?=$yesNo?>" align="center"><?
-					 
-					 if($arrInfo["status"] == 1)
-					 {
-  			      		?><label for="rdYes<?=$queryId?>"><input id="rdYes<?=$queryId?>" class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="1" checked="true"/>Yes</label>
-						  <label for="rdNo<?=$queryId?>"><input id="rdNo<?=$queryId?>" class="checkboxClass" type="radio" name="rdStatus<?=$queryId?>" value="0"/>No</label><?
-					 }
-					 else
-					 {
-						?><label for="rdYes<?=$queryId?>"><input id="rdYes<?=$queryId?>" class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="1"/>Yes</label>
-						  <label for="rdNo<?=$queryId?>"><input id="rdNo<?=$queryId?>" class="checkboxClass"  type="radio" name="rdStatus<?=$queryId?>" value="0" checked="true"/>No</label><?				 
-					 }		
-					?></td>
-						
-					<td width="10%" class="<?=$style?> blueBG" align="center">
-						<!--<input type="button" name="btnSave" value="Save" style="background-color:#07aff8; border:solid; color:#ffffff; width:70px;" onClick="javascript:updateQuery(<?=$queryId?>)">-->
-						<button style="width: 66px;margin-right: 3px;" onClick="javascript:updateQuery(<?=$queryId?>)">Save</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to save this query</span></a>
-						
-					</td>
-					<td class=" blueBG" align="center" width="15%">
-						<input type="hidden" name="flagPost" id="flagPost" value="<?=$arrInfo['flag_post']?>"><?
-						
-					if($arrInfo["flag_post"] == 'N'){
-						?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Post</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to post this query to practice</span></a><?
-					}
-					else{	
-						?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Unpost</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to unpost this query to practice</span></a><?
-					}
-					?></td>	
-					<td align="center"><?
-					  	  $jsFunc = "javascript:performdelete('job.php?sql=deleteQuery&jobId=".$_REQUEST["jobId"]."&queryId=".$queryId."');";
-						  ?><a onClick="<?=$jsFunc?>" href="javascript:;">
-							  	<img src="images/erase.png"  border="0" height="23px" width="20px" alt="Delete" name="Delete" title="Delete" align="middle" />
-						   </a>
-					</td>						
+						?></td>	
+						<td class="<?=$trClass?>" align="center"><?
+							  $jsFunc = "javascript:performdelete('job.php?sql=deleteQuery&jobId=".$_REQUEST["jobId"]."&queryId=".$queryId."');";
+							  ?><a onClick="<?=$jsFunc?>" href="javascript:;">
+									<img src="images/erase.png"  border="0" height="23px" width="20px" alt="Delete" name="Delete" title="Delete" align="middle" />
+							   </a>
+						</td>						
 					</tr><?
+
+					$countRow++;
 				}
 			}
 			?></table></table>
@@ -857,24 +876,29 @@ switch ($a)
 					}
 				?></tr><?
 
+                $countRow = 0;                
 				foreach ($arrJob AS $jobId => $arrInfo) {
-					?><tr class="trclass"><?
+                                    
+					if($countRow%2 == 0) $trClass = "trcolor";
+					else $trClass = "";
+                                        
+					?><tr class="<?=$trClass?>"><?
 					$arrJobParts = explode('::', $arrInfo["job_name"]);
-					$jobName = '<b style="color:#b30000">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</b> - <b style="color:#0411ff">' . $arrInfo["period"] . '</b> - <b style="color:#006a0e">' . $objCallData->arrJobType[$arrJobParts[2]].'</b>';
+					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $arrInfo["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
 					
-					?><td class="<?=$style?> yellowBG"><?=$arrPractice[$arrInfo['id']]['name']?></td>	
-					<td class="<?=$style?> yellowBG"><?=$jobName?></td>	
-					<td class="<?=$style?> blueBG"><?=htmlspecialchars($objCallData->arrJobStatus[$arrInfo["job_status_id"]]["job_status"])?></td><?
+					?><td class="<?=$style?>"><?=$arrPractice[$arrInfo['id']]['name']?></td>	
+					<td class="<?=$style?>"><?=$jobName?></td>	
+					<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrJobStatus[$arrInfo["job_status_id"]]["job_status"])?></td><?
 
 					if(!empty($arrInfo["job_received"])){
-						?><td align="center" class="<?=$style?> yellowBG"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_received"])))?></td><?
+						?><td align="center" class="<?=$style?>"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_received"])))?></td><?
 					}
 					else{
-						?><td class="<?=$style?> yellowBG"></td><?
+						?><td class="<?=$style?>"></td><?
 					}
 
 					if(!empty($arrInfo["job_due_date"])){
-						?><td align="center" class="<?=$style?> blueBG"><?=
+						?><td align="center" class="<?=$style?>"><?=
 						//date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_due_date"])))
 						$job_due_date = '';
 						if (isset($arrInfo["job_due_date"]) && $arrInfo["job_due_date"] != "") {
@@ -886,17 +910,17 @@ switch ($a)
 						?></td><?
 					}
 					else{
-						?><td class="<?=$style?> blueBG"></td><?
+						?><td class="<?=$style?>"></td><?
 					}
 
 					if($access_file_level['stf_Edit'] == "Y") {
-						?><td width="5%" class="blueBG" align="center">
+						?><td width="5%" align="center">
 							<a href="job.php?a=editJob&jobId=<?=$jobId?>"><img src="images/edit.png" height="23px" width="20px" border="0"  alt="Edit" name="Edit" title="Edit" align="middle" /></a>
 						</td><?
 					}
 
 					if($access_file_level['stf_Delete'] == "Y") {
-						?><td width="5%" class="blueBG" align="center"><?
+						?><td width="5%" align="center"><?
 							$jsFunc = "javascript:performdelete('job.php?sql=deleteJob&jobId=".$jobId."');";
 						  ?><a onClick="<?=$jsFunc?>" href="javascript:;">
 							  	<img src="images/erase.png"  border="0" height="23px" width="20px" alt="Delete" name="Delete" title="Delete" align="middle" />
@@ -905,6 +929,7 @@ switch ($a)
 					}
 
 					?></tr><?
+                                        $countRow++;
 				}
 			?></table><br></form><?
 		break;

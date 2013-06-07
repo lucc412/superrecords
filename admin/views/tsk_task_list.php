@@ -39,10 +39,9 @@
 	}
 		
 	?><tr class="fieldheader">
-		<th width="30%" align="left" class="fieldheader">Task Name</th>
 		<th width="15%" align="left" class="fieldheader">Practice Name</th>
-		<th width="30%" align="left" class="fieldheader">Job Name</th>
-		<th width="15%" align="left" class="fieldheader">SR Manager</th>
+		<th width="30%" align="left" class="fieldheader">Task Name</th>
+		<th width="30%" align="left" class="fieldheader">Task Status</th>
 		<th width="8%" class="fieldheader" colspan="3" align="center">Actions</th>
 	</tr><?
 
@@ -52,19 +51,12 @@
 			else $trClass = "";
  
 		?><tr class="<?=$trClass?>">
-			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["task_name"])?></td>
 			
-			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrPractice[$arrInfo["id"]])?></td><?
+			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrPractice[$arrInfo["id"]])?></td>
 
-		  	$jobName = ($objCallData->arrJob[$arrInfo["job_id"]]);
-			$arrJobParts = explode('::', $jobName);
-			  
-			$jobName = '<b style="color:#b30000">'.$objCallData->arrClient[$arrJobParts[0]] . '</b> - <b style="color:#0411ff">' . $arrJobParts[1] . '</b> - <b style="color:#006a0e">' . $objCallData->arrJobType[$arrJobParts[2]]["sub_Description"].'</b>';
-			?><td class="<?=$style?>"><?=$jobName?></td>
+			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["task_name"])?></td>
 
-			<td class="<?=$style?>">
-				<?=htmlspecialchars($arrEmployees[$arrInfo["sr_manager"]])?>
-			</td><?
+		  	<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrTaskStatus[$arrInfo["task_status_id"]])?></td><?
 			
 			if($access_file_level['stf_View'] == "Y") {
 				?><td align="center">

@@ -137,6 +137,21 @@ a img{
 	border:none;
 }
 
+.clientclr {
+    color:#005b17;
+    font-weight:bold;
+}
+
+.periodclr {
+    color:rgb(241, 82, 34);
+    font-weight:bold;
+}
+
+.activityclr {
+    color: #073f61;
+    font-weight:bold;
+}
+
 .wrapper {
 	
 	height: auto !important;

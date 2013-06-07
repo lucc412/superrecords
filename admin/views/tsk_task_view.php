@@ -37,7 +37,7 @@
 			$PracticeID =  $objCallData->arrClientDetails[$ClientID]["id"];
 	
 			$arrJobParts = explode('::', $objCallData->arrJob[$JobID]);
-			$jobName = '<b style="color:#b30000">'.$objCallData->arrClient[$ClientID] . '</b> - <b style="color:#0411ff">' . $objCallData->arrJobDetails[$JobID]["period"]. '</b> - <b style="color:#006a0e">' . $objCallData->arrJobType[$arrJobParts[2]]["sub_Description"].'</b>';
+			$jobName = '<span class="clientclr">'.$objCallData->arrClient[$ClientID] . '</span> - <span class="periodclr">' . $objCallData->arrJobDetails[$JobID]["period"]. '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]]["sub_Description"].'</span>';
 			
 			echo $jobName; 	
 	?></td>

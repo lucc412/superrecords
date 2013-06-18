@@ -118,13 +118,14 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 						<img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/header-logo.png"  alt="<?php echo JText::_('Super Records Logo'); ?>" />
 					</a>
 				</div> <!--branding-->
-				<div class="user">
+				<div class="user" style="right: -82px;">
 					<li class="contact"><a href="http://www.superrecords.com.au/contact-us.html">Learn More</a></li><?
 
 					/* prefix of URL whether http:// or https: */
 					$prefixURL = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
 
-					?><li class="login"><a href="http://<?=$_SERVER['SERVER_NAME']?>/jobtracker/">Practice Login</a></li>
+					?><li class="login" style="width:85px"><a href="http://<?=$_SERVER['SERVER_NAME']?>/jobtracker/">Practice Login</a></li>
+					<li class="login" style="width: 80px;"><a href="http://<?=$_SERVER['SERVER_NAME']?>/jobtracker/client/">Client Login</a></li>
 				</div> <!--user-->
 				<div class="phone"><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/header-phone.png" /></div> <!--phone-->
 			</div> <!--container-->

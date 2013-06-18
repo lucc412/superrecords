@@ -55,7 +55,7 @@
 							<br>
 							<span name="val_password" id="val_password" style=" color:red; font-size:11px;"></span>
 							</td>
-							<input type="hidden" name="returnurl" value="http://www.superrecords.com.au/jobtracker/client/">
+							<input type="hidden" name="returnurl" value="https://www.superrecords.com.au/jobtracker/client/">
 						</tr>
 						<tr><td>&nbsp;</td></tr>
 					</table>

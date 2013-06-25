@@ -32,6 +32,7 @@
 	}		
 	
 	?><tr class="fieldheader">
+		<th width="10%" class="fieldheader">Practice Code</th>
 		<th class="fieldheader" align="left">Practice Name</th>
 		<th class="fieldheader" align="left">Type</th>
 		<th class="fieldheader" align="left">SR Manager</th>
@@ -45,6 +46,7 @@
 		else $trClass = "";
  
 		?><tr class="<?=$trClass?>">
+			<td align="center" class="<?=$style?>"><?=htmlspecialchars($arrInfo["pr_code"])?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["name"])?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrTypes[$arrInfo["type"]])?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrSrManager[$arrInfo["sr_manager"]])?></td>

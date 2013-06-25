@@ -4,8 +4,8 @@
 
 <table class="tbl" border="0" cellspacing="12" width="70%">
 	<tr>
-		<td class="hr">Practice</td>
-		<td class="dr">New</td>
+		<td class="hr">Code</td>
+		<td class="dr"><?=$arrPracticeData["pr_code"]?></td>
 	</tr>
 	<tr>
 		<td class="hr">Type</td>

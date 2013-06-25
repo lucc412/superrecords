@@ -10,6 +10,10 @@
 	<input type="hidden" name="a" value="edit">
 	<table class="tbl" border="0" cellspacing="10" width="70%">
 		<tr>
+			<td class="hr">Code</td>
+			<td class="dr"><?=$arrPracticeData['pr_code']?></td>
+		</tr>
+		<tr>
 			<td class="hr">Type<font style="color:red;" size="2">*</font></td>
 			<td><select name="lstType">
 					<option value="">Select Type</option><?php

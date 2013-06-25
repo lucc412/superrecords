@@ -9,15 +9,35 @@
 <form action="cli_client.php" method="post" name="manageclient" onSubmit="return validateFormOnSubmit()">
 	<p><input type="hidden" name="sql" value="update"></p>
 	<input type="hidden" name="recid" value="<?=$recid?>">
-	<input type="hidden" name="a" value="edit">
+	<input type="hidden" name="a" value="edit"><?
 	
-	<table class="tbl" border="0" cellspacing="10" width="70%">
+	?><table class="tbl" border="0" cellspacing="10" width="70%"><?
 		
-		<tr>
-			<td class="hr">Client</td>
-			<td class="dr">New</td>
-		</tr>
-		<tr>
+		?><tr>
+			<td class="hr">Client Code</td>
+			<td class="dr"><?
+				if($_SESSION['usertype'] == 'Administrator') {
+
+					if(!empty($_REQUEST['cli_code'])) {
+						$cliCode = $_REQUEST['cli_code'];
+					}
+					else {
+						$cliCode = $arrClientData['client_code'];
+					}
+					?><input type="text" name="cliCode" value="<?=$cliCode?>"><?
+				}
+				else {
+					echo $arrClientData['client_code'];
+				}
+			?></td>
+		</tr><?
+
+		// show error message
+		if($_REQUEST['flagError'] == 'Y') {
+			?><tr><td>&nbsp;</td><td class="errmsg">This client code already exists.</td></tr><?
+		}
+
+		?><tr>
 			<td class="hr">Practice<font style="color:red;" size="2">*</font></td>
 			<td class="dr"><select name="lstPractice" id="lstPractice" onchange="javascript:selectPanel('LoadPanel');">
 					<option value="">Select Practice</option><?php

@@ -34,6 +34,7 @@
 
 	?><tr class="fieldheader">
 		<th class="fieldheader" align="left">Practice</th>
+		<th width="10%" class="fieldheader">Client Code</th>
 		<th class="fieldheader" align="left">Client Name</th>
 		<th class="fieldheader" align="left">Type</th>
 		<th class="fieldheader" align="left">SR Manager</th>
@@ -48,6 +49,7 @@
  
 		?><tr class="<?=$trClass?>">
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrPractice[$arrInfo["id"]])?></td>
+			<td class="<?=$style?>" align="center"><?=htmlspecialchars($arrInfo["client_code"])?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["client_name"])?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrTypes[$arrInfo["client_type_id"]])?></td>
 			

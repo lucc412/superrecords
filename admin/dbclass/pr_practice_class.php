@@ -125,7 +125,7 @@ class Practice_Class extends Database {
 			$filterstr = $commonUses->sqlstr($filter);
 			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
 			
-			$qrySel = "SELECT pr.id pracId, pr.type, pr.name, pr.sr_manager, pr.date_signed_up, prt.*, s.*, cnt.* 
+			$qrySel = "SELECT pr.id pracId, pr.type, pr.name, pr.sr_manager, pr.date_signed_up, pr.pr_code, prt.*, s.*, cnt.* 
 						FROM pr_practice pr, pr_type prt, stf_staff s, con_contact cnt 
 						WHERE pr.type = prt.id 
 						AND pr.sr_manager = s.stf_Code 
@@ -218,6 +218,14 @@ class Practice_Class extends Database {
 
 		mysql_query($qryIns);
 		$practiceId = mysql_insert_id();
+
+		// build 3 digit practice code & update practice code in table
+		$practiceCode = sprintf("%03s", $practiceId);
+		$qryUpd = "UPDATE pr_practice 
+					SET pr_code = '" . $practiceCode . "'
+					WHERE id = ". $practiceId;
+
+		mysql_query($qryUpd);
 
 		return $practiceId;
 	} 

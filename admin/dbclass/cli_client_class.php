@@ -170,10 +170,62 @@ class Practice_Class extends Database
 					'" . $dateSignedUp . "',  
 					'" . $strSteps . "'
 					)";
-		
 
 		mysql_query($qryIns);
-	} 
+		$newClientId = mysql_insert_id();
+
+		/* update client code in client table */
+
+		// fetch practice code for respective client
+		$qrySel = "SELECT pr_code
+					FROM pr_practice 
+					WHERE id = '".$_REQUEST['lstPractice']."'";
+
+		$resultObj = mysql_query($qrySel);
+		$arrInfo = mysql_fetch_assoc($resultObj);
+		$pracCode = $arrInfo['pr_code'];
+
+		// build client code
+		$clientName = $_REQUEST['cliName'];
+		$arrCliName = explode(" ", $clientName);
+		$cntNameWords = count($arrCliName);
+
+		$cntrWord = 0;
+		While($cntrWord < $cntNameWords) {
+			$firstCode = strtoupper(substr($arrCliName[$cntrWord], 0, 3));
+			$cntrWord++;
+			$secondCode = strtoupper(substr($arrCliName[$cntrWord++], 0, 2));
+			$cliName = $firstCode . $secondCode;
+			$clientCode = $pracCode . $cliName;
+
+			// check if client code is unique or not
+			$flagCodeExists = $this->checkClientCodeUnique($clientCode);
+
+			if(!$flagCodeExists) {
+
+				// update client code in client table
+				$qryUpd = "UPDATE client
+							SET client_code = '".$clientCode."'
+							WHERE client_id ='".$newClientId."'";
+
+				mysql_query($qryUpd);
+				break;
+			}
+		}
+
+	}
+
+	// check if client code is unique or not
+	public function checkClientCodeUnique($code) {	
+		$qrySel = "SELECT client_id
+					FROM client
+					WHERE client_code = '".$code."'";
+
+		$resultObj = mysql_query($qrySel);
+		$flagCodeExists = mysql_fetch_assoc($resultObj);
+
+		return $flagCodeExists;
+	}
 
 	public function sql_update() {	
 
@@ -191,17 +243,44 @@ class Practice_Class extends Database
 
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
-		$qryUpd = "UPDATE client
-				SET client_type_id = '" . $_REQUEST['lstType'] . "',
-				client_name = '" . addslashes($_REQUEST['cliName']) . "',
-				id = '" . $_REQUEST['lstPractice'] . "',
-				team_member = '" . $_REQUEST['lstTeamMember'] . "',
-				client_notes = '" . addslashes($_REQUEST['client_notes']) . "',
-				client_received = '" . $dateSignedUp . "',
-				steps_done = '" . $strSteps . "'
-				WHERE client_id = '" . $_REQUEST['recid'] . "'";
+		if(!empty($_REQUEST['cliCode'])) {
 
-		mysql_query($qryUpd);	
+			// check if client code is unique or not
+			$flagCodeExists = $this->checkClientCodeUnique($_REQUEST['cliCode']);
+
+			if(!$flagCodeExists) {
+
+				$qryUpd = "UPDATE client
+						SET client_type_id = '" . $_REQUEST['lstType'] . "',
+							client_code = '" . addslashes($_REQUEST['cliCode']) . "',
+							client_name = '" . addslashes($_REQUEST['cliName']) . "',
+							id = '" . $_REQUEST['lstPractice'] . "',
+							team_member = '" . $_REQUEST['lstTeamMember'] . "',
+							client_notes = '" . addslashes($_REQUEST['client_notes']) . "',
+							client_received = '" . $dateSignedUp . "',
+							steps_done = '" . $strSteps . "'
+						WHERE client_id = '" . $_REQUEST['recid'] . "'";
+
+				mysql_query($qryUpd);
+			}
+			else {
+				header("location: cli_client.php?a=edit&recid=".$_REQUEST['recid']."&cli_code=".$_REQUEST['cliCode']."&flagError=Y");
+			}
+		}
+		else {
+			$qryUpd = "UPDATE client
+						SET client_type_id = '" . $_REQUEST['lstType'] . "',
+							client_name = '" . addslashes($_REQUEST['cliName']) . "',
+							id = '" . $_REQUEST['lstPractice'] . "',
+							team_member = '" . $_REQUEST['lstTeamMember'] . "',
+							client_notes = '" . addslashes($_REQUEST['client_notes']) . "',
+							client_received = '" . $dateSignedUp . "',
+							steps_done = '" . $strSteps . "'
+						WHERE client_id = '" . $_REQUEST['recid'] . "'";
+
+				mysql_query($qryUpd);
+		}
+
 	} 
 
 	function sql_delete($recid) {

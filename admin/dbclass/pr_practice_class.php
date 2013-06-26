@@ -219,10 +219,13 @@ class Practice_Class extends Database {
 		mysql_query($qryIns);
 		$practiceId = mysql_insert_id();
 
-		// build 3 digit practice code & update practice code in table
-		$practiceCode = sprintf("%03s", $practiceId);
+		// get max practice code from pr_practice table
+		$pracCode = $this->get_max_practice_code();
+		$pracCode++;
+		$pracCode = sprintf("%03s", $pracCode);
+
 		$qryUpd = "UPDATE pr_practice 
-					SET pr_code = '" . $practiceCode . "'
+					SET pr_code = '" . $pracCode . "'
 					WHERE id = ". $practiceId;
 
 		mysql_query($qryUpd);
@@ -284,6 +287,16 @@ class Practice_Class extends Database {
 
 		$qryDel = "DELETE FROM pr_practice where id = '".$recid."' ";
 		mysql_query($qryDel);
+	}
+
+	function get_max_practice_code() {
+
+		$qryDel = "SELECT MAX(pr_code) pr_code FROM pr_practice ";
+		$fetchResult = mysql_query($qryDel);
+		$rowData = mysql_fetch_assoc($fetchResult);
+		$pracCode = $rowData['pr_code'];
+
+		return $pracCode;
 	}
 }
 

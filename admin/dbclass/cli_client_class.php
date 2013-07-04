@@ -1,56 +1,56 @@
 <?php
-class Practice_Class extends Database
-{ 	
-	public function __construct()
-	{
-		$this->arrTypes = $this->fetchType();
-		$this->arrStepsList = $this->fetchStepsList();
-		$this->arrPractice = $this->fetchPractice();
-		$this->arrTeamMember = $this->fetchTeamMember();
-  	}	
 
-	public function fetchType() {		
+class Practice_Class extends Database {
 
-		$qrySel = "SELECT ct.client_type_id, ct.client_type 
+    public function __construct() {
+        $this->arrTypes = $this->fetchType();
+        $this->arrStepsList = $this->fetchStepsList();
+        $this->arrPractice = $this->fetchPractice();
+        $this->arrTeamMember = $this->fetchTeamMember();
+    }
+
+    public function fetchType() {
+
+        $qrySel = "SELECT ct.client_type_id, ct.client_type 
 					FROM client_type ct
 					ORDER BY ct.order";
 
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrTypes[$rowData['client_type_id']] = $rowData['client_type'];
-		}
-		return $arrTypes;
-	}
+        $fetchResult = mysql_query($qrySel);
+        while ($rowData = mysql_fetch_assoc($fetchResult)) {
+            $arrTypes[$rowData['client_type_id']] = $rowData['client_type'];
+        }
+        return $arrTypes;
+    }
 
-	public function fetchPractice() {		
+    public function fetchPractice() {
 
-		$qrySel = "SELECT ct.id, ct.name 
+        $qrySel = "SELECT ct.id, ct.name 
 					FROM pr_practice ct 
 					ORDER BY ct.name";
 
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrPractice[$rowData['id']] = $rowData['name'];
-		}
-		return $arrPractice;
-	}
+        $fetchResult = mysql_query($qrySel);
+        while ($rowData = mysql_fetch_assoc($fetchResult)) {
+            $arrPractice[$rowData['id']] = $rowData['name'];
+        }
+        return $arrPractice;
+    }
 
-	public function fetchStepsList() {		
+    public function fetchStepsList() {
 
-		$qrySel = "SELECT cs.id, cs.description
+        $qrySel = "SELECT cs.id, cs.description
 					FROM cli_steps cs
 					ORDER BY cs.order";
 
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrItemList[$rowData['id']] = $rowData['description'];
-		}
-		return $arrItemList;	
-	} 
+        $fetchResult = mysql_query($qrySel);
+        while ($rowData = mysql_fetch_assoc($fetchResult)) {
+            $arrItemList[$rowData['id']] = $rowData['description'];
+        }
+        return $arrItemList;
+    }
 
-	public function fetchTeamMember() {
+    public function fetchTeamMember() {
 
-		$qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
+        $qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
 					FROM stf_staff t1, aty_accesstype t2, con_contact c1
 					WHERE t1.stf_AccessType = t2.aty_Code 
 					AND t1.stf_CCode = c1.con_Code 
@@ -58,55 +58,55 @@ class Practice_Class extends Database
 					AND c1.con_Designation = '29'
 					ORDER BY c1.con_Firstname";
 
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrEmployees[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
-		}
-		return $arrEmployees;	
-	} 
+        $fetchResult = mysql_query($qrySel);
+        while ($rowData = mysql_fetch_assoc($fetchResult)) {
+            $arrEmployees[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
+        }
+        return $arrEmployees;
+    }
 
-	public function fetchEmployees() {	
+    public function fetchEmployees() {
 
-		$qrySel = "SELECT ss.stf_Code, CONCAT_WS(' ', cc.con_Firstname, cc.con_Lastname) staffName 
+        $qrySel = "SELECT ss.stf_Code, CONCAT_WS(' ', cc.con_Firstname, cc.con_Lastname) staffName 
 					 FROM stf_staff ss, con_contact cc
 					 WHERE ss.stf_CCode = cc.con_Code ";
 
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrEmployees[$rowData['stf_Code']] = $rowData['staffName'];
-		}
-		return $arrEmployees;	
-	} 
+        $fetchResult = mysql_query($qrySel);
+        while ($rowData = mysql_fetch_assoc($fetchResult)) {
+            $arrEmployees[$rowData['stf_Code']] = $rowData['staffName'];
+        }
+        return $arrEmployees;
+    }
 
-	public function sql_select($mode='',$recId='') {	
-	
-		global $filter;
-		global $filterfield;
-		global $wholeonly;
-		global $commonUses;	
-		
-		if($_SESSION["usertype"] == "Staff") {
-			$staffId = $_SESSION["staffcode"];
-			$strWhere = "AND (pr.sr_manager=".$staffId." 
-						OR pr.india_manager=".$staffId." 
-						OR cl.team_member=".$staffId ." 
-						OR pr.sales_person=".$staffId . ")";
-		}
-		
-		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))){
-			
-			$qrySel = "SELECT cl.*, pr.sr_manager, pr.india_manager, cl.team_member, pr.sales_person 
+    public function sql_select($mode = '', $recId = '') {
+
+        global $filter;
+        global $filterfield;
+        global $wholeonly;
+        global $commonUses;
+
+        if ($_SESSION["usertype"] == "Staff") {
+            $staffId = $_SESSION["staffcode"];
+            $strWhere = "AND (pr.sr_manager=" . $staffId . " 
+						OR pr.india_manager=" . $staffId . " 
+						OR cl.team_member=" . $staffId . " 
+						OR pr.sales_person=" . $staffId . ")";
+        }
+
+        if (isset($mode) && (($mode == 'view') || ($mode == 'edit'))) {
+
+            $qrySel = "SELECT cl.*, pr.sr_manager, pr.india_manager, cl.team_member, pr.sales_person 
 					FROM client cl, pr_practice pr
-					WHERE pr.id = cl.id AND cl.client_id = ".$recId."
-					ORDER BY cl.client_id DESC";	
-		}
-		else{
-			
-			$filterstr = $commonUses->sqlstr($filter);
+					WHERE pr.id = cl.id AND cl.client_id = " . $recId . "
+					ORDER BY cl.client_id DESC";
+        } else {
 
-			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
+            $filterstr = $commonUses->sqlstr($filter);
 
-				$qrySel = "SELECT cl.*, s.*, cnt.*, pr.sr_manager, pr.india_manager, cl.team_member, pr.sales_person 
+            if (!$wholeonly && isset($wholeonly) && $filterstr != '')
+                $filterstr = "%" . $filterstr . "%";
+
+            $qrySel = "SELECT cl.*, s.*, cnt.*, pr.sr_manager, pr.india_manager, cl.team_member, pr.sales_person 
 							FROM client cl, pr_practice pr, client_type clt, stf_staff s, con_contact cnt
 							WHERE cl.id = pr.id and cl.client_type_id  = clt.client_type_id
 							AND pr.sr_manager = s.stf_Code 
@@ -114,53 +114,50 @@ class Practice_Class extends Database
 							{$strWhere}";
 
 
-			if(isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
-				
-				if($commonUses->sqlstr($filterfield) == 'sr_manager') {
-					$qrySel .= "AND (cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
-				}
-				else{
-					$qrySel .= " AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
-				}
-				
-			} 
-			elseif(isset($filterstr) && $filterstr!='') {
-				
-				$qrySel .= " AND (cl.client_name like '" .$filterstr ."' 
-					OR pr.name like '" .$filterstr ."'
-					OR clt.client_type like '". $filterstr ."'
-					OR cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."'
-					OR cl.client_received like '". $filterstr ."')";
-					
-			}				
+            if (isset($filterstr) && $filterstr != '' && isset($filterfield) && $filterfield != '') {
 
-			$qrySel .= " ORDER BY cl.client_id DESC";
-		}
-		
-		$fetchResult = mysql_query($qrySel);		
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrClients[$rowData['client_id']] = $rowData;
-		}
-		return $arrClients;
-	}
-	
-	public function sql_insert() {	
+                if ($commonUses->sqlstr($filterfield) == 'sr_manager') {
+                    $qrySel .= "AND (cnt.con_Firstname like '" . $filterstr . "' OR cnt.con_Middlename like '" . $filterstr . "' OR cnt.con_Lastname like '" . $filterstr . "')";
+                } else {
+                    $qrySel .= " AND " . $commonUses->sqlstr($filterfield) . " like '" . $filterstr . "'";
+                }
+            } elseif (isset($filterstr) && $filterstr != '') {
 
-		global $commonUses;
+                $qrySel .= " AND (cl.client_name like '" . $filterstr . "' 
+					OR pr.name like '" . $filterstr . "'
+					OR clt.client_type like '" . $filterstr . "'
+					OR cnt.con_Firstname like '" . $filterstr . "' OR cnt.con_Middlename like '" . $filterstr . "' OR cnt.con_Lastname like '" . $filterstr . "'
+					OR cl.client_received like '" . $filterstr . "')";
+            }
 
-		foreach($_REQUEST AS $fieldName => $fieldValue) {
-			 if(strstr($fieldName, "step:")) {
-				$fieldId = str_replace('step:','',$fieldName);
-				$arrSteps[] = $fieldId;
-			 }
-		}
+            $qrySel .= " ORDER BY cl.client_id DESC";
+        }
 
-		$strSteps = '';
-		if(!empty($arrSteps)) $strSteps = implode(',', $arrSteps);
+        $fetchResult = mysql_query($qrySel);
+        while ($rowData = mysql_fetch_assoc($fetchResult)) {
+            $arrClients[$rowData['client_id']] = $rowData;
+        }
+        return $arrClients;
+    }
 
-		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
+    public function sql_insert() {
 
-		$qryIns = "INSERT INTO client(client_type_id, client_name, id, team_member, client_notes, client_received, steps_done)
+        global $commonUses;
+
+        foreach ($_REQUEST AS $fieldName => $fieldValue) {
+            if (strstr($fieldName, "step:")) {
+                $fieldId = str_replace('step:', '', $fieldName);
+                $arrSteps[] = $fieldId;
+            }
+        }
+
+        $strSteps = '';
+        if (!empty($arrSteps))
+            $strSteps = implode(',', $arrSteps);
+
+        $dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
+
+        $qryIns = "INSERT INTO client(client_type_id, client_name, id, team_member, client_notes, client_received, steps_done)
 					VALUES (
 					'" . $_REQUEST['lstType'] . "', 
 					'" . addslashes($_REQUEST['cliName']) . "',
@@ -171,119 +168,138 @@ class Practice_Class extends Database
 					'" . $strSteps . "'
 					)";
 
-		//mysql_query($qryIns);
-		//$newClientId = mysql_insert_id();
-		$newClientId = '32';
+        mysql_query($qryIns);
+        $newClientId = mysql_insert_id();
+        
+        /* update client code in client table */
 
-		/* update client code in client table */
+        // fetch practice code for respective client
+        $qrySel = "SELECT pr_code FROM pr_practice WHERE id = '" . $_REQUEST['lstPractice'] . "'";
+        $resultObj = mysql_query($qrySel);
+        $arrInfo = mysql_fetch_assoc($resultObj);
+        $pracCode = $arrInfo['pr_code'];
 
-		// fetch practice code for respective client
-		$qrySel = "SELECT pr_code
-					FROM pr_practice 
-					WHERE id = '".$_REQUEST['lstPractice']."'";
+        // build client code
+        $clientName = preg_replace('/[^a-zA-Z1-2]/', '_', $_REQUEST['cliName']);
+        $arrCliName = explode("_", $clientName);
 
-		$resultObj = mysql_query($qrySel);
-		$arrInfo = mysql_fetch_assoc($resultObj);
-		$pracCode = $arrInfo['pr_code'];
+        $cntNameWords = count($arrCliName);
+        $intCounter = 0;
+        $cliCode = "";
+        
+        While ($intCounter < $cntNameWords) {
+            
+            $wordLgth=0;
+            $word = $arrCliName[$intCounter];
+            $wordLgth = strlen($arrCliName[$intCounter]);
+            
+            if($cntNameWords == 1){
+                
+                if($cliCode < 5){
+                
+                    if($wordLgth >= 5) {
+                        if(strlen($cliCode) == 0)
+                        {
+                            $cliCode .= substr($word, 0, 5);
+                        }
+                    } else {
+                        $l = 5 - $wordLgth;
+                        $cliCode .= substr($word, 0, $wordLgth);
+                    }
+                    $intCounter++;
+                }    
+                
+            }else{
+                
+                if($cliCode < 5){
+                
+                    if ($wordLgth >= 3) {
+                        if(strlen($cliCode) == 0)
+                        {
+                            $cliCode .= substr($word, 0, 3);
+                        }
+                        else
+                        {
+                            $len = 5 - strlen($cliCode);
+                            $cliCode .= substr($word, 0, $len);
+                        }
 
-		// build client code
-		$clientName = preg_replace('/[^a-zA-Z1-2]/', '_', $_REQUEST['cliName']);
-		$arrCliName = explode("_", $clientName);
+                    } else {
+                        $cliCode .= substr($word, 0, $wordLgth);
+                    }
+                    
+                }
+                $intCounter++;
+            }
+            
+            
+            if($intCounter == $cntNameWords)
+            {
+                if(strlen($cliCode) < 5)
+                $cliCode = str_pad($cliCode, 5, "0",STR_PAD_LEFT);
+            }
+            $cliCodeLen = strlen($cliCode);
+            
+            // check if client code is unique or not 
+            if ($cliCodeLen == 5) {
+                $flagCodeExists = $this->checkClientCodeUnique($pracCode.$cliCode);
 
-		print('<pre>');
-		print_r($arrCliName);
-		$cntNameWords = count($arrCliName);
+                if (!$flagCodeExists)
+                    break;
+            }
+//            else{
+//                $word = "";
+//                $wordLgth = 0;
+//            }
 
-		$intCounter = 0;
-		$cliCode = "";
-		While($intCounter < $cntNameWords) {
-			$word = $arrCliName[$intCounter];
-			//if(empty($word)) continue;
+        }
+        
+        // update client code in client table
+        $qryUpd = "UPDATE client SET client_code = '" . strtoupper($pracCode.$cliCode) . "' WHERE client_id ='" . $newClientId . "'";
+        mysql_query($qryUpd);
+        
+    }
 
-			print('<pre>word::');
-			print_r($word);
+    // check if client code is unique or not
+    public function checkClientCodeUnique($code,$clientId = '') {
+        
+        if(!empty($clientId))
+            $strAppend = "AND client_id <> ".$clientId;
+        else
+            $strAppend = "" ;
+        
+        $qrySel = "SELECT client_id FROM client WHERE client_code = '" . $code . "' {$strAppend}";
+        $resultObj = mysql_query($qrySel);
+        $flagCodeExists = mysql_fetch_assoc($resultObj);
 
-			$wordLgth = strlen($word);
+        return $flagCodeExists;
+    }
 
-			if($wordLgth >= 3) {
-				$cliCode .= substr($word, 0, 3);
-			}
-			else {
-				$cliCode .= substr($word, 0, $wordLgth);
-			}
-	
-			$intCounter++;
+    public function sql_update() {
 
-			$cliCodeLen = strlen($cliCode);
+        global $commonUses;
 
-			// check if client code is unique or not
-			if($cliCodeLen == 5) {
-				$flagCodeExists = $this->checkClientCodeUnique($cliCode);
+        foreach ($_REQUEST AS $fieldName => $fieldValue) {
+            if (strstr($fieldName, "step:")) {
+                $fieldId = str_replace('step:', '', $fieldName);
+                $arrSteps[] = $fieldId;
+            }
+        }
 
-				if(!$flagCodeExists)
-					break;
-			}
-		}
+        $strSteps = '';
+        if (!empty($arrSteps))
+            $strSteps = implode(',', $arrSteps);
 
-		/*if($cliCodeLen > 5) $clientCode = substr($cliCode, 0, 5);
-		else {
-			$cliCode = $cliCode . $newClientId;
-			$clientCode = str_pad($cliCode, 5, "0");
-		}*/
+        $dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
-		print('<pre>cliCode::');
-		print_r($cliCode);exit;
+        if (!empty($_REQUEST['cliCode'])) {
 
-		
+            // check if client code is unique or not
+            $flagCodeExists = $this->checkClientCodeUnique($_REQUEST['cliCode'],$_REQUEST['recid']);
 
+            if (!$flagCodeExists) {
 
-			// update client code in client table
-			$qryUpd = "UPDATE client
-						SET client_code = '".strtoupper($pracCode . $clientCode)."'
-						WHERE client_id ='".$newClientId."'";
-
-			mysql_query($qryUpd);
-			break;
-		exit;
-
-	}
-
-	// check if client code is unique or not
-	public function checkClientCodeUnique($code) {	
-		$qrySel = "SELECT client_id
-					FROM client
-					WHERE client_code = '".$code."'";
-
-		$resultObj = mysql_query($qrySel);
-		$flagCodeExists = mysql_fetch_assoc($resultObj);
-
-		return $flagCodeExists;
-	}
-
-	public function sql_update() {	
-
-		global $commonUses;
-
-		foreach($_REQUEST AS $fieldName => $fieldValue) {
-			 if(strstr($fieldName, "step:")) {
-				$fieldId = str_replace('step:','',$fieldName);
-				$arrSteps[] = $fieldId;
-			 }
-		}
-
-		$strSteps = '';
-		if(!empty($arrSteps)) $strSteps = implode(',', $arrSteps);
-
-		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
-
-		if(!empty($_REQUEST['cliCode'])) {
-
-			// check if client code is unique or not
-			$flagCodeExists = $this->checkClientCodeUnique($_REQUEST['cliCode']);
-
-			if(!$flagCodeExists) {
-
-				$qryUpd = "UPDATE client
+                $qryUpd = "UPDATE client
 						SET client_type_id = '" . $_REQUEST['lstType'] . "',
 							client_code = '" . addslashes($_REQUEST['cliCode']) . "',
 							client_name = '" . addslashes($_REQUEST['cliName']) . "',
@@ -294,14 +310,12 @@ class Practice_Class extends Database
 							steps_done = '" . $strSteps . "'
 						WHERE client_id = '" . $_REQUEST['recid'] . "'";
 
-				mysql_query($qryUpd);
-			}
-			else {
-				header("location: cli_client.php?a=edit&recid=".$_REQUEST['recid']."&cli_code=".$_REQUEST['cliCode']."&flagError=Y");
-			}
-		}
-		else {
-			$qryUpd = "UPDATE client
+                mysql_query($qryUpd);
+            } else {
+                header("location: cli_client.php?a=edit&recid=" . $_REQUEST['recid'] . "&cli_code=" . $_REQUEST['cliCode'] . "&flagError=Y");
+            }
+        } else {
+            $qryUpd = "UPDATE client
 						SET client_type_id = '" . $_REQUEST['lstType'] . "',
 							client_name = '" . addslashes($_REQUEST['cliName']) . "',
 							id = '" . $_REQUEST['lstPractice'] . "',
@@ -311,16 +325,16 @@ class Practice_Class extends Database
 							steps_done = '" . $strSteps . "'
 						WHERE client_id = '" . $_REQUEST['recid'] . "'";
 
-				mysql_query($qryUpd);
-		}
+            mysql_query($qryUpd);
+        }
+    }
 
-	} 
+    function sql_delete($recid) {
 
-	function sql_delete($recid) {
+        $qryDel = "DELETE FROM client where client_id = '" . $recid . "' ";
+        mysql_query($qryDel);
+    }
 
-		$qryDel = "DELETE FROM client where client_id = '".$recid."' ";
-		mysql_query($qryDel);
-	}
 }
 
 ?>

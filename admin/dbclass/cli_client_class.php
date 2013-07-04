@@ -171,8 +171,9 @@ class Practice_Class extends Database
 					'" . $strSteps . "'
 					)";
 
-		mysql_query($qryIns);
-		$newClientId = mysql_insert_id();
+		//mysql_query($qryIns);
+		//$newClientId = mysql_insert_id();
+		$newClientId = '32';
 
 		/* update client code in client table */
 
@@ -186,32 +187,64 @@ class Practice_Class extends Database
 		$pracCode = $arrInfo['pr_code'];
 
 		// build client code
-		$clientName = $_REQUEST['cliName'];
-		$arrCliName = explode(" ", $clientName);
+		$clientName = preg_replace('/[^a-zA-Z1-2]/', '_', $_REQUEST['cliName']);
+		$arrCliName = explode("_", $clientName);
+
+		print('<pre>');
+		print_r($arrCliName);
 		$cntNameWords = count($arrCliName);
 
-		$cntrWord = 0;
-		While($cntrWord < $cntNameWords) {
-			$firstCode = strtoupper(substr($arrCliName[$cntrWord], 0, 3));
-			$cntrWord++;
-			$secondCode = strtoupper(substr($arrCliName[$cntrWord++], 0, 2));
-			$cliName = $firstCode . $secondCode;
-			$clientCode = $pracCode . $cliName;
+		$intCounter = 0;
+		$cliCode = "";
+		While($intCounter < $cntNameWords) {
+			$word = $arrCliName[$intCounter];
+			//if(empty($word)) continue;
+
+			print('<pre>word::');
+			print_r($word);
+
+			$wordLgth = strlen($word);
+
+			if($wordLgth >= 3) {
+				$cliCode .= substr($word, 0, 3);
+			}
+			else {
+				$cliCode .= substr($word, 0, $wordLgth);
+			}
+	
+			$intCounter++;
+
+			$cliCodeLen = strlen($cliCode);
 
 			// check if client code is unique or not
-			$flagCodeExists = $this->checkClientCodeUnique($clientCode);
+			if($cliCodeLen == 5) {
+				$flagCodeExists = $this->checkClientCodeUnique($cliCode);
 
-			if(!$flagCodeExists) {
-
-				// update client code in client table
-				$qryUpd = "UPDATE client
-							SET client_code = '".$clientCode."'
-							WHERE client_id ='".$newClientId."'";
-
-				mysql_query($qryUpd);
-				break;
+				if(!$flagCodeExists)
+					break;
 			}
 		}
+
+		/*if($cliCodeLen > 5) $clientCode = substr($cliCode, 0, 5);
+		else {
+			$cliCode = $cliCode . $newClientId;
+			$clientCode = str_pad($cliCode, 5, "0");
+		}*/
+
+		print('<pre>cliCode::');
+		print_r($cliCode);exit;
+
+		
+
+
+			// update client code in client table
+			$qryUpd = "UPDATE client
+						SET client_code = '".strtoupper($pracCode . $clientCode)."'
+						WHERE client_id ='".$newClientId."'";
+
+			mysql_query($qryUpd);
+			break;
+		exit;
 
 	}
 

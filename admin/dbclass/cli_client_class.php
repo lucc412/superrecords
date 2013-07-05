@@ -180,7 +180,7 @@ class Practice_Class extends Database {
         $pracCode = $arrInfo['pr_code'];
 
         // build client code
-        $clientName = preg_replace('/[^a-zA-Z1-2]/', '_', $_REQUEST['cliName']);
+        $clientName = preg_replace('/[^a-zA-Z0-9]/', '_', $_REQUEST['cliName']);
         $arrCliName = explode("_", $clientName);
 
         $cntNameWords = count($arrCliName);
@@ -195,24 +195,18 @@ class Practice_Class extends Database {
             
             if($cntNameWords == 1){
                 
-                if($cliCode < 5){
+                if(strlen($cliCode) < 5){
                 
                     if($wordLgth >= 5) {
-                        if(strlen($cliCode) == 0)
-                        {
-                            $cliCode .= substr($word, 0, 5);
-                        }
+                        $cliCode .= substr($word, 0, 5);
                     } else {
-                        $l = 5 - $wordLgth;
                         $cliCode .= substr($word, 0, $wordLgth);
                     }
-                    $intCounter++;
                 }    
                 
             }else{
                 
-                if($cliCode < 5){
-                
+                if(strlen($cliCode) < 5 && ($word != '')){
                     if ($wordLgth >= 3) {
                         if(strlen($cliCode) == 0)
                         {
@@ -229,34 +223,42 @@ class Practice_Class extends Database {
                     }
                     
                 }
-                $intCounter++;
+                else{
+                   
+                }
             }
-            
-            
+          
+            $intCounter++;
             if($intCounter == $cntNameWords)
             {
                 if(strlen($cliCode) < 5)
-                $cliCode = str_pad($cliCode, 5, "0",STR_PAD_LEFT);
+                    $cliCode = str_pad($cliCode, 5, "0",STR_PAD_LEFT);
             }
-            $cliCodeLen = strlen($cliCode);
             
             // check if client code is unique or not 
-            if ($cliCodeLen == 5) {
+            if (strlen($cliCode) == 5) {
                 $flagCodeExists = $this->checkClientCodeUnique($pracCode.$cliCode);
-
-                if (!$flagCodeExists)
+               
+                if(!$flagCodeExists)
+                {
                     break;
+                }
+                else
+                {
+                   $cliCode = ''; 
+                }
             }
-//            else{
-//                $word = "";
-//                $wordLgth = 0;
-//            }
-
+            else{
+                $word = "";
+                $wordLgth = 0;
+            }
+            
         }
-        
-        // update client code in client table
-        $qryUpd = "UPDATE client SET client_code = '" . strtoupper($pracCode.$cliCode) . "' WHERE client_id ='" . $newClientId . "'";
-        mysql_query($qryUpd);
+        if($pracCode != '' && $cliCode != '')
+        {
+            $qryUpd = "UPDATE client SET client_code = '" . strtoupper($pracCode.$cliCode) . "' WHERE client_id ='" . $newClientId . "'";
+            mysql_query($qryUpd);
+        }
         
     }
 

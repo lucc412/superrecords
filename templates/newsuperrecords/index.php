@@ -224,7 +224,6 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 				<span><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/logos/cpa.jpg" /></span>
 				<span><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/logos/bgl.jpg" /></span>
 				<span><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/logos/banklink.jpg" /></span>
-				<span><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/logos/ssa.jpg" /></span>
 			</div>
 			<!--sponsors End-->
 		</div>

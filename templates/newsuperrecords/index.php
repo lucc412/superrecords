@@ -118,7 +118,7 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 						<img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/header-logo.png"  alt="<?php echo JText::_('Super Records Logo'); ?>" />
 					</a>
 				</div> <!--branding-->
-				<div class="user" style="right: -82px;">
+				<div class="user" style="right: -15px;">
 					<li class="contact"><a href="http://www.superrecords.com.au/contact-us.html">Learn More</a></li><?
 
 					/* prefix of URL whether http:// or https: */

@@ -28,7 +28,7 @@ if(!empty($a) && $a != 'addJob') {
 					<span style="font-weight:bold; font-size:14pt;"> Job Name: </span><?
 					$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
 					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
-					?><span style="font-size:14pt;"><?=$jobName?></span>
+					?><span style="font-size:14pt;"><?=stripslashes($jobName)?></span>
 			  </td>
 			  
 			</tr>
@@ -49,7 +49,7 @@ if(!empty($a) && $a != 'addJob') {
 
 					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
 				
-				 ?><span style="font-size:10pt;"><?=$jobName?></span>
+				 ?><span style="font-size:10pt;"><?=stripslashes($jobName)?></span>
 				</td>				
 			</tr>
 		</table>
@@ -887,7 +887,7 @@ switch ($a)
 					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $arrInfo["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
 					
 					?><td class="<?=$style?>"><?=$arrPractice[$arrInfo['id']]['name']?></td>	
-					<td class="<?=$style?>"><?=$jobName?></td>	
+					<td class="<?=$style?>"><?=stripslashes($jobName)?></td>	
 					<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrJobStatus[$arrInfo["job_status_id"]]["job_status"])?></td><?
 
 					if(!empty($arrInfo["job_received"])){

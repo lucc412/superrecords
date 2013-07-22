@@ -2,9 +2,14 @@
 	<h1>Add Record</h1>
 </div>
 <div style="position:absolute; top:20; right:-90px; width:300; height:300;">
-<font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font></div>
+<font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font></div><?
 
-<form action="pr_practice.php" method="POST" name="managepractice" onSubmit="return validateFormOnSubmit()">
+// error message
+if(!empty($_REQUEST['flagErrMsg'])) {
+	?><div class="errorMsg"><?=ERRORICON?>&nbsp;Email already registered.</div><?	
+}
+
+?><form action="pr_practice.php" method="POST" name="managepractice" onSubmit="return validateFormOnSubmit()">
 	<p><input type="hidden" name="sql" value="insert"></p>
 	<table class="tbl" border="0" cellspacing="10" width="70%">
 		<tr>
@@ -133,9 +138,7 @@
 	 		</td>
 		</tr>
 		<tr>
-			<td class="hr">Email (User Name)
-			<font style="color:red;" size="2">*</font>
-			</td>
+			<td class="hr">Email Address<font style="color:red;" size="2">*</font></td>
 			<td class="dr">
 				
 				<input type="text" name="email" id="uname">

@@ -86,7 +86,7 @@ if($_SESSION['validUser']) {
 					foreach($arrReportData AS $userId => $arrData) {
 						echo"<tr><td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$srNoCount++."</td>";
 						foreach($arrData AS $columnName => $columnValue) {
-							echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$columnValue."</td>";
+							echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".stripslashes($columnValue)."</td>";
 						}
 						echo"</tr>";
 					}

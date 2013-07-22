@@ -38,11 +38,22 @@ function validateFormOnSubmit() {
 	}
 	
 	else if (document.managepractice.email.value == "") {
-		alert("Enter Email (User Name)");
+		alert("Enter Email Address");
 		document.managepractice.email.focus();
 		return false;
 	}
-	
+
+	else if (document.managepractice.email.value != "") {
+		var atpos = document.managepractice.email.value.indexOf("@");
+		var dotpos = document.managepractice.email.value.lastIndexOf(".");
+
+		if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= document.managepractice.email.value.length){
+			alert('Invalid Email Address. Please enter again.');
+			document.managepractice.email.focus();
+			return false;
+		}
+	}
+
 	else if (document.managepractice.password.value == "") {
 		alert("Enter Password");
 		document.managepractice.password.focus();

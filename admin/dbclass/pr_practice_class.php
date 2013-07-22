@@ -21,7 +21,22 @@ class Practice_Class extends Database {
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
 			$arrTypes[$rowData['id']] = $rowData['description'];
 		}
-		return $arrTypes;	
+		return $arrTypes;
+	} 
+
+	public function checkEmailExists($prEmail) {		
+
+		$qrySel = "SELECT pr.email
+					FROM pr_practice pr
+					WHERE pr.email = '".$prEmail."'";
+
+		$fetchResult = mysql_query($qrySel);		
+		$rowData = mysql_fetch_assoc($fetchResult);
+
+		if(empty($rowData))
+			return true;
+		else
+			return false;	
 	} 
 
 	public function fetchEmployees($flagManager) {

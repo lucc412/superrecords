@@ -13,6 +13,7 @@ DEFINE("REPORTVALUE",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/report_value.p
 DEFINE("REPORTSAVEDREPORT",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/report_savedreports.php");
 DEFINE("REPORTDDOPTIONS",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/report_dd_options.php");
 
+define("ERRORICON", "<img src='images/errorIcon.gif' />");
 // define folder path
 $imgPath = "images/";
 $styleSheet = "css/";

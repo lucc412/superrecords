@@ -47,7 +47,7 @@
  
 		?><tr class="<?=$trClass?>">
 			<td align="center" class="<?=$style?>"><?=htmlspecialchars($arrInfo["pr_code"])?></td>
-			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["name"])?></td>
+			<td class="<?=$style?>"><?=stripslashes($arrInfo["name"])?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrTypes[$arrInfo["type"]])?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrSrManager[$arrInfo["sr_manager"]])?></td>
 			<td class="<?=$style?>" align="center"><?

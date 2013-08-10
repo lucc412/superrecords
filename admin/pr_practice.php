@@ -33,6 +33,7 @@ if($_SESSION['validUser']) {
 			switch ($sql) {
 				case "insert":
 
+					/*
 					// check if email address is unique
 					$flagExists = $objCallData->checkEmailExists($_REQUEST['email']);
 
@@ -40,6 +41,7 @@ if($_SESSION['validUser']) {
 						header("Location: pr_practice.php?a=add&flagErrMsg=Y");
 						exit;
 					}
+					*/
 				
 					$practiceId = $objCallData->sql_insert();
 

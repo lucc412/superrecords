@@ -85,7 +85,7 @@ class DECLARATIONS
                         </table>";
             $pdf->WriteHTML($strContent);
             $pdf->Output($_SERVER['DOCUMENT_ROOT']."/uploads/setup/".$filename,"F");
-            exit;
+         
         }
 }
                     

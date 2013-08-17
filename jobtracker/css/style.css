@@ -1,0 +1,41 @@
+.errclass {
+	border:2px solid #fd0222;
+}
+
+.successClass {
+	border:1px -moz-bg-inset;
+}
+
+.tabclass {
+	font-size:18px;
+	font-weight:bold;
+	padding-right:80px;
+}
+
+.tabclassactive {
+	font-size:18px;
+	font-weight:bold;
+	padding-right:80px;
+	color:red;
+}
+
+.memberclass {
+	font-size:15px;
+	font-weight:bold;
+	color:blue;
+}
+
+a {
+	text-decoration: none;
+	color:blue;
+}
+
+a:hover{
+	color: red;
+}
+
+.indexpageTab {
+	font-size:18px;
+	font-weight:bold;
+	color:blue;
+}

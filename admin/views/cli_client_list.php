@@ -5,7 +5,7 @@
 <table class="customFilter" border="0" cellspacing="1" cellpadding="4" align="right" style="margin-right:15px; ">
 <tr>
 <td><b>Custom Filter</b>&nbsp;</td>
-<td><input type="text" name="filter" value="<?php echo $filter ?>"></td>
+<td><input type="text" name="filter" value="<?php echo stripslashes($filter)?>"></td>
 <td><select name="filter_field">
 <option value="">All Fields</option>
  <option value="<?php echo "cl.client_name" ?>"<?php if ($filterfield == "cl.client_name") { echo "selected"; } ?>>Client Name</option>
@@ -50,7 +50,7 @@
 		?><tr class="<?=$trClass?>">
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrPractice[$arrInfo["id"]])?></td>
 			<td class="<?=$style?>" align="center"><?=htmlspecialchars($arrInfo["client_code"])?></td>
-			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["client_name"])?></td>
+			<td class="<?=$style?>"><?=stripslashes($arrInfo["client_name"])?></td>
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrTypes[$arrInfo["client_type_id"]])?></td>
 			
 			<td class="<?=$style?>"><?=htmlspecialchars($arrEmployees[$arrInfo["sr_manager"]])?></td>

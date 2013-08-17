@@ -78,7 +78,7 @@
 		<tr>
 			<td class="hr">Client Name<font style="color:red;" size="2">*</font></td>
 			<td class="dr">
-				<input type="text" name="cliName" maxlength="50" value="<?=$arrClientData['client_name']?>">
+				<input type="text" name="cliName" maxlength="50" value="<?=stripslashes($arrClientData['client_name'])?>">
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Client.</span></a>
 			</td>
 		</tr>

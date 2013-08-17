@@ -12,7 +12,7 @@
 <table class="tbl" border="0" cellspacing="12" width="70%">
 	<tr>
 		<td class="hr">Task Name</td>
-		<td class="dr"><?=htmlspecialchars($arrTaskData["task_name"])?></td>
+		<td class="dr"><?=stripslashes($arrTaskData["task_name"])?></td>
 	</tr>
 	
 	<tr>
@@ -22,7 +22,7 @@
 
 	<tr>
 		<td class="hr">Client Name</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrClient[$arrTaskData["client_id"]])?></td>
+		<td class="dr"><?=stripslashes($objCallData->arrClient[$arrTaskData["client_id"]])?></td>
 	</tr>
 
 	<tr>
@@ -39,7 +39,7 @@
 			$arrJobParts = explode('::', $objCallData->arrJob[$JobID]);
 			$jobName = '<span class="clientclr">'.$objCallData->arrClient[$ClientID] . '</span> - <span class="periodclr">' . $objCallData->arrJobDetails[$JobID]["period"]. '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]]["sub_Description"].'</span>';
 			
-			echo $jobName; 	
+			echo stripslashes($jobName); 	
 	?></td>
 	</tr>
 

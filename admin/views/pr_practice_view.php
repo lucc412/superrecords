@@ -13,7 +13,7 @@
 	</tr>
 	<tr>
 		<td class="hr">Practice Name</td>
-		<td class="dr"><?=htmlspecialchars($arrPracticeData["name"])?></td>
+		<td class="dr"><?=stripslashes($arrPracticeData["name"])?></td>
 	</tr>
 	<tr>
 		<td class="hr">SR Manager</td>
@@ -68,7 +68,7 @@
 		<td class="dr"><?=htmlspecialchars($arrPracticeData["fax"])?></td>
 	</tr>
 	<tr>
-		<td class="hr">Email (User Name)</td>
+		<td class="hr">Email Address</td>
 		<td class="dr"><?=htmlspecialchars($arrPracticeData["email"])?></td>
 	</tr>
 	<tr>

@@ -29,7 +29,7 @@
 		<tr>
 			<td class="hr">Practice Name<font style="color:red;" size="2">*</font></td>
 			<td class="dr">
-				<input type="text" name="refName" maxlength="50" value="<?=$arrPracticeData['name']?>">
+				<input type="text" name="refName" maxlength="50" value="<?=stripslashes($arrPracticeData['name'])?>">
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Practice.</span></a>
 			</td>
 		</tr>
@@ -145,9 +145,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Email (User Name)<font style="color:red;" size="2">*</font></td>
-			
-		
+			<td class="hr">Email Address<font style="color:red;" size="2">*</font></td>
 			<td class="dr">
 				<input type="text" name="email" value="<?=$arrPracticeData['email']?>">
 			</td>

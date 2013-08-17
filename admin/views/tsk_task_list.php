@@ -54,7 +54,7 @@
 			
 			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrPractice[$arrInfo["id"]])?></td>
 
-			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["task_name"])?></td>
+			<td class="<?=$style?>"><?=stripslashes($arrInfo["task_name"])?></td>
 
 		  	<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrTaskStatus[$arrInfo["task_status_id"]])?></td><?
 			

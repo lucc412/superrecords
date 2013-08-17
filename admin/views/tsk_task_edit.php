@@ -27,7 +27,7 @@
 		<tr>
 			<td class="hr">Task Name<font style="color:red;" size="2">*</font></td>
 			<td class="dr">
-				<input type="text" name="txtTaskName" size="26" value="<?=$arrTaskData['task_name']?>">
+				<input type="text" name="txtTaskName" size="26" value="<?=stripslashes($arrTaskData['task_name'])?>">
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Task.</span></a>
 			</td>
 		</tr>
@@ -46,7 +46,7 @@
 					foreach($objCallData->arrPractice AS $practice_id => $practice_name){
 						$selectStr = '';
 						if($practice_id == $arrTaskData['id']) $selectStr = 'selected';
-						?><option <?=$selectStr?> value="<?=$practice_id?>"><?=$practice_name?></option><?php 
+						?><option <?=$selectStr?> value="<?=$practice_id?>"><?=stripslashes($practice_name)?></option><?php 
 				} 
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Practice.</span></a><?
@@ -67,7 +67,7 @@
 							foreach($arrFewClient AS $client_id => $client_name){
 								$selectStr = '';
 								if($client_id == $arrTaskData['client_id']) $selectStr = 'selected';
-								?><option <?=$selectStr?> value="<?=$client_id?>"><?=$client_name?></option><?php 
+								?><option <?=$selectStr?> value="<?=$client_id?>"><?=stripslashes($client_name)?></option><?php 
 							} 
 						?></select>
 					</span>
@@ -100,7 +100,7 @@
 								{
 									$selectStr = '';
 									if($job_id == $arrTaskData['job_id']) $selectStr = 'selected';		
-									?><option <?=$selectStr?> value="<?=$job_id?>"><?=$job_name?></option><?php 
+									?><option <?=$selectStr?> value="<?=$job_id?>"><?=stripslashes($job_name)?></option><?php 
 								} 
 							?></select>
 					  </span>

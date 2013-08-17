@@ -680,7 +680,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .sponsors {
 	height:105px;
 	background:url(../images/sponsors-shadow.jpg) top center no-repeat;
-	padding:30px 20px 0;
+	padding:35px 20px 0;
 	border-bottom:3px solid #ccc;
 }
 

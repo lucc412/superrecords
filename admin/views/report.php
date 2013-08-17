@@ -156,7 +156,7 @@ include("includes/header.php");
 							$srNoCount++;
 
 							foreach($arrData AS $columnName => $columnValue) {
-								?><td <?=$tdColor?>><?=$columnValue?></td><?
+								?><td <?=$tdColor?>><?=stripslashes($columnValue)?></td><?
 								$tdColor ='';
 							}
 						?></tr><?

@@ -29,7 +29,7 @@
 	</tr>
 	<tr>
 		<td class="hr">Client Name</td>
-		<td class="dr"><?=htmlspecialchars($arrClientData["client_name"])?></td>
+		<td class="dr"><?=stripslashes($arrClientData["client_name"])?></td>
 	</tr>
 	<tr>
 		<td class="hr">Entity Type</td>

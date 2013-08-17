@@ -8,11 +8,10 @@ include(TOPBAR);
 	<span>
 		<b>Welcome to the Super Records job submission page.</b></br>Here you can submit a new job for any client. Please note you must create the client before submitting a job for that client.
 	<span>
-</div><?
-
-// content
-?><form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertJob" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data">
-	<!--<input type="hidden" name="sql" value="insert">-->
+</div>
+<form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertJob&type=SETUP" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data">
+	<input type="hidden" name="job_submitted" value="N">
+        <input type="hidden" name="subfrmId" value="<?=$_REQUEST['frmId']?>">
 	<table align="center" width="90%" class="fieldtable" cellpadding="10px;">
 
 		<tr>
@@ -27,7 +26,7 @@ include(TOPBAR);
 			</td>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Client Type</strong></td>
@@ -41,7 +40,7 @@ include(TOPBAR);
 			</td>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Job Type</strong></td>
@@ -54,23 +53,23 @@ include(TOPBAR);
 			</td>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Period</strong></td>
 			<td><input title="Specify period of job" type="text" name="txtPeriod" id="txtPeriod" value=""></td>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Notes</strong></td>
 			<td><textarea id="txtNotes" name="txtNotes"></textarea>  </td>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 
-		<tr>
+<!--		<tr>
 			<td><strong>Source Documents</strong></td>
 			<td><span class="docheader">Description</span></td>
 			<td><span class="docheader">File Path</span></td>
@@ -86,14 +85,17 @@ include(TOPBAR);
 		<tr>
 			<td>&nbsp;</td>
 			<td colspan="3"><div id="parentDiv" style="margin-top:-17px;">&nbsp;</div></td>
-		</tr>
+		</tr>-->
 
-		<tr>
+<!--		<td><button type="reset" onclick="window.location.href='jobs.php?a=order'" >Back</button></td>
 			<td><button type="reset" value="Reset">Reset</button></td>
-			<td><button type="submit" value="Add">Submit</button></td>
-		</tr>
-
-	</table>
+			<td><button type="submit" value="Add">Next</button></td>-->
+            </table>
+        <div style="padding-top:20px;">
+            <span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />BACK</button></span>
+            <span align="right" style="padding-left:55px;"><button type="reset" >RESET</button></span>
+            <span align="right" style="padding-left:55px;"><button type="submit">NEXT</button></span>
+        </div>
 </form><?
 
 // include footer file

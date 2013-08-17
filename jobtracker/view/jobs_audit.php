@@ -70,7 +70,7 @@ include(TOPBAR);
 
 		<tr><td>&nbsp;</td></tr>
 
-		<tr>
+<!--		<tr>
 			<td><strong>Source Documents</strong></td>
 			<td><span class="docheader">Description</span></td>
 			<td><span class="docheader">File Path</span></td>
@@ -86,7 +86,7 @@ include(TOPBAR);
 		<tr>
 			<td>&nbsp;</td>
 			<td colspan="3"><div id="parentDiv" style="margin-top:-17px;">&nbsp;</div></td>
-		</tr>
+		</tr>-->
 
 		<tr>
 			<td><button type="reset" value="Reset">Reset</button></td>

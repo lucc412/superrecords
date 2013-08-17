@@ -28,5 +28,17 @@ class Home {
 		$prName = $rowData['name'];
 		return $prName;
 	}
+        
+        
+        public function forgot_practice($username) {
+		$qrySel = "SELECT pr.id,pr.email,pr.password
+                    FROM pr_practice pr
+                    WHERE pr.email = '$username'";
+	
+		$fetchResult = mysql_query($qrySel);
+		$rowData = mysql_fetch_assoc($fetchResult);
+		$pracDtl = $rowData;
+		return $pracDtl;
+	}
 }
 ?>

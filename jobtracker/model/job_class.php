@@ -8,17 +8,19 @@ class Job {
 	public function sql_select($fetchType=NULL) {
 		
 		if(!empty($fetchType) && $fetchType == 'pending') {
-			$appendStr = 'AND t1.job_status_id <> 7';
+			$appendStr = 'AND t1.job_status_id <> 7 AND t1.job_submitted = "Y"';
 		}
 		else if(!empty($fetchType) && $fetchType == 'completed') {
-			$appendStr = 'AND t1.job_status_id = 7';
+			$appendStr = 'AND t1.job_status_id = 7 AND t1.job_submitted = "Y"';
 		}
-
-		if(!empty($_REQUEST['lstClientType'])) {
+                else if(!empty($fetchType) && $fetchType == 'saved') {
+			$appendStr = 'AND t1.job_submitted = "N"';
+		}
+                if(!empty($_REQUEST['lstClientType'])) {
 			$appendSelStr = "AND t1.client_id = {$_REQUEST['lstClientType']}";
 		}
-
-		$qrySel = "SELECT t1.job_id, t1.job_name, t1.job_received, t1.job_type_id, t1.client_id, t1.period, t1.job_status_id, t1.mas_Code, t1.notes
+                
+                $qrySel = "SELECT t1.job_id, t1.job_name, t1.job_received, t1.job_type_id, t1.client_id, t1.period, t1.job_status_id, t1.mas_Code, t1.notes, t1.job_genre, t1.job_submitted, t1.setup_subfrm_id
 					FROM job t1, client c1
 					WHERE c1.id = '{$_SESSION['PRACTICEID']}'
 					AND t1.client_id = c1.client_id
@@ -157,15 +159,18 @@ class Job {
 	}
 
 	public function sql_insert() {
-		$clientId = $_REQUEST['lstClientType'];
+                
+                $clientId = $_REQUEST['lstClientType'];
 		$typeId = $_REQUEST['lstJobType'];
 		$period = $_REQUEST['txtPeriod'];
 		$cliType = $_REQUEST['lstCliType'];
 		$notes = $_REQUEST['txtNotes'];
-		
+                $type = $_REQUEST['type'];
+                $jobStatus = $_REQUEST['job_submitted'];
+                $setup_subfrm = $_REQUEST['subfrmId'];
 		$jobName = $clientId .'::'. $period .'::'. $typeId;
 
-		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, notes, job_name, job_status_id, job_received)
+		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, notes, job_name, job_status_id, job_received, job_genre, job_submitted, setup_subfrm_id)
 					VALUES (
 					" . $clientId . ", 
 					" . $cliType . ", 
@@ -174,9 +179,12 @@ class Job {
 					'" . $notes . "',  
 					'" . $jobName . "',  
 					1,   
-					NOW()
+					NOW(),
+                                        '".$type."',
+                                        '".$jobStatus."',
+                                        '".$setup_subfrm."'    
 					)";
-
+                
 		mysql_query($qryIns);
 		$jobId = mysql_insert_id();
 
@@ -348,6 +356,39 @@ class Job {
 				mysql_query($qryDel);
 			}
 		}
+	}
+        
+        public function fetch_setup_forms() 
+        {
+            $frmQry = "SELECT * FROM setup_forms";
+            $fetchResult = mysql_query($frmQry);		
+            
+            $subfrmQry = "SELECT * FROM setup_subforms";
+            $fetchRow = mysql_query($subfrmQry);
+            
+            while($rowData = mysql_fetch_assoc($fetchResult)) 
+            {
+                $arrForms[$rowData['form_id']] = $rowData;
+            }
+            
+            while($row = mysql_fetch_assoc($fetchRow)) 
+            {
+                $arrSubForms[$row['subform_id']] = $row;
+            }
+            
+            foreach ($arrForms as $key => $value) 
+            {
+                foreach ($arrSubForms as $val) 
+                {
+                    if($value['form_id'] == $val['form_id'])
+                        $arrForms[$value['form_id']]['subforms'][] = $val;
+                }
+            }
+            
+//            echo '<pre>';
+//            print_r($arrForms);
+//            echo '</pre>';
+            return $arrForms;
 	}
 }
 ?>

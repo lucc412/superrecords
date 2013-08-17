@@ -10,12 +10,11 @@ include(TOPBAR);
 
 // content
 ?><form name="objForm" id="objForm" method="post" action="jobs.php" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data">
-
-	<input type="hidden" name="sql" value="update">
-	<input type="hidden" name="recid" value="<?=$_REQUEST['recid']?>"><?
-	$jobId = $_REQUEST['recid'];
-
-	?><table class="resources" width="90%" cellpadding="10px;">
+        <input type="hidden" name="type" value="<?=$arrJobsData['job_genre']?>">
+        <input type="hidden" name="subfrmId" value="<?=$_REQUEST['frmId']?>">
+        <input type="hidden" name="sql" value="update">
+	<input type="hidden" name="recid" value="<?=$_REQUEST['recid']?>"><?$jobId = $_REQUEST['recid'];
+        ?><table class="resources" width="90%" cellpadding="10px;">
 
 		<tr>
 			<td><strong>Client</strong></td>
@@ -80,66 +79,15 @@ include(TOPBAR);
 		</tr>
 
 		<tr><td>&nbsp;</td></tr>
-
-		<tr>
-			<td><strong>Source Documents</strong></td>
-			<?
-				$arrSourceDocs = $objScr->fetch_documents($jobId);
-				
-				//***** Code to check file uploaded but not exists -> starts here *****
-				$countFiles = 0;
-				foreach($arrSourceDocs AS $documentId => $arrDocInfo)
-				{
-					$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
-					if(file_exists($folderPath))
-						$countFiles++;					
-				}
-				//***** Code to check file uploaded but not exists -> ends here *******
-				
-				if(!empty($arrSourceDocs) && $countFiles>0) {
-			?>
-			<td><?
-					$cntFile = 0;
-					foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-						$cntFile++;
-						$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
-						if(file_exists($folderPath)) {
-							?><p><a href="jobs.php?a=download&filePath=<?=$arrDocInfo['file_path']?>&flagChecklist=S" title="Click to view this source document">Document <?=$cntFile?></a>
-							<!--<span style="margin-left:20px;"><a title="Click to delete this document" href="jobs.php?filePath=<?=$arrDocInfo['file_path']?>&recid=<?=$jobId?>&documentId=<?=$documentId?>&a=deleteDoc&flagChecklist=S" onclick="javascript:return unlinkFile('<?=$filePath?>');">X</a></span>--></p>
-							<input type="hidden" name="sourceDoc_<?=$cntFile?>" id="sourceDoc_<?=$cntFile?>" value="<?=$arrDocInfo['file_path']?>"><?
-						}
-					}
-			?></td>
-
-		</tr><? }
-
-			if(!empty($arrSourceDocs) && $countFiles>0) {
-		?><tr><td>&nbsp;</td></tr>
-
-		<tr>
-			<td>&nbsp;</td><?
-			}
-			?><td><span class="docheader">Description</span></td>
-			<td><span class="docheader">File Path</span></td>
-		</tr>
-
-		<tr>
-			<td>&nbsp;</td>
-			<td width="274px"><input type="text" name="textSource_50" title="Specify name of source document"></td>
-			<td width="240px"><input type="file" name="sourceDoc_50" id="sourceDoc_50"></td>
-			<td><button type="button" style="margin-top:-6px;width:94px;" title="Click here to upload new source document" onclick="javascript:addElement();" value="Add">Add</button></td>
-		</tr>
-
-		<tr>
+                <tr>
 			<td>&nbsp;</td>
 			<td colspan="3"><div id="parentDiv">&nbsp;</div></td>
 		</tr>
 
 		<tr><td>&nbsp;</td></tr>
-
-		<tr>
+                <tr>
 			<td><button type="reset" value="Reset">Reset</button></td>
-			<td><button type="submit" value="Edit">Edit</button></td>
+                        <td><button type="submit" value="Edit">Next</button></td>
 		</tr>
 	</table>
 </form><?

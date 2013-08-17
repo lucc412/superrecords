@@ -211,4 +211,42 @@ function replaceContent($content, $salesPersonId=NULL, $practiceId=NULL, $client
 	
 	return $content;	
 } 
+
+// function to covert date into mysql format
+function getDateFormat($dateformat)
+{
+	$date=explode("/",$dateformat);
+	$year=$date[2];
+	$month=$date[1];
+	$day=$date[0];
+	$mysql=$year."-".$month."-".$day;
+	return $mysql;
+}
+
+// function to fetch states
+function fetchStates() {
+    $qryFetch = "SELECT cs.cst_Code state_id, cs.cst_Description state_name 
+                            FROM cli_state cs";
+
+    $fetchResult = mysql_query($qryFetch);
+
+    while($rowData = mysql_fetch_assoc($fetchResult)) {
+            $arrStates[$rowData['state_id']] = $rowData['state_name'];
+    }
+    return $arrStates;
+}
+
+//        class PHP_FUNCTIONS
+//	{
+//            function getDateFormat($dateformat)
+//	    {
+//	        $date=explode("/",$dateformat);
+//	        $year=$date[2];
+//	        $month=$date[1];
+//	        $day=$date[0];
+//	        $mysql=$year."-".$month."-".$day;
+//	        return $mysql;
+//	    }
+//	}
+//	$phpFunctns = new PHP_FUNCTIONS();
 ?>

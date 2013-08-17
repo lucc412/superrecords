@@ -10,15 +10,20 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=9" />
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
 		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
 		<link href="images_user/favicon.ico" rel="shortcut icon" />
 		<!-- Main CSS-->
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
 		<!-- Google Webfont -->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'><?
-
-		$arrQryStr = explode('&', $_SERVER['QUERY_STRING']);
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+                <link rel="stylesheet" type="text/css" href="<?echo SERVER;?>/jobtracker/css/style.css"/>
+                <link rel="stylesheet" type="text/css" href="<?echo SERVER;?>/jobtracker/css/tooltip.css"/>
+                <script type="text/javascript" src="<?echo SERVER;?>/jobtracker/js/common.js"></script>
+		<script type="text/javascript" src="<?echo SERVER;?>/jobtracker/js/datetimepicker_css.js"></script>
+                <?php 
+                $arrQryStr = explode('&', $_SERVER['QUERY_STRING']);
 		$qryStr = $arrQryStr[0];
 
 		if(basename($_SERVER['PHP_SELF']) == 'jobs.php') {
@@ -46,6 +51,33 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 			?><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 			<script type="text/javascript" src="js/job_validation.js"></script><?
 		}
+                else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_contact.php') {
+                        ?><title>Contact Details</title>
+                        <script type="text/javascript" src="js/new_smsf_contact.js"></script><?
+                }
+                else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_fund.php') {
+                        ?><title>Fund Details</title>
+                        <script type="text/javascript" src="js/new_smsf_fund.js"></script><?
+                }
+                else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_member.php') {
+                        ?><title>Member Details</title>
+                        <script type="text/javascript" src="js/new_smsf_member.js"></script><?
+                }
+                else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_trustee.php') {
+                        ?><title>Trustee Details</title>
+                        <script type="text/javascript" src="js/new_smsf_trustee.js"></script><?
+                }
+                else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_declarations.php') {
+                        ?><title>Declarations</title>
+                        <script type="text/javascript" src="js/new_smsf_declarations.js"></script><?
+                }
+                else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_contact.php') {
+                        ?><title>Contact Details</title>
+                        <script type="text/javascript" src="js/existing_smsf_contact.js"></script><?
+                }else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_fund.php') {
+                        ?><title>Contact Details</title>
+                        <script type="text/javascript" src="js/existing_smsf_fund.js"></script><?
+                }
 		else if(basename($_SERVER['PHP_SELF']) == 'queries.php') {
 			?><title>View All Queries</title>
 			<script type="text/javascript" src="js/queries_validation.js"></script><?
@@ -106,7 +138,15 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 							</li>
 							<li class="dropdown"><a href="javascript:;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jobs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 								<ul class="sub">
-									<li><a href="jobs.php?a=add">Submit a Job</a></li>
+									<li>
+                                                                            <a href="jobs.php?a=add&type=job">Submit a Job</a>
+                                                                            <ul class="sub">
+                                                                                <li><a href="jobs.php?a=add&type=comp">Compliance</a></li>
+                                                                                <li><a href="jobs.php?a=add&type=audit">Audit</a></li>
+                                                                                <li><a href="jobs.php?a=order">Order Documents</a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li><a href="jobs.php?a=saved">Saved Jobs</a></li>
 									<li><a href="jobs.php?a=pending">Pending Jobs</a></li>
 									<li><a href="jobs.php?a=completed">Completed Jobs</a></li>
 									<li><a href="jobs.php?a=document">My Documents</a></li>

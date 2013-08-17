@@ -14,7 +14,10 @@ switch ($sql)
 	
 	case "insertJob":
 		$jobId = $objScr->sql_insert();
-		
+                if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
+                $_SESSION['jobId'] = $jobId;
+                
+            
 		/* send mail function starts here for ADD NEW JOB */
 		$pageUrl = basename($_SERVER['REQUEST_URI']);	
 		
@@ -45,8 +48,8 @@ switch ($sql)
 		/* send mail function ends here */	
 			
 		/* send mail function starts here for ADD NEW TASK */
-		$pageUrl = "job.php?sql=addTask";
-		
+                $pageUrl = "job.php?sql=addTask";
+                
 		// check if event is active or inactive [This will return TRUE or FALSE as per result]
 		$flagSet = getEventStatus($pageUrl);
 		
@@ -70,15 +73,40 @@ switch ($sql)
 			include_once(MAIL);
 			send_mail($to, $cc, $subject, $content);
 		}
+                
 		/* send mail function ends here */		
-			
-		header('location: jobs.php');
+		if($_REQUEST['subfrmId'] == '1')
+                {
+                    header('location: new_smsf.php');
+                }
+                else if($_REQUEST['subfrmId'] == '2')
+                {
+                    header('location: existing_smsf.php');
+                }
+                else if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'job')   
+                {
+                    header('location: jobs.php');
+                }
 		break;
 
 	case "update":
-		$objScr->sql_update();
-		header('location: jobs.php');
-		break;
+                $objScr->sql_update();
+                print_r($_REQUEST); 
+                switch($_REQUEST['subfrmId'])
+                {
+                    case '1':
+                            header('location: new_smsf.php');
+                        break;
+                    case '2':
+                            header('location: existing_smsf.php');
+                        break;
+                }
+                
+                if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'job')   
+                {
+                    header('location: jobs.php');
+                }
+                break;
 
 	case "delete":
 		$objScr->sql_delete($_REQUEST['recid']);
@@ -142,13 +170,29 @@ switch ($a) {
 case "add":
 	$arrClientType = $objScr->fetchClientType();
 	$arrClients = $objScr->fetch_clients();
-	include(VIEW.'jobs_add.php');
-	break;
+        switch($_REQUEST['type'])
+        {
+            case 'comp':
+                    include(VIEW.'jobs_comp.php');
+                break;
+            case 'audit':
+                    include(VIEW.'jobs_audit.php');
+                break;
+            case 'setup':
+                    include(VIEW.'jobs_order.php');
+                break;
+            case 'job':
+                    include(VIEW.'jobs_add.php');
+                break;
+        }
+        break;
 
 case "edit":
 	$arrJobs = $objScr->sql_select();
-	$arrJobsData = $arrJobs[$recid];
-	$arrJobType = $objScr->fetchType($arrJobsData['mas_Code']);
+        if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
+        $_SESSION['jobId'] = $recid;
+        $arrJobsData = $arrJobs[$recid];
+        $arrJobType = $objScr->fetchType($arrJobsData['mas_Code']);
 	$arrClientType = $objScr->fetchClientType();
 	$arrClients = $objScr->fetch_clients();
 	include(VIEW.'jobs_edit.php');
@@ -162,7 +206,16 @@ case "pending":
 	$arrJobStatus = $objScr->fetchStatus();
 	include(VIEW.'jobs_pending.php');
 	break;
-
+    
+case "saved":
+	$arrJobs = $objScr->sql_select('saved');
+	$arrJobType = $objScr->fetchType();
+	$arrClientType = $objScr->fetchClientType();
+	$arrClients = $objScr->fetch_associated_clients('saved');
+	$arrJobStatus = $objScr->fetchStatus();
+	include(VIEW.'jobs_saved.php');
+	break;
+    
 case "completed":
 	$arrJobs = $objScr->sql_select('completed');
 	$arrJobType = $objScr->fetchType();
@@ -202,7 +255,16 @@ case "deleteDoc":
 	$arrClients = $objScr->fetch_associated_clients();
 	include(VIEW.'jobs_edit.php');
 	break;
-
+    
+case "order":
+//	$arrJobs = $objScr->sql_select();
+//	$arrJobsData = $arrJobs[$recid];
+//	$arrJobType = $objScr->fetchType($arrJobsData['mas_Code']);
+//	$arrClientType = $objScr->fetchClientType();
+//	$arrClients = $objScr->fetch_clients();
+        $arrForms = $objScr->fetch_setup_forms();
+        include(VIEW.'order_docs.php');
+	break;
 default:
 	$arrJobStatus = $objScr->fetchStatus();
 	$arrJobs = $objScr->sql_select();

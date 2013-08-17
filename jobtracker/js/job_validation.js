@@ -62,7 +62,7 @@ function checkValidation() {
 		}
 
 		if(!flagUpload) {
-			flagReturn = confirm('You have not uploaded any Source Documents. Are you sure you want to continue?');
+//			flagReturn = confirm('You have not uploaded any Source Documents. Are you sure you want to continue?');
 		}
 	}
 	

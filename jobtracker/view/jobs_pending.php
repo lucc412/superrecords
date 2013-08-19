@@ -37,11 +37,12 @@ include(TOPBAR);
 		// display job data
 		?><table width="100%" class="resources">
 			<tr>
-				<td class="td_title">Job Name</td>
-				<td class="td_title">Job Status</td>
-				<td class="td_title">Source Documents</td>
-				<td class="td_title">Reports</td>
-				<td class="td_title" align="center">Queries</td>
+				<td width="45%" class="td_title">Job Name</td>
+				<td width="10%" class="td_title">Job Genre</td>
+				<td width="10%" class="td_title">Job Status</td>
+				<td width="12%" class="td_title">Source Documents</td>
+				<td width="12%" class="td_title">Reports</td>
+				<td width="12%" class="td_title" align="center">Queries</td>
 			</tr><?
 			
 			$countRow = 0;
@@ -54,6 +55,8 @@ include(TOPBAR);
 					$jobName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
 
 					?><td class="tddata"><?=$jobName?></td>
+
+					<td class="tddata"><?=ucfirst(strtolower($arrJobDetails['job_genre']))?></td>
 
 					<td class="tddata"><?=$arrJobStatus[$arrJobDetails['job_status_id']]?></td>
 

@@ -37,11 +37,11 @@ include(TOPBAR);
 		// display job data
 		?><table width="100%" class="resources">
 		<tr>
-			<td class="td_title">Job Name</td>
-			<td class="td_title">Job Status</td>
-			<td class="td_title">Source Documents</td>
-			<td class="td_title">Reports</td>
-			<td class="td_title" align="center">Queries</td>
+			<td width="50%" class="td_title">Job Name</td>
+			<td width="10%" class="td_title">Job Genre</td>
+			<td width="15%" class="td_title">Source Documents</td>
+			<td width="15%" class="td_title">Reports</td>
+			<td width="12%" class="td_title" align="center">Queries</td>
 		</tr><?			
 		
 		$countRow = 0;
@@ -55,7 +55,7 @@ include(TOPBAR);
 
 				?><td class="tddata"><?=$jobName?></td>
 
-				<td class="tddata"><?=$arrJobStatus[$arrJobDetails['job_status_id']]?></td>
+				<td class="tddata"><?=ucfirst(strtolower($arrJobDetails['job_genre']))?></td>
 
 				<td class="tddata"><?
 					$arrSourceDocs = $objScr->fetch_documents($jobId);

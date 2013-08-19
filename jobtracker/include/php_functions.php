@@ -211,4 +211,35 @@ function replaceContent($content, $salesPersonId=NULL, $practiceId=NULL, $client
 	
 	return $content;	
 } 
+
+function showArray($exp){
+
+    echo '<pre>';
+    print_r($exp);
+    echo '</pre>';
+}
+
+function arrayToString($sep,$source){
+
+    $cs_str = implode($sep, $source);
+    return $cs_str;
+}
+
+function stringToArray($sep, $src){
+
+    $cs_array = explode($sep, $src);
+    return $cs_array;
+}
+
+function stringrtrim($source, $sep){
+
+    $string = rtrim($source, $sep);
+    return $string;
+}
+
+function replaceString($srch, $rep, $src)
+{
+    $cont = str_replace($srch, $rep, $src);
+    return $cont;
+}
 ?>

@@ -18,12 +18,7 @@ set_include_path($inc_path);
 
 class commonUse extends Database
 {
-			
-			
-			/*$objFunc = new FunctionExtends();
-			$objFunc->compareURL();			*/
-			
-	
+				
             function checkDuplicate($table,$field,$postvalue)
             {
                     $query="select ".$field." from ".$table." where ".$field."='".$postvalue."'";
@@ -830,7 +825,6 @@ class commonUse extends Database
 			
 		function compareURL($sessionURL,$crntURL)
 		{
-			//$crntURL = BASENAME($_SERVER['PHP_SELF']);
 			if(strcasecmp($sessionURL,$crntURL) != 0)
 			{
 				unset($_SESSION["filter"]);
@@ -838,7 +832,37 @@ class commonUse extends Database
 				$_SESSION['URL'] = $crntURL; 
 			}	
 				
-		}	
+		}
+		
+		function showArray($exp){
+			echo '<pre>';
+			print_r($exp);
+			echo '</pre>';
+		}
+
+		function arrayToString($sep,$source){
+
+			$cs_str = implode($sep, $source);
+			return $cs_str;
+		}
+
+		function stringToArray($sep, $src){
+
+			$cs_array = explode($sep, $src);
+			return $cs_array;
+		}
+
+		function stringrtrim($source, $sep){
+
+			$string = rtrim($source, $sep);
+			return $string;
+		}
+
+		function replaceString($srch, $rep, $src)
+		{
+			$cont = str_replace($srch, $rep, $src);
+			return $cont;
+		}
     }
     $commonUses = new commonUse();
 ?>

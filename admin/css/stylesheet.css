@@ -427,12 +427,13 @@ a img{
 select {
   background-position: center right;
   background-repeat: no-repeat;
-  color: #F05729;
+  color: #999;
   font: inherit;	
   padding-top: 2px;
   padding-bottom: 2px;
   white-space: nowrap;
   font-size: 12px;
+  border:1px solid #CCC;
 }
 
 
@@ -642,6 +643,59 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	width: 197px;
 }
 
+.bluearrow1 {
+	font-weight:bold;
+	font-size:13px;
+	display:block;
+	padding:10px 20px;
+	background:url(../images/rightmenu-arrow.jpg) 5px 15px no-repeat;
+	cursor:pointer;
+	color:rgba(7, 65, 96, 0.94);
+}
+
+.auditupload td 
+{
+	font-weight:normal;
+	padding:2px 30px;
+}
+
+.auditupload textarea 
+{
+	height:20px;
+}
+
+.auditupload button {
+	color: white;
+	background:url(../images/submit-bg.jpg) center left no-repeat #074165;
+	font-size: 13px;
+	width:165px;
+	padding-left:32px;
+	text-align: left;
+	height: 24px;
+	cursor:pointer;
+	border:none;
+	margin-top:4px;
+}
+
+.upload
+{
+	width:178px;
+}
+
+.pdR50
+{
+	padding-right:50px;
+}
+
+.pdL30
+{
+	padding-left:30px;
+}
+
+.pdT50
+{
+	padding-top:50px;
+}
 
 .rightmenu {
 	background: #fff;
@@ -792,6 +846,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	border-radius:4px;
 	border: 1px solid #CCC;
 	color:#999;
+}
+
+.pdB50
+{
+	padding-bottom:50px;
+}
+
+.pdT80
+{
+	padding-top:80px;
+}
+
+.pdT30
+{
+	padding-top:30px;
 }
 
 input

@@ -12,6 +12,7 @@ include(TOPBAR);
 ?><form name="objForm" id="objForm" method="post" action="jobs.php" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data">
 
 	<input type="hidden" name="sql" value="update">
+	<input type="hidden" name="type" value="COMPLIANCE">
 	<input type="hidden" name="recid" value="<?=$_REQUEST['recid']?>"><?
 	$jobId = $_REQUEST['recid'];
 

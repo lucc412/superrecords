@@ -28,8 +28,8 @@ $_SESSION['timeout'] = time();
 	
 	if(basename($_SERVER['PHP_SELF']) == 'job.php') {
 		?><title>Job List</title>
-		<script type="text/javascript" src="<?php echo $javaScript;?>job.js"></script>
-		<script type="text/javascript" src="<?php echo $javaScript;?>jquery-1.4.2.min.js"></script><?
+		<script type="text/javascript" src="<?php echo $javaScript;?>jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="<?php echo $javaScript;?>job.js"></script><?
 	}else if(basename($_SERVER['PHP_SELF']) == 'lead.php') {
 		?><title>Manage Lead</title>
 		<script type="text/javascript" src="<?php echo $javaScript; ?>lead_validate.js"></script><?
@@ -70,13 +70,13 @@ $_SESSION['timeout'] = time();
 		?><title>Client Steps</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'tsk_task.php') {
 		?><title>Task</title>
-		<script type="text/javascript" src="<?=$javaScript;?>tsk_task_validate.js"></script>
-		<script type="text/javascript" src="<?=$javaScript;?>jquery-1.4.2.min.js"></script><?	
+		<script type="text/javascript" src="<?=$javaScript;?>jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="<?=$javaScript;?>tsk_task_validate.js"></script><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'tsk_status.php') {
 		?><title>Task Status</title>
 		<LINK href="<?php echo $styleSheet; ?>tooltip.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript" src="<?=$javaScript;?>tsk_task_validate.js"></script>
-		<script type="text/javascript" src="<?=$javaScript;?>jquery-1.4.2.min.js"></script><?	
+		<script type="text/javascript" src="<?=$javaScript;?>jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="<?=$javaScript;?>tsk_task_validate.js"></script><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'prc_processcycle.php') {
 		?><title>Process Cycle</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'mas_masteractivity.php') {

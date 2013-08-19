@@ -1,1 +1,1 @@
-this is upload directory where all documents uploaded by SR will be stored.
+This is upload directory where documents uploaded by sr app are stored

@@ -7,7 +7,7 @@ class Client {
   
 	public function sql_select() {		
 
-		$qrySel = "SELECT t1.client_name, t1.client_id, t1.client_received, t1.recieved_authority, t1.client_type_id
+		$qrySel = "SELECT t1.client_name, t1.client_id, DATE_FORMAT(t1.client_received, '%d/%m/%Y') client_received, t1.recieved_authority, t1.client_type_id
 					FROM client t1
 					WHERE id = '{$_SESSION['PRACTICEID']}'";
 

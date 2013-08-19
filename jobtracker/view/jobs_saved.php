@@ -50,11 +50,8 @@ include(TOPBAR);
 
 				?><tr class="<?=$trClass?>">
 					<td class="tddata"><?=$jobName?></td>
-
 					<td class="tddata"><?=ucfirst(strtolower($arrJobDetails['job_genre']))?></td>
-
 					<td class="tddata" align="center"><?=$arrJobDetails['job_received']?></td>
-
 					<td class="tddata" align="center"><?
 						if($arrJobDetails['job_genre'] == 'SETUP') {
 							?><a title="click here to edit this job" href='jobs.php?a=edit&recid=<?=$jobId?>&frmId=<?=$arrJobDetails['setup_subfrm_id']?>'><?=EDITICON?></a><?
@@ -63,7 +60,6 @@ include(TOPBAR);
 							?><a title="click here to edit this job" href='jobs.php?a=audit&recid=<?=$jobId?>'><?=EDITICON?></a><?
 						}
 					?></td>
-
 				</tr><?
 				$countRow++;
 			}

@@ -118,8 +118,8 @@ class Job_Class extends Database
 						  OR p1.sales_person=".$userId." 
 						  OR c1.team_member=".$userId.")";
 		}
-					
-		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id, j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes, j1.job_genre
+				
+		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id, j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes, j1.job_genre, j1.job_submitted
 					FROM job j1, client c1 {$fromStr} {$strFrom}
 					WHERE j1.client_id = c1.client_id 
 					AND j1.discontinue_date IS NULL

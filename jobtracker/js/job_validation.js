@@ -1,9 +1,21 @@
-// This function is used to redirect page
-function urlRedirect(url)
-{
-	window.location.href = url;
-}
+// show hide audit checklist options
+$(function(){
+   $("span").each(function (i){
+	  (function(i) {
+		  i++;
+		  $('#checklist' + i).click(function() {
+			  $('#subchecklist' + i).toggle(600);
+		  });
 
+	  }(i));
+   });
+});
+
+function newPopup(url)
+{
+	popupWindow = window.open(
+		url,'popUpWindow','height=400,width=1100,left=40,top=20,resizable=yes,scrollbars=no,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+}
 
 // This function is used to perform validations
 function checkValidation() {
@@ -62,7 +74,7 @@ function checkValidation() {
 		}
 
 		if(!flagUpload) {
-			flagReturn = confirm('You have not uploaded any Source Documents. Are you sure you want to continue?');
+//			flagReturn = confirm('You have not uploaded any Source Documents. Are you sure you want to continue?');
 		}
 	}
 	

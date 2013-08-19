@@ -87,7 +87,7 @@ include(TOPBAR);
 
 					<td class="tddata" align="center"><?=$arrJobDetails['job_received']?></td>
 
-					<td class="tddata" align="center"><a title="click here to edit this job" href='jobs.php?a=edit&recid=<?=$jobId?>'><?=EDITICON?></a></td>
+					<td class="tddata" align="center"><a title="click here to edit this job" href='jobs.php?a=edit&recid=<?=$jobId?>&frmId=<?=$arrJobDetails['setup_subfrm_id']?>'><?=EDITICON?></a></td>
 
 				</tr><?
 				$countRow++;

@@ -274,7 +274,7 @@ a img{
     top: -16px;
     left: 206px;
     padding: 16px 0 20px 0;
-    background-color: #f0d91b;
+/*    background-color: #f0d91b;*/
     text-align: left;
     width: 160px;
 	-webkit-transition: all .3s;
@@ -284,7 +284,7 @@ a img{
 	list-style:none;
 }
 
-.nav .container ul ul > li:hover > ul { opacity: 1; left: 196px; visibility: visible;}
+.nav .container ul ul > li:hover > ul { opacity: 1; left: 188px; visibility: visible;}
 
 .nav .container ul ul a:hover{
     background-color:#05334e;

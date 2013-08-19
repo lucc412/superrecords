@@ -35,11 +35,11 @@ include("path.php");
 					<li class="dropdown"><a href="javascript:;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jobs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 						<ul class="sub">
 							<li>
-								<a href="jobs.php?a=add&type=job">Submit a Job</a>
+								<a style="cursor:default" href="javascript:;">Submit a Job</a>
 								<ul class="sub">
 									<li><a href="jobs.php?a=add&type=comp">Compliance</a></li>
 									<li><a href="jobs.php?a=audit&var=new">Audit</a></li>
-									<li><a href="jobs.php?a=order">Order Documents</a></li>
+									<!--<li><a href="jobs.php?a=order">Order Documents</a></li>-->
 								</ul>
 							</li>
 							<li><a href="jobs.php?a=saved">Saved Jobs</a></li>

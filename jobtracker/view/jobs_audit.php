@@ -19,7 +19,7 @@ include(TOPBAR);
 		?><input type="hidden" name="sql" value="update"><?
 	}
 
-	?><input type="hidden" name="type" value="AUDIT">
+	?><input type="hidden" name="type" id="type" value="AUDIT">
 	<table align="center" width="90%" class="fieldtable" cellpadding="10px;">
 
 		<tr>

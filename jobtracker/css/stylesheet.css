@@ -579,6 +579,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	padding-top:50px;
 }
 
+.pd10
+{
+	padding:10px;
+}
+
 .rightmenu {
 	background: #fff;
 	width: 253px;

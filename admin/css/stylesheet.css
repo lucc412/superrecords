@@ -863,6 +863,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	padding-top:30px;
 }
 
+.pdT10
+{
+	padding-top:10px;
+}
+
 input
 {
 	width:215px;

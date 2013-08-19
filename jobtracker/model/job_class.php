@@ -26,7 +26,8 @@ class Job {
 					WHERE c1.id = '{$_SESSION['PRACTICEID']}'
 					AND t1.client_id = c1.client_id
 					AND t1.discontinue_date IS NULL  
-					{$appendStr} {$appendSelStr}";
+					{$appendStr} {$appendSelStr}
+					ORDER BY t1.job_received desc";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

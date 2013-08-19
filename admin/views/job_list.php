@@ -17,8 +17,7 @@ $client_id = $objCallData->arrJob[$_REQUEST["jobId"]]["client_id"];
 
 if(!empty($a) && $a != 'addJob') {
 	if($a == "uploadReports" || $a == "auditDocs") {
-		?><br /><br />
-		<table align="center" width="100%" border="0">
+		?><table align="center" width="100%" border="0" class="pdT10">
 			<tr>
 				<td>
 					<span style="font-weight:bold; font-size:10pt;"> Practice Name: </span>

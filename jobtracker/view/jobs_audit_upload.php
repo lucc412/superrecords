@@ -2,11 +2,11 @@
 // include topbar file
 include(HEADDATA);
 
-?><div class="wrapper">
+?><!--<div class="wrapper">
 	<div class="pagebackground">
-		<div class="container"><?
+		<div class="container">--><?
 			// page header
-			?><div class="pageheader">
+			?><div class="pageheader pd10">
 				<h1>Upload checklist - <?=$checklistName?></h1>
 				<span>
 					<b>Welcome to the Super Records job checklist upload page.</b></br>Here you can upload a new checklist for any job.
@@ -15,7 +15,7 @@ include(HEADDATA);
 
 			// content
 			?><form name="objForm" id="objForm" method="post" action="jobs.php" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data">	
-				<div>
+				<div class="pd10">
 					<span><input type="file" name="fileUpload"></span>
 					<span class="pdL30"><button type="submit" value="Add">Add</button></span>
 				</div>
@@ -24,8 +24,8 @@ include(HEADDATA);
 			</form><?
 
 			if(!empty($arrDocList)) {
-				?><div class="pdT50">
-					<table width="40%">
+				?><div class="pdT50 pd10">
+					<table width="100%">
 						<tr>
 							<td class="td_title">Document Name</td>
 							<td width="100px" align="center" class="td_title">Date</td>
@@ -45,10 +45,10 @@ include(HEADDATA);
 					?></table>
 				</div><?
 			}
-		?></div>
+		?><!--</div>
 	</div>
-</div><?
+</div>--><?
 
 // include footer file
-include(FOOTER);
+//include(FOOTER);
 ?>

@@ -269,7 +269,7 @@ class Job {
 	public function edit_audit_details($arrSubForm, $jobId) {
 
 		foreach($arrSubForm AS $subChecklistId => $checklistInfo) {
-			print $qryUpd = "UPDATE audit_form_status
+			$qryUpd = "UPDATE audit_form_status
 						SET upload_status = '".$checklistInfo['status']."',
 						notes = '".$checklistInfo['notes']."'
 						WHERE subchecklist_id = ".$subChecklistId." 

@@ -12,15 +12,25 @@ include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/job_class.php';
 
+if(!isset($_REQUEST['sql'])) $_REQUEST['sql'] = "";
+else $sql = $_REQUEST['sql'];
+if(!isset($_REQUEST['a'])) $_REQUEST['a'] = "";
+else $a = $_REQUEST['a'];
+
+if($a == "uploadReports") {
+	session_start();
+}
+else if($a == "auditDocs") {
+	session_start();	
+}
+else {
+	include("includes/header.php");	
+}
+
 // create class object for class function access
 $objCallData = new Job_Class();
 
 if($_SESSION['validUser']) {
-
-	if(!isset($_REQUEST['sql'])) $_REQUEST['sql'] = "";
-	else $sql = $_REQUEST['sql'];
-	if(!isset($_REQUEST['a'])) $_REQUEST['a'] = "";
-	else $a = $_REQUEST['a'];
 
 	// do not include below code when file 'download' case is called
 	if($sql != 'download') {
@@ -29,7 +39,7 @@ if($_SESSION['validUser']) {
 			<script type="text/javascript" src="<?php echo $javaScript;?>job.js"></script><?
 		}
 	}
-	if($a != "uploadReports" && $a != "auditDocs") include("includes/header.php");
+	
 	$filter = $_REQUEST["filter"];
 	?><br/><?
 			

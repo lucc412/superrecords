@@ -13,7 +13,8 @@
 		<!-- Google Webfont -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/tooltip.css"/>
-		<script type="text/javascript" src="js/datetimepicker_css.js"></script><?
+		<script type="text/javascript" src="js/datetimepicker_css.js"></script>
+		<script type="text/javascript" src="js/common.js"></script><?
 
 		$arrQryStr = explode('&', $_SERVER['QUERY_STRING']);
 		$qryStr = $arrQryStr[0];
@@ -25,11 +26,17 @@
 			else if($qryStr == 'a=audit') {
 				?><title>Submit a Job (Audit)</title><?
 			}
+			else if($qryStr == 'a=checklist') {
+				?><title>Submit documents (Audit)</title><?
+			}
 			else if($qryStr == 'a=uploadAudit') {
 				?><title>Add documents (Audit)</title><?
 			}
 			else if($qryStr == 'a=edit') {
 				?><title>Edit Existing Job</title><?
+			}
+			else if($qryStr == 'a=saved') {
+				?><title>Saved Jobs</title><?
 			}
 			else if($qryStr == 'a=pending') {
 				?><title>Pending Jobs</title><?

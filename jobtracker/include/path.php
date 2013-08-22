@@ -1,5 +1,4 @@
 <?
-define("ERRORICON", "<img src='images_user/errorIcon.gif' />");
 define("EDITICON", "<img src='images_user/edit.png' height='25px' width='22px'>");
 define('DBCONNECT',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/connection.php');
 define('TOPBAR',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/topbar.php');

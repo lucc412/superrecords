@@ -23,7 +23,7 @@ switch($_REQUEST['a'])
 
 			// content
 			if(count($arrjobs) == 0) {
-				?><div class="errorMsg"><?=ERRORICON?>&nbsp;No documents uploaded...!</div><?	
+				?><div class="errorMsg">You don't have any additional source documents added for jobs.</div><?
 			}
 			else {
 				?><table width="100%" class="resources">

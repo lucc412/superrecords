@@ -103,6 +103,19 @@ class Job {
 		return $arrDocs;	
 	}
 
+	public function fetch_queries($jobId) {		
+
+		$qrySel = "SELECT count(*) qryCount
+					FROM queries t1
+					WHERE t1.job_id = '{$jobId}'
+					AND t1.flag_post = 'Y'
+					AND t1.status = '0'";
+
+		$fetchResult = mysql_query($qrySel);		
+		$rowData = mysql_fetch_row($fetchResult);
+		return $rowData[0];	
+	}
+
 	public function fetch_clients() {		
 
 		$qrySel = "SELECT t1.client_id, t1.client_name

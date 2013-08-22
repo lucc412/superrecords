@@ -17,7 +17,7 @@ include(TOPBAR);
 	?><table width="100%">
 		<tr>
 			<td align="right">
-				<select name="lstClientType" id="lstClientType" onchange="this.form.submit();">
+				<select style="width:300px;" name="lstClientType" id="lstClientType" onchange="this.form.submit();">
 					<option value="0">Select Client</option><?php
 					foreach($arrClients AS $clientId => $clientName){
 						$selectStr = '';
@@ -29,8 +29,8 @@ include(TOPBAR);
 	</table></br><?
 
 	// content
-	if(count($arrJobs) == 0) {
-		?><div class="errorMsg"><?=ERRORICON?>&nbsp;No pending jobs available...!</div><?	
+	if(count($arrJobs) == 0) {	
+		?><div class="errorMsg">You don't have any pending jobs.</div><?
 	}
 	else {
 		
@@ -88,7 +88,12 @@ include(TOPBAR);
 						}
 					?></td>
 
-					<td class="tddata viewquery" align="center"><a target="_blank" href="queries.php?lstJob=<?=$jobId?>" title="Click to view queries">View Queries</a></td>
+					<td class="tddata viewquery" align="center"><?
+						$flagQueryExists = $objScr->fetch_queries($jobId);
+						if(!empty($flagQueryExists)) {
+							?><a target="_blank" href="queries.php?lstJob=<?=$jobId?>&lstCliType=<?=$arrJobDetails['client_id']?>" title="Click to view queries">View Queries</a><?
+						}
+					?></td>
 				</tr><?
 				$countRow++;
 			}

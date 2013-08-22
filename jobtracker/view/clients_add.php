@@ -13,7 +13,7 @@ include(TOPBAR);
 
 // error message
 if(!empty($_REQUEST['flagDuplicate'])) {
-	?><div class="errorMsg"><?=ERRORICON?>&nbsp;Client already exists.</div><?	
+	?><div class="errorMsg">This client name has been already chosen.</div><?	
 }
 
 // content

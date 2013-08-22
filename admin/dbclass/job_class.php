@@ -542,7 +542,10 @@ class Job_Class extends Database
 
 		if($_REQUEST['flagType'] == 'A')
 			$folderPath = "../uploads/audit/" . $fileName;
-				
+		
+                if($_REQUEST['flagType'] == 'ST')
+			$folderPath = "../uploads/setup/" . $fileName;
+                
 		if($_REQUEST['flagType'] == 'R')
 			$folderPath = "../uploads/reports/" . $fileName;
 				

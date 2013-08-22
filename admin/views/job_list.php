@@ -273,6 +273,22 @@ switch ($a)
                         ?><input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$jobDueDate?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 					</td>
 				</tr>
+                                <?php $arrInfo = $objCallData->fetchDocument($_REQUEST["jobId"]); 
+                                      
+                                      foreach ($arrInfo as $key => $value) {
+                                        $doc_id = $key;  
+                                        $filePath = $value['file_path'];
+                                      
+                                      }
+                                      if($_SESSION['jobGenre'] == 'SETUP') {
+                                      ?> 
+                                <tr>
+					<td class="hr">Setup Details</td>
+					<td class="dr">
+                                            <button onclick="javascript:redirectURL('job.php?sql=download&flagType=ST&filePath=<?=urlencode($filePath)?>&docId=<?=$doc_id?>');" title="Click to view this document" >Download</button>
+                                        </td>
+				</tr>
+                                      <?php } ?>
 			</table>
 				<button type="submit" value="Update" name="btnJob">Update</button></td>
 				<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">

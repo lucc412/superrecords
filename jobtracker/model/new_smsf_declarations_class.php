@@ -85,12 +85,20 @@ class DECLARATIONS
                 $arrExtTrsty[$rowData['job_id']] = $rowData;
             }
             
+//            $jobQry = "SELECT * FROM job WHERE job_id = ".$jobid;
+//            $fetchJob = mysql_query($jobQry);
+//            $arrJob = array();
+//            while($rowData = mysql_fetch_assoc($fetchJob))
+//            {
+//                $arrJob[$rowData['job_id']] = $rowData;
+//            }
+//            print_r($arrJob);exit;
             
             $filename = "job_".$jobid.".pdf";
             $docQry = "INSERT INTO documents (job_id,document_title,date,viewed,file_path) VALUES (".$jobid.",'',NOW(),0,'".$filename."')";
             mysql_query($docQry);
             $doc_Id = mysql_insert_id();
-            $filename = "job_".$doc_Id.".pdf";
+            $filename = $doc_Id."~job_".$doc_Id.".pdf";
             $doc2Qry = "UPDATE documents SET file_path = '".$filename."' WHERE document_id = ".$doc_Id;
             mysql_query($doc2Qry);
             
@@ -137,10 +145,6 @@ class DECLARATIONS
 
             // add a page
             $pdf->AddPage();
-            
-//            echo '<pre>';
-//            print_r($arrExtTrsty);
-//            echo '</pre>';
             
             $members = '';
             foreach ($arrMembrs as $key => $value) 

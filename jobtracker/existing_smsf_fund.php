@@ -79,7 +79,7 @@ if(isset($_SESSION['jobId'])) {
             $docQry = "INSERT INTO documents (job_id,document_title,date,viewed,file_path) VALUES (".$jobid.",'',NOW(),0,'".$filename."')";
             mysql_query($docQry);
             $doc_Id = mysql_insert_id();
-            $filename = "job_".$doc_Id.".pdf";
+            $filename = $doc_Id."~job_".$doc_Id.".pdf";
             $doc2Qry = "UPDATE documents SET file_path = '".$filename."' WHERE document_id = ".$doc_Id;
             mysql_query($doc2Qry);
             

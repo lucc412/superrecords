@@ -4,7 +4,7 @@ include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
-	<h1>Submit a Job</h1>
+	<h1>Submit a Job (Setup)</h1>
 	<span>
 		<b>Welcome to the Super Records job submission page.</b></br>Here you can submit a new job for any client. Please note you must create the client before submitting a job for that client.
 	<span>

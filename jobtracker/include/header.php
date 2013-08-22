@@ -17,11 +17,15 @@
 		<script type="text/javascript" src="js/common.js"></script><?
 
 		$arrQryStr = explode('&', $_SERVER['QUERY_STRING']);
-		$qryStr = $arrQryStr[0];
-
+                $qryStr = $arrQryStr[0];
+                $typeStr = $arrQryStr[1];
+                
 		if(basename($_SERVER['PHP_SELF']) == 'jobs.php') {
-			if($qryStr == 'a=add') {
+			if($typeStr == 'type=comp') {
 				?><title>Submit a Job (Compliance)</title><?
+			}
+                        else if($typeStr == 'type=setup') {
+				?><title>Submit a Job (Setup)</title><?
 			}
 			else if($qryStr == 'a=audit') {
 				?><title>Submit a Job (Audit)</title><?

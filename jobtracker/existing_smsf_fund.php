@@ -48,6 +48,16 @@ if(isset($_SESSION['jobId'])) {
 			$flagReturn = $objScr->editFundInfo($fundName, $abn, $streetAdd, $postalAdd, $members, $trusteeId, $fundStatus, $jobStatus);
 		}
                 
+//            print $jobQry = "SELECT * FROM job WHERE job_id = ".$_SESSION['jobId'];
+//            $fetchJob = mysql_query($jobQry);
+//            $arrJob = array();
+//            while($rowData = mysql_fetch_assoc($fetchJob))
+//            {
+//                $arrJob[$rowData['job_id']] = $rowData;
+//            }
+//            print_r($arrJob);exit;
+//            print $jobQry = "SELECT * FROM job WHERE job_id = ".$_SESSION['jobId'];
+                
             $jobid = $_SESSION['jobId'];
             $contQry = "SELECT * FROM es_contact_details WHERE job_id = ".$_SESSION['jobId'];
             $fetchCntact = mysql_query($contQry);
@@ -230,9 +240,9 @@ if(isset($_SESSION['jobId'])) {
 		if($flagReturn) {
                     
                     if(isset($_POST['fund_status']) && $_POST['fund_status'] == 1)
-                            header('Location: jobs.php?a=saved');
+                            header('Location: jobs.php?a=pending');
                     else
-			header('Location: jobs.php');
+			header('Location: jobs.php?a=saved');
 		}
 		else {
 			echo "Sorry, Please try later.";

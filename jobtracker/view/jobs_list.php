@@ -30,7 +30,7 @@ include(TOPBAR);
 
 	// content
 	if(count($arrJobs) == 0) {
-		?><div class="errorMsg"><?=ERRORICON?>&nbsp;No jobs added yet...!</div><?	
+		?><div class="errorMsg">You don't have any jobs yet.</div><?
 	}
 	else {
 		// display job data

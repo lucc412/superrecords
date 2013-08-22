@@ -12,7 +12,7 @@ include(TOPBAR);
 
 // content
 if(count($arrClients) == 0) {
-	?><div class="errorMsg"><?=ERRORICON?>&nbsp;No clients added yet...!</div><?	
+	?><div class="errorMsg">You don't have any clients added yet.</div><?	
 }
 else {
 	?><table align="center" width="100%">

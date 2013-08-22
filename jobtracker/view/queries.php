@@ -15,7 +15,7 @@ include(TOPBAR);
 	<input type="hidden" name="action" id="action" value="update">	
 
 	<div id="savePopup" align="center" class="successPopup">
-		Answer Saved.
+		Answer to the query is saved.
 	</div>
 
 	<div id="saveAllPopup" align="center" class="successPopup">
@@ -25,19 +25,18 @@ include(TOPBAR);
 	<table class="resources" width="100%">
 		<tr>
 			<td align="right"><?
-
 				// Client filter
-				?><select name="lstCliType" id="lstCliType" onchange="javascript:submitForm();">
+				?><span style="padding-right:5px;"><select style="width:200px;" name="lstCliType" id="lstCliType" onchange="javascript:submitForm();">
 					<option value="0">Select Client</option><?
 					foreach($arrClients AS $clientId => $clientName){
 						$selectStr = '';
 						if($clientId == $_REQUEST['lstCliType']) $selectStr = 'selected';
 						?><option <?=$selectStr?> value="<?=$clientId?>"><?=$clientName?></option><?php 
 					}
-				?></select><?
+				?></select></span><?
 
 				// Job filter
-				?><select name="lstJob" id="lstJob" onchange="javascript:submitForm();">
+				?><select style="width:300px" name="lstJob" id="lstJob" onchange="javascript:submitForm();">
 					<option value="0">Select Job</option><?
 					foreach($arrJobs AS $jobId => $jobName){
 						$selectStr = '';
@@ -53,7 +52,7 @@ include(TOPBAR);
 	</table></br><?
 
 	if(count($arrQueries) == 0) {
-		?><div align="center"><div class="errorMsg"><?=ERRORICON?>&nbsp;No pending queries available...!</div></div><?	
+		?><div class="errorMsg">You don't have any pending queries for selected criteria.</div><?	
 	}
 	else {
 		?><table width="100%" class="resources">
@@ -115,7 +114,7 @@ include(TOPBAR);
 				 function hideMsg() {
 					document.getElementById("savePopup").style.visibility = "hidden";
 				 }
-				 mrgLeft = (screen.width / 2) - 330;
+				 mrgLeft = (screen.width / 2) - 290;
 				 mrgLeft = mrgLeft +"px";
 				 document.getElementById("savePopup").style.visibility = "visible";
 				 document.getElementById("savePopup").style.marginLeft = mrgLeft;

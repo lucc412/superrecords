@@ -4,15 +4,15 @@ include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
-	<h1>Submit a Job</h1>
+	<h1>Submit a Job (Compliance)</h1>
 	<span>
-		<b>Welcome to the Super Records job submission page.</b></br>Here you can submit a new job for any client. Please note you must create the client before submitting a job for that client.
+		<b>Welcome to the Super Records job submission page for Compliance.</b></br>Here you can submit a new job for any client. Please note you must create the client before submitting a job for that client.
 	<span>
 </div><?
 
 // content
 ?><form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertJob" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data">
-	<!--<input type="hidden" name="sql" value="insert">-->
+	<input type="hidden" name="type" id="type" value="COMPLIANCE">
 	<table align="center" width="90%" class="fieldtable" cellpadding="10px;">
 
 		<tr>

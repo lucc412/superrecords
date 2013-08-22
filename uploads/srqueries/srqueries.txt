@@ -1,1 +1,1 @@
-this is upload directory where all documents for SR queries will be stored.
+This is upload directory where documents associated with queries uploaded by sr app are stored

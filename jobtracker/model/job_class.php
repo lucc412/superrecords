@@ -13,19 +13,21 @@ class Job {
 		else if(!empty($fetchType) && $fetchType == 'completed') {
 			$appendStr = 'AND t1.job_status_id = 7 AND t1.job_submitted = "Y"';
 		}
-                else if(!empty($fetchType) && $fetchType == 'saved') {
+		else if(!empty($fetchType) && $fetchType == 'saved') {
 			$appendStr = 'AND t1.job_submitted = "N"';
 		}
-                if(!empty($_REQUEST['lstClientType'])) {
+
+		if(!empty($_REQUEST['lstClientType'])) {
 			$appendSelStr = "AND t1.client_id = {$_REQUEST['lstClientType']}";
 		}
-                
-                $qrySel = "SELECT t1.job_id, t1.job_name, t1.job_received, t1.job_type_id, t1.client_id, t1.period, t1.job_status_id, t1.mas_Code, t1.notes, t1.job_genre, t1.job_submitted, t1.setup_subfrm_id
+
+		$qrySel = "SELECT t1.job_id, t1.job_name, DATE_FORMAT(t1.job_received, '%d/%m/%Y') job_received, t1.job_type_id, t1.client_id, t1.period, t1.job_status_id, t1.mas_Code, t1.notes, t1.job_genre, t1.setup_subfrm_id, t1.job_submitted
 					FROM job t1, client c1
 					WHERE c1.id = '{$_SESSION['PRACTICEID']}'
 					AND t1.client_id = c1.client_id
 					AND t1.discontinue_date IS NULL  
-					{$appendStr} {$appendSelStr}";
+					{$appendStr} {$appendSelStr}
+					ORDER BY t1.job_received desc";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -34,11 +36,12 @@ class Job {
 		return $arrjobs;	
 	}
 
-	public function fetch_associated_clients($fetchType=NULL) {
+	public function fetch_associated_clients() {
 
 		$qrySel = "SELECT t1.client_id, t1.client_name
 					FROM client t1
-					WHERE t1.id = '{$_SESSION['PRACTICEID']}' ORDER BY t1.client_name";
+					WHERE t1.id = '{$_SESSION['PRACTICEID']}'
+					ORDER BY t1.client_name";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -116,8 +119,10 @@ class Job {
 
 	public function fetchClientType() {		
  		$qrySel = "SELECT ma.mas_Code, ma.mas_Description
-					FROM mas_masteractivity ma
-					WHERE ma.display_in_practice = 'yes'
+					FROM mas_masteractivity ma, sub_subactivity sa
+					WHERE ma.mas_Code = sa.sas_Code
+					AND ma.display_in_practice = 'yes'
+					AND sa.display_in_practice = 'yes'
 					ORDER BY ma.mas_Order";
 
 		$fetchResult = mysql_query($qrySel);		
@@ -160,29 +165,34 @@ class Job {
 
 	public function sql_insert() {
                 
-                $clientId = $_REQUEST['lstClientType'];
+        $clientId = $_REQUEST['lstClientType'];
 		$typeId = $_REQUEST['lstJobType'];
 		$period = $_REQUEST['txtPeriod'];
 		$cliType = $_REQUEST['lstCliType'];
 		$notes = $_REQUEST['txtNotes'];
-                $type = $_REQUEST['type'];
-                $jobStatus = $_REQUEST['job_submitted'];
-                $setup_subfrm = $_REQUEST['subfrmId'];
+		$jobGenre = $_REQUEST['type'];
+		$setup_subfrm = $_REQUEST['subfrmId'];
+
+		if($jobGenre == 'COMPLIANCE')
+			$jobSubmitted = 'Y';
+		else 
+			$jobSubmitted = 'N';
+
 		$jobName = $clientId .'::'. $period .'::'. $typeId;
 
-		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, notes, job_name, job_status_id, job_received, job_genre, job_submitted, setup_subfrm_id)
+		$qryIns = "INSERT INTO job(client_id, job_genre, job_submitted, mas_Code, job_type_id, period, notes, job_name, job_status_id, setup_subfrm_id, job_received)
 					VALUES (
 					" . $clientId . ", 
+					'" . $jobGenre . "', 
+					'" . $jobSubmitted . "', 
 					" . $cliType . ", 
 					" . $typeId . ", 
 					'" . $period . "',  
 					'" . $notes . "',  
 					'" . $jobName . "',  
 					1,   
-					NOW(),
-                                        '".$type."',
-                                        '".$jobStatus."',
-                                        '".$setup_subfrm."'    
+					'".$setup_subfrm."',    
+					NOW()              
 					)";
                 
 		mysql_query($qryIns);
@@ -191,7 +201,8 @@ class Job {
 		$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType, $typeId);
 		
 		// add source documents
-		$this->add_source_Docs($jobId);
+		if($jobGenre == "COMPLIANCE")
+			$this->add_source_Docs($jobId);
 		
 		return $jobId;
 	}
@@ -213,6 +224,59 @@ class Job {
 		mysql_query($qryIns);			
 	}
 
+	public function add_audit_Docs($jobId, $checklistId) {
+
+		$qrySel = "SELECT max(document_id) docId 
+					FROM documents";
+		$objResult = mysql_query($qrySel);
+
+		$arrInfo = mysql_fetch_assoc($objResult);
+		$fileId = $arrInfo['docId'];
+		$origFileName = stripslashes($_FILES['fileUpload']['name']);
+		$filePart = pathinfo($origFileName);
+		$fileName =  $fileId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
+		$folderPath = "../uploads/audit/" . $fileName;
+
+
+		if(file_exists($_FILES['fileUpload']['tmp_name'])) {
+			if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $folderPath)) {
+				$qryIns = "INSERT INTO documents(job_id, checklist_id, file_path, date)
+							VALUES(
+							".$jobId.", 
+							". $checklistId .", 
+							'". addslashes($fileName) ."', 
+							NOW() 
+							)";
+				mysql_query($qryIns);
+			}
+		}
+	}
+
+	public function update_job_completed($jobId) {
+		$qryUpd = "Update job
+					SET job_submitted = 'Y'
+					WHERE job_id = {$jobId}";
+
+		mysql_query($qryUpd);
+	}
+
+	public function add_audit_details($strInsert) {
+		$qryIns = "INSERT INTO audit_form_status(job_id, subchecklist_id, upload_status, notes)
+					VALUES".$strInsert;
+		mysql_query($qryIns);
+	}
+
+	public function edit_audit_details($arrSubForm, $jobId) {
+
+		foreach($arrSubForm AS $subChecklistId => $checklistInfo) {
+			$qryUpd = "UPDATE audit_form_status
+						SET upload_status = '".$checklistInfo['status']."',
+						notes = '".$checklistInfo['notes']."'
+						WHERE subchecklist_id = ".$subChecklistId." 
+						AND job_id = ".$jobId;
+			mysql_query($qryUpd);
+		}
+	}
 
 	public function add_source_Docs($jobId) {
 
@@ -291,11 +355,41 @@ class Job {
 		$returnPath = $origFileName . '~' . $currentTime;
 		return $returnPath;
 	}
-	
+
+	public function getAuditDetails($jobId) {
+		$qrySel = "SELECT af.subchecklist_id, af.upload_status, af.notes
+					FROM audit_form_status af
+					WHERE af.job_id = {$jobId}
+					ORDER BY af.subchecklist_id";
+
+		$objRes = mysql_query($qrySel);
+		while($rowData = mysql_fetch_assoc($objRes)) {
+			$arrDocDetails[$rowData['subchecklist_id']]['status'] = $rowData['upload_status'];
+			$arrDocDetails[$rowData['subchecklist_id']]['notes'] = $rowData['notes'];
+		}
+		
+		return $arrDocDetails;
+	}
+
+	public function getAuditDocList($jobId, $checklistId) {
+		$qrySel = "SELECT d.file_path, DATE_FORMAT(d.date, '%d/%m/%Y') date
+					FROM documents d
+					WHERE d.job_id = {$jobId}
+					AND d.checklist_id = {$checklistId}
+					ORDER BY d.date desc";
+
+		$objRes = mysql_query($qrySel);
+		while($rowData = mysql_fetch_assoc($objRes)) {
+			$arrDocList[$rowData['file_path']] = $rowData['date'];
+		}
+		
+		return $arrDocList;
+	}
 
 	public function sql_update() {	
 
 		$jobName = $_REQUEST['lstClientType'] .'::'. $_REQUEST['txtPeriod'] .'::'. $_REQUEST['lstJobType'];
+		$jobGenre = $_REQUEST['type'];
 
 		$qryUpd = "UPDATE job
 				SET job_type_id = '" . $_REQUEST['lstJobType'] . "',
@@ -304,14 +398,13 @@ class Job {
 				period = '" . $_REQUEST['txtPeriod'] . "',
 				notes = '" . $_REQUEST['txtNotes'] . "',
 				job_name = '" . $jobName . "'
-				WHERE job_id = '" . $_REQUEST['recid'] . "'";
+				WHERE job_id = '" . $_SESSION['jobId'] . "'";
 
 		mysql_query($qryUpd);
 
 		// upload documents here
-		$this->add_source_Docs($_REQUEST['recid']);
-
-		return $returnstr;
+		if($jobGenre == "COMPLIANCE")
+			$this->add_source_Docs($_REQUEST['recid']);
 	} 
 
 	public function doc_download($fileName, $flagChecklist) {
@@ -321,6 +414,9 @@ class Job {
 		}
 		else if($flagChecklist == 'R') {
 			$folderPath = "../uploads/reports/" . $fileName;
+		}
+		else if($flagChecklist == 'A') {
+			$folderPath = "../uploads/audit/" . $fileName;
 		}
 
 		$arrFileName = explode('~', $fileName);
@@ -357,38 +453,77 @@ class Job {
 			}
 		}
 	}
+
+	public function getChecklistName($checklistId) {
+
+		$qrySel = "SELECT ac.checklist_name
+					FROM audit_checklist ac
+					WHERE ac.checklist_id = ".$checklistId;
+
+		$fetchResult = mysql_query($qrySel);		
+		$rowData = mysql_fetch_assoc($fetchResult);
+		$checklistName = $rowData['checklist_name'];
+
+		return $checklistName;
+	}
+
+	public function getAuditChecklist() {
+
+		$qrySel = "SELECT ac.checklist_id, ac.checklist_name, aus.subchecklist_id, aus.subchecklist_name
+					FROM audit_checklist ac, audit_subchecklist aus
+					WHERE ac.checklist_id = aus.checklist_id
+					GROUP BY ac.checklist_order, aus.subchecklist_order";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrChecklist[$rowData['checklist_id'].":".$rowData['checklist_name']][$rowData['subchecklist_id']] = $rowData['subchecklist_name'];
+		}
+
+		return $arrChecklist;
+	}
+
+	public function fetchJobDetail($jobId) {		
+
+		$qrySel = "SELECT j1.client_id, j1.period, j1.mas_Code, j1.job_type_id, j1.notes
+					FROM job j1
+					WHERE j1.job_id = '{$jobId}'";
+
+		$fetchResult = mysql_query($qrySel);		
+		$arrJobInfo = mysql_fetch_assoc($fetchResult);
+		return $arrJobInfo;	
+	}
         
-        public function fetch_setup_forms() 
-        {
-            $frmQry = "SELECT * FROM setup_forms";
-            $fetchResult = mysql_query($frmQry);		
-            
-            $subfrmQry = "SELECT * FROM setup_subforms";
-            $fetchRow = mysql_query($subfrmQry);
-            
-            while($rowData = mysql_fetch_assoc($fetchResult)) 
-            {
-                $arrForms[$rowData['form_id']] = $rowData;
-            }
-            
-            while($row = mysql_fetch_assoc($fetchRow)) 
-            {
-                $arrSubForms[$row['subform_id']] = $row;
-            }
-            
-            foreach ($arrForms as $key => $value) 
-            {
-                foreach ($arrSubForms as $val) 
-                {
-                    if($value['form_id'] == $val['form_id'])
-                        $arrForms[$value['form_id']]['subforms'][] = $val;
-                }
-            }
-            
-//            echo '<pre>';
-//            print_r($arrForms);
-//            echo '</pre>';
-            return $arrForms;
+	public function fetch_setup_forms() 
+	{
+		$frmQry = "SELECT * FROM setup_forms";
+		$fetchResult = mysql_query($frmQry);		
+		
+		$subfrmQry = "SELECT * FROM setup_subforms";
+		$fetchRow = mysql_query($subfrmQry);
+		
+		while($rowData = mysql_fetch_assoc($fetchResult)) 
+		{
+			$arrForms[$rowData['form_id']] = $rowData;
+		}
+		
+		while($row = mysql_fetch_assoc($fetchRow)) 
+		{
+			$arrSubForms[$row['subform_id']] = $row;
+		}
+		
+		foreach ($arrForms as $key => $value) 
+		{
+			foreach ($arrSubForms as $val) 
+			{
+				if($value['form_id'] == $val['form_id'])
+					$arrForms[$value['form_id']]['subforms'][] = $val;
+			}
+		}
+		
+		// echo '<pre>';
+        // print_r($arrForms);
+        // echo '</pre>';
+		return $arrForms;
 	}
 }
 ?>

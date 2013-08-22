@@ -118,12 +118,12 @@ class Job_Class extends Database
 						  OR p1.sales_person=".$userId." 
 						  OR c1.team_member=".$userId.")";
 		}
-					
-		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id, j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes, j1.job_submitted 
+				
+		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id, j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes, j1.job_genre, j1.job_submitted
 					FROM job j1, client c1 {$fromStr} {$strFrom}
 					WHERE j1.client_id = c1.client_id 
 					AND j1.discontinue_date IS NULL
-                                        AND j1.job_submitted = 'Y' 
+					AND j1.job_submitted = 'Y'
 					{$strWhere} 
 					{$whereStr} 
 					GROUP BY j1.job_id
@@ -341,9 +341,11 @@ class Job_Class extends Database
 	}  
 	
 	// Function to fetch all Documents
-	public function fetchDocument()
+	public function fetchDocument($jobId)
 	{	
-		$qrySel = "SELECT *	FROM documents";
+		$qrySel = "SELECT *	
+					FROM documents
+					WHERE job_id = ".$jobId;
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -537,6 +539,9 @@ class Job_Class extends Database
 	{		
 		if($_REQUEST['flagType'] == 'S')
 			$folderPath = "../uploads/sourcedocs/" . $fileName;
+
+		if($_REQUEST['flagType'] == 'A')
+			$folderPath = "../uploads/audit/" . $fileName;
 				
 		if($_REQUEST['flagType'] == 'R')
 			$folderPath = "../uploads/reports/" . $fileName;
@@ -625,7 +630,52 @@ class Job_Class extends Database
 		$sent_mail_date = $sent_mail_date['sent_mail_date'];
 		return $sent_mail_date ;
 	}
-	
+
+	public function getAuditDocList($jobId, $checklistId) {
+		$qrySel = "SELECT d.file_path, DATE_FORMAT(d.date, '%d/%m/%Y') date
+					FROM documents d
+					WHERE d.job_id = {$jobId}
+					AND d.checklist_id = {$checklistId}
+					ORDER BY d.date desc";
+
+		$objRes = mysql_query($qrySel);
+		while($rowData = mysql_fetch_assoc($objRes)) {
+			$arrDocList[$rowData['file_path']] = $rowData['date'];
+		}
+		
+		return $arrDocList;
+	}
+
+	public function getAuditChecklist() {
+
+		$qrySel = "SELECT ac.checklist_id, ac.checklist_name, aus.subchecklist_id, aus.subchecklist_name
+					FROM audit_checklist ac, audit_subchecklist aus, documents dc
+					WHERE ac.checklist_id = aus.checklist_id
+					AND dc.checklist_id = ac.checklist_id
+					GROUP BY ac.checklist_order, aus.subchecklist_order";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrChecklist[$rowData['checklist_id'].":".$rowData['checklist_name']][$rowData['subchecklist_id']] = $rowData['subchecklist_name'];
+		}
+
+		return $arrChecklist;
+	}
+
+	public function getAuditDetails($jobId) {
+		$qrySel = "SELECT af.subchecklist_id, af.upload_status, af.notes
+					FROM audit_form_status af
+					WHERE af.job_id = {$jobId}
+					ORDER BY af.subchecklist_id";
+
+		$objRes = mysql_query($qrySel);
+		while($rowData = mysql_fetch_assoc($objRes)) {
+			$arrDocDetails[$rowData['subchecklist_id']]['status'] = $rowData['upload_status'];
+			$arrDocDetails[$rowData['subchecklist_id']]['notes'] = $rowData['notes'];
+		}
+		
+		return $arrDocDetails;
+	}
 
 }
 ?>

@@ -10,12 +10,12 @@ include(TOPBAR);
 
 // content
 ?><form name="objForm" id="objForm" method="post" action="jobs.php" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data">
-        <input type="hidden" name="type" value="<?=$arrJobsData['job_genre']?>">
-        <input type="hidden" name="subfrmId" value="<?=$_REQUEST['frmId']?>">
-        <input type="hidden" name="sql" value="update">
-	<input type="hidden" name="recid" value="<?=$_REQUEST['recid']?>"><?$jobId = $_REQUEST['recid'];
-        ?><table class="resources" width="90%" cellpadding="10px;">
-
+	<input type="hidden" name="sql" value="update">
+	<input type="hidden" name="type" value="<?=$arrJobsData['job_genre']?>">
+	<input type="hidden" name="subfrmId" value="<?=$_REQUEST['frmId']?>">
+	<input type="hidden" name="recid" value="<?=$_REQUEST['recid']?>"><?
+	$jobId = $_REQUEST['recid'];
+	?><table class="resources" width="90%" cellpadding="10px;">
 		<tr>
 			<td><strong>Client</strong></td>
 			<td>

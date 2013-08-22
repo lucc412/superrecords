@@ -36,11 +36,11 @@ include(TOPBAR);
 		// display job data
 		?><table align="center" width="100%" class="resources">
 			<tr>
-				<td class="td_title">Job Name</td>
-				<td class="td_title">Job Status</td>
-				<td class="td_title">Source Documents</td>
-				<td class="td_title" width="80px;">Reports</td>
-				<td class="td_title" align="center">Date Created</td>
+				<td width="50%" class="td_title">Job Name</td>
+				<td width="18%" class="td_title">Job Status</td>
+				<td width="12%" class="td_title">Source Documents</td>
+				<td width="12%" class="td_title">Reports</td>
+				<td width="15%" class="td_title" align="center">Date Created</td>
 				<td class="td_title" align="center">Actions</td>
 			</tr><?
 

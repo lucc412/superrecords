@@ -34,12 +34,10 @@ include(TOPBAR);
 		// display job data
 		?><table align="center" width="100%" class="resources">
 			<tr>
-				<td class="td_title">Job Name</td>
-				<td class="td_title">Job Status</td>
-				<td class="td_title">Source Documents</td>
-				<td class="td_title" width="80px;">Reports</td>
-				<td class="td_title" align="center">Date Created</td>
-				<td class="td_title" align="center">Actions</td>
+				<td width="50%" class="td_title">Job Name</td>
+				<td width="15%" class="td_title">Job Genre</td>
+				<td width="15%" class="td_title" align="center">Date Created</td>
+				<td width="8%" class="td_title" align="center">Actions</td>
 			</tr><?
 
 			$countRow = 0;
@@ -52,41 +50,16 @@ include(TOPBAR);
 
 				?><tr class="<?=$trClass?>">
 					<td class="tddata"><?=$jobName?></td>
-
-					<td class="tddata"><?=$arrJobStatus[$arrJobDetails['job_status_id']]?></td>
-
-					<td class="tddata"><?
-						$arrSourceDocs = $objScr->fetch_documents($jobId);
-						if(!empty($arrSourceDocs)) {
-							$docCnt = 0;
-							foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-								$docCnt++;
-								$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
-								if(file_exists($folderPath)) {
-									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document">Document <?=$docCnt?></a></p><?
-								}
-							}
-						}
-					?></td>
-
-					<td class="tddata"><?
-						$arrReports = $objScr->fetch_reports($jobId);
-						if(!empty($arrReports)) {
-							$reportCnt = 0;
-							foreach($arrReports AS $reportId => $arrReportInfo) {
-								$reportCnt++;
-								$folderPath = "../uploads/reports/" . $arrReportInfo['file_path'];
-								if(file_exists($folderPath)) {
-									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrReportInfo['file_path'])?>&flagChecklist=R" title="Click to view this document">Report <?=$reportCnt?></a></p><?
-								}
-							}
-						}
-					?></td>
-
+					<td class="tddata"><?=ucfirst(strtolower($arrJobDetails['job_genre']))?></td>
 					<td class="tddata" align="center"><?=$arrJobDetails['job_received']?></td>
-
-					<td class="tddata" align="center"><a title="click here to edit this job" href='jobs.php?a=edit&recid=<?=$jobId?>&frmId=<?=$arrJobDetails['setup_subfrm_id']?>'><?=EDITICON?></a></td>
-
+					<td class="tddata" align="center"><?
+						if($arrJobDetails['job_genre'] == 'SETUP') {
+							?><a title="click here to edit this job" href='jobs.php?a=edit&recid=<?=$jobId?>&frmId=<?=$arrJobDetails['setup_subfrm_id']?>'><?=EDITICON?></a><?
+						}
+						else {
+							?><a title="click here to edit this job" href='jobs.php?a=audit&recid=<?=$jobId?>'><?=EDITICON?></a><?
+						}
+					?></td>
 				</tr><?
 				$countRow++;
 			}

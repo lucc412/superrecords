@@ -1,9 +1,23 @@
 //************************************************************************************************
 //  Task          : Validation function to check for mandatory fields.
-//  Modified By   : Dhiraj Sahu 
-//  Created on    : 15-Jan-2013
-//  Last Modified : 15-Jan-2013 
+//  Modified By   : Disha Goyal 
+//  Created on    : 15-Jan-2013 
+//  Last Modified : 19-Aug-2013
 //************************************************************************************************
+
+// show hide audit checklist options
+$(function(){
+   $("span").each(function (i){
+	  (function(i) {
+		  i++;
+		  $('#checklist' + i).click(function() {
+			  $('#subchecklist' + i).toggle(600);
+		  });
+
+	  }(i));
+   });
+});
+
 function validateFormOnSubmit() { 
 	flagReturn = true;
 
@@ -157,7 +171,7 @@ function ComfirmCancel(jobId)
 function newPopup(url)
 {
 	popupWindow = window.open(
-		url,'popUpWindow','height=600,width=1050,left=40,top=20,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+		url,'popUpWindow','height=350,width=800,left=40,top=20,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
 }
 
 //************************************************************************************************
@@ -240,9 +254,5 @@ function selectOptions(listName)
 
 function redirectURL(url)
 {
-	//alert("\""+url+"\"");
-	//window.location.href = url;	
-	//alert("After");
-	window.open(url);
-	
+	window.open(url);	
 }

@@ -17,10 +17,10 @@ if(count($arrClients) == 0) {
 else {
 	?><table align="center" width="100%">
 		<tr>
-			<td class="td_title">Client Name</td>
-			<td class="td_title">Entity Type</td>
-			<td class="td_title" align="center">Date Created</td>
-			<td class="td_title" align="center">Actions</td>
+			<td width="60%" class="td_title">Client Name</td>
+			<td width="18%" class="td_title">Entity Type</td>
+			<td width="12%" class="td_title" align="center">Date Created</td>
+			<td width="8%" class="td_title" align="center">Actions</td>
 		</tr><?
 
 		$countRow = 0;

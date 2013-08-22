@@ -617,13 +617,34 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	border-bottom: 3px solid #e5e5e5;
 }
 
-
 .column-right {
 	float:right;
 	width:260px;
 }
 
+.bluearrow1 {
+	font-weight:bold;
+	font-size:15px;
+	display:block;
+	padding:10px 20px;
+	background:url(../images/rightmenu-arrow.jpg) 5px 15px no-repeat;
+	cursor:pointer;
+	color:#074160;
+}
 
+.bluearrow {
+	font-weight:bold;
+	font-size:15px;
+	color:#074160;
+}
+
+.bluetext {
+	padding:10px 20px;
+	background:url(../images/rightmenu-arrow.jpg) 5px 15px no-repeat;
+	cursor:pointer;
+	font-weight:bold;
+	font-size:15px;
+}
 
 .quicklink {
 	background: url(../images/ql-bg.png) bottom repeat-x;

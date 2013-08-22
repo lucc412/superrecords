@@ -12,30 +12,34 @@ include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/job_class.php';
 
+if(!isset($_REQUEST['sql'])) $_REQUEST['sql'] = "";
+else $sql = $_REQUEST['sql'];
+if(!isset($_REQUEST['a'])) $_REQUEST['a'] = "";
+else $a = $_REQUEST['a'];
 
+if($a == "uploadReports") {
+	session_start();
+}
+else if($a == "auditDocs") {
+	session_start();	
+}
+else {
+	include("includes/header.php");	
+}
 
 // create class object for class function access
 $objCallData = new Job_Class();
 
-//print_r($_REQUEST);
-//exit;
-
 if($_SESSION['validUser']) {
 
 	// do not include below code when file 'download' case is called
-	if($_REQUEST['sql'] != 'download') {
-		
-		
-		?><?
-		
-		if($_REQUEST["a"] == "uploadReports") {
-			?><link rel="stylesheet" type="text/css" href="css/stylesheet.css"/><?
+	if($sql != 'download') {
+		if($a == "uploadReports" || $a == "auditDocs") {
+			?><link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+			<script type="text/javascript" src="<?php echo $javaScript;?>job.js"></script><?
 		}
-		
 	}
-	if($a != "uploadReports") include("includes/header.php"); 
-	$a = $_REQUEST["a"];
-	$sql = $_REQUEST["sql"];
+	
 	$filter = $_REQUEST["filter"];
 	?><br/><?
 			
@@ -240,8 +244,6 @@ if($_SESSION['validUser']) {
 					break;
 					
 				case "updateQueryPost":
-					print 'updateQueryPost------';
-					exit;
 					$queryId = $_POST["queryId"];
 					$flagPost = $_POST["flagPost"];
 					
@@ -298,7 +300,7 @@ if($_SESSION['validUser']) {
 					include('views/job_list.php');
 				}
 		
-	if($a != "uploadReports") include("includes/footer.php");	
+	if($a != "uploadReports" && $a != "auditDocs") include("includes/footer.php");	
 }  
 else {
 	header("Location:index.php?msg=timeout");

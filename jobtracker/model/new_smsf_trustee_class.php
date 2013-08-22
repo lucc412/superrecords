@@ -43,7 +43,7 @@ class NEW_SMSF_TRUSTEE
 	
 	// function to insert trustee details of Existing trustee
 	function addExistingTrustee($jobId, $cName, $acn, $abn, $tfn, $regAddress, $priAddress, $yesNo, $extTrstStats) {
-		$qryInsert = "INSERT INTO es_existing_trustee(job_id, company_name, abn, tfn, office_address, business_address, yes_no, extTrusty_status)					 
+		$qryInsert = "INSERT INTO es_existing_trustee(job_id, company_name, acn, abn, tfn, office_address, business_address, yes_no, extTrusty_status)					 
                       VALUES (
 							'" . addslashes($jobId) . "',
 							'" . addslashes($cName) . "',	

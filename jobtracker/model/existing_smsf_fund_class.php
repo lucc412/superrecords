@@ -66,7 +66,7 @@ class EXISTING_SMSF_FUND {
 							'" . addslashes($streetAdd) . "',	
 							'" . addslashes($postalAdd) . "',	
 							'" . addslashes($members) . "',	
-							'" . addslashes($trusteeId) . "'
+							'" . addslashes($trusteeId) . "',
                                                         '" . addslashes($fundStatus) . "'
 					)";
 

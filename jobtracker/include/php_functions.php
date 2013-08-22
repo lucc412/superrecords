@@ -266,4 +266,25 @@ function fetchStates() {
     }
     return $arrStates;
 }
+
+function fetchStateName($id) 
+        {
+            $qryFetch = "SELECT cs.cst_Code state_id, cs.cst_Description state_name 
+					FROM cli_state cs WHERE cs.cst_Code = ".$id;
+
+            $fetchResult = mysql_query($qryFetch);
+            $rowData = mysql_fetch_assoc($fetchResult);
+            
+            return $rowData['state_name'];
+	}
+        
+        function fetchTrusteeName($id) 
+        {
+            $qryFetch = "SELECT * FROM es_trustee_type  WHERE trustee_type_id = ".$id;
+
+            $fetchResult = mysql_query($qryFetch);
+            $rowData = mysql_fetch_assoc($fetchResult);
+            
+            return $rowData['trustee_type_name'];
+	}
 ?>

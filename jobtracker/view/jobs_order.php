@@ -11,6 +11,7 @@ include(TOPBAR);
 </div>
 <form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertJob&type=SETUP" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data">
 	<input type="hidden" name="job_submitted" value="N">
+        <input type="hidden" name="type" id="type" value="SETUP">
         <input type="hidden" name="subfrmId" value="<?=$_REQUEST['frmId']?>">
 	<table align="center" width="90%" class="fieldtable" cellpadding="10px;">
 

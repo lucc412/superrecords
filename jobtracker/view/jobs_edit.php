@@ -15,7 +15,8 @@ include(TOPBAR);
 	<input type="hidden" name="subfrmId" value="<?=$_REQUEST['frmId']?>">
 	<input type="hidden" name="recid" value="<?=$_REQUEST['recid']?>"><?
 	$jobId = $_REQUEST['recid'];
-	?><table class="resources" width="90%" cellpadding="10px;">
+	?>
+        <table align="center" width="90%" class="fieldtable" cellpadding="10px;">
 		<tr>
 			<td><strong>Client</strong></td>
 			<td>
@@ -30,7 +31,7 @@ include(TOPBAR);
 			</td>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Client Type</strong></td>
@@ -46,7 +47,7 @@ include(TOPBAR);
 			</td>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Job Type</strong></td>
@@ -64,32 +65,32 @@ include(TOPBAR);
 			</td>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr> 
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Period</strong></td>
 			<td><input type="text" name="txtPeriod" id="txtPeriod" value="<?=$arrJobsData['period']?>"></td>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 		
 		<tr>
 			<td><strong>Notes</strong></td>
 			<td> <textarea id="txtNotes" name="txtNotes"><?=$arrJobsData['notes']?></textarea>
 		</tr>
 
-		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
                 <tr>
 			<td>&nbsp;</td>
 			<td colspan="3"><div id="parentDiv">&nbsp;</div></td>
 		</tr>
-
-		<tr><td>&nbsp;</td></tr>
-                <tr>
-			<td><button type="reset" value="Reset">Reset</button></td>
-                        <td><button type="submit" value="Edit">Next</button></td>
-		</tr>
 	</table>
+        
+        <div style="padding-top:20px;">
+
+            <span align="right" ><button type="reset" value="Reset" >RESET</button></span>
+            <span align="right" style="padding-left:55px;"><button type="submit" value="Edit">NEXT</button></span>
+        </div>
 </form><?
 
 // include footer file

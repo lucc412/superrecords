@@ -39,7 +39,7 @@ include("path.php");
 								<ul class="sub">
 									<li><a href="jobs.php?a=add&type=comp">Compliance</a></li>
 									<li><a href="jobs.php?a=audit&var=new">Audit</a></li>
-									<!--<li><a href="jobs.php?a=order">Order Documents</a></li>-->
+									<li><a href="jobs.php?a=order">Order Documents</a></li>
 								</ul>
 							</li>
 							<li><a href="jobs.php?a=saved">Saved Jobs</a></li>

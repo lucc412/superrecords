@@ -9,10 +9,8 @@ class NEW_SMSF_MEMBER {
 	// function to fetch countries
 	function fetchCountries() {
 		$qryFetch = "SELECT * FROM es_country";	
-
-        $fetchResult = mysql_query($qryFetch);
-
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
+                $fetchResult = mysql_query($qryFetch);
+                while($rowData = mysql_fetch_assoc($fetchResult)) {
 			$arrStates[$rowData['country_id']] = $rowData['country_name'];
 		}
 		return $arrStates;

@@ -38,7 +38,7 @@ if(isset($_SESSION['jobId'])) {
         
         // include view file 
         if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'Y')
-            header('Location: jobs.php');
+            header('Location: jobs.php?a=saved');
         
         else if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'N')
             header('Location: jobs.php?a=saved');

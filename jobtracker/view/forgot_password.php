@@ -17,8 +17,8 @@
                     <div align="center"><?
 
 				// error message if login attempt fails
-				if(!empty($_REQUEST['loginFail'])) {
-					?><div class="errorMsg" style="width:300px; margin-bottom:15px;">Sorry, Your email address or password does not match.</div><?
+				if(!empty($msg)) {
+					?><div class="errorMsg" style="width:300px; margin-bottom:15px;">Sorry, Your email address does not match.</div><?
 				}
 
 				?><div align="center" class="logindiv"><?

@@ -12,7 +12,7 @@
 		// page header
 		?><div align="center" style="margin-top:20px;padding-bottom:45px;"><a href="http://<?=$_SERVER['SERVER_NAME']?>/index.php"><img src="images_user/header-logo.png"></a></div>
 
-		<form name="objForm" id="objForm" method="post" action="home.php" onsubmit="javascript:return checkValidation();">
+		<form name="objForm" id="objForm" method="post" action="home.php" onsubmit="javascript:return userValidation();">
                     <input type="hidden" name="flgFrgtPass" id="flgFrgtPass" value="forgot"/>
                     <div align="center"><?
 

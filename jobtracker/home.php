@@ -2,7 +2,7 @@
 include("include/common.php");
 include(MODEL."home_class.php");
 $objScr = new Home();
-	
+
 if(isset($_REQUEST['txtName']) && isset($_REQUEST['txtPassword'])) 
 {
 	$username = $_REQUEST['txtName'];
@@ -24,7 +24,7 @@ if(isset($_REQUEST['txtName']) && isset($_REQUEST['txtPassword']))
 		header('Location: login.php?loginFail=Y');
 	}
 }
-else if(isset($_REQUEST['flgFrgtPass']) && $_REQUEST['flgFrgtPass'] == "forgot") {
+else if(isset($_REQUEST['flgFrgtPass']) && isset($_REQUEST['txtName']) && $_REQUEST['flgFrgtPass'] == "forgot") {
 	
     $username = $_REQUEST['txtName'];
     $pracDtls = $objScr->forgot_practice($username);

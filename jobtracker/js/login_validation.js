@@ -13,7 +13,7 @@ function checkValidation() {
 		flagReturn = false;
 	}
 	else {
-	document.getElementById('val_username').innerHTML = "";
+                document.getElementById('val_username').innerHTML = "";
 		username.className = "";
 	}
 	
@@ -26,12 +26,33 @@ function checkValidation() {
 		flagReturn = false;
 	}
 	else {
-	document.getElementById('val_password').innerHTML = "";
+                document.getElementById('val_password').innerHTML = "";
 		password.className = "";
 	}
 	
 	return flagReturn;
 }
+
+function userValidation()
+{
+        var flagReturn = true;
+	var username = document.getElementById('txtName');
+	
+	if(username.value == "")
+	{
+		document.getElementById('val_username').innerHTML = "Please Provide User Name";
+		document.getElementById('txtName').focus();
+		username.className = "errclass";
+		flagReturn = false;
+	}
+	else {
+                document.getElementById('val_username').innerHTML = "";
+		username.className = "";
+	}
+        
+        return flagReturn;
+}
+    
 /*
 function email()
 {

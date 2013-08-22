@@ -22,15 +22,15 @@ include(TOPBAR);
 						<?=$arrQues[$i]?>
 					</td>
 					<td>
-						&nbsp;&nbsp;<label><input type="radio" name="rd<?=$i+1?>" id="rd<?=$i+1?>"/>Yes</label>
-						<label><input type="radio" name="rd<?=$i+1?>" id="rd<?=$i+1?>" checked="checked"/>No</label>
+						<label style="padding-right:20px;"><input class="checkboxClass" type="radio" name="rd<?=$i+1?>" id="rd<?=$i+1?>"/>Yes</label>
+						<label><input class="checkboxClass" type="radio" name="rd<?=$i+1?>" id="rd<?=$i+1?>" checked="checked"/>No</label>
 					</td>
 				</tr><?
 			}	
 		?></table>
 
 		</br><div style="font-weight:bold;">
-			<input type="checkbox" name="chkAgree" id="chkAgree"/> I have read and agree to your 
+			<input class="checkboxClass" type="checkbox" name="chkAgree" id="chkAgree"/> I have read and agree to your 
 			<a href="#" onclick="javascript:popUp('docs/terms_conditions.html');">terms and conditions</a>
 		</div>
 	</div>
@@ -42,9 +42,9 @@ include(TOPBAR);
 		else
 			$jsFunc = "window.location.href='new_smsf_member.php'";
 		
-                ?><span align="left"><button type="button" onclick="<?=$jsFunc?>" >BACK</button></span>
-                <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">SAVE & EXIT</button></span>
-                <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
+			?><span align="left"><button type="button" onclick="<?=$jsFunc?>" >BACK</button></span>
+			<span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">SAVE & EXIT</button></span>
+			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
 	</div>
         <script>
             $('#btnNext').click(function(){$('#job_submitted').val('N')})

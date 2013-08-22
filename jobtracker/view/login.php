@@ -48,12 +48,12 @@
 							<span name="val_password" id="val_password" style=" color:red; font-size:11px;"></span>
 							</td>
 						</tr>
-						<!--<tr>
+						<tr>
 							<td colspan="2" align="center">
 								<span style="font-size:11px;">Forgot password?</span>
 								<a style="text-decoration:none; color:#001590; font-size:12px; font-weight:bold;" onclick="window.open('forgot_password.php','subwindow','toolbar=no,location=no,directories=no,status=yes,scrollbars=yes,menubar=no,resizable=yes,height=500,width=800');return false" href="#">Click here</a>
 							</td>
-						</tr>-->
+						</tr>
 						<tr><td>&nbsp;</td></tr>
 					</table>
 					<div>

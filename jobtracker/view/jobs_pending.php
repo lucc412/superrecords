@@ -37,11 +37,12 @@ include(TOPBAR);
 		// display job data
 		?><table width="100%" class="resources">
 			<tr>
-				<td width="45%" class="td_title">Job Name</td>
-				<td width="10%" class="td_title">Job Genre</td>
-				<td width="10%" class="td_title">Job Status</td>
-				<td width="12%" class="td_title">Source Documents</td>
-				<td width="12%" class="td_title">Reports</td>
+				<td class="td_title">Job Name</td>
+				<td class="td_title">Job Genre</td>
+				<td class="td_title">Job Status</td>
+				<td class="td_title">Source Documents</td>
+				<td class="td_title">Reports</td>
+				<td align="center" class="td_title">Submission Date</td>
 				<td width="12%" class="td_title" align="center">Queries</td>
 			</tr><?
 			
@@ -87,6 +88,7 @@ include(TOPBAR);
 							}
 						}
 					?></td>
+					<td class="tddata" align="center"><?=$arrJobDetails['job_received']?></td>
 
 					<td class="tddata viewquery" align="center"><?
 						$flagQueryExists = $objScr->fetch_queries($jobId);

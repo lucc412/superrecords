@@ -9,25 +9,28 @@ class Job {
 		
 		if(!empty($fetchType) && $fetchType == 'pending') {
 			$appendStr = 'AND t1.job_status_id <> 7 AND t1.job_submitted = "Y"';
+			$orderByStr = 't1.job_received desc';
 		}
 		else if(!empty($fetchType) && $fetchType == 'completed') {
 			$appendStr = 'AND t1.job_status_id = 7 AND t1.job_submitted = "Y"';
+			$orderByStr = 't1.job_completed_date desc';
 		}
 		else if(!empty($fetchType) && $fetchType == 'saved') {
 			$appendStr = 'AND t1.job_submitted = "N"';
+			$orderByStr = 't1.job_created_date desc';
 		}
 
 		if(!empty($_REQUEST['lstClientType'])) {
 			$appendSelStr = "AND t1.client_id = {$_REQUEST['lstClientType']}";
-		}
+		} 
 
-		$qrySel = "SELECT t1.job_id, t1.job_name, DATE_FORMAT(t1.job_received, '%d/%m/%Y') job_received, t1.job_type_id, t1.client_id, t1.period, t1.job_status_id, t1.mas_Code, t1.notes, t1.job_genre, t1.setup_subfrm_id, t1.job_submitted
+		$qrySel = "SELECT t1.job_id, t1.job_name, DATE_FORMAT(t1.job_received, '%d/%m/%Y') job_received, DATE_FORMAT(t1.job_created_date, '%d/%m/%Y') job_created_date, DATE_FORMAT(t1.job_completed_date, '%d/%m/%Y') job_completed_date, t1.job_type_id, t1.client_id, t1.period, t1.job_status_id, t1.mas_Code, t1.notes, t1.job_genre, t1.setup_subfrm_id, t1.job_submitted
 					FROM job t1, client c1
 					WHERE c1.id = '{$_SESSION['PRACTICEID']}'
 					AND t1.client_id = c1.client_id
 					AND t1.discontinue_date IS NULL  
 					{$appendStr} {$appendSelStr}
-					ORDER BY t1.job_received desc";
+					ORDER BY {$orderByStr}";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -186,14 +189,18 @@ class Job {
 		$jobGenre = $_REQUEST['type'];
 		$setup_subfrm = $_REQUEST['subfrmId'];
 
-		if($jobGenre == 'COMPLIANCE')
+		if($jobGenre == 'COMPLIANCE') {
 			$jobSubmitted = 'Y';
-		else 
+			$jobReceived = 'NOW()';
+		}
+		else {
 			$jobSubmitted = 'N';
+			$jobReceived = 'NULL';
+		}
 
 		$jobName = $clientId .'::'. $period .'::'. $typeId;
 
-		$qryIns = "INSERT INTO job(client_id, job_genre, job_submitted, mas_Code, job_type_id, period, notes, job_name, job_status_id, setup_subfrm_id, job_received)
+		$qryIns = "INSERT INTO job(client_id, job_genre, job_submitted, mas_Code, job_type_id, period, notes, job_name, job_status_id, setup_subfrm_id, job_created_date, job_received)
 					VALUES (
 					" . $clientId . ", 
 					'" . $jobGenre . "', 
@@ -201,11 +208,12 @@ class Job {
 					" . $cliType . ", 
 					" . $typeId . ", 
 					'" . $period . "',  
-					'" . $notes . "',  
+					'" . $notes . "',
 					'" . $jobName . "',  
 					1,   
 					'".$setup_subfrm."',    
-					NOW()              
+					NOW(),            
+					".$jobReceived."         
 					)";
                 
 		mysql_query($qryIns);
@@ -267,7 +275,8 @@ class Job {
 
 	public function update_job_completed($jobId) {
 		$qryUpd = "Update job
-					SET job_submitted = 'Y'
+					SET job_submitted = 'Y',
+					job_received = NOW()
 					WHERE job_id = {$jobId}";
 
 		mysql_query($qryUpd);

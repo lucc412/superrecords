@@ -41,6 +41,7 @@ include(TOPBAR);
 			<td width="10%" class="td_title">Job Genre</td>
 			<td width="15%" class="td_title">Source Documents</td>
 			<td width="15%" class="td_title">Reports</td>
+			<td width="12%" class="td_title" align="center">Completion Date</td>
 			<td width="12%" class="td_title" align="center">Queries</td>
 		</tr><?			
 		
@@ -84,6 +85,8 @@ include(TOPBAR);
 						}
 					}
 				?></td>
+
+				<td class="tddata" align="center"><?=$arrJobDetails['job_completed_date']?></td>
 
 				<td class="tddata viewquery" align="center"><?
 					$flagQueryExists = $objScr->fetch_queries($jobId);

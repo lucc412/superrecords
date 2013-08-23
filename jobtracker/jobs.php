@@ -142,7 +142,7 @@ if(isset($_REQUEST['a'])) {
 			break;
 
 		case "checklist":
-			$arrChecklist = $objScr->getAuditChecklist();
+			$arrChecklist = $objScr->getAuditChecklist($_SESSION['jobId']);
 			$arrDocDetails = $objScr->getAuditDetails($_SESSION['jobId']);
 			$arrUplStatus['PENDING'] = 'Pending';
 			$arrUplStatus['ATTACHED'] = 'Attached';

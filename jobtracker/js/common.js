@@ -9,3 +9,29 @@ function urlRedirect(url)
 {
 	window.location.href = url;
 }
+
+$(function(){
+	$('INPUT[type="file"]').change(function () {
+		var ext = this.value.match(/\.(.+)$/)[1];
+		switch (ext) {
+			case 'txt':
+			case 'doc':
+			case 'docx':
+			case 'ppt':
+			case 'pptx':
+			case 'pdf':
+			case 'xls':
+			case 'xlsx':
+			case 'zip':
+			case 'rar':
+			case 'png':
+			case 'jpg':
+			case 'jpeg':
+			case 'msg':
+				break;
+			default:
+				alert('Sorry, This file type is not allowed.');
+				this.value = '';
+		}
+	});
+});

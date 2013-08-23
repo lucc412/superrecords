@@ -1,6 +1,6 @@
 // show hide audit checklist options
 $(function(){
-   $("span").each(function (i){
+	$("span").each(function (i){
 	  (function(i) {
 		  i++;
 		  $('#checklist' + i).click(function() {
@@ -15,6 +15,20 @@ function newPopup(url)
 {
 	popupWindow = window.open(
 		url,'popUpWindow','height=400,width=600,left=40,top=20,resizable=yes,scrollbars=no,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+}
+
+// This function is used to perform validations for upload
+function uploadValidate() {
+
+	var flagReturn = true;
+	var eleFileUpload = document.getElementById('fileUpload');
+
+	if(eleFileUpload.value == 0) {
+		eleFileUpload.className = "errclass";
+		flagReturn = false;
+	}
+
+	return flagReturn;
 }
 
 // This function is used to perform validations

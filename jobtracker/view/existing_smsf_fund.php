@@ -28,16 +28,17 @@ include(TOPBAR);
 			</tr>
 			<tr>
 				<td>Street Address</td>
-				<td><textarea name="taStreetAdd" /><?=$streetAdd?></textarea></td>
+				<td><textarea name="taStreetAdd" style="margin-bottom: 5px;"/><?=$streetAdd?></textarea></td>
 			</tr>
 			<tr>
 				<td>Postal Address</td>
-				<td><textarea name="taPostalAdd" /><?=$postalAdd?></textarea></td>
+				<td><textarea name="taPostalAdd" style="margin-bottom: 5px;"/><?=$postalAdd?></textarea></td>
 			</tr>
 			<tr>
 				<td>How many members?</td>
 				<td>
-					<select name="lstMembers"><?
+					<select name="lstMembers" style="width: auto;margin-bottom: 5px;">
+                                            <option value="">Select no of members</option><?
 						foreach($arrNoOfMembers AS $noOfMembers) {
 							$selectedStr = "";
 							if($members == $noOfMembers) $selectedStr = "selected='selected'";

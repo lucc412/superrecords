@@ -21,30 +21,11 @@ class DECLARATIONS
 
             return $arrQues;
 	}
-//        
-//        function fetchStateName($id) 
-//        {
-//            $qryFetch = "SELECT cs.cst_Code state_id, cs.cst_Description state_name 
-//					FROM cli_state cs WHERE cs.cst_Code = ".$id;
-//
-//            $fetchResult = mysql_query($qryFetch);
-//            $rowData = mysql_fetch_assoc($fetchResult);
-//            
-//            return $rowData['state_name'];
-//	}
-//        
-//        function fetchTrusteeName($id) 
-//        {
-//            $qryFetch = "SELECT * FROM es_trustee_type  WHERE trustee_type_id = ".$id;
-//
-//            $fetchResult = mysql_query($qryFetch);
-//            $rowData = mysql_fetch_assoc($fetchResult);
-//            
-//            return $rowData['trustee_type_name'];
-//	}
-        
+
         function generatePDF()
         {
+            // Fetch All Details of Job
+            
             $jobid = $_SESSION['jobId'];
             $contQry = "SELECT * FROM es_contact_details WHERE job_id = ".$_SESSION['jobId'];
             $fetchCntact = mysql_query($contQry);
@@ -85,15 +66,41 @@ class DECLARATIONS
                 $arrExtTrsty[$rowData['job_id']] = $rowData;
             }
             
-//            $jobQry = "SELECT * FROM job WHERE job_id = ".$jobid;
-//            $fetchJob = mysql_query($jobQry);
-//            $arrJob = array();
-//            while($rowData = mysql_fetch_assoc($fetchJob))
-//            {
-//                $arrJob[$rowData['job_id']] = $rowData;
-//            }
-//            print_r($arrJob);exit;
+            $jobQry = "SELECT * FROM job WHERE job_id = ".$jobid;
+            $fetchJob = mysql_query($jobQry);
+            $arrJob = array();
+            while($rowData = mysql_fetch_assoc($fetchJob))
+            {
+                $arrJob[$rowData['job_id']] = $rowData;
+            }
             
+            $qryCli = "SELECT t1.client_id, t1.client_name
+                        FROM client t1
+                        WHERE t1.client_id = '{$arrJob[$jobid]['client_id']}'
+                        ORDER BY t1.client_name";
+            
+            $fetchClients = mysql_query($qryCli);
+            $arrClients = mysql_fetch_assoc($fetchClients);
+            
+            
+            $qryPra = "SELECT t1.id, t1.name
+                        FROM pr_practice t1
+                        WHERE t1.id = '{$_SESSION['PRACTICEID']}'
+                        ORDER BY t1.name";
+                        
+            $fetchPrac = mysql_query($qryPra);
+            $arrPractice = mysql_fetch_assoc($fetchPrac);
+            
+           
+            $qryAct = "SELECT sa.sub_Code, sa.sub_Description
+					FROM sub_subactivity sa
+					WHERE sa.sub_Code = ".$arrJob[$jobid]['job_type_id']."
+                                        AND sa.display_in_practice = 'yes'
+					ORDER BY sa.sub_Order";
+            $fetchAct = mysql_query($qryAct);
+            $arrActivity = mysql_fetch_assoc($fetchAct);
+            
+            // Insert into documents table
             $filename = "job_".$jobid.".pdf";
             $docQry = "INSERT INTO documents (job_id,document_title,date,viewed,file_path) VALUES (".$jobid.",'',NOW(),0,'".$filename."')";
             mysql_query($docQry);
@@ -146,7 +153,10 @@ class DECLARATIONS
             // add a page
             $pdf->AddPage();
             
+            
+            // HTML Part of PDF
             $members = '';
+            $cnt = 1;
             foreach ($arrMembrs as $key => $value) 
             {
                $value["gender"] =($value["gender"] == "M")?"Male":"Female";
@@ -155,47 +165,51 @@ class DECLARATIONS
                $Data = mysql_fetch_assoc($fetchCntry);
                $value['country_id'] = $Data['country_name'];
                
-                $members .= '<table class="first" cellpadding="4" cellspacing="6">
+                $members .= '
+                            <table class="first" cellpadding="4" cellspacing="6">
                             <tr>
-                                <td><b>Member Name :</b></td>
-                                <td><b>'.$value['title'].' '.$value['fname'].' '.$value['mname'].' '.$value['lname'].'</b></td>
+                                <td colspan="2"><b>Member '.$cnt.'</b></td>
                             </tr>
                             <tr>
-                                <td><b>Date of Birth :</b></td>
-                                <td><b>'.$value['dob'].'</b></td>
+                                <td>Member Name : </td>
+                                <td>'.$value['title'].' '.$value['fname'].' '.$value['mname'].' '.$value['lname'].' </td>
                             </tr>
                             <tr>
-                                <td><b>City of Birth :</b></td>
-                                <td><b>'.$value['city'].'</b></td>
+                                <td>Date of Birth : </td>
+                                <td>'.$value['dob'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Country of Birth :</b></td>
-                                <td><b>'.$value['country_id'].'</b></td>
+                                <td>City of Birth : </td>
+                                <td>'.$value['city'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Sex :</b></td>
-                                <td><b>'.$value["gender"].'</b></td>
+                                <td>Country of Birth : </td>
+                                <td>'.$value['country_id'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Address :</b></td>
-                                <td><b>'.$value['address'].'</b></td>
+                                <td>Sex : </td>
+                                <td>'.$value["gender"].' </td>
                             </tr>
                             <tr>
-                                <td><b>Tax File Number :</b></td>
-                                <td><b>'.$value['tfn'].'</b></td>
+                                <td>Address : </td>
+                                <td>'.$value['address'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Occupation :</b></td>
-                                <td><b>'.$value['occupation'].'</b></td>
+                                <td>Tax File Number : </td>
+                                <td> '.$value['tfn'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Contact Number :</b></td>
-                                <td><b>'.$value['contact_no'].'</b></td>
+                                <td>Occupation : </td>
+                                <td>'.$value['occupation'].' </td>
+                            </tr>
+                            <tr>
+                                <td>Contact Number : </td>
+                                <td>'.$value['contact_no'].' </td>
                             </tr>
                             
                         </table>
                         <br/>';
-                
+                $cnt++;
             }
             
             $trustee = '';
@@ -206,24 +220,24 @@ class DECLARATIONS
                         <br />
                         <table class="first" cellpadding="4" cellspacing="6">
                             <tr>
-                                <td><b>Preferred Company Name :</b></td>
-                                <td><b>'.$arrNewTrsty[$jobid]['company_name'].'</b></td>
+                                <td>Preferred Company Name : </td>
+                                <td>'.$arrNewTrsty[$jobid]['company_name'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Alternative Name Option 1 :</b></td>
-                                <td><b>'.$arrNewTrsty[$jobid]['alternative_name1'].'</b></td>
+                                <td>Alternative Name Option 1 : </td>
+                                <td>'.$arrNewTrsty[$jobid]['alternative_name1'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Alternative Name Option 2 :</b></td>
-                                <td><b>'.$arrNewTrsty[$jobid]['alternative_name2'].'</b></td>
+                                <td>Alternative Name Option 2 : </td>
+                                <td>'.$arrNewTrsty[$jobid]['alternative_name2'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Registered Office Address :</b></td>
-                                <td><b>'.$arrNewTrsty[$jobid]['office_address'].'</b></td>
+                                <td>Registered Office Address : </td>
+                                <td>'.$arrNewTrsty[$jobid]['office_address'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Principal Place of Business :</b></td>
-                                <td><b>'.$arrNewTrsty[$jobid]['business_address'].'</b></td>
+                                <td>Principal Place of Business : </td>
+                                <td>'.$arrNewTrsty[$jobid]['business_address'].' </td>
                             </tr>
                         </table>';
             }  else if($arrFund[$jobid]['trustee_type_id'] == 3) {
@@ -231,64 +245,53 @@ class DECLARATIONS
                         <br />
                         <table class="first" cellpadding="4" cellspacing="6">
                             <tr>
-                                <td><b>Company Name :</b></td>
-                                <td><b>'.$arrExtTrsty[$jobid]['company_name'].'</b></td>
+                                <td>Company Name : </td>
+                                <td>'.$arrExtTrsty[$jobid]['company_name'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Company A.C.N :</b></td>
-                                <td><b>'.$arrExtTrsty[$jobid]['acn'].'</b></td>
+                                <td>Company A.C.N : </td>
+                                <td>'.$arrExtTrsty[$jobid]['acn'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Company A.B.N :</b></td>
-                                <td><b>'.$arrExtTrsty[$jobid]['abn'].'</b></td>
+                                <td>Company A.B.N : </td>
+                                <td>'.$arrExtTrsty[$jobid]['abn'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Company T.F.N :</b></td>
-                                <td><b>'.$arrExtTrsty[$jobid]['tfn'].'</b></td>
+                                <td>Company T.F.N : </td>
+                                <td>'.$arrExtTrsty[$jobid]['tfn'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Registered Office Address :</b></td>
-                                <td><b>'.$arrExtTrsty[$jobid]['office_address'].'</b></td>
+                                <td>Registered Office Address : </td>
+                                <td>'.$arrExtTrsty[$jobid]['office_address'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Principal Place of Business :</b></td>
-                                <td><b>'.$arrExtTrsty[$jobid]['business_address'].'</b></td>
+                                <td>Principal Place of Business : </td>
+                                <td>'.$arrExtTrsty[$jobid]['business_address'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Are all proposed members of the Superfund are directors of the company ? :</b></td>
-                                <td><b>'.$arrExtTrsty[$jobid]['yes_no'].'</b></td>
+                                <td>Are all proposed members of the Superfund are directors of the company ? : </td>
+                                <td>'.$arrExtTrsty[$jobid]['yes_no'].' </td>
                             </tr>
                         </table>';
             }
             
             $html = '<!-- EXAMPLE OF CSS STYLE -->
                         <style>
-                            h1 {
+                            h2 {
                                 font-family: helvetica;
-                                font-size: 24pt;
-                                text-align: center;
+                                margin:0;
+                                color:#F05729;
                             }
-                            p.first {
-                                color: #003300;
+                            p {
                                 font-family: helvetica;
-                                font-size: 12pt;
-                            }
-                            p.first span {
-                                color: #006600;
-                                font-style: italic;
-                            }
-                            p#second {
-                                color: rgb(00,63,127);
-                                font-family: times;
-                                font-size: 12pt;
-                                text-align: justify;
-                            }
-                            p#second > span {
-                                background-color: gray;
+                                margin:0;
+                                color:#F05729;
+                                font-size:12px;
+                                font-weight: bold;
                             }
                             table.first {
                                 font-family: helvetica;
-                                font-size: 9pt;
+                                font-size: 10px;
                             }
                             
                             div.test {
@@ -300,31 +303,37 @@ class DECLARATIONS
                                 padding: 5px;
                             }
                         </style>
-                        <div>
-                            <h1 class="title">Setup Details</h1>
-                        </div>
+                        <table style="margin-bottom: 30px;">
+                            <tr>
+                                <td><a href="home.php" style="float:left;margin-right: 40px;"><img src="images_user/header-logo.png" style="width:250px;" /></a></td>                            
+                                <td><p>'.$arrPractice['name'].'</p>
+                                    <p>'.$arrClients['client_name'].' - '.$arrJob[$jobid]['period'].' - '.$arrActivity['sub_Description'].'</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
                         <div class="test">Contact Details</div>
                         <br />
                         <table class="first" cellpadding="4" cellspacing="6">
                             <tr>
-                                <td><b>First Name :</b></td>
-                                <td><b>'.$arrCntact[$jobid]['fname'].'</b></td>
+                                <td>First Name :</td>
+                                <td>'.$arrCntact[$jobid]['fname'].'</td>
                             </tr>
                             <tr>
-                                <td><b>Last Name :</b></td>
-                                <td><b>'.$arrCntact[$jobid]['lname'].'</b></td>
+                                <td>Last Name : </td>
+                                <td>'.$arrCntact[$jobid]['lname'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Email Address :</b></td>
-                                <td><b>'.$arrCntact[$jobid]['email'].'</b></td>
+                                <td>Email Address : </td>
+                                <td>'.$arrCntact[$jobid]['email'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Phone Number :</b></td>
-                                <td><b>'.$arrCntact[$jobid]['phoneno'].'</b></td>
+                                <td>Phone Number : </td>
+                                <td>'.$arrCntact[$jobid]['phoneno'].' </td>
                             </tr>
                             <tr>
-                                <td><b>State :</b></td>
-                                <td><b>'.fetchStateName($arrCntact[$jobid]['state_id']).'</b></td>
+                                <td>State : </td>
+                                <td>'.fetchStateName($arrCntact[$jobid]['state_id']).' </td>
                             </tr>
                         </table>
                         <br/>
@@ -332,32 +341,32 @@ class DECLARATIONS
                         <br/>
                         <table class="first" cellpadding="4" cellspacing="6">
                             <tr>
-                                <td><b>Fund Name :</b></td>
-                                <td><b>'.$arrFund[$jobid]['fund_name'].'</b></td>
+                                <td>Fund Name : </td>
+                                <td>'.$arrFund[$jobid]['fund_name'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Street Address :</b></td>
-                                <td><b>'.$arrFund[$jobid]['street_address'].'</b></td>
+                                <td>Street Address : </td>
+                                <td>'.$arrFund[$jobid]['street_address'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Postal Address :</b></td>
-                                <td><b>'.$arrFund[$jobid]['postal_address'].'</b></td>
+                                <td>Postal Address : </td>
+                                <td>'.$arrFund[$jobid]['postal_address'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Date of establishment :</b></td>
-                                <td><b>'.$arrFund[$jobid]['date_of_establishment'].'</b></td>
+                                <td>Date of establishment : </td>
+                                <td>'.$arrFund[$jobid]['date_of_establishment'].' </td>
                             </tr>
                             <tr>
-                                <td><b>State of registration :</b></td>
-                                <td><b>'.fetchStateName($arrFund[$jobid]['registration_state']).'</b></td>
+                                <td>State of registration : </td>
+                                <td>'.fetchStateName($arrFund[$jobid]['registration_state']).' </td>
                             </tr>
                             <tr>
-                                <td><b>How many members? :</b></td>
-                                <td><b>'.$arrFund[$jobid]['members'].'</b></td>
+                                <td>How many members? : </td>
+                                <td>'.$arrFund[$jobid]['members'].' </td>
                             </tr>
                             <tr>
-                                <td><b>Trustee Type :</b></td>
-                                <td><b>'.fetchTrusteeName($arrFund[$jobid]['trustee_type_id']).'</b></td>
+                                <td>Trustee Type : </td>
+                                <td>'.fetchTrusteeName($arrFund[$jobid]['trustee_type_id']).' </td>
                             </tr>
                             
                         </table>                        
@@ -366,13 +375,29 @@ class DECLARATIONS
                         <br/>'.$members.$trustee.'
                         ';
             
-
             // output the HTML content
             $pdf->writeHTML($html, true, false, true, false, '');
 
             //$pdf->Output($filename, 'I');
-            $pdf->Output($_SERVER['DOCUMENT_ROOT']."/uploads/setup/".$filename,"F");
+            $pdf->Output(UPLOADSETUP.$filename,"F");
          
+        }
+        
+        function updateTerms($chk)
+        {
+            $chk = ($chk == 'on')?1:0;
+            $qry = "UPDATE es_contact_details SET terms_n_conditn = ".$chk." WHERE job_id = ".$_SESSION['jobId'];
+            mysql_query($qry);
+        }
+        
+        function fetchTerms()
+        {
+            $qry = "SELECT terms_n_conditn FROM es_contact_details WHERE job_id = ".$_SESSION['jobId'];
+            $data = mysql_query($qry);
+            $rec = mysql_fetch_assoc($data);
+            $chk = ($rec['terms_n_conditn'] == '1')?"on":"off";
+            
+            return $chk;
         }
 }
                     

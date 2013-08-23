@@ -30,7 +30,7 @@ include(TOPBAR);
 		?></table>
 
 		</br><div style="font-weight:bold;">
-			<input class="checkboxClass" type="checkbox" name="chkAgree" id="chkAgree"/> I have read and agree to your 
+                    <input class="checkboxClass" type="checkbox" name="chkAgree" id="chkAgree" <?php echo ($checkTerms=='on')?"checked":""; ?>/> I have read and agree to your 
 			<a href="#" onclick="javascript:popUp('docs/terms_conditions.html');">terms and conditions</a>
 		</div>
 	</div>

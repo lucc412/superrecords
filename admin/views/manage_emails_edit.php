@@ -40,10 +40,13 @@
 
 					<span style="color:orange"><u>Below are the dynamic fields applicable to this content:</u></span><?
 
-					if($eventId != '6' && $eventId != '7' && $eventId != '8' && $eventId != '9') {
+					if($eventId != '6' && $eventId != '7' && $eventId != '8' && $eventId != '9' && $eventId != '10') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">PRACTICENAME</div><?
 					}
-
+                                        if($eventId == '10') {
+						?><div style="padding-bottom:5px;color:red;font-weight:bold">User</div>
+                                                  <div style="padding-bottom:5px;color:red;font-weight:bold">Password</div><?
+					}
 					if($eventId == '1') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">SALESPERSONNAME</div><?
 					}

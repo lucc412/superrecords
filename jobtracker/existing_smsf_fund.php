@@ -32,7 +32,7 @@ if(isset($_SESSION['jobId'])) {
 		$members = $_REQUEST['lstMembers'];
 		$trusteeId = $_REQUEST['lstTrustee'];
                 $fundStatus = $_REQUEST['fund_status'];
-                $jobStatus = $_REQUEST['job_status'];
+                $jobStatus = $_REQUEST['job_submitted'];
 
 		// fetch existing fund details
 		$arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
@@ -47,7 +47,7 @@ if(isset($_SESSION['jobId'])) {
 			// edit fund details of sign up user
 			$flagReturn = $objScr->editFundInfo($fundName, $abn, $streetAdd, $postalAdd, $members, $trusteeId, $fundStatus, $jobStatus);
 		}
-                
+               
 //            print $jobQry = "SELECT * FROM job WHERE job_id = ".$_SESSION['jobId'];
 //            $fetchJob = mysql_query($jobQry);
 //            $arrJob = array();
@@ -235,14 +235,12 @@ if(isset($_SESSION['jobId'])) {
 
                     //$pdf->Output($filename, 'I');
                     $pdf->Output($_SERVER['DOCUMENT_ROOT']."/uploads/setup/".$filename,"F");
-         
                 
-		if($flagReturn) {
-                    
-                    if(isset($_POST['fund_status']) && $_POST['fund_status'] == 1)
-                            header('Location: jobs.php?a=pending');
-                    else
-			header('Location: jobs.php?a=saved');
+		if($flagReturn) { 
+			if(isset($_POST['fund_status']) && $_POST['fund_status'] == 1)
+				header('Location: jobs.php?a=pending');
+			else
+				header('Location: jobs.php?a=saved');
 		}
 		else {
 			echo "Sorry, Please try later.";

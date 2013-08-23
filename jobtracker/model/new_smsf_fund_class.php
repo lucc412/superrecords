@@ -20,7 +20,7 @@ class NEW_SMSF_FUND {
 
 	// function to insert fund details of sign up user
 	function addFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus) {
-		print $qryInsert = "INSERT INTO es_fund_details(job_id, signup_type, fund_name, street_address, postal_address, date_of_establishment, registration_state, members, trustee_type_id, fund_status)
+		$qryInsert = "INSERT INTO es_fund_details(job_id, signup_type, fund_name, street_address, postal_address, date_of_establishment, registration_state, members, trustee_type_id, fund_status)
                       VALUES (
 							'" . addslashes($_SESSION['jobId']) . "',
 							'N',
@@ -41,7 +41,7 @@ class NEW_SMSF_FUND {
 
 	// function to insert fund details of sign up user
 	function editFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus) {
-            print $qryInsert = "UPDATE es_fund_details
+           $qryInsert = "UPDATE es_fund_details
 						SET fund_name = '" . addslashes($fundName) . "',
 							street_address = '" . addslashes($streetAdd) . "',
 							postal_address = '" . addslashes($postalAdd) . "',

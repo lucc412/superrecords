@@ -71,9 +71,9 @@ class EXISTING_SMSF_FUND {
 					)";
 
             $flagReturn = mysql_query($qryInsert);
-            if($jobStatus == 1)
+            if($jobStatus == 'Y')
             {
-                $stQry = "UPDATE job SET job_status = ".$jobStatus." WHERE job_id = ".$_SESSION['jobId'];
+                $stQry = "UPDATE job SET job_submitted = '".$jobStatus."' WHERE job_id = ".$_SESSION['jobId'];
                 $flagReturn = mysql_query($stQry);
             }
 	    return $flagReturn;	
@@ -92,9 +92,9 @@ class EXISTING_SMSF_FUND {
 					WHERE job_id = '" . $_SESSION['jobId']. "'";
 
         $flagReturn = mysql_query($qryInsert);
-            if($jobStatus == 1)
+            if($jobStatus == 'Y')
             {
-                $stQry = "UPDATE job SET job_status = ".$jobStatus." WHERE job_id = ".$_SESSION['jobId'];
+                $stQry = "UPDATE job SET job_submitted = '".$jobStatus."' WHERE job_id = ".$_SESSION['jobId'];
                 $flagReturn = mysql_query($stQry);
             }
 	    return $flagReturn;	

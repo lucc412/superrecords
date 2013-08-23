@@ -69,12 +69,12 @@ include(TOPBAR);
                         <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
 		</div>
 		<input type="hidden" name="doAction" value="addFundInfo">
-                <input type="hidden" name="job_status" id="job_status" value="0">
+                <input type="hidden" name="job_submitted" id="job_submitted" value="N">
 
 	</form>
         <script>
             $('#btnNext').click(function(){$('#fund_status').val('0')})
-            $('#btnSave').click(function(){$('#fund_status').val('1');$('#job_status').val('1')})
+            $('#btnSave').click(function(){$('#fund_status').val('1');$('#job_submitted').val('Y')})
         </script>
 </div><?
 

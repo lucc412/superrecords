@@ -43,7 +43,7 @@ class NEW_SMSF_MEMBER {
 
 	// function to edit member details of sign up user
 	function editMemberInfo($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus) {
-		print $qryUpd = "UPDATE es_member_details
+		$qryUpd = "UPDATE es_member_details
 						SET title = '" . addslashes($title) . "',
 							fname = '" . addslashes($fname) . "',
 							mname = '" . addslashes($mname) . "',	 

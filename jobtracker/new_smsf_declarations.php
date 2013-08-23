@@ -12,14 +12,17 @@ if(isset($_SESSION['jobId'])) {
             
 	// fetch states for drop-down
 	$arrQuestionsList = $objScr->fetchQuestions();
-
+        $checkTerms = $objScr->fetchTerms();
+        
 	$arrQues = array();
         if(isset($_REQUEST['job_submitted']))
         {
             $stQry = "UPDATE job SET job_submitted = '".$_REQUEST['job_submitted']."' WHERE job_id = ".$_SESSION['jobId'];
             $flagReturn = mysql_query($stQry);
             
-            if($flagReturn)
+            $objScr->updateTerms($_REQUEST['chkAgree']);
+
+            if($_REQUEST['job_submitted'] == 'Y')
             {
                 $objScr->generatePDF();
             }

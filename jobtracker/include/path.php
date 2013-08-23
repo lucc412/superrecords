@@ -10,4 +10,5 @@ define('PDF',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/library/tcpdf/tcpdf.php');
 define('PHPFUNCTION',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/php_functions.php');
 define('MODEL',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/model/');
 define('VIEW',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/view/');
+define('UPLOADSETUP',$_SERVER['DOCUMENT_ROOT'].'/uploads/setup/');
 ?>

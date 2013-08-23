@@ -32,7 +32,7 @@ include(TOPBAR);
 			<tr>
 				<td>State</td>
 				<td>
-					<select name="lstState"><?
+					<select name="lstState" style="margin-bottom: 5px;"><?
 						foreach($arrStates AS $stateIdKey => $stateName) {
 							$selectedStr = "";
 							if($stateId == $stateIdKey) $selectedStr = "selected='selected'";

@@ -538,7 +538,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	color:#999;
 }
 
-.bluearrow1 {
+.bluearrow {
 	font-weight:bold;
 	font-size:13px;
 	display:block;
@@ -546,6 +546,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	background:url(../images_user/rightmenu-arrow.jpg) 5px 15px no-repeat;
 	cursor:pointer;
 	color:rgba(7, 65, 96, 0.94);
+}
+
+.orangearrow {
+	font-weight:bold;
+	font-size:13px;
+	display:block;
+	padding:10px 20px;
+	background:url(../images_user/rightmenu-arrow-orange.jpg) 5px 15px no-repeat;
+	cursor:pointer;
+	color:#F05729;
 }
 
 .auditupload td 
@@ -572,6 +582,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .pdL30
 {
 	padding-left:30px;
+}
+
+.pdL10
+{
+	padding-left:10px;
 }
 
 .pdT50

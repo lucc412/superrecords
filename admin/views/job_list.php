@@ -404,7 +404,7 @@ switch ($a)
 					}
 					?><tr>
 						<td align="right" colspan="3">
-							<button type="button" title="click here to view documents" onclick="JavaScript:newPopup('job.php?a=auditDocs&checklistId=<?=$checklistId?>&jobId=<?=$_REQUEST['jobId']?>');">View Documents</button>
+							<button type="button" title="click here to view documents" onclick="JavaScript:newPopup('job.php?a=auditDocs&checklistId=<?=$checklistId?>&jobId=<?=$_REQUEST['jobId']?>');">Documents</button>
 						</td>
 					</tr><?
 					

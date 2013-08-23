@@ -69,29 +69,7 @@ include(TOPBAR);
 		</tr>
 
 		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-
-<!--		<tr>
-			<td><strong>Source Documents</strong></td>
-			<td><span class="docheader">Description</span></td>
-			<td><span class="docheader">File Path</span></td>
-		</tr>
-
-		<tr>
-			<td>&nbsp;</td>
-			<td width="274px"><input type="text" name="textSource_50" title="Specify name of source document"></td>
-			<td width="240px"><input type="file" name="sourceDoc_50" id="sourceDoc_50" title="Upload source document"></td>
-			<td><button type="button" style="margin-top:-6px;width: 94px;" title="Click here to upload new source document" onclick="javascript:addElement();" value="Add">Add</button></td>
-		</tr>
-
-		<tr>
-			<td>&nbsp;</td>
-			<td colspan="3"><div id="parentDiv" style="margin-top:-17px;">&nbsp;</div></td>
-		</tr>-->
-
-<!--		<td><button type="reset" onclick="window.location.href='jobs.php?a=order'" >Back</button></td>
-			<td><button type="reset" value="Reset">Reset</button></td>
-			<td><button type="submit" value="Add">Next</button></td>-->
-            </table>
+        </table>
         <div style="padding-top:20px;">
             <span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />BACK</button></span>
             <span align="right" style="padding-left:55px;"><button type="reset" >RESET</button></span>

@@ -480,16 +480,17 @@ class Job {
 		return $checklistName;
 	}
 
-	public function getAuditChecklist() {
+	public function getAuditChecklist($jobId) {
 
-		$qrySel = "SELECT ac.checklist_id, ac.checklist_name, aus.subchecklist_id, aus.subchecklist_name
-					FROM audit_checklist ac, audit_subchecklist aus
+		$qrySel = "SELECT ac.checklist_id, ac.checklist_name, aus.subchecklist_id, aus.subchecklist_name, IF(dc.checklist_id, 1, 0) uploadStatus
+					FROM audit_subchecklist aus, audit_checklist ac
+					LEFT JOIN documents dc ON ac.checklist_id = dc.checklist_id AND dc.job_id = '{$jobId}'
 					WHERE ac.checklist_id = aus.checklist_id
 					GROUP BY ac.checklist_order, aus.subchecklist_order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrChecklist[$rowData['checklist_id'].":".$rowData['checklist_name']][$rowData['subchecklist_id']] = $rowData['subchecklist_name'];
+			$arrChecklist[$rowData['checklist_id'].":".$rowData['checklist_name'].":".$rowData['uploadStatus']][$rowData['subchecklist_id']] = $rowData['subchecklist_name'];
 		}
 
 		return $arrChecklist;

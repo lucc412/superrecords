@@ -18,13 +18,19 @@ include(TOPBAR);
 	else {
 		?><input type="hidden" name="sql" value="updateAudit"><?
 	}
+
 	?><div class="auditupload"><?
 		foreach($arrChecklist AS $strChecklist => $arrSubChecklist) {
 			$checklist = stringToArray(':',$strChecklist);
 			$checklistId = $checklist['0'];
 			$checklistName = $checklist['1'];
+			$checklistStatus = $checklist['2'];
 
-			?><span class="bluearrow1" id="checklist<?=$checklistId?>"><?=$checklistName;?></span>
+			if(empty($checklistStatus)) 
+				$classStr = "bluearrow";
+			else 
+				$classStr = "orangearrow";
+			?><span class="<?=$classStr?>" id="checklist<?=$checklistId?>"><?=$checklistName;?></span>
 			<table style="display:none;" id="subchecklist<?=$checklistId?>"><?
 				foreach($arrSubChecklist AS $subChecklistId => $subChecklistName) {
 					?><tr>
@@ -50,7 +56,7 @@ include(TOPBAR);
 				}
 				?><tr>
 					<td align="right" colspan="3">
-						<button type="button" title="click here to add documents" onclick="JavaScript:newPopup('jobs.php?a=uploadAudit&checklistId=<?=$checklistId?>');">Add Documents</button>
+						<button type="button" title="click here to manage documents" onclick="JavaScript:newPopup('jobs.php?a=uploadAudit&checklistId=<?=$checklistId?>');">Documents</button>
 					</td>
 				</tr>
 			</table><?

@@ -34,13 +34,13 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 		<meta name="keywords" content="keyword, keyword" />
 
 		<meta name="DC.subject" lang="en" content="Super Records" /> 
-		<meta name="DC.Rights" content="Copyright (c) 2013 - Super Records | Web Design by Quikclicks www.quikclicks.com.au" />
+		<meta name="DC.Rights" content="Copyright (c) 2013 - Super Records Sydney" />
 		<meta name="DC.date" scheme="DCTERMS.W3CDTF" content="2012-08-01" /> 
 		<meta name="date_modified" scheme="ISO8601" content="2012-08-10" />
 
 		<!-- metadata cont'd-->
-		<meta name="DC.creator" content="Quikclicks Web Design Sydney - http://www.quikclicks.com.au" /> 
-		<meta name="DC.publisher" content="Quikclicks Web Design Sydney - http://www.quikclicks.com.au" /> 
+		<meta name="DC.creator" content="Super Records Sydney - http://superrecords.com.au/" /> 
+		<meta name="DC.publisher" content="Super Records Sydney - http://superrecords.com.au/" /> 
 		<meta name="DC.type" scheme="DCTERMS.DCMIType" content="Text" /> 
 		<meta name="DC.format" scheme="DCTERMS.IMT" content="text/html" />
 		<meta name="DC.language" scheme="DCTERMS.RFC1766" content="en-AU" /> 

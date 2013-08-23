@@ -89,7 +89,10 @@ class EXISTING_SMSF_FUND {
         $flagReturn = mysql_query($qryInsert);
             if($jobStatus == 'Y')
             {
-                $stQry = "UPDATE job SET job_submitted = '".$jobStatus."' WHERE job_id = ".$_SESSION['jobId'];
+                $stQry = "UPDATE job 
+						SET job_submitted = '".$jobStatus."', 
+						job_received = NOW() 
+						WHERE job_id = ".$_SESSION['jobId'];
                 $flagReturn = mysql_query($stQry);
             }
 	    return $flagReturn;	

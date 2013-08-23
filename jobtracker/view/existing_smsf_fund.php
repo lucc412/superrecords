@@ -17,13 +17,13 @@ include(TOPBAR);
 			<tr>
 				<td>Fund Name</td>
 				<td><input type="text" name="txtFund" value="<?=$fundName?>" />
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Please enter the name of your SMSF</span></a>
+				<a class="tooltip" href="#"><?=HELP?><span class="help">Please enter the name of your SMSF</span></a>
 				</td>
 			</tr>
 			<tr>
 				<td>Fund ABN</td>
 				<td><input type="text" name="txtAbn" value="<?=$abn?>" />
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Please enter the ABN of your SMSF</span></a>
+				<a class="tooltip" href="#"><?=HELP?><span class="help">Please enter the ABN of your SMSF</span></a>
 				</td>
 			</tr>
 			<tr>
@@ -45,7 +45,7 @@ include(TOPBAR);
 							?><option <?=$selectedStr?> ><?=$noOfMembers?></option><?
 						}
 					?></select>
-					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select how many members in your SMSF</span></a>
+					<a class="tooltip" href="#"><?=HELP?><span class="help">Select how many members in your SMSF</span></a>
 				</td>
 			</tr>
 			<tr>
@@ -58,7 +58,7 @@ include(TOPBAR);
 							?><option <?=$selectedStr?> value="<?=$trusteeTypeId?>"><?=$trusteeTypeName?></option><?
 						}
 					?></select>
-					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select whether you have individuals as trustees or a Corporate trustee.</span></a>
+					<a class="tooltip" href="#"><?=HELP?><span class="help">Select whether you have individuals as trustees or a Corporate trustee.</span></a>
 				</td>
 			</tr>
 		</table>

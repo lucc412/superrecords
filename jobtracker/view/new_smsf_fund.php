@@ -16,7 +16,7 @@ include(TOPBAR);
 			<tr>
 				<td>Fund Name</td>
 				<td><input type="text" name="txtFund" value="<?=$fundName?>" />
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Please enter the name you would like to use for your new SMSF</span></a>
+				<a class="tooltip" href="#"><?=HELP?><span class="help">Please enter the name you would like to use for your new SMSF</span></a>
 				</td>
 			</tr>
 			<tr>
@@ -30,7 +30,7 @@ include(TOPBAR);
 			<tr>
 				<td>Date of establishment </td>
 				<td>
-					<input type="text" id="txtSetupDate" readonly="true" name="txtSetupDate" size="10" value="<?
+					<input type="text" style="width:70px" id="txtSetupDate" readonly="true" name="txtSetupDate" size="10" value="<?
 					if(isset($regDate) && $regDate != "") {
 						if($regDate != "0000-00-00") {
 							if($regDate == '1970-01-01') 
@@ -43,7 +43,7 @@ include(TOPBAR);
 						}
 					}  
 					echo($regDate);
-					?>"/><img src="images/calendar.png" id="calImgId" onclick="javascript:NewCssCal('txtSetupDate','ddMMyyyy')" align="middle" style="cursor:pointer"/>
+					?>"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtSetupDate','ddMMyyyy')" align="middle" style="cursor:pointer"/>
 				</td>
 			</tr>
 			<tr>
@@ -70,7 +70,7 @@ include(TOPBAR);
 							?><option <?=$selectStr?> ><?=$noOfMembers?></option><?
 						}
 					?></select>
-					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">A SMSF is limited to a maximum of four members</span></a>
+					<a class="tooltip" href="#"><?=HELP?><span class="help">A SMSF is limited to a maximum of four members</span></a>
 				</td>
 			</tr>
 			<tr>
@@ -84,7 +84,7 @@ include(TOPBAR);
 							?><option <?=$selectStr?> value="<?=$trusteeTypeId?>"><?=$trusteeTypeName?></option><?
 						}
 					?></select>
-					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select whether you wish to have individuals as trustees or whether you need a corporate trustee. Please note if there is only one member a corporate trustee is required.</span></a>
+					<a class="tooltip" href="#"><?=HELP?><span class="help">Select whether you wish to have individuals as trustees or whether you need a corporate trustee. Please note if there is only one member a corporate trustee is required.</span></a>
 				</td>
 			</tr>
 		</table>

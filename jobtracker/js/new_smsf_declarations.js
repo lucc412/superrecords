@@ -15,7 +15,7 @@ function checkYesNoAns()
 	
 	if(count > 0)
 	{
-		alert('You will need to discuss your application with a consultant. Please call befreesuper on 1300 87 3733 or submit your details via the enquiry form to have someone contact you.');
+		alert('You will need to discuss your application with a consultant. Please call super records on 1800 278 737 or submit your details via the enquiry form to have someone contact you.');
 		
 		return false;
 	}

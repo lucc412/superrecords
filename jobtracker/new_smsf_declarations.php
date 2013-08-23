@@ -15,18 +15,18 @@ if(isset($_SESSION['jobId'])) {
         $checkTerms = $objScr->fetchTerms();
         
 	$arrQues = array();
-        if(isset($_REQUEST['job_submitted']))
-        {
-            $stQry = "UPDATE job SET job_submitted = '".$_REQUEST['job_submitted']."' WHERE job_id = ".$_SESSION['jobId'];
-            $flagReturn = mysql_query($stQry);
-            
-            $objScr->updateTerms($_REQUEST['chkAgree']);
+	if(isset($_REQUEST['job_submitted']))
+	{
+		$stQry = "UPDATE job SET job_submitted = '".$_REQUEST['job_submitted']."', job_received = NOW() WHERE job_id = ".$_SESSION['jobId'];
+		$flagReturn = mysql_query($stQry);
+		
+		$objScr->updateTerms($_REQUEST['chkAgree']);
 
-            if($_REQUEST['job_submitted'] == 'Y')
-            {
-                $objScr->generatePDF();
-            }
-        }
+		if($_REQUEST['job_submitted'] == 'Y')
+		{
+			$objScr->generatePDF();
+		}
+	}
         
 	foreach($arrQuestionsList as $value)
 	{	

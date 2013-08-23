@@ -12,7 +12,7 @@ include(TOPBAR);
 <div style="font-size: 13px;color: #074263;">
 	<div>
 		<u>Before you begin</u>
-		<ul>
+		<ul class="pdL20">
 			<li>
 				1.	It is recommended that you have spoken to an advisor about whether setting up a SMSF is the right choice for your circumstances.
 			</li>

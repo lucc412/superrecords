@@ -79,7 +79,7 @@ include(TOPBAR);
 				<tr>
 					<td>Date of Birth</td>
 					<td>
-						<input type="text" id="txtDob<?=$memberCount?>" readonly="true" name="txtDob<?=$memberCount?>" size="10" value="<?
+						<input type="text" style="width:70px" id="txtDob<?=$memberCount?>" readonly="true" name="txtDob<?=$memberCount?>" size="10" value="<?
 						if(isset($dob) && $dob != "") {
 							if($dob != "0000-00-00") {
 								$dob = date("d/m/Y",strtotime($dob));
@@ -90,7 +90,7 @@ include(TOPBAR);
 							}
 						}  
 						echo($dob);
-						?>" onblur="javascript:getAge(this.value)"/><img src="images/calendar.png" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" style="cursor:pointer"/>
+						?>" onblur="javascript:getAge(this.value)"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" style="cursor:pointer"/>
 					</td>
 				</tr>
 				<tr>
@@ -128,13 +128,13 @@ include(TOPBAR);
 				<tr>
 					<td>Tax File Number</td>
 					<td><input type="text" id="txtTfn<?=$memberCount?>" name="txtTfn<?=$memberCount?>" value="<?=$tfn?>" />
-					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">The Tax File Number is required to register the SMSF for an ABN. You can get this from your last tax return or group certificate.</span></a>
+					<a class="tooltip" href="#"><?=HELP?><span class="help">The Tax File Number is required to register the SMSF for an ABN. You can get this from your last tax return or group certificate.</span></a>
 					</td>
 				</tr>
 				<tr>
 					<td>Occupation</td>
 					<td><input type="text" id="txtOccupation<?=$memberCount?>" name="txtOccupation<?=$memberCount?>" value="<?=$occupation?>" />
-					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Your occupation is required to be provided as part of the application</span></a>
+					<a class="tooltip" href="#"><?=HELP?><span class="help">Your occupation is required to be provided as part of the application</span></a>
 					</td>
 				</tr>
 				<tr>

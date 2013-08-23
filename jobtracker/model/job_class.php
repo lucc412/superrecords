@@ -9,15 +9,15 @@ class Job {
 		
 		if(!empty($fetchType) && $fetchType == 'pending') {
 			$appendStr = 'AND t1.job_status_id <> 7 AND t1.job_submitted = "Y"';
-			$orderByStr = 't1.job_received desc';
+			$orderByStr = 'ORDER BY t1.job_received desc';
 		}
 		else if(!empty($fetchType) && $fetchType == 'completed') {
 			$appendStr = 'AND t1.job_status_id = 7 AND t1.job_submitted = "Y"';
-			$orderByStr = 't1.job_completed_date desc';
+			$orderByStr = 'ORDER BY t1.job_completed_date desc';
 		}
 		else if(!empty($fetchType) && $fetchType == 'saved') {
 			$appendStr = 'AND t1.job_submitted = "N"';
-			$orderByStr = 't1.job_created_date desc';
+			$orderByStr = 'ORDER BY t1.job_created_date desc';
 		}
 
 		if(!empty($_REQUEST['lstClientType'])) {
@@ -30,7 +30,7 @@ class Job {
 					AND t1.client_id = c1.client_id
 					AND t1.discontinue_date IS NULL  
 					{$appendStr} {$appendSelStr}
-					ORDER BY {$orderByStr}";
+					{$orderByStr}";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

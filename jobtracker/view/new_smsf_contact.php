@@ -45,7 +45,7 @@ include(TOPBAR);
 				<td>
 					<input type="text" name="txtCode" value="<?=$referralCode?>" maxlength="6"/>
 
-					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">If someone has referred you and has provided a referral code, please enter the code here.</span></a><?
+					<a class="tooltip" href="#"><?=HELP?><span class="help">If someone has referred you and has provided a referral code, please enter the code here.</span></a><?
 
 					if(isset($flaginvalid)){
 						?><span id="msg" style="padding-left:10px;color:red">Please enter a valid referral code</span><? 

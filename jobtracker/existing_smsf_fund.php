@@ -51,7 +51,7 @@ if(isset($_SESSION['jobId'])) {
               
                 if(isset($jobStatus))
                 {
-                    $stQry = "UPDATE job SET job_submitted = '".$jobStatus."' WHERE job_id = ".$_SESSION['jobId'];
+                    $stQry = "UPDATE job SET job_submitted = '".$jobStatus."', job_received = NOW() WHERE job_id = ".$_SESSION['jobId'];
                     $flagReturn = mysql_query($stQry);
                 }
                 

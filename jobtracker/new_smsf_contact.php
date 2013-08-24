@@ -38,15 +38,14 @@ if(isset($flagInsert) && $flagInsert === TRUE) {
 	$email = $_REQUEST['txtEmail'];
 	$phone = $_REQUEST['txtPhone'];
 	$stateId = $_REQUEST['lstState'];
-	$refCode = $_REQUEST['txtCode'];
-        $contStatus = $_REQUEST['cont_status'];
+	$contStatus = $_REQUEST['cont_status'];
 
 	// fetch existing trustee data
 	$arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
 	
 	// insert contact details of sign up user
 	if(empty($arrData)) {
-		$lastInsertId = $objScr->addContactDetails($fname, $lname, $email, $phone, $stateId, $refCode, $contStatus);
+		$lastInsertId = $objScr->addContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus);
 
 		//set sign up id in session variable
 //		if(!empty($lastInsertId)) {
@@ -56,7 +55,7 @@ if(isset($flagInsert) && $flagInsert === TRUE) {
 	}
 	// edit contact details of sign up user
 	else {
-		$flagReturn = $objScr->editContactDetails($fname, $lname, $email, $phone, $stateId, $refCode, $contStatus);
+		$flagReturn = $objScr->editContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus);
 	}
 
 	if(!empty($lastInsertId) || $flagReturn) {
@@ -126,16 +125,6 @@ else if(!empty($arrData['state_id'])) {
 }
 else {
 	$stateId = "";
-}
-
-if(isset($_REQUEST['txtCode'])) {
-	$referralCode = $_REQUEST['txtCode'];
-}
-else if(!empty($arrData['referral_code'])) {
-	$referralCode = $arrData['referral_code'];
-}
-else {
-	$referralCode = "";
 }
 
 // include view file

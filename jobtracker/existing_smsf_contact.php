@@ -47,15 +47,14 @@
 		$email = $_REQUEST['txtEmail'];
 		$phone = $_REQUEST['txtPhone'];
 		$stateId = $_REQUEST['lstState'];
-		$refCode = $_REQUEST['txtCode'];
-                $contStatus = $_REQUEST['cont_status'];
+		$contStatus = $_REQUEST['cont_status'];
 
 		// fetch existing contact details
 		$arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
 
 		// insert contact details of sign up user
 		if(empty($arrData)) {
-			$lastInsertId = $objScr->addContactDetails($fname, $lname, $email, $phone, $stateId, $refCode, $contStatus);
+			$lastInsertId = $objScr->addContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus);
 
 			if(!empty($lastInsertId)) {
 
@@ -67,7 +66,7 @@
 		}
 		// update contact details of sign up user
 		else {
-			$flagUpdate = $objScr->editContactDetails($fname, $lname, $email, $phone, $stateId, $refCode, $contStatus);
+			$flagUpdate = $objScr->editContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus);
 		}		
 
 		if(!empty($lastInsertId) || $flagUpdate) {
@@ -142,15 +141,6 @@
 		$stateId = "";
 	}
 	
-	if(isset($_REQUEST['txtCode'])){
-		$refCode = $_REQUEST['txtCode'];
-	}
-	else if(!empty($arrData['referral_code'])) {
-		$refCode = $arrData['referral_code'];
-	}
-	else {
-		$refCode = "";
-	}
 	
 	// fetch states for drop-down
 	$arrStates = $objScr->fetchStates();

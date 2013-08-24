@@ -51,13 +51,13 @@
 			
 		}
 		
-		if((document.frmnewsmsfcont.txtCode.value == null) || (document.frmnewsmsfcont.txtCode.value == ""))
-		{
-			document.frmnewsmsfcont.flaginit.value = 'N';
-		}else{
-			document.frmnewsmsfcont.flaginit.value = 'Y';
-		}
-		
+//		if((document.frmnewsmsfcont.txtCode.value == null) || (document.frmnewsmsfcont.txtCode.value == ""))
+//		{
+//			document.frmnewsmsfcont.flaginit.value = 'N';
+//		}else{
+//			document.frmnewsmsfcont.flaginit.value = 'Y';
+//		}
+//		
 		return flagReturn;
                 
 	}

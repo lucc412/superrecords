@@ -50,12 +50,12 @@
 			}
 		}
 		
-		if((document.frmexstsmsfcont.txtCode.value == null) || (document.frmexstsmsfcont.txtCode.value == ""))
-		{
-			document.frmexstsmsfcont.flaginit.value = 'N';
-		}else{
-			document.frmexstsmsfcont.flaginit.value = 'Y';
-		}
+//		if((document.frmexstsmsfcont.txtCode.value == null) || (document.frmexstsmsfcont.txtCode.value == ""))
+//		{
+//			document.frmexstsmsfcont.flaginit.value = 'N';
+//		}else{
+//			document.frmexstsmsfcont.flaginit.value = 'Y';
+//		}
 		
 		return flagReturn;		
 	}

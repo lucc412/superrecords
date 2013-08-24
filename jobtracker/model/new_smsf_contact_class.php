@@ -37,9 +37,9 @@ class NEW_SMSF_CONTACT {
 	}
 	
 	// function to insert contact details of sign up user
-	function addContactDetails($fname, $lname, $email, $phone, $stateId, $refCode, $contStatus) {
+	function addContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus) {
 		
-		$qryInsert = "INSERT INTO es_contact_details(job_id,signup_type, fname, lname, email, phoneno, state_id, referral_code, cont_status)					 
+		$qryInsert = "INSERT INTO es_contact_details(job_id,signup_type, fname, lname, email, phoneno, state_id, cont_status)					 
                       VALUES ('" . $_SESSION['jobId'] . "',
 							'N',
 							'" . addslashes($fname) . "',
@@ -47,8 +47,7 @@ class NEW_SMSF_CONTACT {
 							'" . addslashes($email) . "',	
 							'" . addslashes($phone) . "',	
 							'" . addslashes($stateId) . "',	
-							'" . addslashes($refCode) . "',
-                                                        '" . addslashes($contStatus) . "'
+							'" . addslashes($contStatus) . "'
 					)";
 					
 			
@@ -59,7 +58,7 @@ class NEW_SMSF_CONTACT {
 	}
 
 	// function to update contact details of sign up user
-	function editContactDetails($fname, $lname, $email, $phone, $stateId, $refCode, $contStatus) {
+	function editContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus) {
 		
 		$qryUpd = "UPDATE es_contact_details
 						SET fname = '" . addslashes($fname) . "',
@@ -67,7 +66,6 @@ class NEW_SMSF_CONTACT {
 							email = '" . addslashes($email) . "',
 							phoneno = '" . addslashes($phone) . "',
 							state_id = '" . addslashes($stateId) . "',
-							referral_code = '" . addslashes($refCode) . "',
                                                         cont_status = '" . addslashes($contStatus) . "'
 						WHERE job_id = " . $_SESSION['jobId'];		
 			

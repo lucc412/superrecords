@@ -41,7 +41,7 @@ include(TOPBAR);
 					?></select>
 				</td>
 			</tr>
-			<tr>
+<!--			<tr>
 				<td>Referral Code</td>
 				<td><input type="text" name="txtCode" value="<?=$refCode?>" maxlength="6"/>
 				<a class="tooltip" href="#"><?=HELP?><span class="help">If someone has referred you and has provided a referral code, please enter the code here.</span></a>
@@ -49,7 +49,7 @@ include(TOPBAR);
    				   ?><span id="msg" style="padding-left:10px;color:red">Please enter a valid referral code</span><? 
 				}?>
 				</td>
-			</tr>
+			</tr>-->
 		</table>
                 <input type="hidden" id="cont_status" name="cont_status" value=""/>
                 <div style="padding-top:20px;">

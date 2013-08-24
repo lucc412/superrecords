@@ -76,28 +76,28 @@ if(isset($_SESSION['jobId'])) {
                         $arrFund[$rowData['job_id']] = $rowData;
                     }
 
-                    $memberQry = "SELECT * FROM es_member_details WHERE job_id = ".$_SESSION['jobId'];
-                    $fetchMembr = mysql_query($memberQry);
-                    while($rowData = mysql_fetch_assoc($fetchMembr))
-                    {
-                        $arrMembrs[$rowData['member_id']] = $rowData;
-                    }
-
-                    $newTrstyQry = "SELECT * FROM es_new_trustee WHERE job_id = ".$_SESSION['jobId'];
-                    $fetchNewTrsty = mysql_query($newTrstyQry);
-                    $arrNewTrsty = array();
-                    while($rowData = mysql_fetch_assoc($fetchNewTrsty))
-                    {
-                        $arrNewTrsty[$rowData['job_id']] = $rowData;
-                    }
-
-                    $extTrstyQry = "SELECT * FROM es_existing_trustee WHERE job_id = ".$_SESSION['jobId'];
-                    $fetchExtTrsty = mysql_query($extTrstyQry);
-                    $arrExtTrsty = array();
-                    while($rowData = mysql_fetch_assoc($fetchExtTrsty))
-                    {
-                        $arrExtTrsty[$rowData['job_id']] = $rowData;
-                    }
+//                    $memberQry = "SELECT * FROM es_member_details WHERE job_id = ".$_SESSION['jobId'];
+//                    $fetchMembr = mysql_query($memberQry);
+//                    while($rowData = mysql_fetch_assoc($fetchMembr))
+//                    {
+//                        $arrMembrs[$rowData['member_id']] = $rowData;
+//                    }
+//
+//                    $newTrstyQry = "SELECT * FROM es_new_trustee WHERE job_id = ".$_SESSION['jobId'];
+//                    $fetchNewTrsty = mysql_query($newTrstyQry);
+//                    $arrNewTrsty = array();
+//                    while($rowData = mysql_fetch_assoc($fetchNewTrsty))
+//                    {
+//                        $arrNewTrsty[$rowData['job_id']] = $rowData;
+//                    }
+//
+//                    $extTrstyQry = "SELECT * FROM es_existing_trustee WHERE job_id = ".$_SESSION['jobId'];
+//                    $fetchExtTrsty = mysql_query($extTrstyQry);
+//                    $arrExtTrsty = array();
+//                    while($rowData = mysql_fetch_assoc($fetchExtTrsty))
+//                    {
+//                        $arrExtTrsty[$rowData['job_id']] = $rowData;
+//                    }
 
                     $jobQry = "SELECT * FROM job WHERE job_id = ".$jobid;
                     $fetchJob = mysql_query($jobQry);
@@ -138,7 +138,7 @@ if(isset($_SESSION['jobId'])) {
                     $docQry = "INSERT INTO documents (job_id,document_title,date,viewed,file_path) VALUES (".$jobid.",'',NOW(),0,'".$filename."')";
                     mysql_query($docQry);
                     $doc_Id = mysql_insert_id();
-                    $filename = $doc_Id."~job_".$doc_Id.".pdf";
+                    $filename = $doc_Id."~job.pdf";
                     $doc2Qry = "UPDATE documents SET file_path = '".$filename."' WHERE document_id = ".$doc_Id;
                     mysql_query($doc2Qry);
 
@@ -185,128 +185,127 @@ if(isset($_SESSION['jobId'])) {
 
                     // add a page
                     $pdf->AddPage();
-
-
+                    
                     // HTML Part of PDF
-                    $members = '';
-            
-                    foreach ($arrMembrs as $key => $value) 
-                    {
-                        $value["gender"] =($value["gender"] == "M")?"Male":"Female";
-                        $cntry = "SELECT * FROM es_country WHERE country_id = ".$value['country_id'];
-                        $fetchCntry = mysql_query($cntry);
-                        $Data = mysql_fetch_assoc($fetchCntry);
-                        $value['country_id'] = $Data['country_name'];
-
-                         $members .= '
-                                 <table class="first" cellpadding="4" cellspacing="6">
-                                     <tr>
-                                         <td>Member Name : </td>
-                                         <td>'.$value['title'].' '.$value['fname'].' '.$value['mname'].' '.$value['lname'].' </td>
-                                     </tr>
-                                     <tr>
-                                         <td>Date of Birth : </td>
-                                         <td>'.$value['dob'].' </td>
-                                     </tr>
-                                     <tr>
-                                         <td>City of Birth : </td>
-                                         <td>'.$value['city'].' </td>
-                                     </tr>
-                                     <tr>
-                                         <td>Country of Birth : </td>
-                                         <td>'.$value['country_id'].' </td>
-                                     </tr>
-                                     <tr>
-                                         <td>Sex : </td>
-                                         <td>'.$value["gender"].' </td>
-                                     </tr>
-                                     <tr>
-                                         <td>Address : </td>
-                                         <td>'.$value['address'].' </td>
-                                     </tr>
-                                     <tr>
-                                         <td>Tax File Number : </td>
-                                         <td> '.$value['tfn'].' </td>
-                                     </tr>
-                                     <tr>
-                                         <td>Occupation : </td>
-                                         <td>'.$value['occupation'].' </td>
-                                     </tr>
-                                     <tr>
-                                         <td>Contact Number : </td>
-                                         <td>'.$value['contact_no'].' </td>
-                                     </tr>
-
-                                 </table>
-                                 <br/>';
-
-                        }
-                        
-                        $trustee = '';
-                        if($arrFund[$jobid]['trustee_type_id'] == 1)
-                        {
-                            $trustee .= '';
-                        }  
-                        else if($arrFund[$jobid]['trustee_type_id'] == 2) {
-                            $trustee .= '<div class="test">New Corporate Trustee Details</div>
-                                    <br />
-                                    <table class="first" cellpadding="4" cellspacing="6">
-                                        <tr>
-                                            <td>Preferred Company Name : </td>
-                                            <td>'.$arrNewTrsty[$jobid]['company_name'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Alternative Name Option 1 : </td>
-                                            <td>'.$arrNewTrsty[$jobid]['alternative_name1'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Alternative Name Option 2 : </td>
-                                            <td>'.$arrNewTrsty[$jobid]['alternative_name2'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Registered Office Address : </td>
-                                            <td>'.$arrNewTrsty[$jobid]['office_address'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Principal Place of Business : </td>
-                                            <td>'.$arrNewTrsty[$jobid]['business_address'].' </td>
-                                        </tr>
-                                    </table>';
-                        }  else if($arrFund[$jobid]['trustee_type_id'] == 3) 
-                        {
-                            $trustee .= '<div class="test">Existing Corporate Trustee Details</div>
-                                    <br />
-                                    <table class="first" cellpadding="4" cellspacing="6">
-                                        <tr>
-                                            <td>Company Name : </td>
-                                            <td>'.$arrExtTrsty[$jobid]['company_name'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Company A.C.N : </td>
-                                            <td>'.$arrExtTrsty[$jobid]['acn'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Company A.B.N : </td>
-                                            <td>'.$arrExtTrsty[$jobid]['abn'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Company T.F.N : </td>
-                                            <td>'.$arrExtTrsty[$jobid]['tfn'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Registered Office Address : </td>
-                                            <td>'.$arrExtTrsty[$jobid]['office_address'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Principal Place of Business : </td>
-                                            <td>'.$arrExtTrsty[$jobid]['business_address'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Are all proposed members of the Superfund are directors of the company ? : </td>
-                                            <td>'.$arrExtTrsty[$jobid]['yes_no'].' </td>
-                                        </tr>
-                                    </table>';
-                        }
+//                    $members = '';
+//            
+//                    foreach ($arrMembrs as $key => $value) 
+//                    {
+//                        $value["gender"] =($value["gender"] == "M")?"Male":"Female";
+//                        $cntry = "SELECT * FROM es_country WHERE country_id = ".$value['country_id'];
+//                        $fetchCntry = mysql_query($cntry);
+//                        $Data = mysql_fetch_assoc($fetchCntry);
+//                        $value['country_id'] = $Data['country_name'];
+//
+//                         $members .= '
+//                                 <table class="first" cellpadding="4" cellspacing="6">
+//                                     <tr>
+//                                         <td>Member Name : </td>
+//                                         <td>'.$value['title'].' '.$value['fname'].' '.$value['mname'].' '.$value['lname'].' </td>
+//                                     </tr>
+//                                     <tr>
+//                                         <td>Date of Birth : </td>
+//                                         <td>'.$value['dob'].' </td>
+//                                     </tr>
+//                                     <tr>
+//                                         <td>City of Birth : </td>
+//                                         <td>'.$value['city'].' </td>
+//                                     </tr>
+//                                     <tr>
+//                                         <td>Country of Birth : </td>
+//                                         <td>'.$value['country_id'].' </td>
+//                                     </tr>
+//                                     <tr>
+//                                         <td>Sex : </td>
+//                                         <td>'.$value["gender"].' </td>
+//                                     </tr>
+//                                     <tr>
+//                                         <td>Address : </td>
+//                                         <td>'.$value['address'].' </td>
+//                                     </tr>
+//                                     <tr>
+//                                         <td>Tax File Number : </td>
+//                                         <td> '.$value['tfn'].' </td>
+//                                     </tr>
+//                                     <tr>
+//                                         <td>Occupation : </td>
+//                                         <td>'.$value['occupation'].' </td>
+//                                     </tr>
+//                                     <tr>
+//                                         <td>Contact Number : </td>
+//                                         <td>'.$value['contact_no'].' </td>
+//                                     </tr>
+//
+//                                 </table>
+//                                 <br/>';
+//
+//                        }
+//                        
+//                        $trustee = '';
+//                        if($arrFund[$jobid]['trustee_type_id'] == 1)
+//                        {
+//                            $trustee .= '';
+//                        }  
+//                        else if($arrFund[$jobid]['trustee_type_id'] == 2) {
+//                            $trustee .= '<div class="test">New Corporate Trustee Details</div>
+//                                    <br />
+//                                    <table class="first" cellpadding="4" cellspacing="6">
+//                                        <tr>
+//                                            <td>Preferred Company Name : </td>
+//                                            <td>'.$arrNewTrsty[$jobid]['company_name'].' </td>
+//                                        </tr>
+//                                        <tr>
+//                                            <td>Alternative Name Option 1 : </td>
+//                                            <td>'.$arrNewTrsty[$jobid]['alternative_name1'].' </td>
+//                                        </tr>
+//                                        <tr>
+//                                            <td>Alternative Name Option 2 : </td>
+//                                            <td>'.$arrNewTrsty[$jobid]['alternative_name2'].' </td>
+//                                        </tr>
+//                                        <tr>
+//                                            <td>Registered Office Address : </td>
+//                                            <td>'.$arrNewTrsty[$jobid]['office_address'].' </td>
+//                                        </tr>
+//                                        <tr>
+//                                            <td>Principal Place of Business : </td>
+//                                            <td>'.$arrNewTrsty[$jobid]['business_address'].' </td>
+//                                        </tr>
+//                                    </table>';
+//                        }  else if($arrFund[$jobid]['trustee_type_id'] == 3) 
+//                        {
+//                            $trustee .= '<div class="test">Existing Corporate Trustee Details</div>
+//                                    <br />
+//                                    <table class="first" cellpadding="4" cellspacing="6">
+//                                        <tr>
+//                                            <td>Company Name : </td>
+//                                            <td>'.$arrExtTrsty[$jobid]['company_name'].' </td>
+//                                        </tr>
+//                                        <tr>
+//                                            <td>Company A.C.N : </td>
+//                                            <td>'.$arrExtTrsty[$jobid]['acn'].' </td>
+//                                        </tr>
+//                                        <tr>
+//                                            <td>Company A.B.N : </td>
+//                                            <td>'.$arrExtTrsty[$jobid]['abn'].' </td>
+//                                        </tr>
+//                                        <tr>
+//                                            <td>Company T.F.N : </td>
+//                                            <td>'.$arrExtTrsty[$jobid]['tfn'].' </td>
+//                                        </tr>
+//                                        <tr>
+//                                            <td>Registered Office Address : </td>
+//                                            <td>'.$arrExtTrsty[$jobid]['office_address'].' </td>
+//                                        </tr>
+//                                        <tr>
+//                                            <td>Principal Place of Business : </td>
+//                                            <td>'.$arrExtTrsty[$jobid]['business_address'].' </td>
+//                                        </tr>
+//                                        <tr>
+//                                            <td>Are all proposed members of the Superfund are directors of the company ? : </td>
+//                                            <td>'.$arrExtTrsty[$jobid]['yes_no'].' </td>
+//                                        </tr>
+//                                    </table>';
+//                        }
 
                         $html = '<!-- EXAMPLE OF CSS STYLE -->
                                     <style>
@@ -338,7 +337,7 @@ if(isset($_SESSION['jobId'])) {
                                     </style>
                                     <table style="margin-bottom: 30px;">
                                         <tr>
-                                            <td><a href="home.php" style="float:left;margin-right: 40px;"><img src="images_user/header-logo.png" style="width:250px;" /></a></td>                            
+                                            <td><a href="www.superrecords.com.au" style="float:left;margin-right: 40px;"><img src="'.$_SERVER['DOCUMENT_ROOT'].'/jobtracker/images_user/header-logo.png" style="width:250px;" /></a></td>                            
                                             <td><p>'.$arrPractice['name'].'</p>
                                                 <p>'.$arrClients['client_name'].' - '.$arrJob[$jobid]['period'].' - '.$arrActivity['sub_Description'].'</p>
                                             </td>
@@ -378,20 +377,16 @@ if(isset($_SESSION['jobId'])) {
                                             <td>'.$arrFund[$jobid]['fund_name'].' </td>
                                         </tr>
                                         <tr>
+                                            <td>Fund ABN : </td>
+                                            <td>'.$arrFund[$jobid]['abn'].' </td>
+                                        </tr>
+                                        <tr>
                                             <td>Street Address : </td>
                                             <td>'.$arrFund[$jobid]['street_address'].' </td>
                                         </tr>
                                         <tr>
                                             <td>Postal Address : </td>
                                             <td>'.$arrFund[$jobid]['postal_address'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Date of establishment : </td>
-                                            <td>'.$arrFund[$jobid]['date_of_establishment'].' </td>
-                                        </tr>
-                                        <tr>
-                                            <td>State of registration : </td>
-                                            <td>'.fetchStateName($arrFund[$jobid]['registration_state']).' </td>
                                         </tr>
                                         <tr>
                                             <td>How many members? : </td>
@@ -413,6 +408,7 @@ if(isset($_SESSION['jobId'])) {
 
                         //$pdf->Output($filename, 'I');
                         $pdf->Output(UPLOADSETUP.$filename,"F");
+                        
                 }
                     
 		if($flagReturn) { 

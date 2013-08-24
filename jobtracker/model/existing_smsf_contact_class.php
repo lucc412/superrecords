@@ -53,16 +53,15 @@ class EXISTING_SMSF_CONTACT {
 	}
 
 	// function to insert contact details of sign up user
-	function addContactDetails($fname, $lname, $email, $phone, $stateId, $refCode, $contStatus) {
-		$qryInsert = "INSERT INTO es_contact_details(fname, lname, email, phoneno, state_id, referral_code, job_id, cont_status)					 
+	function addContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus) {
+		$qryInsert = "INSERT INTO es_contact_details(fname, lname, email, phoneno, state_id, job_id, cont_status)					 
                       VALUES (
 							'" . addslashes($fname) . "',
 							'" . addslashes($lname) . "',	
 							'" . addslashes($email) . "',	
 							'" . addslashes($phone) . "',	
 							'" . addslashes($stateId) . "',	
-							'" . addslashes($refCode) . "', 
-                                                        '" . addslashes($_SESSION['jobId']) . "',
+							'" . addslashes($_SESSION['jobId']) . "',
                                                         '" . addslashes($contStatus) . "'
 					)";
 
@@ -74,15 +73,14 @@ class EXISTING_SMSF_CONTACT {
 	}
 
 	// function to update contact details of sign up user
-	function editContactDetails($fname, $lname, $email, $phone, $stateId, $refCode, $contStatus) {
+	function editContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus) {
 		$qryUpd = "UPDATE es_contact_details
 					SET fname = '" . addslashes($fname) . "',
 						lname = '" . addslashes($lname) . "',	
 						email = '" . addslashes($email) . "',	
 						phoneno = '" . addslashes($phone) . "',	
 						state_id = '" . addslashes($stateId) . "',	
-						referral_code = '" . addslashes($refCode) . "',
-                                                cont_status = '" . addslashes($contStatus) . "',    
+						cont_status = '" . addslashes($contStatus) . "',    
 					WHERE job_id = '" . $_SESSION['jobId']. "'";					 
 
         mysql_query($qryUpd);

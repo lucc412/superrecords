@@ -105,7 +105,7 @@ class DECLARATIONS
             $docQry = "INSERT INTO documents (job_id,document_title,date,viewed,file_path) VALUES (".$jobid.",'',NOW(),0,'".$filename."')";
             mysql_query($docQry);
             $doc_Id = mysql_insert_id();
-            $filename = $doc_Id."~job_".$doc_Id.".pdf";
+            $filename = $doc_Id."~job.pdf";
             $doc2Qry = "UPDATE documents SET file_path = '".$filename."' WHERE document_id = ".$doc_Id;
             mysql_query($doc2Qry);
             
@@ -305,7 +305,7 @@ class DECLARATIONS
                         </style>
                         <table style="margin-bottom: 30px;">
                             <tr>
-                                <td><a href="home.php" style="float:left;margin-right: 40px;"><img src="images_user/header-logo.png" style="width:250px;" /></a></td>                            
+                                <td><a href="href="www.superrecords.com.au"" style="float:left;margin-right: 40px;"><img src="images_user/header-logo.png" style="width:250px;" /></a></td>                            
                                 <td><p>'.$arrPractice['name'].'</p>
                                     <p>'.$arrClients['client_name'].' - '.$arrJob[$jobid]['period'].' - '.$arrActivity['sub_Description'].'</p>
                                 </td>

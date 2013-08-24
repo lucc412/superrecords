@@ -1,7 +1,6 @@
 <?php
 include(TOPBAR);
-?>
-<div class="pageheader">
+?><div class="pageheader">
 	<h1>Contact Details</h1>
 	<span>
 		<b>Welcome to the Super Records Contact Details page.</b>
@@ -44,8 +43,7 @@ include(TOPBAR);
 				<td>Referral Code</td>
 				<td>
 					<input type="text" name="txtCode" value="<?=$referralCode?>" maxlength="6"/>
-
-					<a class="tooltip" href="#"><?=HELP?><span class="help">If someone has referred you and has provided a referral code, please enter the code here.</span></a><?
+					<a id="iconQuestion" class="tooltip" title="If someone has referred you and has provided a referral code, <br/>please enter the code here.">?</a><?
 
 					if(isset($flaginvalid)){
 						?><span id="msg" style="padding-left:10px;color:red">Please enter a valid referral code</span><? 

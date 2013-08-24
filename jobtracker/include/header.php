@@ -12,9 +12,19 @@
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
 		<!-- Google Webfont -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="css/tooltip.css"/>
+		<!--<link rel="stylesheet" type="text/css" href="css/tooltip.css"/>-->
+		<link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
 		<script type="text/javascript" src="js/datetimepicker_css.js"></script>
-		<script type="text/javascript" src="js/common.js"></script><?
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+		<script type="text/javascript" src="js/jquery.tooltipster.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			 $('.tooltip').tooltipster({
+				 animation: 'grow',
+			 });
+			});
+		</script><?
 
 		$arrQryStr = explode('&', $_SERVER['QUERY_STRING']);
                 $qryStr = $arrQryStr[0];

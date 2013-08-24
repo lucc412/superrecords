@@ -604,6 +604,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	padding:10px;
 }
 
+.calendar
+{
+	cursor:pointer;
+	padding-bottom:10px;
+}
+
 .rightmenu {
 	background: #fff;
 	width: 253px;

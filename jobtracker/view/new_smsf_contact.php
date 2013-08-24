@@ -59,7 +59,7 @@ include(TOPBAR);
                 <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">NEXT</button></span>
                 <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>
             </div>
-		<input type="hidden" name="flaginit" value="">
+		<input type="hidden" name="flaginit" value="add">
 	</form>  
         <script>
             $('#btnNext').click(function(){$('#cont_status').val('0')})

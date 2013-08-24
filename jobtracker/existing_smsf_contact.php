@@ -17,9 +17,9 @@
 	}
 	
 	// check referral Code
-	if(isset($_POST['flaginit']) && $_POST['flaginit'] == 'Y'){
-		
-		if(isset($_POST['txtCode']) && !empty($_POST['txtCode'])){
+//	if(isset($_POST['flaginit']) && $_POST['flaginit'] == 'Y'){
+//		
+//		if(isset($_POST['txtCode']) && !empty($_POST['txtCode'])){
 		
 //			$codeStatus = $objScr->checkIfCodeExists($_POST['txtCode']);
 //			
@@ -30,17 +30,17 @@
 //			else{
 //				$flaginvalid = TRUE;
 //			}
-                    $flagInsert = TRUE;
-			
-		}	
+//                    $flagInsert = TRUE;
+//			
+//		}	
 		
-	}elseif(isset($_POST['flaginit']) && $_POST['flaginit'] == 'N'){
-		if(isset($_SESSION['EXST_REFCODE'])) unset($_SESSION['EXST_REFCODE']);
-		$flagInsert = TRUE;
-	}
+//	}elseif(isset($_POST['flaginit']) && $_POST['flaginit'] == 'N'){
+//		if(isset($_SESSION['EXST_REFCODE'])) unset($_SESSION['EXST_REFCODE']);
+//		$flagInsert = TRUE;
+//	}
 
 	// case when next button is clicked
-	if(isset($flagInsert) && $flagInsert === TRUE) {
+	if(isset($_POST['flaginit']) && $_POST['flaginit'] =='add') {
 		
 		$fname = $_REQUEST['txtFname'];
 		$lname = $_REQUEST['txtLname'];

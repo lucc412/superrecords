@@ -14,8 +14,8 @@ $objScr = new NEW_SMSF_CONTACT();
 $arrStates = fetchStates();
 
 // check referral Code
-if(isset($_POST['flaginit']) && $_POST['flaginit'] == 'Y') {
-	if(isset($_POST['txtCode']) && !empty($_POST['txtCode'])) {
+//if(isset($_POST['flaginit']) && $_POST['flaginit'] == 'Y') {
+//	if(isset($_POST['txtCode']) && !empty($_POST['txtCode'])) {
 //		$codeStatus = $objScr->checkIfCodeExists($_POST['txtCode']);
 //		if($codeStatus) {
 //			$flagInsert = TRUE;
@@ -23,15 +23,15 @@ if(isset($_POST['flaginit']) && $_POST['flaginit'] == 'Y') {
 //		else{
 //			$flaginvalid = TRUE;
 //		}
-            $flagInsert = TRUE;
-	}
-}
-else if(isset($_POST['flaginit']) && $_POST['flaginit'] == 'N') {
-	if(isset($_SESSION['NEW_REFCODE'])) unset($_SESSION['NEW_REFCODE']);
-	$flagInsert = TRUE;
-}
+//            $flagInsert = TRUE;
+//	}
+//}
+//else if(isset($_POST['flaginit']) && $_POST['flaginit'] == 'N') {
+//	if(isset($_SESSION['NEW_REFCODE'])) unset($_SESSION['NEW_REFCODE']);
+//	$flagInsert = TRUE;
+//}
 
-if(isset($flagInsert) && $flagInsert === TRUE) {
+if(isset($_POST['flaginit']) && $_POST['flaginit'] =='add') {
 	
 	$fname = $_REQUEST['txtFname'];
 	$lname = $_REQUEST['txtLname'];

@@ -16,7 +16,7 @@ include(TOPBAR);
 			<tr>
 				<td>Fund Name</td>
 				<td><input type="text" name="txtFund" value="<?=$fundName?>" />
-				<a class="tooltip" href="#"><?=HELP?><span class="help">Please enter the name you would like to use for your new SMSF</span></a>
+				<a id="iconQuestion" class="tooltip" title="Please enter the name you would like to use for your new SMSF">?</a>
 				</td>
 			</tr>
 			<tr>
@@ -43,7 +43,7 @@ include(TOPBAR);
 						}
 					}  
 					echo($regDate);
-					?>"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtSetupDate','ddMMyyyy')" align="middle" style="cursor:pointer"/>
+					?>"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtSetupDate','ddMMyyyy')" align="middle" class="calendar"/>
 				</td>
 			</tr>
 			<tr>
@@ -70,7 +70,7 @@ include(TOPBAR);
 							?><option <?=$selectStr?> ><?=$noOfMembers?></option><?
 						}
 					?></select>
-					<a class="tooltip" href="#"><?=HELP?><span class="help">A SMSF is limited to a maximum of four members</span></a>
+					<a id="iconQuestion" class="tooltip" title="A SMSF is limited to a maximum of four members">?</a>
 				</td>
 			</tr>
 			<tr>
@@ -84,7 +84,7 @@ include(TOPBAR);
 							?><option <?=$selectStr?> value="<?=$trusteeTypeId?>"><?=$trusteeTypeName?></option><?
 						}
 					?></select>
-					<a class="tooltip" href="#"><?=HELP?><span class="help">Select whether you wish to have individuals as trustees or whether you need a corporate trustee. Please note if there is only one member a corporate trustee is required.</span></a>
+					<a id="iconQuestion" class="tooltip" title="Select whether you wish to have individuals as trustees or whether you need a corporate trustee. <br/>Please note if there is only one member a corporate trustee is required.">?</a>
 				</td>
 			</tr>
 		</table>

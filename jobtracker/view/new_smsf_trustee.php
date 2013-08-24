@@ -24,7 +24,7 @@ include(TOPBAR);
 				<tr>
 					<td>Preferred Company Name</td>
 					<td><input type="text" name="txtCname" value="<?=$cname?>" />
-					<a class="tooltip" href="#"><?=HELP?><span class="help">Please provide three options for your company name. A company name is required to be unique, so if your selected name is taken we will use one of your other options.</span></a>
+					<a id="iconQuestion" class="tooltip" title="Please provide three options for your company name. A company name is required <br/>to be unique, so if your selected name is taken we will use one of your other options.">?</a>
 					</td>
 				</tr>
 				<tr>
@@ -38,13 +38,13 @@ include(TOPBAR);
 				<tr>
 					<td>Registered Office Address</td>
 					<td><input type="text" name="txtRegAddress" value="<?=$regAdd?>" />
-					<a class="tooltip" href="#"><?=HELP?><span class="help">Provide the address for any notices to be sent to</span></a>
+					<a id="iconQuestion" class="tooltip" title="Provide the address for any notices to be sent at.">?</a>
 					</td>
 				</tr>
 				<tr>
 					<td>Principal Place of Business</td>
 					<td><input type="text" name="txtPriAddress" value="<?=$priBusiness?>" />
-					<a class="tooltip" href="#"><?=HELP?><span class="help">This cannot be a PO Box</span></a>
+					<a id="iconQuestion" class="tooltip" title="This cannot be a PO Box.">?</a>
 					</td>
 				</tr>
 			</table>
@@ -89,13 +89,13 @@ include(TOPBAR);
 				<tr>
 					<td>Registered Office Address</td>
 					<td><input type="text" name="txtRegAddress" value="<?=$regAdd?>" />
-					<a class="tooltip" href="#"><?=HELP?><span class="help">Provide the address for any notices to be sent to</span></a>
+					<a id="iconQuestion" class="tooltip" title="Provide the address for any notices to be sent at.">?</a>
 					</td>
 				</tr>
 				<tr>
 					<td>Principal Place of Business</td>
 					<td><input type="text" name="txtPriAddress" value="<?=$priBusiness?>" />
-					<a class="tooltip" href="#"><?=HELP?><span class="help">This cannot be a PO Box</span></a>
+					<a id="iconQuestion" class="tooltip" title="This cannot be a PO Box.">?</a>
 					</td>
 				</tr>
 				<tr>
@@ -108,17 +108,17 @@ include(TOPBAR);
 								?><option <?=$selectStr?> ><?=$option?></option><?
 							}
 						?></select>
-						<a class="tooltip" href="#"><?=HELP?><span class="help">Each member of the fund is required to be a director of the company.</span></a>
+						<a id="iconQuestion" class="tooltip" title="Each member of the fund is required to be a director of the company.">?</a>
 					</td>
 				</tr>
 			</table>
-                        <input type="hidden" id="extTrust_status" name="extTrust_status" value=""/>
+            <input type="hidden" id="extTrust_status" name="extTrust_status" value=""/>
 			<div style="padding-top:20px;">
-                                <span align="left"><button type="button" onclick="window.location.href='new_smsf_member.php'" >BACK</button></span>
-                                <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >NEXT</button></span>
+               <span align="left"><button type="button" onclick="window.location.href='new_smsf_member.php'" >BACK</button></span>
+               <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >NEXT</button></span>
 				<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>
-                        </div>
-			<input type="hidden" name="doAction" value="addExsTrusteeInfo">
+            </div>
+		<input type="hidden" name="doAction" value="addExsTrusteeInfo">
         <script>
             $('#btnNext').click(function(){$('#extTrust_status').val('0')})
             $('#btnSave').click(function(){$('#extTrust_status').val('1')})

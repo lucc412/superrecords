@@ -90,7 +90,7 @@ include(TOPBAR);
 							}
 						}  
 						echo($dob);
-						?>" onblur="javascript:getAge(this.value)"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" style="cursor:pointer"/>
+						?>" onblur="javascript:getAge(this.value)"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" class="calendar"/>
 					</td>
 				</tr>
 				<tr>
@@ -128,13 +128,13 @@ include(TOPBAR);
 				<tr>
 					<td>Tax File Number</td>
 					<td><input type="text" id="txtTfn<?=$memberCount?>" name="txtTfn<?=$memberCount?>" value="<?=$tfn?>" />
-					<a class="tooltip" href="#"><?=HELP?><span class="help">The Tax File Number is required to register the SMSF for an ABN. You can get this from your last tax return or group certificate.</span></a>
+					<a id="iconQuestion" class="tooltip" title="The Tax File Number is required to register the SMSF for an ABN. <br/>You can get this from your last tax return or group certificate.">?</a>
 					</td>
 				</tr>
 				<tr>
 					<td>Occupation</td>
 					<td><input type="text" id="txtOccupation<?=$memberCount?>" name="txtOccupation<?=$memberCount?>" value="<?=$occupation?>" />
-					<a class="tooltip" href="#"><?=HELP?><span class="help">Your occupation is required to be provided as part of the application</span></a>
+					<a id="iconQuestion" class="tooltip" title="Your occupation is required to be provided as part of the application.">?</a>
 					</td>
 				</tr>
 				<tr>

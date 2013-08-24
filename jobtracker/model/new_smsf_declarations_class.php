@@ -305,7 +305,7 @@ class DECLARATIONS
                         </style>
                         <table style="margin-bottom: 30px;">
                             <tr>
-                                <td><a href="href="www.superrecords.com.au"" style="float:left;margin-right: 40px;"><img src="images_user/header-logo.png" style="width:250px;" /></a></td>                            
+                                <td><a href="www.superrecords.com.au" style="float:left;margin-right: 40px;"><img src="images_user/header-logo.png" style="width:250px;" /></a></td>                            
                                 <td><p>'.$arrPractice['name'].'</p>
                                     <p>'.$arrClients['client_name'].' - '.$arrJob[$jobid]['period'].' - '.$arrActivity['sub_Description'].'</p>
                                 </td>

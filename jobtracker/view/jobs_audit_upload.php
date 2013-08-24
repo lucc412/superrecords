@@ -6,7 +6,7 @@ include(HEADDATA);
 ?><div class="pageheader pd10">
 	<h1>Add documents for <?=$checklistName?></h1>
 	<span>
-		<b>Welcome to the Super Records job checklist upload page.</b></br>Here you can upload a new checklist for any job.
+		<b>Welcome to the Super Records job checklist upload page.</b></br>Here you can upload checklists for job.
 	<span>
 </div><?
 

@@ -13,4 +13,5 @@ define('PHPFUNCTION',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/php_function
 define('MODEL',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/model/');
 define('VIEW',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/view/');
 define('UPLOADSETUP',$_SERVER['DOCUMENT_ROOT'].'/uploads/setup/');
+define("SETUPNAVIGATION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/view/setup_navigation.php");
 ?>

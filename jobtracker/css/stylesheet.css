@@ -37,6 +37,16 @@
 
 }
 
+.joblstbtn{
+	width: 215px;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #074165;/* EE4D0F*/
+	cursor: pointer;
+        padding :4px;
+}
 
 
 * {

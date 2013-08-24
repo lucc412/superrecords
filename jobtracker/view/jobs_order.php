@@ -1,7 +1,7 @@
 <?
 // include topbar file
 include(TOPBAR);
-
+include(SETUPNAVIGATION);
 // page header
 ?><div class="pageheader">
 	<h1>Submit a Job (Setup)</h1>

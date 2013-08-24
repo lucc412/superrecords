@@ -7,20 +7,20 @@ function checkValidation() {
 
 	if(username.value == "")
 	{
-		document.getElementById('val_username').innerHTML = "Please Provide User Name";
+		document.getElementById('val_username').innerHTML = "Please provide email address";
 		document.getElementById('txtName').focus();
 		username.className = "errclass";
 		flagReturn = false;
 	}
 	else {
-                document.getElementById('val_username').innerHTML = "";
+        document.getElementById('val_username').innerHTML = "";
 		username.className = "";
 	}
 	
 	
 	if(password.value == "") 
 	{
-		document.getElementById('val_password').innerHTML = "Please Provide Password";
+		document.getElementById('val_password').innerHTML = "Please provide password";
 		document.getElementById('txtPassword').focus();
 		password.className = "errclass";
 		flagReturn = false;
@@ -35,12 +35,12 @@ function checkValidation() {
 
 function userValidation()
 {
-        var flagReturn = true;
+    var flagReturn = true;
 	var username = document.getElementById('txtName');
 	
 	if(username.value == "")
 	{
-		document.getElementById('val_username').innerHTML = "Please Provide User Name";
+		document.getElementById('val_username').innerHTML = "Please provide your email address that is registered with us";
 		document.getElementById('txtName').focus();
 		username.className = "errclass";
 		flagReturn = false;

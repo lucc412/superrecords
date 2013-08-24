@@ -6,7 +6,7 @@
 
 // error message
 if(!empty($_REQUEST['flagErrMsg'])) {
-	?><div class="errorMsg"><?=ERRORICON?>&nbsp;Email already registered.</div><?	
+	?><div class="errorMsg"><?=ERRORICON?>&nbsp;Sorry, the email address is already registered.</div><?	
 }
 
 ?><form action="pr_practice.php" method="POST" name="managepractice" onSubmit="return validateFormOnSubmit()">

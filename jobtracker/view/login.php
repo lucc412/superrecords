@@ -29,7 +29,7 @@
 
 					<table cellpadding="10px" width="80%">
 						<tr>
-							<td class="logintd">User Name </td>
+							<td class="logintd">Email Address</td>
 							<td><input type="text" name="txtName" id="txtName">
 							<span style="color:red">
 							*
@@ -47,14 +47,17 @@
 							<br>
 							<span name="val_password" id="val_password" style=" color:red; font-size:11px;"></span>
 							</td>
-						</tr>
-						<tr>
-							<td colspan="2" align="center">
-								<span style="font-size:11px;">Forgot password?</span>
-								<a style="text-decoration:none; color:#001590; font-size:12px; font-weight:bold;" onclick="window.open('forgot_password.php','subwindow','toolbar=no,location=no,directories=no,status=yes,scrollbars=yes,menubar=no,resizable=yes,height=500,width=800');return false" href="#">Click here</a>
-							</td>
-						</tr>
-						<tr><td>&nbsp;</td></tr>
+						</tr><?
+
+						if(!empty($flagSetLink)) {
+							?><tr>
+								<td colspan="2" align="center">
+									<span style="font-size:11px;">Forgot password?</span>
+									<a class="forgotlink" title="click here to recover password" onclick="window.open('forgot_password.php','subwindow','toolbar=no,location=no,directories=no,status=yes,scrollbars=yes,menubar=no,resizable=yes,height=500,width=800');return false" href="#">Click here</a>
+								</td>
+							</tr><?
+						}
+						?><tr><td>&nbsp;</td></tr>
 					</table>
 					<div>
 						<span style="margin-right:12px;"><button align="right" type="reset" value="Reset">Reset</button></span>

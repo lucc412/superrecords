@@ -30,15 +30,15 @@ class Home {
 	}
         
         
-        public function forgot_practice($username) {
-		$qrySel = "SELECT pr.id,pr.email,pr.password
+        public function fetch_practice_password($username) {
+		$qrySel = "SELECT pr.password
                     FROM pr_practice pr
                     WHERE pr.email = '$username'";
 	
 		$fetchResult = mysql_query($qrySel);
 		$rowData = mysql_fetch_assoc($fetchResult);
-		$pracDtl = $rowData;
-		return $pracDtl;
+		$prPassword = $rowData['password'];
+		return $prPassword;
 	}
 }
 ?>

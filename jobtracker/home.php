@@ -25,36 +25,30 @@ if(isset($_REQUEST['txtName']) && isset($_REQUEST['txtPassword']))
 	}
 }
 else if(isset($_REQUEST['flgFrgtPass']) && isset($_REQUEST['txtName']) && $_REQUEST['flgFrgtPass'] == "forgot") {
-	
-    $username = $_REQUEST['txtName'];
-    $pracDtls = $objScr->forgot_practice($username);
     
-    if(is_array($pracDtls))
-    {
-        $pageUrl = basename($_SERVER['REQUEST_URI']);
+	$pageUrl = basename($_SERVER['REQUEST_URI']);
+	$username = $_REQUEST['txtName'];
+	$prPassword = $objScr->fetch_practice_password($username);
 
-        // check if event is active or inactive [This will return TRUE or FALSE as per result]
-        $flagSet = getEventStatus($pageUrl);
-        if($flagSet)
-        {
-            //$to = $pracDtls['email'];
-            $event = get_email_info($pageUrl);
-            $to = 'siddhesh.c@befreeit.com.au';
-            $cc = $event['event_cc'];
-            $subject = "Forgot Password Details";
-            $msg = html_entity_decode($event['event_content']);
-            $msg = str_replace("{User}", $_REQUEST['txtName'], $msg);
-            $content = str_replace("{Password}", $pracDtls['password'], $msg);
-            include_once(MAIL);
-            send_mail($to, $cc, $subject, $content);
-            echo '<script>window.close();</script>';
-        }
-    }
-    else
-    {
-        $msg =  "Invalid Email Address";
-        include(VIEW."forgot_password.php");
-    }
+	if(!empty($prPassword))
+	{
+		$arrEmailInfo = get_email_info($pageUrl);
+		$to = $_REQUEST['txtName'];
+		$cc = $arrEmailInfo['event_cc'];
+		$subject = $arrEmailInfo['event_subject'];
+		$content = html_entity_decode($arrEmailInfo['event_content']);
+		$content = str_replace("PASSWORD", $prPassword, $content);
+		include_once(MAIL);
+		send_mail($to, $cc, $subject, $content);
+		//echo '<script>window.close();</script>';
+		$flagSuccess =  "Y";
+		include(VIEW."forgot_password.php");
+	}
+	else
+	{
+		$flagError =  "Y";
+		include(VIEW."forgot_password.php");
+	}
 }
 else if(isset($_SESSION['PRACTICEID']) && isset($_SESSION['PRACTICE'])) {
 	include(VIEW."home.php");

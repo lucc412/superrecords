@@ -2,7 +2,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=9" />
-		<title>Practice Login</title>
+		<title>Password Recovery</title>
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
 		<link href="images_user/favicon.ico" rel="shortcut icon" />
 		<script type="text/javascript" src="js/login_validation.js"></script>
@@ -13,12 +13,17 @@
 		?><div align="center" style="margin-top:20px;padding-bottom:45px;"><a href="http://<?=$_SERVER['SERVER_NAME']?>/index.php"><img src="images_user/header-logo.png"></a></div>
 
 		<form name="objForm" id="objForm" method="post" action="home.php" onsubmit="javascript:return userValidation();">
-                    <input type="hidden" name="flgFrgtPass" id="flgFrgtPass" value="forgot"/>
-                    <div align="center"><?
+			<input type="hidden" name="flgFrgtPass" id="flgFrgtPass" value="forgot"/>
+			<div align="center"><?
 
 				// error message if login attempt fails
-				if(!empty($msg)) {
-					?><div class="errorMsg" style="width:300px; margin-bottom:15px;">Sorry, Your email address does not match.</div><?
+				if($flagError == 'Y') {
+					?><div class="errorMsg" style="width:300px; margin-bottom:15px;">Sorry, this email address is incorrect.</div><?
+				}
+
+				// error message if login attempt fails
+				if($flagSuccess == 'Y') {
+					?><div class="errorMsg" style="width:300px; margin-bottom:15px;">Please check your inbox to recover password.</div><?
 				}
 
 				?><div align="center" class="logindiv"><?
@@ -30,7 +35,7 @@
 
 					<table cellpadding="10px" width="80%">
 						<tr>
-							<td class="logintd">User Name </td>
+							<td class="logintd">Email Address</td>
 							<td><input type="text" name="txtName" id="txtName">
 							<span style="color:red">
 							*
@@ -45,7 +50,7 @@
 						<span style="margin-right:12px;"><button align="right" type="reset" value="Reset">Reset</button></span>
 						<span><button align="right" type="submit"  value="Submit">Submit</button></span>
 					</div>
-                                </div>
+               </div>
 			</div>
 		</form>
 	</body>

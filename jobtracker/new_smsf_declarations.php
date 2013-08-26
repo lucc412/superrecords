@@ -24,6 +24,7 @@ if(isset($_SESSION['jobId'])) {
 
 		if($_REQUEST['job_submitted'] == 'Y')
 		{
+			new_job_task_mail();
 			$objScr->generatePDF();
 		}
 	}

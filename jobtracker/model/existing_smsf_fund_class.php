@@ -89,6 +89,8 @@ class EXISTING_SMSF_FUND {
         $flagReturn = mysql_query($qryInsert);
             if($jobStatus == 'Y')
             {
+				new_job_task_mail();
+
                 $stQry = "UPDATE job 
 						SET job_submitted = '".$jobStatus."', 
 						job_received = NOW() 

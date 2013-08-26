@@ -57,8 +57,9 @@ if(isset($_SESSION['jobId'])) {
                 
                 if($jobStatus == 'Y')
                 {
+					new_job_task_mail();
+
                     // Fetch All Details of Job
-            
                     $jobid = $_SESSION['jobId'];
                     $contQry = "SELECT * FROM es_contact_details WHERE job_id = ".$_SESSION['jobId'];
                     $fetchCntact = mysql_query($contQry);
@@ -75,29 +76,6 @@ if(isset($_SESSION['jobId'])) {
                     {
                         $arrFund[$rowData['job_id']] = $rowData;
                     }
-
-//                    $memberQry = "SELECT * FROM es_member_details WHERE job_id = ".$_SESSION['jobId'];
-//                    $fetchMembr = mysql_query($memberQry);
-//                    while($rowData = mysql_fetch_assoc($fetchMembr))
-//                    {
-//                        $arrMembrs[$rowData['member_id']] = $rowData;
-//                    }
-//
-//                    $newTrstyQry = "SELECT * FROM es_new_trustee WHERE job_id = ".$_SESSION['jobId'];
-//                    $fetchNewTrsty = mysql_query($newTrstyQry);
-//                    $arrNewTrsty = array();
-//                    while($rowData = mysql_fetch_assoc($fetchNewTrsty))
-//                    {
-//                        $arrNewTrsty[$rowData['job_id']] = $rowData;
-//                    }
-//
-//                    $extTrstyQry = "SELECT * FROM es_existing_trustee WHERE job_id = ".$_SESSION['jobId'];
-//                    $fetchExtTrsty = mysql_query($extTrstyQry);
-//                    $arrExtTrsty = array();
-//                    while($rowData = mysql_fetch_assoc($fetchExtTrsty))
-//                    {
-//                        $arrExtTrsty[$rowData['job_id']] = $rowData;
-//                    }
 
                     $jobQry = "SELECT * FROM job WHERE job_id = ".$jobid;
                     $fetchJob = mysql_query($jobQry);

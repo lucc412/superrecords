@@ -1,5 +1,6 @@
 <?php
 include(TOPBAR);
+include(SETUPNAVIGATION);
 ?><div class="pageheader">
 	<h1>Contact Details</h1>
 	<span>

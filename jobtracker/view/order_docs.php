@@ -8,11 +8,7 @@
  */
 
 include(TOPBAR);
-include(SETUPNAVIGATION);
 ?>
-<br>
-<br>
-<br>
 <style>
     .wrap ul li { list-style: none;padding: 5px;}
     .wrap li :hover{font-size:12px;color:#F05729;}

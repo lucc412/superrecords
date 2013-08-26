@@ -187,16 +187,21 @@ switch ($a)
 			$indManager = $arrPanelInfo[2];
 			$teamMember = $objCallData->fetch_team_member($client_id);
 			
-			if(!empty($arrJob[$_REQUEST["jobId"]]["job_received"]))
-				$rec_date = date('d/m/Y', strtotime($arrJob[$_REQUEST["jobId"]]["job_received"]));
-			else	
-				$rec_date = "";
-				
-			if(!empty($arrJob[$_REQUEST["jobId"]]["job_due_date"]))
-				$due_date = $arrJob[$_REQUEST["jobId"]]["job_due_date"];
-			else	
-				$due_date = "";
-			
+                        $rec_date = "";
+			if (isset($arrJob[$_REQUEST["jobId"]]["job_received"]) && $arrJob[$_REQUEST["jobId"]]["job_received"] != "") {
+                                if($arrJob[$_REQUEST["jobId"]]["job_received"] != "0000-00-00 00:00:00") {
+                                        $rec_date = date("d/m/Y",strtotime($arrJob[$_REQUEST["jobId"]]["job_received"]));
+                                }
+                        }  	
+                        
+                        
+                        $due_date = "";
+			if (isset($arrJob[$_REQUEST["jobId"]]["job_due_date"]) && $arrJob[$_REQUEST["jobId"]]["job_due_date"] != "") {
+                                if($arrJob[$_REQUEST["jobId"]]["job_due_date"] != "0000-00-00 00:00:00") {
+                                        $due_date = date("d/m/Y",strtotime($arrJob[$_REQUEST["jobId"]]["job_due_date"]));
+                                }
+                        }  	
+
 			include(JOBNAVIGATION);
 
 			 ?><br/><br/><br/><form method="POST" name="frmJobDetails" action="job.php?a=editJob&jobId=<?=$_REQUEST["jobId"]?>">
@@ -333,7 +338,16 @@ switch ($a)
 					}
 					?><td class="<?=$trClass?>" width="20%"><?=$docName?></td>
 						
-					<td class="<?=$trClass?>" width="10%" align="center"><?=htmlspecialchars($arrInfo["date"])?></td><?
+					<td class="<?=$trClass?>" width="10%" align="center"><?php 
+                                        
+                                            $dateUpload = "";
+                                            if (isset($arrInfo["date"]) && $arrInfo["date"] != "") {
+                                                    if($arrInfo["date"] != "0000-00-00 00:00:00") {
+                                                            $dateUpload = date("d/m/Y",strtotime($arrInfo["date"]));
+                                                    }
+                                            }  
+                                            echo htmlspecialchars($dateUpload);
+                                        ?></td><?
 						
 					if($arrInfo["viewed"]==0)
 					{
@@ -441,7 +455,16 @@ switch ($a)
 
 				?><tr>
 					<td class="<?=$trClass?>"><?=htmlspecialchars($arrInfo["report_title"])?></td>	
-					<td width="23%" align="center" class="<?=$trClass?>"><?=htmlspecialchars($arrInfo["date"])?></td>
+					<td width="23%" align="center" class="<?=$trClass?>"><?php
+                                            $dateRpt = "";
+                                            if (isset($arrInfo["date"]) && $arrInfo["date"] != "") {
+                                                    if($arrInfo["date"] != "0000-00-00 00:00:00") {
+                                                            $dateRpt = date("d/m/Y",strtotime($arrInfo["date"]));
+                                                    }
+                                            }  
+                                            echo htmlspecialchars($dateRpt);
+                                        
+                                        ?></td>
 					<td width="10%" class="<?=$trClass?>" align="center">
 					<button onclick="redirectURL('job.php?sql=download&flagType=R&filePath=<?=urlencode($arrInfo['file_path'])?>')"title="Click to view this document" >Download</button>
 					  </td>
@@ -564,7 +587,7 @@ switch ($a)
 				<span class="boldtext"><?php 
 				$lastDate = $objCallData->view_send_mail_practice($_REQUEST["jobId"]);
 				if($lastDate != '0000-00-00') {
-					echo 'Last Sent : '.date('d-M-Y', strtotime($lastDate));
+					echo 'Last Sent : '.date('d/m/Y', strtotime($lastDate));
 				}
 			   ?></span><?
 			}
@@ -629,7 +652,7 @@ switch ($a)
 						
 						 <?
 							if(!empty($arrInfo["date_added"]) && $arrInfo["date_added"] != '0000-00-00') {
-								?><td align="center" width="10%" class="<?=$trClass?>"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["date_added"])))?></td><?
+								?><td align="center" width="10%" class="<?=$trClass?>"><?=date('d/m/Y', strtotime(htmlspecialchars($arrInfo["date_added"])))?></td><?
 							}
 							else {
 								?><td width="10%" align="center" class="<?=$trClass?>"></td><?
@@ -637,7 +660,7 @@ switch ($a)
 						 ?>
 						<?
 							if(!empty($arrInfo["date_answered"]) && $arrInfo["date_answered"] != '0000-00-00') {
-								?><td width="10%" class="<?=$trClass?>"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["date_answered"])))?></td><?
+								?><td width="10%" class="<?=$trClass?>"><?=date('d/m/Y', strtotime(htmlspecialchars($arrInfo["date_answered"])))?></td><?
 							}
 							else {
 								?><td width="10%" class="<?=$trClass?>"></td><?
@@ -843,7 +866,7 @@ switch ($a)
 					<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrJobStatus[$arrInfo["job_status_id"]]["job_status"])?></td><?
 
 					if(!empty($arrInfo["job_received"])){
-						?><td align="center" class="<?=$style?>"><?=date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_received"])))?></td><?
+						?><td align="center" class="<?=$style?>"><?=date('d/m/Y', strtotime(htmlspecialchars($arrInfo["job_received"])))?></td><?
 					}
 					else{
 						?><td class="<?=$style?>"></td><?
@@ -855,7 +878,7 @@ switch ($a)
 						$job_due_date = '';
 						if (isset($arrInfo["job_due_date"]) && $arrInfo["job_due_date"] != "") {
 							if($arrInfo["job_due_date"] != "0000-00-00 00:00:00") {
-								$job_due_date = date('d-M-Y', strtotime(htmlspecialchars($arrInfo["job_due_date"])));
+								$job_due_date = date('d/m/Y', strtotime(htmlspecialchars($arrInfo["job_due_date"])));
 							}
 						}
 						echo $job_due_date; 	

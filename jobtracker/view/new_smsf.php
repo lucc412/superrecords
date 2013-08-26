@@ -1,6 +1,6 @@
 <?php
 include(TOPBAR);
-
+include(SETUPNAVIGATION);
 ?>
 <div class="pageheader">
 	<h1>SMSF Deed of Establishment</h1>

@@ -38,8 +38,8 @@
 }
 
 .joblstbtn{
-	width: 140px;
-	font-family: Arial;
+	width: 128px;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-weight: bold;
 	color: #FFF;
@@ -614,6 +614,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .pd10
 {
 	padding:10px;
+}
+
+.pdB20
+{
+	padding-bottom:20px;
 }
 
 .calendar

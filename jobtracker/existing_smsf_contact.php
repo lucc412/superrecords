@@ -46,7 +46,6 @@
 		$lname = $_REQUEST['txtLname'];
 		$email = $_REQUEST['txtEmail'];
 		$phone = $_REQUEST['txtPhone'];
-		$stateId = $_REQUEST['lstState'];
 		$contStatus = $_REQUEST['cont_status'];
 
 		// fetch existing contact details
@@ -54,7 +53,7 @@
 
 		// insert contact details of sign up user
 		if(empty($arrData)) {
-			$lastInsertId = $objScr->addContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus);
+			$lastInsertId = $objScr->addContactDetails($fname, $lname, $email, $phone, $contStatus);
 
 			if(!empty($lastInsertId)) {
 
@@ -66,13 +65,16 @@
 		}
 		// update contact details of sign up user
 		else {
-			$flagUpdate = $objScr->editContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus);
+			$flagUpdate = $objScr->editContactDetails($fname, $lname, $email, $phone, $contStatus);
 		}		
 
 		if(!empty($lastInsertId) || $flagUpdate) {
 			
                     if(isset($_POST['cont_status']) && $_POST['cont_status'] == 1)
+                    {
+                        if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                         header('Location: jobs.php?a=saved');
+                    }
                     else
                         header('Location: existing_smsf_fund.php');
 		}

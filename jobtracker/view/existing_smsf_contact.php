@@ -29,18 +29,7 @@ include(SETUPNAVIGATION);
 				<td>Phone Number</td>
 				<td><input type="text" name="txtPhone" value="<?=$phoneno?>" /></td>
 			</tr>
-			<tr>
-				<td>State</td>
-				<td>
-					<select name="lstState" style="margin-bottom: 5px;"><?
-						foreach($arrStates AS $stateIdKey => $stateName) {
-							$selectedStr = "";
-							if($stateId == $stateIdKey) $selectedStr = "selected='selected'";
-							?><option <?=$selectedStr?> value="<?=$stateIdKey?>"><?=$stateName?></option><?
-						}
-					?></select>
-				</td>
-			</tr>
+			
 <!--			<tr>
 				<td>Referral Code</td>
 				<td><input type="text" name="txtCode" value="<?=$refCode?>" maxlength="6"/>
@@ -53,8 +42,8 @@ include(SETUPNAVIGATION);
 		</table>
                 <input type="hidden" id="cont_status" name="cont_status" value=""/>
                 <div style="padding-top:20px;">
-                <span align="left"><button type="button" onclick="window.location.href='existing_smsf.php'" value="BACK" />BACK</button></span>
-                <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">NEXT</button></span>
+                <?php if(!$arrData) { ?><span align="left"><button type="button" onclick="window.location.href='existing_smsf.php'" value="BACK" <?php if($arrData)echo 'disabled'; ?> />BACK</button></span><?php } ?>
+                <span align="right" style="<?php if(!$arrData)echo'padding-left:55px;'; ?>"><button type="submit" id="btnNext">NEXT</button></span>
                 <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>
             </div>
 		

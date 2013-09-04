@@ -39,7 +39,7 @@ include(TOPBAR);
 				<td width="15%" class="td_title" align="center">Creation Date</td>
 				<td width="8%" class="td_title" align="center">Actions</td>
 			</tr><?
-
+                        
 			$countRow = 0;
 			foreach($arrJobs AS $jobId => $arrJobDetails) {
 				if($countRow%2 == 0) $trClass = "trcolor";
@@ -54,7 +54,7 @@ include(TOPBAR);
 					<td class="tddata" align="center"><?=$arrJobDetails['job_created_date']?></td>
 					<td class="tddata" align="center"><?
 						if($arrJobDetails['job_genre'] == 'SETUP') {
-							?><a title="click here to edit this job" href='jobs.php?a=edit&recid=<?=$jobId?>&frmId=<?=$arrJobDetails['setup_subfrm_id']?>'><?=EDITICON?></a><?
+							?><a title="click here to edit this job" href='jobs.php?a=edit&recid=<?=$jobId?>&frmId=<?=$arrJobDetails['setup_subfrm_id']?>&type=setup'><?=EDITICON?></a><?
 						}
 						else {
 							?><a title="click here to edit this job" href='jobs.php?a=audit&recid=<?=$jobId?>'><?=EDITICON?></a><?

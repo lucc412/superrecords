@@ -49,6 +49,8 @@ if(isset($_SESSION['jobId'])) {
                     $flagReturn = $objScr->editFundInfo($fundName, $abn, $streetAdd, $postalAdd, $members, $trusteeId, $fundStatus, $jobStatus);
 		}
               
+                $arrClient = $objScr->checkClients($fundName);
+                
                 if(isset($jobStatus))
                 {
                     $stQry = "UPDATE job SET job_submitted = '".$jobStatus."', job_received = NOW() WHERE job_id = ".$_SESSION['jobId'];
@@ -390,6 +392,7 @@ if(isset($_SESSION['jobId'])) {
                 }
                     
 		if($flagReturn) { 
+                        if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
 			if(isset($_POST['fund_status']) && $_POST['fund_status'] == 1)
 				header('Location: jobs.php?a=pending');
 			else

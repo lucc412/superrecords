@@ -99,5 +99,40 @@ class EXISTING_SMSF_FUND {
             }
 	    return $flagReturn;	
 	}
+        
+        
+        function checkClients($fundName)
+        {
+            $qrySel = "SELECT t1.client_id, t1.client_name FROM client t1
+					WHERE id = '{$_SESSION['PRACTICEID']}' AND t1.client_name = '".$fundName."'
+					ORDER BY t1.client_name";
+                                        
+            $fetchResult = mysql_query($qrySel);
+            $client_id = "";
+            $rowData = mysql_fetch_assoc($fetchResult);
+            
+            if($rowData)
+            {
+                $client_id = $rowData['client_id'];
+            }
+            else
+            {
+//                client_code
+                $qryIns = "INSERT INTO client(client_type_id, client_name, recieved_authority, id, client_received)
+					VALUES ( 5, '" . $fundName . "', 1, " . $_SESSION['PRACTICEID'] . ", NOW())";
+                
+                $flagReturn = mysql_query($qryIns);
+                $client_id = mysql_insert_id();
+                
+            }
+
+            if(isset($client_id) && $client_id != '')
+            {
+                $updt = "UPDATE job SET client_id = ".$client_id." WHERE job_id = ".$_SESSION['jobId'];
+                mysql_query($updt);
+            }
+            
+            return $client_id;
+        }
 }
 ?>

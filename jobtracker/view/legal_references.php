@@ -3,17 +3,17 @@ include(TOPBAR);
 include(SETUPNAVIGATION);
 ?>
 <div class="pageheader">
-	<h1>Member Details</h1>
+	<h1>Legal Personal References Details</h1>
 	<span>
-		<b>Welcome to the Super Records Member Details page.</b>
+		<b>Welcome to the Super Records Legal Personal References Details page.</b>
 	<span>
 </div>
 <div style="padding-top:20px;">
-	<div style="padding-bottom:20px;">Please enter the details for each member of the new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div><?
+	<div style="padding-bottom:20px;">Please enter the details for each references of the new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div><?
 
 	// show member form as per no of members
-	?><form method="post" action="new_smsf_member.php" name="frmnewsmsfmember" onsubmit="return formValidation(<?=$_SESSION['NOOFMEMBERS']?>)"><?
-                $legalRef = 0;
+	?><form method="post" action="legal_references.php" name="frmnewsmsfmember" onsubmit="return formValidation(<?=$_SESSION['NOOFMEMBERS']?>)"><?
+                $_SESSION['NOOFMEMBERS'] = 1;
 		for($memberCount=1; $memberCount <= $_SESSION['NOOFMEMBERS']; $memberCount++) {
 
 			$memberId = "";
@@ -32,25 +32,25 @@ include(SETUPNAVIGATION);
 
 			if(!empty($arrData)) {
 				if(isset($arrData[$memberCount])) {
-                                    $arrMemberInfo = $arrData[$memberCount];
+					$arrMemberInfo = $arrData[$memberCount];
 
-                                    $memberId = $arrMemberInfo['member_id'];
-                                    $title = $arrMemberInfo['title'];
-                                    $fname = $arrMemberInfo['fname'];
-                                    $mname = $arrMemberInfo['mname'];
-                                    $lname = $arrMemberInfo['lname'];
-                                    $dob = $arrMemberInfo['dob'];
-                                    $city = $arrMemberInfo['city'];
-                                    $country = $arrMemberInfo['country_id'];
-                                    $gender = $arrMemberInfo['gender'];
-                                    $address = $arrMemberInfo['address'];
-                                    $tfn = $arrMemberInfo['tfn'];
-                                    $occupation = $arrMemberInfo['occupation'];
-                                    $contactNo = $arrMemberInfo['contact_no'];
+					$memberId = $arrMemberInfo['member_id'];
+					$title = $arrMemberInfo['title'];
+					$fname = $arrMemberInfo['fname'];
+					$mname = $arrMemberInfo['mname'];
+					$lname = $arrMemberInfo['lname'];
+					$dob = $arrMemberInfo['dob'];
+					$city = $arrMemberInfo['city'];
+					$country = $arrMemberInfo['country_id'];
+					$gender = $arrMemberInfo['gender'];
+					$address = $arrMemberInfo['address'];
+					$tfn = $arrMemberInfo['tfn'];
+					$occupation = $arrMemberInfo['occupation'];
+					$contactNo = $arrMemberInfo['contact_no'];
 				}
 			}
 			
-			?><span class="memberclass"><u>Member <?=$memberCount?></u></span>
+			?><span class="memberclass"><u>Reference <?=$memberCount?></u></span>
 			<table>
 				<tr>
 					<td>Title</td>
@@ -79,7 +79,6 @@ include(SETUPNAVIGATION);
 				<tr>
 					<td>Date of Birth</td>
 					<td>
-                                            <script> var refVal = 0; </script>
 						<input type="text" style="width:70px" id="txtDob<?=$memberCount?>" readonly="true" name="txtDob<?=$memberCount?>" size="10" value="<?
 						if(isset($dob) && $dob != "") {
 							if($dob != "0000-00-00") {
@@ -91,16 +90,7 @@ include(SETUPNAVIGATION);
 							}
 						}  
 						echo($dob);
-//                                                $year = date('Y', strtotime($arrMemberInfo['dob']));
-//                                                $diff = date_diff($year, date('Y'),TRUE);
-//                                                if((date('Y') - $year) <= 18)
-//                                                    $legalRef++;//echo 'Done';
-//                                                else
-//                                                    $legalRef--;
-//                                                
-						?>" onblur="getAge(this.value);" />
-                                                <img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" class="calendar"/>
-                                                
+						?>" onblur="javascript:getAge(this.value)"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" class="calendar"/>
 					</td>
 				</tr>
 				<tr>
@@ -156,7 +146,6 @@ include(SETUPNAVIGATION);
                         
 		}?>
                 <input type="hidden" id="member_status" name="member_status" value=""/>
-                <input type="hidden" value="<?=$legalRef?>" id="ref" name="ref" />
                 <div style="padding-top:20px;">
                     <span align="left"><button type="button" onclick="window.location.href='new_smsf_fund.php'" >BACK</button></span>
                     <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >NEXT</button></span>
@@ -170,5 +159,6 @@ include(SETUPNAVIGATION);
         </script>
         
 </div><?
+
 include(FOOTER);
 ?>

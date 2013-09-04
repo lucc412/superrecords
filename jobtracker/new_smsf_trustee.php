@@ -38,7 +38,10 @@ if(isset($_SESSION['jobId'])) {
 		if($flagReturn)
 		{
                     if(isset($_POST['newTrust_status']) && $_POST['newTrust_status'] == 1)
+                    {
+                        if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                         header('Location: jobs.php?a=saved');
+                    }
                     else
 			header('Location: new_smsf_declarations.php');
 		}
@@ -74,7 +77,10 @@ if(isset($_SESSION['jobId'])) {
 
 		if($flagReturn) {
                     if(isset($_POST['extTrust_status']) && $_POST['extTrust_status'] == 1)
-                        header('Location: jobs.php');
+                    {
+                        if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
+                        header('Location: jobs.php?a=saved');
+                    }
                     else
 			header('Location: new_smsf_declarations.php');
 		}

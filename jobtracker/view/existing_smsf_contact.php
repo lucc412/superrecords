@@ -44,13 +44,13 @@ include(SETUPNAVIGATION);
                 <div style="padding-top:20px;">
                 <?php if(!$arrData) { ?><span align="left"><button type="button" onclick="window.location.href='existing_smsf.php'" value="BACK" <?php if($arrData)echo 'disabled'; ?> />BACK</button></span><?php } ?>
                 <span align="right" style="<?php if(!$arrData)echo'padding-left:55px;'; ?>"><button type="submit" id="btnNext">NEXT</button></span>
-                <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>
+                <!--<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>-->
             </div>
 		
 		<input type="hidden" name="flaginit" value="add">
                  <script>
             $('#btnNext').click(function(){$('#cont_status').val('0')})
-            $('#btnSave').click(function(){$('#cont_status').val('1')})
+            //$('#btnSave').click(function(){$('#cont_status').val('1')})
         </script>
 	</form> 
 	

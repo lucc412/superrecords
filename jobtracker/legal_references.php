@@ -103,6 +103,6 @@ if(isset($_SESSION['jobId'])) {
 	include(VIEW . "legal_references.php");
 }
 else {
-	header('Location: index.php');
+	header('Location: login.php');
 }
 ?>

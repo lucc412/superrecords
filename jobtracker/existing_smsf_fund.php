@@ -433,6 +433,6 @@ if(isset($_SESSION['jobId'])) {
 	include(VIEW . "existing_smsf_fund.php");
 }
 else {
-	header('Location: index.php');
+	header('Location: login.php');
 }
 ?>

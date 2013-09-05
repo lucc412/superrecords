@@ -143,6 +143,6 @@ if(isset($_SESSION['jobId'])) {
 	include(VIEW . "new_smsf_trustee.php");
 }
 else {
-	header('Location: index.php');
+	header('Location: login.php');
 }
 ?>

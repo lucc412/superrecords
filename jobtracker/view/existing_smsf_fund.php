@@ -3,14 +3,14 @@ include(TOPBAR);
 include(SETUPNAVIGATION);
 ?>
 
-<div class="pageheader">
+<div class="pageheader" style="padding-bottom: 0;">
 	<h1>Fund Details</h1>
 	<span>
 		<b>Welcome to the Super Records Fund Details page.</b>
 	<span>
 </div>
-<div style="padding-top:20px;">
-	<div style="padding-bottom:20px;">Please enter the details for your fund. These details will be used to set up the fund in our system. If you need any help completing this section, please contact us.</div>
+<div>
+	<div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details for your fund. These details will be used to set up the fund in our system. If you need any help completing this section, please contact us.</div>
 	
 	<form method="post" action="existing_smsf_fund.php" name="frmexstsmsffund" onsubmit="return formValidation();">
 		<table class="fieldtable">

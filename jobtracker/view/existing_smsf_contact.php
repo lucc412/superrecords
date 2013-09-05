@@ -2,14 +2,14 @@
 include(TOPBAR);
 include(SETUPNAVIGATION);
 ?>
-<div class="pageheader">
+<div class="pageheader" style="padding-bottom: 0">
 	<h1>Contact Details</h1>
 	<span>
 		<b>Welcome to the Super Records Contact Details page.</b>
 	<span>
 </div>
-<div style="padding-top:20px;">
-	<div style="padding-bottom:20px;">Please enter your contact details. If there are any issues with this application, we will contact you using these details. Once your fund is set up, we will also contact you using these details to guide you through the next stages of the process.</div>
+<div>
+	<div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter your contact details. If there are any issues with this application, we will contact you using these details. Once your fund is set up, we will also contact you using these details to guide you through the next stages of the process.</div>
 	
 	<form method="post" action="existing_smsf_contact.php" name="frmexstsmsfcont" onsubmit="return formValidation();">
 		<table class="fieldtable">

@@ -558,6 +558,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	background:url(../images_user/rightmenu-arrow.jpg) 5px 15px no-repeat;
 	cursor:pointer;
 	color:rgba(7, 65, 96, 0.94);
+	text-decoration:underline;
 }
 
 .orangearrow {
@@ -568,6 +569,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	background:url(../images_user/rightmenu-arrow-orange.jpg) 5px 15px no-repeat;
 	cursor:pointer;
 	color:#F05729;
+	text-decoration:underline;
+}
+
+.uploadMultiple {
+	position:absolute;
+	top:100px;
+	right:0px;
 }
 
 .auditupload td 
@@ -589,6 +597,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .pdR50
 {
 	padding-right:50px;
+}
+
+.pdR40
+{
+	padding-right:40px;
 }
 
 .pdL30
@@ -619,6 +632,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .pdB20
 {
 	padding-bottom:20px;
+}
+
+.pdB15 {
+	padding-bottom:15px;
 }
 
 .calendar

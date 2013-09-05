@@ -1,5 +1,5 @@
 // show hide audit checklist options
-$(function(){
+/*$(function(){
 	$("span").each(function (i){
 	  (function(i) {
 		  i++;
@@ -10,11 +10,12 @@ $(function(){
 	  }(i));
    });
 });
+*/
 
-function newPopup(url)
+function newPopup(url,height)
 {
 	popupWindow = window.open(
-		url,'popUpWindow','height=400,width=600,left=40,top=20,resizable=yes,scrollbars=no,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+		url,'popUpWindow','height='+height+',width=600,left=40,top=20,resizable=yes,scrollbars=no,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
 }
 
 // This function is used to perform validations for upload
@@ -39,6 +40,7 @@ function checkValidation() {
 	var clientType = document.getElementById('lstCliType');
 	var lstJobType = document.getElementById('lstJobType');
 	var txtPeriod = document.getElementById('txtPeriod');
+	var hiddenType = document.getElementById('type');
 
 	if(lstClientType.value == 0) {
 		lstClientType.className = "errclass";
@@ -48,20 +50,22 @@ function checkValidation() {
 		lstClientType.className = "drop_down_select";
 	}
 
-	if(clientType.value == 0) {
-		clientType.className = "errclass";
-		flagReturn = false;
-	}
-	else {
-		clientType.className = "drop_down_select";
-	}
-	
-	if(lstJobType.value == 0) {
-		lstJobType.className = "errclass";
-		flagReturn = false;
-	}
-	else {
-		lstJobType.className = "drop_down_select";
+	if(hiddenType.value == 'COMPLIANCE') {
+		if(clientType.value == 0) {
+			clientType.className = "errclass";
+			flagReturn = false;
+		}
+		else {
+			clientType.className = "drop_down_select";
+		}
+		
+		if(lstJobType.value == 0) {
+			lstJobType.className = "errclass";
+			flagReturn = false;
+		}
+		else {
+			lstJobType.className = "drop_down_select";
+		}
 	}
 
 	if(txtPeriod.value == "") {
@@ -73,7 +77,7 @@ function checkValidation() {
 	}
 
 	// validation for source doc upload
-	if(document.getElementById("type").value == 'COMPLIANCE') {
+	if(hiddenType.value == 'COMPLIANCE') {
 		if(flagReturn) {
 			flagUpload = false;
 			var object = document.getElementById("objForm");

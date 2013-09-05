@@ -6,7 +6,7 @@
 //************************************************************************************************
 
 // show hide audit checklist options
-$(function(){
+/*$(function(){
    $("span").each(function (i){
 	  (function(i) {
 		  i++;
@@ -17,6 +17,7 @@ $(function(){
 	  }(i));
    });
 });
+*/
 
 function validateFormOnSubmit() { 
 	flagReturn = true;

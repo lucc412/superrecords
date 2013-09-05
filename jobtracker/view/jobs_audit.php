@@ -40,47 +40,33 @@ include(TOPBAR);
 
 		<tr>
 			<td><strong>Client Type</strong></td>
-			<td>
-				<select name="lstCliType" id="lstCliType" title="Select type of client" onchange="javascript:selectOptions('JobType');">
-					<option value="0">Select Client Type</option><?php
-					foreach($arrClientType AS $typeId => $typeDesc){
-						$selectStr = '';
-						if($typeId == $dbCliTypeId) $selectStr = 'selected';
-						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?php 
-					}
-				?></select>
-			</td>
+			<td><?=$arrAuditType['cliType'];?><input type="hidden" name="lstCliType" value="25"></td>
 		</tr>
 
 		<tr><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Job Type</strong></td>
-			<td>
-				<span id="spanJobType">	
-					<select name="lstJobType" id="lstJobType" title="Select type of job"><?
-						if(!empty($dbJobTypeId)) {
-							?><option value="0">Select Job Type</option><?php
-							foreach($arrJobType AS $typeId => $typeDesc){
-								$selectStr = '';
-								if($typeId == $dbJobTypeId) $selectStr = 'selected';
-								?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?php 
-							}
-						}
-						else {
-							?><option value="0">Select Job Type</option><?
-						}
-					?></select>
-				</span>
-			</td>
+			<td><?=$arrAuditType['jobType'];?><input type="hidden" name="lstJobType" value="11"></td>
 		</tr>
-
 
 		<tr><td>&nbsp;</td></tr>
 
 		<tr>
 			<td><strong>Period</strong></td>
-			<td><input title="Specify period of job" type="text" name="txtPeriod" id="txtPeriod" value="<?=$dbPeriod?>"></td>
+			<td><?
+				$optionYear = "2010";
+				?><select name="txtPeriod" id="txtPeriod" title="Select period">
+					<option value="">Select Period</option><?
+					while($optionYear <= date("Y")) {
+						if(time() < strtotime("01 July ".$optionYear)) break;
+						$optPeriod = "Year End 30/06/".$optionYear++;
+						$strPeriod = '';
+						if($dbPeriod == $optPeriod) $strPeriod = 'selected';
+						?><option <?=$strPeriod?>><?=$optPeriod?></option><?php 
+					}
+				?></select>
+			</td>
 		</tr>
 
 		<tr><td>&nbsp;</td></tr>

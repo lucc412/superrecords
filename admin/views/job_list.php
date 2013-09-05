@@ -380,49 +380,61 @@ switch ($a)
 	// Case to load checklists tab, begins here.	
 	case "checklists":
 
-		$arrChecklist = $objCallData->getAuditChecklist();
+		$arrChecklist = $objCallData->getAuditChecklist($_REQUEST["jobId"]);
 		$arrDocDetails = $objCallData->getAuditDetails($_REQUEST["jobId"]);
+		$arrSubDocList = $objCallData->getAuditSubDocList($_REQUEST['jobId']);
 		$arrUplStatus['PENDING'] = 'Pending';
 		$arrUplStatus['ATTACHED'] = 'Attached';
 		$arrUplStatus['NA'] = 'N/A';
 		include(JOBNAVIGATION);
-		?><div class="auditupload pdT50"><?
+		?><div class="pdT50"><?
 			foreach($arrChecklist AS $strChecklist => $arrSubChecklist) {
 				$checklist = $commonUses->stringToArray(':',$strChecklist);
 				$checklistId = $checklist['0'];
 				$checklistName = $checklist['1'];
+				$arrDocList = $objCallData->getAuditDocList($_REQUEST['jobId'],$checklistId);
 
-				?><span class="bluearrow1" id="checklist<?=$checklistId?>"><?=$checklistName;?></span>
-				<table style="display:none;" id="subchecklist<?=$checklistId?>"><?
-					foreach($arrSubChecklist AS $subChecklistId => $subChecklistName) {
-						?><tr>
-							<td style="width:400px" id="subchecklist"><?=$subChecklistName?></td>
-							<td align="right"><?
-								foreach($arrUplStatus AS $charStatus => $strStatus) {
-									$strChecked = "";
-									// edit case
-									if(isset($arrDocDetails[$subChecklistId]['status'])) {
-										if($charStatus == $arrDocDetails[$subChecklistId]['status'])
-											$strChecked = "checked";
-									}
-									// add case
-									else {
-										if($charStatus == 'PENDING')
-											$strChecked = "checked";
-									}
-									?><input type="radio" name="rdUplStatus<?=$subChecklistId?>" class="checkboxClass" value="<?=$charStatus?>" <?=$strChecked?> disabled><?=$strStatus;
-								}
-							?></td>
-							<td align="right"><textarea name="taNotes<?=$subChecklistId?>" cols="5" rows="1" readonly><?=$arrDocDetails[$subChecklistId]['notes']?></textarea></td>
+				?><span class="bluearrow1" id="checklist<?=$checklistId?>"><?=$checklistName;?></span><?
+				if(!empty($arrDocList)) {
+					?><div class="pdB15" align="right"><button style="width:250px;" type="button" title="click here to view multiple documents" onclick="JavaScript:newPopup('job.php?a=auditDocs&checklistId=<?=$checklistId?>&jobId=<?=$_REQUEST['jobId']?>');">View multiple uploaded documents</button></div><?
+				}
+				?><table width="100%" id="subchecklist<?=$checklistId?>" class="fieldtable pdB20">
+					<tbody>
+						<tr class="fieldheader">
+							<th width="50%" class="fieldheader">Description</th>
+							<th width="10%" class="fieldheader" align="center">Status</th>
+							<th width="20%" class="fieldheader" align="left">Comments</th>
+							<th width="15%" class="fieldheader" align="center">Documents</th>
 						</tr><?
-					}
-					?><tr>
-						<td align="right" colspan="3">
-							<button type="button" title="click here to view documents" onclick="JavaScript:newPopup('job.php?a=auditDocs&checklistId=<?=$checklistId?>&jobId=<?=$_REQUEST['jobId']?>');">Documents</button>
-						</td>
-					</tr><?
-					
-				?></table><?
+						$countRow=0;
+						foreach($arrSubChecklist AS $subChecklistId => $subChecklistName) {
+							if($countRow%2 == 0) $trClass = "trcolor";
+							else $trClass = "";
+							?><tr class="<?=$trClass?>">
+								<td style="width:400px" id="subchecklist"><?=$subChecklistName?></td>
+								<td align="center"><?
+									$charStatus=$arrDocDetails[$subChecklistId]['status'];
+									echo $arrUplStatus[$charStatus];
+								?></td>
+								<td align="left"><?=$arrDocDetails[$subChecklistId]['notes']?></td>
+								<td align="center"><?
+									$arrSubDocuments = $arrSubDocList[$subChecklistId];
+									if(!empty($arrSubDocuments)) {
+										$docCnt = 0;
+										foreach($arrSubDocuments AS $docPath) {
+											$docCnt++;
+											$folderPath = "../uploads/audit/" . $docPath;
+											if(file_exists($folderPath)) {
+												?><p><a class="alink" href="job.php?sql=download&flagType=A&filePath=<?=urlencode($docPath)?>" title="Click to view this document">Document <?=$docCnt?></a></p><?
+											}
+										}
+									}
+								?></td>
+							</tr><?
+							$countRow++;
+						}
+					?></tbody>
+				</table><?
 			}
 			?></div><?
 		

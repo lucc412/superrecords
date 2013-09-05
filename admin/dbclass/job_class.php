@@ -601,7 +601,6 @@ class Job_Class extends Database
 		$origFileName = stripslashes($_FILES['fileReport']['name']);
 		$filePart = pathinfo($origFileName);
 		
-		$rnd = rand(1111,9999);
 		$dbFileName = $fileId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
 		$folderPath = "../uploads/reports/" . $dbFileName;
 
@@ -643,6 +642,7 @@ class Job_Class extends Database
 					FROM documents d
 					WHERE d.job_id = {$jobId}
 					AND d.checklist_id = {$checklistId}
+					AND d.subchecklist_id = 0
 					ORDER BY d.date desc";
 
 		$objRes = mysql_query($qrySel);
@@ -653,12 +653,13 @@ class Job_Class extends Database
 		return $arrDocList;
 	}
 
-	public function getAuditChecklist() {
+	public function getAuditChecklist($jobId) {
 
 		$qrySel = "SELECT ac.checklist_id, ac.checklist_name, aus.subchecklist_id, aus.subchecklist_name
-					FROM audit_checklist ac, audit_subchecklist aus, documents dc
+					FROM audit_subchecklist aus, audit_checklist_status acs, audit_checklist ac
 					WHERE ac.checklist_id = aus.checklist_id
-					AND dc.checklist_id = ac.checklist_id
+					AND ac.checklist_id = acs.checklist_id 
+					AND acs.job_id = '{$jobId}'
 					GROUP BY ac.checklist_order, aus.subchecklist_order";
 
 		$fetchResult = mysql_query($qrySel);		
@@ -682,6 +683,21 @@ class Job_Class extends Database
 		}
 		
 		return $arrDocDetails;
+	}
+
+	public function getAuditSubDocList($jobId) {
+		$qrySel = "SELECT d.file_path, d.subchecklist_id
+					FROM documents d
+					WHERE d.job_id = {$jobId}
+					AND d.subchecklist_id <> 0
+					ORDER BY d.date desc";
+
+		$objRes = mysql_query($qrySel);
+		while($rowData = mysql_fetch_assoc($objRes)) {
+			$arrDocList[$rowData['subchecklist_id']][] = $rowData['file_path'];
+		}
+		
+		return $arrDocList;
 	}
 
 }

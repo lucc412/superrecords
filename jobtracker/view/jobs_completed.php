@@ -37,12 +37,12 @@ include(TOPBAR);
 		// display job data
 		?><table width="100%" class="resources">
 		<tr>
-			<td width="50%" class="td_title">Job Name</td>
-			<td width="10%" class="td_title">Job Genre</td>
-			<td width="15%" class="td_title">Source Documents</td>
-			<td width="15%" class="td_title">Reports</td>
-			<td width="12%" class="td_title" align="center">Completion Date</td>
-			<td width="12%" class="td_title" align="center">Queries</td>
+			<td width="40%" class="td_title">Job Name</td>
+			<td class="td_title">Job Genre</td>
+			<td class="td_title">Source Documents</td>
+			<td class="td_title">Reports</td>
+			<td class="td_title" align="center">Completion Date</td>
+			<td class="td_title" align="center">Queries</td>
 		</tr><?			
 		
 		$countRow = 0;

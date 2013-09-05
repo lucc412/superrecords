@@ -19,11 +19,12 @@ class LEGAL_REFERENCES {
 	}
 
 	// function to insert member details of sign up user
-	function addLegalReferences($title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus) 
+	function addLegalReferences($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone) 
         {
-		$qryInsert = "INSERT INTO es_legal_references (job_id, title, fname, mname, lname, dob, city, country_id, gender, address, tfn, occupation, contact_no, member_status)
+		$qryInsert = "INSERT INTO es_legal_references (job_id, member_id, title, fname, mname, lname, dob, city, country_id, gender, address, tfn, occupation, contact_no)
                       VALUES (
 							'" . addslashes($_SESSION['jobId']) . "',
+                                                        '" . $memberId . "',    
 							'" . addslashes($title) . "',
 							'" . addslashes($fname) . "',	
 							'" . addslashes($mname) . "',	
@@ -35,17 +36,17 @@ class LEGAL_REFERENCES {
 							'" . addslashes($address) . "',
 							'" . addslashes($tfn) . "',
 							'" . addslashes($occupation) . "',
-							'" . addslashes($phone) . "',
-                                                        '" . addslashes($memberStatus) . "'
+							'" . addslashes($phone) . "'
+                                                        
 					)";
-
+                
 		$flagReturn = mysql_query($qryInsert);
 
 	    return $flagReturn;
 	}
 
 	// function to edit member details of sign up user
-	function editLegalReferences($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus) {
+	function editLegalReferences($refId, $memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone) {
 		$qryUpd = "UPDATE es_legal_references
 						SET title = '" . addslashes($title) . "',
 							fname = '" . addslashes($fname) . "',
@@ -58,9 +59,10 @@ class LEGAL_REFERENCES {
 							address = '" . addslashes($address) . "', 
 							tfn = '" . addslashes($tfn) . "', 
 							occupation = '" . addslashes($occupation) . "', 
-							contact_no = '" . addslashes($phone) . "',
-                                                        member_status = '" . addslashes($memberStatus) . "'
-						WHERE member_id = " . $memberId ." AND job_id = ".$_SESSION['jobId'];
+							contact_no = '" . addslashes($phone) . "'
+						WHERE ref_id = ". $refId ." AND member_id = " . $memberId ." AND job_id = ".$_SESSION['jobId'];
+                
+                //exit;
 
 		$flagReturn = mysql_query($qryUpd);
 
@@ -70,7 +72,7 @@ class LEGAL_REFERENCES {
 	// function to existing fetch trustee details
 	function fetchExistingDetails($jobId) {
 
-		$qryFetch = "SELECT * FROM es_member_details WHERE job_id = '" . $jobId . "'";	
+		$qryFetch = "SELECT * FROM es_legal_references WHERE job_id = '" . $jobId . "'";	
 
                 $fetchResult = mysql_query($qryFetch);
 		$count = 1;
@@ -82,5 +84,20 @@ class LEGAL_REFERENCES {
 
 		return $arrData;
 	}
+        
+        function checkLegalRef()
+        {
+            $qryFetch = "SELECT * FROM es_member_details WHERE job_id = '" . $_SESSION['jobId'] . "' AND legal_references = 1";
+
+            $fetchResult = mysql_query($qryFetch);
+            $count = 1;
+
+            $arrData = array();
+            while($rowData = mysql_fetch_assoc($fetchResult)) {
+                    $arrData[$count++] = $rowData['member_id'];
+            }
+
+            return $arrData;
+        }
 }
 ?>

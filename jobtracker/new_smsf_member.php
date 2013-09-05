@@ -17,7 +17,7 @@ if(isset($_SESSION['jobId'])) {
         {
         	// fetch existing contact details
 		$arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
-                
+                $legRefernces=0;
 		for($memberCount=1; $memberCount <= $_SESSION['NOOFMEMBERS']; $memberCount++) 
                 {
                     if(isset($_REQUEST['memberId' . $memberCount]))
@@ -28,6 +28,13 @@ if(isset($_SESSION['jobId'])) {
                     $mname = $_REQUEST['txtMname' . $memberCount];
                     $lname = $_REQUEST['txtLname' . $memberCount];
                     $dob = getDateFormat($_REQUEST['txtDob' . $memberCount]);
+                    
+                    if(date('Y') - date('Y', strtotime($dob) < 18 ))
+                    {
+                        $legRefernces++;
+                        $ref = 1;
+                    }
+                    
                     $city = $_REQUEST['txtCity' . $memberCount];
                     $country = $_REQUEST['lstCountry' . $memberCount];
                     $gender = $_REQUEST['lstGender' . $memberCount];
@@ -39,15 +46,17 @@ if(isset($_SESSION['jobId'])) {
 
                     // insert member info of sign up user
                     if(empty($memberId)) {
-                            $flagReturn = $objScr->addMemberInfo($title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus);
+                            $flagReturn = $objScr->addMemberInfo($title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus, $ref);
                     }
                     else {
-                            $flagReturn = $objScr->editMemberInfo($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus);
+                            $flagReturn = $objScr->editMemberInfo($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus, $ref);
                     }
 		}
-
+                
 		// check for no. of members records added
-		if($flagReturn) {
+		if($flagReturn) 
+                {
+                
 			if($_SESSION['TRUSTEETYPE'] == '1')
 			{
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
@@ -65,8 +74,14 @@ if(isset($_SESSION['jobId'])) {
                                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                                 header('Location: jobs.php?a=saved');
                             }
+                            elseif ($legRefernces > 0) 
+                            {
+                                header('Location: legal_references.php');
+                            }
                             else
+                            {
                                 header('Location: new_smsf_trustee.php');
+                            }
                         }
 		}
 		else {

@@ -13,7 +13,8 @@ if(isset($_SESSION['jobId'])) {
 
 	// define array
 	$arrYesNo = array('Yes', 'No');
-
+        $arrLegRef = $objScr->checkLegalRef();
+        
 	// case of Trustee Type - New Trustee
 	if(isset($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'addNewTrusteeInfo') {
 		$cName = $_REQUEST['txtCname'];

@@ -12,11 +12,12 @@ include(SETUPNAVIGATION);
 	<div style="padding-bottom:20px;">Please enter the details for each references of the new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div><?
 
 	// show member form as per no of members
-	?><form method="post" action="legal_references.php" name="frmnewsmsfmember" onsubmit="return formValidation(<?=$_SESSION['NOOFMEMBERS']?>)"><?
-                $_SESSION['NOOFMEMBERS'] = 1;
-		for($memberCount=1; $memberCount <= $_SESSION['NOOFMEMBERS']; $memberCount++) {
+	?><form method="post" action="legal_references.php" name="frmnewsmsfmember" onsubmit="return formValidation(<?=count($arrLegRef)?>)"><?
+                //$_SESSION['NOOFMEMBERS'] = 1;
+		for($memberCount=1; $memberCount <= count($arrLegRef); $memberCount++) {
 
-			$memberId = "";
+                        $refId = "";
+			$memberId = $arrLegRef[$memberCount];
 			$title = "";
 			$fname = "";
 			$mname = "";
@@ -33,7 +34,8 @@ include(SETUPNAVIGATION);
 			if(!empty($arrData)) {
 				if(isset($arrData[$memberCount])) {
 					$arrMemberInfo = $arrData[$memberCount];
-
+                                        
+                                        $refId = $arrMemberInfo['ref_id'];
 					$memberId = $arrMemberInfo['member_id'];
 					$title = $arrMemberInfo['title'];
 					$fname = $arrMemberInfo['fname'];
@@ -142,16 +144,17 @@ include(SETUPNAVIGATION);
 					<td><input type="text" id="txtPhone<?=$memberCount?>" name="txtPhone<?=$memberCount?>" value="<?=$contactNo?>" /></td>
 				</tr>
 			</table><br/><br/>
-			<input type="hidden" name="memberId<?=$memberCount?>" value="<?=$memberId?>"><?
+			<input type="hidden" name="memberId<?=$memberCount?>" value="<?=$memberId?>">
+                        <input type="hidden" name="refId<?=$memberCount?>" value="<?=$refId?>"><?
                         
 		}?>
                 <input type="hidden" id="member_status" name="member_status" value=""/>
                 <div style="padding-top:20px;">
-                    <span align="left"><button type="button" onclick="window.location.href='new_smsf_fund.php'" >BACK</button></span>
+                    <span align="left"><button type="button" onclick="window.location.href='new_smsf_member.php'" >BACK</button></span>
                     <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >NEXT</button></span>
                     <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>
 		</div>
-		<input type="hidden" name="doAction" value="addMemberInfo">
+		<input type="hidden" name="doAction" value="addLegRef">
 	</form>
         <script>
             $('#btnNext').click(function(){$('#member_status').val('0')})

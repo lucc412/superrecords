@@ -30,7 +30,7 @@ include(TOPBAR);
 
 	// content
 	if(count($arrJobs) == 0) {
-		?><div class="errorMsg">You don't have any completed jobs.</div><?
+		?><div class="errorMsg">You don't have any completed jobs linked to this client.</div><?
 	}
 	else {
 

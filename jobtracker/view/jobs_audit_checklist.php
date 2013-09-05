@@ -4,7 +4,7 @@ include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
-	<h1>Submit documents (Audit)</h1>
+	<h1>Select checklist (Audit)</h1>
 	<span>
 		<b>Welcome to the Super Records checklist selection page for audit.</b></br>Please select the checklist for audit job.
 	<span>
@@ -21,7 +21,7 @@ include(TOPBAR);
 			$defaultChckd = "checked";
 		else 
 			$defaultChckd = "";
-		?><input class="checkboxClass" <?=$defaultChckd?> type="checkbox" name="checklist<?=$checklistId?>"><?=$arrChcklst[0];?><br/><?
+		?><p class="pdB8"><input class="checkboxClass" <?=$defaultChckd?> type="checkbox" name="checklist<?=$checklistId?>"><span class="checklistlabel pdL10"><?=$arrChcklst[0];?></span></p><?
 	}
 	?><div class="pdT50">
 		<span class="pdR50"><button type="reset" onclick="window.location.href='jobs.php?a=audit'" value="Reset">Back</button></span>

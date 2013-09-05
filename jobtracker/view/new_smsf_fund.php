@@ -12,7 +12,7 @@ include(SETUPNAVIGATION);
 	<div style="padding-bottom:20px;">Please enter the details for your new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div>
 	
 	<form method="post" name="frmnewsmsffund" action="new_smsf_fund.php" onsubmit="return formValidation()">
-		<table>
+		<table class="fieldtable">
 			<tr>
 				<td>Fund Name</td>
 				<td><input type="text" name="txtFund" value="<?=$fundName?>" />

@@ -11,9 +11,9 @@ include(SETUPNAVIGATION);
 	<div style="padding-bottom:20px;">Please enter your contact details. If there are any issues with this application, we will contact you using these details. Once your fund is set up, we will also contact you using these details to guide you through the next stages of the process.</div>
 	
 	<form method="post" name="frmnewsmsfcont" action="new_smsf_contact.php" onsubmit="return formValidation();">
-		<table>
+		<table class="fieldtable">
 			<tr>
-				<td>First Name</td>
+				<td><strong>First Name</strong></td>
 				<td><input type="text" id="txtFname" name="txtFname" value="<?=$fname?>" /></td>
 			</tr>
 			<tr>

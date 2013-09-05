@@ -10,19 +10,17 @@ include(SETUPNAVIGATION);
 </div>
 <form method="post" action="new_smsf_declarations.php" onsubmit="return checkYesNoAns();">
 	<input type="hidden" value="<?=$_SESSION['TRUSTEETYPE']?>" id="hdnTrusteeType"/>
-
-	<div style="padding-top:20px;"><u><b>New SMSF Declaration</b></u></div>
-	<div>
+	<div style="padding-top:20px;">
 		<div>There are certain limitations on who can be a member or a trustee of a self managed superannuation fund. Please answer yes or no to the following questions to determine whether any proposed member is not allowed to be a member of the SMSF.</div></br>	
 
-		<table><?
+		<table class="fieldtable"><?
 			for($i=0; $i<count($arrQues); $i++)	{
 				?><tr>
-					<td>
+					<td class="pdB20">
 						<?=$arrQues[$i]?>
 					</td>
-					<td>
-						<label style="padding-right:20px;"><input class="checkboxClass" type="radio" name="rd<?=$i+1?>" id="rd<?=$i+1?>"/>Yes</label>
+					<td class="pdB20">
+						<label style="padding-left:30px;"><input class="checkboxClass" type="radio" name="rd<?=$i+1?>" id="rd<?=$i+1?>"/>Yes</label>
 						<label><input class="checkboxClass" type="radio" name="rd<?=$i+1?>" id="rd<?=$i+1?>" checked="checked"/>No</label>
 					</td>
 				</tr><?

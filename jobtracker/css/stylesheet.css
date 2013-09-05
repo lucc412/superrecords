@@ -556,7 +556,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	display:block;
 	padding:10px 20px;
 	background:url(../images_user/rightmenu-arrow.jpg) 5px 15px no-repeat;
-	cursor:pointer;
+	cursor:default;
 	color:rgba(7, 65, 96, 0.94);
 	text-decoration:underline;
 }
@@ -619,6 +619,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	padding-left:10px;
 }
 
+.pdT20
+{
+	padding-top:20px;
+}
+
+.pdT10
+{
+	padding-top:10px;
+}
+
 .pdT50
 {
 	padding-top:50px;
@@ -627,6 +637,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .pd10
 {
 	padding:10px;
+}
+
+.pdB8
+{
+	padding-bottom:8px;
 }
 
 .pdB20
@@ -642,6 +657,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 {
 	cursor:pointer;
 	padding-bottom:10px;
+}
+
+.checklistlabel
+{
+	font-size:12px;
+	color:#666;
+	font-weight:bold;
 }
 
 .rightmenu {
@@ -856,6 +878,11 @@ button {
 	margin-top:4px;
 }
 
+.fieldtable td 
+{
+	font-weight:bold;
+}
+
 .logoutbtn {
 	color: white;
 	background:url(../images_user/submit-bg.jpg) center left no-repeat #074165;
@@ -886,6 +913,22 @@ button {
 {
 	width:90%;
 	color:#FB5C24;
+}
+
+.introduction div
+{
+	font-weight:bold;
+}
+
+.introduction span
+{
+	color:#0c436c;
+	text-decoration:underline;
+}
+
+.orangeheader
+{
+	color:#f05927;
 }
 
 .successPopup {

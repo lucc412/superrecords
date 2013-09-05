@@ -4,12 +4,12 @@ include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
-	<h1>Submit documents (Audit)</h1>
+	<h1>Add documents (Audit)</h1>
 	<div>
 		<span>
 			<b>Welcome to the Super Records documents upload page for audit.</b></br>Here you can upload documents for audit job.
 			<div class="downloadChecklist" align="right">
-				<button name="button" type="button" onclick="javascript:urlRedirect('jobs.php?sql=dwnldchcklst');">Download Checklist</button>
+				<button title="click here to download your preferred checklist" type="button" onclick="javascript:urlRedirect('jobs.php?sql=dwnldchcklst');">Download Checklist</button>
 			</div>
 		</span>
 	</div>
@@ -37,10 +37,10 @@ include(TOPBAR);
 				<tbody>
 					<tr>
 						<td width="40%" class="td_title">Description</td>
-						<td class="td_title" align="center">Status</td>
-						<td class="td_title" align="center">Comments</td>
 						<td class="td_title" align="center">Upload</td>
 						<td class="td_title" align="center">Documents</td>
+						<td class="td_title" align="center">Status</td>
+						<td class="td_title" align="center">Comments</td>
 					</tr><?
 					$countRow = 0;
 					foreach($arrSubChecklist AS $subChecklistId => $subChecklistName) {
@@ -48,6 +48,20 @@ include(TOPBAR);
 						else $trClass = "";
 						?><tr class="<?=$trClass?>">
 							<td class="tddata" style="width:400px" id="subchecklist"><?=$subChecklistName?></td>
+							<td class="tddata" align="center"><button style="width:85px" onclick="JavaScript:newPopup('jobs.php?a=uploadSubAudit&checklistId=<?=$checklistId?>&subchecklistId=<?=$subChecklistId?>','250');" type="button" title="click here to upload documents">Upload</button></td>
+							<td class="tddata" align="center"><?
+								$arrSubDocuments = $arrSubDocList[$subChecklistId];
+								if(!empty($arrSubDocuments)) {
+									$docCnt = 0;
+									foreach($arrSubDocuments AS $docPath) {
+										$docCnt++;
+										$folderPath = "../uploads/audit/" . $docPath;
+										if(file_exists($folderPath)) {
+											?><p><a href="jobs.php?a=download&filePath=<?=urlencode($docPath)?>&flagChecklist=A" title="Click to view this document">Document <?=$docCnt?></a></p><?
+										}
+									}
+								}
+							?></td>
 							<td class="tddata" align="center">
 								<select name="rdUplStatus<?=$subChecklistId?>"><?
 									foreach($arrUplStatus AS $charStatus => $strStatus) {
@@ -67,20 +81,6 @@ include(TOPBAR);
 								?></select>
 							</td>
 							<td class="tddata" align="center"><textarea name="taNotes<?=$subChecklistId?>" cols="5" rows="1"><?=$arrDocDetails[$subChecklistId]['notes']?></textarea></td>
-							<td class="tddata" align="center"><button style="width:85px" onclick="JavaScript:newPopup('jobs.php?a=uploadSubAudit&checklistId=<?=$checklistId?>&subchecklistId=<?=$subChecklistId?>','250');" type="button" title="click here to upload documents">Upload</button></td>
-							<td class="tddata" align="center"><?
-								$arrSubDocuments = $arrSubDocList[$subChecklistId];
-								if(!empty($arrSubDocuments)) {
-									$docCnt = 0;
-									foreach($arrSubDocuments AS $docPath) {
-										$docCnt++;
-										$folderPath = "../uploads/audit/" . $docPath;
-										if(file_exists($folderPath)) {
-											?><p><a href="jobs.php?a=download&filePath=<?=urlencode($docPath)?>&flagChecklist=A" title="Click to view this document">Document <?=$docCnt?></a></p><?
-										}
-									}
-								}
-							?></td>
 						</tr><?
 						$countRow++;
 					}

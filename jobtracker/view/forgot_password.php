@@ -18,12 +18,12 @@
 
 				// error message if login attempt fails
 				if($flagError == 'Y') {
-					?><div class="errorMsg" style="width:300px; margin-bottom:15px;">Sorry, this email address is incorrect.</div><?
+					?><div class="errorMsg" style="width:300px; margin-bottom:15px;">A user with this email address was not found.</div><?
 				}
 
 				// error message if login attempt fails
 				if($flagSuccess == 'Y') {
-					?><div class="errorMsg" style="width:300px; margin-bottom:15px;">Please check your inbox to recover password.</div><?
+					?><div class="errorMsg" style="width:550px; margin-bottom:15px;">Password was sent to your email. Please check your email for a message from SuperRecords.</div><?
 				}
 
 				?><div align="center" class="logindiv"><?

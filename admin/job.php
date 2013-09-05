@@ -36,6 +36,7 @@ if($_SESSION['validUser']) {
 	if($sql != 'download') {
 		if($a == "uploadReports" || $a == "auditDocs") {
 			?><link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+			<script type="text/javascript" src="<?php echo $javaScript;?>jquery-1.4.2.min.js"></script>
 			<script type="text/javascript" src="<?php echo $javaScript;?>job.js"></script><?
 		}
 	}

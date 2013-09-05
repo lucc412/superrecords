@@ -11,14 +11,14 @@ include(TOPBAR);
 ?>
 <style>
     .wrap ul li { list-style: none;padding: 5px;}
-    .wrap li :hover{color:#F05729;}
+    /*.wrap li :hover{color:#F05729;}*/
     .wrap ul{ padding-left: 15px;}
     .wrap li a {color: #074263;}
 </style>
 <div class="pageheader">
 	<h1>Order Documents</h1>
 	<span>
-		<b>Welcome to the Super Records job submission page.</b></br>If you would like to retrive the previously saved order, please click on retrive the saved order. Otherwise, to submit the new order, please select start the new order.
+		<b>Welcome to the Super Records job submission page.</b></br>If you would like to retrieve the saved order, please click on Saved Jobs. Otherwise please select the document you would like to order from below list.
 	<span>
 </div>
 <div class="wrap" style="min-height: 350px; ">
@@ -29,8 +29,8 @@ include(TOPBAR);
         <ul>
         <?php foreach($subforms['subforms'] as $frm => $frmVal){ ?>
             <li>
-                <div style="width: 550px;float: left;padding: 4px 0 5px;"><span><?=$frmVal['subform_name']?></span></div>
-                <div style="width: 60px;float: left;padding: 4px 0 5px;"><strong><?php echo '$'.$frmVal['subform_price'];?></strong></div>
+                <div style="width: 550px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?=$frmVal['subform_name']?></span></div>
+                <div style="width: 60px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?='$'.$frmVal['subform_price'];?></span></div>
                 <button style="width: 82px;margin: 0" onclick='window.location.href="jobs.php?a=redirect&type=setup&frmId=<?=$frmVal['subform_id']?>"' >Order</button>
             </li>
         <?php } ?>

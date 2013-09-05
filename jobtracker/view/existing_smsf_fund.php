@@ -13,7 +13,7 @@ include(SETUPNAVIGATION);
 	<div style="padding-bottom:20px;">Please enter the details for your fund. These details will be used to set up the fund in our system. If you need any help completing this section, please contact us.</div>
 	
 	<form method="post" action="existing_smsf_fund.php" name="frmexstsmsffund" onsubmit="return formValidation();">
-		<table>
+		<table class="fieldtable">
 			<tr>
 				<td>Fund Name</td>
 				<td><input type="text" name="txtFund" value="<?=$fundName?>" />

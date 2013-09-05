@@ -111,10 +111,10 @@ function getAge(age,cnt)
     var year = ~~((Date.now() - birthday) / (31557600000));
     if(year < 18)
     {
-        alert('Please provide Legal Personal Details for your member');
+        //alert('Please provide Legal Personal Details for your member');
         //$('#trlegalRef').show();
-        cnt++;
-        return cnt;
+        //cnt++;
+       // return cnt;
     }
     else{
         //$('#trlegalRef').hide();

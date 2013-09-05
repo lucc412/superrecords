@@ -12,7 +12,9 @@ function urlRedirect(url)
 
 $(function(){
 	$('INPUT[type="file"]').change(function () {
-		var ext = this.value.match(/\.(.+)$/)[1];
+		//var ext = this.value.match(/\.(.+)$/)[1];
+		var fileName = $(this).val().split('/').pop().split('\\').pop();
+		var ext = fileName.split('.').pop();
 		switch (ext) {
 			case 'txt':
 			case 'doc':

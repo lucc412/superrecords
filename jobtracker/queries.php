@@ -47,7 +47,7 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 			/* send mail function ends here */
 		}	
 
-		header("Location: queries.php?flagUpdate=Y&lstJob={$_REQUEST['lstJob']}");
+		header("Location: queries.php?flagUpdate=Y&lstJob={$_REQUEST['lstJob']}&lstCliType={$_REQUEST['lstCliType']}");
 	}
 	else {
 		foreach($_REQUEST AS $varName => $varValue) {

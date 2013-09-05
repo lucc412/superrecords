@@ -35,20 +35,23 @@
 			if($typeStr == 'type=comp') {
 				?><title>Submit a Job (Compliance)</title><?
 			}
-                        else if($typeStr == 'type=setup') {
+            else if($typeStr == 'type=setup') {
 				?><title>Submit a Job (Setup)</title><?
 			}
 			else if($qryStr == 'a=audit') {
 				?><title>Submit a Job (Audit)</title><?
 			}
 			else if($qryStr == 'a=checklist') {
-				?><title>Submit documents (Audit)</title><?
+				?><title>Select checklist (Audit)</title><?
 			}
-			else if($qryStr == 'a=uploadAudit') {
+			else if($qryStr == 'a=subchecklist' || $qryStr == 'a=uploadAudit' || $qryStr == 'a=uploadSubAudit') {
 				?><title>Add documents (Audit)</title><?
 			}
 			else if($qryStr == 'a=edit') {
 				?><title>Edit Existing Job</title><?
+			}
+			else if($qryStr == 'a=order') {
+				?><title>Order Documents</title><?
 			}
 			else if($qryStr == 'a=saved') {
 				?><title>Saved Jobs</title><?

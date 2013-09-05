@@ -402,9 +402,9 @@ switch ($a)
 					<tbody>
 						<tr class="fieldheader">
 							<th width="50%" class="fieldheader">Description</th>
+							<th width="15%" class="fieldheader" align="center">Documents</th>
 							<th width="10%" class="fieldheader" align="center">Status</th>
 							<th width="20%" class="fieldheader" align="left">Comments</th>
-							<th width="15%" class="fieldheader" align="center">Documents</th>
 						</tr><?
 						$countRow=0;
 						foreach($arrSubChecklist AS $subChecklistId => $subChecklistName) {
@@ -412,11 +412,6 @@ switch ($a)
 							else $trClass = "";
 							?><tr class="<?=$trClass?>">
 								<td style="width:400px" id="subchecklist"><?=$subChecklistName?></td>
-								<td align="center"><?
-									$charStatus=$arrDocDetails[$subChecklistId]['status'];
-									echo $arrUplStatus[$charStatus];
-								?></td>
-								<td align="left"><?=$arrDocDetails[$subChecklistId]['notes']?></td>
 								<td align="center"><?
 									$arrSubDocuments = $arrSubDocList[$subChecklistId];
 									if(!empty($arrSubDocuments)) {
@@ -430,6 +425,11 @@ switch ($a)
 										}
 									}
 								?></td>
+								<td align="center"><?
+									$charStatus=$arrDocDetails[$subChecklistId]['status'];
+									echo $arrUplStatus[$charStatus];
+								?></td>
+								<td align="left"><?=$arrDocDetails[$subChecklistId]['notes']?></td>
 							</tr><?
 							$countRow++;
 						}

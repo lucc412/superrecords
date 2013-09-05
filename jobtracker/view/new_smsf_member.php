@@ -50,8 +50,8 @@ include(SETUPNAVIGATION);
 				}
 			}
 			
-			?><span class="memberclass"><u>Member <?=$memberCount?></u></span>
-			<table>
+			?><span style="color:#0c436c"><u><b>Member <?=$memberCount?></b></u></span>
+			<table class="fieldtable">
 				<tr>
 					<td>Title</td>
 					<td>

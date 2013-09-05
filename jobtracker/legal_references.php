@@ -11,16 +11,27 @@ if(isset($_SESSION['jobId'])) {
 	// create class object for class function access
 	$objScr = new LEGAL_REFERENCES();
 	//global $phpFunctns;
-
-	if(isset($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'addMemberInfo') {
+        $arrLegRef = $objScr->checkLegalRef();
+        
+	if(isset($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'addLegRef') {
 
 		// fetch existing contact details
-		$arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
+            	$arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
                 
-		for($memberCount=1; $memberCount <= $_SESSION['NOOFMEMBERS']; $memberCount++) {
-			if(isset($_REQUEST['memberId' . $memberCount]))
-				$memberId = $_REQUEST['memberId' . $memberCount]; 
-
+                
+                //$memberCount = count($arrLegRef);
+                
+                for($memberCount=1; $memberCount <= count($arrLegRef); $memberCount++) 
+                {
+		        if(isset($_REQUEST['memberId' . $memberCount]))
+                            $memberId = $_REQUEST['memberId' . $memberCount]; 
+                        else{
+                            $memberId = $arrLegRef[$memberCount];
+                        }
+                        
+                        if(isset($_REQUEST['refId' . $memberCount]))
+                            $refId = $_REQUEST['refId' . $memberCount]; 
+                        
 			$title = $_REQUEST['lstTitle' . $memberCount];
 			$fname = $_REQUEST['txtFname' . $memberCount];
 			$mname = $_REQUEST['txtMname' . $memberCount];
@@ -33,14 +44,14 @@ if(isset($_SESSION['jobId'])) {
 			$tfn = $_REQUEST['txtTfn' . $memberCount];
 			$occupation = $_REQUEST['txtOccupation' . $memberCount];
 			$phone = $_REQUEST['txtPhone' . $memberCount];
-                        $memberStatus = $_REQUEST['member_status'];
+                        //$memberStatus = $_REQUEST['member_status'];
 			
 			// insert member info of sign up user
-			if(empty($memberId)) {
-				$flagReturn = $objScr->addLegalReferences($title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus);
+			if(empty($refId)) {
+				$flagReturn = $objScr->addLegalReferences($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone);
 			}
 			else {
-				$flagReturn = $objScr->editLegalReferences($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus);
+				$flagReturn = $objScr->editLegalReferences($refId, $memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone);
 			}
 		}
 
@@ -49,14 +60,20 @@ if(isset($_SESSION['jobId'])) {
 			if($_SESSION['TRUSTEETYPE'] == '1')
 			{
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
+                            {
+                                if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                                 header('Location: jobs.php?a=saved');
+                            }
                             else
                                 header('Location: new_smsf_declarations.php');
                         }
 			else	
 			{
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
+                            {
+                                if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                                 header('Location: jobs.php?a=saved');
+                            }
                             else
                                 header('Location: new_smsf_trustee.php');
                         }

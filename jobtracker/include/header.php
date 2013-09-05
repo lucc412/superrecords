@@ -83,6 +83,10 @@
 				?><title>Member Details</title>
 				<script type="text/javascript" src="js/new_smsf_member.js"></script><?
 		}
+                else if(basename($_SERVER['PHP_SELF']) == 'legal_references.php') {
+				?><title>Legal References</title>
+				<script type="text/javascript" src="js/legal_references.js"></script><?
+		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_trustee.php') {
 				?><title>Trustee Details</title>
 				<script type="text/javascript" src="js/new_smsf_trustee.js"></script><?

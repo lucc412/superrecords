@@ -35,7 +35,7 @@ include(SETUPNAVIGATION);
 
 	<p class="orangeheader">If you are ready to continue, please click NEXT at the bottom of the page.</p>
 </b></div>
-<input type="hidden" name="lstClientType" value="21"/>
+<input type="hidden" name="lstClientType" value="25"/>
 <div class="pdT20">
     <span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />BACK</button></span>
     <span align="right" style="padding-left:55px;"><button type="button" onclick="javascript:window.location.assign('jobs.php?sql=<?php if(isset($_SESSION['jobId'])){echo'update';}else{echo'insertJob';} ?>&type=SETUP&subfrmId=1');">NEXT</button></span>

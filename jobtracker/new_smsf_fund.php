@@ -39,14 +39,13 @@ if(isset($_SESSION['jobId'])) {
 		// insert fund details of sign up user
 		if(empty($arrData)) {
 			$flagReturn = $objScr->addFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus);
+			$arrClient = $objScr->checkClients($fundName);
 		}
 		// edit fund details of sign up user
 		else {
 			$flagReturn = $objScr->editFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus);
 		}
-                
-                $arrClient = $objScr->checkClients($fundName);
-                
+                 
 		if($flagReturn) 
                 {
                 	// set no of members allowed in session variable

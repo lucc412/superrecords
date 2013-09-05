@@ -17,7 +17,7 @@ include(SETUPNAVIGATION);
 	if($_SESSION['TRUSTEETYPE'] == '2') {
 
 		?><div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details to set up your new corporate trustee. These details will be used to register the corporate trustee. If you need any help completing this section, please contact us.</div>
-		<span><u><b>New Corporate Trustee Details</b></u><span>
+		<span style="color:#0c436c"><u><b>New Corporate Trustee Details</b></u><span>
 		<form method="post" action="new_smsf_trustee.php" name="frmnewsmsftrustee" onsubmit="return formValidation()">
 		
 			<table class="fieldtable">
@@ -65,14 +65,8 @@ include(SETUPNAVIGATION);
 
 	// Form display for Existing Corporate Trustee
 	if($_SESSION['TRUSTEETYPE'] == '3') {
-		?>
-<<<<<<< HEAD
-                <div style="padding-bottom:20px;">Please enter the details of the company you have to act as your corporate trustee. If you need any help completing this section, please contact us.</div>
-                <span style="color:#0c436c"><u><b>Existing Corporate Trustee Details</b></u></span>
-=======
-                <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details of the company you have to act as your corporate trustee. If you need any help completing this section, please contact us.</div>
-                <span><u><b>Existing Corporate Trustee Details</b></u><span>
->>>>>>> d4980ca2b031e5782039dcd94bf50a99181fb227
+		?> <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details of the company you have to act as your corporate trustee. If you need any help completing this section, please contact us.</div>
+           <span style="color:#0c436c"><u><b>Existing Corporate Trustee Details</b></u><span>
 			
 		<form method="post" action="new_smsf_trustee.php" name="frmnewsmsftrustee" onsubmit="return formValidation()">
 		

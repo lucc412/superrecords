@@ -52,7 +52,7 @@ include(SETUPNAVIGATION);
 				}
 			}
 			
-			?><span class="memberclass"><u>Reference <?=$memberCount?></u></span>
+			?><span style="color:#0c436c"><b><u>Reference <?=$memberCount?></u></b></span>
 			<table>
 				<tr>
 					<td>Title</td>

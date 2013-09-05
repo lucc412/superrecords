@@ -112,12 +112,12 @@ function getAge(age,cnt)
     if(year < 18)
     {
         alert('Member should be minimum 18 years in age, please provide legal references for it.');
-        //$('#trlegalRef').show();
-        //cnt++;
-       // return cnt;
+        $('#trlegalRef').show();
+        cnt++;
+        return cnt;
     }
     else{
-        //$('#trlegalRef').hide();
+        $('#trlegalRef').hide();
     }
 
     return cnt;

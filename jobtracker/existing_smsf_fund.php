@@ -43,13 +43,14 @@ if(isset($_SESSION['jobId'])) {
                 {
                     // insert fund details of sign up user
                     $flagReturn = $objScr->addFundInfo($fundName, $abn, $streetAdd, $postalAdd, $members, $trusteeId, $fundStatus, $jobStatus);
+					$arrClient = $objScr->checkClients($fundName);
 		}
 		else {
                     // edit fund details of sign up user
                     $flagReturn = $objScr->editFundInfo($fundName, $abn, $streetAdd, $postalAdd, $members, $trusteeId, $fundStatus, $jobStatus);
 		}
               
-                $arrClient = $objScr->checkClients($fundName);
+                
                 
                 if(isset($jobStatus))
                 {

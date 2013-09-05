@@ -128,7 +128,12 @@ class EXISTING_SMSF_FUND {
 
             if(isset($client_id) && $client_id != '')
             {
-                $updt = "UPDATE job SET client_id = ".$client_id." WHERE job_id = ".$_SESSION['jobId'];
+                $jobName = $client_id .'::'. date('Y') .'::21';
+                $updt = "UPDATE job SET 
+                    client_id = ".$client_id.", 
+                    job_name = '".addslashes($jobName)."' 
+                    WHERE job_id = ".$_SESSION['jobId'];
+                
                 mysql_query($updt);
             }
             

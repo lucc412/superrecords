@@ -33,8 +33,9 @@ if(isset($_SESSION['jobId'])) {
                     {
                         $legRefernces++;
                         $ref = 1;
-                    }  else {
-                        $legRefernces--;
+                    }  
+					else {
+                        //$legRefernces--;
                         $ref = 0;
                     }
                     

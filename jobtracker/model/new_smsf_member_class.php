@@ -63,6 +63,11 @@ class NEW_SMSF_MEMBER {
 
 		$flagReturn = mysql_query($qryUpd);
 
+		if(!empty($ref)) {
+			$qryDel = "DELETE FROM es_legal_references WHERE member_id = {$memberId}";
+			mysql_query($qryDel);
+		}
+
 	    return $flagReturn;
 	}
 

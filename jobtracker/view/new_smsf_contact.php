@@ -28,18 +28,7 @@ include(SETUPNAVIGATION);
 				<td>Phone Number</td>
 				<td><input type="text" name="txtPhone" value="<?=$phoneno?>" /></td>
 			</tr>
-			<tr>
-				<td>State</td>
-				<td>
-					<select name="lstState" style="margin-bottom: 5px;"><?
-						foreach($arrStates AS $stateKey => $stateName) {
-							$selectStr = '';
-							if($stateId == $stateKey) $selectStr = 'selected';
-							?><option <?=$selectStr?> value="<?=$stateKey?>"><?=$stateName?></option><?
-						}
-					?></select>
-				</td>
-			</tr>
+			
 <!--			<tr>
 				<td>Referral Code</td>
 				<td>
@@ -52,17 +41,18 @@ include(SETUPNAVIGATION);
 				?></td>
 			</tr>-->
 		</table>
+            
             <input type="hidden" id="cont_status" name="cont_status" value=""/>
             <div style="padding-top:20px;">
-                <span align="left"><button type="button" onclick="window.location.href='new_smsf.php'" value="BACK" />BACK</button></span>
-                <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">NEXT</button></span>
-                <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>
+                <?php if(!$arrData) { ?><span align="left"><button type="button" onclick="window.location.href='new_smsf.php'" value="BACK"  />BACK</button></span> <?php } ?>
+                <span align="right" style="<?php if(!$arrData)echo'padding-left:55px;'; ?> "><button type="submit" id="btnNext">NEXT</button></span>
+                <!--<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>-->
             </div>
 		<input type="hidden" name="flaginit" value="add">
 	</form>  
         <script>
             $('#btnNext').click(function(){$('#cont_status').val('0')})
-            $('#btnSave').click(function(){$('#cont_status').val('1')})
+//            $('#btnSave').click(function(){$('#cont_status').val('1')})
         </script>
 </div><?
 

@@ -42,10 +42,15 @@ if(isset($_SESSION['jobId'])) {
         
         // include view file 
         if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'Y')
+        {
+            if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
             header('Location: jobs.php?a=pending');
-        
+        }
         else if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'N')
+        {
+            if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
             header('Location: jobs.php?a=saved');
+        }
         else
             include(VIEW . "new_smsf_declarations.php");
 }

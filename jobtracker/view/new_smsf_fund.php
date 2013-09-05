@@ -9,7 +9,7 @@ include(SETUPNAVIGATION);
 	<span>
 </div>
 <div style="padding-top:20px;">
-	<div style="padding-bottom:20px;">Please enter your contact details. If there are any issues with this application, we will contact you using these details. Once your fund is set up, we will also contact you using these details to guide you through the next stages of the process.</div>
+	<div style="padding-bottom:20px;">Please enter the details for your new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div>
 	
 	<form method="post" name="frmnewsmsffund" action="new_smsf_fund.php" onsubmit="return formValidation()">
 		<table>

@@ -5,6 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=9" />
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+                <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
 		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
 		<link href="images_user/favicon.ico" rel="shortcut icon" />
@@ -16,8 +17,8 @@
 		<link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
 		<script type="text/javascript" src="js/datetimepicker_css.js"></script>
 		<script type="text/javascript" src="js/common.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
-		<script type="text/javascript" src="js/jquery.tooltipster.js"></script>
+<!--		<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>-->
+                <script type="text/javascript" src="js/jquery.tooltipster.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function() {
 			 $('.tooltip').tooltipster({

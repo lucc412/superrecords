@@ -44,10 +44,12 @@ if(isset($_SESSION['jobId'])) {
 		else {
 			$flagReturn = $objScr->editFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus);
 		}
-
-		if($flagReturn) {
-
-			// set no of members allowed in session variable
+                
+                $arrClient = $objScr->checkClients($fundName);
+                
+		if($flagReturn) 
+                {
+                	// set no of members allowed in session variable
 			if(isset($_SESSION['TRUSTEETYPE'])) unset($_SESSION['TRUSTEETYPE']);
 			$_SESSION['TRUSTEETYPE'] = $trusteeId;
 
@@ -55,7 +57,10 @@ if(isset($_SESSION['jobId'])) {
 			$_SESSION['NOOFMEMBERS'] = $members;
                         
                         if(isset($_POST['fund_status']) && $_POST['fund_status'] == 1)
+                        {
+                            if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                             header('Location: jobs.php?a=saved');
+                        }
 			else
                             header('Location: new_smsf_member.php');
 		}

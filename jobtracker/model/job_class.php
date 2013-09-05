@@ -17,7 +17,7 @@ class Job {
 		}
 		else if(!empty($fetchType) && $fetchType == 'saved') {
 			$appendStr = 'AND t1.job_submitted = "N"';
-			$orderByStr = 'ORDER BY t1.job_created_date desc';
+			$orderByStr = 'ORDER BY t1.job_id desc';
 		}
 
 		if(!empty($_REQUEST['lstClientType'])) {
@@ -194,15 +194,15 @@ class Job {
 		return $arrJobStatus;
 	}
 
-	public function sql_insert() {
-                
-        $clientId = $_REQUEST['lstClientType'];
-		$typeId = $_REQUEST['lstJobType'];
-		$period = $_REQUEST['txtPeriod'];
-		$cliType = $_REQUEST['lstCliType'];
-		$notes = $_REQUEST['txtNotes'];
-		$jobGenre = $_REQUEST['type'];
-		$setup_subfrm = $_REQUEST['subfrmId'];
+	public function sql_insert($details) {
+            
+                $clientId = $details['lstClientType'];
+		$typeId = $details['lstJobType'];
+		$period = $details['txtPeriod'];
+		$cliType = $details['lstCliType'];
+		$notes = $details['txtNotes'];
+		$jobGenre = $details['type'];
+		$setup_subfrm = $details['subfrmId'];
 
 		if($jobGenre == 'COMPLIANCE') {
 			$jobSubmitted = 'Y';
@@ -214,10 +214,11 @@ class Job {
 		}
 
 		$jobName = $clientId .'::'. $period .'::'. $typeId;
-
+                if(empty($clientId) && empty($period))$jobName=NULL;
+                    
 		$qryIns = "INSERT INTO job(client_id, job_genre, job_submitted, mas_Code, job_type_id, period, notes, job_name, job_status_id, setup_subfrm_id, job_created_date, job_received)
 					VALUES (
-					" . $clientId . ", 
+					'" . $clientId . "', 
 					'" . $jobGenre . "', 
 					'" . $jobSubmitted . "', 
 					" . $cliType . ", 
@@ -230,8 +231,7 @@ class Job {
 					NOW(),            
 					".$jobReceived."         
 					)";
-                
-		mysql_query($qryIns);
+                mysql_query($qryIns);
 		$jobId = mysql_insert_id();
 
 		$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType, $typeId);

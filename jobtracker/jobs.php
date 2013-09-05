@@ -10,9 +10,29 @@ if(isset($_REQUEST['recid']))
 if(isset($_REQUEST['var']) && $_REQUEST['var'] == 'new')
 	unset($_SESSION['jobId']);
 
+    
 if(isset($_REQUEST['a'])) {
 	$a = $_REQUEST['a'];
 	switch ($a) {
+                case "redirect":
+                        if(isset($_SESSION['frmId']))unset($_SESSION['frmId']);
+                            $_SESSION['frmId'] = $_REQUEST['frmId'];
+                            
+                        switch($_REQUEST['type'])
+			{
+				case 'setup':
+                                        if($_REQUEST['frmId'] == '1')
+                                            header('location: new_smsf.php');
+                                        else if($_REQUEST['frmId'] == '2')
+                                            header('location: existing_smsf.php');
+                                        
+					break;
+				case 'comp':
+						include(VIEW.'jobs_add.php');
+					break;
+			}
+			break;
+                    
 		case "add":
 			$arrClientType = $objScr->fetchClientType();
 			$arrClients = $objScr->fetch_clients();
@@ -28,14 +48,30 @@ if(isset($_REQUEST['a'])) {
 			break;
 
 		case "edit":
-			$arrJobs = $objScr->sql_select();
+                        $arrJobs = $objScr->sql_select();
 			if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
 			$_SESSION['jobId'] = $recid;
 			$arrJobsData = $arrJobs[$recid];
 			$arrJobType = $objScr->fetchType($arrJobsData['mas_Code']);
 			$arrClientType = $objScr->fetchClientType();
 			$arrClients = $objScr->fetch_clients();
-			include(VIEW.'jobs_edit.php');
+                        if(isset($_SESSION['frmId']))unset($_SESSION['frmId']);
+                            $_SESSION['frmId'] = $_REQUEST['frmId'];
+                            
+                        switch($_REQUEST['type'])
+			{
+				case 'setup':
+                                        if($_REQUEST['frmId'] == '1')
+                                            header('location: new_smsf.php');
+                                        else if($_REQUEST['frmId'] == '2')
+                                            header('location: existing_smsf.php');
+                                        
+					break;
+				case 'comp':
+						include(VIEW.'jobs_edit.php');
+					break;
+			}
+			
 			break;
 
 		case "pending":
@@ -183,7 +219,32 @@ if(isset($_REQUEST['sql'])) {
 	switch ($sql)
 	{
 		case "insertJob":
-			$jobId = $objScr->sql_insert();
+                    
+                        $arrJobReq = array();
+                        if($_REQUEST['type'] == 'SETUP')
+                        {
+                            $arrJobReq['lstClientType'] = NULL;
+                            $arrJobReq['lstJobType'] = 168;
+                            $arrJobReq['lstCliType'] = 21;
+                            $arrJobReq['type'] = $_REQUEST['type'];
+                            $arrJobReq['subfrmId'] = $_REQUEST['subfrmId'];
+                            $arrJobReq['txtPeriod'] = NULL;
+                            $arrJobReq['txtNotes'] = NULL;
+                            
+                        }
+                        else
+                        {
+                            $arrJobReq['lstClientType'] = $_REQUEST['lstClientType'];
+                            $arrJobReq['lstJobType'] = $_REQUEST['lstJobType'];
+                            $arrJobReq['txtPeriod'] = $_REQUEST['txtPeriod'];
+                            $arrJobReq['lstCliType'] = $_REQUEST['lstCliType'];
+                            $arrJobReq['txtNotes'] = $_REQUEST['txtNotes'];
+                            $arrJobReq['type'] = $_REQUEST['type'];
+                            $arrJobReq['subfrmId'] = $_REQUEST['subfrmId'];
+                            
+                        }
+                        
+                        $jobId = $objScr->sql_insert($arrJobReq);
 			if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
 			$_SESSION['jobId'] = $jobId;	
 				
@@ -195,23 +256,26 @@ if(isset($_REQUEST['sql'])) {
 				header('location: jobs.php?a=checklist');
 			else if($_REQUEST['type'] == 'SETUP') {
 				if($_REQUEST['subfrmId'] == '1')
-					header('location: new_smsf.php');
+					header('location: new_smsf_contact.php');
 				else if($_REQUEST['subfrmId'] == '2')
-					header('location: existing_smsf.php');
+					header('location: existing_smsf_contact.php');
 			}
 			break;
 
 		case "update":
 			$objScr->sql_update();
+                        if(isset($_SESSION['frmId']))unset($_SESSION['frmId']);
+                            $_SESSION['frmId'] = $_REQUEST['subfrmId'];
+                            
 			if($_REQUEST['type'] == 'COMPLIANCE')
 				header('location: jobs.php?a=pending');
 			else if($_REQUEST['type'] == 'AUDIT')
 				header('location: jobs.php?a=checklist');
 			else if($_REQUEST['type'] == 'SETUP') {
 				if($_REQUEST['subfrmId'] == '1')
-					header('location: new_smsf.php');
+					header('location: new_smsf_contact.php');
 				else if($_REQUEST['subfrmId'] == '2')
-					header('location: existing_smsf.php');
+					header('location: existing_smsf_contact.php');
 			}
 			break;
 

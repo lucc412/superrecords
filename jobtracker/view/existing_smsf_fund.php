@@ -10,7 +10,7 @@ include(SETUPNAVIGATION);
 	<span>
 </div>
 <div style="padding-top:20px;">
-	<div style="padding-bottom:20px;">Please enter details of Fund you would like to set up.</div>
+	<div style="padding-bottom:20px;">Please enter the details for your fund. These details will be used to set up the fund in our system. If you need any help completing this section, please contact us.</div>
 	
 	<form method="post" action="existing_smsf_fund.php" name="frmexstsmsffund" onsubmit="return formValidation();">
 		<table>

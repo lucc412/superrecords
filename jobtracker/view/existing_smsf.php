@@ -10,15 +10,15 @@ include(SETUPNAVIGATION);
 </div>
 
 <div style="padding-top:20px;">
-	Welcome to the application page to transfer your EXISTING Self Managed Superannuation Fund (SMSF) to befreesuper.
+	Welcome to the application page to transfer your EXISTING Self Managed Superannuation Fund (SMSF) to superrecords.
 </div>
 
 <div style="padding-bottom:10px;padding-top:10px;">
-	Please note that befreesuper is an accounting service only. We do not provide financial planning or investment advice, apart from whether investments will comply with legislation.
+	Please note that superrecords is an accounting service only. We do not provide financial planning or investment advice, apart from whether investments will comply with legislation.
 </div>
 
 <div style="padding-bottom:10px;">
-	Completing this application will result in befreesuper becoming the tax agent of the fund and handling the ongoing accounting, tax and audit for your new SMSF
+	Completing this application will result in superrecords becoming the tax agent of the fund and handling the ongoing accounting, tax and audit for your new SMSF
 </div>
 
 <div style="padding-bottom:10px;">
@@ -30,8 +30,8 @@ include(SETUPNAVIGATION);
 </div>
 
 <div style="padding-top:20px;" >
-    <span align="left"><button type="button" onclick="window.location.href='jobs.php?a=edit&recid=<?=$_SESSION['jobId']?>&frmId=2'" value="BACK" />BACK</button></span>
-    <span align="right" style="padding-left:55px;"><button type="button" onclick="javascript:window.location.assign('existing_smsf_contact.php');">NEXT</button></span>
+    <span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />BACK</button></span>
+    <span align="right" style="padding-left:55px;"><button type="button" onclick="javascript:window.location.assign('jobs.php?sql=<?php if(isset($_SESSION['jobId'])){echo'update';}else{echo'insertJob';} ?>&type=SETUP&subfrmId=2');">NEXT</button></span>
 </div>
 <?
     include(FOOTER);

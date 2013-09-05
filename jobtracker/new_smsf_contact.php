@@ -11,7 +11,7 @@ $objScr = new NEW_SMSF_CONTACT();
 
 // fetch states for drop-down
 //$arrStates = $objScr->fetchStates();
-$arrStates = fetchStates();
+//$arrStates = fetchStates();
 
 // check referral Code
 //if(isset($_POST['flaginit']) && $_POST['flaginit'] == 'Y') {
@@ -37,7 +37,7 @@ if(isset($_POST['flaginit']) && $_POST['flaginit'] =='add') {
 	$lname = $_REQUEST['txtLname'];
 	$email = $_REQUEST['txtEmail'];
 	$phone = $_REQUEST['txtPhone'];
-	$stateId = $_REQUEST['lstState'];
+	//$stateId = $_REQUEST['lstState'];
 	$contStatus = $_REQUEST['cont_status'];
 
 	// fetch existing trustee data
@@ -45,7 +45,7 @@ if(isset($_POST['flaginit']) && $_POST['flaginit'] =='add') {
 	
 	// insert contact details of sign up user
 	if(empty($arrData)) {
-		$lastInsertId = $objScr->addContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus);
+		$lastInsertId = $objScr->addContactDetails($fname, $lname, $email, $phone, $contStatus);
 
 		//set sign up id in session variable
 //		if(!empty($lastInsertId)) {
@@ -55,12 +55,15 @@ if(isset($_POST['flaginit']) && $_POST['flaginit'] =='add') {
 	}
 	// edit contact details of sign up user
 	else {
-		$flagReturn = $objScr->editContactDetails($fname, $lname, $email, $phone, $stateId, $contStatus);
+		$flagReturn = $objScr->editContactDetails($fname, $lname, $email, $phone, $contStatus);
 	}
 
 	if(!empty($lastInsertId) || $flagReturn) {
             if(isset($_POST['cont_status']) && $_POST['cont_status'] == 1)
+            {
+                if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                 header('Location: jobs.php?a=saved');
+            }
             else    
 		header('Location: new_smsf_fund.php');
 	}
@@ -117,15 +120,15 @@ else {
 	$phoneno = "";
 }
 
-if(isset($_REQUEST['lstState'])) {
-	$stateId = $_REQUEST['lstState'];
-}
-else if(!empty($arrData['state_id'])) {
-	$stateId = $arrData['state_id'];
-}
-else {
-	$stateId = "";
-}
+//if(isset($_REQUEST['lstState'])) {
+//	$stateId = $_REQUEST['lstState'];
+//}
+//else if(!empty($arrData['state_id'])) {
+//	$stateId = $arrData['state_id'];
+//}
+//else {
+//	$stateId = "";
+//}
 
 // include view file
 include(VIEW . "new_smsf_contact.php");

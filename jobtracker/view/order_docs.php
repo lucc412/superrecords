@@ -11,7 +11,7 @@ include(TOPBAR);
 ?>
 <style>
     .wrap ul li { list-style: none;padding: 5px;}
-    .wrap li :hover{font-size:12px;color:#F05729;}
+    .wrap li :hover{color:#F05729;}
     .wrap ul{ padding-left: 15px;}
     .wrap li a {color: #074263;}
 </style>
@@ -23,14 +23,16 @@ include(TOPBAR);
 </div>
 <div class="wrap" style="min-height: 350px; ">
     
-    <?php
-    
-    foreach ($arrForms as $forms => $subforms) { ?>
+    <?php foreach ($arrForms as $forms => $subforms) { ?>
         <h1 style="font-size: 15px;color: #F05729"><?=$subforms['form_name']?></h1>
         <br>
         <ul>
         <?php foreach($subforms['subforms'] as $frm => $frmVal){ ?>
-            <li><a href="jobs.php?a=add&type=setup&frmId=<?=$frmVal['subform_id']?>"><?=$frmVal['subform_name']?></a></li>
+            <li>
+                <div style="width: 550px;float: left;padding: 4px 0 5px;"><span><?=$frmVal['subform_name']?></span></div>
+                <div style="width: 60px;float: left;padding: 4px 0 5px;"><strong><?php echo '$'.$frmVal['subform_price'];?></strong></div>
+                <button style="width: 82px;margin: 0" onclick='window.location.href="jobs.php?a=redirect&type=setup&frmId=<?=$frmVal['subform_id']?>"' >Order</button>
+            </li>
         <?php } ?>
         </ul>        
         <br>

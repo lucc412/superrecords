@@ -11,38 +11,39 @@ if(isset($_SESSION['jobId'])) {
 	// create class object for class function access
 	$objScr = new NEW_SMSF_MEMBER();
 	//global $phpFunctns;
-
-	if(isset($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'addMemberInfo') {
-
-		// fetch existing contact details
+        //showArray($_REQUEST);
+        //exit;
+	if(isset($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'addMemberInfo') 
+        {
+        	// fetch existing contact details
 		$arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
                 
-		for($memberCount=1; $memberCount <= $_SESSION['NOOFMEMBERS']; $memberCount++) {
-			if(isset($_REQUEST['memberId' . $memberCount]))
-				$memberId = $_REQUEST['memberId' . $memberCount]; 
+		for($memberCount=1; $memberCount <= $_SESSION['NOOFMEMBERS']; $memberCount++) 
+                {
+                    if(isset($_REQUEST['memberId' . $memberCount]))
+                            $memberId = $_REQUEST['memberId' . $memberCount]; 
 
-			$title = $_REQUEST['lstTitle' . $memberCount];
-			$fname = $_REQUEST['txtFname' . $memberCount];
-			$mname = $_REQUEST['txtMname' . $memberCount];
-			$lname = $_REQUEST['txtLname' . $memberCount];
-			$dob = getDateFormat($_REQUEST['txtDob' . $memberCount]);
-	//		$dob = $phpFunctns->getDateFormat($_REQUEST['txtDob' . $memberCount]);
-			$city = $_REQUEST['txtCity' . $memberCount];
-			$country = $_REQUEST['lstCountry' . $memberCount];
-			$gender = $_REQUEST['lstGender' . $memberCount];
-			$address = $_REQUEST['txtAddress' . $memberCount];
-			$tfn = $_REQUEST['txtTfn' . $memberCount];
-			$occupation = $_REQUEST['txtOccupation' . $memberCount];
-			$phone = $_REQUEST['txtPhone' . $memberCount];
-                        $memberStatus = $_REQUEST['member_status'];
-			
-			// insert member info of sign up user
-			if(empty($memberId)) {
-				$flagReturn = $objScr->addMemberInfo($title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus);
-			}
-			else {
-				$flagReturn = $objScr->editMemberInfo($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus);
-			}
+                    $title = $_REQUEST['lstTitle' . $memberCount];
+                    $fname = $_REQUEST['txtFname' . $memberCount];
+                    $mname = $_REQUEST['txtMname' . $memberCount];
+                    $lname = $_REQUEST['txtLname' . $memberCount];
+                    $dob = getDateFormat($_REQUEST['txtDob' . $memberCount]);
+                    $city = $_REQUEST['txtCity' . $memberCount];
+                    $country = $_REQUEST['lstCountry' . $memberCount];
+                    $gender = $_REQUEST['lstGender' . $memberCount];
+                    $address = $_REQUEST['txtAddress' . $memberCount];
+                    $tfn = $_REQUEST['txtTfn' . $memberCount];
+                    $occupation = $_REQUEST['txtOccupation' . $memberCount];
+                    $phone = $_REQUEST['txtPhone' . $memberCount];
+                    $memberStatus = $_REQUEST['member_status'];
+
+                    // insert member info of sign up user
+                    if(empty($memberId)) {
+                            $flagReturn = $objScr->addMemberInfo($title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus);
+                    }
+                    else {
+                            $flagReturn = $objScr->editMemberInfo($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus);
+                    }
 		}
 
 		// check for no. of members records added
@@ -50,14 +51,20 @@ if(isset($_SESSION['jobId'])) {
 			if($_SESSION['TRUSTEETYPE'] == '1')
 			{
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
+                            {
+                                if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                                 header('Location: jobs.php?a=saved');
+                            }
                             else
                                 header('Location: new_smsf_declarations.php');
                         }
 			else	
 			{
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
+                            {
+                                if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                                 header('Location: jobs.php?a=saved');
+                            }
                             else
                                 header('Location: new_smsf_trustee.php');
                         }

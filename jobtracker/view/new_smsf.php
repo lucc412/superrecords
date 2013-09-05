@@ -27,8 +27,8 @@ include(SETUPNAVIGATION);
 
 	<div>
 		Completing this application will result in;
-		1.	a new SMSF being set up for you by befreesuper
-		2.	befreesuper becoming the tax agent of the fund and handling the ongoing accounting, tax and audit for your new SMSF
+		1.	a new SMSF being set up for you by superrecords.
+		2.	superrecords becoming the tax agent of the fund and handling the ongoing accounting, tax and audit for your new SMSF
 	</div><br/>
 
 	If you have any difficulty with this application or would like to discuss the SMSF or the service before completing it, please either call us or complete the enquiry form on our main page to have one of our consultants contact you.<br/><br/>
@@ -37,10 +37,26 @@ include(SETUPNAVIGATION);
 
 	If you are ready to continue, please click NEXT at the bottom of the page.
 </div>
+<input type="hidden" name="lstClientType" value="21"/>
 <div style="padding-top:20px;" >
-    <span align="left"><button type="button" onclick="window.location.href='jobs.php?a=edit&recid=<?=$_SESSION['jobId']?>&frmId=1'" value="BACK" />BACK</button></span>
-    <span align="right" style="padding-left:55px;"><button type="button" onclick="javascript:window.location.assign('new_smsf_contact.php');">NEXT</button></span>
+    <span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />BACK</button></span>
+    <span align="right" style="padding-left:55px;"><button type="button" onclick="javascript:window.location.assign('jobs.php?sql=<?php if(isset($_SESSION['jobId'])){echo'update';}else{echo'insertJob';} ?>&type=SETUP&subfrmId=1');">NEXT</button></span>
 </div>
 <?
+//                $clientId = $_REQUEST['lstClientType'];
+//		$typeId = $_REQUEST['lstJobType'];
+//		$period = $_REQUEST['txtPeriod'];
+//		$cliType = $_REQUEST['lstCliType'];
+//		$notes = $_REQUEST['txtNotes'];
+//		$jobGenre = $_REQUEST['type'];
+//		$setup_subfrm = $_REQUEST['subfrmId'];
+//
+//		if($jobGenre == 'COMPLIANCE') {
+//			$jobSubmitted = 'Y';
+//			$jobReceived = 'NOW()';
+//		}
+//		else {
+//			$jobSubmitted = 'N';
+//			$jobReceived = 'NULL';
 include(FOOTER);
 ?>

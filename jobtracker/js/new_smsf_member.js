@@ -104,12 +104,23 @@
 	}
 	
 // get age of member
-function getAge(age) {
-	//alert(age);
-	dateString = age;
-	var birthday = +new Date(dateString);
-	//alert(~~((Date.now() - birthday) / (31557600000)));
+function getAge(age,cnt) 
+{
+    dateString = age;
+    var birthday = +new Date(dateString);
+    var year = ~~((Date.now() - birthday) / (31557600000));
+    if(year < 18)
+    {
+        alert('Please provide Legal Personal Details for your member');
+        //$('#trlegalRef').show();
+        cnt++;
+        return cnt;
+    }
+    else{
+        //$('#trlegalRef').hide();
+    }
 
+    return cnt;
 }
 	
 	

@@ -18,7 +18,7 @@ include(SETUPNAVIGATION);
 		<tr>
 			<td><strong>Client</strong></td>
 			<td>
-				<select name="lstClientType" id="lstClientType" title="Select client">
+				<select name="lstClientType" id="lstClientType" title="Select Client">
 					<option value="0">Select Client</option><?php
 					foreach($arrClients AS $clientId => $clientName){
 						?><option value="<?=$clientId?>"><?=$clientName?></option><?php 

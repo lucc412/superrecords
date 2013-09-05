@@ -136,24 +136,35 @@ if(isset($_REQUEST['a'])) {
 				$dbNotes = "";
 			}
 
-			$arrClientType = $objScr->fetchClientType();
+			$arrAuditType = $objScr->getAuditCliJobType();
 			$arrClients = $objScr->fetch_clients();
 			include(VIEW.'jobs_audit.php');
 			break;
 
 		case "checklist":
 			$arrChecklist = $objScr->getAuditChecklist($_SESSION['jobId']);
+			include(VIEW.'jobs_audit_checklist.php');
+			break;
+
+		case "subchecklist":
+			$arrSubchecklist = $objScr->getAuditSubChecklist($_SESSION['jobId']);
 			$arrDocDetails = $objScr->getAuditDetails($_SESSION['jobId']);
+			$arrSubDocList = $objScr->getAuditSubDocList($_SESSION['jobId']);
 			$arrUplStatus['PENDING'] = 'Pending';
 			$arrUplStatus['ATTACHED'] = 'Attached';
 			$arrUplStatus['NA'] = 'N/A';
-			include(VIEW.'jobs_audit_checklist.php');
+			include(VIEW.'jobs_audit_subchecklist.php');
 			break;
 
 		case "uploadAudit":
 			$checklistName = $objScr->getChecklistName($_REQUEST['checklistId']);
 			$arrDocList = $objScr->getAuditDocList($_SESSION['jobId'],$_REQUEST['checklistId']);
 			include(VIEW.'jobs_audit_upload.php');
+			break;
+
+		case "uploadSubAudit":
+			$subchecklistName = $objScr->getSubChecklistName($_REQUEST['subchecklistId']);
+			include(VIEW.'jobs_subaudit_upload.php');
 			break;
 
 		default:
@@ -204,9 +215,32 @@ if(isset($_REQUEST['sql'])) {
 			}
 			break;
 
+		case "checklistSelection":
+			$arrSelChckList = $objScr->fetch_existing_checklist_selection($_SESSION['jobId']);
+			foreach($_POST AS $postName => $postVal) {
+				$flagChckList = strstr($postName, "checklist");
+				if($flagChckList) {
+					$arrFilChckList[] = replaceString('checklist', '', $postName);  
+				}
+			}
+			if(!empty($arrFilChckList) && !empty($arrSelChckList)) {
+				$arrAddChckList = array_diff($arrFilChckList, $arrSelChckList);
+				$arrRemChckList = array_diff($arrSelChckList, $arrFilChckList);
+			}
+			else if(!empty($arrFilChckList) && empty($arrSelChckList)) {
+				$arrAddChckList = $arrFilChckList;
+			}
+			$objScr->sql_checklist_selection($arrAddChckList, $arrRemChckList, $_SESSION['jobId']);
+			header('location: jobs.php?a=subchecklist');
+			break;
+
 		case "delete":
 			$objScr->sql_delete($_REQUEST['recid']);
 			header('location: jobs.php');
+			break;
+
+		case "dwnldchcklst":
+			$objScr->sql_download_checklist($_SESSION['jobId']);
 			break;
 		
 		case "insertDoc":
@@ -261,10 +295,18 @@ if(isset($_REQUEST['sql'])) {
 			header('location: jobs.php?a=document');
 			break;
 
-
 		case "uploadAuditDocs":
-			$objScr->add_audit_Docs($_SESSION['jobId'], $_REQUEST['checklistId']);
+			$objScr->add_audit_Docs($_SESSION['jobId'],$_REQUEST['checklistId']);
 			header('location: jobs.php?a=uploadAudit&checklistId='.$_REQUEST['checklistId']);
+			break;
+
+		case "uploadSubAuditDocs":
+			$objScr->add_audit_Docs($_SESSION['jobId'],$_REQUEST['checklistId'],$_REQUEST['subchecklistId']);
+			echo "<script>
+				opener.parent.location.href = 'jobs.php?a=subchecklist';
+                self.close();
+            </script>";
+			//header('location: jobs.php?a=uploadSubAudit&checklistId='.$_REQUEST['checklistId'].'&subchecklistId='.$_REQUEST['subchecklistId']);
 			break;
 
 		case "insertAudit":
@@ -312,7 +354,7 @@ if(isset($_REQUEST['sql'])) {
 			}
 			$objScr->edit_audit_details($arrSubForm, $_SESSION['jobId']);
 			if($_REQUEST['button'] == 'Save') {
-				header('location: jobs.php');
+				header('location: jobs.php?a=saved');
 			}
 			else {
 				$objScr->update_job_completed($_SESSION['jobId']);

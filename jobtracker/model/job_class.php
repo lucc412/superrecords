@@ -148,6 +148,21 @@ class Job {
 		return $arrClientType;
 	}
 
+	public function getAuditCliJobType() {		
+ 		$qrySel = "SELECT ma.mas_Description, sa.sub_Description
+					FROM mas_masteractivity ma, sub_subactivity sa
+					WHERE ma.mas_Code = sa.sas_Code
+					AND ma.mas_Code = '25'
+					AND sa.sub_Code = '11'";
+
+		$fetchResult = mysql_query($qrySel);		
+		$rowData = mysql_fetch_assoc($fetchResult);
+		$arrAuditType['cliType'] = $rowData['mas_Description'];
+		$arrAuditType['jobType'] = $rowData['sub_Description'];
+
+		return $arrAuditType;
+	}
+
 	public function fetchType($masCode=NULL) {		
 		if(!empty($masCode)) {
 			$appendStr = "AND ma.mas_Code = {$masCode}";
@@ -245,8 +260,7 @@ class Job {
 		mysql_query($qryIns);			
 	}
 
-	public function add_audit_Docs($jobId, $checklistId) {
-
+	public function add_audit_Docs($jobId, $checklistId, $subchecklistId) {
 		$qrySel = "SELECT max(document_id) docId 
 					FROM documents";
 		$objResult = mysql_query($qrySel);
@@ -258,16 +272,28 @@ class Job {
 		$fileName =  $fileId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
 		$folderPath = "../uploads/audit/" . $fileName;
 
-
 		if(file_exists($_FILES['fileUpload']['tmp_name'])) {
 			if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $folderPath)) {
-				$qryIns = "INSERT INTO documents(job_id, checklist_id, file_path, date)
-							VALUES(
-							".$jobId.", 
-							". $checklistId .", 
-							'". addslashes($fileName) ."', 
-							NOW() 
-							)";
+				if(empty($subchecklistId)) {
+					$qryIns = "INSERT INTO documents(job_id, checklist_id, file_path, date)
+								VALUES(
+								".$jobId.", 
+								". $checklistId .", 
+								'". addslashes($fileName) ."', 
+								NOW() 
+								)";
+				}
+				else if(!empty($subchecklistId)) {
+					$qryIns = "INSERT INTO documents(job_id, checklist_id, subchecklist_id, file_path, date)
+								VALUES(
+								".$jobId.", 
+								". $checklistId .", 
+								". $subchecklistId .", 
+								'". addslashes($fileName) ."', 
+								NOW() 
+								)";
+
+				}
 				mysql_query($qryIns);
 			}
 		}
@@ -397,12 +423,27 @@ class Job {
 		$qrySel = "SELECT d.file_path, DATE_FORMAT(d.date, '%d/%m/%Y') date
 					FROM documents d
 					WHERE d.job_id = {$jobId}
-					AND d.checklist_id = {$checklistId}
+					AND d.checklist_id = {$checklistId} 
+					AND d.subchecklist_id = 0
 					ORDER BY d.date desc";
 
 		$objRes = mysql_query($qrySel);
 		while($rowData = mysql_fetch_assoc($objRes)) {
 			$arrDocList[$rowData['file_path']] = $rowData['date'];
+		}
+		return $arrDocList;
+	}
+
+	public function getAuditSubDocList($jobId) {
+		$qrySel = "SELECT d.file_path, d.subchecklist_id
+					FROM documents d
+					WHERE d.job_id = {$jobId}
+					AND d.subchecklist_id <> 0
+					ORDER BY d.date desc";
+
+		$objRes = mysql_query($qrySel);
+		while($rowData = mysql_fetch_assoc($objRes)) {
+			$arrDocList[$rowData['subchecklist_id']][] = $rowData['file_path'];
 		}
 		
 		return $arrDocList;
@@ -476,8 +517,19 @@ class Job {
 		}
 	}
 
-	public function getChecklistName($checklistId) {
+	public function getSubChecklistName($checklistId) {
+		$qrySel = "SELECT ac.subchecklist_name
+					FROM audit_subchecklist ac
+					WHERE ac.subchecklist_id = ".$checklistId;
 
+		$fetchResult = mysql_query($qrySel);		
+		$rowData = mysql_fetch_assoc($fetchResult);
+		$checklistName = $rowData['subchecklist_name'];
+
+		return $checklistName;
+	}
+
+	public function getChecklistName($checklistId) {
 		$qrySel = "SELECT ac.checklist_name
 					FROM audit_checklist ac
 					WHERE ac.checklist_id = ".$checklistId;
@@ -491,18 +543,39 @@ class Job {
 
 	public function getAuditChecklist($jobId) {
 
-		$qrySel = "SELECT ac.checklist_id, ac.checklist_name, aus.subchecklist_id, aus.subchecklist_name, IF(dc.checklist_id, 1, 0) uploadStatus
+		$qrySel = "SELECT ac.checklist_id, ac.checklist_name, aus.subchecklist_id, aus.subchecklist_name, IF(acs.checklist_id, 1, 0) chcklstStatus
 					FROM audit_subchecklist aus, audit_checklist ac
-					LEFT JOIN documents dc ON ac.checklist_id = dc.checklist_id AND dc.job_id = '{$jobId}'
+					LEFT JOIN audit_checklist_status acs ON ac.checklist_id = acs.checklist_id AND acs.job_id = '{$jobId}'
 					WHERE ac.checklist_id = aus.checklist_id
 					GROUP BY ac.checklist_order, aus.subchecklist_order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrChecklist[$rowData['checklist_id'].":".$rowData['checklist_name'].":".$rowData['uploadStatus']][$rowData['subchecklist_id']] = $rowData['subchecklist_name'];
+			$arrChecklist[$rowData['checklist_id']] = $rowData['checklist_name'].":".$rowData['chcklstStatus'];
 		}
 
 		return $arrChecklist;
+	}
+
+	public function getAuditSubChecklist($jobId, $flagSimple=false) {
+
+		$qrySel = "SELECT ac.checklist_id, ac.checklist_name, aus.subchecklist_id, aus.subchecklist_name, IF(dc.checklist_id, 1, 0) uploadStatus
+					FROM audit_subchecklist aus, audit_checklist_status acs, audit_checklist ac
+					LEFT JOIN documents dc ON ac.checklist_id = dc.checklist_id AND dc.job_id = '{$jobId}' AND dc.subchecklist_id = 0
+					WHERE ac.checklist_id = aus.checklist_id
+					AND ac.checklist_id = acs.checklist_id
+					AND acs.job_id = '{$jobId}'
+					GROUP BY ac.checklist_order, aus.subchecklist_order";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			if($flagSimple) 
+				$arrSubchecklist[$rowData['checklist_name']][] = $rowData['subchecklist_name'];
+			else 
+				$arrSubchecklist[$rowData['checklist_id'].":".$rowData['checklist_name'].":".$rowData['uploadStatus']][$rowData['subchecklist_id']] = $rowData['subchecklist_name'];
+		}
+
+		return $arrSubchecklist;
 	}
 
 	public function fetchJobDetail($jobId) {		
@@ -514,6 +587,42 @@ class Job {
 		$fetchResult = mysql_query($qrySel);		
 		$arrJobInfo = mysql_fetch_assoc($fetchResult);
 		return $arrJobInfo;	
+	}
+
+	public function fetch_existing_checklist_selection($jobId) {
+		$qrySel = "SELECT acs.checklist_id
+					FROM audit_checklist_status acs
+					WHERE acs.job_id = '{$jobId}'";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrSelChckList[] = $rowData['checklist_id'];
+		}
+		return $arrSelChckList;	
+	}
+
+	public function sql_checklist_selection($arrAddChckList, $arrRemChckList, $jobId) {
+		if(!empty($arrAddChckList)) {
+			$insChcklst = "INSERT INTO audit_checklist_status (job_id, checklist_id) VALUES";
+			foreach($arrAddChckList AS $checklistId) {
+				$insChcklst .= "({$jobId}, {$checklistId}),";
+			}
+			$insChcklst = stringrtrim($insChcklst, ",");
+			//print $insChcklst;
+			mysql_query($insChcklst);	
+
+		}
+
+		if(!empty($arrRemChckList)) {
+			$delChcklst = "DELETE FROM audit_checklist_status WHERE job_id = {$jobId} AND checklist_id IN (";
+			foreach($arrRemChckList AS $checklistId) {
+				$delChcklst .= "'{$checklistId}',";
+			}
+			$delChcklst = stringrtrim($delChcklst, ",");
+			$delChcklst .= ")";
+			//print $delChcklst;
+			mysql_query($delChcklst);	
+		}
 	}
         
 	public function fetch_setup_forms() 
@@ -547,6 +656,40 @@ class Job {
         // print_r($arrForms);
         // echo '</pre>';
 		return $arrForms;
+	}
+
+	public function sql_download_checklist($jobId) {
+		$arrSubchecklist = $this->getAuditSubChecklist($jobId, true);
+
+		?><html>
+			<body><?
+				$cntChckLst = A;
+				echo"<table border='1' align='center' bgcolor='#F8F8F8' cellpadding='10'>";
+				foreach($arrSubchecklist AS $checklistName => $subChecklist) {
+					echo"<tr>";
+					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729; background-color:#074165;'>".$cntChckLst++."</td>";
+					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729; background-color:#074165;'>".stripslashes($checklistName)."</td>";
+					echo"</tr>";
+					$cntSubchckLst = 1;
+					foreach($subChecklist AS $subChecklistName) {
+						echo"<tr>";
+						echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$cntSubchckLst++."</td>";
+						echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$subChecklistName++."</td>";
+						echo"</tr>";
+					}
+				}
+				echo"</table>";
+
+				header("Pragma: public");
+				header("Expires: 0");
+				header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
+				header("Content-Type: application/force-download");
+				header("Content-type: application/octet-stream");
+				header("Content-Disposition: attachment;filename=checklist.xls");
+				header("Pragma: no-cache");
+				header("Expires: 0");
+			?></body>
+		</html><?
 	}
 }
 ?>

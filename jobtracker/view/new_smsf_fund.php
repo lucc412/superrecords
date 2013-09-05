@@ -67,7 +67,7 @@ include(SETUPNAVIGATION);
 						foreach($arrNoOfMembers AS $noOfMembers) {
 							$selectStr = "";
 							if($members == $noOfMembers) $selectStr = "selected";
-							?><option <?=$selectStr?> ><?=$noOfMembers?></option><?
+							?><option value="<?=$noOfMembers?>" <?=$selectStr?> ><?=$noOfMembers?></option><?
 						}
 					?></select>
 					<a id="iconQuestion" class="tooltip" title="A SMSF is limited to a maximum of four members">?</a>

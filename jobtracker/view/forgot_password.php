@@ -23,7 +23,7 @@
 
 				// error message if login attempt fails
 				if($flagSuccess == 'Y') {
-					?><div class="errorMsg" style="width:550px; margin-bottom:15px;">Password was sent to your email. Please check your email for a message from SuperRecords.</div><?
+					?><div class="errorMsg" style="width:550px; margin-bottom:15px;">Password was sent to your email. Please check your email for a message from Super Records.</div><?
 				}
 
 				?><div align="center" class="logindiv"><?

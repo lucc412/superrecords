@@ -42,7 +42,7 @@ include(SETUPNAVIGATION);
 						foreach($arrNoOfMembers AS $noOfMembers) {
 							$selectedStr = "";
 							if($members == $noOfMembers) $selectedStr = "selected='selected'";
-							?><option <?=$selectedStr?> ><?=$noOfMembers?></option><?
+							?><option value="<?=$noOfMembers?>" <?=$selectedStr?> ><?=$noOfMembers?></option><?
 						}
 					?></select>
 					<a id="iconQuestion" class="tooltip" title="Select how many members in your SMSF.">?</a>

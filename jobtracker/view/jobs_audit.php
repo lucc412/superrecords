@@ -63,7 +63,7 @@ include(TOPBAR);
 						$optPeriod = "Year End 30/06/".$optionYear++;
 						$strPeriod = '';
 						if($dbPeriod == $optPeriod) $strPeriod = 'selected';
-						?><option <?=$strPeriod?>><?=$optPeriod?></option><?php 
+						?><option value="<?=$optPeriod?>" <?=$strPeriod?>><?=$optPeriod?></option><?php 
 					}
 				?></select>
 			</td>

@@ -226,7 +226,7 @@ if(isset($_REQUEST['sql'])) {
                             $arrJobReq['lstCliType'] = 25;
                             $arrJobReq['type'] = $_REQUEST['type'];
                             $arrJobReq['subfrmId'] = $_REQUEST['subfrmId'];
-                            $arrJobReq['txtPeriod'] = NULL;
+                            $arrJobReq['txtPeriod'] = date('Y');
                             $arrJobReq['txtNotes'] = NULL;
                             
                         }

@@ -2,14 +2,14 @@
 include(TOPBAR);
 include(SETUPNAVIGATION);
 ?>
-<div class="pageheader">
+<div class="pageheader" style="padding-bottom: 0">
 	<h1>Legal Personal References Details</h1>
 	<span>
 		<b>Welcome to the Super Records Legal Personal References Details page.</b>
 	<span>
 </div>
-<div style="padding-top:20px;">
-	<div style="padding-bottom:20px;">Please enter the details for each references of the new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div><?
+<div>
+	<div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please provide legal refrences for member below 18  years of age. If you need any help completing this section, please contact us.</div><?
 
 	// show member form as per no of members
 	?><form method="post" action="legal_references.php" name="frmnewsmsfmember" onsubmit="return formValidation(<?=count($arrLegRef)?>)"><?
@@ -92,7 +92,7 @@ include(SETUPNAVIGATION);
 							}
 						}  
 						echo($dob);
-						?>" onblur="javascript:getAge(this.value)"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" class="calendar"/>
+						?>" onblur="javascript:return getAge(this.value)"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" class="calendar"/>
 					</td>
 				</tr>
 				<tr>

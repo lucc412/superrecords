@@ -29,10 +29,13 @@ if(isset($_SESSION['jobId'])) {
                     $lname = $_REQUEST['txtLname' . $memberCount];
                     $dob = getDateFormat($_REQUEST['txtDob' . $memberCount]);
                     
-                    if(date('Y') - date('Y', strtotime($dob) < 18 ))
+                    if((date('Y') - date('Y', strtotime($dob)) < 18 ))
                     {
                         $legRefernces++;
                         $ref = 1;
+                    }  else {
+                        $legRefernces--;
+                        $ref = 0;
                     }
                     
                     $city = $_REQUEST['txtCity' . $memberCount];

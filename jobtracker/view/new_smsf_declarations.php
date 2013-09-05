@@ -11,7 +11,7 @@ include(SETUPNAVIGATION);
 <form method="post" action="new_smsf_declarations.php" onsubmit="return checkYesNoAns();">
 	<input type="hidden" value="<?=$_SESSION['TRUSTEETYPE']?>" id="hdnTrusteeType"/>
 
-	<div style="padding-top:20px;"><u><b>New SMSF Declaration</b></u></div>
+	<div ><u><b>New SMSF Declaration</b></u></div>
 	<div>
 		<div>There are certain limitations on who can be a member or a trustee of a self managed superannuation fund. Please answer yes or no to the following questions to determine whether any proposed member is not allowed to be a member of the SMSF.</div></br>	
 

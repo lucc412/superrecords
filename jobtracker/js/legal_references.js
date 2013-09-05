@@ -28,7 +28,11 @@
 				document.getElementById('txtDob'+i).focus();
 				flagReturn = false;
 			}else{
-				document.getElementById('txtDob'+i).className = "successClass";
+				flagReturn = getAge(document.getElementById('txtDob'+i).value);
+                                if(flagReturn == false)
+                                    document.getElementById('txtDob'+i).className = "errclass";
+                                else 
+                                    document.getElementById('txtDob'+i).className = "successClass";
 			}	
 			
 			if((document.getElementById('txtCity'+i).value == null) || (document.getElementById('txtCity'+i).value == ""))
@@ -111,7 +115,7 @@ function getAge(age)
     var year = ~~((Date.now() - birthday) / (31557600000));
     if(year < 18)
     {
-        alert('Legal References should be above 18 years');
+        alert('Legal personal representative should be minimum 18 years in age.');
         //$('#trlegalRef').show();
         return false;
     }

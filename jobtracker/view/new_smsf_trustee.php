@@ -2,13 +2,13 @@
 include(TOPBAR);
 include(SETUPNAVIGATION);
 ?>
-<div class="pageheader">
+<div class="pageheader" style="padding-bottom:0;">
 	<h1>Trustee Details</h1>
 	<span>
 		<b>Welcome to the Super Records Trustee Details page.</b>
 	<span>
 </div>
-<div style="padding-top:20px;">
+<div >
 	
 
 	<input type="hidden" name="trustyType" id="trustyType" value="<?php echo($_SESSION['TRUSTEETYPE'])?>"/><?
@@ -16,7 +16,7 @@ include(SETUPNAVIGATION);
 	// Form display for New Corporate Trustee 
 	if($_SESSION['TRUSTEETYPE'] == '2') {
 
-		?><div style="padding-bottom:20px;">Please enter the details to set up your new corporate trustee. These details will be used to register the corporate trustee. If you need any help completing this section, please contact us.</div>
+		?><div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details to set up your new corporate trustee. These details will be used to register the corporate trustee. If you need any help completing this section, please contact us.</div>
 		<span><u><b>New Corporate Trustee Details</b></u><span>
 		<form method="post" action="new_smsf_trustee.php" name="frmnewsmsftrustee" onsubmit="return formValidation()">
 		
@@ -66,7 +66,7 @@ include(SETUPNAVIGATION);
 	// Form display for Existing Corporate Trustee
 	if($_SESSION['TRUSTEETYPE'] == '3') {
 		?>
-                <div style="padding-bottom:20px;">Please enter the details of the company you have to act as your corporate trustee. If you need any help completing this section, please contact us.</div>
+                <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details of the company you have to act as your corporate trustee. If you need any help completing this section, please contact us.</div>
                 <span><u><b>Existing Corporate Trustee Details</b></u><span>
 			
 		<form method="post" action="new_smsf_trustee.php" name="frmnewsmsftrustee" onsubmit="return formValidation()">

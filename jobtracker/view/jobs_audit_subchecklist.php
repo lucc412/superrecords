@@ -89,7 +89,7 @@ include(TOPBAR);
 		}
 		?><div class="pdT50">
 			<span class="pdR50"><button type="reset" onclick="window.location.href='jobs.php?a=checklist'" value="Reset">Back</button></span>
-			<span class="pdR50"><button name="button" type="submit" value="Save">Save</button></span>
+			<span class="pdR50"><button name="button" type="submit" value="Save">Save & Exit</button></span>
 			<span><button name="button" type="submit" value="Submit">Submit</button></span>
 		</div>
 	</div>

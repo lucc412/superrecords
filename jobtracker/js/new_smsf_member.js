@@ -108,16 +108,16 @@ function getAge(age,cnt)
 {
     dateString = age;
     var birthday = +new Date(dateString);
-    var year = ~~((Date.now() - birthday) / (31557600000));
+    var year = ~~((+new Date() - birthday) / (31557600000));
     if(year < 18)
     {
         alert('Member should be minimum 18 years in age, please provide legal references for it.');
-        $('#trlegalRef').show();
+        //$('#trlegalRef').show();
         cnt++;
         return cnt;
     }
     else{
-        $('#trlegalRef').hide();
+       // $('#trlegalRef').hide();
     }
 
     return cnt;

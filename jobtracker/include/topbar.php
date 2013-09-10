@@ -49,6 +49,7 @@ include("path.php");
 						</ul>
 					</li>
 					<li><a href="queries.php">View All Queries</a></li> 
+					<li><a href="template.php">Download Templates</a></li> 
 				</ul>
 			</div><!--container-->
 		</div><!--nav--><?

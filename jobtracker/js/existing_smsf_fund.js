@@ -47,6 +47,35 @@
 		}else{
 			document.frmexstsmsffund.taPostalAdd.className = "successClass";
 		}
+
+		if((document.frmexstsmsffund.lstMembers.value == null) || (document.frmexstsmsffund.lstMembers.value == ""))
+	{	
+		document.frmexstsmsffund.lstMembers.className = "errclass";
+		document.frmexstsmsffund.lstMembers.focus();
+		flagReturn = false;
+	}else{
+		document.frmexstsmsffund.lstMembers.className = "successClass";
+	}
+
+	if((document.frmexstsmsffund.lstTrustee.value == null) || (document.frmexstsmsffund.lstTrustee.value == ""))
+	{	
+		document.frmexstsmsffund.lstTrustee.className = "errclass";
+		document.frmexstsmsffund.lstTrustee.focus();
+		flagReturn = false;
+	}
+	else{
+		if(document.frmexstsmsffund.lstTrustee.value == '1') {
+			noOfMembers = document.frmexstsmsffund.lstMembers.value;
+			if(noOfMembers == '1') {
+				alert("When Trustee type is 'Individuals' minimum two members are required");
+				document.frmexstsmsffund.lstMembers.className = "errclass";
+				document.frmexstsmsffund.lstMembers.focus();
+				flagReturn = false;
+			}
+		}
+
+		document.frmexstsmsffund.lstTrustee.className = "successClass";
+	}
 		
 		return flagReturn;
 		

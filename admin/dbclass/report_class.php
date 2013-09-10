@@ -119,6 +119,7 @@ class SR_Report {
 			
 			// for job page report case
 			case "job":
+					$strFirstWhr = "AND tbl.discontinue_date IS NULL AND tbl.job_submitted = 'Y'";
 					$orderBy = "ORDER BY tbl.job_id desc";
 				break;			  
 				 
@@ -129,6 +130,7 @@ class SR_Report {
 				
 			// for task page report case
 			case "task":
+					$strFirstWhr = "AND tbl.discontinue_date = '0000-00-00' ";
 					$orderBy = "ORDER BY tbl.task_id desc";
 				break;
 		}
@@ -136,6 +138,7 @@ class SR_Report {
 		$qrySel = "SELECT {$strColumns}
 				   FROM {$reportPageName} tbl {$otherTable}
 				   WHERE 1
+				   {$strFirstWhr}
 				   {$strWhere}
 				   {$strAnd}
 				   {$strCondition}
@@ -205,7 +208,8 @@ class SR_Report {
 		$qrySel = "SELECT j.job_id, CONCAT_WS(' - ', c.client_name, j.period, m.mas_Description) jobName, j.job_name
 					 FROM job j, client c, mas_masteractivity m
 					 WHERE j.client_id = c.client_id
-					 AND j.mas_Code = m.mas_Code";
+					 AND j.mas_Code = m.mas_Code
+					 AND j.discontinue_date IS NULL";
 		 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult))

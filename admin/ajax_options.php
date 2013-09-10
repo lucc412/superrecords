@@ -65,7 +65,8 @@ function sql_select_job($itemId)
 	$sql = "SELECT job_id, job_name, period
 			FROM job  
 			WHERE client_id=".$itemId." 
-			AND discontinue_date IS NULL 
+			AND discontinue_date IS NULL
+			AND job_submitted = 'Y'
 			ORDER BY job_name";
 	$res = mysql_query($sql) or die(mysql_error());
 	$count = mysql_num_rows($res);

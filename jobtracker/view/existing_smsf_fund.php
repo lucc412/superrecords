@@ -38,7 +38,7 @@ include(SETUPNAVIGATION);
 				<td>How many members?</td>
 				<td>
 					<select name="lstMembers" style="width: auto;margin-bottom: 5px;">
-                                            <option value="">Select no of members</option><?
+                       <option value="">Select no of members</option><?
 						foreach($arrNoOfMembers AS $noOfMembers) {
 							$selectedStr = "";
 							if($members == $noOfMembers) $selectedStr = "selected='selected'";
@@ -51,7 +51,8 @@ include(SETUPNAVIGATION);
 			<tr>
 				<td>Trustee Type</td>
 				<td>
-					<select name="lstTrustee"><?
+					<select name="lstTrustee">
+						<option value="">Select Trustee type</option><?
 						foreach($arrTrusteeType AS $trusteeTypeId => $trusteeTypeName) {
 							$selectedStr = "";
 							if($trusteeType == $trusteeTypeId) $selectedStr = "selected='selected'";

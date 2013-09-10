@@ -196,6 +196,7 @@ class Task_Class extends Database {
 					WHERE t.discontinue_date IS NULL 
 					AND t.job_id = j.job_id
 					AND j.client_id = c.client_id
+					AND j.job_submitted = 'Y'
 					AND c.id = pr.id
 					AND t.task_id = ".$recId."
 					ORDER BY t.task_id DESC";
@@ -208,7 +209,8 @@ class Task_Class extends Database {
 			
 			$qrySel = "SELECT t.*, s.*, cnt.*,j.*, pr.*, c.*, sa.*
 					FROM task t, job j, client c, pr_practice pr, stf_staff s, con_contact cnt, sub_subactivity sa
-					WHERE t.discontinue_date IS NULL 
+					WHERE t.discontinue_date IS NULL
+					AND j.job_submitted = 'Y'
 					AND t.job_id = j.job_id
 					AND j.client_id = c.client_id
 					AND c.id = pr.id 

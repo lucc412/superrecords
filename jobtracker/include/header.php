@@ -109,6 +109,10 @@
 			?><title>View All Queries</title>
 			<script type="text/javascript" src="js/queries_validation.js"></script><?
 		}
+		else if(basename($_SERVER['PHP_SELF']) == 'template.php') {
+			?><title>Download Templates</title>
+			<script type="text/javascript" src="js/queries_validation.js"></script><?
+		}
 		else if(basename($_SERVER['PHP_SELF']) == 'clients.php') {
 			if($qryStr == 'a=add') {
 				?><title>Add New Client</title><?

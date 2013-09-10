@@ -331,10 +331,6 @@ class DECLARATIONS
                                 <td>Phone Number : </td>
                                 <td>'.$arrCntact[$jobid]['phoneno'].' </td>
                             </tr>
-                            <tr>
-                                <td>State : </td>
-                                <td>'.fetchStateName($arrCntact[$jobid]['state_id']).' </td>
-                            </tr>
                         </table>
                         <br/>
                         <div class="test">Fund Details</div>

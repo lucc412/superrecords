@@ -21,6 +21,7 @@ class Query {
 					AND j1.client_id = c1.client_id
 					AND t1.status = '0'
 					AND t1.flag_post = 'Y'
+					AND j1.discontinue_date IS NULL  
 					AND c1.id = '{$_SESSION['PRACTICEID']}'
 					{$appendWhrStr}";
 
@@ -77,7 +78,6 @@ class Query {
 					SET sent_time = '".$crnt_time."' 
 					WHERE id = '{$_SESSION['PRACTICEID']}'";
 					
-		
 		mysql_query($query);			
 	}
 
@@ -91,7 +91,8 @@ class Query {
 					FROM job j1, client c1
 					WHERE j1.client_id = c1.client_id
 					AND c1.id = '{$_SESSION['PRACTICEID']}'
-					AND j1.discontinue_date IS NULL  
+					AND j1.discontinue_date IS NULL
+					AND j1.job_submitted = 'Y'
 					{$appendWhrStr}";
 
 		$fetchResult = mysql_query($qrySel);		

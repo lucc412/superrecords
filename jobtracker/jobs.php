@@ -100,7 +100,7 @@ if(isset($_REQUEST['a'])) {
 			break;
 
 		case "document":
-			$arrjobs = $objScr->sql_select();
+			$arrjobs = $objScr->sql_select('document');
 			$arrDoc = $objScr->fetch_documents();
 			$arrJobType = $objScr->fetchType();
 			$arrClients = $objScr->fetch_associated_clients();
@@ -108,7 +108,7 @@ if(isset($_REQUEST['a'])) {
 			break;
 
 		case "uploadDoc":
-			$arrjobs = $objScr->sql_select();
+			$arrjobs = $objScr->sql_select('uploadDoc');
 			$arrJobType = $objScr->fetchType();
 			$arrClients = $objScr->fetch_associated_clients();
 			include(VIEW.'jobs_documents.php');
@@ -399,6 +399,7 @@ if(isset($_REQUEST['sql'])) {
 			}
 			else {
 				$objScr->update_job_completed($_SESSION['jobId']);
+				$objScr->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
 				new_job_task_mail();
 				header('location: jobs.php?a=pending');
 			}
@@ -423,6 +424,7 @@ if(isset($_REQUEST['sql'])) {
 			}
 			else {
 				$objScr->update_job_completed($_SESSION['jobId']);
+				$objScr->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
 				new_job_task_mail();
 				header('location: jobs.php?a=pending');
 			}

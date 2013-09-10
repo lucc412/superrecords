@@ -19,6 +19,10 @@ class Job {
 			$appendStr = 'AND t1.job_submitted = "N"';
 			$orderByStr = 'ORDER BY t1.job_id desc';
 		}
+		else if(!empty($fetchType) && ($fetchType == 'document' || $fetchType == 'uploadDoc')) {
+			$appendStr = 'AND t1.job_submitted = "Y"';
+			$orderByStr = 'ORDER BY t1.job_id desc';
+		}
 
 		if(!empty($_REQUEST['lstClientType'])) {
 			$appendSelStr = "AND t1.client_id = {$_REQUEST['lstClientType']}";
@@ -196,7 +200,7 @@ class Job {
 
 	public function sql_insert($details) {
             
-                $clientId = $details['lstClientType'];
+        $clientId = $details['lstClientType'];
 		$typeId = $details['lstJobType'];
 		$period = $details['txtPeriod'];
 		$cliType = $details['lstCliType'];
@@ -234,16 +238,16 @@ class Job {
                 mysql_query($qryIns);
 		$jobId = mysql_insert_id();
 
-		$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType, $typeId);
-		
-		// add source documents
-		if($jobGenre == "COMPLIANCE")
+		// add source documents & new task if it is Compliance job
+		if($jobGenre == "COMPLIANCE") {
+			$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType);
 			$this->add_source_Docs($jobId);
+		}
 		
 		return $jobId;
 	}
 
-	public function add_task($typeId, $period, $practiceId, $clientId, $jobId, $cliType, $typeId) {
+	public function add_task($typeId, $period, $practiceId, $clientId, $jobId, $cliType) {
 		$arrJobType = $this->fetchType();
 		$arrClients = $this->fetch_associated_clients();
 
@@ -256,6 +260,23 @@ class Job {
 					'" . $jobId . "',
 					'" . $cliType . "',
 					'" . $typeId . "'
+					)";
+		mysql_query($qryIns);			
+	}
+
+	public function add_new_task($practiceId, $jobId) {
+		$arrJobType = $this->fetchType();
+		$arrClients = $this->fetch_associated_clients();
+		$arrJobData = $this->fetch_job_data($jobId);
+		$taskName = $arrClients[$arrJobData['client_id']] . ' - ' . $arrJobData['period'] . ' - ' . $arrJobType[$arrJobData['job_type_id']];
+	
+		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code) 
+					VALUES ('" . $taskName . "',
+					'" . $practiceId . "',
+					'" . $arrJobData['client_id'] . "',
+					'" . $jobId . "',
+					'" . $arrJobData['mas_Code'] . "',
+					'" . $arrJobData['job_type_id'] . "'
 					)";
 		mysql_query($qryIns);			
 	}
@@ -306,6 +327,19 @@ class Job {
 					WHERE job_id = {$jobId}";
 
 		mysql_query($qryUpd);
+	}
+
+	public function fetch_job_data($jobId) {
+		$qryUpd = "SELECT jb.period, jb.client_id, jb.mas_Code, jb.job_type_id
+					FROM job jb
+					WHERE jb.job_id = {$_SESSION['jobId']}";
+
+		$objResult = mysql_query($qryUpd);
+		while($rowInfo = mysql_fetch_assoc($objResult)) {
+			$arrJobData = $rowInfo;
+		}
+
+		return $arrJobData;
 	}
 
 	public function add_audit_details($strInsert) {

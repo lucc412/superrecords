@@ -83,19 +83,26 @@ class EXISTING_SMSF_FUND {
 						postal_address = '" . addslashes($postalAdd) . "',	
 						members = '" . addslashes($members) . "',	
 						trustee_type_id = '" . addslashes($trusteeId) . "',
-                                                fund_status = '".addslashes($fundStatus)."'
+                        fund_status = '".addslashes($fundStatus)."'
 					WHERE job_id = '" . $_SESSION['jobId']. "'";
 
         $flagReturn = mysql_query($qryInsert);
             if($jobStatus == 'Y')
             {
-				new_job_task_mail();
 
                 $stQry = "UPDATE job 
 						SET job_submitted = '".$jobStatus."', 
 						job_received = NOW() 
 						WHERE job_id = ".$_SESSION['jobId'];
                 $flagReturn = mysql_query($stQry);
+				
+				// add new task
+				include(MODEL."job_class.php");
+				$objJob = new Job();
+				$objJob->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
+				
+				// send mail for new task
+				new_job_task_mail();
             }
 	    return $flagReturn;	
 	}

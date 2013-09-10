@@ -24,7 +24,15 @@ if(isset($_SESSION['jobId'])) {
 
 		if($_REQUEST['job_submitted'] == 'Y')
 		{
+			// add new task
+			include(MODEL."job_class.php");
+			$objJob = new Job();
+			$objJob->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
+
+			// send mail for new task
 			new_job_task_mail();
+
+			// generate PDF
 			$objScr->generatePDF();
 		}
 	}

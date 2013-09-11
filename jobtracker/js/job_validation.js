@@ -225,3 +225,42 @@ function selectOptions(listName) {
 		document.getElementById("span"+listName).innerHTML = selectStr;
 	}
 }
+
+    function checkDuplicateJob()
+    {
+        $("#dialog-confirm").dialog({
+            autoOpen: false,
+            modal: true,
+            resizable: false,
+            height:250,
+            buttons: {
+                "Continue": function() {
+                    $( this ).dialog( "close" );
+                },
+                Cancel: function() {
+                    $( this ).dialog( "close" );
+                    window.location.assign('jobs.php?a=pending');
+                }
+            }    
+        });
+
+        ajaxUrl = '/jobtracker/jobs.php?a=duplicateJob&lstClientType='+$("#lstClientType").val()+'&lstJobType='+$("#lstJobType").val()+'&txtPeriod='+$("#txtPeriod").val();
+        var response = $.ajax({
+            type: "GET",
+            url: ajaxUrl,
+            async: false,
+            data:{}
+        }).responseText;
+
+        if(response != '')
+        {
+            $( "#dialog-confirm" ).dialog( "open" );
+            return false;
+        }
+        else
+        {
+            var flag = checkValidation();
+            return flag;
+        }  
+
+    }

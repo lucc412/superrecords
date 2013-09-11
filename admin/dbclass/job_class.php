@@ -558,6 +558,10 @@ class Job_Class extends Database
 		
 		if($_REQUEST['flagType'] == 'SRQ')
 			$folderPath = "../uploads/srqueries/" . $fileName;
+                
+                if($_REQUEST['flagType'] == 'T')
+			$folderPath = "../uploads/template/" . $fileName;
+                
 			
 		$arrFileName = explode('~', $fileName);
 		$origFileName = $arrFileName[1];

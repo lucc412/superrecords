@@ -61,20 +61,24 @@ function ComfirmCancel(){
 </script>
 
 <?php
+echo '<pre>';
+            print_r($_REQUEST);
+        echo '</pre>';
+        //exit;
   //Get FormCode
   $formcode=$commonUses->getFormCode("Template");
 
-//update service required tmpl_order
+        //update service required tmpl_order
         if(isset($_POST['gridedit']) && $_POST['gridedit']=="save")
         $sql_update_order =mysql_query("update `template` set `tmpl_order`=".$_POST['tmpl_order']." where tmpl_id=".$_POST['svrcode']);
 
-  //Call CheckAccess function by passing $_SESSION of staff code and form code
+        //Call CheckAccess function by passing $_SESSION of staff code and form code
 
   $access_file_level=$commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
   if($access_file_level==0)
   {
-  //If View, Add, Edit, Delete all set to N
-  echo "You are not authorised to view this file.";
+    //If View, Add, Edit, Delete all set to N
+    echo "You are not authorised to view this file.";
   }
   else if(is_array($access_file_level)==1)
   {
@@ -107,6 +111,16 @@ function ComfirmCancel(){
     case "update":
       sql_update();
       break;
+    case "download":
+        
+            echo '<pre>';
+            print_r($_REQUEST);
+        echo '</pre>';
+        exit;
+            $objJob = new Job_Class();
+            $objJob->doc_download($fileName);
+            exit;
+        break;
    }
 
   switch ($a) {
@@ -140,6 +154,7 @@ function ComfirmCancel(){
 	    echo "You are not authorised to edit record.";
 	  }
       break;
+    
     default:
 	 if($access_file_level['stf_View']=="Y")
 	  {
@@ -255,7 +270,8 @@ $countRow = 0;
 <td><?php echo htmlspecialchars($row["tmpl_name"]) ?></td>
 <td align="center">
 <?php
-	 if($access_file_level['stf_Edit']=="Y") {
+        
+	if($access_file_level['stf_Edit']=="Y") {
 	if($_GET['page']!="")
 		$updatequery="?page=".$_GET['page'];
 	if($_GET['tmpl_order']!="" && $_GET['type']!="")
@@ -380,6 +396,9 @@ else {
 
 <?php function showroweditor($row, $iseditmode)
   {
+    echo '<pre>';
+    print_r($row);
+    echo '</pre>';
 ?>
 <table class="tbl" border="0" cellspacing="10" width="50%">
 <tr>
@@ -390,8 +409,13 @@ else {
 </tr>
 <tr>
 <td class="hr">Upload<font style="color:red;" size="2">*</font></td>
-<td class="dr"><input type="file" name="tmpl_filepath">
-<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Upload template.</span></a>
+<td class="dr">
+    <?php if(!$iseditmode) {?>
+    <input type="file" name="tmpl_filepath">aaaaaaa
+    <a class="tooltip" href="#"><img src="images/help.png"><span class="help">Upload template.</span></a>
+    <?php }elseif($iseditmode) {?>
+    <button title="Click to view this document" onclick="window.open('template.php?sql=download&flagType=T&filePath='<?=$row['tmpl_filepath']?>)">Download</button>
+    <?php }?>
 </td>
 </tr>
 <tr>
@@ -601,7 +625,7 @@ function sql_select()
 
   $filterstr = $commonUses->sqlstr($filter);
   if (!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
-  $sql = "SELECT `tmpl_id`, `tmpl_name`, `tmpl_desc`, `tmpl_order` FROM `template`";
+  $sql = "SELECT `tmpl_id`, `tmpl_name`, `tmpl_desc`, `tmpl_order`, `tmpl_filepath` FROM `template`";
   if (isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
     $sql .= " where " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";
   } elseif (isset($filterstr) && $filterstr!='') {
@@ -666,6 +690,7 @@ function primarykeycondition()
 {
   global $_POST;
   global $commonUses;
+  
   $pk = "";
   $pk .= "(`tmpl_id`";
   if (@$_POST["xid"] == "") {

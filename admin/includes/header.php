@@ -357,7 +357,7 @@ $_SESSION['timeout'] = time();
 						}
 
 						// Job Menu (check access by passing $_SESSION of staff code and form code)
-						$formcode_sys="95,96,97,7,8,11,12,100";
+						$formcode_sys="95,96,97,7,8,11,12,100,102";
 						$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);
 
 						if($access_menu_level=="true") {
@@ -377,6 +377,14 @@ $_SESSION['timeout'] = time();
 									if(is_array($access_submenu_level)==1) {
 										if(in_array("Y",$access_submenu_level)) {   
 											?><li><a href="tsk_task.php?a=reset">Task</a></li><?
+										}
+									} 
+                                                                        
+                                                                        // Templates Submenu (Check access by passing $_SESSION of staff code and form code)
+									$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],102,1);
+									if(is_array($access_submenu_level)==1) {
+										if(in_array("Y",$access_submenu_level)) {   
+											?><li><a href="template.php?a=reset">Template</a></li><?
 										}
 									} 
 

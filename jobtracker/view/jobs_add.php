@@ -4,14 +4,14 @@ include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
-	<h1>Submit new job (Compliance)</h1>
+	<h1>Submit new compliance job</h1>
 	<span>
-		<b>Welcome to the Super Records job submission page for Compliance.</b></br>Here you can submit a new job for any client. Please note you must create the client before submitting a job for that client.
+		<b>Welcome to the Super Records compliance job submission page.</b></br>Here you can submit a new compliance job. Please note you must create the client before submitting a job for that client.
 	<span>
 </div><?
 
 // content
-?><form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertJob" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data">
+?><form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertJob" onSubmit="javascript:return checkDuplicateJob();" enctype="multipart/form-data">
 	<input type="hidden" name="type" id="type" value="COMPLIANCE">
 	<table align="center" width="90%" class="fieldtable" cellpadding="10px;">
 
@@ -58,7 +58,20 @@ include(TOPBAR);
 
 		<tr>
 			<td><strong>Period</strong></td>
-			<td><input title="Specify period of job" type="text" name="txtPeriod" id="txtPeriod" value=""></td>
+			<!--<td><input title="Specify period of job" type="text" name="txtPeriod" id="txtPeriod" value=""></td>-->
+                        <td><?
+				$optionYear = "2010";
+				?><select name="txtPeriod" id="txtPeriod" title="Select period">
+					<option value="">Select Period</option><?
+					while($optionYear <= date("Y")) {
+						if(time() < strtotime("01 July ".$optionYear)) break;
+						$optPeriod = "Year End 30/06/".$optionYear++;
+						$strPeriod = '';
+						if($dbPeriod == $optPeriod) $strPeriod = 'selected';
+						?><option value="<?=$optPeriod?>" <?=$strPeriod?>><?=$optPeriod?></option><?php 
+					}
+				?></select>
+			</td>
 		</tr>
 
 		<tr><td>&nbsp;</td></tr>
@@ -94,7 +107,29 @@ include(TOPBAR);
 		</tr>
 
 	</table>
-</form><?
+</form>
+<style>
+    .ui-dialog
+    {
+        height: 142px !important;
+        width: 550px !important;
+    }
+    .ui-widget-header{
+        background: url("../images_user/submit-bg.jpg") no-repeat scroll left center #074165;
+        color: #FFF;
+    }
+    .ui-dialog-content{
+        height: 40px !important;
+        overflow: hidden !important;
+    }
+</style>
+<div id="dialog-confirm" title="Warning" style="display: none;">
+  <p>
+      <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+      You have already submitted the same Job previously. If you would like to upload additional documents for already submitted job, please go to <a style="text-decoration: underline;cursor: pointer;color: #074165;" onclick="javascript:window.location.assign('jobs.php?a=document')">View and upload documents</a> menu under Jobs.
+  </p>
+</div>
+    <?
 
 // include footer file
 include(FOOTER);

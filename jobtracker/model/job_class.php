@@ -23,7 +23,10 @@ class Job {
 			$appendStr = 'AND t1.job_submitted = "Y"';
 			$orderByStr = 'ORDER BY t1.job_id desc';
 		}
-
+                else if(!empty($fetchType) && ($fetchType == 'duplicate')) {
+                    $jobName = $_REQUEST['lstClientType'] .'::'. $_REQUEST['txtPeriod'] .'::'. $_REQUEST['lstJobType'];
+                    $appendStr = "AND t1.job_name = '".$jobName."'";
+		}
 		if(!empty($_REQUEST['lstClientType'])) {
 			$appendSelStr = "AND t1.client_id = {$_REQUEST['lstClientType']}";
 		} 

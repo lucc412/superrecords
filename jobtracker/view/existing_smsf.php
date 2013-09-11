@@ -5,7 +5,7 @@ include(SETUPNAVIGATION);
 <div class="pageheader">
 	<h1>SMSF Deed of Variation</h1>
 	<span>
-		<b>Welcome to the Super Records SMSF Deed of Variation page.</b>
+		<b>Welcome to the Super Records SMSF deed of variation page.</b>
 	<span>
 </div>
 

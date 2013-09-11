@@ -3,11 +3,21 @@
 include(TOPBAR);
 
 // page header
-?><div class="pageheader">
-	<h1>Submit a Job (Audit)</h1>
-	<span>
-		<b>Welcome to the Super Records job submission page.</b></br>Here you can submit a new job for any client. Please note you must create the client before submitting a job for that client.
-	<span>
+?><div class="pageheader"><?
+	if(empty($arrJobInfo)) {
+		?><h1>Submit new audit job</h1><?
+	}
+	else {
+		?><h1>Edit existing audit job</h1><?
+	}
+	?><span><?
+		if(empty($arrJobInfo)) {
+			?><b>Welcome to Super Records audit only job submission page.</b></br>Here you can submit a new Audit job. Please note you must create the client before submitting a job for that client.<br/>If you would like to retrieve the previously saved job, please go to <i>Retrieve saved jobs</i> under Jobs menu otherwise please continue.<?
+		}
+		else {
+			?><b>Welcome to Super Records audit only job edit page.</b></br>Here you can edit an existing Audit job.<?
+		}
+	?><span>
 </div><?
 
 // content

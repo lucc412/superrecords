@@ -5,14 +5,12 @@ include(SETUPNAVIGATION);
 <div class="pageheader">
 	<h1>Declarations</h1>
 	<span>
-		<b>Welcome to the Super Records Declarations page.</b>
+		<b>Welcome to the Super Records declarations page.</b><br/>There are certain limitations on who can be a member or a trustee of a self managed superannuation fund. Please answer yes or no to the following questions to determine whether any proposed member or trustee is not allowed to be a member or trustee of the SMSF.
 	<span>
 </div>
 <form method="post" action="new_smsf_declarations.php" onsubmit="return checkYesNoAns();">
 	<input type="hidden" value="<?=$_SESSION['TRUSTEETYPE']?>" id="hdnTrusteeType"/>
 	<div style="padding-top:20px;">
-		<div>There are certain limitations on who can be a member or a trustee of a self managed superannuation fund. Please answer yes or no to the following questions to determine whether any proposed member is not allowed to be a member of the SMSF.</div></br>	
-
 		<table class="fieldtable"><?
 			for($i=0; $i<count($arrQues); $i++)	{
 				?><tr>

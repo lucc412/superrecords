@@ -5,7 +5,7 @@ include(SETUPNAVIGATION);
 <div class="pageheader" style="padding-bottom: 0">
 	<h1>Member Details</h1>
 	<span>
-		<b>Welcome to the Super Records Member Details page.</b>
+		<b>Welcome to the Super Records member details page.</b>
 	<span>
 </div>
 <div>

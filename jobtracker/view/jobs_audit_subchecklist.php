@@ -4,10 +4,10 @@ include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
-	<h1>Add documents (Audit)</h1>
+	<h1>Checklist for Audit</h1>
 	<div>
 		<span>
-			<b>Welcome to the Super Records documents upload page for audit.</b></br>Here you can upload documents for audit job.
+			<b>Welcome to Super Records Audit checklist section. </b></br>Please click on below selected categories to view the checklists & upload documents against each category as applicable.  If you would like to upload multiple documents or files for this particular job, please select <i>Upload Multiple Documents</i> button.
 			<div class="downloadChecklist" align="right">
 				<button title="click here to download your preferred checklist" type="button" onclick="javascript:urlRedirect('jobs.php?sql=dwnldchcklst');">Download Checklist</button>
 			</div>
@@ -32,15 +32,15 @@ include(TOPBAR);
 			$checklistStatus = $checklist['2'];
 
 			?><span class="bluearrow" id="checklist<?=$checklistId?>"><?=$checklistName;?></span>
-			<div class="pdB15" align="right"><button style="width:<?if(empty($checklistStatus)) echo "205px"; else echo "250px";?>" type="button" title="click here to manage documents" onclick="JavaScript:newPopup('jobs.php?a=uploadAudit&checklistId=<?=$checklistId?>','400');"><?if(empty($checklistStatus)) echo "Upload multiple documents"; else echo "View multiple uploaded documents";?></button></div>
+			<div class="pdB15" align="right"><button style="width:<?if(empty($checklistStatus)) echo "205px"; else echo "250px";?>" type="button" title="click here to manage documents" onclick="JavaScript:newPopup('jobs.php?a=uploadAudit&checklistId=<?=$checklistId?>','400');"><?if(empty($checklistStatus)) echo "Upload Multiple Documents"; else echo "View multiple uploaded documents";?></button></div>
 			<table width="100%" id="subchecklist<?=$checklistId?>" class="resources pdB20">
 				<tbody>
 					<tr>
-						<td width="40%" class="td_title">Description</td>
+						<td width="50%" class="td_title">Description</td>
 						<td class="td_title" align="center">Upload</td>
-						<td class="td_title" align="center">Documents</td>
+						<td class="td_title">Documents</td>
 						<td class="td_title" align="center">Status</td>
-						<td class="td_title" align="center">Comments</td>
+						<td align="center" class="td_title">Comments</td>
 					</tr><?
 					$countRow = 0;
 					foreach($arrSubChecklist AS $subChecklistId => $subChecklistName) {
@@ -48,8 +48,8 @@ include(TOPBAR);
 						else $trClass = "";
 						?><tr class="<?=$trClass?>">
 							<td class="tddata" style="width:400px" id="subchecklist"><?=$subChecklistName?></td>
-							<td class="tddata" align="center"><button style="width:85px" onclick="JavaScript:newPopup('jobs.php?a=uploadSubAudit&checklistId=<?=$checklistId?>&subchecklistId=<?=$subChecklistId?>','250');" type="button" title="click here to upload documents">Upload</button></td>
-							<td class="tddata" align="center"><?
+							<td class="tddata" align="center"><div class="arrow-up" onclick="JavaScript:newPopup('jobs.php?a=uploadSubAudit&checklistId=<?=$checklistId?>&subchecklistId=<?=$subChecklistId?>','250');" title="click here to upload documents"></div></td>
+							<td class="tddata"><?
 								$arrSubDocuments = $arrSubDocList[$subChecklistId];
 								if(!empty($arrSubDocuments)) {
 									$docCnt = 0;
@@ -80,7 +80,7 @@ include(TOPBAR);
 									}
 								?></select>
 							</td>
-							<td class="tddata" align="center"><textarea name="taNotes<?=$subChecklistId?>" cols="5" rows="1"><?=$arrDocDetails[$subChecklistId]['notes']?></textarea></td>
+							<td align="center" class="tddata"><textarea name="taNotes<?=$subChecklistId?>" style="width:120px;height:17px" ><?=$arrDocDetails[$subChecklistId]['notes']?></textarea></td>
 						</tr><?
 						$countRow++;
 					}

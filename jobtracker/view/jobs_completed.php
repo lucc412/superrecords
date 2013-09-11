@@ -4,7 +4,7 @@ include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
-	<h1>Completed Jobs</h1>
+	<h1>Completed jobs</h1>
 	<span>
 		<b>Welcome to the Super Records completed job list.</b></br>Below you can see all completed jobs for your practice.
 	<span>

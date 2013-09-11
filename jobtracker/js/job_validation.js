@@ -244,7 +244,7 @@ function selectOptions(listName) {
             }    
         });
 
-        ajaxUrl = '/jobtracker/jobs.php?a=duplicateJob';
+        ajaxUrl = '/jobtracker/jobs.php?a=duplicateJob&lstClientType='+$("#lstClientType").val()+'&lstJobType='+$("#lstJobType").val()+'&txtPeriod='+$("#txtPeriod").val();
         var response = $.ajax({
             type: "GET",
             url: ajaxUrl,

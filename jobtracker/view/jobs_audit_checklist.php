@@ -4,9 +4,9 @@ include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
-	<h1>Select checklist (Audit)</h1>
+	<h1>Audit Checklist</h1>
 	<span>
-		<b>Welcome to the Super Records checklist selection page for audit.</b></br>Please select the checklist for audit job.
+		<b>Welcome to Super Records Audit checklist section.</b></br>Please tick each SMSF category relevant to the Fund.<br/>A list of documents required for all selected categories will appear in next section.
 	<span>
 </div><?
 

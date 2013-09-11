@@ -18,7 +18,7 @@ include(TOPBAR);
 <div class="pageheader">
 	<h1>Order Documents</h1>
 	<span>
-		<b>Welcome to the Super Records job submission page.</b></br>If you would like to retrieve the saved order, please click on Saved Jobs. Otherwise please select the document you would like to order from below list.
+		<b>Welcome to the Super Records order documents page.</b></br>If you would like to retrieve the saved order, please click on <i>Retrieve saved jobs</i> under Jobs menu. Otherwise please select the document you would like to order from below list.
 	<span>
 </div>
 <div class="wrap" style="min-height: 350px; ">

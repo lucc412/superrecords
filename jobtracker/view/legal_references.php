@@ -3,13 +3,13 @@ include(TOPBAR);
 include(SETUPNAVIGATION);
 ?>
 <div class="pageheader" style="padding-bottom: 0">
-	<h1>Legal Personal Reference Details</h1>
+	<h1>Legal Personal Representative Detail</h1>
 	<span>
-		<b>Welcome to the Super Records Legal Personal References Details page.</b>
+		<b>Welcome to the Super Records Legal Personal Representative Details page.</b>
 	<span>
 </div>
 <div>
-	<div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please provide legal refrences for member below 18  years of age. If you need any help completing this section, please contact us.</div><?
+	<div style="padding-bottom:20px;color: #074263;font-size: 14px;">As member of the super fund is below 18 years of age, Legal Personal Representative of that person must act as trustee of the fund on member behalf. Please provide details of legal personal representative below.</div><?
 
 	// show member form as per no of members
 	?><form method="post" action="legal_references.php" name="frmnewsmsfmember" onsubmit="return formValidation(<?=count($arrLegRef)?>)"><?

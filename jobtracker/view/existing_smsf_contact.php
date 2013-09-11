@@ -3,9 +3,9 @@ include(TOPBAR);
 include(SETUPNAVIGATION);
 ?>
 <div class="pageheader" style="padding-bottom: 0">
-	<h1>Contact Details</h1>
+	<h1>Practice Contact Details</h1>
 	<span>
-		<b>Welcome to the Super Records Contact Details page.</b>
+		<b>welcome to Super Records practice contact details page.</b>
 	<span>
 </div>
 <div>

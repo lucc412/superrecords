@@ -45,7 +45,7 @@
 		<p class="joblstbtn" style="<?if(basename($_SERVER['PHP_SELF']) == "new_smsf_member.php") echo "background-color:#F05729;"?>" >Member Details</p>
             </td>
             <td>
-		<p class="joblstbtn" style="<?if(basename($_SERVER['PHP_SELF']) == "legal_references.php") echo "background-color:#F05729;"?>" >Legal References</p>
+		<p class="joblstbtn" style="width:190px;<?if(basename($_SERVER['PHP_SELF']) == "legal_references.php") echo "background-color:#F05729"?>" >Legal Personal Representative</p>
             </td>
             <?php  } ?>
             <?php if($_SESSION['frmId'] == '1'){ ?>

@@ -33,43 +33,48 @@
                 
 		if(basename($_SERVER['PHP_SELF']) == 'jobs.php') {
 			if($typeStr == 'type=comp') {
-				?><title>Submit a Job (Compliance)</title><?
+				?><title>Submit new compliance job</title><?
 			}
             else if($typeStr == 'type=setup') {
-				?><title>Submit a Job (Setup)</title><?
+				?><title>Submit new setup job</title><?
 			}
 			else if($qryStr == 'a=audit') {
-				?><title>Submit a Job (Audit)</title><?
+				if(isset($typeStr) && strstr($typeStr, 'recid')) {
+					?><title>Edit existing audit job</title><?
+				}
+				else {
+					?><title>Submit new audit job</title><?
+				}
 			}
 			else if($qryStr == 'a=checklist') {
-				?><title>Select checklist (Audit)</title><?
+				?><title>Audit Checklist</title><?
 			}
 			else if($qryStr == 'a=subchecklist' || $qryStr == 'a=uploadAudit' || $qryStr == 'a=uploadSubAudit') {
-				?><title>Add documents (Audit)</title><?
+				?><title>Checklist for Audit</title><?
 			}
 			else if($qryStr == 'a=edit') {
-				?><title>Edit Existing Job</title><?
+				?><title>Edit existing job</title><?
 			}
 			else if($qryStr == 'a=order') {
 				?><title>Order Documents</title><?
 			}
 			else if($qryStr == 'a=saved') {
-				?><title>Saved Jobs</title><?
+				?><title>Retrieve saved jobs</title><?
 			}
 			else if($qryStr == 'a=pending') {
-				?><title>Pending Jobs</title><?
+				?><title>Pending jobs</title><?
 			}
 			else if($qryStr == 'a=completed') {
-				?><title>Completed Jobs</title><?
+				?><title>Completed jobs</title><?
 			}
 			else if($qryStr == 'a=document') {
-				?><title>My Documents</title><?
+				?><title>View and upload documents</title><?
 			}
 			else if($qryStr == 'a=uploadDoc') {
-				?><title>Upload Document</title><?
+				?><title>View and upload documents</title><?
 			}
 			else {
-				?><title>View My Job List</title><?
+				?><title>Submit new job</title><?
 			}
 			?>
 			<script type="text/javascript" src="js/job_validation.js"></script><?
@@ -87,7 +92,7 @@
 				<script type="text/javascript" src="js/new_smsf_member.js"></script><?
 		}
                 else if(basename($_SERVER['PHP_SELF']) == 'legal_references.php') {
-				?><title>Legal References</title>
+				?><title>Legal Personal Representative</title>
 				<script type="text/javascript" src="js/legal_references.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_trustee.php') {

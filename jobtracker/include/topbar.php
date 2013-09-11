@@ -25,29 +25,23 @@ include("path.php");
 		<div class="nav">
 			<div class="container">
 				<ul>
-					<li><a href="home.php">Home</a></li>
-					<li class="dropdown"><a href="javascript:;">&nbsp;&nbsp;&nbsp;&nbsp;Clients&nbsp;&nbsp;&nbsp;&nbsp;</a>
+					<!--<li><a href="home.php">Home</a></li>-->
+					<li class="dropdown"><a href="javascript:;">&nbsp;&nbsp;Clients&nbsp;&nbsp;</a>
 						<ul class="sub">
 							<li><a href="clients.php?a=add">Add New Client</a></li>
 							<li><a href="clients.php">View My Client List</a></li>
 						</ul>
 					</li>
-					<li class="dropdown"><a href="javascript:;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jobs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+					<li class="dropdown"><a href="javascript:;">&nbsp;&nbsp;Jobs&nbsp;&nbsp;</a>
 						<ul class="sub">
-							<li>
-								<a style="cursor:default" href="javascript:;">Submit a Job</a>
-								<ul class="sub">
-									<li><a href="jobs.php?a=add&type=comp">Compliance</a></li>
-									<li><a href="jobs.php?a=audit&var=new">Audit Only</a></li>
-									<li><a href="jobs.php?a=order&var=new">Order Documents</a></li>
-								</ul>
-							</li>
-							<li><a href="jobs.php?a=saved">Saved Jobs</a></li>
-							<li><a href="jobs.php?a=pending">Pending Jobs</a></li>
-							<li><a href="jobs.php?a=completed">Completed Jobs</a></li>
-							<li><a href="jobs.php?a=document">My Documents</a></li>
+							<li><a href="jobs.php">Submit new job</a></li>
+							<li><a href="jobs.php?a=saved">Retrieve saved jobs</a></li>
+							<li><a href="jobs.php?a=pending">Pending jobs</a></li>
+							<li><a href="jobs.php?a=completed">Completed jobs</a></li>
+							<li><a href="jobs.php?a=document">View and upload documents</a></li>
 						</ul>
 					</li>
+					<li><a href="jobs.php?a=order&var=new">Order Documents</a></li> 
 					<li><a href="queries.php">View All Queries</a></li> 
 					<li><a href="template.php">Download Templates</a></li> 
 				</ul>

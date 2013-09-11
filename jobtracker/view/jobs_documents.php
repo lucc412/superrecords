@@ -9,9 +9,9 @@ switch($_REQUEST['a'])
 
 		// page header
 		?><div class="pageheader">
-			<h1>My Documents</h1>
+			<h1>View and upload documents</h1>
 			<span>
-				<b>Welcome to the Super Records documents list.</b></br>Below you can see all documents for your jobs.
+				<b>Welcome to the Super Records documents list for your jobs.</b></br>Below you can see all documents for your jobs.
 			<span>
 		</div><?
 

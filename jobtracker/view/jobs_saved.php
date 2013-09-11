@@ -4,7 +4,7 @@ include(TOPBAR);
 
 // page header
 ?><div class="pageheader">
-	<h1>Saved Jobs</h1>
+	<h1>Retrieve saved jobs</h1>
 	<span>
 		<b>Welcome to the Super Records saved job list.</b></br>Below you can see all saved jobs for your practice.
 	<span>

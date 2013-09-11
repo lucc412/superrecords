@@ -5,18 +5,16 @@ include(SETUPNAVIGATION);
 <div class="pageheader" style="padding-bottom:0;">
 	<h1>Trustee Details</h1>
 	<span>
-		<b>Welcome to the Super Records Trustee Details page.</b>
+		<b>Welcome to the Super Records trustee details page.</b>
 	<span>
 </div>
-<div >
-	
-
+<div>
 	<input type="hidden" name="trustyType" id="trustyType" value="<?php echo($_SESSION['TRUSTEETYPE'])?>"/><?
 
 	// Form display for New Corporate Trustee 
 	if($_SESSION['TRUSTEETYPE'] == '2') {
 
-		?><div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details to set up your new corporate trustee. These details will be used to register the corporate trustee. If you need any help completing this section, please contact us.</div>
+		?><div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please provide below details to set up new special purpose company to be the trustee of this super fund. These details will be used to register the company and set up the super fund. If you need any help completing this section, please contact us.</div>
 		<span style="color:#0c436c"><u><b>New Corporate Trustee Details</b></u></span>
 		<form method="post" action="new_smsf_trustee.php" name="frmnewsmsftrustee" onsubmit="return formValidation()">
 		
@@ -65,7 +63,7 @@ include(SETUPNAVIGATION);
 
 	// Form display for Existing Corporate Trustee
 	if($_SESSION['TRUSTEETYPE'] == '3') {
-		?> <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details of the company you have to act as your corporate trustee. If you need any help completing this section, please contact us.</div>
+		?> <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details of the company which will be acting as the trustee of this fund. If you need any help completing this section, please contact us.</div>
            <span style="color:#0c436c"><u><b>Existing Corporate Trustee Details</b></u></span>
 			
 		<form method="post" action="new_smsf_trustee.php" name="frmnewsmsftrustee" onsubmit="return formValidation()">

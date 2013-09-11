@@ -4,8 +4,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=9" />
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-                <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+                <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+                <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 		<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
 		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
 		<link href="images_user/favicon.ico" rel="shortcut icon" />
@@ -17,7 +18,6 @@
 		<link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
 		<script type="text/javascript" src="js/datetimepicker_css.js"></script>
 		<script type="text/javascript" src="js/common.js"></script>
-<!--		<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>-->
                 <script type="text/javascript" src="js/jquery.tooltipster.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function() {
@@ -71,7 +71,7 @@
 			else {
 				?><title>View My Job List</title><?
 			}
-			?><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+			?>
 			<script type="text/javascript" src="js/job_validation.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_contact.php') {

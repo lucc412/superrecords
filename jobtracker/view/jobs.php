@@ -9,9 +9,9 @@ include(TOPBAR);
 	<span>
 </div>
 
-<div class="pdT50 pdB20">
-	<span onclick="javascript:urlRedirect('jobs.php?a=add&type=comp');" title="Submit new compliance job" class="jobbox">Compliance</span>
-	<span onclick="javascript:urlRedirect('jobs.php?a=audit&var=new');" title="Submit new audit only job" class="jobbox" style="padding-left:26px;padding-right:26px">Audit only</span>
+<div class="pdT50 pdB20" style="text-align:center">
+	<span onclick="javascript:urlRedirect('jobs.php?a=add&type=comp');" title="Submit new compliance job" class="jobbox">Submit Compliance job</span>
+	<span onclick="javascript:urlRedirect('jobs.php?a=audit&var=new');" title="Submit new audit only job" class="jobbox" style="padding-left:26px;padding-right:26px">Submit Audit Only job</span>
 </div><?
 
 include (FOOTER);

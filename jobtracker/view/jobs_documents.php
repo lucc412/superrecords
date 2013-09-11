@@ -60,13 +60,14 @@ switch($_REQUEST['a'])
 
 							<td class="tddata"><?
 								$arrSourceDocs = $objScr->fetch_documents($jobId);
+                                                                //var_dump($arrSourceDocs);
 								if(!empty($arrSourceDocs)) {
 									$docCnt = 0;
 									foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
 										$docCnt++;
 										$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
 										if(file_exists($folderPath)) {
-											?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document">Document <?=$docCnt?></a></p><?
+											?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?php $file = explode('~',$arrDocInfo['file_path']); echo $file[1];?></a></p><?
 										}
 									}
 								}

@@ -381,7 +381,6 @@ if(isset($_REQUEST['sql'])) {
 				opener.parent.location.href = 'jobs.php?a=subchecklist';
                 self.close();
             </script>";
-			//header('location: jobs.php?a=uploadSubAudit&checklistId='.$_REQUEST['checklistId'].'&subchecklistId='.$_REQUEST['subchecklistId']);
 			break;
 
 		case "insertAudit":

@@ -463,7 +463,7 @@ class Job_Class extends Database
 		$jobType = $_REQUEST["lstJob"];
 		$notes = $_REQUEST['txtNotes'];
 
-		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, notes, job_name, job_status_id, job_received)
+		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, notes, job_name, job_status_id, job_submitted, job_received)
 					VALUES (
 					" . $client_Id . ", 
 					" . $masCode . ", 
@@ -472,6 +472,7 @@ class Job_Class extends Database
 					'" . $notes . "',
 					'" . $jobName . "',  
 					1,  
+					'Y',
 					NOW()
 					)";
 

@@ -71,7 +71,6 @@ if(isset($a)) {
 			
 			break;
 
-<<<<<<< HEAD
 		case "pending":
 			$arrJobs = $objScr->sql_select('pending');
 			$arrJobType = $objScr->fetchType();

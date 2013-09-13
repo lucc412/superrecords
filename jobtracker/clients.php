@@ -45,6 +45,7 @@ switch ($sql) {
 				send_mail($to, $cc, $subject, $content);
 			}
 			/* send mail function ends here */
+			header("location: clients.php");
 		}
 		else 
 		{

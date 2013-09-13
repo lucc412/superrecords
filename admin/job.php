@@ -111,7 +111,7 @@ if($_SESSION['validUser']) {
 						send_mail($to, $cc, $subject, $content);
 					}
 					/* send mail function ends here */
-					
+					header('location: job.php');
 					break;
 
 				case "updateJob":

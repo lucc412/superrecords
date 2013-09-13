@@ -203,7 +203,7 @@ class Job {
 
 	public function sql_insert($details) {
             
-        $clientId = $details['lstClientType'];
+                $clientId = $details['lstClientType'];
 		$typeId = $details['lstJobType'];
 		$period = $details['txtPeriod'];
 		$cliType = $details['lstCliType'];
@@ -240,7 +240,9 @@ class Job {
 					)";
                 mysql_query($qryIns);
 		$jobId = mysql_insert_id();
-
+                
+                
+                $this->smsfCheck($setup_subfrm,$jobId);
 		// add source documents & new task if it is Compliance job
 		if($jobGenre == "COMPLIANCE") {
 			$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType);
@@ -249,6 +251,11 @@ class Job {
 		
 		return $jobId;
 	}
+        public function smsfCheck($setup_subfrm,$jobId)
+        {
+            $qry = "UPDATE es_SMSF SET job_id = ".$jobId." WHERE job_id = 0";
+            mysql_query($qry);
+        }
 
 	public function add_task($typeId, $period, $practiceId, $clientId, $jobId, $cliType) {
 		$arrJobType = $this->fetchType();

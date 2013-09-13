@@ -9,28 +9,6 @@ include(MODEL . "new_smsf_contact_class.php");
 // create class object for class function access
 $objScr = new NEW_SMSF_CONTACT();
 
-// fetch states for drop-down
-//$arrStates = $objScr->fetchStates();
-//$arrStates = fetchStates();
-
-// check referral Code
-//if(isset($_POST['flaginit']) && $_POST['flaginit'] == 'Y') {
-//	if(isset($_POST['txtCode']) && !empty($_POST['txtCode'])) {
-//		$codeStatus = $objScr->checkIfCodeExists($_POST['txtCode']);
-//		if($codeStatus) {
-//			$flagInsert = TRUE;
-//		}
-//		else{
-//			$flaginvalid = TRUE;
-//		}
-//            $flagInsert = TRUE;
-//	}
-//}
-//else if(isset($_POST['flaginit']) && $_POST['flaginit'] == 'N') {
-//	if(isset($_SESSION['NEW_REFCODE'])) unset($_SESSION['NEW_REFCODE']);
-//	$flagInsert = TRUE;
-//}
-
 if(isset($_POST['flaginit']) && $_POST['flaginit'] =='add') {
 	
 	$fname = $_REQUEST['txtFname'];

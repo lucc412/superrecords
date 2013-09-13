@@ -19,16 +19,16 @@ function checkYesNoAns()
 		
 		return false;
 	}
-	else if(document.getElementById('chkAgree').checked == false)
-	{
-		alert('Please click to agree our terms & conditions.');
-		document.getElementById('chkAgree').focus();
-		return false;
-	}
+//	else if(document.getElementById('chkAgree').checked == false)
+//	{
+//		alert('Please click to agree our terms & conditions.');
+//		document.getElementById('chkAgree').focus();
+//		return false;
+//	}
 	
 	
-	if(count == 0 && document.getElementById('chkAgree').checked == true)
-		return true;
-	else
-		return false;
+//	if(count == 0 && document.getElementById('chkAgree').checked == true)
+//		return true;
+//	else
+//		return false;
 }

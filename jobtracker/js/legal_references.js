@@ -110,17 +110,16 @@
 // get age of member
 function getAge(age) 
 {
-    dateString = age;
-    var birthday = +new Date(dateString);
-    var year = ~~((+new Date() - birthday) / (31557600000));
-    if(year < 18)
+    dateString = age
+    var birthday = new Date(dateString);
+    var birthYear = birthday.getFullYear();
+    var currentYear = new Date().getFullYear();
+    if((currentYear - birthYear) < 18)
     {
         alert('Legal personal representative should be minimum 18 years in age.');
         return false;
     }
-    else{
-    }
-
+    
     return true;
 }
 	

@@ -135,7 +135,7 @@ class EXISTING_SMSF_FUND {
 
             if(isset($client_id) && $client_id != '')
             {
-                $jobName = $client_id .'::'. date('Y') .'::21';
+                $jobName = $client_id .'::'. date('Y') .'::168';
                 $updt = "UPDATE job SET 
                     client_id = ".$client_id.", 
                     job_name = '".addslashes($jobName)."' 

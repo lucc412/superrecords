@@ -289,7 +289,8 @@ function fetchTrusteeName($id)
 }
 
 // send mail for new job & new task
-function new_job_task_mail() {
+function new_job_task_mail() 
+{
 	/* send mail function starts here for ADD NEW JOB */
 	$pageUrl = "jobs.php?sql=insertJob";
 	
@@ -346,5 +347,72 @@ function new_job_task_mail() {
 		send_mail($to, $cc, $subject, $content);
 	}
 	/* send mail function ends here */	
+}
+
+function createPDF($html,$filename)
+{
+    include(PDF);
+    
+    // create new PDF document
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+    // set document information
+    $pdf->SetCreator(PDF_CREATOR);
+    $pdf->SetAuthor('Super Records');
+    $pdf->SetTitle('SuperRecords Setup Report');
+    $pdf->SetSubject('SuperRecords Setup Report');
+    $pdf->SetKeywords('SuperRecords Setup Report');
+
+    // set default header data
+    $pdf->SetHeaderData(PDF_HEADER_LOGO, 70, 'Super Records'.' ', 'Trustee Guide',array(7,65,101));
+
+    // set header and footer fonts
+    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', 15));
+    $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+    
+    // set default monospaced font
+    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+    // set margins
+    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+    // set auto page breaks
+    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+    // set image scale factor
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+    // set some language-dependent strings (optional)
+    if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+        require_once(dirname(__FILE__).'/lang/eng.php');
+        $pdf->setLanguageArray($l);
+    }
+
+    // set font
+    $pdf->SetFont('helvetica', '', 10);
+
+    // add a page
+    $pdf->AddPage();
+    
+    //$html = "";
+
+    // output the HTML content
+    $pdf->writeHTML($html, true, false, true, false, '');
+
+    $pdf->Output($filename, 'I');
+    //$pdf->Output(UPLOADSETUP.$filename,"F");
+}
+
+function showPDFViewer($file,$filename)
+{
+    header('Content-type: application/pdf');
+    header('Content-Disposition: inline; filename="' . $filename . '"');
+    header('Content-Transfer-Encoding: binary');
+    header('Content-Length: ' . filesize($file));
+    header('Accept-Ranges: bytes');
+
+    @readfile($file);
 }
 ?>

@@ -3,7 +3,7 @@
 // send mail function
 function send_mail($to, $cc=NULL, $subject, $content)
 {	
-	$from = "noreply@superrecords.com.au";
+	$from = "siddhesh.c@befreeit.com.au";
 
 	//It will set the Header From Which Email Id main will send also it will Set CC
 	$headers = "MIME-Version: 1.0\r\n";

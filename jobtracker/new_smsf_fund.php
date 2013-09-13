@@ -12,9 +12,14 @@ if(isset($_SESSION['jobId'])) {
 	$objScr = new NEW_SMSF_FUND();
 
 	// function to download doc file
-	if(isset($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'download') {
-		$objScr->doc_download();	
-	}
+	if(isset($_REQUEST['do']) && $_REQUEST['do'] == 'download') 
+        {
+            showPDFViewer('docs/guide.pdf','guide.pdf');
+            //createPDF($html, 'guide.pdf');
+        }
+//        if(isset($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'download') {
+//		$objScr->doc_download();	
+//	}
 
 	// fetch data is available 
 	if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) {

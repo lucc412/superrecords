@@ -92,7 +92,13 @@ include(SETUPNAVIGATION);
 							}
 						}  
 						echo($dob);
-						?>" onblur="javascript:return getAge(this.value)"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" class="calendar"/>
+						?>" /><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" class="calendar"/>
+                                                <script>
+                                                    $('#txtDob<?=$memberCount?>').blur(function(){
+                                                        return getAge(this.value);
+                                                    });
+                                                    
+                                                </script>
 					</td>
 				</tr>
 				<tr>
@@ -159,6 +165,7 @@ include(SETUPNAVIGATION);
         <script>
             $('#btnNext').click(function(){$('#member_status').val('0')})
             $('#btnSave').click(function(){$('#member_status').val('1')})
+            
         </script>
         
 </div><?

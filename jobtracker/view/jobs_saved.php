@@ -44,7 +44,6 @@ include(TOPBAR);
 			foreach($arrJobs AS $jobId => $arrJobDetails) {
 				if($countRow%2 == 0) $trClass = "trcolor";
 				else $trClass = "";
-
 				$arrJobParts = explode('::', $arrJobDetails['job_name']);
 				$jobName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
 

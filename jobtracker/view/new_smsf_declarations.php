@@ -32,6 +32,7 @@ include(SETUPNAVIGATION);
 		</div>-->
 	</div>
         <input type="hidden" name="job_submitted" id="job_submitted" value="">
+        <input type="hidden" name="preview" id="preview" value="">
 	<div style="padding-top:20px;"><?
 
 		if($_SESSION['TRUSTEETYPE'] != 1)
@@ -41,11 +42,13 @@ include(SETUPNAVIGATION);
 		
 			?><span align="left"><button type="button" onclick="<?=$jsFunc?>" >BACK</button></span>
 			<span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">SAVE & EXIT</button></span>
+                        <span align="right" style="padding-left:55px;"><button id="btnPreview" class="" type="button" onclick="js:urlRedirect('setup_preview.php');">Preview</button></span>
 			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
 	</div>
         <script>
             $('#btnNext').click(function(){$('#job_submitted').val('N')})
             $('#btnSave').click(function(){$('#job_submitted').val('Y')})
+            
         </script>
 </form><?
 

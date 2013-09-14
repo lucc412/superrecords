@@ -26,6 +26,13 @@
                 $arrMembrs[$rowData['member_id']] = $rowData;
             }
             
+            $LegalQry = "SELECT * FROM es_legal_references WHERE job_id = ".$_SESSION['jobId'];
+            $fetchLegRef = mysql_query($LegalQry);
+            while($rowData = mysql_fetch_assoc($fetchLegRef))
+            {
+                $arrLegRef[$rowData['job_id']] = $rowData;
+            }
+            
             $newTrstyQry = "SELECT * FROM es_new_trustee WHERE job_id = ".$_SESSION['jobId'];
             $fetchNewTrsty = mysql_query($newTrstyQry);
             $arrNewTrsty = array();
@@ -75,10 +82,12 @@
             $fetchAct = mysql_query($qryAct);
             $arrActivity = mysql_fetch_assoc($fetchAct);
             
+            
             // HTML Part of PDF
             if($arrJob[$jobid][setup_subfrm_id] == 1)
             {
                 $members = '';
+                $leagalRef = '';
                 $cnt = 1;
                 foreach ($arrMembrs as $key => $value) 
                 {
@@ -87,10 +96,67 @@
                    $fetchCntry = mysql_query($cntry);
                    $Data = mysql_fetch_assoc($fetchCntry);
                    $value['country_id'] = $Data['country_name'];
+                   
+                   if($value['legal_references'] == 1)
+                   {
+                        $cntr = 1;
+                        
+                        foreach ($arrLegRef as $key => $value) 
+                        {
+                                if($cntr == 1)
+                                $leagalRef .= '<div class="test">Legal References Details</div><br/>';
 
-                    $members .= '<div class="test">Memeber Details</div>
-                                <br/>
-                                <table class="fieldtable" cellpadding="4" cellspacing="6">
+                                $leagalRef .= '<table class="fieldtable" cellpadding="4" cellspacing="6">
+                                        <tr>
+                                            <td colspan="2"><b>Legal References '.$cntr.'</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Legal References Name : </td>
+                                            <td>'.$value['title'].' '.$value['fname'].' '.$value['mname'].' '.$value['lname'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date of Birth : </td>
+                                            <td>'.$value['dob'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>City of Birth : </td>
+                                            <td>'.$value['city'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Country of Birth : </td>
+                                            <td>'.$value['country_id'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sex : </td>
+                                            <td>'.$value["gender"].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address : </td>
+                                            <td>'.$value['address'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tax File Number : </td>
+                                            <td> '.$value['tfn'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Occupation : </td>
+                                            <td>'.$value['occupation'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact Number : </td>
+                                            <td>'.$value['contact_no'].' </td>
+                                        </tr>
+
+                                    </table>
+                                    <br/>';
+                            $cntr++;
+                        }
+                   }
+                           
+                   if($cnt == 1)
+                        $members .= '<div class="test">Memeber Details</div><br/>';
+                    
+                    $members .= '<table class="fieldtable" cellpadding="4" cellspacing="6">
                                 <tr>
                                     <td colspan="2"><b>Member '.$cnt.'</b></td>
                                 </tr>
@@ -135,6 +201,7 @@
                             <br/>';
                     $cnt++;
                 }
+                
             }
             if($arrJob[$jobid][setup_subfrm_id] == 1)
             {
@@ -287,7 +354,7 @@
                             </tr>
                             
                         </table>                        
-                        <br/>'.$members.$trustee.'
+                        <br/>'.$members.$leagalRef.$trustee.'
                         <br/>
                         <div align="center">
                             <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php");\'>BACK</button></span>

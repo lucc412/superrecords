@@ -13,6 +13,7 @@ if(isset($_SESSION['jobId']))
             
 	// fetch states for drop-down
 	$arrQuestionsList = $objScr->fetchQuestions();
+        $arrLegRef = $objScr->checkLegalRef();
         $checkTerms = $objScr->fetchTerms();
 //        if($_REQUEST['preview'] == "Y")
 //        {

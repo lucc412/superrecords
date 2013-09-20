@@ -10,9 +10,7 @@ if(isset($_SESSION['jobId'])) {
 
 	// create class object for class function access
 	$objScr = new NEW_SMSF_MEMBER();
-	//global $phpFunctns;
-        //showArray($_REQUEST);
-        //exit;
+	
 	if(isset($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'addMemberInfo') 
         {
         	// fetch existing contact details
@@ -67,6 +65,10 @@ if(isset($_SESSION['jobId'])) {
                             {
                                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                                 header('Location: jobs.php?a=saved');
+                            }
+                            elseif ($legRefernces > 0) 
+                            {
+                                header('Location: legal_references.php');
                             }
                             else
                                 header('Location: new_smsf_declarations.php');

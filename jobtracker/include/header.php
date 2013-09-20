@@ -24,7 +24,7 @@
 			 $('.tooltip').tooltipster({
 				 animation: 'grow',
 			 });
-			});
+                });
 		</script><?
 
 		$arrQryStr = explode('&', $_SERVER['QUERY_STRING']);
@@ -35,7 +35,7 @@
 			if($typeStr == 'type=comp') {
 				?><title>Submit new compliance job</title><?
 			}
-            else if($typeStr == 'type=setup') {
+                        else if($typeStr == 'type=setup') {
 				?><title>Submit new setup job</title><?
 			}
 			else if($qryStr == 'a=audit') {

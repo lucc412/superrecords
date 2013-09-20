@@ -22,6 +22,21 @@ class DECLARATIONS
             return $arrQues;
 	}
 
+        function checkLegalRef()
+        {
+            $qryFetch = "SELECT * FROM es_member_details WHERE job_id = '" . $_SESSION['jobId'] . "' AND legal_references = 1";
+            
+            $fetchResult = mysql_query($qryFetch);
+            $count = 1;
+
+            $arrData = array();
+            while($rowData = mysql_fetch_assoc($fetchResult)) {
+                    $arrData[$count++] = $rowData['member_id'];
+            }
+            
+            return $arrData;
+        }
+        
         function generatePDF()
         {
             // Fetch All Details of Job

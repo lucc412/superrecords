@@ -63,12 +63,12 @@ include(SETUPNAVIGATION);
 				</td>
 			</tr>
 		</table>
-            <div style="padding-top:20px;font-weight:bold;color: #074165;">To learn more about the differences between Individual and Corporate Trustees please read our <a href="existing_smsf_fund.php?do=download" target="_new" style="color: #F05729;">guide.</a></div>
+            <div style="padding-top:20px;font-weight:bold;color: #074165;font-size: 13px">To learn more about the differences between Individual and Corporate Trustees please click to <a href="existing_smsf_fund.php?do=download" target="_new" style="color: #F05729;">download guide.</a></div>
                 <input type="hidden" id="fund_status" name="fund_status" value=""/>
 		<div style="padding-top:20px;">
 			<span align="left"><button type="button" onclick="window.location.href='existing_smsf_contact.php'" >BACK</button></span>
 			<span align="right" style="padding-left:55px;"><button type="submit" id='btnNext'>SAVE & EXIT</button></span>
-                        <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
+            <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
 		</div>
 		<input type="hidden" name="doAction" value="addFundInfo">
                 <input type="hidden" name="job_submitted" id="job_submitted" value="N">

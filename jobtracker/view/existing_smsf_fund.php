@@ -68,7 +68,9 @@ include(SETUPNAVIGATION);
 		<div style="padding-top:20px;">
 			<span align="left"><button type="button" onclick="window.location.href='existing_smsf_contact.php'" >BACK</button></span>
 			<span align="right" style="padding-left:55px;"><button type="submit" id='btnNext'>SAVE & EXIT</button></span>
-            <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
+			<span align="right" style="padding-left:55px;"><button id="btnPreview" class="" type="button" onclick="js:urlRedirect('setup_preview.php');">Preview</button></span>
+			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
+
 		</div>
 		<input type="hidden" name="doAction" value="addFundInfo">
                 <input type="hidden" name="job_submitted" id="job_submitted" value="N">

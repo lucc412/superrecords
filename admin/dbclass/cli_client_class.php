@@ -245,7 +245,13 @@ class Practice_Class extends Database {
                 }
                 else
                 {
-                   $cliCode = ''; 
+                    
+                    $strName = str_replace(' ', '', $_REQUEST['cliName']);
+                    $seed = str_split($strName);
+                    shuffle($seed);
+                    $cliCode = '';
+                    foreach (array_rand($seed, 5) as $k) $cliCode .= $seed[$k];
+                    break;
                 }
             }
             else{

@@ -16,7 +16,7 @@ switch ($sql) {
 			
 			//Insert New Client By Practice Login into Database
 			$clientId = $objScr->sql_insert();
-
+                        
 			/* send mail function starts here */
 			$pageUrl = basename($_SERVER['REQUEST_URI']);	
 			

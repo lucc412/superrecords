@@ -104,11 +104,11 @@
                         foreach ($arrLegRef as $key => $value) 
                         {
                                 if($cntr == 1)
-                                $leagalRef .= '<div class="test">Legal References Details</div><br/>';
+                                $leagalRef .= '<div class="test">Legal Personal Representative</div><br/>';
 
                                 $leagalRef .= '<table class="fieldtable" cellpadding="4" cellspacing="6">
                                         <tr>
-                                            <td colspan="2"><b>Legal References '.$cntr.'</b></td>
+                                            <td colspan="2"><b>Legal Personal Representative Detail '.$cntr.'</b></td>
                                         </tr>
                                         <tr>
                                             <td>Legal References Name : </td>
@@ -154,7 +154,7 @@
                    }
                            
                    if($cnt == 1)
-                        $members .= '<div class="test">Memeber Details</div><br/>';
+                        $members .= '<div class="test">Member Details</div><br/>';
                     
                     $members .= '<table class="fieldtable" cellpadding="4" cellspacing="6">
                                 <tr>
@@ -356,8 +356,8 @@
                         </table>                        
                         <br/>'.$members.$leagalRef.$trustee.'
                         <br/>
-                        <div align="center">
-                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php");\'>BACK</button></span>
+                        <div align="left" class="pdT20">
+                            <span align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php");\'>BACK</button></span>
                             <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php?job_submitted=Y");\'>SUBMIT</button></span>
                         </div>
                         ';

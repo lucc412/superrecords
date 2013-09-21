@@ -38,7 +38,14 @@ include(SETUPNAVIGATION);
 		if($_SESSION['TRUSTEETYPE'] != 1)
 			$jsFunc = "window.location.href='new_smsf_trustee.php'";
 		else
-			$jsFunc = "window.location.href='new_smsf_member.php'";
+		{
+                    if(count($arrLegRef)>0){
+                        $jsFunc = "window.location.href='legal_references.php'";
+                    }
+                    else {
+                        $jsFunc = "window.location.href='new_smsf_member.php'";
+                    }
+                }
 		
 			?><span align="left"><button type="button" onclick="<?=$jsFunc?>" >BACK</button></span>
 			<span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">SAVE & EXIT</button></span>

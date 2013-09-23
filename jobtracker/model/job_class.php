@@ -242,17 +242,26 @@ class Job {
 		$jobId = mysql_insert_id();
                 
                 
-                $this->smsfCheck($setup_subfrm,$jobId);
+                
 		// add source documents & new task if it is Compliance job
 		if($jobGenre == "COMPLIANCE") {
 			$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType);
 			$this->add_source_Docs($jobId);
 		}
+                elseif($jobGenre == "SETUP") 
+                {
+                    $this->smsfCheck($setup_subfrm,$jobId);
+                }
+            
+        
 		
 		return $jobId;
 	}
         public function smsfCheck($setup_subfrm,$jobId)
         {
+//            $Qry = "INSERT INTO es_smsf (authority_status,smsf_type) VALUES (".$_REQUEST['cbAuthority'].",'".$_REQUEST['smsf_type']."')";
+//            $flag = mysql_query($Qry);
+        
             $qry = "UPDATE es_SMSF SET job_id = ".$jobId." WHERE job_id = 0";
             mysql_query($qry);
         }

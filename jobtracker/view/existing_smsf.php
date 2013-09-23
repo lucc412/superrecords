@@ -33,8 +33,8 @@ include(SETUPNAVIGATION);
 </b>
 
 <div class="pdT20">
-    <span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />BACK</button></span>
-    <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >NEXT</button></span>
+    <?php if(empty($_SESSION['jobId'])){ ?><span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />BACK</button></span><?php } ?>
+    <span align="right" style="<?php if(!isset($_SESSION['jobId'])){ echo'padding-left:55px;'; } ?>"><button type="submit" id="btnNext" >NEXT</button></span>
 </div>
 </form>
 <script>

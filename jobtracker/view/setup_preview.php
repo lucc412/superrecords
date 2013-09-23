@@ -1,6 +1,7 @@
 <?php
     include(TOPBAR);
             
+    
             // Fetch All Details of Job
             $jobid = $_SESSION['jobId'];
             $contQry = "SELECT * FROM es_contact_details WHERE job_id = ".$_SESSION['jobId'];
@@ -269,6 +270,36 @@
                 }
             }
             
+            if($arrJob[$jobid][setup_subfrm_id] == 1)
+            {
+                $buttons = '<div align="center">
+                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php");\'>BACK</button></span>
+                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php?job_submitted=Y");\'>SUBMIT</button></span>
+                        </div>';
+                
+                $fund = '<tr>
+                                <td>Date of establishment : </td>
+                                <td>'.$arrFund[$jobid]['date_of_establishment'].' </td>
+                            </tr>
+                            <tr>
+                                <td>State of registration : </td>
+                                <td>'.fetchStateName($arrFund[$jobid]['registration_state']).' </td>
+                            </tr>';
+                
+            }    
+            else if($arrJob[$jobid][setup_subfrm_id] == 2)
+            {
+                $buttons = '<div align="center">
+                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("existing_smsf_fund.php");\'>BACK</button></span>
+                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("existing_smsf_fund.php?job_submitted=Y&preview_form=submit");\'>SUBMIT</button></span>
+                        </div>';
+                $fund='<tr>
+                            <td>Fund ABN : </td>
+                            <td>'.$arrFund[$jobid]['abn'].' </td>
+                        </tr>';
+            }
+            
+            
             echo $html = '<!-- EXAMPLE OF CSS STYLE -->
                         <style>
                             h2 {
@@ -335,15 +366,7 @@
                             <tr>
                                 <td>Postal Address : </td>
                                 <td>'.$arrFund[$jobid]['postal_address'].' </td>
-                            </tr>
-                            <tr>
-                                <td>Date of establishment : </td>
-                                <td>'.$arrFund[$jobid]['date_of_establishment'].' </td>
-                            </tr>
-                            <tr>
-                                <td>State of registration : </td>
-                                <td>'.fetchStateName($arrFund[$jobid]['registration_state']).' </td>
-                            </tr>
+                            </tr>'.$fund.'
                             <tr>
                                 <td>How many members? : </td>
                                 <td>'.$arrFund[$jobid]['members'].' </td>
@@ -356,11 +379,7 @@
                         </table>                        
                         <br/>'.$members.$leagalRef.$trustee.'
                         <br/>
-                        <div align="center">
-                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php");\'>BACK</button></span>
-                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php?job_submitted=Y");\'>SUBMIT</button></span>
-                        </div>
-                        ';
+                        '.$buttons;
             
 ?>
 

@@ -45,6 +45,7 @@ if(isset($_SESSION['jobId'])) {
 		if(empty($arrData)) {
 			$flagReturn = $objScr->addFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus);
 			$arrClient = $objScr->checkClients($fundName);
+                        
 		}
 		// edit fund details of sign up user
 		else {

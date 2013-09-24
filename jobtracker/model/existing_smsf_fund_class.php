@@ -131,6 +131,8 @@ class EXISTING_SMSF_FUND
                 mysql_query($updt);
             }
             
+            generateClientCode($client_id,$fundName);
+            
             return $client_id;
         }
         

@@ -416,9 +416,9 @@ function showPDFViewer($file,$filename)
     @readfile($file);
 }
 
-function generateClientCode()
+function generateClientCode($clientId,$cliName)
 {
-    showArray($_REQUEST);exit;
+    
     // fetch practice code for respective client
     $qrySel = "SELECT pr_code FROM pr_practice WHERE id = '" . $_SESSION['PRACTICEID'] . "'";
     $resultObj = mysql_query($qrySel);
@@ -426,7 +426,7 @@ function generateClientCode()
     $pracCode = $arrInfo['pr_code'];
 
     // build client code
-    $clientName = preg_replace('/[^a-zA-Z0-9]/', '_', $_REQUEST['txtName']);
+    $clientName = preg_replace('/[^a-zA-Z0-9]/', '_', $cliName);
     $arrCliName = explode("_", $clientName);
 
     $cntNameWords = count($arrCliName);
@@ -442,7 +442,7 @@ function generateClientCode()
 
         if($cntNameWords == 1)
         {
-            print '$cliCode is = '.$cliCode;
+            
             if(strlen($cliCode) < 5)
             {
                 if($wordLgth >= 5) 
@@ -502,7 +502,7 @@ function generateClientCode()
             }
             else
             {
-                $strName = str_replace(' ', '', $_REQUEST['txtName']);
+                $strName = str_replace(' ', '', $cliName);
                 $seed = str_split($strName);
                 shuffle($seed);
                 $cliCode = '';

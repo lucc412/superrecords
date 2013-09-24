@@ -415,4 +415,129 @@ function showPDFViewer($file,$filename)
 
     @readfile($file);
 }
+
+function generateClientCode()
+{
+    showArray($_REQUEST);exit;
+    // fetch practice code for respective client
+    $qrySel = "SELECT pr_code FROM pr_practice WHERE id = '" . $_SESSION['PRACTICEID'] . "'";
+    $resultObj = mysql_query($qrySel);
+    $arrInfo = mysql_fetch_assoc($resultObj);
+    $pracCode = $arrInfo['pr_code'];
+
+    // build client code
+    $clientName = preg_replace('/[^a-zA-Z0-9]/', '_', $_REQUEST['txtName']);
+    $arrCliName = explode("_", $clientName);
+
+    $cntNameWords = count($arrCliName);
+    $intCounter = 0;
+    $cliCode = "";
+
+    While ($intCounter < $cntNameWords) 
+    {
+
+        $wordLgth=0;
+        $word = $arrCliName[$intCounter];
+        $wordLgth = strlen($arrCliName[$intCounter]);
+
+        if($cntNameWords == 1)
+        {
+            print '$cliCode is = '.$cliCode;
+            if(strlen($cliCode) < 5)
+            {
+                if($wordLgth >= 5) 
+                {
+                    $cliCode .= substr($word, 0, 5);
+                } 
+                else 
+                {
+                    $cliCode .= substr($word, 0, $wordLgth);
+                }
+            }    
+
+        }
+        else
+        {
+
+            if(strlen($cliCode) < 5 && ($word != ''))
+            {
+                if ($wordLgth >= 3) 
+                {
+                    if(strlen($cliCode) == 0)
+                    {
+                        $cliCode .= substr($word, 0, 3);
+                    }
+                    else
+                    {
+                        $len = 5 - strlen($cliCode);
+                        $cliCode .= substr($word, 0, $len);
+                    }
+                }
+                else 
+                {
+                    $cliCode .= substr($word, 0, $wordLgth);
+                }
+
+            }
+            else{
+
+            }
+        }
+
+        $intCounter++;
+        if($intCounter == $cntNameWords)
+        {
+            if(strlen($cliCode) < 5)
+                $cliCode = str_pad($cliCode, 5, "0",STR_PAD_LEFT);
+        }
+
+        // check if client code is unique or not 
+        if (strlen($cliCode) == 5) 
+        {
+            $flagCodeExists = checkClientCodeUnique($pracCode.$cliCode);
+
+            if(!$flagCodeExists)
+            {
+                break;
+            }
+            else
+            {
+                $strName = str_replace(' ', '', $_REQUEST['txtName']);
+                $seed = str_split($strName);
+                shuffle($seed);
+                $cliCode = '';
+                foreach (array_rand($seed, 5) as $k) $cliCode .= $seed[$k];
+                break;
+            }
+        }
+        else
+        {
+            $word = "";
+            $wordLgth = 0;
+        }
+
+    }
+    
+    if($pracCode != '' && $cliCode != '')
+    {
+        $qryUpd = "UPDATE client SET client_code = '" . strtoupper($pracCode.$cliCode) . "' WHERE client_id ='" . $clientId . "'";
+        mysql_query($qryUpd);
+    }
+    return $clientId;
+}
+
+// check if client code is unique or not
+    function checkClientCodeUnique($code,$clientId = '') {
+        
+        if(!empty($clientId))
+            $strAppend = "AND client_id <> ".$clientId;
+        else
+            $strAppend = "" ;
+        
+        $qrySel = "SELECT client_id FROM client WHERE client_code = '" . $code . "' {$strAppend}";
+        $resultObj = mysql_query($qrySel);
+        $flagCodeExists = mysql_fetch_assoc($resultObj);
+
+        return $flagCodeExists;
+    }
 ?>

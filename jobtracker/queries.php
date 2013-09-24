@@ -30,7 +30,7 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 
 				// fetch email id of sr manager
 				$strPanelInfo = sql_select_panel($_SESSION["PRACTICEID"]);
-				$arrPanelInfo = explode('~', $strPanelInfo);
+				$arrPanelInfo = stringToArray('~', $strPanelInfo);
 				$srManagerEmail = $arrPanelInfo[0];
 				$inManagerEmail = $arrPanelInfo[2];
 

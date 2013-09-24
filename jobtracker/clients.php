@@ -31,7 +31,7 @@ switch ($sql) {
 				
 				// fetch email id of sr manager & sales person of practice
 				$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
-				$arrPanelInfo = explode('~', $strPanelInfo);
+				$arrPanelInfo = stringToArray('~', $strPanelInfo);
 				$srManagerEmailId = $arrPanelInfo[0];
 				$salePersonEmailId = $arrPanelInfo[1];
 

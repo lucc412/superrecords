@@ -181,7 +181,7 @@ function replaceContent($content, $salesPersonId=NULL, $practiceId=NULL, $client
 	// for job name
 	if(!empty($jobId)) {
 		$jobName = fetchEntityName($jobId, 'J');
-		$arrJobParts = explode('::',$jobName);
+		$arrJobParts = stringToArray('::',$jobName);
 		
 		$client_id = $arrJobParts[0];
 		$sub_activity = $arrJobParts[2];
@@ -305,7 +305,7 @@ function new_job_task_mail()
 
 		// fetch email id of sr manager
 		$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
-		$arrPanelInfo = explode('~', $strPanelInfo);
+		$arrPanelInfo = stringToArray('~', $strPanelInfo);
 		$srManagerEmail = $arrPanelInfo[0];
 		$inManagerEmail = $arrPanelInfo[2];
 
@@ -334,7 +334,7 @@ function new_job_task_mail()
 
 		// fetch email id of sr manager
 		$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
-		$arrPanelInfo = explode('~', $strPanelInfo);
+		$arrPanelInfo = stringToArray('~', $strPanelInfo);
 		$inManagerEmail = $arrPanelInfo[2];
 
 		$to = $inManagerEmail;

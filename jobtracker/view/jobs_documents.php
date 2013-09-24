@@ -29,7 +29,7 @@ switch($_REQUEST['a'])
 				?><table width="100%" class="resources">
 					<tr>
 						<td class="td_title">Job Name</td>
-						<td class="td_title">Document Title</td>
+						<td class="td_title">Job Genre</td>
 						<td class="td_title">Source Documents</td>
 					</tr><?
 					
@@ -39,35 +39,18 @@ switch($_REQUEST['a'])
 						else $trClass = "";
 
 						?><tr class="<?=$trClass?>"><?
-							$arrJobParts = explode('::', $arrJobDetails['job_name']);
+							$arrJobParts = stringToArray('::', $arrJobDetails['job_name']);
 							$jobName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
 
 							?><td class="tddata"><?=$jobName?></td>
-
+							<td class="tddata"><?=ucfirst(strtolower($arrJobDetails['job_genre']))?></td>
 							<td class="tddata"><?
 								$arrSourceDocs = $objScr->fetch_documents($jobId);
 								if(!empty($arrSourceDocs)) {
-									$docCnt = 0;
 									foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-										$docCnt++;
 										$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
 										if(file_exists($folderPath)) {
-											echo $arrDocInfo['document_title']."</br>";
-										}
-									}
-								}
-							?></td>
-
-							<td class="tddata"><?
-								$arrSourceDocs = $objScr->fetch_documents($jobId);
-                                                                //var_dump($arrSourceDocs);
-								if(!empty($arrSourceDocs)) {
-									$docCnt = 0;
-									foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-										$docCnt++;
-										$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
-										if(file_exists($folderPath)) {
-											?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?php $file = explode('~',$arrDocInfo['file_path']); echo $file[1];?></a></p><?
+											?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?=$arrDocInfo['document_title'];?></a></p><?
 										}
 									}
 								}
@@ -92,24 +75,26 @@ switch($_REQUEST['a'])
 		</div>
 		
 		<form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertDoc" enctype="multipart/form-data" onSubmit="javascript:return checkDocValidation();">
-			<!--<input type="hidden" name="sql" value="insertDoc">-->
-
+			<input type="hidden" name="additionalDoc" value="<?if(!empty($_REQUEST['lstJob'])) echo 'Y'; else echo 'N';?>">
 			<table width="60%" class="fieldtable" cellpadding="10px;">
 				<tr>
-					<td><strong> Select Job <font style="color:red;" size="2">*</font></strong></td>
+					<td><strong> Select Job</strong></td>
 					<td><?
 						$arrJobNames = array();
 						foreach($arrjobs AS $jobId => $jobName)
 						{
-							$arrJobParts = explode('::', $jobName["job_name"]);
+							$arrJobParts = stringToArray('::', $jobName["job_name"]);
 							$arrJobNames[$jobId] = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
 						}
 						// Code to sort Job Names array in ascending order
 						asort($arrJobNames);
-					?><select name="lstJob" id="lstJob">
+
+						?><select name="lstJob" id="lstJob">
 							<option value="0">Select Job</option><?
 							foreach($arrJobNames AS $jobId => $jobName)
 							{
+								$selectStr = "";
+								if($_REQUEST['lstJob'] == $jobId) $selectStr = "selected";
 								?><option <?=$selectStr?> value="<?=$jobId?>"><?=$jobName?></option><?php 
 							}
 						?></select>
@@ -119,14 +104,14 @@ switch($_REQUEST['a'])
 				<tr><td>&nbsp;</td></tr>
 				
 				<tr>
-					<td><strong> Document Title </strong></td>
+					<td><strong> Document Title</strong></td>
 					<td> <input type="text" name="txtDocTitle" id="txtDocTitle" size="36px" /></td>
 				</tr>
 				
 				<tr><td>&nbsp;</td></tr>
 				
 				<tr>
-					<td><strong> Source Document <font style="color:red;" size="2">*</font> </strong></td>
+					<td><strong> Source Document</strong></td>
 					<td> <input type="file" name="fileDoc" id="fileDoc" size="30px" /> </td>
 				</tr>
 				

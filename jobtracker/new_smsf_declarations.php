@@ -58,7 +58,7 @@ if(isset($_SESSION['jobId']))
         {
             foreach($arrQuestionsList as $value)
             {	
-                $arrId = explode(",",$value['trustee_type_id']);
+                $arrId = stringToArray(",",$value['trustee_type_id']);
 
                 for($i=0; $i<count($arrId); $i++)
                 {

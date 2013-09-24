@@ -216,7 +216,7 @@ class Query {
 		if($_REQUEST['flagType'] == 'SRQ')
 			$folderPath = "../uploads/srqueries/" . $fileName;
 			
-		$arrFileName = explode('~', $fileName);
+		$arrFileName = stringToArray('~', $fileName);
 		$origFileName = $arrFileName[1];
 		header("Expires: 0");
 		header("Last-Modified: " . gmdate("D, d M Y H:i(worry)") . " GMT");  

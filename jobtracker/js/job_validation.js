@@ -1,16 +1,19 @@
-// show hide audit checklist options
-/*$(function(){
-	$("span").each(function (i){
-	  (function(i) {
-		  i++;
-		  $('#checklist' + i).click(function() {
-			  $('#subchecklist' + i).toggle(600);
-		  });
+$(document).ready(function() {
+	
+	/* SIMPLE ACCORDIAN STYLE MENU FUNCTION */	
+	$('div.accordionButton').click(function() {
+		if($(this).next().css('display') == 'none'){
+			$('div.accordionContent').slideUp('normal');
+			$(this).next().slideDown('normal');
+		}else{
+			$(this).next().slideUp('normal');
+		}
+	});
+	
+	/* CLOSES ALL DIVS ON PAGE LOAD */	
+	$("div.accordionContent").hide();
 
-	  }(i));
-   });
 });
-*/
 
 function newPopup(url,height)
 {
@@ -23,8 +26,13 @@ function uploadValidate() {
 
 	var flagReturn = true;
 	var eleFileUpload = document.getElementById('fileUpload');
+	var eleFileTitle = document.getElementById('fileTitle');
 
-	if(eleFileUpload.value == 0) {
+	if(eleFileTitle.value == "") {
+		eleFileTitle.className = "errclass";
+		flagReturn = false;
+	}
+	else if(eleFileUpload.value == 0) {
 		eleFileUpload.className = "errclass";
 		flagReturn = false;
 	}
@@ -88,6 +96,9 @@ function checkValidation() {
 				if(elementId.indexOf("sourceDoc_") != -1) {
 					if(element.value != "") {
 						flagUpload = true;
+						//alert(i);
+						//var eleDocName = elementId.indexOf("textSource_");
+						//alert(eleDocName.value);
 					}
 				}
 			}
@@ -97,7 +108,7 @@ function checkValidation() {
 			}
 		}
 	}
-	
+	//return false;
 	return flagReturn;
 }
 
@@ -106,6 +117,7 @@ function checkDocValidation()
 	flagReturn = true;
 
 	var lstJob = document.getElementById('lstJob');
+	var docTitle = document.getElementById('txtDocTitle');
 	var fileDoc = document.getElementById('fileDoc');
 	
 	// do field validation  
@@ -116,6 +128,15 @@ function checkDocValidation()
 	}
 	else {
 		lstJob.className = "drop_down_select";
+	}
+
+	if (docTitle.value == "")
+	{		
+		docTitle.className = "errclass";
+		flagReturn = false;
+	}
+	else {
+		docTitle.className = "";
 	}
 	
 	if (fileDoc.value == "")

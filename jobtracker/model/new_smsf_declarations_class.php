@@ -39,6 +39,18 @@ class DECLARATIONS
         
         function generatePDF()
         {
+            
+            $stQry = "UPDATE job SET job_submitted = '".$_REQUEST['job_submitted']."', job_received = NOW() WHERE job_id = ".$_SESSION['jobId'];
+            $flagReturn = mysql_query($stQry);
+
+            // add new task
+            include(MODEL."job_class.php");
+            $objJob = new Job();
+            $objJob->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
+
+            // send mail for new task
+            new_job_task_mail();
+            
             // Fetch All Details of Job
             
             $jobid = $_SESSION['jobId'];

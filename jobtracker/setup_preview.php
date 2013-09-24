@@ -8,5 +8,7 @@
 // include common file
 include("include/common.php");
 
+
+
 include(VIEW . "setup_preview.php");
 ?>

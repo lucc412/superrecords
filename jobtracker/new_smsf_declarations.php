@@ -15,35 +15,17 @@ if(isset($_SESSION['jobId']))
 	$arrQuestionsList = $objScr->fetchQuestions();
         $arrLegRef = $objScr->checkLegalRef();
         $checkTerms = $objScr->fetchTerms();
-//        if($_REQUEST['preview'] == "Y")
-//        {
-//            include(VIEW . "setup_preview.php");
-//        }    
+
 	$arrQues = array();
 	if(isset($_REQUEST['job_submitted']))
 	{
-            $stQry = "UPDATE job SET job_submitted = '".$_REQUEST['job_submitted']."', job_received = NOW() WHERE job_id = ".$_SESSION['jobId'];
-            $flagReturn = mysql_query($stQry);
-
             $objScr->updateTerms($_REQUEST['chkAgree']);
-
-            if($_REQUEST['job_submitted'] == 'Y')
-            {
-                    // add new task
-                    include(MODEL."job_class.php");
-                    $objJob = new Job();
-                    $objJob->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
-
-                    // send mail for new task
-                    new_job_task_mail();
-
-                    // generate PDF
-                    $objScr->generatePDF();
-            }
 
             // include view file 
             if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'Y')
             {
+                // generate PDF
+                $objScr->generatePDF();
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                 header('Location: jobs.php?a=pending');
             }

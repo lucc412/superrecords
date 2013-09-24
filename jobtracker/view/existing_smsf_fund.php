@@ -65,10 +65,11 @@ include(SETUPNAVIGATION);
 		</table>
             <div style="padding-top:20px;font-weight:bold;color: #074165;font-size: 13px">To learn more about the differences between Individual and Corporate Trustees please click to <a href="existing_smsf_fund.php?do=download" target="_new" style="color: #F05729;">download guide.</a></div>
                 <input type="hidden" id="fund_status" name="fund_status" value=""/>
+                <input type="hidden" id="preview" name="preview" value="0"/>
 		<div style="padding-top:20px;">
 			<span align="left"><button type="button" onclick="window.location.href='existing_smsf_contact.php'" >BACK</button></span>
 			<span align="right" style="padding-left:55px;"><button type="submit" id='btnNext'>SAVE & EXIT</button></span>
-			<span align="right" style="padding-left:55px;"><button id="btnPreview" class="" type="button" onclick="js:urlRedirect('setup_preview.php');">Preview</button></span>
+			<span align="right" style="padding-left:55px;"><button id="btnPreview" class="" type="submit" >Preview</button></span>
 			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
 
 		</div>
@@ -79,6 +80,7 @@ include(SETUPNAVIGATION);
         <script>
             $('#btnNext').click(function(){$('#fund_status').val('0')})
             $('#btnSave').click(function(){$('#fund_status').val('1');$('#job_submitted').val('Y')})
+            $('#btnPreview').click(function(){$('#preview').val('1');})
         </script>
 </div><?
 

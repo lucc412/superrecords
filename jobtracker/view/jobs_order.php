@@ -71,9 +71,9 @@ include(SETUPNAVIGATION);
 		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
         </table>
         <div style="padding-top:20px;">
-            <span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />BACK</button></span>
-            <span align="right" style="padding-left:55px;"><button type="reset" >RESET</button></span>
-            <span align="right" style="padding-left:55px;"><button type="submit">NEXT</button></span>
+            <span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />Back</button></span>
+            <span align="right" style="padding-left:55px;"><button type="reset" >Reset</button></span>
+            <span align="right" style="padding-left:55px;"><button type="submit">Next</button></span>
         </div>
 </form><?
 

@@ -47,10 +47,10 @@ include(SETUPNAVIGATION);
                     }
                 }
 		
-			?><span align="left"><button type="button" onclick="<?=$jsFunc?>" >BACK</button></span>
-			<span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">SAVE & EXIT</button></span>
+			?><span align="left"><button type="button" onclick="<?=$jsFunc?>" >Back</button></span>
+			<span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">Save & Exit</button></span>
                         <span align="right" style="padding-left:55px;"><button id="btnPreview" class="" type="button" onclick="js:urlRedirect('setup_preview.php');">Preview</button></span>
-			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
+			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">Submit</button></span>
 	</div>
         <script>
             $('#btnNext').click(function(){$('#job_submitted').val('N')})

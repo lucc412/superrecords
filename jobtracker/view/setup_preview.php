@@ -273,8 +273,9 @@
             if($arrJob[$jobid][setup_subfrm_id] == 1)
             {
                 $buttons = '<div align="left">
-                            <span align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php");\'>BACK</button></span>
-                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php?job_submitted=Y");\'>SUBMIT</button></span>
+                            <span align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php");\'>Back</button></span>
+							<span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("jobs.php?a=saved");\'>Save & Exit</button></span>
+                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("new_smsf_declarations.php?job_submitted=Y");\'>Submit</button></span>
                         </div>';
                 
                 $fund = '<tr>
@@ -290,8 +291,9 @@
             else if($arrJob[$jobid][setup_subfrm_id] == 2)
             {
                 $buttons = '<div align="left">
-                            <span align="right"><button onclick=\' window.location.assign("existing_smsf_fund.php");\'>BACK</button></span>
-                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("existing_smsf_fund.php?job_submitted=Y&preview_form=submit");\'>SUBMIT</button></span>
+                            <span align="right"><button onclick=\' window.location.assign("existing_smsf_fund.php");\'>Back</button></span>
+							<span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("jobs.php?a=saved");\'>Save & Exit</button></span>
+                            <span style="padding-left:55px;" align="right"><button onclick=\' window.location.assign("existing_smsf_fund.php?job_submitted=Y&preview_form=submit");\'>Submit</button></span>
                         </div>';
                 $fund='<tr>
                             <td>Fund ABN : </td>

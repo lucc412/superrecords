@@ -67,10 +67,10 @@ include(SETUPNAVIGATION);
                 <input type="hidden" id="fund_status" name="fund_status" value=""/>
                 <input type="hidden" id="preview" name="preview" value="0"/>
 		<div style="padding-top:20px;">
-			<span align="left"><button type="button" onclick="window.location.href='existing_smsf_contact.php'" >BACK</button></span>
-			<span align="right" style="padding-left:55px;"><button type="submit" id='btnNext'>SAVE & EXIT</button></span>
+			<span align="left"><button type="button" onclick="window.location.href='existing_smsf_contact.php'" >Back</button></span>
+			<span align="right" style="padding-left:55px;"><button type="submit" id='btnNext'>Save & Exit</button></span>
 			<span align="right" style="padding-left:55px;"><button id="btnPreview" class="" type="submit" >Preview</button></span>
-			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SUBMIT</button></span>
+			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">Submit</button></span>
 
 		</div>
 		<input type="hidden" name="doAction" value="addFundInfo">

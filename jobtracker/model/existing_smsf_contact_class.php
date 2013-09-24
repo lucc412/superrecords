@@ -64,7 +64,7 @@ class EXISTING_SMSF_CONTACT {
                                                         '" . addslashes($contStatus) . "'
 					)";
 
-		
+
         mysql_query($qryInsert);
 		$lastInsertId = mysql_insert_id();
 
@@ -78,7 +78,7 @@ class EXISTING_SMSF_CONTACT {
 						lname = '" . addslashes($lname) . "',	
 						email = '" . addslashes($email) . "',	
 						phoneno = '" . addslashes($phone) . "',	
-						cont_status = '" . addslashes($contStatus) . "',    
+						cont_status = '" . addslashes($contStatus) . "'    
 					WHERE job_id = '" . $_SESSION['jobId']. "'";					 
 
         mysql_query($qryUpd);

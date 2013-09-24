@@ -117,6 +117,8 @@ class NEW_SMSF_FUND {
                 $flagReturn = mysql_query($qryIns);
                 $client_id = mysql_insert_id();
                 
+                generateClientCode();
+                
             }
 
             if(isset($client_id) && $client_id != '')

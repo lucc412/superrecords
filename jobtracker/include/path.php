@@ -1,5 +1,7 @@
 <?
 define("EDITICON", "<img src='images_user/edit.png' height='25px' width='22px'>");
+define("QUERY", "<img src='images_user/q.png'>");
+define("UPLOAD", "<img src='images_user/upload.jpg'>");
 define("CALENDARICON", "images_user/calendar.png");
 define('DBCONNECT',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/connection.php');
 define('TOPBAR',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/topbar.php');

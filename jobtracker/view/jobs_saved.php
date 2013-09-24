@@ -35,8 +35,7 @@ include(TOPBAR);
 		?><table align="center" width="100%" class="resources">
 			<tr>
 				<td width="50%" class="td_title">Job Name</td>
-				<td width="15%" class="td_title">Job Genre</td>
-				<td width="15%" class="td_title" align="center">Creation Date</td>
+				<td width="10%" class="td_title" align="center">Creation Date</td>
 				<td width="8%" class="td_title" align="center">Actions</td>
 			</tr><?
                         
@@ -44,12 +43,11 @@ include(TOPBAR);
 			foreach($arrJobs AS $jobId => $arrJobDetails) {
 				if($countRow%2 == 0) $trClass = "trcolor";
 				else $trClass = "";
-				$arrJobParts = explode('::', $arrJobDetails['job_name']);
+				$arrJobParts = stringToArray('::', $arrJobDetails['job_name']);
 				$jobName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
 
 				?><tr class="<?=$trClass?>">
 					<td class="tddata"><?=$jobName?></td>
-					<td class="tddata"><?=ucfirst(strtolower($arrJobDetails['job_genre']))?></td>
 					<td class="tddata" align="center"><?=$arrJobDetails['job_created_date']?></td>
 					<td class="tddata" align="center"><?
 						if($arrJobDetails['job_genre'] == 'SETUP') {

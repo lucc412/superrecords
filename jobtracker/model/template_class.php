@@ -21,7 +21,7 @@ class Template {
 	public function doc_download($fileName) {
 	
 		$folderPath = "../uploads/template/" . $fileName;
-		$arrFileName = explode('~', $fileName);
+		$arrFileName = stringToArray('~', $fileName);
 		$origFileName = $arrFileName[1];
 		header("Expires: 0");  
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");  

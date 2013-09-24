@@ -127,7 +127,7 @@ class Job_Class extends Database
 					{$strWhere} 
 					{$whereStr} 
 					GROUP BY j1.job_id
-					ORDER BY job_id desc";
+					ORDER BY job_received desc";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -541,14 +541,14 @@ class Job_Class extends Database
 	//************************************************************************************************  
 	
 	public function doc_download($fileName)
-	{		
+	{	
 		if($_REQUEST['flagType'] == 'S')
 			$folderPath = "../uploads/sourcedocs/" . $fileName;
 
 		if($_REQUEST['flagType'] == 'A')
 			$folderPath = "../uploads/audit/" . $fileName;
 		
-                if($_REQUEST['flagType'] == 'ST')
+        if($_REQUEST['flagType'] == 'ST')
 			$folderPath = "../uploads/setup/" . $fileName;
                 
 		if($_REQUEST['flagType'] == 'R')
@@ -560,10 +560,9 @@ class Job_Class extends Database
 		if($_REQUEST['flagType'] == 'SRQ')
 			$folderPath = "../uploads/srqueries/" . $fileName;
                 
-                if($_REQUEST['flagType'] == 'T')
+        if($_REQUEST['flagType'] == 'T')
 			$folderPath = "../uploads/template/" . $fileName;
                 
-			
 		$arrFileName = explode('~', $fileName);
 		$origFileName = $arrFileName[1];
 
@@ -642,17 +641,17 @@ class Job_Class extends Database
 		return $sent_mail_date ;
 	}
 
-	public function getAuditDocList($jobId, $checklistId) {
-		$qrySel = "SELECT d.file_path, DATE_FORMAT(d.date, '%d/%m/%Y') date
+	public function getAuditDocList($jobId) {
+		$qrySel = "SELECT d.file_path, DATE_FORMAT(d.date, '%d/%m/%Y') date, document_title
 					FROM documents d
 					WHERE d.job_id = {$jobId}
-					AND d.checklist_id = {$checklistId}
+					AND d.checklist_id = 0
 					AND d.subchecklist_id = 0
 					ORDER BY d.date desc";
 
 		$objRes = mysql_query($qrySel);
 		while($rowData = mysql_fetch_assoc($objRes)) {
-			$arrDocList[$rowData['file_path']] = $rowData['date'];
+			$arrDocList[$rowData['file_path']] = $rowData['date'].":".$rowData['document_title'];
 		}
 		
 		return $arrDocList;
@@ -691,7 +690,7 @@ class Job_Class extends Database
 	}
 
 	public function getAuditSubDocList($jobId) {
-		$qrySel = "SELECT d.file_path, d.subchecklist_id
+		$qrySel = "SELECT d.file_path, d.subchecklist_id, d.document_title
 					FROM documents d
 					WHERE d.job_id = {$jobId}
 					AND d.subchecklist_id <> 0
@@ -699,7 +698,7 @@ class Job_Class extends Database
 
 		$objRes = mysql_query($qrySel);
 		while($rowData = mysql_fetch_assoc($objRes)) {
-			$arrDocList[$rowData['subchecklist_id']][] = $rowData['file_path'];
+			$arrDocList[$rowData['subchecklist_id']][] = $rowData['file_path'].':'.$rowData['document_title'];
 		}
 		
 		return $arrDocList;

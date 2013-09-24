@@ -650,7 +650,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	background:url(../images/rightmenu-arrow.jpg) 5px 15px no-repeat;
 	cursor:pointer;
 	color:rgba(7, 65, 96, 0.94);
-	text-decoration:underline;
 }
 
 .auditupload td 

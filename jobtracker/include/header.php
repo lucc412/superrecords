@@ -27,7 +27,7 @@
                 });
 		</script><?
 
-		$arrQryStr = explode('&', $_SERVER['QUERY_STRING']);
+		$arrQryStr = stringToArray('&', $_SERVER['QUERY_STRING']);
                 $qryStr = $arrQryStr[0];
                 $typeStr = $arrQryStr[1];
                 

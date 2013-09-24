@@ -5,9 +5,7 @@ include("include/common.php");
 
 if(isset($_SESSION['jobId'])) 
 {
-
-    showArray($_REQUEST);
-    
+   
 	// include model file
 	include(MODEL . "existing_smsf_fund_class.php");
 

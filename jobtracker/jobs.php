@@ -10,440 +10,438 @@ if(isset($_REQUEST['recid']))
 if(isset($_REQUEST['var']) && $_REQUEST['var'] == 'new')
 	unset($_SESSION['jobId']);
 
-if(isset($_REQUEST['sql'])) {
-	$sql = $_REQUEST['sql'];
-	switch ($sql)
-	{
-		case "insertJob":
-                    
-			$arrJobReq = array();
-			if($_REQUEST['type'] == 'SETUP')
-			{
-				$arrJobReq['lstClientType'] = NULL;
-				$arrJobReq['lstJobType'] = 21;
-				$arrJobReq['lstCliType'] = 25;
-				$arrJobReq['type'] = $_REQUEST['type'];
-				$arrJobReq['subfrmId'] = $_REQUEST['subfrmId'];
-				$arrJobReq['txtPeriod'] = date('Y');
-				$arrJobReq['txtNotes'] = NULL;
+
+$sql = $_REQUEST['sql'];
+switch ($sql)
+{
+	case "insertJob":
 				
-			}
-			else
-			{
-				$arrJobReq['lstClientType'] = $_REQUEST['lstClientType'];
-				$arrJobReq['lstJobType'] = $_REQUEST['lstJobType'];
-				$arrJobReq['txtPeriod'] = $_REQUEST['txtPeriod'];
-				$arrJobReq['lstCliType'] = $_REQUEST['lstCliType'];
-				$arrJobReq['txtNotes'] = $_REQUEST['txtNotes'];
-				$arrJobReq['type'] = $_REQUEST['type'];
-				$arrJobReq['subfrmId'] = NULL;
-				
-			}
-                        
-            $jobId = $objScr->sql_insert($arrJobReq);
-			if($_REQUEST['type'] == 'SETUP') {
-				$objScr->setSmsfAuthority($_REQUEST['subfrmId'], $jobId);
-			}
-			if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
-			$_SESSION['jobId'] = $jobId;	
-				
-			if($_REQUEST['type'] == 'COMPLIANCE') {
-				new_job_task_mail();
-				header('location: jobs.php?a=pending');
-			}
-			else if($_REQUEST['type'] == 'AUDIT')
-				header('location: jobs.php?a=checklist');
-			else if($_REQUEST['type'] == 'SETUP') {
-				if($_REQUEST['subfrmId'] == '1')
-                   header('location: new_smsf_contact.php');
-				else if($_REQUEST['subfrmId'] == '2')
-                   header('location: existing_smsf_contact.php');
-			}
-			break;
+		$arrJobReq = array();
+		if($_REQUEST['type'] == 'SETUP')
+		{
+			$arrJobReq['lstClientType'] = NULL;
+			$arrJobReq['lstJobType'] = 21;
+			$arrJobReq['lstCliType'] = 25;
+			$arrJobReq['type'] = $_REQUEST['type'];
+			$arrJobReq['subfrmId'] = $_REQUEST['subfrmId'];
+			$arrJobReq['txtPeriod'] = date('Y');
+			$arrJobReq['txtNotes'] = NULL;
+			
+		}
+		else
+		{
+			$arrJobReq['lstClientType'] = $_REQUEST['lstClientType'];
+			$arrJobReq['lstJobType'] = $_REQUEST['lstJobType'];
+			$arrJobReq['txtPeriod'] = $_REQUEST['txtPeriod'];
+			$arrJobReq['lstCliType'] = $_REQUEST['lstCliType'];
+			$arrJobReq['txtNotes'] = $_REQUEST['txtNotes'];
+			$arrJobReq['type'] = $_REQUEST['type'];
+			$arrJobReq['subfrmId'] = NULL;
+			
+		}
+					
+		$jobId = $objScr->sql_insert($arrJobReq);
+		if($_REQUEST['type'] == 'SETUP') {
+			$objScr->setSmsfAuthority($_REQUEST['subfrmId'], $jobId);
+		}
+		if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
+		$_SESSION['jobId'] = $jobId;	
+			
+		if($_REQUEST['type'] == 'COMPLIANCE') {
+			new_job_task_mail();
+			header('location: jobs.php?a=pending');
+		}
+		else if($_REQUEST['type'] == 'AUDIT')
+			header('location: jobs.php?a=checklist');
+		else if($_REQUEST['type'] == 'SETUP') {
+			if($_REQUEST['subfrmId'] == '1')
+			   header('location: new_smsf_contact.php');
+			else if($_REQUEST['subfrmId'] == '2')
+			   header('location: existing_smsf_contact.php');
+		}
+		break;
 
-		case "update":
-			if(isset($_SESSION['frmId']))unset($_SESSION['frmId']);
-				$_SESSION['frmId'] = $_REQUEST['subfrmId'];
-                            
-			if($_REQUEST['type'] == 'COMPLIANCE') {
-				$objScr->sql_update();
-				header('location: jobs.php?a=pending');
-			}
-			else if($_REQUEST['type'] == 'AUDIT') {
-				$objScr->sql_update();
-				header('location: jobs.php?a=checklist');
-			}
-			else if($_REQUEST['type'] == 'SETUP') {
-				if($_REQUEST['subfrmId'] == '1')
-					header('location: new_smsf_contact.php');
-				else if($_REQUEST['subfrmId'] == '2')
-					header('location: existing_smsf_contact.php');
-			}
-			break;
+	case "update":
+		if(isset($_SESSION['frmId']))unset($_SESSION['frmId']);
+			$_SESSION['frmId'] = $_REQUEST['subfrmId'];
+						
+		if($_REQUEST['type'] == 'COMPLIANCE') {
+			$objScr->sql_update();
+			header('location: jobs.php?a=pending');
+		}
+		else if($_REQUEST['type'] == 'AUDIT') {
+			$objScr->sql_update();
+			header('location: jobs.php?a=checklist');
+		}
+		else if($_REQUEST['type'] == 'SETUP') {
+			if($_REQUEST['subfrmId'] == '1')
+				header('location: new_smsf_contact.php');
+			else if($_REQUEST['subfrmId'] == '2')
+				header('location: existing_smsf_contact.php');
+		}
+		break;
 
-		case "checklistSelection":
-			$arrSelChckList = $objScr->fetch_existing_checklist_selection($_SESSION['jobId']);
-			foreach($_POST AS $postName => $postVal) {
-				$flagChckList = strstr($postName, "checklist");
-				if($flagChckList) {
-					$arrFilChckList[] = replaceString('checklist', '', $postName);  
-				}
+	case "checklistSelection":
+		$arrSelChckList = $objScr->fetch_existing_checklist_selection($_SESSION['jobId']);
+		foreach($_POST AS $postName => $postVal) {
+			$flagChckList = strstr($postName, "checklist");
+			if($flagChckList) {
+				$arrFilChckList[] = replaceString('checklist', '', $postName);  
 			}
-			if(!empty($arrFilChckList) && !empty($arrSelChckList)) {
-				$arrAddChckList = array_diff($arrFilChckList, $arrSelChckList);
-				$arrRemChckList = array_diff($arrSelChckList, $arrFilChckList);
-			}
-			else if(!empty($arrFilChckList) && empty($arrSelChckList)) {
-				$arrAddChckList = $arrFilChckList;
-			}
-			$objScr->sql_checklist_selection($arrAddChckList, $arrRemChckList, $_SESSION['jobId']);
-			header('location: jobs.php?a=subchecklist');
-			break;
+		}
+		if(!empty($arrFilChckList) && !empty($arrSelChckList)) {
+			$arrAddChckList = array_diff($arrFilChckList, $arrSelChckList);
+			$arrRemChckList = array_diff($arrSelChckList, $arrFilChckList);
+		}
+		else if(!empty($arrFilChckList) && empty($arrSelChckList)) {
+			$arrAddChckList = $arrFilChckList;
+		}
+		$objScr->sql_checklist_selection($arrAddChckList, $arrRemChckList, $_SESSION['jobId']);
+		header('location: jobs.php?a=subchecklist');
+		break;
 
-		case "delete":
-			$objScr->sql_delete($_REQUEST['recid']);
-			header('location: jobs.php');
-			break;
+	case "delete":
+		$objScr->sql_delete($_REQUEST['recid']);
+		header('location: jobs.php');
+		break;
 
-		case "dwnldchcklst":
-			$objScr->sql_download_checklist($_SESSION['jobId']);
-			break;
+	case "dwnldchcklst":
+		$objScr->sql_download_checklist($_SESSION['jobId']);
+		break;
+	
+	case "insertDoc":
+	
+		$returnPath = $objScr->upload_document();
 		
-		case "insertDoc":
+		/* send mail function starts here */
+		$pageUrl = basename($_SERVER['REQUEST_URI']);	
 		
-			$returnPath = $objScr->upload_document();
+		// check if event is active or inactive [This will return TRUE or FALSE as per result]
+		$flagSet = getEventStatus($pageUrl);
+		
+		// if event is active it go for mail function
+		if($flagSet) {
+			//It will Get All Details in array format for Send Email	
+			$arrEmailInfo = get_email_info($pageUrl);
 			
-			/* send mail function starts here */
-			$pageUrl = basename($_SERVER['REQUEST_URI']);	
+			$arrIds = $objScr->fetch_manager_ids($_REQUEST['lstJob']);
 			
-			// check if event is active or inactive [This will return TRUE or FALSE as per result]
-			$flagSet = getEventStatus($pageUrl);
+			// TO mail parameter
+			$srManagerEmail = fetchStaffInfo($arrIds[0]['sr_manager'], 'email');
+			$IndiaManagerEmail = fetchStaffInfo($arrIds[0]['india_manager'], 'email');
+
+			// fetch email id of sr manager & india manager of practice
+			$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
+			$arrPanelInfo = stringToArray('~', $strPanelInfo);
+			$srManagerEmail = $arrPanelInfo[0];
+			$inManagerEmail = $arrPanelInfo[2];
 			
-			// if event is active it go for mail function
-			if($flagSet) {
-				//It will Get All Details in array format for Send Email	
-				$arrEmailInfo = get_email_info($pageUrl);
-				
-				$arrIds = $objScr->fetch_manager_ids($_REQUEST['lstJob']);
-				
-				// TO mail parameter
-				$srManagerEmail = fetchStaffInfo($arrIds[0]['sr_manager'], 'email');
-				$IndiaManagerEmail = fetchStaffInfo($arrIds[0]['india_manager'], 'email');
+			$to = $srManagerEmail.",".$inManagerEmail;
+			$cc = $arrEmailInfo['event_cc'];
+			$subject = $arrEmailInfo['event_subject'];
+			$content = $arrEmailInfo['event_content'];
 
-				// fetch email id of sr manager & india manager of practice
-				$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
-				$arrPanelInfo = stringToArray('~', $strPanelInfo);
-				$srManagerEmail = $arrPanelInfo[0];
-				$inManagerEmail = $arrPanelInfo[2];
-				
-				$to = $srManagerEmail.",".$inManagerEmail;
-				$cc = $arrEmailInfo['event_cc'];
-				$subject = $arrEmailInfo['event_subject'];
-				$content = $arrEmailInfo['event_content'];
+			$arrReturnPath = stringToArray('~', $returnPath);
+			$docName = $arrReturnPath[0];
+			$uploadedTime =	$arrReturnPath[1];
 
-				$arrReturnPath = stringToArray('~', $returnPath);
-				$docName = $arrReturnPath[0];
-				$uploadedTime =	$arrReturnPath[1];
+			// replace DOCNAME with actual doc name
+			$content = str_replace('DOCNAME', $docName, $content);
 
-				// replace DOCNAME with actual doc name
-				$content = str_replace('DOCNAME', $docName, $content);
+			// replace DOCNAME with actual doc name
+			$content = str_replace('DATETIME', $uploadedTime, $content);
 
-				// replace DOCNAME with actual doc name
-				$content = str_replace('DATETIME', $uploadedTime, $content);
+			$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_REQUEST['lstJob']);
 
-				$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_REQUEST['lstJob']);
+			include_once(MAIL);
+			send_mail($to, $cc, $subject, $content);
+		}
+		/* send mail function ends here */		
 
-				include_once(MAIL);
-				send_mail($to, $cc, $subject, $content);
-			}
-			/* send mail function ends here */		
+		if($_REQUEST['additionalDoc'] == 'Y')
+			header('location: jobs.php?a=pending');
+		else 
+			header('location: jobs.php?a=document');
+		break;
 
-			if($_REQUEST['additionalDoc'] == 'Y')
-				header('location: jobs.php?a=pending');
-			else 
-				header('location: jobs.php?a=document');
-			break;
+	case "uploadAuditDocs":
+		$objScr->add_audit_Docs($_SESSION['jobId']);
+		header('location: jobs.php?a=uploadAudit&checklistId='.$_REQUEST['checklistId']);
+		break;
 
-		case "uploadAuditDocs":
-			$objScr->add_audit_Docs($_SESSION['jobId']);
-			header('location: jobs.php?a=uploadAudit&checklistId='.$_REQUEST['checklistId']);
-			break;
+	case "uploadSubAuditDocs":
+		$objScr->add_audit_Docs($_SESSION['jobId'],$_REQUEST['checklistId'],$_REQUEST['subchecklistId']);
+		echo "<script>
+			opener.parent.location.href = 'jobs.php?a=subchecklist';
+			self.close();
+		</script>";
+		break;
 
-		case "uploadSubAuditDocs":
-			$objScr->add_audit_Docs($_SESSION['jobId'],$_REQUEST['checklistId'],$_REQUEST['subchecklistId']);
-			echo "<script>
-				opener.parent.location.href = 'jobs.php?a=subchecklist';
-                self.close();
-            </script>";
-			break;
-
-		case "insertAudit":
-			
-			foreach($_POST AS $postName => $postVal) {
-				$flagStatus = strstr($postName, "rdUplStatus");
-				if($flagStatus) {
-					$arrSubForm[replaceString('rdUplStatus', '', $postName)]['status'] = $postVal;  
-				}
-
-				$flagNotes = strstr($postName, "taNotes");
-				if($flagNotes) {
-					$arrSubForm[replaceString('taNotes', '', $postName)]['notes'] = $postVal;  
-				}
+	case "insertAudit":
+		
+		foreach($_POST AS $postName => $postVal) {
+			$flagStatus = strstr($postName, "rdUplStatus");
+			if($flagStatus) {
+				$arrSubForm[replaceString('rdUplStatus', '', $postName)]['status'] = $postVal;  
 			}
 
-			foreach($arrSubForm AS $subChecklistId => $checklistInfo) {
-				$strInsert .= "(".$_SESSION['jobId'].",".$subChecklistId.",'".$checklistInfo['status']."','".$checklistInfo['notes']."'),";
+			$flagNotes = strstr($postName, "taNotes");
+			if($flagNotes) {
+				$arrSubForm[replaceString('taNotes', '', $postName)]['notes'] = $postVal;  
 			}
-			$strInsert = stringrtrim($strInsert, ",");
+		}
 
-			$objScr->add_audit_details($strInsert);
-			if($_REQUEST['button'] == 'Save') {
-				header('location: jobs.php?a=saved');
-			}
-			else {
-				$objScr->update_job_completed($_SESSION['jobId']);
-				$objScr->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
-				new_job_task_mail();
-				header('location: jobs.php?a=pending');
-			}
+		foreach($arrSubForm AS $subChecklistId => $checklistInfo) {
+			$strInsert .= "(".$_SESSION['jobId'].",".$subChecklistId.",'".$checklistInfo['status']."','".$checklistInfo['notes']."'),";
+		}
+		$strInsert = stringrtrim($strInsert, ",");
 
-			break;
+		$objScr->add_audit_details($strInsert);
+		if($_REQUEST['button'] == 'Save') {
+			header('location: jobs.php?a=saved');
+		}
+		else {
+			$objScr->update_job_completed($_SESSION['jobId']);
+			$objScr->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
+			new_job_task_mail();
+			header('location: jobs.php?a=pending');
+		}
 
-		case "updateAudit":
-			foreach($_POST AS $postName => $postVal) {
-				$flagStatus = strstr($postName, "rdUplStatus");
-				if($flagStatus) {
-					$arrSubForm[replaceString('rdUplStatus', '', $postName)]['status'] = $postVal;  
-				}
+		break;
 
-				$flagNotes = strstr($postName, "taNotes");
-				if($flagNotes) {
-					$arrSubForm[replaceString('taNotes', '', $postName)]['notes'] = $postVal;  
-				}
-			}
-			$objScr->edit_audit_details($arrSubForm, $_SESSION['jobId']);
-			if($_REQUEST['button'] == 'Save') {
-				header('location: jobs.php?a=saved');
-			}
-			else {
-				$objScr->update_job_completed($_SESSION['jobId']);
-				$objScr->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
-				new_job_task_mail();
-				header('location: jobs.php?a=pending');
+	case "updateAudit":
+		foreach($_POST AS $postName => $postVal) {
+			$flagStatus = strstr($postName, "rdUplStatus");
+			if($flagStatus) {
+				$arrSubForm[replaceString('rdUplStatus', '', $postName)]['status'] = $postVal;  
 			}
 
-			break;
-	}
+			$flagNotes = strstr($postName, "taNotes");
+			if($flagNotes) {
+				$arrSubForm[replaceString('taNotes', '', $postName)]['notes'] = $postVal;  
+			}
+		}
+		$objScr->edit_audit_details($arrSubForm, $_SESSION['jobId']);
+		if($_REQUEST['button'] == 'Save') {
+			header('location: jobs.php?a=saved');
+		}
+		else {
+			$objScr->update_job_completed($_SESSION['jobId']);
+			$objScr->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
+			new_job_task_mail();
+			header('location: jobs.php?a=pending');
+		}
+
+		break;
 }
+
 
 $a = $_REQUEST['a'];
-if(isset($a)) {
-	switch ($a) {
-			case "redirect":
-					if(isset($_SESSION['frmId']))unset($_SESSION['frmId']);
-						$_SESSION['frmId'] = $_REQUEST['frmId'];
-						
-					switch($_REQUEST['type'])
-					{
-						case 'setup':
-							if($_REQUEST['frmId'] == '1')
-								header('location: new_smsf.php');
-							else if($_REQUEST['frmId'] == '2')
-								header('location: existing_smsf.php');
-							break;
-						case 'comp':
-								include(VIEW.'jobs_add.php');
-							break;
-					}
-			break;
+switch ($a) {
+		case "redirect":
+				if(isset($_SESSION['frmId']))unset($_SESSION['frmId']);
+					$_SESSION['frmId'] = $_REQUEST['frmId'];
 					
-		case "add":
-			$arrClientType = $objScr->fetchClientType();
-			$arrClients = $objScr->fetch_clients();
-			switch($_REQUEST['type'])
+				switch($_REQUEST['type'])
+				{
+					case 'setup':
+						if($_REQUEST['frmId'] == '1')
+							header('location: new_smsf.php');
+						else if($_REQUEST['frmId'] == '2')
+							header('location: existing_smsf.php');
+						break;
+					case 'comp':
+							include(VIEW.'jobs_add.php');
+						break;
+				}
+		break;
+				
+	case "add":
+		$arrClientType = $objScr->fetchClientType();
+		$arrClients = $objScr->fetch_clients();
+		switch($_REQUEST['type'])
+		{
+			case 'setup':
+					include(VIEW.'jobs_order.php');
+				break;
+			case 'comp':
+					include(VIEW.'jobs_add.php');
+				break;
+		}
+		break;
+
+	case "edit":
+		$arrJobs = $objScr->sql_select();
+		if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
+		$_SESSION['jobId'] = $recid;
+		$arrJobsData = $arrJobs[$recid];
+		$arrJobType = $objScr->fetchType($arrJobsData['mas_Code']);
+		$arrClientType = $objScr->fetchClientType();
+		$arrClients = $objScr->fetch_clients();
+		if(isset($_SESSION['frmId']))unset($_SESSION['frmId']);
+			$_SESSION['frmId'] = $_REQUEST['frmId'];
+						
+		switch($_REQUEST['type'])
+		{
+			case 'setup':
+				if($_REQUEST['frmId'] == '1')
+					header('location: new_smsf.php');
+				else if($_REQUEST['frmId'] == '2')
+					header('location: existing_smsf.php');
+				break;
+			case 'comp':
+					include(VIEW.'jobs_edit.php');
+				break;
+		}
+		
+		break;
+
+	case "pending":
+		$arrJobs = $objScr->sql_select('pending');
+		$arrJobType = $objScr->fetchType();
+		$arrClientType = $objScr->fetchClientType();
+		$arrClients = $objScr->fetch_associated_clients();
+		$arrJobStatus = $objScr->fetchStatus();
+		include(VIEW.'jobs_pending.php');
+		break;
+
+	case "saved":
+		$arrJobs = $objScr->sql_select('saved');
+		$arrJobType = $objScr->fetchType();
+		$arrClientType = $objScr->fetchClientType();
+		$arrClients = $objScr->fetch_associated_clients();
+		$arrJobStatus = $objScr->fetchStatus();
+		include(VIEW.'jobs_saved.php');
+		break;
+
+	case "completed":
+		$arrJobs = $objScr->sql_select('completed');
+		$arrJobType = $objScr->fetchType();
+		$arrClientType = $objScr->fetchClientType();
+		$arrClients = $objScr->fetch_associated_clients();
+		$arrJobStatus = $objScr->fetchStatus();
+		include(VIEW.'jobs_completed.php');
+		break;
+
+	case "document":
+		$arrjobs = $objScr->sql_select('document');
+		$arrDoc = $objScr->fetch_documents();
+		$arrJobType = $objScr->fetchType();
+		$arrClients = $objScr->fetch_associated_clients();
+		include(VIEW.'jobs_documents.php');
+		break;
+
+	case "uploadDoc":
+		$arrjobs = $objScr->sql_select('uploadDoc');
+		$arrJobType = $objScr->fetchType();
+		$arrClients = $objScr->fetch_associated_clients();
+		include(VIEW.'jobs_documents.php');
+		break;
+
+	case "download":
+		$objScr->doc_download($_REQUEST["filePath"], $_REQUEST['flagChecklist']);
+		include(VIEW.'jobs_edit.php');
+		break;
+
+	case "deleteDoc":
+		$objScr->delete_doc($_REQUEST["filePath"], $_REQUEST['flagChecklist']);
+		$arrJobStatus = $objScr->fetchStatus();
+		$arrJobs = $objScr->sql_select();
+		$arrJobsData = $arrJobs[$recid];
+		$arrJobType = $objScr->fetchType();
+		$arrClientType = $objScr->fetchClientType();
+		$arrClients = $objScr->fetch_associated_clients();
+		include(VIEW.'jobs_edit.php');
+		break;
+		
+	case "order":
+		$arrForms = $objScr->fetch_setup_forms();
+		include(VIEW.'order_docs.php');
+		break;
+
+	case "audit":
+
+		if(isset($_REQUEST['recid']) && !empty($_REQUEST['recid'])) {
+			if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
+			$_SESSION['jobId'] = $_REQUEST['recid'];
+		}
+
+		if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) {
+			$arrJobInfo = $objScr->fetchJobDetail($_SESSION['jobId']);
+			if(!empty($arrJobInfo['client_id']))
+				$dbClientId = $arrJobInfo['client_id'];
+
+			if(!empty($arrJobInfo['mas_Code']))
+				$dbCliTypeId = $arrJobInfo['mas_Code'];
+
+			if(!empty($arrJobInfo['job_type_id']))
+				$dbJobTypeId = $arrJobInfo['job_type_id'];
+
+			if(!empty($arrJobInfo['period']))
+				$dbPeriod = $arrJobInfo['period'];
+
+			if(!empty($arrJobInfo['notes']))
+				$dbNotes = $arrJobInfo['notes'];
+
+			$arrJobType = $objScr->fetchType($dbCliTypeId);
+		}
+		else {
+			$arrJobInfo = array();
+			$dbClientId = "";
+			$dbCliTypeId = "";
+			$dbJobTypeId = "";
+			$dbPeriod = "";
+			$dbNotes = "";
+		}
+
+		$arrAuditType = $objScr->getAuditCliJobType();
+		$arrClients = $objScr->fetch_clients();
+		include(VIEW.'jobs_audit.php');
+		break;
+
+	case "checklist":
+		$arrChecklist = $objScr->getAuditChecklist($_SESSION['jobId']);
+		include(VIEW.'jobs_audit_checklist.php');
+		break;
+
+	case "subchecklist":
+		$arrSubchecklist = $objScr->getAuditSubChecklist($_SESSION['jobId']);
+		$arrDocDetails = $objScr->getAuditDetails($_SESSION['jobId']);
+		$arrSubDocList = $objScr->getAuditSubDocList($_SESSION['jobId']);
+		$arrUplStatus['PENDING'] = 'Pending';
+		$arrUplStatus['ATTACHED'] = 'Attached';
+		$arrUplStatus['NA'] = 'N/A';
+		include(VIEW.'jobs_audit_subchecklist.php');
+		break;
+
+	case "uploadAudit":
+		$arrDocList = $objScr->getAuditDocList($_SESSION['jobId']);
+		include(VIEW.'jobs_audit_upload.php');
+		break;
+
+	case "uploadSubAudit":
+		$subchecklistName = $objScr->getSubChecklistName($_REQUEST['subchecklistId']);
+		include(VIEW.'jobs_subaudit_upload.php');
+		break;
+
+	case "duplicateJob":
+
+			$arrObj = $objScr->sql_select('duplicate');
+
+			if(count($arrObj) != 0)
 			{
-				case 'setup':
-						include(VIEW.'jobs_order.php');
-					break;
-				case 'comp':
-						include(VIEW.'jobs_add.php');
-					break;
-			}
-			break;
-
-		case "edit":
-			$arrJobs = $objScr->sql_select();
-			if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-			$_SESSION['jobId'] = $recid;
-			$arrJobsData = $arrJobs[$recid];
-			$arrJobType = $objScr->fetchType($arrJobsData['mas_Code']);
-			$arrClientType = $objScr->fetchClientType();
-			$arrClients = $objScr->fetch_clients();
-			if(isset($_SESSION['frmId']))unset($_SESSION['frmId']);
-				$_SESSION['frmId'] = $_REQUEST['frmId'];
-							
-			switch($_REQUEST['type'])
+				print_r($arrObj);
+				return $arrObj;
+			}  
+			else 
 			{
-				case 'setup':
-					if($_REQUEST['frmId'] == '1')
-						header('location: new_smsf.php');
-					else if($_REQUEST['frmId'] == '2')
-						header('location: existing_smsf.php');
-					break;
-				case 'comp':
-						include(VIEW.'jobs_edit.php');
-					break;
+				return false;
 			}
-			
+			exit;
 			break;
 
-		case "pending":
-			$arrJobs = $objScr->sql_select('pending');
-			$arrJobType = $objScr->fetchType();
-			$arrClientType = $objScr->fetchClientType();
-			$arrClients = $objScr->fetch_associated_clients();
-			$arrJobStatus = $objScr->fetchStatus();
-			include(VIEW.'jobs_pending.php');
+	case "job":
+			include(VIEW.'jobs.php');
 			break;
-
-		case "saved":
-			$arrJobs = $objScr->sql_select('saved');
-			$arrJobType = $objScr->fetchType();
-			$arrClientType = $objScr->fetchClientType();
-			$arrClients = $objScr->fetch_associated_clients();
-			$arrJobStatus = $objScr->fetchStatus();
-			include(VIEW.'jobs_saved.php');
-			break;
-
-		case "completed":
-			$arrJobs = $objScr->sql_select('completed');
-			$arrJobType = $objScr->fetchType();
-			$arrClientType = $objScr->fetchClientType();
-			$arrClients = $objScr->fetch_associated_clients();
-			$arrJobStatus = $objScr->fetchStatus();
-			include(VIEW.'jobs_completed.php');
-			break;
-
-		case "document":
-			$arrjobs = $objScr->sql_select('document');
-			$arrDoc = $objScr->fetch_documents();
-			$arrJobType = $objScr->fetchType();
-			$arrClients = $objScr->fetch_associated_clients();
-			include(VIEW.'jobs_documents.php');
-			break;
-
-		case "uploadDoc":
-			$arrjobs = $objScr->sql_select('uploadDoc');
-			$arrJobType = $objScr->fetchType();
-			$arrClients = $objScr->fetch_associated_clients();
-			include(VIEW.'jobs_documents.php');
-			break;
-
-		case "download":
-			$objScr->doc_download($_REQUEST["filePath"], $_REQUEST['flagChecklist']);
-			include(VIEW.'jobs_edit.php');
-			break;
-
-		case "deleteDoc":
-			$objScr->delete_doc($_REQUEST["filePath"], $_REQUEST['flagChecklist']);
-			$arrJobStatus = $objScr->fetchStatus();
-			$arrJobs = $objScr->sql_select();
-			$arrJobsData = $arrJobs[$recid];
-			$arrJobType = $objScr->fetchType();
-			$arrClientType = $objScr->fetchClientType();
-			$arrClients = $objScr->fetch_associated_clients();
-			include(VIEW.'jobs_edit.php');
-			break;
-			
-		case "order":
-			$arrForms = $objScr->fetch_setup_forms();
-			include(VIEW.'order_docs.php');
-			break;
-
-		case "audit":
-
-			if(isset($_REQUEST['recid']) && !empty($_REQUEST['recid'])) {
-				if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
-				$_SESSION['jobId'] = $_REQUEST['recid'];
-			}
-
-			if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) {
-				$arrJobInfo = $objScr->fetchJobDetail($_SESSION['jobId']);
-				if(!empty($arrJobInfo['client_id']))
-					$dbClientId = $arrJobInfo['client_id'];
-
-				if(!empty($arrJobInfo['mas_Code']))
-					$dbCliTypeId = $arrJobInfo['mas_Code'];
-
-				if(!empty($arrJobInfo['job_type_id']))
-					$dbJobTypeId = $arrJobInfo['job_type_id'];
-
-				if(!empty($arrJobInfo['period']))
-					$dbPeriod = $arrJobInfo['period'];
-
-				if(!empty($arrJobInfo['notes']))
-					$dbNotes = $arrJobInfo['notes'];
-
-				$arrJobType = $objScr->fetchType($dbCliTypeId);
-			}
-			else {
-				$arrJobInfo = array();
-				$dbClientId = "";
-				$dbCliTypeId = "";
-				$dbJobTypeId = "";
-				$dbPeriod = "";
-				$dbNotes = "";
-			}
-
-			$arrAuditType = $objScr->getAuditCliJobType();
-			$arrClients = $objScr->fetch_clients();
-			include(VIEW.'jobs_audit.php');
-			break;
-
-		case "checklist":
-			$arrChecklist = $objScr->getAuditChecklist($_SESSION['jobId']);
-			include(VIEW.'jobs_audit_checklist.php');
-			break;
-
-		case "subchecklist":
-			$arrSubchecklist = $objScr->getAuditSubChecklist($_SESSION['jobId']);
-			$arrDocDetails = $objScr->getAuditDetails($_SESSION['jobId']);
-			$arrSubDocList = $objScr->getAuditSubDocList($_SESSION['jobId']);
-			$arrUplStatus['PENDING'] = 'Pending';
-			$arrUplStatus['ATTACHED'] = 'Attached';
-			$arrUplStatus['NA'] = 'N/A';
-			include(VIEW.'jobs_audit_subchecklist.php');
-			break;
-
-		case "uploadAudit":
-			$arrDocList = $objScr->getAuditDocList($_SESSION['jobId']);
-			include(VIEW.'jobs_audit_upload.php');
-			break;
-
-		case "uploadSubAudit":
-			$subchecklistName = $objScr->getSubChecklistName($_REQUEST['subchecklistId']);
-			include(VIEW.'jobs_subaudit_upload.php');
-			break;
-
-		case "duplicateJob":
-
-                $arrObj = $objScr->sql_select('duplicate');
-
-                if(count($arrObj) != 0)
-                {
-                    print_r($arrObj);
-                    return $arrObj;
-                }  
-                else 
-                {
-                    return false;
-                }
-                exit;
-
-                break;
-	}
-}
-else {
-	include(VIEW.'jobs.php');
 }
 ?>

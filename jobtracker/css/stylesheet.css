@@ -823,8 +823,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .resources p {
-	/*background:url(../images_user/pdf.png) center left no-repeat;
-	padding-left:20px;*/
+	background:url(../images_user/pdf.jpg) center left no-repeat;
+	padding-left:20px;
 }
 
 .newsroom p {

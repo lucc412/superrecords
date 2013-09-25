@@ -22,7 +22,7 @@ include(HEADDATA);
 
 	if(!empty($arrDocList)) {
 		?><div class="pdT50">
-			<table width="100%">
+			<table width="100%" class="resources">
 				<tr>
 					<td class="td_title">Document Name</td>
 					<td width="100px" align="center" class="td_title">Date</td>

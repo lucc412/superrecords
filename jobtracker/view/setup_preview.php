@@ -90,6 +90,7 @@
                 $members = '';
                 $leagalRef = '';
                 $cnt = 1;
+				$cntr = 1;
                 foreach ($arrMembrs as $key => $value) 
                 {
                    $value["gender"] =($value["gender"] == "M")?"Male":"Female";
@@ -100,19 +101,17 @@
                    
                    if($value['legal_references'] == 1)
                    {
-                        $cntr = 1;
-                        
                         foreach ($arrLegRef as $key => $value) 
                         {
                                 if($cntr == 1)
-                                $leagalRef .= '<div class="test">Legal References Details</div><br/>';
-
+									$leagalRef .= '<div class="test">Legal Personal Representative</div><br/>';
+								
                                 $leagalRef .= '<table class="fieldtable" cellpadding="4" cellspacing="6">
                                         <tr>
-                                            <td colspan="2"><b>Legal References '.$cntr.'</b></td>
+                                            <td colspan="2"><u>Legal Personal Representative '.$cntr.'</u></td>
                                         </tr>
                                         <tr>
-                                            <td>Legal References Name : </td>
+                                            <td>Name : </td>
                                             <td>'.$value['title'].' '.$value['fname'].' '.$value['mname'].' '.$value['lname'].' </td>
                                         </tr>
                                         <tr>
@@ -155,11 +154,11 @@
                    }
                            
                    if($cnt == 1)
-                        $members .= '<div class="test">Memeber Details</div><br/>';
+                        $members .= '<div class="test">Member Details</div><br/>';
                     
                     $members .= '<table class="fieldtable" cellpadding="4" cellspacing="6">
                                 <tr>
-                                    <td colspan="2"><b>Member '.$cnt.'</b></td>
+                                    <td colspan="2"><u>Member '.$cnt.'</u></td>
                                 </tr>
                                 <tr>
                                     <td>Member Name : </td>

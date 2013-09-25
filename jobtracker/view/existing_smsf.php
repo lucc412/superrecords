@@ -49,7 +49,7 @@ include(SETUPNAVIGATION);
             }
             else
             {
-                alert('please check the authority');
+                alert('Please tick if you have received written authority from your client.');
                 $('#cbAuthority').val(0);
                 return false;
             }

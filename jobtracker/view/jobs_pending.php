@@ -42,7 +42,7 @@ include(TOPBAR);
 				<td class="td_title">Source Documents</td>
 				<td class="td_title">Reports</td>
 				<td align="center" class="td_title">Submission Date</td>
-				<td width="12%" colspan="2" class="td_title" align="center">Actions</td>
+				<td width="12%" class="td_title" align="center">Actions</td>
 			</tr><?
 			
 			$countRow = 0;
@@ -87,8 +87,6 @@ include(TOPBAR);
 						if(!empty($flagQueryExists)) {
 							?><a target="_blank" href="queries.php?lstJob=<?=$jobId?>&lstCliType=<?=$arrJobDetails['client_id']?>" title="Click to view queries"><?=QUERY?></a><?
 						}
-					?></td>
-					<td class="tddata" align="center"><?
 						if($arrJobDetails['job_genre'] != 'SETUP') {
 							?><a href="jobs.php?a=uploadDoc&lstJob=<?=$jobId?>" title="Click to upload additional documents"><?=UPLOAD?></a><?
 						}

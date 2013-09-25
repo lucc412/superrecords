@@ -248,23 +248,16 @@ class Job {
 			$this->add_task($typeId, $period, $_SESSION['PRACTICEID'], $clientId, $jobId, $cliType);
 			$this->add_source_Docs($jobId);
 		}
-                elseif($jobGenre == "SETUP") 
-                {
-                    $this->smsfCheck($setup_subfrm,$jobId);
-                }
-            
-        
 		
 		return $jobId;
 	}
-        public function smsfCheck($setup_subfrm,$jobId)
-        {
-//            $Qry = "INSERT INTO es_smsf (authority_status,smsf_type) VALUES (".$_REQUEST['cbAuthority'].",'".$_REQUEST['smsf_type']."')";
-//            $flag = mysql_query($Qry);
-        
-            $qry = "UPDATE es_SMSF SET job_id = ".$jobId." WHERE job_id = 0";
-            mysql_query($qry);
-        }
+
+	public function setSmsfAuthority($setup_subfrm,$jobId)
+	{
+		$Qry = "INSERT INTO es_smsf (job_id, authority_status, smsf_type) 
+				VALUES ({$jobId}, '1','".$setup_subfrm."')";
+		mysql_query($Qry);
+	}
 
 	public function add_task($typeId, $period, $practiceId, $clientId, $jobId, $cliType) {
 		$arrJobType = $this->fetchType();

@@ -203,19 +203,17 @@ class DECLARATIONS
                
                if($value['legal_references'] == 1)
                    {
-                        $cntr = 1;
-                        
                         foreach ($arrLegRef as $key => $value) 
                         {
                                 if($cntr == 1)
-                                $leagalRef .= '<div class="test">Legal References Details</div><br/>';
+									$leagalRef .= '<div class="test">Legal Personal Representative</div><br/>';
 
                                 $leagalRef .= '<table class="fieldtable" cellpadding="4" cellspacing="6">
                                         <tr>
-                                            <td colspan="2"><b>Legal References '.$cntr.'</b></td>
+                                            <td colspan="2"><b>Legal Personal Representative '.$cntr.'</b></td>
                                         </tr>
                                         <tr>
-                                            <td>Legal References Name : </td>
+                                            <td>Name : </td>
                                             <td>'.$value['title'].' '.$value['fname'].' '.$value['mname'].' '.$value['lname'].' </td>
                                         </tr>
                                         <tr>
@@ -460,11 +458,7 @@ class DECLARATIONS
                                 <td>'.fetchTrusteeName($arrFund[$jobid]['trustee_type_id']).' </td>
                             </tr>
                             
-                        </table>                        
-                        <br/>
-                        <div class="test">Memeber Details</div>
-                        <br/>'.$members.$leagalRef.$trustee.'
-                        ';
+                        </table> <br/>'.$members.$leagalRef.$trustee;
             
             // output the HTML content
             $pdf->writeHTML($html, true, false, true, false, '');

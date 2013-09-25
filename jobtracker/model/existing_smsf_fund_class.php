@@ -113,7 +113,7 @@ class EXISTING_SMSF_FUND
             {
 //                client_code
                 $qryIns = "INSERT INTO client(client_type_id, client_name, recieved_authority, id, client_received)
-					VALUES ( 5, '" . $fundName . "', 1, " . $_SESSION['PRACTICEID'] . ", NOW())";
+					VALUES ( 7, '" . $fundName . "', 1, " . $_SESSION['PRACTICEID'] . ", NOW())";
                 
                 $flagReturn = mysql_query($qryIns);
                 $client_id = mysql_insert_id();
@@ -122,7 +122,7 @@ class EXISTING_SMSF_FUND
 
             if(isset($client_id) && $client_id != '')
             {
-                $jobName = $client_id .'::'. date('Y') .'::168';
+                $jobName = $client_id .'::'. date('Y') .'::21';
                 $updt = "UPDATE job SET 
                     client_id = ".$client_id.", 
                     job_name = '".addslashes($jobName)."' 

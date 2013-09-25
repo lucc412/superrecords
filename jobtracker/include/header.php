@@ -110,6 +110,9 @@
 				?><title>Fund Details</title>
 				<script type="text/javascript" src="js/existing_smsf_fund.js"></script><?
 		}
+		else if(basename($_SERVER['PHP_SELF']) == 'setup_preview.php') {
+			?><title>Preview</title><?
+		}
 		else if(basename($_SERVER['PHP_SELF']) == 'queries.php') {
 			?><title>View All Queries</title>
 			<script type="text/javascript" src="js/queries_validation.js"></script><?

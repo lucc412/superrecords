@@ -16,31 +16,34 @@ if(isset($_REQUEST['sql'])) {
 	{
 		case "insertJob":
                     
-                        $arrJobReq = array();
-                        if($_REQUEST['type'] == 'SETUP')
-                        {
-                            $arrJobReq['lstClientType'] = NULL;
-                            $arrJobReq['lstJobType'] = 168;
-                            $arrJobReq['lstCliType'] = 25;
-                            $arrJobReq['type'] = $_REQUEST['type'];
-                            $arrJobReq['subfrmId'] = $_REQUEST['subfrmId'];
-                            $arrJobReq['txtPeriod'] = date('Y');
-                            $arrJobReq['txtNotes'] = NULL;
-                            
-                        }
-                        else
-                        {
-                            $arrJobReq['lstClientType'] = $_REQUEST['lstClientType'];
-                            $arrJobReq['lstJobType'] = $_REQUEST['lstJobType'];
-                            $arrJobReq['txtPeriod'] = $_REQUEST['txtPeriod'];
-                            $arrJobReq['lstCliType'] = $_REQUEST['lstCliType'];
-                            $arrJobReq['txtNotes'] = $_REQUEST['txtNotes'];
-                            $arrJobReq['type'] = $_REQUEST['type'];
-                            $arrJobReq['subfrmId'] = $_REQUEST['subfrmId'];
-                            
-                        }
+			$arrJobReq = array();
+			if($_REQUEST['type'] == 'SETUP')
+			{
+				$arrJobReq['lstClientType'] = NULL;
+				$arrJobReq['lstJobType'] = 21;
+				$arrJobReq['lstCliType'] = 25;
+				$arrJobReq['type'] = $_REQUEST['type'];
+				$arrJobReq['subfrmId'] = $_REQUEST['subfrmId'];
+				$arrJobReq['txtPeriod'] = date('Y');
+				$arrJobReq['txtNotes'] = NULL;
+				
+			}
+			else
+			{
+				$arrJobReq['lstClientType'] = $_REQUEST['lstClientType'];
+				$arrJobReq['lstJobType'] = $_REQUEST['lstJobType'];
+				$arrJobReq['txtPeriod'] = $_REQUEST['txtPeriod'];
+				$arrJobReq['lstCliType'] = $_REQUEST['lstCliType'];
+				$arrJobReq['txtNotes'] = $_REQUEST['txtNotes'];
+				$arrJobReq['type'] = $_REQUEST['type'];
+				$arrJobReq['subfrmId'] = NULL;
+				
+			}
                         
-                        $jobId = $objScr->sql_insert($arrJobReq);
+            $jobId = $objScr->sql_insert($arrJobReq);
+			if($_REQUEST['type'] == 'SETUP') {
+				$objScr->setSmsfAuthority($_REQUEST['subfrmId'], $jobId);
+			}
 			if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
 			$_SESSION['jobId'] = $jobId;	
 				
@@ -52,9 +55,9 @@ if(isset($_REQUEST['sql'])) {
 				header('location: jobs.php?a=checklist');
 			else if($_REQUEST['type'] == 'SETUP') {
 				if($_REQUEST['subfrmId'] == '1')
-                                    header('location: new_smsf_contact.php');
+                   header('location: new_smsf_contact.php');
 				else if($_REQUEST['subfrmId'] == '2')
-                                    header('location: existing_smsf_contact.php');
+                   header('location: existing_smsf_contact.php');
 			}
 			break;
 

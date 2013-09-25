@@ -5,7 +5,7 @@ include("include/common.php");
 
 if(isset($_SESSION["jobId"]))
 {
-    $selQry="SELECT * FROM es_smsf WHERE job_id = ".$_SESSION["jobId"]." AND smsf_type = 1";
+    $selQry="SELECT * FROM es_smsf WHERE job_id = ".$_SESSION["jobId"];
     $fetchResult = mysql_query($selQry);
     
     while($rowData = mysql_fetch_assoc($fetchResult)) 
@@ -18,7 +18,6 @@ if(isset($_SESSION["jobId"]))
 if(isset($_REQUEST) && $_REQUEST['do'] == 'redirect')
 {
     $sql='';
-    $flag ='';
     if(isset($_SESSION["jobId"]))
     {
         $sql = "update"; 
@@ -27,12 +26,9 @@ if(isset($_REQUEST) && $_REQUEST['do'] == 'redirect')
     else
     {
         $sql = "insertJob"; 
-        $Qry = "INSERT INTO es_smsf (authority_status,smsf_type) VALUES (".$_REQUEST['cbAuthority'].",'".$_REQUEST['smsf_type']."')";
-        $flag = mysql_query($Qry);
     }
     
-    if($flag)
-        header('Location:jobs.php?sql='.$sql.'&type=SETUP&subfrmId=1');
+    header('Location:jobs.php?sql='.$sql.'&type=SETUP&subfrmId=1');
 }
 
 // include view file 

@@ -91,14 +91,9 @@ include(SETUPNAVIGATION);
 							}
 						}  
 						echo($dob);
-//                                                $year = date('Y', strtotime($arrMemberInfo['dob']));
-//                                                $diff = date_diff($year, date('Y'),TRUE);
-//                                                if((date('Y') - $year) <= 18)
-//                                                    $legalRef++;//echo 'Done';
-//                                                else
-//                                                    $legalRef--;
+
 //                                                
-						?>" onblur="getAge(this.value);" />
+						?>" />
                                                 <img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy','dropdown',false,24,false,'past')" align="middle" class="calendar"/>
                                                 
 					</td>

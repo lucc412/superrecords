@@ -42,6 +42,10 @@ switch($selectedColumn) {
 	case "india_manager":
 		$arrDDOptions[$selectedColumn] = $objCallUsers->fetchEmployees($designationId=28);
 	break;
+
+	case "audit_manager":
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetchEmployees($designationId=32);
+	break;
 	
 	case "team_member":
 		$arrDDOptions[$selectedColumn] = $objCallUsers->fetchEmployees($designationId=29);

@@ -2,7 +2,7 @@
 	<h1>Add Record</h1>
 </div>
 <div style="position:absolute; top:20; right:-90px; width:300; height:300;">
-<font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font></div><?
+<font style="color:red; font-family:Arial, Helvetica, sans-serif;padding-right:92px" size="2">Fields marked with * are mandatory</font></div><?
 
 // error message
 if(!empty($_REQUEST['flagErrMsg'])) {
@@ -32,40 +32,6 @@ if(!empty($_REQUEST['flagErrMsg'])) {
 			<td class="dr">
 				<input type="text" name="refName" maxlength="50" value="">
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Practice.</span></a>
-			</td>
-		</tr>
-		<tr>
-			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
-			<td class="dr"><select name="lstSrManager">
-					<option value="">Select SR Manager</option><?php
-					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
-						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select senior manager for Practice.</span></a>
-			</td>
-		</tr>
-		<tr>
-			<td class="hr">India Manager</td>
-			<td class="dr"><select name="lstManager">
-					<option value="">Select India Manager</option><?php
-					foreach($objCallData->arrInManager AS $typeId => $typeDesc){
-						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select india manager for Practice.</span></a>
-			</td>
-		</tr>
-		<tr>
-			<td class="hr">Sales Person<font style="color:red;" size="2">*</font></td>
-			<td class="dr">
-				<select name="lstSalesPerson">
-					<option value="">Select Sales Person</option><?
-					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
-						?><option value="<?=$stfCode?>"><?=$stfName?></option><?
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>
 			</td>
 		</tr>
 		<tr>
@@ -152,15 +118,14 @@ if(!empty($_REQUEST['flagErrMsg'])) {
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Date Signed Up<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Practice Software</td>
 			<td class="dr">
-				<input type="text" name="dateSignedUp" id="dateSignedUp" value="">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
-				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Practice signed up date.</span></a>
+				<input type="text" name="software" maxlength="255" value="">
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Practice Software.</span></a>
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Agreed Services</td>
+			<td class="hr">Agreed Services<font style="color:red;" size="2">*</font></td>
 			<td class="dr"><?
 				foreach($objCallData->arrServices AS $code => $description){
 					?><input type="checkbox" class="checkboxClass" name="service:<?=$code?>" id="<?=$description?>" /><label for="<?=$description?>"><?=$description?></label><br/><?
@@ -168,18 +133,83 @@ if(!empty($_REQUEST['flagErrMsg'])) {
 			?></td>
 		</tr>
 		<tr>
+			<td class="hr">Compliance Jobs Projected</td>
+			<td class="dr">
+				<input type="text" name="comp_projected" maxlength="255" value="">
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Audit Only Jobs Projected</td>
+			<td class="dr">
+				<input type="text" name="audit_projected" maxlength="255" value="">
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
+			<td class="dr"><select name="lstSrManager">
+					<option value="">Select SR Manager</option><?php
+					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
+						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select senior manager.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Manager Comp</td>
+			<td class="dr"><select name="lstManager">
+					<option value="">Select Manager Comp</option><?php
+					foreach($objCallData->arrInManager AS $typeId => $typeDesc){
+						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select compliance manager.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Manager Audit</td>
+			<td class="dr"><select name="lstAuditManager">
+					<option value="">Select Manager Audit</option><?php
+					foreach($objCallData->arrAuditMngr AS $typeId => $typeDesc){
+						?><option value="<?=$typeId?>"><?=$typeDesc?></option><?php 
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select audit manager.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Sales Person<font style="color:red;" size="2">*</font></td>
+			<td class="dr">
+				<select name="lstSalesPerson">
+					<option value="">Select Sales Person</option><?
+					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
+						?><option value="<?=$stfCode?>"><?=$stfName?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Date Signed Up<font style="color:red;" size="2">*</font></td>
+			<td class="dr">
+				<input type="text" name="dateSignedUp" id="dateSignedUp" value="">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
+				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Practice signed up date.</span></a>
+			</td>
+		</tr>
+		<!--<tr>
 			<td class="hr">Sent Items</td>
 			<td class="dr"><?
 				foreach($objCallData->arrItemList AS $itemId => $itemName){
 					?><input type="checkbox" class="checkboxClass" name="item:<?=$itemId?>" id="<?=$itemName?>" /><label for="<?=$itemName?>"><?=$itemName?></label><br/><?
 				}
 			?></td>
-		</tr>
+		</tr>-->
 	<tr>
 		<td>
 			<button type="button" value="Cancel" onClick='return ComfirmCancel();' class="cancelbutton">Cancel</button></td>
 		<td>
-			<button type="submit" name="action" value="Save" class="button">Save</button>
+			<button type="submit" name="action" id="saveBtn" value="Save">Save</button>
 		</td>
 	</tr>
 </table>

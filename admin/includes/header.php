@@ -17,6 +17,8 @@ $_SESSION['timeout'] = time();
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<!-- Main CSS-->
 	<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
 	<link rel="stylesheet" type="text/css" href="css/tooltip.css"/>
@@ -54,6 +56,7 @@ $_SESSION['timeout'] = time();
 		?><title>Referrer Items List</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'pr_practice.php') {
 		?><title>Manage Practice</title>
+		<script type="text/javascript" src="<?php echo $javaScript;?>jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="<?php echo $javaScript; ?>pr_validate.js"></script><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'pr_services.php') {
 		?><title>Practice Services</title><?	

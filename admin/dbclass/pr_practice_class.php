@@ -6,8 +6,9 @@ class Practice_Class extends Database {
 		$this->arrSrManager = $this->fetchEmployees('srmanager');
 		$this->arrSalesPerson = $this->fetchEmployees('salesmanager');
 		$this->arrInManager = $this->fetchEmployees('indiamanager');
+		$this->arrAuditMngr = $this->fetchEmployees('auditmanager');
 		$this->arrServices = $this->fetchServices();
-		$this->arrItemList = $this->fetchItemList();
+		//$this->arrItemList = $this->fetchItemList();
 		$this->arrStates = $this->fetchStates();
   	}	
 
@@ -52,6 +53,10 @@ class Practice_Class extends Database {
 		// if employees are fetched that are Sales Manager
 		else if($flagManager == 'indiamanager') { 
 			$appendStr = 'AND c1.con_Designation = 28';
+		}
+		// if employees are fetched that are Sales Manager
+		else if($flagManager == 'auditmanager') { 
+			$appendStr = 'AND c1.con_Designation = 32';
 		}
 
 		$qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
@@ -118,7 +123,8 @@ class Practice_Class extends Database {
 		if($_SESSION['usertype'] == 'Staff')
 			$appendStr = "AND ( pr.sr_manager = {$_SESSION['staffcode']} 
 						OR pr.india_manager = {$_SESSION['staffcode']}
-						OR pr.sales_person = {$_SESSION['staffcode']})";
+						OR pr.sales_person = {$_SESSION['staffcode']}
+						OR pr.audit_manager = {$_SESSION['staffcode']})";
 
 		// view & edit case				
 		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))) {				
@@ -193,26 +199,28 @@ class Practice_Class extends Database {
 				$arrServices[] = $fieldId;
 			 }
 
-			 if(strstr($fieldName, "item:")) {
+			 /*if(strstr($fieldName, "item:")) {
 				$fieldId = str_replace('item:','',$fieldName);
 				$arrItems[] = $fieldId;
 			 }
+			 */
 		}
 
 		$strServices = '';
 		if(!empty($arrServices)) $strServices = implode(',', $arrServices);
 
-		$strItems = '';
-		if(!empty($arrItems)) $strItems = implode(',', $arrItems);
+		//$strItems = '';
+		//if(!empty($arrItems)) $strItems = implode(',', $arrItems);
 
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
-		$qryIns = "INSERT INTO pr_practice(type, name, sr_manager, india_manager, street_adress, suburb, state, postcode, postal_address, main_contact_name, other_contact_name, phone_no, alternate_no, fax, email, password, date_signed_up, agreed_services, sent_items, sales_person)
+		$qryIns = "INSERT INTO pr_practice(type, name, sr_manager, india_manager, audit_manager, street_adress, suburb, state, postcode, postal_address, main_contact_name, other_contact_name, phone_no, alternate_no, fax, email, password, software, comp_projected, audit_projected, date_signed_up, agreed_services, sales_person)
 					VALUES (
 					'" . $_REQUEST['lstType'] . "', 
 					'" . addslashes($_REQUEST['refName']) . "', 
 					'" . $_REQUEST['lstSrManager'] . "', 
 					'" . $_REQUEST['lstManager'] . "', 
+					'" . $_REQUEST['lstAuditManager'] . "', 
 					'" . $_REQUEST['street_Address'] . "', 
 					'" . $_REQUEST['suburb'] . "', 
 					'" . $_REQUEST['lstState'] . "', 
@@ -225,9 +233,11 @@ class Practice_Class extends Database {
 					'" . $_REQUEST['fax'] . "', 
 					'" . $_REQUEST['email'] . "', 
 					'" . $_REQUEST['password'] . "', 
+					'" . $_REQUEST['software'] . "', 
+					'" . $_REQUEST['comp_projected'] . "', 
+					'" . $_REQUEST['audit_projected'] . "', 
 					'" . $dateSignedUp . "', 
 					'" . $strServices . "', 
-					'" . $strItems . "', 
 					'" . $_REQUEST['lstSalesPerson'] . "'
 					)";
 
@@ -258,17 +268,17 @@ class Practice_Class extends Database {
 				$arrServices[] = $fieldId;
 			 }
 
-			 if(strstr($fieldName, "item:")) {
+			 /*if(strstr($fieldName, "item:")) {
 				$fieldId = str_replace('item:','',$fieldName);
 				$arrItems[] = $fieldId;
-			 }
+			 }*/
 		}
 
 		$strServices = '';
 		if(!empty($arrServices)) $strServices = implode(',', $arrServices);
 
-		$strItems = '';
-		if(!empty($arrItems)) $strItems = implode(',', $arrItems);
+		//$strItems = '';
+		//if(!empty($arrItems)) $strItems = implode(',', $arrItems);
 
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
@@ -277,6 +287,7 @@ class Practice_Class extends Database {
 				name = '" . addslashes($_REQUEST['refName']) . "',
 				sr_manager = '" . $_REQUEST['lstSrManager'] . "',
 				india_manager = '" . $_REQUEST['lstManager'] . "',
+				audit_manager = '" . $_REQUEST['lstAuditManager'] . "',
 				street_adress = '" . $_REQUEST['street_Address'] . "',
 				suburb = '" . $_REQUEST['suburb'] . "',
 				state = '" . $_REQUEST['lstState'] . "',
@@ -289,9 +300,11 @@ class Practice_Class extends Database {
 				fax = '" . $_REQUEST['fax'] . "',
 				email = '" . $_REQUEST['email'] . "',
 				password = '" . $_REQUEST['password'] . "',
+				software = '" . $_REQUEST['software'] . "',
+				comp_projected = '" . $_REQUEST['comp_projected'] . "',
+				audit_projected = '" . $_REQUEST['audit_projected'] . "',
 				date_signed_up = '" . $dateSignedUp . "',
 				agreed_services = '" . $strServices . "',
-				sent_items = '" . $strItems . "',
 				sales_person = '" . $_REQUEST['lstSalesPerson'] . "'
 				WHERE id = '" . $_REQUEST['recid'] . "'";
 

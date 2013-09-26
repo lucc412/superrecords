@@ -2,7 +2,7 @@
 	<h1>Edit Record</h1>
 </div>
 <div style="position:absolute; top:20; right:-90px; width:300; height:300;">
-<font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font></div>
+<font style="color:red; font-family:Arial, Helvetica, sans-serif;padding-right:92px" size="2">Fields marked with * are mandatory</font></div>
 
 <form action="pr_practice.php" method="post" name="managepractice" onSubmit="return validateFormOnSubmit()">
 	<p><input type="hidden" name="sql" value="update"></p>
@@ -31,46 +31,6 @@
 			<td class="dr">
 				<input type="text" name="refName" maxlength="50" value="<?=stripslashes($arrPracticeData['name'])?>">
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Practice.</span></a>
-			</td>
-		</tr>
-		<tr>
-			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
-			<td class="dr"><select name="lstSrManager">
-					<option value="">Select SR Manager</option><?php
-					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
-						$selectStr = '';
-						if($typeId == $arrPracticeData['sr_manager']) $selectStr = 'selected';
-						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select senior manager for Practice.</span></a>
-			</td>
-		</tr>
-		<tr>
-			<td class="hr">India Manager</td>
-			<td class="dr"><select name="lstManager">
-					<option value="">Select India Manager</option><?php
-					foreach($objCallData->arrInManager AS $typeId => $typeDesc){
-						$selectStr = '';
-						if($typeId == $arrPracticeData['india_manager']) $selectStr = 'selected';
-						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select india manager for Practice.</span></a>
-			</td>
-		</tr>
-		<tr>
-			<td class="hr">Sales Person<font style="color:red;" size="2">*</font></td>
-			<td class="dr">
-				<select name="lstSalesPerson">
-					<option value="">Select Sales Person</option><?php
-					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
-						$selectStr = '';
-						if($stfCode == $arrPracticeData['sales_person']) $selectStr = 'selected';
-						?><option <?=$selectStr?> value="<?=$stfCode?>"><?=$stfName?></option><?
-					} 
-				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>
 			</td>
 		</tr>
 		<tr>
@@ -158,6 +118,89 @@
 			</td>
 		</tr>
 		<tr>
+			<td class="hr">Practice Software</td>
+			<td class="dr">
+				<input type="text" name="software" maxlength="255" value="<?=stripslashes($arrPracticeData['software'])?>">
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Practice Software.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Agreed Services<font style="color:red;" size="2">*</font></td>
+			<td class="dr"><?
+				$arrServices = explode(',', $arrPracticeData['agreed_services']);
+				foreach($objCallData->arrServices AS $code => $description){
+					$checkedStr = '';
+					if(in_array($code, $arrServices)) $checkedStr = 'checked';
+					?><input <?=$checkedStr?> type="checkbox" class="checkboxClass" name="service:<?=$code?>" id="<?=$description?>" /><label for="<?=$description?>"><?=$description?></label><br/><?
+				}
+			?></td>
+		</tr>
+		<tr>
+			<td class="hr">Compliance Jobs Projected</td>
+			<td class="dr">
+				<input type="text" name="comp_projected" maxlength="255" value="<?=stripslashes($arrPracticeData['comp_projected'])?>">
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Audit Only Jobs Projected</td>
+			<td class="dr">
+				<input type="text" name="audit_projected" maxlength="255" value="<?=stripslashes($arrPracticeData['audit_projected'])?>">
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">SR Manager<font style="color:red;" size="2">*</font></td>
+			<td class="dr"><select name="lstSrManager">
+					<option value="">Select SR Manager</option><?php
+					foreach($objCallData->arrSrManager AS $typeId => $typeDesc){
+						$selectStr = '';
+						if($typeId == $arrPracticeData['sr_manager']) $selectStr = 'selected';
+						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select senior manager.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Manager Comp</td>
+			<td class="dr"><select name="lstManager">
+					<option value="">Select Manager Comp</option><?php
+					foreach($objCallData->arrInManager AS $typeId => $typeDesc){
+						$selectStr = '';
+						if($typeId == $arrPracticeData['india_manager']) $selectStr = 'selected';
+						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select compliance manager.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Manager Audit</td>
+			<td class="dr"><select name="lstAuditManager">
+					<option value="">Select Manager Audit</option><?php
+					foreach($objCallData->arrAuditMngr AS $typeId => $typeDesc){
+						$selectStr = '';
+						if($typeId == $arrPracticeData['audit_manager']) $selectStr = 'selected';
+						?><option <?=$selectStr?> value="<?=$typeId?>"><?=$typeDesc?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select audit manager.</span></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="hr">Sales Person<font style="color:red;" size="2">*</font></td>
+			<td class="dr">
+				<select name="lstSalesPerson">
+					<option value="">Select Sales Person</option><?php
+					foreach($objCallData->arrSalesPerson AS $stfCode => $stfName){
+						$selectStr = '';
+						if($stfCode == $arrPracticeData['sales_person']) $selectStr = 'selected';
+						?><option <?=$selectStr?> value="<?=$stfCode?>"><?=$stfName?></option><?
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select name of sales person.</span></a>
+			</td>
+		</tr>
+		<tr>
 			<td class="hr">Date Signed Up<font style="color:red;" size="2">*</font></td>
 			<td class="dr"><?
 				$dateSignedUp = "";
@@ -171,18 +214,7 @@
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Referral signed up date.</span></a>
 			</td>
 		</tr>
-		<tr>
-			<td class="hr">Agreed Services</td>
-			<td class="dr"><?
-				$arrServices = explode(',', $arrPracticeData['agreed_services']);
-				foreach($objCallData->arrServices AS $code => $description){
-					$checkedStr = '';
-					if(in_array($code, $arrServices)) $checkedStr = 'checked';
-					?><input <?=$checkedStr?> type="checkbox" class="checkboxClass" name="service:<?=$code?>" id="<?=$description?>" /><label for="<?=$description?>"><?=$description?></label><br/><?
-				}
-			?></td>
-		</tr>
-		<tr>
+		<!--<tr>
 			<td class="hr">Sent Items</td>
 			<td class="dr"><?
 				$arrItemsList = explode(',', $arrPracticeData['sent_items']);
@@ -192,7 +224,7 @@
 					?><input <?=$checkedStr?> type="checkbox" class="checkboxClass" name="item:<?=$itemId?>" id="<?=$itemName?>" /><label for="<?=$itemName?>"><?=$itemName?></label><br/><?
 				}
 			?></td>
-		</tr>
+		</tr>-->
 		
 		<tr>
 			<td>

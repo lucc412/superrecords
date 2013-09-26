@@ -46,7 +46,8 @@ class SR_Report {
 				case "pr_practice":
 						$strWhere = "AND ( tbl.sr_manager = ".$staffId." 
 							OR tbl.india_manager = ".$staffId."
-							OR tbl.sales_person = ".$staffId.")";
+							OR tbl.sales_person = ".$staffId."
+							OR tbl.audit_manager = ".$staffId.")";
 				break;
 
 				// for client page report case

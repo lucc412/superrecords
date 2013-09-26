@@ -16,18 +16,6 @@
 		<td class="dr"><?=stripslashes($arrPracticeData["name"])?></td>
 	</tr>
 	<tr>
-		<td class="hr">SR Manager</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrSrManager[$arrPracticeData["sr_manager"]])?></td>
-	</tr>
-	<tr>
-		<td class="hr">India Manager</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrInManager[$arrPracticeData["india_manager"]])?></td>
-	</tr>
-	<tr>
-		<td class="hr">Sales Person</td>
-		<td class="dr"><?=htmlspecialchars($objCallData->arrSalesPerson[$arrPracticeData["sales_person"]])?></td>
-	</tr>
-	<tr>
 		<td class="hr">Street Address</td>
 		<td class="dr"><?=htmlspecialchars($arrPracticeData["street_adress"])?></td>
 	</tr>
@@ -76,14 +64,8 @@
 		<td class="dr"><?=$arrPracticeData["password"]?></td>
 	</tr>
 	<tr>
-		<td class="hr">Date Signed Up</td><?
-		$dateSignedUp = "";
-		if (isset($arrPracticeData["date_signed_up"]) && $arrPracticeData["date_signed_up"] != "") {
-			if($arrPracticeData["date_signed_up"] != "0000-00-00 00:00:00") {
-				$dateSignedUp = date("d/m/Y",strtotime( $arrPracticeData["date_signed_up"]));
-			}
-		}  
-		?><td class="dr"><?=$dateSignedUp?></td>
+		<td class="hr">Practice Software</td>
+		<td class="dr"><?=$arrPracticeData["software"]?></td>
 	</tr>
 	<tr>
 		<td class="hr">Agreed Services</td><?
@@ -95,6 +77,40 @@
 		?><td class="dr"><?=$strServices;?></td>
 	</tr>
 	<tr>
+		<td class="hr">Compliance Jobs Projected</td>
+		<td class="dr"><?=$arrPracticeData["comp_projected"]?></td>
+	</tr>
+	<tr>
+		<td class="hr">Audit Only Jobs Projected</td>
+		<td class="dr"><?=$arrPracticeData["audit_projected"]?></td>
+	</tr>
+	<tr>
+		<td class="hr">SR Manager</td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrSrManager[$arrPracticeData["sr_manager"]])?></td>
+	</tr>
+	<tr>
+		<td class="hr">Manager Comp</td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrInManager[$arrPracticeData["india_manager"]])?></td>
+	</tr>
+	<tr>
+		<td class="hr">Manager Audit</td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrAuditMngr[$arrPracticeData["audit_manager"]])?></td>
+	</tr>
+	<tr>
+		<td class="hr">Sales Person</td>
+		<td class="dr"><?=htmlspecialchars($objCallData->arrSalesPerson[$arrPracticeData["sales_person"]])?></td>
+	</tr>
+	<tr>
+		<td class="hr">Date Signed Up</td><?
+		$dateSignedUp = "";
+		if (isset($arrPracticeData["date_signed_up"]) && $arrPracticeData["date_signed_up"] != "") {
+			if($arrPracticeData["date_signed_up"] != "0000-00-00 00:00:00") {
+				$dateSignedUp = date("d/m/Y",strtotime( $arrPracticeData["date_signed_up"]));
+			}
+		}  
+		?><td class="dr"><?=$dateSignedUp?></td>
+	</tr>
+	<!--<tr>
 		<td class="hr">Sent Items</td><?
 		$arrItemList = explode(',', $arrPracticeData["sent_items"]);
 		foreach($arrItemList AS $intKey => $serviceId) {
@@ -102,7 +118,7 @@
 		}
 		$strSentItems = implode(',', $arrSentItems);
 		?><td class="dr"><?=$strSentItems?></td>
-	</tr>
+	</tr>-->
 </table>
 
 <div class="frmheading">

@@ -91,7 +91,7 @@ include(TOPBAR);
 
 		<tr>
 			<td>&nbsp;</td>
-			<td width="274px"><input type="text" name="textSource_50" title="Specify name of source document"></td>
+			<td width="274px"><input type="text" name="textSource_50" id="textSource_50" title="Specify name of source document"></td>
 			<td width="240px"><input type="file" name="sourceDoc_50" id="sourceDoc_50" title="Upload source document"></td>
 			<td><button type="button" style="margin-top:-6px;width: 94px;" title="Click here to upload new source document" onclick="javascript:addElement();" value="Add">Add</button></td>
 		</tr>

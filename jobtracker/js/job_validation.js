@@ -96,9 +96,12 @@ function checkValidation() {
 				if(elementId.indexOf("sourceDoc_") != -1) {
 					if(element.value != "") {
 						flagUpload = true;
-						//alert(i);
-						//var eleDocName = elementId.indexOf("textSource_");
-						//alert(eleDocName.value);
+						var text = element.name;
+						var eleId = text.replace("sourceDoc_","");
+						if(document.getElementById('textSource_'+eleId).value == "") {
+							document.getElementById('textSource_'+eleId).className = "errclass";
+							flagReturn = false;
+						}
 					}
 				}
 			}
@@ -108,7 +111,6 @@ function checkValidation() {
 			}
 		}
 	}
-	//return false;
 	return flagReturn;
 }
 
@@ -187,6 +189,7 @@ function addElement() {
 
 	var eleName = document.createElement("input");
 	eleName.setAttribute("name", 'textSource_' + (eleCount));
+	eleName.setAttribute("id", 'textSource_' + (eleCount));
 	eleName.setAttribute("type", "text");
 	eleName.setAttribute("title", "Specify name of source document");
 	eleName.setAttribute("style", "margin-right:43px");

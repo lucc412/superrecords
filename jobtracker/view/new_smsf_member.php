@@ -99,7 +99,7 @@ include(SETUPNAVIGATION);
 //                                                    $legalRef--;
 //                                                
 						?>" onblur="getAge(this.value);" />
-                                                <img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" class="calendar"/>
+                                                <img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy','dropdown',false,24,false,'past')" align="middle" class="calendar"/>
                                                 
 					</td>
 				</tr>

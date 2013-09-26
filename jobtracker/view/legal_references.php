@@ -92,7 +92,7 @@ include(SETUPNAVIGATION);
 							}
 						}  
 						echo($dob);
-						?>" /><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy')" align="middle" class="calendar"/>
+						?>" /><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy','dropdown',false,24,false,'past')" align="middle" class="calendar"/>
                                                 <script>
                                                     $('#txtDob<?=$memberCount?>').blur(function(){
                                                         return getAge(this.value);

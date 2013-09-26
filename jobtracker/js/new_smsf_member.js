@@ -104,24 +104,10 @@
 	}
 	
 // get age of member
-function getAge(age,cnt) 
+function getAge(age) 
 {
-//    dateString = age;
-//    var birthday = +new Date(dateString);
-//    var year = ~~((+new Date() - birthday) / (31557600000));
-//    if(year < 18)
-//    {
-//        //alert('Member should be minimum 18 years in age, please provide legal references for it.');
-//        //$('#trlegalRef').show();
-//        cnt++;
-//        return cnt;
-//    }
-//    else{
-//       // $('#trlegalRef').hide();
-//    }
-
-    dateString = age
-    var birthday = new Date(dateString);
+    var g = age.split('/')
+    var birthday = new Date(g[2]+"/"+g[1]+"/"+g[0]);
     var birthYear = birthday.getFullYear();
     var currentYear = new Date().getFullYear();
     if((currentYear - birthYear) < 18)

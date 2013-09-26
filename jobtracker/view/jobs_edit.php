@@ -88,8 +88,8 @@ include(SETUPNAVIGATION);
         
         <div style="padding-top:20px;">
 
-            <span align="right" ><button type="reset" value="Reset" >RESET</button></span>
-            <span align="right" style="padding-left:55px;"><button type="submit" value="Edit">NEXT</button></span>
+            <span align="right" ><button type="reset" value="Reset" >Reset</button></span>
+            <span align="right" style="padding-left:55px;"><button type="submit" value="Edit">Next</button></span>
         </div>
 </form><?
 

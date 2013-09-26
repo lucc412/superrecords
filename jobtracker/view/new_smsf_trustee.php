@@ -48,9 +48,9 @@ include(SETUPNAVIGATION);
 			</table>
                         <input type="hidden" id="newTrust_status" name="newTrust_status" value=""/>
 			<div style="padding-top:20px;">
-        <span align="left"><button type="button" onclick="window.location.href='<?php if(count($arrLegRef)>0){echo 'legal_references.php';}else { echo 'new_smsf_member.php';} ?> '" >BACK</button></span>
-                            <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >NEXT</button></span>
-                            <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave" >SAVE & EXIT</button></span>
+        <span align="left"><button type="button" onclick="window.location.href='<?php if(count($arrLegRef)>0){echo 'legal_references.php';}else { echo 'new_smsf_member.php';} ?> '" >Back</button></span>
+                            <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >Next</button></span>
+                            <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave" >Save & Exit</button></span>
 			</div>
 			<input type="hidden" name="doAction" value="addNewTrusteeInfo">
                         <script>
@@ -113,9 +113,9 @@ include(SETUPNAVIGATION);
 			</table>
             <input type="hidden" id="extTrust_status" name="extTrust_status" value=""/>
 			<div style="padding-top:20px;">
-               <span align="left"><button type="button" onclick="window.location.href='<?php if(count($arrLegRef)>0){echo 'legal_references.php';}else { echo 'new_smsf_member.php';} ?>'" >BACK</button></span>
-               <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >NEXT</button></span>
-				<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>
+               <span align="left"><button type="button" onclick="window.location.href='<?php if(count($arrLegRef)>0){echo 'legal_references.php';}else { echo 'new_smsf_member.php';} ?>'" >Back</button></span>
+               <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >Next</button></span>
+				<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">Save & Exit</button></span>
             </div>
 		<input type="hidden" name="doAction" value="addExsTrusteeInfo">
         <script>

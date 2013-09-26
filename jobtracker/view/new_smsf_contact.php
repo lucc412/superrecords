@@ -44,8 +44,8 @@ include(SETUPNAVIGATION);
             
             <input type="hidden" id="cont_status" name="cont_status" value=""/>
             <div style="padding-top:20px;">
-                <span align="left"><button type="button" onclick="window.location.href='new_smsf.php'" value="BACK"  />BACK</button></span>
-                <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">NEXT</button></span>
+                <span align="left"><button type="button" onclick="window.location.href='new_smsf.php'" value="BACK"  />Back</button></span>
+                <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">Next</button></span>
                 <!--<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>-->
             </div>
 		<input type="hidden" name="flaginit" value="add">

@@ -383,22 +383,26 @@ switch ($a)
 		$arrChecklist = $objCallData->getAuditChecklist($_REQUEST["jobId"]);
 		$arrDocDetails = $objCallData->getAuditDetails($_REQUEST["jobId"]);
 		$arrSubDocList = $objCallData->getAuditSubDocList($_REQUEST['jobId']);
+		$arrDocList = $objCallData->getAuditDocList($_REQUEST['jobId']);
+
 		$arrUplStatus['PENDING'] = 'Pending';
 		$arrUplStatus['ATTACHED'] = 'Attached';
 		$arrUplStatus['NA'] = 'N/A';
 		include(JOBNAVIGATION);
 		?><div class="pdT50"><?
+			if(!empty($arrDocList)) {
+				?><div align="right"><button style="width:250px;" type="button" title="click here to view multiple documents" onclick="JavaScript:newPopup('job.php?a=auditDocs&jobId=<?=$_REQUEST['jobId']?>');">View multiple uploaded documents</button></div><?
+			}
+
+			$cntChcklist=0;
 			foreach($arrChecklist AS $strChecklist => $arrSubChecklist) {
+				$cntChcklist++;
 				$checklist = $commonUses->stringToArray(':',$strChecklist);
 				$checklistId = $checklist['0'];
 				$checklistName = $checklist['1'];
-				$arrDocList = $objCallData->getAuditDocList($_REQUEST['jobId'],$checklistId);
 
-				?><span class="bluearrow1" id="checklist<?=$checklistId?>"><?=$checklistName;?></span><?
-				if(!empty($arrDocList)) {
-					?><div class="pdB15" align="right"><button style="width:250px;" type="button" title="click here to view multiple documents" onclick="JavaScript:newPopup('job.php?a=auditDocs&checklistId=<?=$checklistId?>&jobId=<?=$_REQUEST['jobId']?>');">View multiple uploaded documents</button></div><?
-				}
-				?><table width="100%" id="subchecklist<?=$checklistId?>" class="fieldtable pdB20">
+				?><span class="bluearrow1" id="checklist<?=$cntChcklist?>"><?=$checklistName;?></span>
+				<table width="80%" id="subchecklist<?=$cntChcklist?>" class="fieldtable pdB20" style="display:none;">
 					<tbody>
 						<tr class="fieldheader">
 							<th width="50%" class="fieldheader">Description</th>
@@ -415,12 +419,13 @@ switch ($a)
 								<td align="center"><?
 									$arrSubDocuments = $arrSubDocList[$subChecklistId];
 									if(!empty($arrSubDocuments)) {
-										$docCnt = 0;
-										foreach($arrSubDocuments AS $docPath) {
-											$docCnt++;
+										foreach($arrSubDocuments AS $docDetails) {
+											$arrDoc = explode(":",$docDetails);
+											$docPath = $arrDoc[0];
+											$docName = $arrDoc[1];
 											$folderPath = "../uploads/audit/" . $docPath;
 											if(file_exists($folderPath)) {
-												?><p><a class="alink" href="job.php?sql=download&flagType=A&filePath=<?=urlencode($docPath)?>" title="Click to view this document">Document <?=$docCnt?></a></p><?
+												?><p style="padding-bottom:5px;"><a class="alink" href="job.php?sql=download&flagType=A&filePath=<?=urlencode($docPath)?>" title="Click to view this document"><?=$docName?></a></p><?
 											}
 										}
 									}
@@ -515,7 +520,7 @@ switch ($a)
 				<div align="center">
 					<table class="fieldtable" border="0" cellspacing="15" cellpadding="15" width="40%">
 						<tr>
-							<td width="15%"> Report Title </td>
+							<td width="15%"> Report Title<font style="color:red;" size="2">*</font> </td>
 							<td width="15%"> <input type="text" name="txtReportTitle" id="txtReportTitle" size="36px" /></td>
 						</tr>
 						
@@ -548,7 +553,7 @@ switch ($a)
 				</h1>
 			</div><?
 			
-			$arrDocList = $objCallData->getAuditDocList($_REQUEST['jobId'],$_REQUEST['checklistId']);
+			$arrDocList = $objCallData->getAuditDocList($_REQUEST['jobId']);
 			?><div class="pdT50">
 				<table class="fieldtable" width="100%" align="center">
 					<tr class="fieldheader">
@@ -558,14 +563,16 @@ switch ($a)
 					</tr><?
 
 					$countRow = 0;
-					foreach($arrDocList AS $fileName => $uploadedDate) {
+					foreach($arrDocList AS $fileName => $docData) {
+						$arrDoc = explode(":", $docData);
+						$uploadedDate = $arrDoc[0];
+						$docName = $arrDoc[1];
 						if($countRow%2 == 0) $trClass = "trcolor";
 						else $trClass = "";
-						$docName = str_replace(substr($fileName, 0, strpos($fileName, '~')+1), "", $fileName);
 						?><tr class="<?=$trClass?>">
 							<td class="tddata"><?=$docName?></a></td>
 							<td align="center" width="20%" class="tddata"><?=$uploadedDate?></td>
-							<td align="center" width="20%"><button onclick="redirectURL('job.php?sql=download&flagType=A&filePath=<?=urlencode($fileName)?>')"title="Click to view this document" >Download</button></td>
+							<td align="center" width="20%"><button onclick="redirectURL('job.php?sql=download&a=auditDocs&flagType=A&filePath=<?=urlencode($fileName)?>')"title="Click to view this document" >Download</button></td>
 						</tr><?
 						$countRow++;
 					}

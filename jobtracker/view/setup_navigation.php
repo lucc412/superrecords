@@ -1,17 +1,3 @@
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-//              $arrQryStr = explode('&', $_SERVER['QUERY_STRING']);
-//
-//                $qryStr = $arrQryStr[0];
-//                $typeStr = $arrQryStr[1];
-//                if(isset($arrQryStr[2]))//unset($_SESSION['frmId']);
-//                    $_SESSION['frmId'] = $arrQryStr[2];
-?>              
 <br>
 <br>
 <table border="0" cellspacing="1" cellpadding="4" align="left">

@@ -6,7 +6,7 @@
 //************************************************************************************************
 
 // show hide audit checklist options
-/*$(function(){
+$(function(){
    $("span").each(function (i){
 	  (function(i) {
 		  i++;
@@ -17,7 +17,7 @@
 	  }(i));
    });
 });
-*/
+
 $(function(){
 	$('INPUT[type="file"]').change(function () {
 		//var ext = this.value.match(/\.(.+)$/)[1];
@@ -204,13 +204,18 @@ function newPopup(url)
 
 //************************************************************************************************
 //  Task          : Validation function to check for mandatory fields in Upload Report page.
-//  Modified By   : Dhiraj Sahu 
+//  Modified By   : Disha Goyal 
 //  Created on    : 07-Jan-2013
-//  Last Modified : 07-Jan-2013 
+//  Last Modified : 20-Sept-2013
 //************************************************************************************************
 function checkReportValidation()
 {	
-	if (document.objForm.fileReport.value == "")
+	if (document.objForm.txtReportTitle.value == "")
+	{
+		alert("Specify Report title");
+		document.objForm.txtReportTitle.focus();
+	}
+	else if (document.objForm.fileReport.value == "")
 	{
 		alert("Select Report file");
 		document.objForm.fileReport.focus();

@@ -49,7 +49,7 @@ include(TOPBAR);
 				if($countRow%2 == 0) $trClass = "trcolor";
 				else $trClass = "";
 
-				$arrJobParts = explode('::', $arrJobDetails['job_name']);
+				$arrJobParts = stringToArray('::', $arrJobDetails['job_name']);
 				$jobName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
 
 				?><tr class="<?=$trClass?>">
@@ -60,12 +60,10 @@ include(TOPBAR);
 					<td class="tddata"><?
 						$arrSourceDocs = $objScr->fetch_documents($jobId);
 						if(!empty($arrSourceDocs)) {
-							$docCnt = 0;
 							foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-								$docCnt++;
 								$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
 								if(file_exists($folderPath)) {
-									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document">Document <?=$docCnt?></a></p><?
+									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
 								}
 							}
 						}
@@ -74,12 +72,10 @@ include(TOPBAR);
 					<td class="tddata"><?
 						$arrReports = $objScr->fetch_reports($jobId);
 						if(!empty($arrReports)) {
-							$reportCnt = 0;
 							foreach($arrReports AS $reportId => $arrReportInfo) {
-								$reportCnt++;
 								$folderPath = "../uploads/reports/" . $arrReportInfo['file_path'];
 								if(file_exists($folderPath)) {
-									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrReportInfo['file_path'])?>&flagChecklist=R" title="Click to view this document">Report <?=$reportCnt?></a></p><?
+									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrReportInfo['file_path'])?>&flagChecklist=R" title="Click to view this document"><?=$arrReportInfo['report_title']?></a></p><?
 								}
 							}
 						}

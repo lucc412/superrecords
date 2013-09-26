@@ -41,7 +41,7 @@ include(TOPBAR);
 					foreach($arrJobs AS $jobId => $jobName){
 						$selectStr = '';
 						if($jobId == $_REQUEST['lstJob']) $selectStr = 'selected';
-						$arrJobParts = explode('::', $jobName);
+						$arrJobParts = stringToArray('::', $jobName);
 						$jobDispName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
 						?><option <?=$selectStr?> value="<?=$jobId?>"><?=$jobDispName?></option><?php 
 					}
@@ -72,7 +72,7 @@ include(TOPBAR);
 
 				?><tr class="<?=$trClass?>">
 					<td class="tddata"><?
-						$arrJobParts = explode('::', $arrInfo['job_name']);
+						$arrJobParts = stringToArray('::', $arrInfo['job_name']);
 						$jobDispName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
 						echo $jobDispName;
 					?></td>
@@ -82,7 +82,7 @@ include(TOPBAR);
 					<td width="9%" class="<?=$style?> yellowBG"><?
 					if(!empty($arrInfo["report_file_path"]))
 					{
-						/*$arrFileName = explode('~', $arrInfo['report_file_path']);
+						/*$arrFileName = stringToArray('~', $arrInfo['report_file_path']);
 						$origFileName = $arrFileName[1];
 						$docTitle = $origFileName;*/
 					?><p><b><a href="queries.php?action=download&flagType=SRQ&filePath=<?=urlencode($arrInfo['report_file_path'])?>" title="Click to view this document">Document</a></b></p><?
@@ -95,7 +95,7 @@ include(TOPBAR);
 						?><input type="file" name="doc_<?=$queryId?>"><?
 					}
 					else {
-						/*$arrFileName = explode('~', $arrInfo['file_path']);
+						/*$arrFileName = stringToArray('~', $arrInfo['file_path']);
 						$origFileName = $arrFileName[1];
 						$docTitle = $origFileName;*/
 						?><p><a href="queries.php?action=download&flagType=PRQ&filePath=<?=urlencode($arrInfo['file_path'])?>" title="Click to view this document">Document</a></p><?

@@ -38,12 +38,11 @@ include(TOPBAR);
 		?><table width="100%" class="resources">
 			<tr>
 				<td class="td_title">Job Name</td>
-				<td class="td_title">Job Genre</td>
 				<td class="td_title">Job Status</td>
 				<td class="td_title">Source Documents</td>
 				<td class="td_title">Reports</td>
 				<td align="center" class="td_title">Submission Date</td>
-				<td width="12%" class="td_title" align="center">Queries</td>
+				<td width="12%" class="td_title" colspan="2" align="center">Actions</td>
 			</tr><?
 			
 			$countRow = 0;
@@ -52,48 +51,46 @@ include(TOPBAR);
 				else $trClass = "";
 
 				?><tr class="<?=$trClass?>"><?
-					$arrJobParts = explode('::', $arrJobDetails['job_name']);
+					$arrJobParts = stringToArray('::', $arrJobDetails['job_name']);
 					$jobName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
 
 					?><td class="tddata"><?=$jobName?></td>
-
-					<td class="tddata"><?=ucfirst(strtolower($arrJobDetails['job_genre']))?></td>
 
 					<td class="tddata"><?=$arrJobStatus[$arrJobDetails['job_status_id']]?></td>
 
 					<td class="tddata"><?
 						$arrSourceDocs = $objScr->fetch_documents($jobId);
 						if(!empty($arrSourceDocs)) {
-							$docCnt = 0;
 							foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-								$docCnt++;
 								$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
 								if(file_exists($folderPath)) {
-									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document">Document <?=$docCnt?></a></p><?
+									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
 								}
 							}
 						}
 					?></td>
-
 					<td class="tddata"><?
 						$arrReports = $objScr->fetch_reports($jobId);
 						if(!empty($arrReports)) {
-							$reportCnt = 0;
 							foreach($arrReports AS $reportId => $arrReportInfo) {
-								$reportCnt++;
 								$folderPath = "../uploads/reports/" . $arrReportInfo['file_path'];
 								if(file_exists($folderPath)) {
-									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrReportInfo['file_path'])?>&flagChecklist=R" title="Click to view this document">Report <?=$reportCnt?></a></p><?
+									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrReportInfo['file_path'])?>&flagChecklist=R" title="Click to view this document"><?=$arrReportInfo['report_title']?></a></p><?
 								}
 							}
 						}
 					?></td>
 					<td class="tddata" align="center"><?=$arrJobDetails['job_received']?></td>
 
-					<td class="tddata viewquery" align="center"><?
+					<td class="tddata" style="width:15px" align="center"><?
 						$flagQueryExists = $objScr->fetch_queries($jobId);
 						if(!empty($flagQueryExists)) {
-							?><a target="_blank" href="queries.php?lstJob=<?=$jobId?>&lstCliType=<?=$arrJobDetails['client_id']?>" title="Click to view queries">View Queries</a><?
+							?><a target="_blank" href="queries.php?lstJob=<?=$jobId?>&lstCliType=<?=$arrJobDetails['client_id']?>" title="Click to view queries"><?=QUERY?></a><?
+						}
+					?></td>
+					<td class="tddata" align="center"><?
+						if($arrJobDetails['job_genre'] != 'SETUP') {
+							?><a href="jobs.php?a=uploadDoc&lstJob=<?=$jobId?>" title="Click to upload additional documents"><?=UPLOAD?></a><?
 						}
 					?></td>
 				</tr><?

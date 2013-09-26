@@ -49,6 +49,17 @@
 	text-align: center;  
 }
 
+.boxclose{
+    float:right;
+    margin-top:-55px;
+    cursor:pointer;
+    color: #fff;
+    background: #073f61;
+    font-size: 12px;
+    display: inline-block;
+    line-height: 0px;
+    padding: 9px 4px;       
+}
 
 * {
 	margin:0;
@@ -555,9 +566,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	display:block;
 	padding:10px 20px;
 	background:url(../images_user/rightmenu-arrow.jpg) 5px 15px no-repeat;
-	cursor:default;
+	cursor:pointer;
 	color:rgba(7, 65, 96, 0.94);
-	text-decoration:underline;
+	/*text-decoration:underline;*/
 }
 
 .orangearrow {
@@ -601,6 +612,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .pdR40
 {
 	padding-right:40px;
+}
+
+.pdR20
+{
+	padding-right:20px;
 }
 
 .pdR15
@@ -807,8 +823,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .resources p {
-	/*background:url(../images_user/pdf.png) center left no-repeat;
-	padding-left:20px;*/
+	background:url(../images_user/pdf.jpg) center left no-repeat;
+	padding-left:20px;
 }
 
 .newsroom p {
@@ -878,15 +894,6 @@ button {
 	font-weight:bold;
 	cursor:pointer;
 	color:white;
-}
-
-.arrow-up {
-	width: 0; 
-	height: 0; 
-	border-left: 6px solid transparent;
-	border-right: 6px solid transparent;
-	border-bottom: 6px solid #073f61;
-	cursor:pointer;
 }
 
 .disbtnclass
@@ -1005,7 +1012,6 @@ button {
 }
 	
 /* Contact Form */
-
 
 /* Bottom Menu */
 

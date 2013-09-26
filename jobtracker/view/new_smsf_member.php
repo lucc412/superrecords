@@ -158,9 +158,9 @@ include(SETUPNAVIGATION);
                 <input type="hidden" id="member_status" name="member_status" value=""/>
                 <input type="hidden" value="<?=$legalRef?>" id="ref" name="ref" />
                 <div style="padding-top:20px;">
-                    <span align="left"><button type="button" onclick="window.location.href='new_smsf_fund.php'" >BACK</button></span>
-                    <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >NEXT</button></span>
-                    <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">SAVE & EXIT</button></span>
+                    <span align="left"><button type="button" onclick="window.location.href='new_smsf_fund.php'" >Back</button></span>
+                    <span align="right" style="padding-left:55px;"><button type="submit" id="btnNext" >Next</button></span>
+                    <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">Save & Exit</button></span>
 		</div>
 		<input type="hidden" name="doAction" value="addMemberInfo">
 	</form>

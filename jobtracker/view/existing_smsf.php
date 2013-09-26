@@ -33,8 +33,8 @@ include(SETUPNAVIGATION);
 </b>
 
 <div class="pdT20">
-    <?php if(empty($_SESSION['jobId'])){ ?><span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />BACK</button></span><?php } ?>
-    <span align="right" style="<?php if(!isset($_SESSION['jobId'])){ echo'padding-left:55px;'; } ?>"><button type="submit" id="btnNext" >NEXT</button></span>
+    <?php if(empty($_SESSION['jobId'])){ ?><span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />Back</button></span><?php } ?>
+    <span align="right" style="<?php if(!isset($_SESSION['jobId'])){ echo'padding-left:55px;'; } ?>"><button type="submit" id="btnNext" >Next</button></span>
 </div>
 </form>
 <script>
@@ -49,7 +49,7 @@ include(SETUPNAVIGATION);
             }
             else
             {
-                alert('please check the authority');
+                alert('Please tick if you have received written authority from your client.');
                 $('#cbAuthority').val(0);
                 return false;
             }

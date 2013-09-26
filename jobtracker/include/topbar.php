@@ -34,7 +34,7 @@ include("path.php");
 					</li>
 					<li class="dropdown"><a href="javascript:;">&nbsp;&nbsp;Jobs&nbsp;&nbsp;</a>
 						<ul class="sub">
-							<li><a href="jobs.php">Submit new job</a></li>
+							<li><a href="jobs.php?a=job">Submit new job</a></li>
 							<li><a href="jobs.php?a=saved">Retrieve saved jobs</a></li>
 							<li><a href="jobs.php?a=pending">Pending jobs</a></li>
 							<li><a href="jobs.php?a=completed">Completed jobs</a></li>

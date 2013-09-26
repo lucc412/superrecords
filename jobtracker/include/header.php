@@ -27,7 +27,7 @@
                 });
 		</script><?
 
-		$arrQryStr = explode('&', $_SERVER['QUERY_STRING']);
+		$arrQryStr = stringToArray('&', $_SERVER['QUERY_STRING']);
                 $qryStr = $arrQryStr[0];
                 $typeStr = $arrQryStr[1];
                 
@@ -109,6 +109,9 @@
 		}else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_fund.php') {
 				?><title>Fund Details</title>
 				<script type="text/javascript" src="js/existing_smsf_fund.js"></script><?
+		}
+		else if(basename($_SERVER['PHP_SELF']) == 'setup_preview.php') {
+			?><title>Preview</title><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'queries.php') {
 			?><title>View All Queries</title>

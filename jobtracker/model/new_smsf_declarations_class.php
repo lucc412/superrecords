@@ -77,6 +77,13 @@ class DECLARATIONS
                 $arrMembrs[$rowData['member_id']] = $rowData;
             }
             
+            $LegalQry = "SELECT * FROM es_legal_references WHERE job_id = ".$_SESSION['jobId'];
+            $fetchLegRef = mysql_query($LegalQry);
+            while($rowData = mysql_fetch_assoc($fetchLegRef))
+            {
+                $arrLegRef[$rowData['job_id']] = $rowData;
+            }
+            
             $newTrstyQry = "SELECT * FROM es_new_trustee WHERE job_id = ".$_SESSION['jobId'];
             $fetchNewTrsty = mysql_query($newTrstyQry);
             $arrNewTrsty = array();
@@ -183,7 +190,9 @@ class DECLARATIONS
             
             // HTML Part of PDF
             $members = '';
+            $leagalRef = '';
             $cnt = 1;
+            $cntr = 1;
             foreach ($arrMembrs as $key => $value) 
             {
                $value["gender"] =($value["gender"] == "M")?"Male":"Female";
@@ -192,6 +201,63 @@ class DECLARATIONS
                $Data = mysql_fetch_assoc($fetchCntry);
                $value['country_id'] = $Data['country_name'];
                
+               if($value['legal_references'] == 1)
+                   {
+                        foreach ($arrLegRef as $key => $value) 
+                        {
+                                if($cntr == 1)
+									$leagalRef .= '<div class="test">Legal Personal Representative</div><br/>';
+
+                                $leagalRef .= '<table class="fieldtable" cellpadding="4" cellspacing="6">
+                                        <tr>
+                                            <td colspan="2"><b>Legal Personal Representative '.$cntr.'</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Name : </td>
+                                            <td>'.$value['title'].' '.$value['fname'].' '.$value['mname'].' '.$value['lname'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date of Birth : </td>
+                                            <td>'.$value['dob'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>City of Birth : </td>
+                                            <td>'.$value['city'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Country of Birth : </td>
+                                            <td>'.$value['country_id'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sex : </td>
+                                            <td>'.$value["gender"].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address : </td>
+                                            <td>'.$value['address'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tax File Number : </td>
+                                            <td> '.$value['tfn'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Occupation : </td>
+                                            <td>'.$value['occupation'].' </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact Number : </td>
+                                            <td>'.$value['contact_no'].' </td>
+                                        </tr>
+
+                                    </table>
+                                    <br/>';
+                            $cntr++;
+                        }
+                   }
+               
+                if($cnt == 1)
+                        $members .= '<div class="test">Memeber Details</div><br/>';
+                   
                 $members .= '
                             <table class="first" cellpadding="4" cellspacing="6">
                             <tr>
@@ -392,11 +458,7 @@ class DECLARATIONS
                                 <td>'.fetchTrusteeName($arrFund[$jobid]['trustee_type_id']).' </td>
                             </tr>
                             
-                        </table>                        
-                        <br/>
-                        <div class="test">Memeber Details</div>
-                        <br/>'.$members.$trustee.'
-                        ';
+                        </table> <br/>'.$members.$leagalRef.$trustee;
             
             // output the HTML content
             $pdf->writeHTML($html, true, false, true, false, '');

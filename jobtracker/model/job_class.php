@@ -716,7 +716,7 @@ class Job {
 
 	public function sql_download_checklist($jobId) {
 		$arrSubchecklist = $this->getAuditSubChecklist($jobId, true);
-
+		ob_start();
 		?><html>
 			<body><?
 				$cntChckLst = A;

@@ -156,7 +156,7 @@ switch ($a)
 				</tr>
 				<tr>
 					<td class="hr">Manager Audit</td>
-					<td class="dr" id="tdAuditMngr">&nbsp;</td>
+					<td class="dr" id="tdAuditManager">&nbsp;</td>
 				</tr>
 				<tr>
 					<td class="hr">Sr. Accountant Comp</td>
@@ -317,7 +317,7 @@ switch ($a)
 					</tr>
 					<tr>
 						<td class="hr">Manager Audit</td>
-						<td class="dr" id="tdAuditMngr"><?=$adtManager?></td>
+						<td class="dr" id="tdAuditManager"><?=$adtManager?></td>
 					</tr>
 					<tr>
 						<td class="hr">Sr. Accountant Comp</td>

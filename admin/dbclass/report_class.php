@@ -62,7 +62,10 @@ class SR_Report {
 				case "job":
 						$strWhere = "AND (pr.sr_manager=".$staffId." 
 							OR pr.india_manager=".$staffId." 
+							OR pr.audit_manager=".$staffId." 
 							OR cl.team_member=".$staffId ." 
+							OR cl.sr_accnt_comp=".$staffId ." 
+							OR cl.sr_accnt_audit=".$staffId ." 
 							OR pr.sales_person=".$staffId . ")";
 				break;
 
@@ -70,7 +73,10 @@ class SR_Report {
 				case "task":
 						$strWhere = "AND (pr.sr_manager=".$staffId." 
 							OR pr.india_manager=".$staffId." 
+							OR pr.audit_manager=".$staffId." 
 							OR cl.team_member=".$staffId ." 
+							OR cl.sr_accnt_comp=".$staffId ." 
+							OR cl.sr_accnt_audit=".$staffId ." 
 							OR pr.sales_person=".$staffId . ")";
 				break;
 			}

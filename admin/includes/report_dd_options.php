@@ -50,6 +50,14 @@ switch($selectedColumn) {
 	case "team_member":
 		$arrDDOptions[$selectedColumn] = $objCallUsers->fetchEmployees($designationId=29);
 	break;
+
+	case "sr_accnt_comp":
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetchEmployees($designationId=27);
+	break;
+
+	case "sr_accnt_audit":
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetchEmployees($designationId=33);
+	break;
 	
 	case "id":
 		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("pr_practice", "id", "name");

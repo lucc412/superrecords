@@ -203,7 +203,7 @@ class Job {
 
 	public function sql_insert($details) {
             
-                $clientId = $details['lstClientType'];
+        $clientId = $details['lstClientType'];
 		$typeId = $details['lstJobType'];
 		$period = $details['txtPeriod'];
 		$cliType = $details['lstCliType'];
@@ -240,8 +240,6 @@ class Job {
 					)";
                 mysql_query($qryIns);
 		$jobId = mysql_insert_id();
-                
-                
                 
 		// add source documents & new task if it is Compliance job
 		if($jobGenre == "COMPLIANCE") {

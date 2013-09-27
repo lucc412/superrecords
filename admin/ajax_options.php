@@ -137,7 +137,7 @@ function sql_select_subActivity($itemId)
 // fetch sr manager, india manager, sales manager, team member for selected practice
 function sql_select_panel($itemId)
 {
-	$sql = "SELECT id, sr_manager, india_manager, sales_person
+	$sql = "SELECT id, sr_manager, india_manager, sales_person, audit_manager
 			FROM pr_practice
 			WHERE id=".$itemId;
 			
@@ -153,16 +153,17 @@ function sql_select_panel($itemId)
 		$srManager = $arrEmployees[$rowData['sr_manager']];
 		$salesPrson = $arrEmployees[$rowData['sales_person']];
 		$inManager = $arrEmployees[$rowData['india_manager']];
+		$auditMngr = $arrEmployees[$rowData['audit_manager']];
 
 		// set string of srManager, salesPrson, inManager, teamMember
-		$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember;
+		$strReturn = $srManager.'~'.$salesPrson.'~'.$inManager.'~'.$auditMngr;
 	}
 	return $strReturn;
 }
 
 // fetch team member for selected client
 function fetch_team_member($clientId) {
-	$sql = "SELECT team_member
+	$sql = "SELECT team_member,sr_accnt_comp,sr_accnt_audit
 			FROM client
 			WHERE client_id=".$clientId;
 			
@@ -176,8 +177,13 @@ function fetch_team_member($clientId) {
 
 		$rowData = mysql_fetch_assoc($res);
 		$teamMember = $arrEmployees[$rowData['team_member']];
+		$srComp = $arrEmployees[$rowData['sr_accnt_comp']];
+		$srAudit = $arrEmployees[$rowData['sr_accnt_audit']];
+
+		// set string of teamMember, srComp, srAudit
+		$strReturn = $teamMember.'~'.$srComp.'~'.$srAudit;
 	}
-	return $teamMember;
+	return $strReturn;
 }
 
 function fetchEmployees() {	

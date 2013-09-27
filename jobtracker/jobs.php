@@ -24,9 +24,8 @@ switch ($sql)
 			$arrJobReq['lstCliType'] = 25;
 			$arrJobReq['type'] = $_REQUEST['type'];
 			$arrJobReq['subfrmId'] = $_REQUEST['subfrmId'];
-			$arrJobReq['txtPeriod'] = date('Y');
+			$arrJobReq['txtPeriod'] = 'Year End 30/06/'. date('Y');
 			$arrJobReq['txtNotes'] = NULL;
-			
 		}
 		else
 		{

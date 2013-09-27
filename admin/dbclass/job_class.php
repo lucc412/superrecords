@@ -105,7 +105,6 @@ class Job_Class extends Database
 			}
 		}
 		
-		
 		if($_SESSION["usertype"] == "Staff") {
 			$userId = $_SESSION["staffcode"];
 			
@@ -116,10 +115,13 @@ class Job_Class extends Database
 						  AND (p1.sr_manager=".$userId." 
 						  OR p1.india_manager=".$userId." 
 						  OR p1.sales_person=".$userId." 
-						  OR c1.team_member=".$userId.")";
+						  OR p1.audit_manager=".$userId." 
+						  OR c1.team_member=".$userId."
+						  OR c1.sr_accnt_comp=".$userId."
+						  OR c1.sr_accnt_audit=".$userId.")";
 		}
 				
-		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id, j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes, j1.job_genre, j1.job_submitted
+		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id, j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes, j1.job_genre, j1.job_submitted, j1.mas_Code
 					FROM job j1, client c1 {$fromStr} {$strFrom}
 					WHERE j1.client_id = c1.client_id 
 					AND j1.discontinue_date IS NULL
@@ -195,7 +197,7 @@ class Job_Class extends Database
 	// fetch sr manager, india manager, sales manager, team member for selected practice
 	function sql_select_panel($itemId)
 	{
-		$sql = "SELECT id, sr_manager, india_manager, sales_person
+		$sql = "SELECT id, sr_manager, india_manager, sales_person, audit_manager
 				FROM pr_practice
 				WHERE id=".$itemId;
 				
@@ -211,16 +213,17 @@ class Job_Class extends Database
 			$srManager = $arrEmployees[$rowData['sr_manager']];
 			$salesPrson = $arrEmployees[$rowData['sales_person']];
 			$inManager = $arrEmployees[$rowData['india_manager']];
+			$adtManager = $arrEmployees[$rowData['audit_manager']];
 
 			// set string of srManager, salesPrson, inManager
-			$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager;
+			$strReturn = $srManager.'~'.$salesPrson.'~'.$inManager.'~'.$adtManager;
 		}
 		return $strReturn;
 	}
 
 	// fetch team member for selected client
 	function fetch_team_member($clientId) {
-		$sql = "SELECT team_member
+		$sql = "SELECT team_member,sr_accnt_comp,sr_accnt_audit
 				FROM client
 				WHERE client_id=".$clientId;
 				
@@ -234,8 +237,13 @@ class Job_Class extends Database
 
 			$rowData = mysql_fetch_assoc($res);
 			$teamMember = $arrEmployees[$rowData['team_member']];
+			$srComp = $arrEmployees[$rowData['sr_accnt_comp']];
+			$srAudit = $arrEmployees[$rowData['sr_accnt_audit']];
+
+			// set string of teamMember, srComp, srAudit
+			$strReturn = $teamMember.'~'.$srComp.'~'.$srAudit;
 		}
-		return $teamMember;
+		return $strReturn;
 	}
 
 	function fetchEmployees() {	
@@ -372,12 +380,17 @@ class Job_Class extends Database
 		global $commonUses;
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
+		$arrJobName = explode('::',$_REQUEST['hidJobName']);
+		$jobName = $arrJobName[0].'::'.$_REQUEST["txtPeriod"].'::'.$arrJobName[2];
+
 		if($_REQUEST['lstJobStatus'] == '7')
 			$strUpd = ",job_completed_date = NOW()";
 
 		$qryUpd = "UPDATE job 
 					SET job_status_id=".$_REQUEST["lstJobStatus"].", 
-						job_due_date='". $dateSignedUp ."' 
+						job_due_date='". $dateSignedUp ."', 
+						job_name='". $jobName ."', 
+						period='". $_REQUEST["txtPeriod"] ."' 
 						".$strUpd."
 				   WHERE job_id=".$jobId;
 				   

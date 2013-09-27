@@ -47,6 +47,8 @@ if(!empty($a) && $a != 'addJob') {
 					$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
 
 					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
+
+					$hidJobName = $arrJob[$_REQUEST["jobId"]]["job_name"];
 				
 				 ?><span style="font-size:10pt;"><?=stripslashes($jobName)?></span>
 				</td>				
@@ -73,59 +75,40 @@ switch ($a)
 			   <td class="hr">Practice Name<font style="color:red;" size="2">*</font></td>
 				  <td colspan="2">
 				  	<select id="lstPractice" name="lstPractice" onChange="javascript:selectOptions('Client');selectPanel();">
-						<option value="">----- Select Practice -----</option><?php
+						<option value="">Select Practice</option><?php
 						foreach($objCallData->arrPracticeName AS $practice_id => $practice_name) {
 							?><option value="<?=$practice_id?>"><?=$practice_name?></option><?php 
 						} 
 					?></select>
 					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Practice.</span></a></td>
-			</tr>
+				</tr>
 				<tr>
 					<td class="hr">Client Name<font style="color:red;" size="2">*</font></td>
 					<td colspan="2">
 						<span id="spanClient">
 							<select id="lstClient" name="lstClient">
-								<option value="">------------- Select Client -------------</option><?php
+								<option value="">Select Client</option><?php
 						  ?></select>
 						</span>
 						<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Client.</span></a>
 					</td>
 				</tr>
-
-				<tr>
-					<td class="hr">SR Manager</td>
-					<td class="dr" id="tdSrManager">&nbsp;</td>
-				</tr>
-				<tr>
-					<td class="hr">India Manager</td>
-					<td class="dr" id="tdInManager">&nbsp;</td>
-				</tr>
-				<tr>
-					<td class="hr">Team Member</td>
-					<td class="dr" id="tdTeamMember">&nbsp;</td>
-				</tr>
-				<tr>
-					<td class="hr">Sales Person</td>
-					<td class="dr" id="tdSalesPrson">&nbsp;</td>
-				</tr>
 				<tr>
 				   <td class="hr">Client Type<font style="color:red;" size="2">*</font></td>
-					   
-					  <td colspan="2">
+					 <td colspan="2">
 					   <select id="lstClientType" name="lstClientType">
-							<option value="">--- Select Client Type ---</option><?php
+							<option value="">Select Client Type</option><?php
 							foreach($objCallData->arrClientType AS $mas_code => $client_type) {
 								?><option value="<?=$mas_code?>"><?=$client_type?></option><?php 
 							} 
 						?></select>
 						<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Practice.</span></a></td>
-			   </tr>
-			   	
+				</tr>
 				<tr>
 					<td class="hr">Job Type<font style="color:red;" size="2">*</font></td>
 					<td colspan="2">
 						<select id="lstJob" name="lstJob">
-							<option value="">----- Select Job -----</option><?php
+							<option value="">Select Job</option><?php
 							foreach($objCallData->arrJobType AS $type_id => $job_type) {
 								?><option value="<?=$type_id?>"><?=$job_type?></option><?php 
 							} 
@@ -133,17 +116,26 @@ switch ($a)
 					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Job.</span></a>
 					</td>
 				</tr>
-				
 				<tr>
 					<td class="hr">Period<font style="color:red;" size="2">*</font></td>
-					<td colspan="2"><input title="Specify period of job" type="text" name="txtPeriod" id="txtPeriod" value=""></td>
+					<td colspan="2"><?
+						$optionYear = "2010";
+						?><select name="txtPeriod" id="txtPeriod" title="Select period">
+							<option value="">Select Period</option><?
+							while($optionYear <= date("Y")) {
+								if(time() < strtotime("01 July ".$optionYear)) break;
+								$optPeriod = "Year End 30/06/".$optionYear++;
+								$strPeriod = '';
+								if($dbPeriod == $optPeriod) $strPeriod = 'selected';
+								?><option value="<?=$optPeriod?>" <?=$strPeriod?>><?=$optPeriod?></option><?php 
+							}
+						?></select>
+					</td>
 				</tr>
-				
 				<tr>
 					<td class="hr">Notes</td>
 					<td colspan="2"><textarea id="txtNotes" name="txtNotes"></textarea></td>
 				</tr>
-				
 				<tr style="vertical-align:top;">
 					<td class="hr">Source Documents	</td>
 					<td colspan="2"><input type="text" name="textSource_50" title="Specify name of source document"><input type="file" name="sourceDoc_50" id="sourceDoc_50">
@@ -154,7 +146,30 @@ switch ($a)
 						<button type="button" style="width:94px;margin-top:0px;" title="Click here to upload new source document" name="addBtn" onClick="javascript:addElement();" value="Add" />Add</button>
 					</td>
 				</tr>
-				
+				<tr>
+					<td class="hr">SR Manager</td>
+					<td class="dr" id="tdSrManager">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="hr">Manager Comp</td>
+					<td class="dr" id="tdInManager">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="hr">Manager Audit</td>
+					<td class="dr" id="tdAuditMngr">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="hr">Sr. Accountant Comp</td>
+					<td class="dr" id="tdSrAcntComp">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="hr">Sr. Accountant Audit</td>
+					<td class="dr" id="tdSrAcntAudit">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="hr">Jnr. Accountant Comp</td>
+					<td class="dr" id="tdTeamMember">&nbsp;</td>
+				</tr>
 				<tr>
 					<td>
 						<button type="reset" title="Click here to cancel" value="Cancel" onClick='return ComfirmCancel();'>Cancel</button>
@@ -185,22 +200,27 @@ switch ($a)
 			$srManager = $arrPanelInfo[0];
 			$salePerson = $arrPanelInfo[1];
 			$indManager = $arrPanelInfo[2];
-			$teamMember = $objCallData->fetch_team_member($client_id);
+			$adtManager = $arrPanelInfo[3];
+
+			$strCliPanelInfo = $objCallData->fetch_team_member($client_id);
+			$arrCliPanelInfo = explode('~', $strCliPanelInfo);
+			$teamMember = $arrCliPanelInfo[0];
+			$srComp = $arrCliPanelInfo[1];
+			$srAudit = $arrCliPanelInfo[2];
 			
-                        $rec_date = "";
+            $rec_date = "";
 			if (isset($arrJob[$_REQUEST["jobId"]]["job_received"]) && $arrJob[$_REQUEST["jobId"]]["job_received"] != "") {
-                                if($arrJob[$_REQUEST["jobId"]]["job_received"] != "0000-00-00 00:00:00") {
-                                        $rec_date = date("d/m/Y",strtotime($arrJob[$_REQUEST["jobId"]]["job_received"]));
-                                }
-                        }  	
-                        
-                        
-                        $due_date = "";
+				if($arrJob[$_REQUEST["jobId"]]["job_received"] != "0000-00-00 00:00:00") {
+					$rec_date = date("d/m/Y",strtotime($arrJob[$_REQUEST["jobId"]]["job_received"]));
+				}
+			}  	
+                          
+            $due_date = "";
 			if (isset($arrJob[$_REQUEST["jobId"]]["job_due_date"]) && $arrJob[$_REQUEST["jobId"]]["job_due_date"] != "") {
-                                if($arrJob[$_REQUEST["jobId"]]["job_due_date"] != "0000-00-00 00:00:00") {
-                                        $due_date = date("d/m/Y",strtotime($arrJob[$_REQUEST["jobId"]]["job_due_date"]));
-                                }
-                        }  	
+				if($arrJob[$_REQUEST["jobId"]]["job_due_date"] != "0000-00-00 00:00:00") {
+					$due_date = date("d/m/Y",strtotime($arrJob[$_REQUEST["jobId"]]["job_due_date"]));
+				}
+			}  	
 
 			include(JOBNAVIGATION);
 
@@ -209,49 +229,52 @@ switch ($a)
 			</form>
 
 			<form method="POST" name="frmJobDetails" action="job.php?sql=updateJob">
+			<input type="hidden" name="hidJobName" value="<?=$hidJobName?>">
 			<table class="tbl pdT30" border="0" cellspacing="10" width="70%">
 				<tr>
 					<td class="hr">Client Name</td>
 					<td class="dr"><?=$objCallData->arrClient[$client_id]["client_name"]?></td>
 				</tr>
-
 				<tr>
-					<td class="hr">SR Manager</td>
-					<td class="dr" id="tdSrManager"><?=$srManager?></td>
+					<td class="hr">Client Type</td>
+					<td class="dr"><?=$objCallData->arrClientType[$arrJob[$_REQUEST["jobId"]]["mas_Code"]]?></td>
 				</tr>
-				<tr>
-					<td class="hr">India Manager</td>
-					<td class="dr" id="tdInManager"><?=$indManager?></td>
-				</tr>
-				<tr>
-					<td class="hr">Team Member</td>
-					<td class="dr" id="tdTeamMember"><?=$teamMember?></td>
-				</tr>
-				<tr>
-					<td class="hr">Sales Person</td>
-					<td class="dr" id="tdSalesPrson"><?=$salePerson?></td>
-				</tr>
-				
 				<tr>
 					<td class="hr">Job Type</td>
 					<td class="dr"><?=$objCallData->arrJobType[$arrJob[$_REQUEST["jobId"]]["job_type_id"]]?></td>
 				</tr>
-
 				<tr>
 					<td class="hr">Period</td>
-					<td class="dr"><?=$arrJob[$_REQUEST["jobId"]]["period"]?></td>
+					<td><?
+						$dbPeriod = $arrJob[$_REQUEST["jobId"]]["period"];
+						$optionYear = "2010";
+						?><select name="txtPeriod" id="txtPeriod" title="Select period">
+							<option value="">Select Period</option><?
+							while($optionYear <= date("Y")) {
+								if(time() < strtotime("01 July ".$optionYear)) break;
+								$optPeriod = "Year End 30/06/".$optionYear++;
+								$strPeriod = '';
+								if($dbPeriod == $optPeriod) $strPeriod = 'selected';
+								?><option value="<?=$optPeriod?>" <?=$strPeriod?>><?=$optPeriod?></option><?php 
+							}
+						?></select>
+					</td>
+					
+					</td>
 				</tr>
-
 				<tr>
 					<td class="hr">Notes</td>
 					<td class="dr"><?=nl2br($arrJob[$_REQUEST["jobId"]]["notes"])?></td>
 				</tr>
-				
+				<tr>
+					<td class="hr">Job Received Date</td>
+					<td class="dr"><?=$rec_date?></td>
+				</tr>
 				<tr>
 					<td class="hr">Job Status</td>
 					<td class="dr">
 						<select name="lstJobStatus">
-							<option value="">--- Select Job Status ---</option><?php
+							<option value="">Select Job Status</option><?php
 							foreach($objCallData->arrJobStatus AS $job_status_id => $job_status){
 								$selectStr = '';
 								if($job_status_id == $objCallData->arrJob[$_REQUEST["jobId"]]["job_status_id"]) $selectStr = 'selected';
@@ -260,12 +283,6 @@ switch ($a)
 						?></select>
 					</td>
 				</tr>
-
-				<tr>
-					<td class="hr">Job Received Date</td>
-					<td class="dr"><?=$rec_date?></td>
-				</tr>
-
 				<tr>
 					<td class="hr">Job Due Date</td>
 					<td class="dr"><?
@@ -278,22 +295,42 @@ switch ($a)
                         ?><input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$jobDueDate?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 					</td>
 				</tr>
-                                <?php $arrInfo = $objCallData->fetchDocument($_REQUEST["jobId"]); 
-                                      
-                                      foreach ($arrInfo as $key => $value) {
-                                        $doc_id = $key;  
-                                        $filePath = $value['file_path'];
-                                      
-                                      }
-                                      if($_SESSION['jobGenre'] == 'SETUP') {
-                                      ?> 
-                                <tr>
-					<td class="hr">Setup Details</td>
-					<td class="dr">
-                                            <button onclick="javascript:redirectURL('job.php?sql=download&flagType=ST&filePath=<?=urlencode($filePath)?>&docId=<?=$doc_id?>');" title="Click to view this document" >Download</button>
-                                        </td>
-				</tr>
-                                      <?php } ?>
+				<?php $arrInfo = $objCallData->fetchDocument($_REQUEST["jobId"]); 
+					  
+					  foreach ($arrInfo as $key => $value) {
+						$doc_id = $key;  
+						$filePath = $value['file_path'];
+					  }
+					  if($_SESSION['jobGenre'] == 'SETUP') {
+						?><tr>
+							<td class="hr">Setup Details</td>
+							<td class="dr"><a style="color:#073f61" href="javascript:;" onclick="javascript:redirectURL('job.php?sql=download&flagType=ST&filePath=<?=urlencode($filePath)?>&docId=<?=$doc_id?>');" title="Click to view this document" >Download</a></td>
+						</tr>
+					  <?php } ?>
+					<tr>
+						<td class="hr">SR Manager</td>
+						<td class="dr" id="tdSrManager"><?=$srManager?></td>
+					</tr>
+					<tr>
+						<td class="hr">Manager Comp</td>
+						<td class="dr" id="tdInManager"><?=$indManager?></td>
+					</tr>
+					<tr>
+						<td class="hr">Manager Audit</td>
+						<td class="dr" id="tdAuditMngr"><?=$adtManager?></td>
+					</tr>
+					<tr>
+						<td class="hr">Sr. Accountant Comp</td>
+						<td class="dr" id="tdSrAcntComp"><?=$srComp?></td>
+					</tr>
+					<tr>
+						<td class="hr">Sr. Accountant Audit</td>
+						<td class="dr" id="tdSrAcntAudit"><?=$srAudit?></td>
+					</tr>
+					<tr>
+						<td class="hr">Jnr. Accountant Comp</td>
+						<td class="dr" id="tdTeamMember"><?=$teamMember?></td>
+					</tr>
 			</table>
 				<button type="submit" value="Update" name="btnJob">Update</button></td>
 				<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">

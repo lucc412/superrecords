@@ -228,9 +228,12 @@ function selectPanel() {
 					var arrResponse = strResponse.split('~');
 
 					document.getElementById("tdSrManager").innerHTML = arrResponse[0];
-					document.getElementById("tdSalesPrson").innerHTML = arrResponse[1];
+					if(document.getElementById("tdSalesPrson"))
+						document.getElementById("tdSalesPrson").innerHTML = arrResponse[1];
 					document.getElementById("tdInManager").innerHTML = arrResponse[2];
+
                                         document.getElementById("tdAuditManager").innerHTML = arrResponse[4];
+
 				}
 			}
 		}
@@ -256,7 +259,11 @@ function selectTeamMember() {
 				var strResponse = xmlhttp.responseText;
 
 				if(strResponse) {
-					document.getElementById("tdTeamMember").innerHTML = strResponse;
+					var arrResponse = strResponse.split('~');
+
+					document.getElementById("tdTeamMember").innerHTML = arrResponse[0];
+					document.getElementById("tdSrAcntComp").innerHTML = arrResponse[1];
+					document.getElementById("tdSrAcntAudit").innerHTML = arrResponse[2];
 				}
 			}
 		}

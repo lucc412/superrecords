@@ -74,7 +74,7 @@ function validateFormOnSubmit() {
 	}
 
 	else if (document.objForm.txtPeriod.value == "") {
-		alert("Enter Period");
+		alert("Select Period");
 		document.objForm.txtPeriod.focus();
 		flagReturn = false;
 	}

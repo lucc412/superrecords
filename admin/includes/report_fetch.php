@@ -70,7 +70,7 @@ foreach($arrSelected AS $fieldOrigName) {
 	// if field typex is RF[Related Field] fetch data from 'pr_practice' table
 	if($_SESSION['ARRFIELDTYPEX'][$fieldOrigName] == 'RF') {
 		$flagOtherTable = true;
-		if($fieldOrigName == 'team_member')
+		if($fieldOrigName == 'team_member' || $fieldOrigName == 'sr_accnt_comp' || $fieldOrigName == 'sr_accnt_audit')
 			$strColumns .= 'cl.' . $fieldOrigName . ",";
 		else 
 			$strColumns .= 'pr.' . $fieldOrigName . ",";

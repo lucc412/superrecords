@@ -1,12 +1,14 @@
 <?php
 
-class Practice_Class extends Database {
+class Client_Class extends Database {
 
     public function __construct() {
         $this->arrTypes = $this->fetchType();
         $this->arrStepsList = $this->fetchStepsList();
         $this->arrPractice = $this->fetchPractice();
         $this->arrTeamMember = $this->fetchTeamMember();
+        $this->arrSrAccntComp = $this->fetchSrAccntComp();
+        $this->arrSrAccntAudit = $this->fetchSrAccntAudit();
     }
 
     public function fetchType() {
@@ -64,6 +66,42 @@ class Practice_Class extends Database {
         }
         return $arrEmployees;
     }
+    
+    public function fetchSrAccntComp()
+    {
+        
+        $qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
+					FROM stf_staff t1, aty_accesstype t2, con_contact c1
+					WHERE t1.stf_AccessType = t2.aty_Code 
+					AND t1.stf_CCode = c1.con_Code 
+					AND t2.aty_Description like 'Staff'
+					AND c1.con_Designation = '27'
+					ORDER BY c1.con_Firstname";
+
+        $fetchResult = mysql_query($qrySel);
+        while ($rowData = mysql_fetch_assoc($fetchResult)) {
+            $arrEmployees[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
+        }
+        return $arrEmployees;
+    }
+    
+    public function fetchSrAccntAudit()
+    {
+        
+        $qrySel = "SELECT stf_Code, c1.con_Firstname, c1.con_Lastname 
+					FROM stf_staff t1, aty_accesstype t2, con_contact c1
+					WHERE t1.stf_AccessType = t2.aty_Code 
+					AND t1.stf_CCode = c1.con_Code 
+					AND t2.aty_Description like 'Staff'
+					AND c1.con_Designation = '33'
+					ORDER BY c1.con_Firstname";
+
+        $fetchResult = mysql_query($qrySel);
+        while ($rowData = mysql_fetch_assoc($fetchResult)) {
+            $arrEmployees[$rowData['stf_Code']] = $rowData['con_Firstname'] . ' ' . $rowData['con_Lastname'];
+        }
+        return $arrEmployees;
+    }
 
     public function fetchEmployees() {
 
@@ -90,12 +128,15 @@ class Practice_Class extends Database {
             $strWhere = "AND (pr.sr_manager=" . $staffId . " 
 						OR pr.india_manager=" . $staffId . " 
 						OR cl.team_member=" . $staffId . " 
+                                                OR pr.audit_manager=" . $staffId . " 
+                                                OR cl.sr_accnt_comp=" . $staffId . "
+                                                OR cl.sr_accnt_audit=" . $staffId . "
 						OR pr.sales_person=" . $staffId . ")";
         }
 
         if (isset($mode) && (($mode == 'view') || ($mode == 'edit'))) {
 
-            $qrySel = "SELECT cl.*, pr.sr_manager, pr.india_manager, cl.team_member, pr.sales_person 
+            $qrySel = "SELECT cl.*, pr.sr_manager, pr.india_manager, cl.team_member, pr.sales_person, pr.audit_manager 
 					FROM client cl, pr_practice pr
 					WHERE pr.id = cl.id AND cl.client_id = " . $recId . "
 					ORDER BY cl.client_id DESC";
@@ -106,7 +147,7 @@ class Practice_Class extends Database {
             if (!$wholeonly && isset($wholeonly) && $filterstr != '')
                 $filterstr = "%" . $filterstr . "%";
 
-            $qrySel = "SELECT cl.*, s.*, cnt.*, pr.sr_manager, pr.india_manager, cl.team_member, pr.sales_person 
+            $qrySel = "SELECT cl.*, s.*, cnt.*, pr.sr_manager, pr.india_manager, pr.audit_manager, cl.team_member, pr.sales_person 
 							FROM client cl, pr_practice pr, client_type clt, stf_staff s, con_contact cnt
 							WHERE cl.id = pr.id and cl.client_type_id  = clt.client_type_id
 							AND pr.sr_manager = s.stf_Code 
@@ -157,7 +198,7 @@ class Practice_Class extends Database {
 
         $dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
-        $qryIns = "INSERT INTO client(client_type_id, client_name, id, team_member, client_notes, client_received, steps_done)
+        $qryIns = "INSERT INTO client(client_type_id, client_name, id, team_member, client_notes, client_received, sr_accnt_comp, sr_accnt_audit)
 					VALUES (
 					'" . $_REQUEST['lstType'] . "', 
 					'" . addslashes($_REQUEST['cliName']) . "',
@@ -165,7 +206,8 @@ class Practice_Class extends Database {
 					'" . $_REQUEST['lstTeamMember'] . "',
 					'" . addslashes($_REQUEST['client_notes']) . "',
 					'" . $dateSignedUp . "',  
-					'" . $strSteps . "'
+                                        '" . addslashes($_REQUEST['lstSrAccntComp']) . "',
+                                        '" . addslashes($_REQUEST['lstSrAccntAudit']) . "'
 					)";
 
         mysql_query($qryIns);
@@ -315,7 +357,8 @@ class Practice_Class extends Database {
 							team_member = '" . $_REQUEST['lstTeamMember'] . "',
 							client_notes = '" . addslashes($_REQUEST['client_notes']) . "',
 							client_received = '" . $dateSignedUp . "',
-							steps_done = '" . $strSteps . "'
+                                                        sr_accnt_comp = '" . addslashes($_REQUEST['lstSrAccntComp']) . "',
+                                                        sr_accnt_audit = '" . addslashes($_REQUEST['lstSrAccntAudit']) . "'
 						WHERE client_id = '" . $_REQUEST['recid'] . "'";
 
                 mysql_query($qryUpd);
@@ -329,8 +372,7 @@ class Practice_Class extends Database {
 							id = '" . $_REQUEST['lstPractice'] . "',
 							team_member = '" . $_REQUEST['lstTeamMember'] . "',
 							client_notes = '" . addslashes($_REQUEST['client_notes']) . "',
-							client_received = '" . $dateSignedUp . "',
-							steps_done = '" . $strSteps . "'
+							client_received = '" . $dateSignedUp . "'
 						WHERE client_id = '" . $_REQUEST['recid'] . "'";
 
             mysql_query($qryUpd);

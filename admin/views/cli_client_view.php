@@ -11,27 +11,11 @@
 		<td class="hr">Practice</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrPractice[$arrClientData["id"]])?></td>
 	</tr>
-	<tr>
-		<td class="hr">SR Manager</td>
-		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sr_manager"]])?></td>
-	</tr>
-	<tr>
-		<td class="hr">India Manager</td>
-		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["india_manager"]])?></td>
-	</tr>
-	<tr>
-		<td class="hr">Team Member</td>
-		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["team_member"]])?></td>
-	</tr>
-	<tr>
-		<td class="hr">Sales Person</td>
-		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sales_person"]])?></td>
-	</tr>
-	<tr>
+        <tr>
 		<td class="hr">Client Name</td>
 		<td class="dr"><?=stripslashes($arrClientData["client_name"])?></td>
 	</tr>
-	<tr>
+        <tr>
 		<td class="hr">Entity Type</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrTypes[$arrClientData["client_type_id"]])?></td>
 	</tr>
@@ -39,7 +23,7 @@
 		<td class="hr">Client Notes</td>
 		<td class="dr"><?=htmlspecialchars($arrClientData["client_notes"])?></td>
 	</tr>
-	<tr>
+        <tr>
 		<td class="hr">Date Signed Up</td><?
 		$dateSignedUp = "";
 		if (isset($arrClientData["client_received"]) && $arrClientData["client_received"] != "") {
@@ -50,14 +34,37 @@
 		?><td class="dr"><?=$dateSignedUp?></td>
 	</tr>
 	<tr>
-		<td class="hr">Sent Items</td><?
-		$arrStepsList = explode(',', $arrClientData['steps_done']);
-		foreach($arrStepsList AS $intKey => $stepsId) {
-			$arrSteps[] = $objCallData->arrStepsList[$stepsId];
-		}
-		$strSteps = implode(',', $arrSteps);
-		?><td class="dr"><?=$strSteps?></td>
+		<td class="hr">SR Manager</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sr_manager"]])?></td>
 	</tr>
+	<tr>
+		<td class="hr">Manager Comp</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["india_manager"]])?></td>
+	</tr>
+        <tr>
+                <td class="hr">Manager Audit</td>
+                <td class="dr" id="tdAuditManager"><?=$arrEmployees[$arrClientData['audit_manager']]?></td>
+        </tr>
+        <tr>
+		<td class="hr">Sr.Accountant Comp</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sr_accnt_comp"]])?></td>
+	</tr>
+        <tr>
+		<td class="hr">Sr.Accountant Audit</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sr_accnt_audit"]])?></td>
+	</tr>
+	<tr>
+		<td class="hr">Jnr.Accountant Comp</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["team_member"]])?></td>
+	</tr>
+        
+	<tr>
+		<td class="hr">Sales Person</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sales_person"]])?></td>
+	</tr>
+	
+	
+	
 </table>
 
 <div class="frmheading">

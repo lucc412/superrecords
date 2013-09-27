@@ -137,7 +137,7 @@ function sql_select_subActivity($itemId)
 // fetch sr manager, india manager, sales manager, team member for selected practice
 function sql_select_panel($itemId)
 {
-	$sql = "SELECT id, sr_manager, india_manager, sales_person
+	$sql = "SELECT id, sr_manager, india_manager, sales_person, audit_manager
 			FROM pr_practice
 			WHERE id=".$itemId;
 			
@@ -153,9 +153,10 @@ function sql_select_panel($itemId)
 		$srManager = $arrEmployees[$rowData['sr_manager']];
 		$salesPrson = $arrEmployees[$rowData['sales_person']];
 		$inManager = $arrEmployees[$rowData['india_manager']];
+                $auditManager = $arrEmployees[$rowData['audit_manager']];
 
 		// set string of srManager, salesPrson, inManager, teamMember
-		$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember;
+		$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager.'~'. $teamMember.'~'.$auditManager;
 	}
 	return $strReturn;
 }

@@ -230,6 +230,7 @@ function selectPanel() {
 					document.getElementById("tdSrManager").innerHTML = arrResponse[0];
 					document.getElementById("tdSalesPrson").innerHTML = arrResponse[1];
 					document.getElementById("tdInManager").innerHTML = arrResponse[2];
+                                        document.getElementById("tdAuditManager").innerHTML = arrResponse[4];
 				}
 			}
 		}

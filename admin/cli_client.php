@@ -7,7 +7,7 @@ include (PHPFUNCTION);
 include("includes/header.php");
 
 // create class object for class function access
-$objCallData = new Practice_Class();
+$objCallData = new Client_Class();
 
 
 if($_SESSION['validUser']) {
@@ -117,6 +117,7 @@ if($_SESSION['validUser']) {
 				if ($wholeonly) $checkstr = " checked";
 			
 				$arrClient = $objCallData->sql_select($a,$recid);
+                                
 				$arrClientData = $arrClient[$recid];
 				$arrEmployees = $objCallData->fetchEmployees();
 				include('views/cli_client_edit.php');

@@ -53,27 +53,7 @@
 		<td class="dr"><?=htmlspecialchars($objCallData->arrSubActivity[$arrTaskData["sub_Code"]])?></td>
 	</tr>
 	
-	<tr>
-		<td class="hr">SR Manager</td>
-		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["sr_manager"]])?></td>
-	</tr>
-	
-	<tr>
-		<td class="hr">India Manager</td>
-		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["india_manager"]])?></td>
-	</tr>
-	
-	<tr>
-		<td class="hr">Team Manager</td>
-		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["team_member"]])?></td>
-	</tr>
-
-	<tr>
-		<td class="hr">Sales Person</td>
-		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["sales_person"]])?></td>
-	</tr>
-	
-	<tr>
+        <tr>
 		<td class="hr">Task Status</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrTaskStatus[$arrTaskData["task_status_id"]])?></td>
 	</tr>
@@ -87,19 +67,66 @@
 		<td class="hr">Process Cycle</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrProcessingCycle[$arrTaskData["process_id"]])?></td>
 	</tr>
+        
+        <tr>
+		<td class="hr">External Due Date</td>
+		<td class="dr"><?
+                        if (isset($arrTaskData["due_date"]) && $arrTaskData["due_date"] != "") {
+                            if($arrTaskData["due_date"] != "0000-00-00 00:00:00") {
+                                echo $due_date = date("d/m/Y",strtotime( $arrTaskData["due_date"]));
+                            }
+                        }
+                ?></td>
+	</tr>
+        
+        <tr>
+		<td class="hr">Superrecords Due Date</td>
+		<td class="dr"><?
+                        if (isset($arrTaskData["befree_due_date"]) && $arrTaskData["befree_due_date"] != "") {
+                            if($arrTaskData["befree_due_date"] != "0000-00-00 00:00:00") {
+                                echo $befree_due_date = date("d/m/Y",strtotime( $arrTaskData["befree_due_date"]));
+                            }
+                        }  
+                ?></td>
+	</tr>
+        
+	<tr>
+		<td class="hr">SR Manager</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["sr_manager"]])?></td>
+	</tr>
 	
 	<tr>
-		<td class="hr">External Due Date</td>
-		<td class="dr"><?=htmlspecialchars($arrTaskData["due_date"])?></td>
+		<td class="hr">Manager Comp</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["india_manager"]])?></td>
+	</tr>
+	
+        <tr>
+		<td class="hr">Manager Audit</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["audit_manager"]])?></td>
+	</tr>
+        
+        <tr>
+		<td class="hr">Sr.Accountant Comp</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["sr_accnt_comp"]])?></td>
+	</tr>
+        
+        <tr>
+		<td class="hr">Sr.Accountant Audit</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["sr_accnt_audit"]])?></td>
+	</tr>
+
+        <tr>
+		<td class="hr">Jnr.Accountant Comp</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["team_member"]])?></td>
+	</tr>
+        
+	<tr>
+		<td class="hr">Sales Person</td>
+		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["sales_person"]])?></td>
 	</tr>
 		
 	<tr>
-		<td class="hr">Befree Due Date</td>
-		<td class="dr"><?=htmlspecialchars($arrTaskData["befree_due_date"])?></td>
-	</tr>
-
-	<tr>
-		<td class="hr">SR Manager Notes</td>
+		<td class="hr">India Staff Notes</td>
 		<td class="dr"><?=htmlspecialchars($arrTaskData["notes"])?></td>
 	</tr>
 </table>

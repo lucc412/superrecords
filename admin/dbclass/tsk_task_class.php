@@ -64,7 +64,7 @@ class Task_Class extends Database {
 	
 	public function arrClientDetails()
 	{		
-		$qrySel = "SELECT *	FROM client ORDER BY client_name";
+		$qrySel = "SELECT * FROM client ORDER BY client_name";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -183,7 +183,13 @@ class Task_Class extends Database {
 		$strWhere = "";		
 		if($_SESSION["usertype"] == "Staff") {	
 			$userId = $_SESSION["staffcode"];
-			$strWhere .="AND (pr.sr_manager =".$userId." OR pr.india_manager =".$userId." OR c.team_member =".$userId." OR pr.sales_person =".$userId . ")";
+			$strWhere .="AND (pr.sr_manager =".$userId." 
+                                        OR pr.india_manager =".$userId." 
+                                        OR pr.audit_manager=" . $userId . " 
+                                        OR c.team_member =".$userId." 
+                                        OR c.sr_accnt_comp =".$userId."
+                                        OR c.sr_accnt_audit =".$userId."
+                                        OR pr.sales_person =".$userId . ")";
 		}
 	
 		if($jobId)
@@ -191,7 +197,7 @@ class Task_Class extends Database {
 
 		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))) {				
 			
-			$qrySel = "SELECT t.*, pr.sr_manager, pr.india_manager, pr.sales_person, c.team_member
+			$qrySel = "SELECT t.*, pr.sr_manager, pr.india_manager, pr.audit_manager, pr.sales_person, c.team_member, c.sr_accnt_comp, c.sr_accnt_audit
 					FROM task t, job j, client c, pr_practice pr
 					WHERE t.discontinue_date IS NULL 
 					AND t.job_id = j.job_id
@@ -357,7 +363,7 @@ class Task_Class extends Database {
 	// fetch sr manager, india manager, sales manager, team member for selected practice
 	function sql_select_panel($itemId)
 	{
-		$sql = "SELECT id, sr_manager, india_manager, sales_person
+		$sql = "SELECT id, sr_manager, india_manager, audit_manager, sales_person
 				FROM pr_practice
 				WHERE id=".$itemId;
 				
@@ -373,15 +379,17 @@ class Task_Class extends Database {
 			$srManager = $arrEmployees[$rowData['sr_manager']];
 			$salesPrson = $arrEmployees[$rowData['sales_person']];
 			$inManager = $arrEmployees[$rowData['india_manager']];
+                        $auditManager = $arrEmployees[$rowData['audit_manager']];
 
 			// set string of srManager, salesPrson, inManager, teamMember
-			$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager;
+			$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager .'~'.$auditManager;
 		}
 		return $strReturn;
 	}
 
 	// fetch team member for selected client
-	function fetch_team_member($clientId) {
+	function fetch_team_member($clientId) 
+        {
 		$sql = "SELECT team_member
 				FROM client
 				WHERE client_id=".$clientId;
@@ -396,6 +404,48 @@ class Task_Class extends Database {
 
 			$rowData = mysql_fetch_assoc($res);
 			$teamMember = $arrEmployees[$rowData['team_member']];
+		}
+		return $teamMember;
+	}
+        
+        // fetch team member for selected client
+	function fetch_SrAccnt_Comp($clientId) 
+        {
+		$sql = "SELECT sr_accnt_comp
+				FROM client
+				WHERE client_id=".$clientId;
+				
+		$res = mysql_query($sql) or die(mysql_error());
+		$count = mysql_num_rows($res);
+
+		if(!empty($count))
+		{
+			// fetch array of name of all employees
+			$arrEmployees = $this->fetchEmployees();
+
+			$rowData = mysql_fetch_assoc($res);
+			$teamMember = $arrEmployees[$rowData['sr_accnt_comp']];
+		}
+		return $teamMember;
+	}
+        
+        // fetch team member for selected client
+	function fetch_SrAccnt_Audit($clientId) 
+        {
+		$sql = "SELECT sr_accnt_audit
+				FROM client
+				WHERE client_id=".$clientId;
+				
+		$res = mysql_query($sql) or die(mysql_error());
+		$count = mysql_num_rows($res);
+
+		if(!empty($count))
+		{
+			// fetch array of name of all employees
+			$arrEmployees = $this->fetchEmployees();
+
+			$rowData = mysql_fetch_assoc($res);
+			$teamMember = $arrEmployees[$rowData['sr_accnt_audit']];
 		}
 		return $teamMember;
 	}

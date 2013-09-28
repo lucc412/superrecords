@@ -34,12 +34,13 @@ if($_SESSION['validUser']) {
 					$eventId = $_REQUEST["eventId"];
 					$frmEmail = $_REQUEST["txtFrm~".$eventId];
 					$ccEmail = $_REQUEST["txtCc~".$eventId];
+					$bccEmail = $_REQUEST["txtBcc~".$eventId];
 					
 					$arrFrmEmail = explode(',', $frmEmail);
 					$frmEmail = $arrFrmEmail[0];
 
 					// DB function to update event
-					$objCallData->sql_update($eventId, $frmEmail, $toEmail, $ccEmail);
+					$objCallData->sql_update($eventId, $frmEmail, $ccEmail, $bccEmail);
 
 					break;
 

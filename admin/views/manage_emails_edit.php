@@ -35,30 +35,31 @@
 			?><tr>
 				<td>Content</td>
 				<td><?
-					$eventId = $arrEventInfo["event_id"];
+					//$eventId = $arrEventInfo["event_id"];
+					$eventCode = $arrEventInfo["event_code"];
 					?><textarea cols="80" id="txtContent" name="txtContent" rows="10"><?=$arrEventInfo["event_content"]?></textarea><br/>
 
 					<span style="color:orange"><u>Below are the dynamic fields applicable to this content:</u></span><?
 
-					if($eventId != '6' && $eventId != '7' && $eventId != '8' && $eventId != '9' && $eventId != '10') {
+					if($eventCode == 'NEWPR' || $eventCode == 'NEWCL' || $eventCode == 'COMPR' || $eventCode == 'AUDPR' || $eventCode == 'NEWJB' || $eventCode == 'QRYAN' || $eventCode == 'NEWDC') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">PRACTICENAME</div><?
 					}
-                    if($eventId == '10') {
+                    if($eventCode == 'FRPAS') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">PASSWORD</div><?
 					}
-					if($eventId == '1') {
+					if($eventCode == 'NEWPR') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">SALESPERSONNAME</div><?
 					}
-					
-					if($eventId == '2') {
+					if($eventCode == 'NEWCL' || $eventCode == 'COMCL' || $eventCode == 'AUDCL' || $eventCode == 'JNRCL' || $eventCode == 'NEWJB') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">CLIENTNAME</div><?
 					}
-					
-					if($eventId != '1' && $eventId != '2' && $eventId == '9') {
+					if($eventCode == 'NWTSK' || $eventCode == 'NEWQR' || $eventCode == 'QRYAN' || $eventCode == 'NEWDC' || $eventCode == 'NEWRP' || $eventCode == 'JBDON') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">JOBNAME</div><?
 					}
-
-					if($eventId == '5') {
+					if($eventCode == 'TSKDN') {
+						?><div style="padding-bottom:5px;color:red;font-weight:bold">TASKNAME</div><?
+					}
+					if($eventCode == 'NEWDC') {
 						?><div style="padding-bottom:5px;color:red;font-weight:bold">DOCNAME</div>
 						<div style="padding-bottom:5px;color:red;font-weight:bold">DATETIME</div><?
 					}

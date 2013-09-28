@@ -46,13 +46,13 @@ if($_SESSION['validUser']) {
 					$practiceId = $objCallData->sql_insert();
 
 					/* send mail function starts here */
-					$pageUrl = basename($_SERVER['REQUEST_URI']);	
+					$pageCode = 'NEWPR';	
 					// check if event is active or inactive [This will return TRUE or FALSE as per result]
-					$flagSet = getEventStatus($pageUrl);
+					$flagSet = getEventStatus($pageCode);
 					// if event is active it go for mail function
 					if($flagSet) {
 						//It will Get All Details in array format for Send Email	
-						$arrEmailInfo = get_email_info($pageUrl);
+						$arrEmailInfo = get_email_info($pageCode);
 						// TO mail parameter
 						if(!empty($_REQUEST['lstSrManager'])) {
 							$srManagerEmail = fetchStaffInfo($_REQUEST["lstSrManager"], 'email');

@@ -632,8 +632,8 @@ switch ($a)
 			<img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom" height="22px" style="margin-top:-5px;" >&nbsp;Add Record</a><?
 
 			// check if event is active or inactive [This will return TRUE or FALSE as per result]
-			$pageUrl = "job.php?sql=sendMail";	
-			$flagSet = getEventStatus($pageUrl);
+			$pageCode = "NEWQR";	
+			$flagSet = getEventStatus($pageCode);
 			
 			if($flagSet) {
 				?><span style="margin-left:764px;">

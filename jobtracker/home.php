@@ -26,13 +26,13 @@ if(isset($_REQUEST['txtName']) && isset($_REQUEST['txtPassword']))
 }
 else if(isset($_REQUEST['flgFrgtPass']) && isset($_REQUEST['txtName']) && $_REQUEST['flgFrgtPass'] == "forgot") {
     
-	$pageUrl = basename($_SERVER['REQUEST_URI']);
+	$pageCode = 'FRPAS';
 	$username = $_REQUEST['txtName'];
 	$prPassword = $objScr->fetch_practice_password($username);
 
 	if(!empty($prPassword))
 	{
-		$arrEmailInfo = get_email_info($pageUrl);
+		$arrEmailInfo = get_email_info($pageCode);
 		$to = $_REQUEST['txtName'];
 		$cc = $arrEmailInfo['event_cc'];
 		$subject = $arrEmailInfo['event_subject'];

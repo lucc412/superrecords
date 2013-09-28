@@ -24,11 +24,11 @@
 				<th align="left" width="25%" class="fieldheader">Name of Event</th>
 				<th class="fieldheader" width="18%">From</th>
 				<th class="fieldheader" width="20%">To</th>
-				<th class="fieldheader" width="15%">CC</th><?
+				<th class="fieldheader" width="15%">CC</th>
+				<th class="fieldheader" width="15%">BCC</th><?
 				if($access_file_level['stf_Delete'] == "Y") {
 					?><th width="10%" class="fieldheader">Status</th><?
 				}
-
 				if($access_file_level['stf_Edit'] == "Y") {
 					?><th width="10%" class="fieldheader" align="center">Set Template</th>
 					<th width="10%" class="fieldheader" align="center">Action</th><?
@@ -47,30 +47,22 @@
 					?><td><?=htmlspecialchars($arrInfo["event_name"])?></td><?
 
 					/* From Email Address */
-					?><td align="center">noreply@superrecords.com.au</td><?
+					?><td align="center"><?=htmlspecialchars($arrInfo["event_from"])?></td><?
 
 					/* To Email Address */
-					?><td style="padding:5px 10px;"><?
-
-						if($eventId == '1') {
-							echo 'SR Manager';
-						}
-						else if($eventId == '9') {
-							echo 'India Manager';
-						}
-						else if($eventId == '2') {
-							echo 'SR Manager, Salesperson';
-						}
-						else if($eventId == '4' || $eventId == '5' || $eventId == '3') {
-							echo 'SR Manager, India Manager';
-						}
-						else if($eventId == '6' || $eventId == '7' || $eventId == '8' || $eventId == '10') {
-							echo 'Practice';
-						}
-					?></td><?
+					?><td style="padding:5px 10px;"><?=$arrInfo["event_to_assigned"]?></td><?
 
 					/* CC Email Address */
-					?><td align="center"><textarea cols="10" rows="20" name="txtCc~<?=$eventId?>" ><?=htmlspecialchars($arrInfo["event_cc"])?></textarea></td><?
+					?><td style="padding:5px 10px;">
+						<span><?=$arrInfo["event_cc_assigned"]?></span>
+						<textarea style="height:25px" cols="5" rows="10" name="txtCc~<?=$eventId?>"><?=htmlspecialchars($arrInfo["event_cc"])?></textarea>
+					</td><?
+
+					/* BCC Email Address */
+					?><td style="padding:5px 10px;">
+						<span><?=$arrInfo["event_bcc_assigned"]?></span>
+						<textarea style="height:25px" cols="5" rows="10" name="txtBcc~<?=$eventId?>"><?=htmlspecialchars($arrInfo["event_bcc"])?></textarea>
+					</td><?
 
 					/* Status of event */
 					if($access_file_level['stf_Delete'] == "Y") {
@@ -99,7 +91,7 @@
 							<a href="manage_emails.php?action=edit&eventId=<?=$eventId?>"><b style="color:#005b17"><img title="Click to set mail template" src="images/email_content.png"/></b></a>
 						</td>
 						<td align="center">
-							<button type="submit" value="save" onclick="javascript:saveEmailEvent(<?=$eventId?>)">Save</button>
+							<button type="submit" style="width:70px" value="save" onclick="javascript:saveEmailEvent(<?=$eventId?>)">Save</button>
 						</td><?
 					}
 				?></tr><?

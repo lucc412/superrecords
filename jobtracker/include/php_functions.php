@@ -1,11 +1,11 @@
 <?php
 //It will Check Given Event is Active or Not it will Return Status Event according Event Id is Givent as Argument to Function
-function getEventStatus($pageUrl) 
+function getEventStatus($pageCode) 
 {
 	//It will Generate Query to Fetch Event Record based on Event ID Given	
 	$query = "SELECT event_status 
 			  FROM email_events 
-			  WHERE event_url LIKE '%{$pageUrl}%'";
+			  WHERE event_code = '{$pageCode}'";
 		  
 	$runquery = mysql_query($query);
 	while($myRow = mysql_fetch_assoc($runquery))
@@ -35,12 +35,12 @@ function get_email_id($pr_id)
 }
 
 //It will Get All Information Regarding Event like TO , FROM , CC , Subject , Message etc It will Return all those Details in Array Form.
-function get_email_info($pageUrl)
+function get_email_info($pageCode)
 {
 	//It will Generate Query and will get Require Details From Database
 	$myQuery = "SELECT event_name,event_subject,event_content, event_cc
 				FROM email_events 
-				WHERE event_url LIKE '%{$pageUrl}%'";
+				WHERE event_code = '{$pageCode}'";
 	
 	$runQuery = mysql_query($myQuery);
 	$arrEmailInfo = mysql_fetch_assoc($runQuery);
@@ -292,16 +292,16 @@ function fetchTrusteeName($id)
 function new_job_task_mail() 
 {
 	/* send mail function starts here for ADD NEW JOB */
-	$pageUrl = "jobs.php?sql=insertJob";
+	$pageCode = "NEWJB";
 	
 	// check if event is active or inactive [This will return TRUE or FALSE as per result]
-	$flagSet = getEventStatus($pageUrl);
+	$flagSet = getEventStatus($pageCode);
 	
 	// if event is active it go for mail function
 	if($flagSet)
 	{
 		//It will Get All Details in array format for Send Email	
-		$arrEmailInfo = get_email_info($pageUrl);
+		$arrEmailInfo = get_email_info($pageCode);
 
 		// fetch email id of sr manager
 		$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
@@ -321,16 +321,16 @@ function new_job_task_mail()
 	/* send mail function ends here */	
 		
 	/* send mail function starts here for ADD NEW TASK */
-	$pageUrl = "job.php?sql=addTask";
+	$pageCode = "NWTSK";
 			
 	// check if event is active or inactive [This will return TRUE or FALSE as per result]
-	$flagSet = getEventStatus($pageUrl);
+	$flagSet = getEventStatus($pageCode);
 	
 	// if event is active it go for mail function
 	if($flagSet)
 	{
 		//It will Get All Details in array format for Send Email	
-		$arrEmailInfo = get_email_info($pageUrl);
+		$arrEmailInfo = get_email_info($pageCode);
 
 		// fetch email id of sr manager
 		$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);

@@ -35,12 +35,13 @@ class Manage_Emails extends Database {
 
 	/* This is email event update function to update cc, to, from email addresses 
 	   Created By -> 01-Mar-13 [Disha Goyal]
-	   Last Modified By -> 07-Mar-13 [Disha Goyal]
+	   Last Modified By -> 28-Sep-13 [Disha Goyal]
 	*/
-	public function sql_update($eventId, $frmEmail, $ccEmail, $ccEmail) {
+	public function sql_update($eventId, $frmEmail, $ccEmail, $bccEmail) {
 
 		$qryUpd = "UPDATE email_events
-				SET event_cc = '" . addslashes($ccEmail) . "'
+				SET event_cc = '" . addslashes($ccEmail) . "',
+				event_bcc = '" . addslashes($bccEmail) . "'
 				WHERE event_id = '" . $eventId . "'";
 
 		mysql_query($qryUpd);	

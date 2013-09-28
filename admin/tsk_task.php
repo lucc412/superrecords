@@ -105,6 +105,8 @@ if($_SESSION['validUser']) {
 					$practiceId = $objCallData->arrClientDetails[$clientId]["id"];
 					$strPanelInfo = $objCallData->sql_select_panel($practiceId);
 					$teamMemberEmail = $objCallData->fetch_team_member($clientId);
+                                        $SrAccntCompEmail = $objCallData->fetch_SrAccnt_Comp($clientId);
+                                        $SrAccntAuditEmail = $objCallData->fetch_SrAccnt_Audit($clientId);
 				}
 
 				// fetch name of sr manager, india manager & team member
@@ -112,6 +114,7 @@ if($_SESSION['validUser']) {
 				$srManagerEmail = $arrPanelInfo[0];
 				$salesPersonEmail = $arrPanelInfo[1];
 				$inManagerEmail = $arrPanelInfo[2];
+                                $auditManagerEmail = $arrPanelInfo[3];
 				include('views/tsk_task_add.php');
 				break;
 

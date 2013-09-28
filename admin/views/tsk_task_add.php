@@ -108,25 +108,7 @@
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Sub Activity.</span></a>
 			</td>
 		</tr>
-
-		<tr>
-			<td class="hr">SR Manager</td>
-			<td class="dr" id="tdSrManager"><?=$srManagerEmail?></td>
-		</tr>
-		<tr>
-			<td class="hr">India Manager</td>
-			<td class="dr" id="tdInManager"><?=$inManagerEmail?></td>
-		</tr>
-		<tr>
-			<td class="hr">Team Member</td>
-			<td class="dr" id="tdTeamMember"><?=$teamMemberEmail?></td>
-		</tr>
-		<tr>
-			<td class="hr">Sales Person</td>
-			<td class="dr" id="tdSalesPrson"><?=$salesPersonEmail?></td>
-		</tr>
-
-		<tr>
+<tr>
 			<td class="hr">Task Status <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstTaskStatus">
 					<option value="0">--- Select Task Status ---</option><?php
@@ -171,15 +153,45 @@
 		</tr>
 
 		<tr>
-			<td class="hr">Befree Due Date</td>
+			<td class="hr">Superrecords Due Date</td>
 				<td class="dr">						
 					<input type="text" name="befreeDueDate" id="befreeDueDate" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('befreeDueDate','ddmmyyyy',false,24)">
 					<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 				</td>
 		</tr>
+		<tr>
+			<td class="hr">SR Manager</td>
+			<td class="dr" id="tdSrManager"><?=$srManagerEmail?></td>
+		</tr>
+		<tr>
+			<td class="hr">Manager Comp</td>
+			<td class="dr" id="tdInManager"><?=$inManagerEmail?></td>
+		</tr>
+                <tr>
+			<td class="hr">Manager Audit</td>
+			<td class="dr" id="tdInManager"><?=$auditManagerEmail?></td>
+		</tr>
+		<tr>
+			<td class="hr">Jnr.Accountant Comp</td>
+			<td class="dr" id="tdTeamMember"><?=$teamMemberEmail?></td>
+		</tr>
+                <tr>
+			<td class="hr">Sr.Accountant Comp</td>
+			<td class="dr" id="tdTeamMember"><?=$SrAccntCompEmail?></td>
+		</tr>
+                <tr>
+			<td class="hr">Sr.Accountant Audit</td>
+			<td class="dr" id="tdTeamMember"><?=$SrAccntAuditEmail?></td>
+		</tr>
+		<tr>
+			<td class="hr">Sales Person</td>
+			<td class="dr" id="tdSalesPrson"><?=$salesPersonEmail?></td>
+		</tr>
+
+		
 			
 		<tr>
-			<td class="hr">SR Manager Notes</td>
+			<td class="hr">India Staff Notes</td>
 			<td class="dr">
 				<textarea name="txtNotes" rows="3" cols="25"></textarea>
 			</td>

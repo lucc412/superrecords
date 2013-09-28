@@ -15,7 +15,7 @@
 	<p><input type="hidden" name="sql" value="update"></p>
 	<input type="hidden" name="recid" value="<?=$recid?>">
 	<input type="hidden" name="a" value="edit"><?
-			$JobID = $_REQUEST["jobId"];
+                        $JobID = $_REQUEST["jobId"];
 			$ClientID = $objCallData->arrJobDetails[$_REQUEST["jobId"]]["client_id"];
 			$PracticeID =  $objCallData->arrClientDetails[$ClientID]["id"];
 	
@@ -140,24 +140,7 @@
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Sub Activity.</span></a>
 			</td>
 		</tr>
-
-		<tr>
-			<td class="hr">SR Manager</td>
-			<td class="dr" id="tdSrManager"><?=$arrEmployees[$arrTaskData['sr_manager']]?></td>
-		</tr>
-		<tr>
-			<td class="hr">India Manager</td>
-			<td class="dr" id="tdInManager"><?=$arrEmployees[$arrTaskData['india_manager']]?></td>
-		</tr>
-		<tr>
-			<td class="hr">Team Member</td>
-			<td class="dr" id="tdTeamMember"><?=$arrEmployees[$arrTaskData['team_member']]?></td>
-		</tr>
-		<tr>
-			<td class="hr">Sales Person</td>
-			<td class="dr" id="tdSalesPrson"><?=$arrEmployees[$arrTaskData['sales_person']]?></td>
-		</tr>
-		<tr>
+                <tr>
 			<td class="hr">Task Status <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstTaskStatus">
 					<option value="0">--- Select Task Status ---</option><?php
@@ -199,8 +182,7 @@
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select process cycle for task.</span></a>
 			</td>
 		</tr>
-		
-		<tr>
+                <tr>
 			<td class="hr">External Due Date</td>
 				<td class="dr">
 					<?						
@@ -221,7 +203,7 @@
 		</tr>
 
 		<tr>
-			<td class="hr">Befree Due Date</td>
+			<td class="hr">Superrecords Due Date</td>
 				<td class="dr">
 				<?						
 					/*$arrDate = explode("-", $arrTaskData['befree_due_date']);
@@ -239,9 +221,40 @@
 					
 				</td>
 		</tr>
+		<tr>
+			<td class="hr">SR Manager</td>
+			<td class="dr" id="tdSrManager"><?=$arrEmployees[$arrTaskData['sr_manager']]?></td>
+		</tr>
+		<tr>
+			<td class="hr">Manager Comp</td>
+			<td class="dr" id="tdInManager"><?=$arrEmployees[$arrTaskData['india_manager']]?></td>
+		</tr>
+                <tr>
+			<td class="hr">Manager Audit</td>
+			<td class="dr" id="tdAuditManager"><?=$arrEmployees[$arrTaskData['audit_manager']]?></td>
+		</tr>
+		<tr>
+			<td class="hr">Jnr.Accountant Comp</td>
+			<td class="dr" id="tdTeamMember"><?=$arrEmployees[$arrTaskData['team_member']]?></td>
+		</tr>
+                <tr>
+			<td class="hr">Sr.Accountant Comp</td>
+			<td class="dr" id="tdSrAcntComp"><?=$arrEmployees[$arrTaskData['sr_accnt_comp']]?></td>
+		</tr>
+                <tr>
+			<td class="hr">Sr.Accountant Audit</td>
+			<td class="dr" id="tdSrAcntAudit"><?=$arrEmployees[$arrTaskData['sr_accnt_audit']]?></td>
+		</tr>
+		<tr>
+			<td class="hr">Sales Person</td>
+			<td class="dr" id="tdSalesPrson"><?=$arrEmployees[$arrTaskData['sales_person']]?></td>
+		</tr>
+		
+		
+		
 
 		<tr>
-			<td class="hr">SR Manager Notes</td>
+			<td class="hr">India Staff Notes</td>
 			<td class="dr">
 				<textarea name="txtNotes" rows="3" cols="25"><?=$arrTaskData['notes']?></textarea>
 			</td>

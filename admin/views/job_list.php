@@ -108,7 +108,7 @@ switch ($a)
 					<td class="hr">Job Type<font style="color:red;" size="2">*</font></td>
 					<td colspan="2">
 						<select id="lstJob" name="lstJob">
-							<option value="">Select Job</option><?php
+							<option value="">Select Job Type</option><?php
 							foreach($objCallData->arrJobType AS $type_id => $job_type) {
 								?><option value="<?=$type_id?>"><?=$job_type?></option><?php 
 							} 
@@ -632,8 +632,7 @@ switch ($a)
 			<img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom" height="22px" style="margin-top:-5px;" >&nbsp;Add Record</a><?
 
 			// check if event is active or inactive [This will return TRUE or FALSE as per result]
-			$pageCode = "NEWQR";	
-			$flagSet = getEventStatus($pageCode);
+			$flagSet = getEventStatus('NEWQR');
 			
 			if($flagSet) {
 				?><span style="margin-left:764px;">

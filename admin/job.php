@@ -51,7 +51,6 @@ if($_SESSION['validUser']) {
 					$jobId = $objCallData->insert_job();
 					
 					/* send mail function starts here for ADD NEW JOB */
-					$practiceId = $_REQUEST['lstPractice'];
 					$pageCode = 'NEWJB';
 					
 					// check if event is active or inactive [This will return TRUE or FALSE as per result]
@@ -64,24 +63,21 @@ if($_SESSION['validUser']) {
 						$arrEmailInfo = get_email_info($pageCode);
 
 						// fetch email id of sr manager
-						$strPanelInfo = sql_select_panel($practiceId);
-						$arrPanelInfo = explode('~', $strPanelInfo);
-						$srManagerEmail = $arrPanelInfo[0];
-						$inManagerEmail = $arrPanelInfo[2];
-
-						$to = $srManagerEmail . ',' . $inManagerEmail;
-						$cc = $arrEmailInfo['event_cc'];
+						$to = fetch_prac_designation($_REQUEST['lstPractice'],true,true,true,true);
+						$cc = fetch_client_designation($jobId,true,true,true);
+						if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
+						$bcc = $arrEmailInfo['event_bcc'];
+						$from = $arrEmailInfo['event_from'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
-						$content =replaceContent($content, NULL, $practiceId, NULL, $jobId);
+						$content = replaceContent($content, NULL, $_REQUEST['lstPractice'], NULL, $jobId);
 						
 						include_once(MAIL);
-						send_mail($to, $cc, $subject, $content);
+						send_mail($from, $to, $cc, $bcc, $subject, $content);
 					}
 					/* send mail function ends here */
 
 					/* send mail function starts here for ADD NEW TASK */
-					$practiceId = $_REQUEST['lstPractice'];	
 					$pageCode = "NWTSK";
 					
 					// check if event is active or inactive [This will return TRUE or FALSE as per result]
@@ -94,29 +90,28 @@ if($_SESSION['validUser']) {
 						$arrEmailInfo = get_email_info($pageCode);
 
 						// fetch email id of sr manager
-						$strPanelInfo = sql_select_panel($practiceId);
-						$arrPanelInfo = explode('~', $strPanelInfo);
-						$srManagerEmail = $arrPanelInfo[0];
-						$inManagerEmail = $arrPanelInfo[2];
-
-						$to = $inManagerEmail;
-						$cc = $arrEmailInfo['event_cc'];
+						$to = fetch_prac_designation($_REQUEST['lstPractice'],true,false,true,true);
+						$cc = fetch_client_designation($jobId,true,true,true);
+						if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
+						$bcc = $arrEmailInfo['event_bcc'];
+						$from = $arrEmailInfo['event_from'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
-						$content =replaceContent($content, NULL, NULL, NULL, $jobId);
+						$content = replaceContent($content, NULL, NULL, NULL, $jobId);
 						
 						include_once(MAIL);
-						send_mail($to, $cc, $subject, $content);
+						send_mail($from, $to, $cc, $bcc, $subject, $content);
 					}
 					/* send mail function ends here */
 					header('location: job.php');
 					break;
 
 				case "updateJob":
+					$jobId = $_REQUEST['jobId'];
+					$oldJobStatus = $objCallData->getJobStatus($jobId);
+					$newJobStatus = $_POST['lstJobStatus'];
 					
-					$jobStatus = $_POST['lstJobStatus'];
-					
-					if($jobStatus == '7')
+					if($oldJobStatus != $newJobStatus && $newJobStatus == '7')
 					{
 						/* send mail function starts here */	
 						$pageCode = 'JBDON';
@@ -127,25 +122,26 @@ if($_SESSION['validUser']) {
 							//It will Get All Details in array format for Send Email
 							$arrEmailInfo = get_email_info($pageCode);
 							//It will Get Email Id from Which Email Id the Email will Send.
-							$jobId = $_REQUEST['jobId'];
 							$practiceId = $objCallData->fetchPracticeId($jobId);
 							$toEmail = get_email_id($practiceId);
 							$to = $toEmail;
 							$cc = $arrEmailInfo['event_cc'];
+							$bcc = fetch_prac_designation($practiceId,true);
+							if(!empty($arrEmailInfo['event_bcc'])) $bcc .= ','.$arrEmailInfo['event_bcc'];
+							$from = $arrEmailInfo['event_from'];
 							$subject = $arrEmailInfo['event_subject'];
 							$content = $arrEmailInfo['event_content'];
 							$content = replaceContent($content,NULL,$practiceId,NULL,$jobId);
 							
 							include_once(MAIL);
-							send_mail($to, $cc, $subject, $content);
-							
+							send_mail($from, $to, $cc, $bcc, $subject, $content);
 						}
-					/* send mail function ends here */
+						/* send mail function ends here */
 					}
 					
-					$objCallData->sql_update($_REQUEST["jobId"]);
+					$objCallData->sql_update($jobId);
 
-					header('Location: job.php?a=editJob&jobId='.$_REQUEST["jobId"]);
+					header('Location: job.php');
 					break;
 					
 				case "deleteJob":
@@ -186,18 +182,18 @@ if($_SESSION['validUser']) {
 						//It will Get Email Id from Which Email Id the Email will Send.
 						$jobId = $_REQUEST['jobId'];
 						$practiceId = $objCallData->fetchPracticeId($jobId);
-				
 						$toEmail = get_email_id($practiceId);
-				
 						$to = $toEmail;
 						$cc = $arrEmailInfo['event_cc'];
+						$bcc = fetch_prac_designation($practiceId,true);
+						if(!empty($arrEmailInfo['event_bcc'])) $bcc .= ','.$arrEmailInfo['event_bcc'];
+						$from = $arrEmailInfo['event_from'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];	
 						$content = replaceContent($content,NULL,$practiceId,NULL,$jobId);
 						
 						include_once(MAIL);
-						send_mail($to, $cc, $subject, $content);
-						
+						send_mail($from, $to, $cc, $bcc, $subject, $content);
 					}
 					/* send mail function ends here */
 					
@@ -255,22 +251,23 @@ if($_SESSION['validUser']) {
 					$objCallData->send_mail_practice($_REQUEST['jobId']);
 
 					//It will Get All Details in array format for Send Email	
-					$arrEmailInfo = get_email_info('job.php?sql=sendMail');
+					$arrEmailInfo = get_email_info('NEWQR');
 					
 					//It will Get Email Id from Which Email Id the Email will Send.
 					$jobId = $_REQUEST['jobId'];
 					$practiceId = $objCallData->fetchPracticeId($jobId);
-			
 					$toEmail = get_email_id($practiceId);
-			
 					$to = $toEmail;
 					$cc = $arrEmailInfo['event_cc'];
+					$bcc = fetch_prac_designation($practiceId,true,false,true,true);
+					if(!empty($arrEmailInfo['event_bcc'])) $bcc .= ','.$arrEmailInfo['event_bcc'];
+					$from = $arrEmailInfo['event_from'];
 					$subject = $arrEmailInfo['event_subject'];
 					$content = $arrEmailInfo['event_content'];	
 					$content = replaceContent($content,NULL,NULL,NULL,$jobId);
 					
 					include_once(MAIL);
-					send_mail($to, $cc, $subject, $content);
+					send_mail($from, $to, $cc, $bcc, $subject, $content);
 					/* send mail function ends here */
 
 					header('Location: job.php?a=queries&jobId='.$jobId);

@@ -113,30 +113,20 @@ switch ($sql)
 		$returnPath = $objScr->upload_document();
 		
 		/* send mail function starts here */
-		$pageCode = 'NEWDC';	
-		
+
 		// check if event is active or inactive [This will return TRUE or FALSE as per result]
-		$flagSet = getEventStatus($pageCode);
+		$flagSet = getEventStatus('NEWDC');
 		
 		// if event is active it go for mail function
 		if($flagSet) {
 			//It will Get All Details in array format for Send Email	
-			$arrEmailInfo = get_email_info($pageCode);
-			
-			$arrIds = $objScr->fetch_manager_ids($_REQUEST['lstJob']);
-			
-			// TO mail parameter
-			$srManagerEmail = fetchStaffInfo($arrIds[0]['sr_manager'], 'email');
-			$IndiaManagerEmail = fetchStaffInfo($arrIds[0]['india_manager'], 'email');
+			$arrEmailInfo = get_email_info('NEWDC');
 
 			// fetch email id of sr manager & india manager of practice
-			$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
-			$arrPanelInfo = stringToArray('~', $strPanelInfo);
-			$srManagerEmail = $arrPanelInfo[0];
-			$inManagerEmail = $arrPanelInfo[2];
-			
-			$to = $srManagerEmail.",".$inManagerEmail;
+			$to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
 			$cc = $arrEmailInfo['event_cc'];
+			$bcc = $arrEmailInfo['event_bcc'];
+			$from = $arrEmailInfo['event_from'];
 			$subject = $arrEmailInfo['event_subject'];
 			$content = $arrEmailInfo['event_content'];
 
@@ -153,7 +143,7 @@ switch ($sql)
 			$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_REQUEST['lstJob']);
 
 			include_once(MAIL);
-			send_mail($to, $cc, $subject, $content);
+			send_mail($from, $to, $cc, $bcc, $subject, $content);
 		}
 		/* send mail function ends here */		
 

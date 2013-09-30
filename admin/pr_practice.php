@@ -32,8 +32,6 @@ if($_SESSION['validUser']) {
 
 			switch ($sql) {
 				case "insert":
-
-					
 					// check if email address is unique
 					$flagExists = $objCallData->checkEmailExists($_REQUEST['email']);
 
@@ -41,8 +39,6 @@ if($_SESSION['validUser']) {
 						header("Location: pr_practice.php?a=add&flagErrMsg=Y");
 						exit;
 					}
-					
-				
 					$practiceId = $objCallData->sql_insert();
 
 					/* send mail function starts here */
@@ -58,12 +54,14 @@ if($_SESSION['validUser']) {
 							$srManagerEmail = fetchStaffInfo($_REQUEST["lstSrManager"], 'email');
 						}
 						$to = $srManagerEmail;
+						$from = $arrEmailInfo['event_from'];
 						$cc = $arrEmailInfo['event_cc'];
+						$bcc = $arrEmailInfo['event_bcc'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
 						$content = replaceContent($content, $_REQUEST["lstSalesPerson"], $practiceId);
 						include_once(MAIL);
-						send_mail($to, $cc, $subject, $content);
+						send_mail($from, $to, $cc, $bcc, $subject, $content);
 					}
 					/* send mail function ends here */
 					header('location: pr_practice.php');
@@ -71,6 +69,7 @@ if($_SESSION['validUser']) {
 
 				case "update":
 					$objCallData->sql_update();
+					header('location: pr_practice.php');
 					break;
 
 				case "delete":

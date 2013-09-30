@@ -30,19 +30,16 @@ switch ($sql) {
 				$arrEmailInfo = get_email_info($pageCode);
 				
 				// fetch email id of sr manager & sales person of practice
-				$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
-				$arrPanelInfo = stringToArray('~', $strPanelInfo);
-				$srManagerEmailId = $arrPanelInfo[0];
-				$salePersonEmailId = $arrPanelInfo[1];
-
-				$to = $srManagerEmailId.','.$salePersonEmailId;
+				$to = fetch_prac_designation($_SESSION['PRACTICEID'],true,true,true,true);
 				$cc = $arrEmailInfo['event_cc'];
+				$bcc = $arrEmailInfo['event_bcc'];
+				$from = $arrEmailInfo['event_from'];
 				$subject = $arrEmailInfo['event_subject'];
 				$content = $arrEmailInfo['event_content'];
 				$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], $clientId);
 				
 				include_once(MAIL);
-				send_mail($to, $cc, $subject, $content);
+				send_mail($from, $to, $cc, $bcc, $subject, $content);
 			}
 			/* send mail function ends here */
 			header("location: clients.php");

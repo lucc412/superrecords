@@ -68,7 +68,7 @@ function validateFormOnSubmit() {
 	}
 
 	else if (document.objForm.lstJob.value == "") {
-		alert("Select Job");
+		alert("Select Job Type");
 		document.objForm.lstJob.focus();
 		flagReturn = false;
 	}

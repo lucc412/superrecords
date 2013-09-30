@@ -152,7 +152,7 @@ class Job_Class extends Database
 		return $arrTypes;
 	} 
 
-	// Function to fetch all Queries
+	// Function to fetch practice id
 	public function fetchPracticeId($jobId)
 	{
 		$qrySel = "SELECT pr.id practiceId
@@ -178,6 +178,20 @@ class Job_Class extends Database
 			$arrQuery[$rowData['query_id']] = $rowData;
 		}
 		return $arrQuery;	
+	} 
+
+	// Function to fetch old job status
+	public function getJobStatus($jobId)
+	{
+		$qrySel = "SELECT jb.job_status_id
+					FROM job jb
+					WHERE jb.job_id = {$jobId}";
+
+		$fetchResult = mysql_query($qrySel);		
+		$fetchRow = mysql_fetch_row($fetchResult);
+		$jobStatus = $fetchRow[0];
+
+		return $jobStatus;
 	} 
 
 	// function to fetch contact name as per user email address

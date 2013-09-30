@@ -163,7 +163,7 @@
 		<tr>
 			<td class="hr">Manager Comp</td>
 			<td class="dr"><select name="lstManager">
-					<option value="">Select Manager Comp</option><?php
+					<option value="0">Select Manager Comp</option><?php
 					foreach($objCallData->arrInManager AS $typeId => $typeDesc){
 						$selectStr = '';
 						if($typeId == $arrPracticeData['india_manager']) $selectStr = 'selected';
@@ -176,7 +176,7 @@
 		<tr>
 			<td class="hr">Manager Audit</td>
 			<td class="dr"><select name="lstAuditManager">
-					<option value="">Select Manager Audit</option><?php
+					<option value="0">Select Manager Audit</option><?php
 					foreach($objCallData->arrAuditMngr AS $typeId => $typeDesc){
 						$selectStr = '';
 						if($typeId == $arrPracticeData['audit_manager']) $selectStr = 'selected';

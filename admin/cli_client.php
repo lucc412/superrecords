@@ -35,24 +35,19 @@ if($_SESSION['validUser']) {
 				case "insert":
 
 					// insert new client
-					$objCallData->sql_insert();
-				
-					$srManager = $_REQUEST['lstSrManager'];
-					$salePerson = $_REQUEST['lstSalesPerson'];
+					$clientId = $objCallData->sql_insert();
+					$arrPracInfo = $objCallData->fetchPracticeInfo($clientId);
+
+					$srManager = $arrPracInfo[1];
 					$practiceId = $_REQUEST['lstPractice'];
 					$clientName = $_REQUEST['cliName'];
 				
 					/* send mail function starts here */
-					$pageCode = 'NEWCL';
-					// check if event is active or inactive [This will return TRUE or FALSE as per result]
-					$flagSet = getEventStatus($pageCode);
-					// if event is active it go for mail function
+
+					// new client added
+					$flagSet = getEventStatus('NEWCL');
 					if($flagSet) {
-
-						// It will Get All Details in array format for Send Email	
-						$arrEmailInfo = get_email_info($pageCode);
-
-						// fetch email id of sr manager & sales person of practice
+						$arrEmailInfo = get_email_info('NEWCL');
 						$to = fetch_prac_designation($practiceId,true,true,true,true);
 						$cc = $arrEmailInfo['event_cc'];
 						$bcc = $arrEmailInfo['event_bcc'];
@@ -61,9 +56,65 @@ if($_SESSION['validUser']) {
 						$content = $arrEmailInfo['event_content'];
 						$content = replaceContent($content, NULL,$practiceId,NULL,NULL);
 						$content = str_replace('CLIENTNAME',$clientName,$content);
-						//It will include send_mail.php to send Email.
 						include_once(MAIL);
 						send_mail($from, $to, $cc, $bcc, $subject, $content);
+					}
+
+					// Sr. Accountant Comp assigned to client
+					$flagSet = getEventStatus('COMCL');
+					if($flagSet) {
+						if(!empty($_REQUEST['lstSrAccntComp'])) {
+							$arrEmailInfo = get_email_info('COMCL');
+							$srManagerEmail = fetchStaffInfo($srManager, 'email');
+							$srCompEmail = fetchStaffInfo($_REQUEST["lstSrAccntComp"], 'email');
+							$to = $srManagerEmail.','.$srCompEmail;
+							$cc = $arrEmailInfo['event_cc'];
+							$bcc = $arrEmailInfo['event_bcc'];
+							$from = $arrEmailInfo['event_from'];
+							$subject = $arrEmailInfo['event_subject'];
+							$content = $arrEmailInfo['event_content'];
+							$content = str_replace('CLIENTNAME',$clientName,$content);
+							include_once(MAIL);
+							send_mail($from, $to, $cc, $bcc, $subject, $content);
+						}
+					}
+
+					// Sr. Accountant Audit assigned to client
+					$flagSet = getEventStatus('AUDCL');
+					if($flagSet) {
+						if(!empty($_REQUEST['lstSrAccntAudit'])) {
+							$arrEmailInfo = get_email_info('AUDCL');
+							$srManagerEmail = fetchStaffInfo($srManager, 'email');
+							$srCompEmail = fetchStaffInfo($_REQUEST["lstSrAccntAudit"], 'email');
+							$to = $srManagerEmail.','.$srCompEmail;
+							$cc = $arrEmailInfo['event_cc'];
+							$bcc = $arrEmailInfo['event_bcc'];
+							$from = $arrEmailInfo['event_from'];
+							$subject = $arrEmailInfo['event_subject'];
+							$content = $arrEmailInfo['event_content'];
+							$content = str_replace('CLIENTNAME',$clientName,$content);
+							include_once(MAIL);
+							send_mail($from, $to, $cc, $bcc, $subject, $content);
+						}
+					}
+
+					// Jnr. Accountant Comp assigned to client
+					$flagSet = getEventStatus('JNRCL');
+					if($flagSet) {
+						if(!empty($_REQUEST['lstTeamMember'])) {
+							$arrEmailInfo = get_email_info('JNRCL');
+							$srManagerEmail = fetchStaffInfo($srManager, 'email');
+							$srCompEmail = fetchStaffInfo($_REQUEST["lstTeamMember"], 'email');
+							$to = $srManagerEmail.','.$srCompEmail;
+							$cc = $arrEmailInfo['event_cc'];
+							$bcc = $arrEmailInfo['event_bcc'];
+							$from = $arrEmailInfo['event_from'];
+							$subject = $arrEmailInfo['event_subject'];
+							$content = $arrEmailInfo['event_content'];
+							$content = str_replace('CLIENTNAME',$clientName,$content);
+							include_once(MAIL);
+							send_mail($from, $to, $cc, $bcc, $subject, $content);
+						}
 					}
 					/* send mail function ends here */
 					
@@ -71,6 +122,79 @@ if($_SESSION['validUser']) {
 					break;
 
 				case "update":
+					$arrPracInfo = $objCallData->fetchPracticeInfo($_REQUEST['recid']);
+					$practiceId = $arrPracInfo[0];
+					$srManager = $arrPracInfo[1];
+
+					// Sr. Accountant Comp assigned to client
+					$flagSet = getEventStatus('COMCL');
+					if($flagSet) {
+						$newCompManager = $_REQUEST['lstSrAccntComp'];
+						if(!empty($newCompManager)) {
+							$oldCompManager = $objCallData->fetchManager($_REQUEST['recid'], 'sr_accnt_comp');
+							if($oldCompManager != $newCompManager) {
+								$arrEmailInfo = get_email_info('COMCL');
+								$srManagerEmail = fetchStaffInfo($srManager, 'email');
+								$compManagerEmail = fetchStaffInfo($_REQUEST["lstSrAccntComp"], 'email');
+								$to = $srManagerEmail.','.$compManagerEmail;
+								$cc = $arrEmailInfo['event_cc'];
+								$bcc = $arrEmailInfo['event_bcc'];
+								$from = $arrEmailInfo['event_from'];
+								$subject = $arrEmailInfo['event_subject'];
+								$content = $arrEmailInfo['event_content'];
+								$content = replaceContent($content,NULL,NULL,$_REQUEST['recid']);
+								include_once(MAIL);
+								send_mail($from, $to, $cc, $bcc, $subject, $content);
+							}
+						}
+					}
+
+					// Sr. Accountant Audit assigned to client
+					$flagSet = getEventStatus('AUDCL');
+					if($flagSet) {
+						$newCompManager = $_REQUEST['lstSrAccntAudit'];
+						if(!empty($newCompManager)) {
+							$oldCompManager = $objCallData->fetchManager($_REQUEST['recid'], 'sr_accnt_audit');
+							if($oldCompManager != $newCompManager) {
+								$arrEmailInfo = get_email_info('AUDCL');
+								$srManagerEmail = fetchStaffInfo($srManager, 'email');
+								$auditManagerEmail = fetchStaffInfo($_REQUEST["lstSrAccntAudit"], 'email');
+								$to = $srManagerEmail.','.$auditManagerEmail;
+								$cc = $arrEmailInfo['event_cc'];
+								$bcc = $arrEmailInfo['event_bcc'];
+								$from = $arrEmailInfo['event_from'];
+								$subject = $arrEmailInfo['event_subject'];
+								$content = $arrEmailInfo['event_content'];
+								$content = replaceContent($content,NULL,NULL,$_REQUEST['recid']);
+								include_once(MAIL);
+								send_mail($from, $to, $cc, $bcc, $subject, $content);
+							}
+						}
+					}
+
+					// Jnr. Accountant Comp assigned to client
+					$flagSet = getEventStatus('JNRCL');
+					if($flagSet) {
+						$newCompManager = $_REQUEST['lstTeamMember'];
+						if(!empty($newCompManager)) {
+							$oldCompManager = $objCallData->fetchManager($_REQUEST['recid'], 'team_member');
+							if($oldCompManager != $newCompManager) {
+								$arrEmailInfo = get_email_info('JNRCL');
+								$srManagerEmail = fetchStaffInfo($srManager, 'email');
+								$compManagerEmail = fetchStaffInfo($_REQUEST["lstTeamMember"], 'email');
+								$to = $srManagerEmail.','.$compManagerEmail;
+								$cc = $arrEmailInfo['event_cc'];
+								$bcc = $arrEmailInfo['event_bcc'];
+								$from = $arrEmailInfo['event_from'];
+								$subject = $arrEmailInfo['event_subject'];
+								$content = $arrEmailInfo['event_content'];
+								$content = replaceContent($content,NULL,NULL,$_REQUEST['recid']);
+								include_once(MAIL);
+								send_mail($from, $to, $cc, $bcc, $subject, $content);
+							}
+						}
+					}
+
 					$objCallData->sql_update();
 					header('location: cli_client.php');
 					break;

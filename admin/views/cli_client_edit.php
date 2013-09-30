@@ -106,7 +106,7 @@
 			<td class="dr" id="tdAuditManager"><?=$arrEmployees[$arrClientData['audit_manager']]?></td>
 		</tr>
                 <tr>
-			<td class="hr">Sr.Accountant Comp</td>
+			<td class="hr">Sr. Accountant Comp</td>
 			<td class="dr"><select name="lstSrAccntComp">
 					<option value="">Select Sr.Accountant Comp</option><?php
 					foreach($objCallData->arrSrAccntComp AS $staffId => $staffName){
@@ -115,33 +115,33 @@
 						?><option <?=$selectStr?> value="<?=$staffId?>"><?=$staffName?></option><?
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select team member for Client.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Sr. Accountant Comp of client.</span></a>
 			</td>
 		</tr>
-                <tr>
-			<td class="hr">Sr.Accountant Audit</td>
+        <tr>
+			<td class="hr">Sr. Accountant Audit</td>
 			<td class="dr"><select name="lstSrAccntAudit">
-					<option value="">Select Sr.Accountant Audit</option><?php
+					<option value="">Select Sr. Accountant Audit</option><?php
 					foreach($objCallData->arrSrAccntAudit AS $staffId => $staffName){
 						$selectStr = '';
 						if($staffId == $arrClientData['sr_accnt_audit']) $selectStr = 'selected';
 						?><option <?=$selectStr?> value="<?=$staffId?>"><?=$staffName?></option><?
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select team member for Client.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Sr. Accountant Audit of client.</span></a>
 			</td>
 		</tr>
-                <tr>
-			<td class="hr">Jnr.Accountant Comp</td>
+        <tr>
+			<td class="hr">Jnr. Accountant Comp</td>
 			<td class="dr"><select name="lstTeamMember">
-					<option value="">Select Jnr.Accountant Comp</option><?php
+					<option value="">Select Jnr. Accountant Comp</option><?php
 					foreach($objCallData->arrTeamMember AS $staffId => $staffName){
 						$selectStr = '';
 						if($staffId == $arrClientData['team_member']) $selectStr = 'selected';
 						?><option <?=$selectStr?> value="<?=$staffId?>"><?=$staffName?></option><?
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select team member for Client.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Jnr. Accountant Comp for Client.</span></a>
 			</td>
 		</tr>
                 <tr>

@@ -234,15 +234,15 @@
 			<td class="dr" id="tdAuditManager"><?=$arrEmployees[$arrTaskData['audit_manager']]?></td>
 		</tr>
 		<tr>
-			<td class="hr">Jnr.Accountant Comp</td>
+			<td class="hr">Jnr. Accountant Comp</td>
 			<td class="dr" id="tdTeamMember"><?=$arrEmployees[$arrTaskData['team_member']]?></td>
 		</tr>
                 <tr>
-			<td class="hr">Sr.Accountant Comp</td>
+			<td class="hr">Sr. Accountant Comp</td>
 			<td class="dr" id="tdSrAcntComp"><?=$arrEmployees[$arrTaskData['sr_accnt_comp']]?></td>
 		</tr>
                 <tr>
-			<td class="hr">Sr.Accountant Audit</td>
+			<td class="hr">Sr. Accountant Audit</td>
 			<td class="dr" id="tdSrAcntAudit"><?=$arrEmployees[$arrTaskData['sr_accnt_audit']]?></td>
 		</tr>
 		<tr>

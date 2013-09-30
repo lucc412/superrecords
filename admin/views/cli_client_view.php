@@ -46,15 +46,15 @@
                 <td class="dr" id="tdAuditManager"><?=$arrEmployees[$arrClientData['audit_manager']]?></td>
         </tr>
         <tr>
-		<td class="hr">Sr.Accountant Comp</td>
+		<td class="hr">Sr. Accountant Comp</td>
 		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sr_accnt_comp"]])?></td>
 	</tr>
         <tr>
-		<td class="hr">Sr.Accountant Audit</td>
+		<td class="hr">Sr. Accountant Audit</td>
 		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["sr_accnt_audit"]])?></td>
 	</tr>
 	<tr>
-		<td class="hr">Jnr.Accountant Comp</td>
+		<td class="hr">Jnr. Accountant Comp</td>
 		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrClientData["team_member"]])?></td>
 	</tr>
         

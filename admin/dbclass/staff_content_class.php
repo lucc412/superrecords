@@ -427,27 +427,6 @@ class staffContentList extends Database
 							<a class="tooltip" href="#"><img src="images/help.png"><span class="help">if checked the user is disabled, it cannot access the SR App.</span></a>
 						</td>
 					</tr>
-					<!--<tr>
-						<td class="hr">Can view all data<font style="color:red;" size="2"></font></td>
-						<td class="dr"><input type="checkbox" class="checkboxClass" name="stf_Viewall" id="stf_Viewall" <?php if($row["stf_Viewall"]=='Y'){echo "checked";} ?> >
-							<input type="hidden" name="chkViewall" />
-							<a class="tooltip" href="#"><img src="images/help.png"><span class="help">This is used to enable the user to view all data without any limitation similar to Administrator.  But this conditions will apply to only their enabled forms.</span></a>
-						</td>
-					</tr>
-					<tr>
-						<td class="hr">Document Upload / Download</td>
-						<td class="dr"><input type="checkbox" class="checkboxClass" name="stf_Upload" id="stf_Upload" <?php if($row["stf_Upload"]=='Y'){echo "checked";} ?> >
-							<input type="hidden" name="chkUpload" />
-							<a class="tooltip" href="#"><img src="images/help.png"><span class="help">This is used to enable the user to upload the documents to their corresponding clients via CMS admin as well as to view the documents in client's grid list (Clients -> Manage Clients).</span></a>
-						</td>
-					</tr>
-					<tr>
-						<td class="hr">Client Login & Status Update</td>
-						<td class="dr"><input type="checkbox" class="checkboxClass" name="stf_LoginStatus" id="stf_LoginStatus" <?php if($row["stf_LoginStatus"]=='Y'){echo "checked";} ?> >
-							<input type="hidden" name="chkLoginStatus" />
-							<a class="tooltip" href="#"><img src="images/help.png"><span class="help">This is used to enable the user to Active / In-Active clients.</span></a>
-						</td>
-					</tr>-->
 					<br><?
 
 					//show permission settings

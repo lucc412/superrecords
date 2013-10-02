@@ -1,7 +1,7 @@
 <?php
 //*************************************************************************************************
 //  Task          : Page for Listing of Job.
-//  Modified By   : Dhiraj Sahu
+//  Modified By   : Siddhesh Champaneri
 //  Created on    : 01-Jan-2013 
 //  Last Modified : 07-Jan-2013 
 //************************************************************************************************
@@ -223,7 +223,7 @@ switch ($a)
 			}  	
 
 			include(JOBNAVIGATION);
-
+                        
 			 ?><br/><br/><br/><form method="POST" name="frmJobDetails" action="job.php?a=editJob&jobId=<?=$_REQUEST["jobId"]?>">
 				<button name="btnTasks" value="View Associated Tasks" style="width:215px;" onClick="JavaScript:newPopup('tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>');">View Associated Tasks</button>
 			</form>
@@ -248,7 +248,12 @@ switch ($a)
 					<td><?
 						$dbPeriod = $arrJob[$_REQUEST["jobId"]]["period"];
 						$optionYear = "2010";
-						?><select name="txtPeriod" id="txtPeriod" title="Select period">
+                                                if($_SESSION["usertype"] == "Staff") {
+                                                $arrFeatures = $commonUses->getFeatureVisibility('period');
+                                                }else
+                            $arrFeatures['stf_visibility'] = 1;
+                                                if($arrFeatures['stf_visibility'] == 1)
+						{?><select name="txtPeriod" id="txtPeriod" title="Select period">
 							<option value="">Select Period</option><?
 							while($optionYear <= date("Y")) {
 								if(time() < strtotime("01 July ".$optionYear)) break;
@@ -258,6 +263,9 @@ switch ($a)
 								?><option value="<?=$optPeriod?>" <?=$strPeriod?>><?=$optPeriod?></option><?php 
 							}
 						?></select>
+                                                <?php }else{
+                                                    echo $dbPeriod;
+                                                } ?>
 					</td>
 					
 					</td>
@@ -348,7 +356,7 @@ switch ($a)
 		$objCallData->arrDocument = $objCallData->fetchDocument($_REQUEST["jobId"]);
 
 		include(JOBNAVIGATION);
-		?><table class="fieldtable_outer pdT80" align="center">
+		?><table class="fieldtable pdT50" width="100%" align="center"  border="0" cellspacing="1" cellpadding="4" >
 
 			<table class="fieldtable" align="center" width="100%" border="0" cellspacing="1" cellpadding="4" >
 			<tr class="fieldheader">
@@ -488,9 +496,17 @@ switch ($a)
 	// **********************************************************
 	// Case to load Reports tab, begins here.	
 	case "reports":
-		
-		$objCallData->arrReport = $objCallData->fetchReport();
-		include(JOBNAVIGATION);
+            
+                $objCallData->arrReport = $objCallData->fetchReport();
+		include(JOBNAVIGATION);    
+                if($_SESSION["usertype"] == "Staff") {
+                $arrFeatures = $commonUses->getFeatureVisibility('report');
+                }else
+                            $arrFeatures['stf_visibility'] = 1;
+                
+		if($arrFeatures['stf_visibility'] == 1)
+                {
+                
 		
 		?><table class="fieldtable pdT50" width="100%" align="center"  border="0" cellspacing="1" cellpadding="4" >
 		<tr class="fieldheader">
@@ -533,7 +549,18 @@ switch ($a)
 				<button onclick="JavaScript:newPopup('job.php?a=uploadReports&jobId=<?=$_REQUEST["jobId"]?>');">Upload</button>
 			</td></tr>
 		</table><?
-	
+                }
+                else { 
+                    ?>
+                <table class="fieldtable pdT50" width="100%" align="center"  border="0" cellspacing="1" cellpadding="4"  >
+                    <tr>
+                        <td>
+                            <? echo 'Please contact your team leader or administrator for rights'; ?>
+                        </td>
+                    </tr>
+                </table>
+                    
+                <? } 
 		break;
 	// Case to load Reports tab, Ends here.		
 	// **********************************************************
@@ -634,9 +661,15 @@ switch ($a)
 			// check if event is active or inactive [This will return TRUE or FALSE as per result]
 			$pageCode = "NEWQR";	
 			$flagSet = getEventStatus($pageCode);
-			
-			if($flagSet) {
-				?><span style="margin-left:764px;">
+                        
+                        if($_SESSION["usertype"] == "Staff") {
+                            $arrFeatures = $commonUses->getFeatureVisibility('send_mail');
+                        }else
+                            $arrFeatures['stf_visibility'] = 1;
+                                
+                        if(($flagSet === TRUE) && ($arrFeatures['stf_visibility'] == 1)) {
+				?>
+                                <span style="margin-left:764px;">
 				   <button name="sendEmail" style="width: 222px" onclick="javascript:redirectURL('job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>')">Send Mail to Practice</button>
 				</span><br>
 
@@ -647,6 +680,7 @@ switch ($a)
 				}
 			   ?></span><?
 			}
+                        
 	    ?></div>	
 		<br>
 		
@@ -748,13 +782,20 @@ switch ($a)
 						</td>
 						<td class="<?=$trClass?>" align="center" width="15%">
 							<input type="hidden" name="flagPost" id="flagPost" value="<?=$arrInfo['flag_post']?>"><?
-							
-						if($arrInfo["flag_post"] == 'N'){
-							?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Post</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to post this query to practice</span></a><?
-						}
-						else{	
-							?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Unpost</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to unpost this query to practice</span></a><?
-						}
+                                                if($_SESSION["usertype"] == "Staff") {
+                                                $arrFeatures = $commonUses->getFeatureVisibility('post_queries');
+                                                }else
+                                                $arrFeatures['stf_visibility'] = 1;
+                                                if($arrFeatures['stf_visibility'] == 1)
+                                                {
+                                                    if($arrInfo["flag_post"] == 'N'){
+                                                            ?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Post</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to post this query to practice</span></a><?
+                                                    }
+                                                    else{	
+                                                            ?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Unpost</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to unpost this query to practice</span></a><?
+                                                    }
+                                                }
+                                                
 						?></td>	
 						<td class="<?=$trClass?>" align="center"><?
 							  $jsFunc = "javascript:performdelete('job.php?sql=deleteQuery&jobId=".$_REQUEST["jobId"]."&queryId=".$queryId."');";

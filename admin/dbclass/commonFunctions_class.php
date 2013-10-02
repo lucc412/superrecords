@@ -863,6 +863,19 @@ class commonUse extends Database
 			$cont = str_replace($srch, $rep, $src);
 			return $cont;
 		}
+                
+                function getFeatureVisibility($ftName)
+                {
+                    $ftQry = "SELECT * FROM stf_staff_features WHERE stf_options = '".$ftName."'";
+                    $fetchData = mysql_query($ftQry);
+                    
+                    while($res = mysql_fetch_assoc($fetchData)){
+                        $arrFeatures = $res;
+                    }
+                        
+                    return $arrFeatures;
+                }
+                    
     }
     $commonUses = new commonUse();
 ?>

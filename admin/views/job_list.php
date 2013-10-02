@@ -108,7 +108,7 @@ switch ($a)
 					<td class="hr">Job Type<font style="color:red;" size="2">*</font></td>
 					<td colspan="2">
 						<select id="lstJob" name="lstJob">
-							<option value="">Select Job</option><?php
+							<option value="">Select Job Type</option><?php
 							foreach($objCallData->arrJobType AS $type_id => $job_type) {
 								?><option value="<?=$type_id?>"><?=$job_type?></option><?php 
 							} 
@@ -659,27 +659,32 @@ switch ($a)
 			<img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom" height="22px" style="margin-top:-5px;" >&nbsp;Add Record</a><?
 
 			// check if event is active or inactive [This will return TRUE or FALSE as per result]
+
 			$pageCode = "NEWQR";	
 			$flagSet = getEventStatus($pageCode);
                         
-                        if($_SESSION["usertype"] == "Staff") {
-                            $arrFeatures = $commonUses->getFeatureVisibility('send_mail');
-                        }else
-                            $arrFeatures['stf_visibility'] = 1;
-                                
-                        if(($flagSet === TRUE) && ($arrFeatures['stf_visibility'] == 1)) {
-				?>
-                                <span style="margin-left:764px;">
-				   <button name="sendEmail" style="width: 222px" onclick="javascript:redirectURL('job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>')">Send Mail to Practice</button>
-				</span><br>
+                        if($flagSet === TRUE)
+                        {    
+                            if($_SESSION["usertype"] == "Staff") {
+                                $arrFeatures = $commonUses->getFeatureVisibility('send_mail');
+                            }else
+                                $arrFeatures['stf_visibility'] = 1;
 
-				<span class="boldtext"><?php 
-				$lastDate = $objCallData->view_send_mail_practice($_REQUEST["jobId"]);
-				if($lastDate != '0000-00-00') {
-					echo 'Last Sent : '.date('d/m/Y', strtotime($lastDate));
-				}
-			   ?></span><?
-			}
+                            if($arrFeatures['stf_visibility'] == 1) {
+                                    ?>
+                                    <span style="margin-left:764px;">
+
+                                       <button name="sendEmail" style="width: 222px" onclick="javascript:redirectURL('job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>')">Send Mail to Practice</button>
+                                    </span><br>
+
+                                    <span class="boldtext"><?php 
+                                    $lastDate = $objCallData->view_send_mail_practice($_REQUEST["jobId"]);
+                                    if($lastDate != '0000-00-00') {
+                                            echo 'Last Sent : '.date('d/m/Y', strtotime($lastDate));
+                                    }
+                               ?></span><?
+                            }
+                        }
                         
 	    ?></div>	
 		<br>

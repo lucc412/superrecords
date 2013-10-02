@@ -145,7 +145,7 @@ class SR_Report {
 				break;
 		}
 
-		$qrySel = "SELECT {$strColumns}
+		print $qrySel = "SELECT {$strColumns}
 				   FROM {$reportPageName} tbl {$otherTable}
 				   WHERE 1
 				   {$strFirstWhr}

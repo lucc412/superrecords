@@ -106,17 +106,17 @@
 	</tr>
         
         <tr>
-		<td class="hr">Sr.Accountant Comp</td>
+		<td class="hr">Sr. Accountant Comp</td>
 		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["sr_accnt_comp"]])?></td>
 	</tr>
         
         <tr>
-		<td class="hr">Sr.Accountant Audit</td>
+		<td class="hr">Sr. Accountant Audit</td>
 		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["sr_accnt_audit"]])?></td>
 	</tr>
 
         <tr>
-		<td class="hr">Jnr.Accountant Comp</td>
+		<td class="hr">Jnr. Accountant Comp</td>
 		<td class="dr"><?=htmlspecialchars($arrEmployees[$arrTaskData["team_member"]])?></td>
 	</tr>
         

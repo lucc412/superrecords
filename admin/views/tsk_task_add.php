@@ -169,19 +169,19 @@
 		</tr>
                 <tr>
 			<td class="hr">Manager Audit</td>
-			<td class="dr" id="tdInManager"><?=$auditManagerEmail?></td>
+			<td class="dr" id="tdAuditManager"><?=$auditManagerEmail?></td>
 		</tr>
 		<tr>
-			<td class="hr">Jnr.Accountant Comp</td>
+			<td class="hr">Jnr. Accountant Comp</td>
 			<td class="dr" id="tdTeamMember"><?=$teamMemberEmail?></td>
 		</tr>
                 <tr>
-			<td class="hr">Sr.Accountant Comp</td>
-			<td class="dr" id="tdTeamMember"><?=$SrAccntCompEmail?></td>
+			<td class="hr">Sr. Accountant Comp</td>
+			<td class="dr" id="tdSrAcntComp"><?=$SrAccntCompEmail?></td>
 		</tr>
-                <tr>
-			<td class="hr">Sr.Accountant Audit</td>
-			<td class="dr" id="tdTeamMember"><?=$SrAccntAuditEmail?></td>
+        <tr>
+			<td class="hr">Sr. Accountant Audit</td>
+			<td class="dr" id="tdSrAcntAudit"><?=$SrAccntAuditEmail?></td>
 		</tr>
 		<tr>
 			<td class="hr">Sales Person</td>

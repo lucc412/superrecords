@@ -35,11 +35,13 @@ else if(isset($_REQUEST['flgFrgtPass']) && isset($_REQUEST['txtName']) && $_REQU
 		$arrEmailInfo = get_email_info($pageCode);
 		$to = $_REQUEST['txtName'];
 		$cc = $arrEmailInfo['event_cc'];
+		$bcc = $arrEmailInfo['event_bcc'];
+		$from = $arrEmailInfo['event_from'];
 		$subject = $arrEmailInfo['event_subject'];
 		$content = html_entity_decode($arrEmailInfo['event_content']);
 		$content = str_replace("PASSWORD", $prPassword, $content);
 		include_once(MAIL);
-		send_mail($to, $cc, $subject, $content);
+		send_mail($from, $to, $cc, $bcc, $subject, $content);
 		//echo '<script>window.close();</script>';
 		$flagSuccess =  "Y";
 		include(VIEW."forgot_password.php");

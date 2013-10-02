@@ -7,7 +7,7 @@ if($_REQUEST['a'] == 'logout') {
 }
 
 // check if event is active or inactive [This will return TRUE or FALSE as per result]
-$flagSetLink = getEventStatus('home.php');
+$flagSetLink = getEventStatus('FRPAS');
 
 if(isset($_SESSION['PRACTICEID'])) {
 	header('Location: home.php');

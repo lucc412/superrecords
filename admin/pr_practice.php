@@ -32,8 +32,6 @@ if($_SESSION['validUser']) {
 
 			switch ($sql) {
 				case "insert":
-
-					
 					// check if email address is unique
 					$flagExists = $objCallData->checkEmailExists($_REQUEST['email']);
 
@@ -41,36 +39,118 @@ if($_SESSION['validUser']) {
 						header("Location: pr_practice.php?a=add&flagErrMsg=Y");
 						exit;
 					}
-					
-				
 					$practiceId = $objCallData->sql_insert();
 
 					/* send mail function starts here */
-					$pageCode = 'NEWPR';	
-					// check if event is active or inactive [This will return TRUE or FALSE as per result]
-					$flagSet = getEventStatus($pageCode);
-					// if event is active it go for mail function
+
+					// new practice added
+					$flagSet = getEventStatus('NEWPR');
 					if($flagSet) {
-						//It will Get All Details in array format for Send Email	
-						$arrEmailInfo = get_email_info($pageCode);
-						// TO mail parameter
+						$arrEmailInfo = get_email_info('NEWPR');
 						if(!empty($_REQUEST['lstSrManager'])) {
 							$srManagerEmail = fetchStaffInfo($_REQUEST["lstSrManager"], 'email');
 						}
 						$to = $srManagerEmail;
+						$from = $arrEmailInfo['event_from'];
 						$cc = $arrEmailInfo['event_cc'];
+						$bcc = $arrEmailInfo['event_bcc'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
 						$content = replaceContent($content, $_REQUEST["lstSalesPerson"], $practiceId);
 						include_once(MAIL);
-						send_mail($to, $cc, $subject, $content);
+						send_mail($from, $to, $cc, $bcc, $subject, $content);
+					}
+
+					// india manager assigned to practice
+					$flagSet = getEventStatus('COMPR');
+					if($flagSet) {
+						if(!empty($_REQUEST['lstManager'])) {
+							$arrEmailInfo = get_email_info('COMPR');
+							$srManagerEmail = fetchStaffInfo($_REQUEST["lstSrManager"], 'email');
+							$compManagerEmail = fetchStaffInfo($_REQUEST["lstManager"], 'email');
+							$to = $srManagerEmail.','.$compManagerEmail;
+							$cc = $arrEmailInfo['event_cc'];
+							$bcc = $arrEmailInfo['event_bcc'];
+							$from = $arrEmailInfo['event_from'];
+							$subject = $arrEmailInfo['event_subject'];
+							$content = $arrEmailInfo['event_content'];
+							$content = replaceContent($content,NULL,$practiceId,NULL,NULL);
+							include_once(MAIL);
+							send_mail($from, $to, $cc, $bcc, $subject, $content);
+						}
+					}
+
+					// audit manager assigned to practice
+					$flagSet = getEventStatus('AUDPR');
+					if($flagSet) {
+						if(!empty($_REQUEST['lstAuditManager'])) {
+							$arrEmailInfo = get_email_info('AUDPR');
+							$srManagerEmail = fetchStaffInfo($_REQUEST["lstSrManager"], 'email');
+							$auditManagerEmail = fetchStaffInfo($_REQUEST["lstAuditManager"], 'email');
+							$to = $srManagerEmail.','.$auditManagerEmail;
+							$cc = $arrEmailInfo['event_cc'];
+							$bcc = $arrEmailInfo['event_bcc'];
+							$from = $arrEmailInfo['event_from'];
+							$subject = $arrEmailInfo['event_subject'];
+							$content = $arrEmailInfo['event_content'];
+							$content = replaceContent($content,NULL,$practiceId,NULL,NULL);
+							include_once(MAIL);
+							send_mail($from, $to, $cc, $bcc, $subject, $content);
+						}
 					}
 					/* send mail function ends here */
 					header('location: pr_practice.php');
 					break;
 
 				case "update":
+
+					// india manager assigned to practice
+					$flagSet = getEventStatus('COMPR');
+					if($flagSet) {
+						$newCompManager = $_REQUEST['lstManager'];
+						if(!empty($newCompManager)) {
+							$oldCompManager = $objCallData->fetchManager($_REQUEST['recid'], 'india_manager');
+							if($oldCompManager != $newCompManager) {
+								$arrEmailInfo = get_email_info('COMPR');
+								$srManagerEmail = fetchStaffInfo($_REQUEST["lstSrManager"], 'email');
+								$compManagerEmail = fetchStaffInfo($_REQUEST["lstManager"], 'email');
+								$to = $srManagerEmail.','.$compManagerEmail;
+								$cc = $arrEmailInfo['event_cc'];
+								$bcc = $arrEmailInfo['event_bcc'];
+								$from = $arrEmailInfo['event_from'];
+								$subject = $arrEmailInfo['event_subject'];
+								$content = $arrEmailInfo['event_content'];
+								$content = replaceContent($content,NULL,$_REQUEST['recid'],NULL,NULL);
+								include_once(MAIL);
+								send_mail($from, $to, $cc, $bcc, $subject, $content);
+							}
+						}
+					}
+
+					// audit manager assigned to practice
+					$flagSet = getEventStatus('AUDPR');
+					if($flagSet) {
+						$newAudtManager = $_REQUEST['lstAuditManager'];
+						if(!empty($newAudtManager)) {
+							$oldAudtManager = $objCallData->fetchManager($_REQUEST['recid'], 'audit_manager');
+							if($oldAudtManager != $newAudtManager) {
+								$arrEmailInfo = get_email_info('AUDPR');
+								$srManagerEmail = fetchStaffInfo($_REQUEST["lstSrManager"], 'email');
+								$auditManagerEmail = fetchStaffInfo($_REQUEST["lstAuditManager"], 'email');
+								$to = $srManagerEmail.','.$auditManagerEmail;
+								$cc = $arrEmailInfo['event_cc'];
+								$bcc = $arrEmailInfo['event_bcc'];
+								$from = $arrEmailInfo['event_from'];
+								$subject = $arrEmailInfo['event_subject'];
+								$content = $arrEmailInfo['event_content'];
+								$content = replaceContent($content,NULL,$_REQUEST['recid'],NULL,NULL);
+								include_once(MAIL);
+								send_mail($from, $to, $cc, $bcc, $subject, $content);
+							}
+						}
+					}
 					$objCallData->sql_update();
+					header('location: pr_practice.php');
 					break;
 
 				case "delete":

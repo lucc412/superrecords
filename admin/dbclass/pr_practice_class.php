@@ -326,6 +326,16 @@ class Practice_Class extends Database {
 
 		return $pracCode;
 	}
+
+	function fetchManager($pracId, $colManager) {
+
+		$qryDel = "SELECT {$colManager} FROM pr_practice WHERE id = {$pracId}";
+		$fetchResult = mysql_query($qryDel);
+		$rowData = mysql_fetch_row($fetchResult);
+		$pracManager = $rowData[0];
+
+		return $pracManager;
+	}
 }
 
 ?>

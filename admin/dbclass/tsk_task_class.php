@@ -304,7 +304,6 @@ class Task_Class extends Database {
 
 	public function sql_update()
 	{	
-
 		// external due date
 		$arrExtDate = explode("/", $_REQUEST["dateSignedUp"]);
 		$strExtDate = $arrExtDate[2]."-".$arrExtDate[1]."-".$arrExtDate[0];
@@ -351,6 +350,20 @@ class Task_Class extends Database {
 					WHERE task_id = '" . $_REQUEST['recid'] . "'";
 		}			
 		mysql_query($qryUpd);	
+	} 
+
+	// Function to fetch old task status
+	public function getTaskStatus($taskId)
+	{
+		$qrySel = "SELECT tsk.task_status_id
+					FROM task tsk
+					WHERE tsk.task_id = {$taskId}";
+
+		$fetchResult = mysql_query($qrySel);		
+		$fetchRow = mysql_fetch_row($fetchResult);
+		$taskStatus = $fetchRow[0];
+
+		return $taskStatus;
 	} 
 
 	function sql_delete($recid) {

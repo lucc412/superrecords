@@ -68,37 +68,37 @@
 			<td class="hr">Manager Audit</td>
 			<td class="dr" id="tdAuditManager">&nbsp;</td>
 		</tr>
-                <tr>
-			<td class="hr">Sr.Accountant Comp</td>
-			<td class="dr"><select name="lstTeamMember">
-					<option value="">Select Sr.Accountant Comp</option><?php
+        <tr>
+			<td class="hr">Sr. Accountant Comp</td>
+			<td class="dr"><select name="lstSrAccntComp">
+					<option value="">Select Sr. Accountant Comp</option><?php
 					foreach($objCallData->arrSrAccntComp AS $staffId => $staffName){
 						?><option value="<?=$staffId?>"><?=$staffName?></option><?php 
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select team member of client.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Sr. Accountant Comp of client.</span></a>
 			</td>
 		</tr>
-                <tr>
-			<td class="hr">Sr.Accountant Audit</td>
-			<td class="dr"><select name="lstTeamMember">
-					<option value="">Select Sr.Accountant Audit</option><?php
+       <tr>
+			<td class="hr">Sr. Accountant Audit</td>
+			<td class="dr"><select name="lstSrAccntAudit">
+					<option value="">Select Sr. Accountant Audit</option><?php
 					foreach($objCallData->arrSrAccntAudit AS $staffId => $staffName){
 						?><option value="<?=$staffId?>"><?=$staffName?></option><?php 
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select team member of client.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select   Sr. Accountant Audit of client.</span></a>
 			</td>
 		</tr>
 		<tr>
-			<td class="hr">Jnr.Accountant Comp</td>
+			<td class="hr">Jnr. Accountant Comp</td>
 			<td class="dr"><select name="lstTeamMember">
-					<option value="">Select Jnr.Accountant Comp</option><?php
+					<option value="">Select Jnr. Accountant Comp</option><?php
 					foreach($objCallData->arrTeamMember AS $staffId => $staffName){
 						?><option value="<?=$staffId?>"><?=$staffName?></option><?php 
 					} 
 				?></select>
-				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select team member of client.</span></a>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select Jnr. Accountant Comp of client.</span></a>
 			</td>
 		</tr>
                 

@@ -38,7 +38,7 @@ function get_email_id($pr_id)
 function get_email_info($pageCode)
 {
 	//It will Generate Query and will get Require Details From Database
-	$myQuery = "SELECT event_name,event_subject,event_content, event_cc
+	$myQuery = "SELECT event_name,event_subject,event_content, event_cc, event_from, event_bcc
 				FROM email_events 
 				WHERE event_code = '{$pageCode}'";
 	
@@ -65,6 +65,11 @@ function fetchEntityName($entityId, $flagType) {
 		$selStr = "j.job_name name";
 		$frmStr = "job j";
 		$whrStr = "j.job_id = {$entityId}";
+	}
+	else if($flagType == 'T') {
+		$selStr = "t.task_name name";
+		$frmStr = "task t";
+		$whrStr = "t.task_id = {$entityId}";
 	}
 
 	$qrySel = "SELECT {$selStr}
@@ -100,48 +105,49 @@ function fetchStaffInfo($staffId, $flagType) {
 }
 
 // fetch sr manager, india manager, sales manager, team member for selected practice
-function sql_select_panel($practiceId) {
-	$sql = "SELECT sr_manager, india_manager, sales_person
+function fetch_prac_designation($practiceId, $flSrMngr=false, $flSalesPerson=false, $flInMngr=false, $flAdtMngr=false) {
+	
+	// fetch array of name of all employees
+	$arrEmployees = fetchEmployees();
+
+	$sql = "SELECT sr_manager, india_manager, sales_person, audit_manager
 			FROM pr_practice
 			WHERE id=".$practiceId;
 			
 	$res = mysql_query($sql) or die(mysql_error());
-	$count = mysql_num_rows($res);
-
-	if(!empty($count))
-	{
-		// fetch array of name of all employees
-		$arrEmployees = fetchEmployees();
-
-		$rowData = mysql_fetch_assoc($res);
-		$srManager = $arrEmployees[$rowData['sr_manager']];
-		$salesPrson = $arrEmployees[$rowData['sales_person']];
-		$inManager = $arrEmployees[$rowData['india_manager']];
-
-		// set string of srManager, salesPrson, inManager, teamMember
-		$strReturn = $srManager .'~'. $salesPrson .'~'. $inManager;
+	while($rowData = mysql_fetch_assoc($res)) {
+		if($flSrMngr) $arrToEmail[] = $arrEmployees[$rowData['sr_manager']];
+		if($flSalesPerson) $arrToEmail[] = $arrEmployees[$rowData['sales_person']];
+		if($flInMngr) $arrToEmail[] = $arrEmployees[$rowData['india_manager']];
+		if($flAdtMngr) $arrToEmail[] = $arrEmployees[$rowData['audit_manager']];
 	}
-	return $strReturn;
+	$arrToEmail = array_filter($arrToEmail);
+	$strToEmail = implode(',',$arrToEmail);
+	
+	return $strToEmail;
 }
 
 // fetch sr manager, india manager, sales manager, team member for selected practice
-function fetch_team_member($clientId) {
-	$sql = "SELECT team_member
-			FROM client
-			WHERE client_id=".$clientId;
+function fetch_client_designation($jobId, $flTeamMmbr=false, $flSrAcComp=false, $flagSrAcAdt=false) {
+	
+	// fetch array of name of all employees
+	$arrEmployees = fetchEmployees();
+
+	$sql = "SELECT cl.team_member, cl.sr_accnt_comp, cl.sr_accnt_audit
+			FROM client cl, job jb
+			WHERE cl.client_id = jb.client_id
+			AND jb.job_id=".$jobId;
 			
-	$res = mysql_query($sql) or die(mysql_error());
-	$count = mysql_num_rows($res);
-
-	if(!empty($count))
-	{
-		// fetch array of name of all employees
-		$arrEmployees = fetchEmployees();
-
-		$rowData = mysql_fetch_assoc($res);
-		$teamMember = $arrEmployees[$rowData['team_member']];
+	$res = mysql_query($sql) or die(mysql_error()); 
+	while($rowData = mysql_fetch_assoc($res)) {
+		if($flTeamMmbr) $arrCcEmail[] = $arrEmployees[$rowData['team_member']];
+		if($flSrAcComp) $arrCcEmail[] = $arrEmployees[$rowData['sr_accnt_comp']];
+		if($flagSrAcAdt) $arrCcEmail[] = $arrEmployees[$rowData['sr_accnt_audit']];
 	}
-	return $teamMember;
+	$arrCcEmail = array_filter($arrCcEmail);
+	$strCcEmail = implode(',',$arrCcEmail);
+
+	return $strCcEmail;
 }
 
 function fetchEmployees() {	
@@ -158,7 +164,7 @@ function fetchEmployees() {
 } 
 
 // this is used to replace the dynamic variables used in mail content
-function replaceContent($content, $salesPersonId=NULL, $practiceId=NULL, $clientId=NULL, $jobId=NULL) {
+function replaceContent($content, $salesPersonId=NULL, $practiceId=NULL, $clientId=NULL, $jobId=NULL, $taskId=NULL) {
 	
 	// for sales person name
 	if(!empty($salesPersonId)) {
@@ -207,6 +213,12 @@ function replaceContent($content, $salesPersonId=NULL, $practiceId=NULL, $client
 		$queryName = $client_name.'-'.$arrJobParts[1].'-'.$subactivity_name;
 		
 		$content = str_replace('JOBNAME', $queryName, $content);
+	}
+
+	// for task name
+	if(!empty($taskId)) {
+		$taskName = fetchEntityName($taskId, 'T');
+		$content = str_replace('TASKNAME', $taskName, $content);
 	}
 	
 	return $content;	
@@ -304,19 +316,17 @@ function new_job_task_mail()
 		$arrEmailInfo = get_email_info($pageCode);
 
 		// fetch email id of sr manager
-		$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
-		$arrPanelInfo = stringToArray('~', $strPanelInfo);
-		$srManagerEmail = $arrPanelInfo[0];
-		$inManagerEmail = $arrPanelInfo[2];
-
-		$to = $srManagerEmail. ',' .$inManagerEmail;
-		$cc = $arrEmailInfo['event_cc'];
+		$to = fetch_prac_designation($_SESSION['PRACTICEID'],true,true,true,true);
+		$cc = fetch_client_designation($_SESSION['jobId'],true,true,true);
+		if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
+		$bcc = $arrEmailInfo['event_bcc'];
+		$from = $arrEmailInfo['event_from'];
 		$subject = $arrEmailInfo['event_subject'];
 		$content = $arrEmailInfo['event_content'];
 		$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_SESSION['jobId']);
 
 		include_once(MAIL);
-		send_mail($to, $cc, $subject, $content);
+		send_mail($from, $to, $cc, $bcc, $subject, $content);
 	}
 	/* send mail function ends here */	
 		
@@ -333,18 +343,17 @@ function new_job_task_mail()
 		$arrEmailInfo = get_email_info($pageCode);
 
 		// fetch email id of sr manager
-		$strPanelInfo = sql_select_panel($_SESSION['PRACTICEID']);
-		$arrPanelInfo = stringToArray('~', $strPanelInfo);
-		$inManagerEmail = $arrPanelInfo[2];
-
-		$to = $inManagerEmail;
-		$cc = $arrEmailInfo['event_cc'];
+		$to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
+		$cc = fetch_client_designation($_SESSION['jobId'],true,true,true);
+		if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
+		$bcc = $arrEmailInfo['event_bcc'];
+		$from = $arrEmailInfo['event_from'];
 		$subject = $arrEmailInfo['event_subject'];
 		$content = $arrEmailInfo['event_content'];
 		$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_SESSION['jobId']);
 
 		include_once(MAIL);
-		send_mail($to, $cc, $subject, $content);
+		send_mail($from, $to, $cc, $bcc, $subject, $content);
 	}
 	/* send mail function ends here */	
 }

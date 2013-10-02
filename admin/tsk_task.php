@@ -65,20 +65,17 @@ if($_SESSION['validUser']) {
 
 						//It will Get All Details in array format for Send Email	
 						$arrEmailInfo = get_email_info($pageCode);
-
-						// fetch email id of sr manager
-						$strPanelInfo = sql_select_panel($practiceId);
-						$arrPanelInfo = explode('~', $strPanelInfo);
-						$inManagerEmail = $arrPanelInfo[2];
-
-						$to = $inManagerEmail;
-						$cc = $arrEmailInfo['event_cc'];
+						$to = fetch_prac_designation($practiceId,true,false,true,true);
+						$cc = fetch_client_designation($jobId,true,true,true);
+						if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
+						$bcc = $arrEmailInfo['event_bcc'];
+						$from = $arrEmailInfo['event_from'];
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
 						$content = replaceContent($content, NULL, NULL, NULL, $jobId);
 						
 						include_once(MAIL);
-						send_mail($to, $cc, $subject, $content);
+						send_mail($from, $to, $cc, $bcc, $subject, $content);
 					}
 					/* send mail function ends here */
 
@@ -86,7 +83,49 @@ if($_SESSION['validUser']) {
 					break;
 
 				case "update":
+					// set parameters when task is added from Job Page - View Associated tasks
+					if(isset($_REQUEST['jobId']) && !empty($_REQUEST['jobId'])) {
+						$jobId = $_REQUEST["jobId"];
+						$practiceId = $objCallData->arrClientDetails[$clientId]["id"];
+					}
+					// set parameters when task is added from Task page
+					else {
+						$jobId = $_REQUEST["lstJob"];
+						$practiceId = $_REQUEST["lstPractice"];
+					}
+
+					$taskId = $_REQUEST['recid'];
+					$oldTaskStatus = $objCallData->getTaskStatus($taskId);
+					$newTaskStatus = $_POST['lstTaskStatus'];
+					
+					if($oldTaskStatus != $newTaskStatus && $newTaskStatus == '16')
+					{
+						/* send mail function starts here */	
+						$pageCode = 'TSKDN';
+						// check if event is active or inactive [This will return TRUE or FALSE as per result]
+						$flagSet = getEventStatus($pageCode);
+						// if event is active it go for mail function
+						if($flagSet) {
+							//It will Get All Details in array format for Send Email
+							$arrEmailInfo = get_email_info($pageCode);
+							//It will Get Email Id from Which Email Id the Email will Send.
+							$to = fetch_prac_designation($practiceId,true,false,true,true);
+							$cc = fetch_client_designation($jobId,true,true,true);
+							if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
+							$bcc = $arrEmailInfo['event_bcc'];
+							$from = $arrEmailInfo['event_from'];
+							$subject = $arrEmailInfo['event_subject'];
+							$content = $arrEmailInfo['event_content'];
+							$content = replaceContent($content,NULL,NULL,NULL,NULL,$taskId);
+							
+							include_once(MAIL);
+							send_mail($from, $to, $cc, $bcc, $subject, $content);
+						}
+						/* send mail function ends here */
+					}
+
 					$objCallData->sql_update();
+					header('location: tsk_task.php?jobId='.$_REQUEST["jobId"]);
 					break;
 
 				case "delete":
@@ -105,8 +144,8 @@ if($_SESSION['validUser']) {
 					$practiceId = $objCallData->arrClientDetails[$clientId]["id"];
 					$strPanelInfo = $objCallData->sql_select_panel($practiceId);
 					$teamMemberEmail = $objCallData->fetch_team_member($clientId);
-                                        $SrAccntCompEmail = $objCallData->fetch_SrAccnt_Comp($clientId);
-                                        $SrAccntAuditEmail = $objCallData->fetch_SrAccnt_Audit($clientId);
+					$SrAccntCompEmail = $objCallData->fetch_SrAccnt_Comp($clientId);
+					$SrAccntAuditEmail = $objCallData->fetch_SrAccnt_Audit($clientId);
 				}
 
 				// fetch name of sr manager, india manager & team member
@@ -114,7 +153,7 @@ if($_SESSION['validUser']) {
 				$srManagerEmail = $arrPanelInfo[0];
 				$salesPersonEmail = $arrPanelInfo[1];
 				$inManagerEmail = $arrPanelInfo[2];
-                                $auditManagerEmail = $arrPanelInfo[3];
+                $auditManagerEmail = $arrPanelInfo[3];
 				include('views/tsk_task_add.php');
 				break;
 

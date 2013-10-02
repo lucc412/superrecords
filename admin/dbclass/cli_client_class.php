@@ -307,7 +307,8 @@ class Client_Class extends Database {
             $qryUpd = "UPDATE client SET client_code = '" . strtoupper($pracCode.$cliCode) . "' WHERE client_id ='" . $newClientId . "'";
             mysql_query($qryUpd);
         }
-        
+     
+		return $newClientId;
     }
 
     // check if client code is unique or not
@@ -384,6 +385,29 @@ class Client_Class extends Database {
         $qryDel = "DELETE FROM client where client_id = '" . $recid . "' ";
         mysql_query($qryDel);
     }
+
+	function fetchManager($clientId, $colManager) {
+
+		$qryDel = "SELECT {$colManager} FROM client WHERE client_id = {$clientId}";
+		$fetchResult = mysql_query($qryDel);
+		$rowData = mysql_fetch_row($fetchResult);
+		$cliManager = $rowData[0];
+
+		return $cliManager;
+	}
+
+	// Function to fetch practice id
+	public function fetchPracticeInfo($clientId)
+	{
+		$qrySel = "SELECT pr.id practiceId, pr.sr_manager srManager
+					FROM client cl, pr_practice pr
+					WHERE cl.id = pr.id
+					AND cl.client_id = {$clientId}";
+
+		$fetchResult = mysql_query($qrySel);		
+		$arrPracInfo = mysql_fetch_row($fetchResult);
+		return $arrPracInfo;
+	} 
 
 }
 

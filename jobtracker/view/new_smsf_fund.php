@@ -87,7 +87,7 @@ include(SETUPNAVIGATION);
 					<a id="iconQuestion" class="tooltip" title="Select whether you wish to have individuals as trustees or whether you need a corporate trustee. <br/>Please note if there is only one member a corporate trustee is required.">?</a>
 				</td>
 			</tr>
-		</table><?php //popUp('docs/guide.html'); ?>
+		</table>
             <div style="padding-top:20px;font-weight:bold;color: #074165;font-size: 13px">To learn more about the differences between Individual and Corporate Trustees please click to <a href='new_smsf_fund.php?do=download' onclick="javascript:windows.location.assign('new_smsf_fund.php?do=download')" target="_new" style="color: #F05729;">download guide.</a></div>
                 <input type="hidden" id="fund_status" name="fund_status" value=""/>
 		<div style="padding-top:20px;">

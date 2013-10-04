@@ -251,7 +251,8 @@ switch ($a)
                                                 if($_SESSION["usertype"] == "Staff") {
                                                 $arrFeatures = $commonUses->getFeatureVisibility('period');
                                                 }else
-                            $arrFeatures['stf_visibility'] = 1;
+                                                    $arrFeatures['stf_visibility'] = 1;
+                                                
                                                 if($arrFeatures['stf_visibility'] == 1)
 						{?><select name="txtPeriod" id="txtPeriod" title="Select period">
 							<option value="">Select Period</option><?

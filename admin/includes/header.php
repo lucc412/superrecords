@@ -26,6 +26,7 @@ $_SESSION['timeout'] = time();
 	<!-- Google Webfont -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'/>
 	<script type="text/javascript" src="<?php echo $javaScript;?>datetimepicker.js"></script>
+        <script src="<?php echo $javaScript;?>jobs_rights.js" type="text/javascript" ></script>
 	<script type="text/javascript" src="<?php echo $javaScript;?>validate.js"></script><?
 	
 	if(basename($_SERVER['PHP_SELF']) == 'job.php') {
@@ -51,7 +52,9 @@ $_SESSION['timeout'] = time();
 	}else if(basename($_SERVER['PHP_SELF']) == 'rf_services.php') {
 		?><title>Referrer Services</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'rf_type.php') {
-		?><title>Referrer Type</title><?	
+            	?><title>Referrer Type</title><?	
+        }else if(basename($_SERVER['PHP_SELF']) == 'jobs_rights.php') {
+		?><title>Job Rights</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'rf_tasklist.php') {
 		?><title>Referrer Items List</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'pr_practice.php') {

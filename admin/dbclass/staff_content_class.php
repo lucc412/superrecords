@@ -308,7 +308,7 @@ class staffContentList extends Database
 			<span class="frmheading"  style='font-size:96%;'>Created by: <?php echo htmlspecialchars($row["stf_Createdby"]) ?> | Created on: <?php echo $commonUses->showGridDateFormat($row["stf_Createdon"]); ?> | Lastmodified by: <?php echo htmlspecialchars($row["stf_Lastmodifiedby"]) ?> | Lastmodified on: <?php echo  $commonUses->showGridDateFormat($row["stf_Lastmodifiedon"]); ?></span><?
 		}
 
-		function showroweditor($row, $iseditmode)
+		function showroweditor($row, $iseditmode, $recid=NULL)
 		{
 			global $commonUses;
 			$i=0;
@@ -542,7 +542,9 @@ class staffContentList extends Database
 						$permres = mysql_query($permquery);
 						$count = mysql_num_rows($permres);
 
-						while ($row_perm=mysql_fetch_array($permres)) {
+						while ($row_perm=mysql_fetch_array($permres)) 
+                                                {
+                                                    
 							if($commonUses->getAccessTypeDescription($row["stf_AccessType"])=="Administrator")
 							$checked="checked";
 							?><input type="hidden" name="stf_Code[]" value="<?php echo $row_perm['stf_Code']; ?>" />
@@ -636,7 +638,11 @@ class staffContentList extends Database
 							echo "<div style='float:left; margin-left:55px;'>Hosting</div>";
 							else if($row_perm['frm_Description']=="Staff") echo "Users";
 							else if($row_perm['frm_Description']=="Cases") echo "Tickets";
-							else echo $row_perm['frm_Description']; ?> </div></span>
+                                                        else if($row_perm['frm_Code']==95) echo '<a style="color:#666666;cursor:pointer;" onclick="window.location.href=\'jobs_rights.php?frmcode='.$row_perm['frm_Code'].'&xstaffcode='.$row["stf_Code"].'&recid='.$recid.'\'" >'.$row_perm['frm_Description'].'</a>';
+							else{ echo $row_perm['frm_Description']; }
+
+                                                        ?> </div></span>
+                                                        
 							<div style=" float:right"><input class="checkboxClass" type="checkbox" name="Check_ctr_row[<?php echo $row_perm['stf_FormCode']; ?>]" id="Check_ctr_row[<?php echo $row_perm['stf_FormCode']; ?>]"  value="yes" onClick="CheckAll_Row(<?php echo $row_perm['stf_FormCode']; ?>)" ></div>
 							</td>
 							<td  align="center">
@@ -804,7 +810,7 @@ class staffContentList extends Database
 			<font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font>
 		</div>
 
-		<form enctype="multipart/form-data" action="stf_staff.php<?php echo "?a=".$_GET['a']."&recid=".$_GET['recid'];?>" method="post"  name="staff" onSubmit="return validateFormOnSubmit()">
+		<form enctype="multipart/form-data" action="stf_staff.php<?php echo "?a=".$_GET['a']."&recid=".$recid;?>" method="post"  name="staff" onSubmit="return validateFormOnSubmit()">
 			<input type="hidden" name="sql" value="update">
 			<input type="hidden" name="xstf_Code" value="<?php echo $row["stf_Code"] ?>">
 			<?
@@ -814,7 +820,7 @@ class staffContentList extends Database
 				}
 					
 			?>
-			<?php $this->showroweditor($row, true); ?>
+			<?php $this->showroweditor($row, true, $recid); ?>
 			<button style="margin-right:32px;" type="button" value="Cancel" onClick='return ComfirmCancel();'>Cancel</button>
 			<button type="submit" id="btnUpdate" name="action" value="Update" style="width:115px;" class="button">Update</button>
 		</form><?

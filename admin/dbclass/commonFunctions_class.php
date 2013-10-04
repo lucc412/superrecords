@@ -864,13 +864,23 @@ class commonUse extends Database
 			return $cont;
 		}
                 
-                function getFeatureVisibility($ftName)
+                function getFeatureVisibility($ftName=NULL)
                 {
-                    $ftQry = "SELECT * FROM stf_staff_features WHERE stf_options = '".$ftName."'";
+                    
+                    if(isset($ftName))
+                        $strAppend = "WHERE stf_options = '".$ftName."'";
+                    else 
+                        $strAppend = "";
+                    
+                    $ftQry = "SELECT * FROM stf_staff_features {$strAppend}";
+                    
                     $fetchData = mysql_query($ftQry);
                     
                     while($res = mysql_fetch_assoc($fetchData)){
-                        $arrFeatures = $res;
+                        if(isset($ftName))
+                            $arrFeatures = $res;
+                        else
+                            $arrFeatures[$res['ft_id']] = $res;
                     }
                         
                     return $arrFeatures;

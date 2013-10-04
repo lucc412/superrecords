@@ -9,19 +9,13 @@ include(SETUPNAVIGATION);
 </div>
 <form method="post" action="new_smsf.php?do=redirect" onsubmit="return  checkValidation();">
     <input type="hidden" name="smsf_type" id="smsf_type" value="1" />
-<div class="introduction"><b>
-	<br/><div>
-		<span>Completing this application will result in:</span>
-		<p class="pdL20 pdB8">1. A new SMSF being set up for you by Super Records.</p>
-		<p class="pdL20 pdB8">2. For ABN/TFN set up purposes, Super Records will become the tax agent of the fund.</p>
-	</div><br/>
-
-	If you have any difficulty with this application or would like to discuss the SMSF or the service before completing it, please contact us.<br/><br/>
-        <p><input type="checkbox" value="" style="width: auto;margin-right: 10px;" name="cbAuthority" id="cbAuthority" <?php if($arrSMSF[$_SESSION["jobId"]]['authority_status']==1){echo "checked";}?> >I have received written authority from my client to utilise the services of Super Records Pty Ltd and its associated entities for the completion of work as requested.</p><br/>
-	<p class="orangeheader">If you are ready to continue, please click NEXT at the bottom of the page.</p>
-        
-        
-</b></div>
+<div class="introduction">
+	<p><input type="checkbox" style="padding-bottom:2px;" class="checkboxClass" name="cbApply" id="cbApply" <?php if(!empty($arrSMSF['apply_abntfn'])){echo "checked";}?> >Please select if you would like us to <em>apply for ABN/TFN for new SMSF</em>, please note <span>Super Records</span> and/or its associated entities will become the tax agent of the fund.</p>
+    
+	<p class="pdB15"><input type="checkbox" class="checkboxClass" name="cbAuthority" id="cbAuthority" <?php if(!empty($arrSMSF['authority_status'])){echo "checked";}?> >I have received written authority from my client to utilise the services of <span>Super Records Pty Ltd</span> and its associated entities for the completion of work as requested.</p>
+	
+	<p>If you have any difficulty with this application or would like to discuss the SMSF or the service before completing it, please contact us.</p> 
+</div>
 <input type="hidden" name="lstClientType" value="25"/>
 <div class="pdT20">
     <?php if(empty($_SESSION['jobId'])){ ?><span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />Back</button></span><? } ?>
@@ -31,18 +25,17 @@ include(SETUPNAVIGATION);
 <script>
     function checkValidation()
     {
-            if($('#cbAuthority').is(':checked') == true)
-            {
-                //window.location.assign('jobs.php?sql=<?php if(isset($_SESSION['jobId'])){echo'update';}else{echo'insertJob';} ?>&type=SETUP&subfrmId=1');
-                $('#cbAuthority').val(1);
-                return true;
-            }
-            else
-            {
-                alert('Please tick if you have received written authority from your client.');
-                $('#cbAuthority').val(0);
-                return false;
-            }
+		if($('#cbAuthority').is(':checked') == true)
+		{
+			$('#cbAuthority').val(1);
+			return true;
+		}
+		else
+		{
+			alert('Please tick if you have received written authority from your client.');
+			$('#cbAuthority').val(0);
+			return false;
+		}
     }
 </script>
     

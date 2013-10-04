@@ -84,11 +84,11 @@ class Job {
 			$appendWhrStr = "AND j1.job_id = {$_REQUEST['lstJob']}";
 		}
 
-		$qrySel = "SELECT t1.document_id, t1.document_title, t1.file_path, t1.file_path,j1.job_id, j1.job_name 
+		$qrySel = "SELECT t1.document_id, t1.document_title, t1.file_path, t1.file_path,j1.job_id, j1.job_name, j1.job_genre
 					FROM documents t1, job j1, client c1
 					WHERE t1.job_id = j1.job_id
 					AND j1.client_id = c1.client_id
-					AND c1.id = '{$_SESSION['PRACTICEID']}' 
+					AND c1.id = '{$_SESSION['PRACTICEID']}'
 					{$strJobId} 
 					{$appendWhrStr}";
 
@@ -252,8 +252,15 @@ class Job {
 
 	public function setSmsfAuthority($setup_subfrm,$jobId)
 	{
-		$Qry = "INSERT INTO es_smsf (job_id, authority_status, smsf_type) 
-				VALUES ({$jobId}, '1','".$setup_subfrm."')";
+		if($setup_subfrm == '1') {
+			if(!empty($_REQUEST['cbApply'])) {
+				$strField = ",apply_abntfn";
+				$strValue = ",1";
+			}
+		}
+
+		$Qry = "INSERT INTO es_smsf (job_id, authority_status, smsf_type {$strField}) 
+				VALUES ({$jobId}, '1','".$setup_subfrm."' {$strValue})";
 		mysql_query($Qry);
 	}
 
@@ -295,13 +302,15 @@ class Job {
 		$qrySel = "SELECT max(document_id) docId 
 					FROM documents";
 		$objResult = mysql_query($qrySel);
-
 		$arrInfo = mysql_fetch_assoc($objResult);
 		$fileId = $arrInfo['docId'];
+		$fileId++;
+
 		$origFileName = stripslashes($_FILES['fileUpload']['name']);
 		$filePart = pathinfo($origFileName);
 		$fileName =  $fileId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
 		$folderPath = "../uploads/audit/" . $fileName;
+		$currentTime = date('Y-m-d H:i:s');
 
 		if(file_exists($_FILES['fileUpload']['tmp_name'])) {
 			if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $folderPath)) {
@@ -311,7 +320,7 @@ class Job {
 								".$jobId.", 
 								'". addslashes($_REQUEST['fileTitle']) ."', 
 								'". addslashes($fileName) ."', 
-								NOW() 
+								'".$currentTime."'
 								)";
 					mysql_query($qryIns);
 				}
@@ -332,7 +341,7 @@ class Job {
 								". $checklistId .", 
 								". $subchecklistId .", 
 								'". addslashes($fileName) ."', 
-								NOW() 
+								'".$currentTime."'
 								)";
 					mysql_query($qryIns);
 				}
@@ -388,6 +397,7 @@ class Job {
 		$objResult = mysql_query($qrySel);
 		$arrInfo = mysql_fetch_assoc($objResult);
 		$fileId = $arrInfo['docId'];
+		$currentTime = date('Y-m-d H:i:s');
 
 		foreach($_FILES AS $fieldName => $imageInfo){
 			if(strstr($fieldName, 'sourceDoc_')) {
@@ -405,7 +415,7 @@ class Job {
 									".$jobId.", 
 									'". addslashes($_REQUEST['textSource_'.$uploadCnt]) ."', 
 									'". addslashes($fileName) ."', 
-									NOW() 
+									'".$currentTime."'
 									)";
 						mysql_query($qryIns);
 					}
@@ -421,15 +431,18 @@ class Job {
 
 		$objResult = mysql_query($qrySel);
 		$arrInfo = mysql_fetch_assoc($objResult);
-		$fileId = $arrInfo['docId'];
-
+		$fileId = $arrInfo['docId'];	
+		$fileId++;
 		$currentTime = date('Y-m-d H:i:s');
 
-		$fileId++;
 		$origFileName = stripslashes($_FILES['fileDoc']['name']);
 		$filePart = pathinfo($origFileName);
 		$fileName =  $fileId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
-		$folderPath = "../uploads/sourcedocs/" . $fileName;
+
+		if($_REQUEST['genre'] == 'AUDIT')
+			$folderPath = "../uploads/audit/" . $fileName;
+		else if($_REQUEST['genre'] == 'COMPLIANCE')
+			$folderPath = "../uploads/sourcedocs/" . $fileName;
 
 		if(file_exists($_FILES['fileDoc']['tmp_name']))
 		{
@@ -535,6 +548,9 @@ class Job {
 		}
 		else if($flagChecklist == 'A') {
 			$folderPath = "../uploads/audit/" . $fileName;
+		}
+		else if($flagChecklist == 'ST') {
+			$folderPath = "../uploads/setup/" . $fileName;
 		}
 
 		$arrFileName = stringToArray('~', $fileName);
@@ -721,9 +737,9 @@ class Job {
 				echo"<table border='1' align='center' bgcolor='#F8F8F8' cellpadding='10'>";
 				foreach($arrSubchecklist AS $checklistName => $subChecklist) {
 					echo"<tr>";
-					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729; background-color:#074165;'>".$cntChckLst++."</td>";
-					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729; background-color:#074165;'>".stripslashes($checklistName)."</td>";
-					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729; background-color:#074165;'>Status</td>";
+					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:60px; background-color:#074165;'>".$cntChckLst++."</td>";
+					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:600px; background-color:#074165;'>".stripslashes($checklistName)."</td>";
+					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:100px;background-color:#074165;'>Yes/No/N/A</td>";
 					echo"</tr>";
 					$cntSubchckLst = 1;
 					foreach($subChecklist AS $subChecklistName) {

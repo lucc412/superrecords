@@ -79,6 +79,9 @@
 			?>
 			<script type="text/javascript" src="js/job_validation.js"></script><?
 		}
+		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf.php') {
+				?><title>New SMSF Details</title><?
+		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_contact.php') {
 				?><title>Contact Details</title>
 				<script type="text/javascript" src="js/new_smsf_contact.js"></script><?
@@ -91,7 +94,7 @@
 				?><title>Member Details</title>
 				<script type="text/javascript" src="js/new_smsf_member.js"></script><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'legal_references.php') {
+        else if(basename($_SERVER['PHP_SELF']) == 'legal_references.php') {
 				?><title>Legal Personal Representative</title>
 				<script type="text/javascript" src="js/legal_references.js"></script><?
 		}
@@ -103,10 +106,14 @@
 				?><title>Declarations</title>
 				<script type="text/javascript" src="js/new_smsf_declarations.js"></script><?
 		}
+		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf.php') {
+				?><title>Existing SMSF Details</title><?
+		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_contact.php') {
 				?><title>Contact Details</title>
 				<script type="text/javascript" src="js/existing_smsf_contact.js"></script><?
-		}else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_fund.php') {
+		}
+		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_fund.php') {
 				?><title>Fund Details</title>
 				<script type="text/javascript" src="js/existing_smsf_fund.js"></script><?
 		}

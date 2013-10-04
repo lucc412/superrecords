@@ -1,37 +1,32 @@
 <?php
-
 // include common file
 include("include/common.php");
 
 if(isset($_SESSION["jobId"]))
 {
-    $selQry="SELECT * FROM es_smsf WHERE job_id = ".$_SESSION["jobId"];
+    $selQry="SELECT apply_abntfn, authority_status FROM es_smsf WHERE job_id = ".$_SESSION["jobId"];
     $fetchResult = mysql_query($selQry);
-    
-    while($rowData = mysql_fetch_assoc($fetchResult)) 
-    {
-        $arrSMSF[$rowData['job_id']] = $rowData;
-    }
-    
+    $arrSMSF = mysql_fetch_assoc($fetchResult);
 }
 
 if(isset($_REQUEST) && $_REQUEST['do'] == 'redirect')
 {
-    $sql='';
-    if(isset($_SESSION["jobId"]))
-    {
-        $sql = "update"; 
-        if($arrSMSF[$_SESSION["jobId"]]['authority_status']==1)$flag=TRUE;
-    }
-    else
-    {
-        $sql = "insertJob"; 
-    }
-    
-    header('Location:jobs.php?sql='.$sql.'&type=SETUP&subfrmId=1');
+    if(isset($_SESSION["jobId"])) {
+		if(!empty($_REQUEST['cbApply'])) {
+			$updQry = "UPDATE es_smsf SET apply_abntfn = 1";
+			mysql_query($updQry);
+		}
+		else {
+			$updQry = "UPDATE es_smsf SET apply_abntfn = 0";
+			mysql_query($updQry);
+		}
+		header('Location:jobs.php?sql=update&type=SETUP&subfrmId=1');
+	}
+	else {
+		header('Location:jobs.php?sql=insertJob&type=SETUP&subfrmId=1&cbApply='.$_REQUEST['cbApply']);
+	}
 }
 
 // include view file 
 include(VIEW . "new_smsf.php");
-
 ?>

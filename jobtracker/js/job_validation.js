@@ -250,6 +250,7 @@ function selectOptions(listName) {
 	}
 }
 
+    var duplicate = 0;
     function checkDuplicateJob()
     {
         $("#dialog-confirm").dialog({
@@ -278,8 +279,13 @@ function selectOptions(listName) {
 
         if(response != '')
         {
-            $( "#dialog-confirm" ).dialog( "open" );
-            return false;
+            if(duplicate == 0)
+            {
+                duplicate++;
+                $( "#dialog-confirm" ).dialog( "open" );
+                return false;
+            }
+            
         }
         else
         {
@@ -288,3 +294,12 @@ function selectOptions(listName) {
         }  
 
     }
+    
+    function changeDuplicate()
+    {
+        if(duplicate == 1)
+        {
+            duplicate=0;
+        }
+    }
+    

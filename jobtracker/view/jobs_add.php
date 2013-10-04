@@ -18,7 +18,7 @@ include(TOPBAR);
 		<tr>
 			<td><strong>Client</strong></td>
 			<td>
-				<select name="lstClientType" id="lstClientType" title="Select client">
+                            <select name="lstClientType" id="lstClientType" title="Select client" onchange="changeDuplicate()">
 					<option value="0">Select Client</option><?php
 					foreach($arrClients AS $clientId => $clientName){
 						?><option value="<?=$clientId?>"><?=$clientName?></option><?php 
@@ -47,7 +47,7 @@ include(TOPBAR);
 			<td><strong>Job Type</strong></td>
 			<td>
 				<span id="spanJobType">	
-					<select name="lstJobType" id="lstJobType" title="Select type of job">
+					<select name="lstJobType" id="lstJobType" title="Select type of job" onchange="changeDuplicate()">
 						<option value="0">Select Job Type</option>
 					</select>
 				</span>
@@ -61,7 +61,7 @@ include(TOPBAR);
 			<!--<td><input title="Specify period of job" type="text" name="txtPeriod" id="txtPeriod" value=""></td>-->
                         <td><?
 				$optionYear = "2010";
-				?><select name="txtPeriod" id="txtPeriod" title="Select period">
+				?><select name="txtPeriod" id="txtPeriod" title="Select period" onchange="changeDuplicate()">
 					<option value="">Select Period</option><?
 					while($optionYear <= date("Y")) {
 						if(time() < strtotime("01 July ".$optionYear)) break;

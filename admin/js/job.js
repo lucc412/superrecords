@@ -23,6 +23,7 @@ $(function(){
 		//var ext = this.value.match(/\.(.+)$/)[1];
 		var fileName = $(this).val().split('/').pop().split('\\').pop();
 		var ext = fileName.split('.').pop();
+		ext = ext.toLowerCase();
 		switch (ext) {
 			case 'txt':
 			case 'doc':

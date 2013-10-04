@@ -245,7 +245,7 @@ switch ($a)
 				</tr>
 				<tr>
 					<td class="hr">Period</td>
-					<td><?
+					<td class="dr"><?
 						$dbPeriod = $arrJob[$_REQUEST["jobId"]]["period"];
 						$optionYear = "2010";
                                                 if($_SESSION["usertype"] == "Staff") {
@@ -266,6 +266,8 @@ switch ($a)
 						?></select>
                                                 <?php }else{
                                                     echo $dbPeriod;
+                                                    echo '<input type="hidden" name="txtPeriod" value="'.$dbPeriod.'">';
+                                                    
                                                 } ?>
 					</td>
 					
@@ -503,7 +505,7 @@ switch ($a)
                 if($_SESSION["usertype"] == "Staff") {
                 $arrFeatures = $commonUses->getFeatureVisibility(2);
                 }else
-                            $arrFeatures['stf_visibility'] = 1;
+                    $arrFeatures['stf_visibility'] = 1;
                 
 		if($arrFeatures['stf_visibility'] == 1)
                 {
@@ -654,6 +656,11 @@ switch ($a)
 	case "queries":
 		$objCallData->arrQueries = $objCallData->fetchQueries();
 		include(JOBNAVIGATION);
+                if($_SESSION["usertype"] == "Staff") 
+                {
+                    $arrFeatures = $commonUses->getFeatureVisibility(3);
+                }else
+                    $arrFeatures['stf_visibility'] = 1;
 		
         ?><div class="pdT80">
 			<a href="job.php?a=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight">
@@ -664,7 +671,7 @@ switch ($a)
 			$pageCode = "NEWQR";	
 			$flagSet = getEventStatus($pageCode);
                         
-                        if($flagSet === TRUE)
+                        if($flagSet)
                         {    
                             if($_SESSION["usertype"] == "Staff") {
                                 $arrFeatures = $commonUses->getFeatureVisibility(1);
@@ -708,7 +715,7 @@ switch ($a)
                     <th class="fieldheader">Date Answered</th>
 					<th class="fieldheader">Answered?</th>
 					<th class="fieldheader">Save</th>
-					<th class="fieldheader">Post</th>
+                                        <?php  if($arrFeatures['stf_visibility'] == 1) { ?> <th class="fieldheader">Post</th> <? } ?>
 					<th class="fieldheader">Action</th>
 				</tr><?
 				
@@ -786,23 +793,21 @@ switch ($a)
 							<button style="width: 66px;margin-right: 3px;" onClick="javascript:updateQuery(<?=$queryId?>)">Save</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to save this query</span></a>
 							
 						</td>
-						<td class="<?=$trClass?>" align="center" width="15%">
-							<input type="hidden" name="flagPost" id="flagPost" value="<?=$arrInfo['flag_post']?>"><?
-                                                if($_SESSION["usertype"] == "Staff") {
-                                                $arrFeatures = $commonUses->getFeatureVisibility(3);
-                                                }else
-                                                $arrFeatures['stf_visibility'] = 1;
+                                                <?
                                                 if($arrFeatures['stf_visibility'] == 1)
                                                 {
+						?><td class="<?=$trClass?>" align="center" width="15%">
+							<input type="hidden" name="flagPost" id="flagPost" value="<?=$arrInfo['flag_post']?>"><?
                                                     if($arrInfo["flag_post"] == 'N'){
                                                             ?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Post</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to post this query to practice</span></a><?
                                                     }
                                                     else{	
                                                             ?><button id="qrPost" style="width:90px;margin-right: 3px;" value="" onclick="javascript:updateQueryPost('<?=$arrInfo['flag_post']?>',<?=$queryId?>)" >Unpost</button><a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click here to unpost this query to practice</span></a><?
                                                     }
-                                                }
                                                 
-						?></td>	
+                                                
+						?></td>
+                                            <? } ?>
 						<td class="<?=$trClass?>" align="center"><?
 							  $jsFunc = "javascript:performdelete('job.php?sql=deleteQuery&jobId=".$_REQUEST["jobId"]."&queryId=".$queryId."');";
 							  ?><a onClick="<?=$jsFunc?>" href="javascript:;">

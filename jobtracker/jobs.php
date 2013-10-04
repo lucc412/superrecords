@@ -110,7 +110,7 @@ switch ($sql)
 	
 	case "insertDoc":
 	
-		$returnPath = $objScr->upload_document();
+		$uploadedDocInfo = $objScr->upload_document();
 		
 		/* send mail function starts here */
 
@@ -130,9 +130,9 @@ switch ($sql)
 			$subject = $arrEmailInfo['event_subject'];
 			$content = $arrEmailInfo['event_content'];
 
-			$arrReturnPath = stringToArray('~', $returnPath);
-			$docName = $arrReturnPath[0];
-			$uploadedTime =	$arrReturnPath[1];
+			$arrDocInfo = stringToArray('~', $uploadedDocInfo);
+			$docName = $arrDocInfo[0];
+			$uploadedTime =	$arrDocInfo[1];
 
 			// replace DOCNAME with actual doc name
 			$content = str_replace('DOCNAME', $docName, $content);
@@ -161,7 +161,7 @@ switch ($sql)
 	case "uploadSubAuditDocs":
 		$objScr->add_audit_Docs($_SESSION['jobId'],$_REQUEST['checklistId'],$_REQUEST['subchecklistId']);
 		echo "<script>
-			opener.parent.location.href = 'jobs.php?a=subchecklist';
+			opener.parent.location.href = 'jobs.php?a=subchecklist&checklistId=".$_REQUEST['checklistId']."';
 			self.close();
 		</script>";
 		break;

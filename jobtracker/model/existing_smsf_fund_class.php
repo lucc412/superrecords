@@ -180,14 +180,19 @@ class EXISTING_SMSF_FUND
             $fetchAct = mysql_query($qryAct);
             $arrActivity = mysql_fetch_assoc($fetchAct);
 
-            // Insert into documents table
-            $filename = "job_".$jobid.".pdf";
-            $docQry = "INSERT INTO documents (job_id,document_title,date,viewed,file_path) VALUES (".$jobid.",'',NOW(),0,'".$filename."')";
+			// Insert into documents table
+			$qrySel = "SELECT max(document_id) docId
+					FROM documents";
+
+			$objResult = mysql_query($qrySel);
+			$arrInfo = mysql_fetch_assoc($objResult);
+			$fileId = $arrInfo['docId'];	
+			$fileId++;
+			$currentTime = date('Y-m-d H:i:s');
+
+            $filename = $fileId."~setup.pdf";
+            $docQry = "INSERT INTO documents (job_id,document_title,date,file_path) VALUES (".$jobid.",'setup','".$currentTime."','".$filename."')";
             mysql_query($docQry);
-            $doc_Id = mysql_insert_id();
-            $filename = $doc_Id."~job.pdf";
-            $doc2Qry = "UPDATE documents SET file_path = '".$filename."' WHERE document_id = ".$doc_Id;
-            mysql_query($doc2Qry);
 
             include(PDF);
             // create new PDF document

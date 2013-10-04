@@ -947,15 +947,14 @@ button {
 	color:#FB5C24;
 }
 
-.introduction div
+.introduction
 {
 	font-weight:bold;
+	line-height:150%;
 }
 
-.introduction span
-{
-	color:#0c436c;
-	text-decoration:underline;
+.introduction span{
+	color:#074263;
 }
 
 .orangeheader

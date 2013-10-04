@@ -11,7 +11,7 @@ $(document).ready(function() {
 	});
 	
 	/* CLOSES ALL DIVS ON PAGE LOAD */	
-	$("div.accordionContent").hide();
+	//$("div.accordionContent").hide();
 
 });
 

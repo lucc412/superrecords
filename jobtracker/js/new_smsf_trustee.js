@@ -78,14 +78,13 @@
 		
 		if(document.getElementById('trustyType').value == 3)
 		{
-			if(document.getElementById('lstQuestion').value == 'No')
-			{
-				alert('All members of superfund are required to be directors of the company. A change of detail forms need to be lodged with ASIC to ensure this is the case. An additional fees of $50 plus GST applies. Our consultant will contact you to organize this on your behalf.');
-				document.getElementById('lstQuestion').className = "errclass";
-				document.getElementById('lstQuestion').focus();
+			if(document.getElementById('lstQuestion').value == 0) {
+				document.frmnewsmsftrustee.lstQuestion.className = "errclass";
+				document.frmnewsmsftrustee.lstQuestion.focus();
 				flagReturn = false;
-			}else{
-				document.getElementById('lstQuestion').className = "successClass";
+			}
+			else {
+				document.frmnewsmsftrustee.lstQuestion.className = "successClass";
 			}
 		}
 		
@@ -96,14 +95,15 @@
 	{
 		if(document.getElementById('lstQuestion').value == 'No')
 		{
-			alert('All members of superfund are required to be directors of the company. A change of detail forms need to be lodged with ASIC to ensure this is the case. An additional fees of $50 plus GST applies. Our consultant will contact you to organize this on your behalf.');
-			document.getElementById('lstQuestion').className = "errclass";
-			document.getElementById('lstQuestion').focus();
-			return false;
+			flagSelect = confirm('All members of superfund are required to be directors of the company. A change of detail forms need to be lodged with ASIC to ensure this is the case. An additional fees of $50 plus GST applies. Our consultant will contact you to organize this on your behalf.');
+
+			if(!flagSelect) {
+				document.getElementById('lstQuestion').focus();
+				return false;
+			}
+			else {
+				return true;
+			}
 		}
-		return true;
 	}
 	
-	
-	
-			

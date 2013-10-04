@@ -6,14 +6,10 @@ include("include/common.php");
 
 if(isset($_SESSION["jobId"]))
 {
-    $selQry="SELECT * FROM es_smsf WHERE job_id = ".$_SESSION["jobId"]." AND smsf_type = 2";
+    $selQry="SELECT apply_abntfn, authority_status FROM es_smsf WHERE job_id = ".$_SESSION["jobId"]." AND smsf_type = 2";
     $fetchResult = mysql_query($selQry);
-    
-    while($rowData = mysql_fetch_assoc($fetchResult)) 
-    {
-        $arrSMSF[$rowData['job_id']] = $rowData;
-    }
-    
+	$fetchResult = mysql_query($selQry);
+    $arrSMSF = mysql_fetch_assoc($fetchResult);
 }
 
 if(isset($_REQUEST) && $_REQUEST['do'] == 'redirect')
@@ -21,8 +17,7 @@ if(isset($_REQUEST) && $_REQUEST['do'] == 'redirect')
     $sql='';
     if(isset($_SESSION["jobId"]))
     {
-        $sql = "update"; 
-        if($arrSMSF[$_SESSION["jobId"]]['authority_status']==1)$flag=TRUE;
+        $sql = "update";
     }
     else
     {

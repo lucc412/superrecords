@@ -100,7 +100,8 @@ include(SETUPNAVIGATION);
 				<tr>
 					<td>Are all proposed members of the Superfund are directors of the company ?</td>
 					<td>
-						<select name="lstQuestion" id="lstQuestion" onchange="javascript:yes_no();"><?
+						<select name="lstQuestion" id="lstQuestion" onchange="javascript:yes_no();">
+							<option value="0">Select</option><?
 							foreach($arrYesNo AS $option) {
 								$selectStr = "";
 								if($memberType == $option) $selectStr = "selected";

@@ -62,9 +62,23 @@ include(TOPBAR);
 						$arrSourceDocs = $objScr->fetch_documents($jobId);
 						if(!empty($arrSourceDocs)) {
 							foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-								$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
-								if(file_exists($folderPath)) {
-									?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+								if($arrDocInfo['job_genre'] == 'AUDIT') {
+									$folderPath = "../uploads/audit/" . $arrDocInfo['file_path'];
+									if(file_exists($folderPath)) {
+										?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=A" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+									}
+								}
+								else if($arrDocInfo['job_genre'] == 'SETUP') {
+									$folderPath = "../uploads/setup/" . $arrDocInfo['file_path'];
+									if(file_exists($folderPath)) {
+										?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=ST" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+									}
+								}
+								else {
+									$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
+									if(file_exists($folderPath)) {
+										?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+									}
 								}
 							}
 						}
@@ -83,14 +97,14 @@ include(TOPBAR);
 					<td class="tddata" align="center"><?=$arrJobDetails['job_received']?></td>
 
 					<td class="tddata" style="width:15px" align="center"><?
+						if($arrJobDetails['job_genre'] != 'SETUP') {
+							?><a href="jobs.php?a=uploadDoc&lstJob=<?=$jobId?>&genre=<?=$arrJobDetails['job_genre']?>" title="Click to upload additional documents"><?=UPLOAD?></a><?
+						}
+					?></td>
+					<td class="tddata" style="width:15px" align="center"><?
 						$flagQueryExists = $objScr->fetch_queries($jobId);
 						if(!empty($flagQueryExists)) {
 							?><a target="_blank" href="queries.php?lstJob=<?=$jobId?>&lstCliType=<?=$arrJobDetails['client_id']?>" title="Click to view queries"><?=QUERY?></a><?
-						}
-					?></td>
-					<td class="tddata" align="center"><?
-						if($arrJobDetails['job_genre'] != 'SETUP') {
-							?><a href="jobs.php?a=uploadDoc&lstJob=<?=$jobId?>" title="Click to upload additional documents"><?=UPLOAD?></a><?
 						}
 					?></td>
 				</tr><?

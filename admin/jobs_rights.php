@@ -21,18 +21,19 @@ $arrFilChckList = $_POST['stf_View'];
 //$commonUses->showArray($arrFilChckList);
 
 
-
-
 if(!empty($arrFilChckList) && !empty($arrChkFeatrs)) 
 {
     $arrAddChckList = array_diff_assoc($arrFilChckList, $arrChkFeatrs);
     $arrRemChckList = array_diff_assoc($arrChkFeatrs, $arrFilChckList);
 }
+else if(empty($arrFilChckList) && !empty($arrChkFeatrs)) 
+{
+    $arrRemChckList = $arrChkFeatrs;
+}
 else if(!empty($arrFilChckList) && empty($arrChkFeatrs)) 
 {
     $arrAddChckList = $arrFilChckList;
 }
-
 
 
 if(!empty($arrRemChckList))

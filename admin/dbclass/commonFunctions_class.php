@@ -868,7 +868,7 @@ class commonUse extends Database
                 {
                     
                     if(isset($ftName))
-                        $strAppend = "WHERE stf_options = '".$ftName."'";
+                        $strAppend = "WHERE disp_id = '".$ftName."' AND stf_SCode = '".$_SESSION['staffcode']."'";
                     else 
                         $strAppend = "";
                     

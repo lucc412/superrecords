@@ -249,7 +249,7 @@ switch ($a)
 						$dbPeriod = $arrJob[$_REQUEST["jobId"]]["period"];
 						$optionYear = "2010";
                                                 if($_SESSION["usertype"] == "Staff") {
-                                                $arrFeatures = $commonUses->getFeatureVisibility('period');
+                                                $arrFeatures = $commonUses->getFeatureVisibility(4);
                                                 }else
                                                     $arrFeatures['stf_visibility'] = 1;
                                                 
@@ -501,7 +501,7 @@ switch ($a)
                 $objCallData->arrReport = $objCallData->fetchReport();
 		include(JOBNAVIGATION);    
                 if($_SESSION["usertype"] == "Staff") {
-                $arrFeatures = $commonUses->getFeatureVisibility('report');
+                $arrFeatures = $commonUses->getFeatureVisibility(2);
                 }else
                             $arrFeatures['stf_visibility'] = 1;
                 
@@ -667,7 +667,7 @@ switch ($a)
                         if($flagSet === TRUE)
                         {    
                             if($_SESSION["usertype"] == "Staff") {
-                                $arrFeatures = $commonUses->getFeatureVisibility('send_mail');
+                                $arrFeatures = $commonUses->getFeatureVisibility(1);
                             }else
                                 $arrFeatures['stf_visibility'] = 1;
 
@@ -789,7 +789,7 @@ switch ($a)
 						<td class="<?=$trClass?>" align="center" width="15%">
 							<input type="hidden" name="flagPost" id="flagPost" value="<?=$arrInfo['flag_post']?>"><?
                                                 if($_SESSION["usertype"] == "Staff") {
-                                                $arrFeatures = $commonUses->getFeatureVisibility('post_queries');
+                                                $arrFeatures = $commonUses->getFeatureVisibility(3);
                                                 }else
                                                 $arrFeatures['stf_visibility'] = 1;
                                                 if($arrFeatures['stf_visibility'] == 1)

@@ -36,7 +36,7 @@ class jobs_rights_class extends Database
         $arrData='';
         while($data = mysql_fetch_assoc($res))
         {
-            $arrData[$data['disp_id']] = $data['disp_id']; 
+            $arrData[$data['disp_id']] = $data['stf_visibility']; 
         }
         
         return $arrData;
@@ -64,6 +64,7 @@ class jobs_rights_class extends Database
     {
         $qry = "DELETE FROM stf_staff_features WHERE stf_SCode = '".$data['xstaffcode']."' 
                                                      AND disp_id IN ({$disp_id})";
+                                                     //exit;
         $res = mysql_query($qry);
         //$data = mysql_fetch_assoc($res);
         return $data;

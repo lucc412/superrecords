@@ -121,8 +121,8 @@ if(document.getElementById('show_Range').style.display=='block')
                 }
 function SelectIP()
 {
-    document.getElementById('show_Range').style.display='block';
-    document.getElementById('show_lable').style.display='block';
+    document.getElementById('show_Range').style.display='';
+    document.getElementById('show_lable').style.display='';
     document.getElementById('or_lable').style.display='none';
 
 

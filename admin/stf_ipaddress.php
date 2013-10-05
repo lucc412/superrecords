@@ -350,7 +350,7 @@ if($row["To_ip"]=="")
 <?php
 if($row["To_ip"]!="")
     {
-    $style="display:block";
+    $style="";
 }
 else
     {
@@ -452,7 +452,7 @@ default:
 <div class="frmheading">
 	<h1>Add Record</h1>
 </div>
-<div style="position:absolute; top:20; right:-90px; width:300; height:300;">
+<div style="position:absolute; top:20; right:0px; width:300; height:300;">
 	<font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font>
 </div>
 <form enctype="multipart/form-data" action="stf_ipaddress.php" method="post" name="ipaddress" onSubmit="return Validateip()">
@@ -520,7 +520,7 @@ if($access_file_level['stf_Delete']=="Y")
   mysql_data_seek($res, $recid);
   $row = mysql_fetch_assoc($res);
   showrecnav("edit", $recid, $count);
-?><div style="position:absolute; top:5; right:-90px; width:300; height:300;">
+?><div style="position:absolute; top:5; right:0px; width:300; height:300;">
 <font style="color:red; font-family:Arial, Helvetica, sans-serif" size="2">Fields marked with * are mandatory</font></div>
 
 <form enctype="multipart/form-data" action="stf_ipaddress.php?a=<?php echo $_GET['a']?>&recid=<?php echo $_GET['recid']?>" method="post" name="ipaddress" onSubmit="return Validateip()">

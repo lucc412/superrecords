@@ -9,7 +9,7 @@
                 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 		<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
 		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
-		<link href="images_user/favicon.ico" rel="shortcut icon" />
+		<link href="images/favicon.ico" rel="shortcut icon" />
 		<!-- Main CSS-->
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
 		<!-- Google Webfont -->

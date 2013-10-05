@@ -1,5 +1,4 @@
 <?php
-     include 'common/varDeclare.php';
      include 'dbclass/commonFunctions_class.php';
 
   if($_SESSION['validUser'])

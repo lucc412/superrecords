@@ -1,20 +1,8 @@
 <?php 
-//session_start();
-/*include("Mail.php");
-require_once("common/class.Database.php");
-include ("functions.php");
-include 'includes/translate.php';*/
-
-$inc_path = get_include_path();
-include ("common/class.Database.php");
-include ("functions.php");
-include 'includes/translate.php';
-include 'includes/commonFunctionExtends.php';
-ini_set('include_path','/home/befreeco/php');
-//require_once ("Mail.php");
-set_include_path($inc_path);
-
-
+include ("includes/class.Database.php");
+include ('includes/varDeclare.php');
+include ('includes/commonFunctionExtends.php');
+include(PHPFUNCTION);
 
 class commonUse extends Database
 {

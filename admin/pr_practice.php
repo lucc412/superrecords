@@ -1,7 +1,5 @@
 <?php 
 ob_start();
-include 'common/varDeclare.php';
-include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/pr_practice_class.php';
 include("includes/header.php");

@@ -1,7 +1,6 @@
 <?php
-     include 'common/varDeclare.php';
-     include 'dbclass/commonFunctions_class.php';
-	 include ("includes/header.php");
+ include 'dbclass/commonFunctions_class.php';
+ include ("includes/header.php");
   if($_SESSION['validUser'])
   {
 

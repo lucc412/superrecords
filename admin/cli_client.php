@@ -1,9 +1,7 @@
 <?php 
 ob_start();
-include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/cli_client_class.php';
-include (PHPFUNCTION);
 include("includes/header.php");
 
 // create class object for class function access

@@ -6,8 +6,6 @@
  */
 include("dbclass/commonFunctions_class.php");
 include("dbclass/jobs_rights_class.php");
-include("common/varDeclare.php");
-
 $objJobRights = new jobs_rights_class();
 
 //$commonUses->showArray($_REQUEST);

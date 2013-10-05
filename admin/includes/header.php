@@ -88,11 +88,9 @@ $_SESSION['timeout'] = time();
 	}else if(basename($_SERVER['PHP_SELF']) == 'prc_processcycle.php') {
 		?><title>Process Cycle</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'mas_masteractivity.php') {
-		?><title>Master Activity</title>
-		<script type="text/javascript" src="ajax.js"></script><?	
+		?><title>Master Activity</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'sub_subactivity.php') {
-		?><title>Sub Activity</title>
-		<script type="text/javascript" src="ajax.js"></script><?	
+		?><title>Sub Activity</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'job_status.php') {
 		?><title>Job Status</title><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'pri_priority.php') {
@@ -107,20 +105,6 @@ $_SESSION['timeout'] = time();
 		<script type="text/javascript" src="<?php echo $javaScript ; ?>staff.js"></script><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'dsg_designation.php') {
 		?><title>Designations</title><?	
-	}else if(basename($_SERVER['PHP_SELF']) == 'cas_cases.php') {
-		?><title>Tickets</title>
-        <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-1.4.2.min.js"></script>
-        <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-ui-1.8.custom.min.js"></script>
-        <link rel="stylesheet" href="as/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
-        <script type="text/javascript" src="as/js/bsn.AutoSuggest_2.1.3.js" charset="utf-8"></script>
-        <script language="JavaScript" src="<?php echo $javaScript; ?>cases.js"></script><?	
-	}else if(basename($_SERVER['PHP_SELF']) == 'tickets.php') {
-		?><title>Tickets</title>
-        <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-1.4.2.min.js"></script>
-        <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-ui-1.8.custom.min.js"></script>
-        <link rel="stylesheet" href="as/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
-        <script type="text/javascript" src="as/js/bsn.AutoSuggest_2.1.3.js" charset="utf-8"></script>
-        <script language="JavaScript" src="<?php echo $javaScript; ?>cases.js"></script><?	
 	}else if(basename($_SERVER['PHP_SELF']) == 'stf_ipaddress.php') {
 		?><title>IP Address</title>
 		<script type="text/javascript" src="<?php echo $javaScript; ?>ipaddress.js"></script><?	
@@ -130,29 +114,26 @@ $_SESSION['timeout'] = time();
 	}else if(basename($_SERVER['PHP_SELF']) == 'manage_emails.php') {
 		?><title>Manage Emails</title>
 		<script type="text/javascript" src="<?=$javaScript;?>manage_emails.js"></script>
-		<script type="text/javascript" src="ckeditor/ckeditor.js"></script><?	
+		<script type="text/javascript" src="library/ckeditor/ckeditor.js"></script><?	
 	}else if((basename($_SERVER['PHP_SELF']) == 'lead_report.php') 
 		|| (basename($_SERVER['PHP_SELF']) == 'practice_report.php') 
 		|| (basename($_SERVER['PHP_SELF']) == 'client_report.php') 
 		|| (basename($_SERVER['PHP_SELF']) == 'job_report.php') 
-		|| (basename($_SERVER['PHP_SELF']) == 'task_report.php') 
-		|| (basename($_SERVER['PHP_SELF']) == 'tickets_report.php')) {
+		|| (basename($_SERVER['PHP_SELF']) == 'task_report.php')) {
 		?><script type="text/javascript" src="<?=$javaScript;?>report_validation.js"></script><?	
 		
 	}else if(basename($_SERVER['PHP_SELF']) == 'index2.php') {
 		?><title>Super Records</title><?	
 	}
-		
 ?></head>
 
 <body><?
 	if($_SESSION['validUser']) {
 		?><br/>
-		
 		<div class="header">
 			<div class="container">
-				<div id="logo"  >
-					<a href="index.php"><img  border="0" src="images/header-logo.png"></a>
+				<div id="logo">
+					<a href="index.php"><img border="0" src="images/header-logo.png"></a>
 				</div>
 
 				<div class="user">        	
@@ -447,7 +428,7 @@ $_SESSION['timeout'] = time();
 						}
 
 						// Administration Menu (check access by passing staff code and form code)
-						$formcode_sys="21,50,4,43,57,98,99";
+						$formcode_sys="21,50,4,57,98,99";
 						$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);
 
 						if($access_menu_level=="true") {
@@ -475,14 +456,6 @@ $_SESSION['timeout'] = time();
 									if(is_array($access_submenu_level)==1) {
 										if(in_array("Y",$access_submenu_level)) {   
 											?><li><a href="dsg_designation.php?a=reset">Designations</a></li><?
-										}
-									} 
-
-									// Tickets Submenu (Check access by passing staff code and form code)
-									$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],43,1);
-									if(is_array($access_submenu_level)==1) {
-										if(in_array("Y",$access_submenu_level)) {   
-											?><li><a href="tickets.php?a=reset">Tickets</a></li><?
 										}
 									} 
 
@@ -515,7 +488,7 @@ $_SESSION['timeout'] = time();
 						}
 
 						// Reports Menu (check access by passing $_SESSION of staff code and form code)
-						$formcode_sys="53,65,45,74,76,77";
+						$formcode_sys="53,65,45,74,76";
 						$access_menu_level = $commonUses->checkMenuAccess($_SESSION['staffcode'],$formcode_sys);
 
 						if($access_menu_level=="true") {   
@@ -559,14 +532,6 @@ $_SESSION['timeout'] = time();
 									if(is_array($access_submenu_level)==1) {
 										if(in_array("Y",$access_submenu_level)) {   
 											?><li><a href="task_report.php">Task Report</a></li><?
-										}
-									}
-
-									// Tickets Report Submenu (Check access by passing $_SESSION of staff code and form code)
-									$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'],77,1);
-									if(is_array($access_submenu_level)==1) {
-										if(in_array("Y",$access_submenu_level)) {   
-											?><li><a href="tickets_report.php">Tickets Report</a></li><?
 										}
 									}
 

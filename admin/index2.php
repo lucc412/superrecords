@@ -10,7 +10,6 @@ if(isset($_SESSION['default_url']) && $_SESSION['default_url'] != '')
 }	
 
 include("dbclass/commonFunctions_class.php");
-include("common/varDeclare.php");
 include("includes/header.php");
 ?>
 

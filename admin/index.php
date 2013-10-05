@@ -2,7 +2,6 @@
 ob_start();
 session_start();
 include("dbclass/commonFunctions_class.php");
-include("common/varDeclare.php");
 if(!$_SESSION['validUser'])
 {
 function loginUser($username,$password)

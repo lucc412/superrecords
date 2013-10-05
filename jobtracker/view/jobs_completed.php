@@ -58,14 +58,28 @@ include(TOPBAR);
 
 				<td class="tddata"><?
 					$arrSourceDocs = $objScr->fetch_documents($jobId);
-					if(!empty($arrSourceDocs)) {
-						foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-							$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
-							if(file_exists($folderPath)) {
-								?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+						if(!empty($arrSourceDocs)) {
+							foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
+								if($arrDocInfo['job_genre'] == 'AUDIT') {
+									$folderPath = "../uploads/audit/" . $arrDocInfo['file_path'];
+									if(file_exists($folderPath)) {
+										?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=A" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+									}
+								}
+								else if($arrDocInfo['job_genre'] == 'SETUP') {
+									$folderPath = "../uploads/setup/" . $arrDocInfo['file_path'];
+									if(file_exists($folderPath)) {
+										?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=ST" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+									}
+								}
+								else {
+									$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
+									if(file_exists($folderPath)) {
+										?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+									}
+								}
 							}
 						}
-					}
 				?></td>
 
 				<td class="tddata"><?

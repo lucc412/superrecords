@@ -15,6 +15,7 @@ function loginUser($username,$password)
    $sql1="SELECT stf_From_ip FROM stf_ipaddress WHERE stf_From_ip=INET_ATON('$myip')";
    $res1 =mysql_query($sql1);
     $ipaddress = @mysql_num_rows($res1);
+	//$ipaddress=1;
 if($ipaddress==0)
     {
        $ip_query = "SELECT stf_From_ip FROM stf_ipaddress WHERE stf_From_ip<=INET_ATON('$myip') AND stf_To_ip>=INET_ATON('$myip')";

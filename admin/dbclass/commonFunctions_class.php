@@ -56,16 +56,6 @@ class commonUse extends Database
 				
 				return $returnStr;
 			}
-            function getTaskDescription($Taskid)
-            {
-                if($Taskid!=0)
-                {
-                    $query="select tsk_Description from tsk_tasks where tsk_Code=".$Taskid;
-                    $result=@mysql_query($query);
-                    $taskdesc=@mysql_result( $result,0,'tsk_Description') ;
-                }
-                return $taskdesc;
-            }
             function getProcessCycleDescription($Processid)
             {
                 if($Processid!=0)
@@ -83,16 +73,6 @@ class commonUse extends Database
                 $res_query = mysql_query($ind_query);
                 $ind_id = mysql_fetch_array($res_query);
                 return $ind_id['cli_Assignedto'];
-            }
-            function getSubTaskDescription($Taskid)
-            {
-                if($Taskid!=0)
-                $query="SELECT sub_Code FROM sub_subcategorytasks WHERE sub_Code = ( SELECT tsk_SubCategory FROM tsk_tasks WHERE tsk_Code =".$Taskid." )";
-                else
-                $query="SELECT sub_Code FROM sub_subcategorytasks WHERE sub_Description like 'Exceptions%'";
-                $result=@mysql_query($query);
-                $subcattaskcode=@mysql_result( $result,0,'sub_Code') ;
-                return $subcattaskcode;
             }
             function getClientType($Typeid)
             {

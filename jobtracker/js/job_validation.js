@@ -233,7 +233,7 @@ function selectOptions(listName) {
 		
 		if(listName == 'JobType')
 		{
-			var selectStr = "<select class=\'drop_down_select\' name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\'0\'>Select Job Type</option>";
+			var selectStr = "<select class=\'drop_down_select\' name=\'lst"+listName+"\' id=\'lst"+listName+"\' onchange='changeDuplicate()'><option value=\'0\'>Select Job Type</option>";
 		}
 		
 		for(var i=0; i<arrData.length; i++)

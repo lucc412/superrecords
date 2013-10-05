@@ -47,7 +47,7 @@ include(TOPBAR);
 			<td><strong>Job Type</strong></td>
 			<td>
 				<span id="spanJobType">	
-					<select name="lstJobType" id="lstJobType" title="Select type of job" onchange="changeDuplicate()">
+					<select name="lstJobType" id="lstJobType" title="Select type of job">
 						<option value="0">Select Job Type</option>
 					</select>
 				</span>

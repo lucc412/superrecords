@@ -656,11 +656,6 @@ switch ($a)
 	case "queries":
 		$objCallData->arrQueries = $objCallData->fetchQueries();
 		include(JOBNAVIGATION);
-                if($_SESSION["usertype"] == "Staff") 
-                {
-                    $arrFeatures = $commonUses->getFeatureVisibility(3);
-                }else
-                    $arrFeatures['stf_visibility'] = 1;
 		
         ?><div class="pdT80">
 			<a href="job.php?a=addQueries&jobId=<?=$_REQUEST["jobId"]?>" class="hlight">
@@ -671,38 +666,38 @@ switch ($a)
 			$pageCode = "NEWQR";	
 			$flagSet = getEventStatus($pageCode);
                         
-                        if($flagSet)
-                        {    
-                            if($_SESSION["usertype"] == "Staff") {
-                                $arrFeatures = $commonUses->getFeatureVisibility(1);
-                            }else
-                                $arrFeatures['stf_visibility'] = 1;
+			if($flagSet)
+			{    
+				if($_SESSION["usertype"] == "Staff") $arrFeatures = $commonUses->getFeatureVisibility(1);	
+				else $arrFeatures['stf_visibility'] = 1;
 
-                            if($arrFeatures['stf_visibility'] == 1) {
-                                    ?>
-                                    <span style="margin-left:764px;">
+				if($arrFeatures['stf_visibility'] == 1) {
+						?><span style="margin-left:764px;">
 
-                                       <button name="sendEmail" style="width: 222px" onclick="javascript:redirectURL('job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>')">Send Mail to Practice</button>
-                                    </span><br>
+						   <button name="sendEmail" style="width: 222px" onclick="javascript:redirectURL('job.php?sql=sendMail&jobId=<?=$_REQUEST["jobId"]?>')">Send Mail to Practice</button>
+						</span><br>
 
-                                    <span class="boldtext"><?php 
-                                    $lastDate = $objCallData->view_send_mail_practice($_REQUEST["jobId"]);
-                                    if($lastDate != '0000-00-00') {
-                                            echo 'Last Sent : '.date('d/m/Y', strtotime($lastDate));
-                                    }
-                               ?></span><?
-                            }
-                        }
+						<span class="boldtext"><?php 
+						$lastDate = $objCallData->view_send_mail_practice($_REQUEST["jobId"]);
+						if($lastDate != '0000-00-00') {
+								echo 'Last Sent : '.date('d/m/Y', strtotime($lastDate));
+						}
+				   ?></span><?
+				}
+			}
                         
 	    ?></div>	
-		<br>
+		<br><?
 		
-		<form method="POST" name="frmQueriesList" action="job.php?sql=updateQuery">
+		// check user rights to show/hide post button
+		if($_SESSION["usertype"] == "Staff") $arrFeatures = $commonUses->getFeatureVisibility(3);
+		else $arrFeatures['stf_visibility'] = 1;
+		
+		?><form method="POST" name="frmQueriesList" action="job.php?sql=updateQuery">
 			
 			<input type="hidden" name="queryId" id="queryId" value="">
 			<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
 			<input type="hidden" name="qryPost" id="qryPost" value="">
-			
 			
 			 <table class="fieldtable" align="center" width="100%" border="0" cellspacing="1" cellpadding="4">
 				<tr class="fieldheader">

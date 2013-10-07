@@ -6,8 +6,6 @@
 //  Last Modified : 26-Jan-2013 
 //************************************************************************************************
 ob_start();
-include 'common/varDeclare.php';
-include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/tsk_task_class.php';
 include("includes/header.php");

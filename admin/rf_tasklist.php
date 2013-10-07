@@ -1,5 +1,4 @@
 <?php 
-    include 'common/varDeclare.php';
     include 'dbclass/commonFunctions_class.php';
 	include ("includes/header.php");
 	
@@ -344,24 +343,7 @@ else {
     else {
 ?>
 <p><b><font color="-1">Sorry, the login/password combination you've entered is invalid</font></b></p>
-<?php } } }if (isset($_SESSION["logged_view"]) && (!$_SESSION["logged_view"])) { ?>
-<form action="cst_clientstatus.php?a=view&recid=<?php echo $recid ?>" method="post">
-<table class="bd" border="0" cellspacing="1" cellpadding="4">
-<tr>
-<td>Login</td>
-<td><input type="text" name="login_view" value="<?php echo $login ?>"></td>
-</tr>
-<tr>
-<td>Password</td>
-<td><input type="password" name="password_view" value="<?php echo $password ?>"></td>
-</tr>
-<tr>
-<td><input type="submit" name="action" value="Login"></td>
-</tr>
-</table>
-</form>
-<?php
-  }
+<?php } } }
   if (!isset($_SESSION["logged_view"])) $_SESSION["logged_view"] = false;
   return $_SESSION["logged_view"];
 } ?>

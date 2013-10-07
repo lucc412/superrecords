@@ -148,6 +148,7 @@ class EXISTING_SMSF_FUND
             $filename = $fileId."~setup.pdf";
             $docQry = "INSERT INTO documents (job_id,document_title,date,file_path) VALUES (".$_SESSION['jobId'].",'setup','".$currentTime."','".$filename."')";
             mysql_query($docQry);
+
             
             $html = $objStpPrvw->generatePreview();
             $title1 = $arrPractice['name'];
@@ -155,6 +156,7 @@ class EXISTING_SMSF_FUND
             
             // Create PDF
             createPDF($html,$filename,$title1,$title2);
+
         }
         
         

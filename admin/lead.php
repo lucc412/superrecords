@@ -1,6 +1,5 @@
 <?php 
 ob_start();
-include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/lead_class.php';
 

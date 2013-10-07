@@ -1,6 +1,5 @@
 <?php
 session_start();
-include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
 include ("includes/header.php");
 if($_SESSION['validUser']) {
@@ -18,10 +17,6 @@ if($_SESSION['validUser']) {
 	  if (!isset($ordtype) && isset($_SESSION["type"])) $ordtype = $_SESSION["type"];
 	  if (!isset($filter) && isset($_SESSION["filter"])) $filter = $_SESSION["filter"];
 	  if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_SESSION["filter_field"];
-	  if( $_SESSION['Submit'] == "Generate Excel Report") {
-		header("Location:dbclass/generate_excel_class.php?report=subactivity");
-	  }
-
 	?>
 	
 	<script>
@@ -231,7 +226,6 @@ function select($access_file_level) {
 <td>&nbsp;</td>
 <td><button type="submit" name="action" value="Apply Filter">Apply Filter</button></td>
 <td><a href="sub_subactivity.php?a=reset" class="hlight">Reset Filter</a></td>
-<td><button type="submit" name="Submit" style="width:180px;" value="Generate Excel Report">Generate Excel Report</button></td>
 </tr>
 </table>
 </form>
@@ -699,11 +693,6 @@ function sql_select()
   $filterstr = $commonUses->sqlstr($filter);
   if (!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
   $sql = "SELECT * FROM (SELECT t1.`sub_Code`, t1.`sas_Code`, t1.`Code`, lp1.`mas_Description` AS `lp_sas_Code`, lp1.`Code` AS `lp_mas_Code`, t1.`sub_Description`, t1.`sub_Order`, t1.`display_in_practice` FROM `sub_subactivity` AS t1 LEFT OUTER JOIN `mas_masteractivity` AS lp1 ON (t1.`sas_Code` = lp1.`mas_Code`)) subq";
-  if($_SESSION['Submit']=="Generate Excel Report")
-  {
-      $sql_excel = "SELECT * FROM (SELECT CONCAT(lp1.`Code`,' - ',lp1.`mas_Description`) AS `Master Activity`, CONCAT(t1.`Code`,' - ',t1.`sub_Description`, t1.`display_in_practice`) AS `Sub Activity`, t1.`sub_Order` AS `Order`, t1.`display_in_practice` AS `Display In Practice ?`, t1.`sub_Code`, t1.`sas_Code`, t1.`Code`, lp1.`mas_Description` AS `lp_sas_Code`, lp1.`Code` AS `lp_mas_Code`, t1.`sub_Description` FROM `sub_subactivity` AS t1 LEFT OUTER JOIN `mas_masteractivity` AS lp1 ON (t1.`sas_Code` = lp1.`mas_Code`)) subq";
-      $sql = $sql_excel;
-  }
   if (isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
     $sql .= " where " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";
   } 

@@ -3,7 +3,6 @@
 include("dbclass/commonFunctions_class.php");
 include("dbclass/staff_content_class.php");
 include("dbclass/staff_db_class.php");
-include("common/varDeclare.php");
 include ("includes/header.php");
 if ($_SESSION['validUser']) {
     if (isset($_GET["order"]))

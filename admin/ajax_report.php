@@ -1,6 +1,5 @@
 <?
 // include all required files for this screen
-include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/report_class.php';
 

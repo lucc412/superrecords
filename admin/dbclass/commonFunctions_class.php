@@ -1,20 +1,8 @@
 <?php 
-//session_start();
-/*include("Mail.php");
-require_once("common/class.Database.php");
-include ("functions.php");
-include 'includes/translate.php';*/
-
-$inc_path = get_include_path();
-include ("common/class.Database.php");
-include ("functions.php");
-include 'includes/translate.php';
-include 'includes/commonFunctionExtends.php';
-ini_set('include_path','/home/befreeco/php');
-//require_once ("Mail.php");
-set_include_path($inc_path);
-
-
+include ("includes/class.Database.php");
+include ('includes/varDeclare.php');
+include ('includes/commonFunctionExtends.php');
+include(PHPFUNCTION);
 
 class commonUse extends Database
 {
@@ -68,16 +56,6 @@ class commonUse extends Database
 				
 				return $returnStr;
 			}
-            function getTaskDescription($Taskid)
-            {
-                if($Taskid!=0)
-                {
-                    $query="select tsk_Description from tsk_tasks where tsk_Code=".$Taskid;
-                    $result=@mysql_query($query);
-                    $taskdesc=@mysql_result( $result,0,'tsk_Description') ;
-                }
-                return $taskdesc;
-            }
             function getProcessCycleDescription($Processid)
             {
                 if($Processid!=0)
@@ -95,16 +73,6 @@ class commonUse extends Database
                 $res_query = mysql_query($ind_query);
                 $ind_id = mysql_fetch_array($res_query);
                 return $ind_id['cli_Assignedto'];
-            }
-            function getSubTaskDescription($Taskid)
-            {
-                if($Taskid!=0)
-                $query="SELECT sub_Code FROM sub_subcategorytasks WHERE sub_Code = ( SELECT tsk_SubCategory FROM tsk_tasks WHERE tsk_Code =".$Taskid." )";
-                else
-                $query="SELECT sub_Code FROM sub_subcategorytasks WHERE sub_Description like 'Exceptions%'";
-                $result=@mysql_query($query);
-                $subcattaskcode=@mysql_result( $result,0,'sub_Code') ;
-                return $subcattaskcode;
             }
             function getClientType($Typeid)
             {

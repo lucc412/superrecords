@@ -4,7 +4,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9" />
 		<title>Client Login</title>
 		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-		<link href="images_user/favicon.ico" rel="shortcut icon" />
+		<link href="images/favicon.ico" rel="shortcut icon" />
 		<script type="text/javascript" src="./../js/login_validation.js"></script>
 	</head>
 	<?php
@@ -17,7 +17,7 @@
 	<body class="pagebackground"><?
 		
 		// page header
-		?><div align="center" style="margin-top:20px;padding-bottom:45px;"><a href="http://<?=$_SERVER['SERVER_NAME']?>/index.php"><img src="./../images_user/header-logo.png"></a></div>
+		?><div align="center" style="margin-top:20px;padding-bottom:45px;"><a href="http://<?=$_SERVER['SERVER_NAME']?>/index.php"><img src="./../images/header-logo.png"></a></div>
 
 		<form name="objForm" id="objForm" method="post" action="<?=$BGL_URL_CHECK?>" onsubmit="javascript:return checkValidation();">
 			<div align="center"><?

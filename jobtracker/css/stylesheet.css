@@ -3,11 +3,11 @@
 
 @font-face {
     font-family: 'OpenSansCondensedLight';
-    src: url('../fonts/OpenSans-CondLight-webfont.eot');
-    src: url('../fonts/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/OpenSans-CondLight-webfont.woff') format('woff'),
-         url('../fonts/OpenSans-CondLight-webfont.ttf') format('truetype'),
-         url('../fonts/OpenSans-CondLight-webfont.svg#OpenSansCondensedLight') format('svg');
+    src: url('fonts/OpenSans-CondLight-webfont.eot');
+    src: url('fonts/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/OpenSans-CondLight-webfont.woff') format('woff'),
+         url('fonts/OpenSans-CondLight-webfont.ttf') format('truetype'),
+         url('fonts/OpenSans-CondLight-webfont.svg#OpenSansCondensedLight') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -15,11 +15,11 @@
 
 @font-face {
     font-family: 'OpenSansCondensedLightItalic';
-    src: url('../fonts/OpenSans-CondLightItalic-webfont.eot');
-    src: url('../fonts/OpenSans-CondLightItalic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/OpenSans-CondLightItalic-webfont.woff') format('woff'),
-         url('../fonts/OpenSans-CondLightItalic-webfont.ttf') format('truetype'),
-         url('../fonts/OpenSans-CondLightItalic-webfont.svg#OpenSansCondensedLightItalic') format('svg');
+    src: url('fonts/OpenSans-CondLightItalic-webfont.eot');
+    src: url('fonts/OpenSans-CondLightItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/OpenSans-CondLightItalic-webfont.woff') format('woff'),
+         url('fonts/OpenSans-CondLightItalic-webfont.ttf') format('truetype'),
+         url('fonts/OpenSans-CondLightItalic-webfont.svg#OpenSansCondensedLightItalic') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -27,11 +27,11 @@
 
 @font-face {
     font-family: 'OpenSansCondensedBold';
-    src: url('../fonts/OpenSans-CondBold-webfont.eot');
-    src: url('../fonts/OpenSans-CondBold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/OpenSans-CondBold-webfont.woff') format('woff'),
-         url('../fonts/OpenSans-CondBold-webfont.ttf') format('truetype'),
-         url('../fonts/OpenSans-CondBold-webfont.svg#OpenSansCondensedBold') format('svg');
+    src: url('fonts/OpenSans-CondBold-webfont.eot');
+    src: url('fonts/OpenSans-CondBold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/OpenSans-CondBold-webfont.woff') format('woff'),
+         url('fonts/OpenSans-CondBold-webfont.ttf') format('truetype'),
+         url('fonts/OpenSans-CondBold-webfont.svg#OpenSansCondensedBold') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -103,7 +103,7 @@ a img{
 /* Header */
 
 .header {
-	background:url(../images_user/header-bg.jpg) repeat-x;
+	background:url(../images/header-bg.jpg) repeat-x;
 	height:100px;
 	width:100%;
 }
@@ -114,7 +114,7 @@ a img{
 }
 
 .header .user {
-	background:url(../images_user/header-user-spacer.png) 114px 4px no-repeat;
+	background:url(../images/header-user-spacer.png) 114px 4px no-repeat;
 	position:absolute;
 	right:0px;
 	top:15px;
@@ -131,12 +131,12 @@ a img{
 }
 
 .header .user .contact {
-	background:url(../images_user/header-icon-contact.png) center left no-repeat;
+	background:url(../images/header-icon-contact.png) center left no-repeat;
 	padding-left:20px;
 }
 
 .header .user .login {
-	background:url(../images_user/header-icon-login.png) 5px 3px no-repeat;
+	background:url(../images/header-icon-login.png) 5px 3px no-repeat;
 	padding-left:20px;
 }
 
@@ -161,7 +161,7 @@ a img{
 	z-index: 9999;
 	margin: 0; 
 	list-style: none;
-	background:url(../images_user/spacer.gif);
+	background:url(../images/spacer.gif);
 }
 .nav .container li { 
 	margin: 0; 
@@ -176,7 +176,7 @@ a img{
 .nav {
 	z-index:9999;
 	height: 50px; 
-	background:url(../images_user/menu-bg.jpg) repeat-x;
+	background:url(../images/menu-bg.jpg) repeat-x;
 	color:#fff;
 	border-bottom: 1px solid white;
 }
@@ -197,7 +197,7 @@ a img{
 
 
 .nav .container .dropdown{
-	background: url(../images_user/menu-dropdown.jpg) 89% 25px no-repeat;
+	background: url(../images/menu-dropdown.jpg) 89% 25px no-repeat;
 }
 
 .nav .container > ul > li > a {
@@ -320,18 +320,18 @@ a img{
 .homebanner {
 	height:471px;
 	width:100%;
-	background:url(../images_user/homebanner.jpg) top center no-repeat #c9d0cc;
+	background:url(../images/homebanner.jpg) top center no-repeat #c9d0cc;
 }
 
 .generalbanner {
 	height:385px;
 	width:100%;
-	background:url(../images_user/generalbanner.png) top center no-repeat #d3d8d5;
+	background:url(../images/generalbanner.png) top center no-repeat #d3d8d5;
 }
 
 .pagebackground {
 	width:100%;
-	background:url(../images_user/generalbanner.png) top center #d3d8d5;
+	background:url(../images/generalbanner.png) top center #d3d8d5;
 	padding-top:10px;
 	padding-bottom:25px;
 }
@@ -514,7 +514,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	line-height:21px;
 	margin-left:30px;
 	list-style-type:none; /* removes default bullet */
-	background-image:url(../images_user/bullet2.png); 
+	background-image:url(../images/bullet2.png); 
 	background-repeat: no-repeat; /* ONE bullet only please */
 	background-position: 0 .47em; /* .45em from top (vertical) */ 
 	padding-left:14px; /* space between bullet and text */ 
@@ -565,7 +565,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	font-size:13px;
 	display:block;
 	padding:10px 20px;
-	background:url(../images_user/rightmenu-arrow.jpg) 5px 15px no-repeat;
+	background:url(../images/rightmenu-arrow.jpg) 5px 15px no-repeat;
 	cursor:pointer;
 	color:rgba(7, 65, 96, 0.94);
 	/*text-decoration:underline;*/
@@ -576,7 +576,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	font-size:13px;
 	display:block;
 	padding:10px 20px;
-	background:url(../images_user/rightmenu-arrow-orange.jpg) 5px 15px no-repeat;
+	background:url(../images/rightmenu-arrow-orange.jpg) 5px 15px no-repeat;
 	cursor:pointer;
 	color:#F05729;
 	text-decoration:underline;
@@ -699,13 +699,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .rightmenu li {
 	list-style:none;
 	width:237px;
-	background:url(../images_user/rightmenu-border.jpg) bottom center no-repeat;
+	background:url(../images/rightmenu-border.jpg) bottom center no-repeat;
 	padding-right:10px;
 
 }
 
 .rightmenu li:hover {
-	background:url(../images_user/rightmenu-hover.jpg) 0px 0px no-repeat;
+	background:url(../images/rightmenu-hover.jpg) 0px 0px no-repeat;
 }
 
 .rightmenu li a {
@@ -714,7 +714,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	font-weight:bold;
 	color:#074160;
 	padding:10px 30px;
-	background:url(../images_user/rightmenu-arrow.jpg) 15px 15px no-repeat;
+	background:url(../images/rightmenu-arrow.jpg) 15px 15px no-repeat;
 	margin-right:17px;
 
 }
@@ -747,7 +747,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .quicklink {
-	background: url(../images_user/ql-bg.png) bottom repeat-x;
+	background: url(../images/ql-bg.png) bottom repeat-x;
 	width: 194px;
 	height: 300px;
 	padding: 1px 13px;
@@ -769,7 +769,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 .quicklink a {
 	color:#f05927;
-	background:url(../images_user/more.jpg) center left no-repeat;
+	background:url(../images/more.jpg) center left no-repeat;
 	padding-left:10px;
 	bottom:20px;
 	position:absolute;
@@ -802,14 +802,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	font-weight:bold;
 	display:block;
 	padding:10px 8px;
-	background:url(../images_user/rightmenu-arrow.jpg) 0px 13px no-repeat;
+	background:url(../images/rightmenu-arrow.jpg) 0px 13px no-repeat;
 	cursor:pointer;
 	color:rgba(7, 65, 96, 0.94);
 }
 
 .sponsors {
 	height:105px;
-	background:url(../images_user/sponsors-shadow.jpg) top center no-repeat;
+	background:url(../images/sponsors-shadow.jpg) top center no-repeat;
 	padding:20px;
 	border-bottom:3px solid #ccc;
 }
@@ -823,7 +823,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .resources p {
-	background:url(../images_user/pdf.jpg) center left no-repeat;
+	background:url(../images/pdf.jpg) center left no-repeat;
 	padding-left:20px;
 }
 
@@ -845,18 +845,18 @@ input {
 }
 
 #Name {
-	background:url(../images_user/icon-name.jpg) center left no-repeat;
+	background:url(../images/icon-name.jpg) center left no-repeat;
 	padding-left:33px;
 }
 
 #Email {
-	background:url(../images_user/icon-email.jpg) center left no-repeat;
+	background:url(../images/icon-email.jpg) center left no-repeat;
 	padding-left:33px;
 }
 
 
 #Telephone {
-	background:url(../images_user/icon-phone.jpg) center left no-repeat;
+	background:url(../images/icon-phone.jpg) center left no-repeat;
 	padding-left:33px;
 }
 
@@ -873,7 +873,7 @@ textarea {
 
 button {
 	color: white;
-	background:url(../images_user/submit-bg.jpg) center left no-repeat #074165;
+	background:url(../images/submit-bg.jpg) center left no-repeat #074165;
 	font-size: 13px;
 	width:165px;
 	padding-left:32px;
@@ -899,7 +899,7 @@ button {
 .disbtnclass
 {
 	color: white;
-	background:url(../images_user/submit-bg-disable.png) center left no-repeat rgba(7, 65, 101, 0.31);
+	background:url(../images/submit-bg-disable.png) center left no-repeat rgba(7, 65, 101, 0.31);
 	font-size: 13px;
 	width:165px;
 	padding-left:32px;
@@ -917,7 +917,7 @@ button {
 
 .logoutbtn {
 	color: white;
-	background:url(../images_user/submit-bg.jpg) center left no-repeat #074165;
+	background:url(../images/submit-bg.jpg) center left no-repeat #074165;
 	font-size: 14px;
 	width: 94px;
 	padding-left: 32px;
@@ -930,7 +930,7 @@ button {
 
 .loginbtn {
 	color: #fff;
-	background:url(../images_user/submit-bg.jpg) center left no-repeat #074165;
+	background:url(../images/submit-bg.jpg) center left no-repeat #074165;
 	font-size: 13px;
 	width: 170px;
 	padding-left: 32px;
@@ -1037,7 +1037,7 @@ button {
 	padding-top: 27px;
 	line-height: 17px;
 	height: 94px;
-	background:url(../images_user/bg-bottom.jpg) repeat-x;
+	background:url(../images/bg-bottom.jpg) repeat-x;
 }
 
 .bottom-menu h1, .bottom-menu h1 a {
@@ -1061,7 +1061,7 @@ button {
 .footer {
 	padding-top:14px;
 	height:46px;
-	background:url(../images_user/footer-bg.jpg) repeat-x;
+	background:url(../images/footer-bg.jpg) repeat-x;
 	color:#afbec8;
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:11px;

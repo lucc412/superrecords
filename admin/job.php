@@ -7,8 +7,6 @@
 //************************************************************************************************
 
 ob_start();
-include 'common/varDeclare.php';
-include(PHPFUNCTION);
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/job_class.php';
 

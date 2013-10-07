@@ -115,7 +115,7 @@ include(TOPBAR);
         width: 550px !important;
     }
     .ui-widget-header{
-        background: url("../images_user/submit-bg.jpg") no-repeat scroll left center #074165;
+        background: url("../images/submit-bg.jpg") no-repeat scroll left center #074165;
         color: #FFF;
     }
     .ui-dialog-content{

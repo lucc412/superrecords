@@ -1,5 +1,4 @@
 <?php
-        include 'common/varDeclare.php';
         include 'dbclass/commonFunctions_class.php';
         include 'dbclass/con_empcontact_class.php';
         include 'dbclass/con_empcontact_db_class.php';

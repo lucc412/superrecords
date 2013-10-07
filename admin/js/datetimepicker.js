@@ -45,7 +45,7 @@ var MthSelColor="#cc0033";//color of font of Month selector if "MonthSelector" i
 var ThemeBg="";//Background image of Calendar window.
 var PrecedeZero=true;//Preceding zero [true|false]
 var MondayFirstDay=true;//true:Use Monday as first day; false:Sunday as first day. [true|false]  //added in version 1.7
-var imgDir = 'js/calendar/'; // folder where images are stored
+var imgDir = 'images/calendar/'; // folder where images are stored
 //end Configurable parameters
 //end Global variable
 

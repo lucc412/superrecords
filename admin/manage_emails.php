@@ -8,7 +8,6 @@
 ob_start();
 
 /* Include common functions files */
-include 'common/varDeclare.php';
 include 'dbclass/commonFunctions_class.php';
 include("includes/header.php");
 /* include class file & create class object for class function access */

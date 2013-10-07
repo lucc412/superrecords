@@ -1,4 +1,5 @@
 <?php
+ini_set("display_errors", 0);
 class JConfig {
 	public $offline = '0';
 	public $offline_message = 'This site is down for maintenance.<br /> Please check back again soon.';

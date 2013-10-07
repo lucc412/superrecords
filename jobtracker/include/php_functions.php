@@ -281,8 +281,7 @@ function fetchStates() {
 
 function fetchStateName($id) 
 {
-    $qryFetch = "SELECT cs.cst_Code state_id, cs.cst_Description state_name 
-                                FROM cli_state cs WHERE cs.cst_Code = ".$id;
+    $qryFetch = "SELECT cs.cst_Code state_id, cs.cst_Description state_name FROM cli_state cs WHERE cs.cst_Code = ".$id;
 
     $fetchResult = mysql_query($qryFetch);
     $rowData = mysql_fetch_assoc($fetchResult);
@@ -358,7 +357,7 @@ function new_job_task_mail()
 	/* send mail function ends here */	
 }
 
-function createPDF($html,$filename)
+function createPDF($html,$filename,$title1,$title2)
 {
     include(PDF);
     
@@ -373,10 +372,10 @@ function createPDF($html,$filename)
     $pdf->SetKeywords('SuperRecords Setup Report');
 
     // set default header data
-    $pdf->SetHeaderData(PDF_HEADER_LOGO, 70, 'Super Records'.' ', 'Trustee Guide',array(7,65,101));
+    $pdf->SetHeaderData(PDF_HEADER_LOGO, 70, $title1.' ',$title2,array(7,65,101));
 
     // set header and footer fonts
-    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', 15));
+    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', 12));
     $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
     
     // set default monospaced font
@@ -404,14 +403,12 @@ function createPDF($html,$filename)
 
     // add a page
     $pdf->AddPage();
-    
-    //$html = "";
 
     // output the HTML content
     $pdf->writeHTML($html, true, false, true, false, '');
 
-    $pdf->Output($filename, 'I');
-    //$pdf->Output(UPLOADSETUP.$filename,"F");
+    //$pdf->Output($filename, 'I');
+    $pdf->Output(UPLOADSETUP.$filename,"F");
 }
 
 function showPDFViewer($file,$filename)

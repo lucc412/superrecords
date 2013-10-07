@@ -76,9 +76,9 @@ class DECLARATIONS
             $title1 = $arrPractice['name'];
             $title2 = $arrClients['client_name'].' - '.$arrJob[$_SESSION['jobId']]['period'].' - '.$arrActivity['sub_Description'];
 
-            
             // Create PDF
             createPDF($html,$filename,$title1,$title2);
+
         }
         
         function updateTerms($chk)

@@ -19,13 +19,19 @@ if($_SESSION['validUser']) {
 	if (isset($_POST["filter_field"])) $filterfield = @$_POST["filter_field"];
 	$wholeonly = false;
 	if (isset($_POST["wholeonly"])) $wholeonly = @$_POST["wholeonly"];
-	
+	if (isset($_REQUEST["order"])) $order = @$_REQUEST["order"]; else $order = 't.task_id';
+        if (isset($_REQUEST["type"])) $ordertype = @$_REQUEST["type"];
+        
 	if (!isset($filter) && isset($_SESSION["filter"])) $filter = $_SESSION["filter"];
 	if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_SESSION["filter_field"];
+        if (!isset($order) && isset($_SESSION["order"])) $order = $_SESSION["order"];
+        if (!isset($order) && isset($_SESSION["ordertype"])) $ordertype = $_SESSION["ordertype"];
 
 	if (isset($filter)) $_SESSION["filter"] = $filter;
 	if (isset($filterfield)) $_SESSION["filter_field"] = $filterfield;
 	if (isset($wholeonly)) $_SESSION["wholeonly"] = $wholeonly;	
+        if (isset($order)) $_SESSION["order"] = $order;
+	if (isset($ordertype)) $_SESSION["ordertype"] = $ordertype;	
 	
 	?><br/><?
 
@@ -209,6 +215,8 @@ if($_SESSION['validUser']) {
 
 				$checkstr = "";
 				if ($wholeonly) $checkstr = " checked";
+                                
+                                if ($ordertype == "DESC") { $ordertype = "ASC"; } else { $ordertype = "DESC"; }
 
 				//If View, Add, Edit, Delete all set to N
 				if($access_file_level == 0) {

@@ -39,9 +39,9 @@
 	}
 		
 	?><tr class="fieldheader">
-		<th width="15%" align="left" class="fieldheader">Practice Name</th>
-		<th width="30%" align="left" class="fieldheader">Task Name</th>
-		<th width="30%" align="left" class="fieldheader">Task Status</th>
+		<th width="15%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "pr.name" ?>&type=<?php echo $ordertype; ?>">Practice Name</a></th>
+		<th width="30%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.task_name" ?>&type=<?php echo $ordertype; ?>">Task Name</a></th>
+		<th width="30%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.task_status_id" ?>&type=<?php echo $ordertype; ?>">Task Status</a></th>
 		<th width="8%" class="fieldheader" colspan="3" align="center">Actions</th>
 	</tr><?
 

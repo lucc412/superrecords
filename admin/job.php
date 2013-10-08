@@ -270,25 +270,30 @@ if($_SESSION['validUser']) {
 
 					header('Location: job.php?a=queries&jobId='.$jobId);
 					break;
+                                        
+                                    default :
+                                        //Get FormCode [Display main listing page of Job]
+                                        $formcode = $commonUses->getFormCode("Job List");
+                                        $access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
+
+                                        //If View, Add, Edit, Delete all set to N
+                                        if($access_file_level == 0) {
+                                            echo "You are not authorised to view this file.";
+                                        }
+                                        else 
+                                        {
+//                                            $arrJob = $objCallData->fetchJob();
+//                                            $arrPractice = $objCallData->fetchPractice();
+//                                            $arrClients = $objCallData->fetchClient();
+//                                            $arrJobType = $objCallData->fetchJobType();
+
+                                            include('views/job_list.php');
+                                        }
+                                        break;
 
 				}
 
-				//Get FormCode [Display main listing page of Job]
-				$formcode = $commonUses->getFormCode("Job List");
-				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
-
-				//If View, Add, Edit, Delete all set to N
-				if($access_file_level == 0) {
-					echo "You are not authorised to view this file.";
-				}
-				else {
-					$arrJob = $objCallData->fetchJob();
-					$arrPractice = $objCallData->fetchPractice();
-					$arrClients = $objCallData->fetchClient();
-					$arrJobType = $objCallData->fetchJobType();
-
-					include('views/job_list.php');
-				}
+				
 		
 	if($a != "uploadReports" && $a != "auditDocs") include("includes/footer.php");	
 }  

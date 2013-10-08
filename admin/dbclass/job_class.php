@@ -11,13 +11,19 @@ class Job_Class extends Database
 { 	
 	public function __construct()
 	{
-		$this->arrJob = $this->fetchJob();
-		$this->arrJobStatus = $this->fetchJobStatus();
-		$this->arrClient = $this->fetchClient();
-		$this->arrClientType = $this->fetchClientType();
-		$this->arrPractice = $this->fetchPractice();
-		$this->arrPracticeName = $this->fetchPracticeName();
-		$this->arrJobType = $this->fetchJobType();
+            if (isset($_REQUEST["order"])) $this->order = $_REQUEST["order"]; else $this->order = 'j1.job_received';
+            if (isset($_REQUEST["type"])) $this->ordertype = $_REQUEST["type"];
+
+            if ($this->ordertype == "DESC") { $this->ordertype = "ASC"; } else { $this->ordertype = "DESC"; }
+
+            $this->arrJob = $this->fetchJob();
+            $this->arrJobStatus = $this->fetchJobStatus();
+            $this->arrClient = $this->fetchClient();
+            $this->arrClientType = $this->fetchClientType();
+            $this->arrPractice = $this->fetchPractice();
+            $this->arrPracticeName = $this->fetchPracticeName();
+            $this->arrJobType = $this->fetchJobType();
+            
 	}	
 
 	public function fetchPracticeName() {		
@@ -45,47 +51,40 @@ class Job_Class extends Database
 	}
 	
 	// Function to fetch all Jobs or fetches Jobs based on arguments
-	public function fetchJob() {
-
+	public function fetchJob() 
+        {
 		if($_REQUEST['filter_field'] == 'all') {
-			$fromStr = ", pr_practice p1, sub_subactivity sa, job_status s1";
+			//$fromStr = ", pr_practice p1, sub_subactivity sa, job_status s1";
 			if(!$_REQUEST['wholeonly']) {
-				$whereStr = "AND ((c1.id = p1.id	AND p1.name LIKE '%".$_REQUEST['filter']."%')
+				$whereStr = "AND (( p1.name LIKE '%".$_REQUEST['filter']."%')
 						OR ((c1.client_name LIKE '%".$_REQUEST['filter']."%'
 							OR sa.sub_Description LIKE '%".$_REQUEST['filter']."%'
-							OR j1.period LIKE '%".$_REQUEST['filter']."%') 
-							AND sa.sub_Code = j1.job_type_id) 
-						OR (j1.job_status_id = s1.job_status_id
-							AND s1.job_status LIKE '%".$_REQUEST['filter']."%'))";
+							OR j1.period LIKE '%".$_REQUEST['filter']."%')) 
+						OR (s1.job_status LIKE '%".$_REQUEST['filter']."%'))";
 			}
 			else {
-				$whereStr = "AND ((c1.id = p1.id	AND p1.name LIKE '".$_REQUEST['filter']."')
+				$whereStr = "AND ((p1.name LIKE '".$_REQUEST['filter']."')
 						OR ((c1.client_name LIKE '".$_REQUEST['filter']."'
 							OR sa.sub_Description LIKE '".$_REQUEST['filter']."'
-							OR j1.period LIKE '".$_REQUEST['filter']."') 
-							AND sa.sub_Code = j1.job_type_id) 
-						OR (j1.job_status_id = s1.job_status_id
-							AND s1.job_status LIKE '".$_REQUEST['filter']."'))";
+							OR j1.period LIKE '".$_REQUEST['filter']."') ) 
+						OR (s1.job_status LIKE '".$_REQUEST['filter']."'))";
 			}
 		}
 		else if($_REQUEST['filter_field'] == 'practice') {
-			$fromStr = ", pr_practice p1";
+			//$fromStr = ", pr_practice p1";
 			if(!$_REQUEST['wholeonly']) {
-				$whereStr = "AND c1.id = p1.id
-							AND p1.name LIKE '%".$_REQUEST['filter']."%'";
+				$whereStr = " AND p1.name LIKE '%".$_REQUEST['filter']."%'";
 			}
 			else {
-				$whereStr = "AND c1.id = p1.id
-							AND p1.name = '".$_REQUEST['filter']."'";
+				$whereStr = " AND p1.name = '".$_REQUEST['filter']."'";
 			}
 		}
 		else if($_REQUEST['filter_field'] == 'job') {
-			$fromStr = ", sub_subactivity sa";
+			//$fromStr = ", sub_subactivity sa";
 			if(!$_REQUEST['wholeonly']) {
 				$whereStr = "AND (c1.client_name LIKE '%".$_REQUEST['filter']."%'
 							OR sa.sub_Description LIKE '%".$_REQUEST['filter']."%'
-							OR j1.period LIKE '%".$_REQUEST['filter']."%')
-							AND sa.sub_Code = j1.job_type_id";
+							OR j1.period LIKE '%".$_REQUEST['filter']."%')";
 			}
 			else {
 				$whereStr = "AND (c1.client_name = '".$_REQUEST['filter']."'
@@ -94,14 +93,12 @@ class Job_Class extends Database
 			}
 		}
 		else if($_REQUEST['filter_field'] == 'status') {
-			$fromStr = ", job_status s1";
+			//$fromStr = ", job_status s1";
 			if(!$_REQUEST['wholeonly']) {
-				$whereStr = "AND j1.job_status_id = s1.job_status_id
-							AND s1.job_status LIKE '%".$_REQUEST['filter']."%'";
+				$whereStr = " AND s1.job_status LIKE '%".$_REQUEST['filter']."%'";
 			}
 			else {
-				$whereStr = "AND j1.job_status_id = s1.job_status_id
-							AND s1.job_status = '".$_REQUEST['filter']."'";
+				$whereStr = " AND s1.job_status = '".$_REQUEST['filter']."'";
 			}
 		}
 		
@@ -109,7 +106,7 @@ class Job_Class extends Database
 			$userId = $_SESSION["staffcode"];
 			
 			if($_REQUEST['filter_field'] != 'practice' && $_REQUEST['filter_field'] != 'all')
-				$strFrom = ",pr_practice p1";
+				//$strFrom = ",pr_practice p1";
 				
 			$strWhere = " AND p1.id = c1.id
 						  AND (p1.sr_manager=".$userId." 
@@ -122,14 +119,18 @@ class Job_Class extends Database
 		}
 				
 		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id, j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes, j1.job_genre, j1.job_submitted, j1.mas_Code
-					FROM job j1, client c1 {$fromStr} {$strFrom}
+					FROM job j1, client c1 , pr_practice p1, sub_subactivity sa, job_status s1 
 					WHERE j1.client_id = c1.client_id 
-					AND j1.discontinue_date IS NULL
+                                        AND c1.id = p1.id	
+                                        AND sa.sub_Code = j1.job_type_id
+                                        AND j1.job_status_id = s1.job_status_id
+                                        AND j1.discontinue_date IS NULL
 					AND j1.job_submitted = 'Y'
 					{$strWhere} 
 					{$whereStr} 
 					GROUP BY j1.job_id
-					ORDER BY job_received desc";
+                                        ORDER BY {$this->order} {$this->ordertype}";
+					
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

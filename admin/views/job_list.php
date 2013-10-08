@@ -25,8 +25,8 @@ if(!empty($a) && $a != 'addJob') {
 				</td>
 				<td align="right">
 					<span style="font-weight:bold; font-size:10pt;"> Job Name: </span><?
-					$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
-					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
+					$arrJobParts = explode('::', $objCallData->arrJob[$_REQUEST["jobId"]]["job_name"]);
+					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $objCallData->arrJob[$_REQUEST["jobId"]]["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
 					?><span style="font-size:10pt;"><?=stripslashes($jobName)?></span>
 			  </td>
 			  
@@ -44,11 +44,11 @@ if(!empty($a) && $a != 'addJob') {
 				
 				<td align="right">
 					<span style="font-weight:bold; font-size:10pt;"> Job Name: </span><?
-					$arrJobParts = explode('::', $arrJob[$_REQUEST["jobId"]]["job_name"]);
+					$arrJobParts = explode('::', $objCallData->arrJob[$_REQUEST["jobId"]]["job_name"]);
 
-					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $arrJob[$_REQUEST["jobId"]]["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
+					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $objCallData->arrJob[$_REQUEST["jobId"]]["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
 
-					$hidJobName = $arrJob[$_REQUEST["jobId"]]["job_name"];
+					$hidJobName = $objCallData->arrJob[$_REQUEST["jobId"]]["job_name"];
 				
 				 ?><span style="font-size:10pt;"><?=stripslashes($jobName)?></span>
 				</td>				
@@ -195,7 +195,7 @@ switch ($a)
 			}
 				
 			$client_id = $objCallData->arrJob[$_REQUEST["jobId"]]["client_id"];
-			$strPanelInfo = $objCallData->sql_select_panel($arrJob[$_REQUEST['jobId']]['id']);
+			$strPanelInfo = $objCallData->sql_select_panel($objCallData->arrJob[$_REQUEST['jobId']]['id']);
 			$arrPanelInfo = explode('~', $strPanelInfo);
 			$srManager = $arrPanelInfo[0];
 			$salePerson = $arrPanelInfo[1];
@@ -209,16 +209,16 @@ switch ($a)
 			$srAudit = $arrCliPanelInfo[2];
 			
             $rec_date = "";
-			if (isset($arrJob[$_REQUEST["jobId"]]["job_received"]) && $arrJob[$_REQUEST["jobId"]]["job_received"] != "") {
-				if($arrJob[$_REQUEST["jobId"]]["job_received"] != "0000-00-00 00:00:00") {
-					$rec_date = date("d/m/Y",strtotime($arrJob[$_REQUEST["jobId"]]["job_received"]));
+			if (isset($objCallData->arrJob[$_REQUEST["jobId"]]["job_received"]) && $objCallData->arrJob[$_REQUEST["jobId"]]["job_received"] != "") {
+				if($objCallData->arrJob[$_REQUEST["jobId"]]["job_received"] != "0000-00-00 00:00:00") {
+					$rec_date = date("d/m/Y",strtotime($objCallData->arrJob[$_REQUEST["jobId"]]["job_received"]));
 				}
 			}  	
                           
             $due_date = "";
-			if (isset($arrJob[$_REQUEST["jobId"]]["job_due_date"]) && $arrJob[$_REQUEST["jobId"]]["job_due_date"] != "") {
-				if($arrJob[$_REQUEST["jobId"]]["job_due_date"] != "0000-00-00 00:00:00") {
-					$due_date = date("d/m/Y",strtotime($arrJob[$_REQUEST["jobId"]]["job_due_date"]));
+			if (isset($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"]) && $objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"] != "") {
+				if($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"] != "0000-00-00 00:00:00") {
+					$due_date = date("d/m/Y",strtotime($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"]));
 				}
 			}  	
 
@@ -237,16 +237,16 @@ switch ($a)
 				</tr>
 				<tr>
 					<td class="hr">Client Type</td>
-					<td class="dr"><?=$objCallData->arrClientType[$arrJob[$_REQUEST["jobId"]]["mas_Code"]]?></td>
+					<td class="dr"><?=$objCallData->arrClientType[$objCallData->arrJob[$_REQUEST["jobId"]]["mas_Code"]]?></td>
 				</tr>
 				<tr>
 					<td class="hr">Job Type</td>
-					<td class="dr"><?=$objCallData->arrJobType[$arrJob[$_REQUEST["jobId"]]["job_type_id"]]?></td>
+					<td class="dr"><?=$objCallData->arrJobType[$objCallData->arrJob[$_REQUEST["jobId"]]["job_type_id"]]?></td>
 				</tr>
 				<tr>
 					<td class="hr">Period</td>
 					<td class="dr"><?
-						$dbPeriod = $arrJob[$_REQUEST["jobId"]]["period"];
+						$dbPeriod = $objCallData->arrJob[$_REQUEST["jobId"]]["period"];
 						$optionYear = "2010";
                                                 if($_SESSION["usertype"] == "Staff") {
                                                 $arrFeatures = $commonUses->getFeatureVisibility(4);
@@ -275,7 +275,7 @@ switch ($a)
 				</tr>
 				<tr>
 					<td class="hr">Notes</td>
-					<td class="dr"><?=nl2br($arrJob[$_REQUEST["jobId"]]["notes"])?></td>
+					<td class="dr"><?=nl2br($objCallData->arrJob[$_REQUEST["jobId"]]["notes"])?></td>
 				</tr>
 				<tr>
 					<td class="hr">Job Received Date</td>
@@ -941,12 +941,12 @@ switch ($a)
 				}
 				
 				?><tr class="fieldheader">
-					<th class="fieldheader" align="left">Practice Name</th>
-					<th class="fieldheader" align="left">Job Name</th>
-					<th class="fieldheader" align="left">Job Genre</th>
-					<th class="fieldheader" align="left">Job Status</th>
-					<th class="fieldheader">Date Received</th>
-					<th class="fieldheader">Due Date</th><?
+					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "p1.name" ?>&type=<?php echo $objCallData->ordertype; ?>">Practice Name</a></th>
+					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "c1.client_name" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Name</a></th>
+					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "j1.job_genre" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Genre</a></th>
+					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "s1.job_status" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Status</a></th>
+					<th class="fieldheader"><a href="job.php?order=<?php echo "j1.job_received" ?>&type=<?php echo $objCallData->ordertype; ?>">Date Received</a></th>
+					<th class="fieldheader"><a href="job.php?order=<?php echo "j1.job_due_date" ?>&type=<?php echo $objCallData->ordertype; ?>">Due Date</a></th><?
 
 					if($access_file_level['stf_Edit'] == "Y" || $access_file_level['stf_Delete'] == "Y") {
 						?><th class="fieldheader" colspan="2">Actions</th><?
@@ -954,7 +954,7 @@ switch ($a)
 				?></tr><?
 
                 $countRow = 0;                
-				foreach ($arrJob AS $jobId => $arrInfo) {
+				foreach ($objCallData->arrJob AS $jobId => $arrInfo) {
                                     
 					if($countRow%2 == 0) $trClass = "trcolor";
 					else $trClass = "";
@@ -963,7 +963,7 @@ switch ($a)
 					$arrJobParts = explode('::', $arrInfo["job_name"]);
 					$jobName = '<span class="clientclr">'.$objCallData->arrClient[$arrJobParts[0]]["client_name"] . '</span> - <span class="periodclr">' . $arrInfo["period"] . '</span> - <span class="activityclr">' . $objCallData->arrJobType[$arrJobParts[2]].'</span>';
 					
-					?><td class="<?=$style?>"><?=$arrPractice[$arrInfo['id']]['name']?></td>	
+					?><td class="<?=$style?>"><?=$objCallData->arrPractice[$arrInfo['id']]['name']?></td>	
 					<td class="<?=$style?>"><?=stripslashes($jobName)?></td>	
 					<td class="<?=$style?>"><?=ucfirst(strtolower($arrInfo['job_genre']))?></td>	
 					<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrJobStatus[$arrInfo["job_status_id"]]["job_status"])?></td><?

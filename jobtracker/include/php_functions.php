@@ -533,17 +533,61 @@ function generateClientCode($clientId,$cliName)
 }
 
 // check if client code is unique or not
-    function checkClientCodeUnique($code,$clientId = '') {
-        
-        if(!empty($clientId))
-            $strAppend = "AND client_id <> ".$clientId;
-        else
-            $strAppend = "" ;
-        
-        $qrySel = "SELECT client_id FROM client WHERE client_code = '" . $code . "' {$strAppend}";
-        $resultObj = mysql_query($qrySel);
-        $flagCodeExists = mysql_fetch_assoc($resultObj);
+function checkClientCodeUnique($code,$clientId = '') {
 
-        return $flagCodeExists;
-    }
+    if(!empty($clientId))
+        $strAppend = "AND client_id <> ".$clientId;
+    else
+        $strAppend = "" ;
+
+    $qrySel = "SELECT client_id FROM client WHERE client_code = '" . $code . "' {$strAppend}";
+    $resultObj = mysql_query($qrySel);
+    $flagCodeExists = mysql_fetch_assoc($resultObj);
+
+    return $flagCodeExists;
+}
+
+//It will Check Given Event is Active or Not it will Return Status Event according Event Id is Givent as Argument to Function
+function returnFileIcon($fileName) 
+{   
+	 $path_parts = pathinfo($fileName);
+         $ext = $path_parts['extension'];
+         $ext = strtolower($ext);
+       
+         switch ($ext) {
+            case 'txt':
+                $icon = ICOTXT;
+                break;
+            case 'doc':
+            case 'docx':
+                $icon = ICODOC;
+                break;
+            case 'ppt':
+            case 'pptx':
+                $icon = ICOPPT;
+                 break;
+            case 'pdf':
+                $icon = ICOPDF;
+                break;
+            case 'xls':
+            case 'xlsx':
+                $icon = ICOXLS;
+                break;
+            case 'zip':
+            case 'rar':
+                $icon = ICOZIP;
+                break;
+            case 'png':
+            case 'jpg':
+            case 'jpeg':
+                $icon = ICOIMG;
+                break;
+            case 'msg':
+                $icon = ICOMSG;
+                break;
+         }
+		
+	//Return the Status of Given Event Id
+    return $icon;
+}
 ?>

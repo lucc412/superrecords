@@ -48,10 +48,11 @@ switch($_REQUEST['a'])
 								$arrSourceDocs = $objScr->fetch_documents($jobId);
 								if(!empty($arrSourceDocs)) {
 									foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-										$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
-										if(file_exists($folderPath)) {
-											?><p><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?=$arrDocInfo['document_title'];?></a></p><?
-										}
+                                                                            $icon = returnFileIcon($arrDocInfo['file_path']);
+                                                                            $folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
+                                                                            if(file_exists($folderPath)) {
+                                                                                    ?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?=$arrDocInfo['document_title'];?></a></p><?
+                                                                            }
 									}
 								}
 							?></td>

@@ -59,7 +59,8 @@ include(TOPBAR);
 											$docName = $arrDocInfo['1'];
 											$folderPath = "../uploads/audit/" . $docPath;
 											if(file_exists($folderPath)) {
-												?><p><a href="jobs.php?a=download&filePath=<?=urlencode($docPath)?>&flagChecklist=A" title="Click to view this document"><?=$docName?></a></p><?
+                                                                                                $icon = returnFileIcon($docPath);
+												?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?=urlencode($docPath)?>&flagChecklist=A" title="Click to view this document"><?=$docName?></a></p><?
 											}
 										}
 									}

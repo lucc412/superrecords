@@ -122,7 +122,10 @@ class Client_Class extends Database {
         global $filterfield;
         global $wholeonly;
         global $commonUses;
-
+        global $order;
+        global $ordertype;
+        
+        
         if ($_SESSION["usertype"] == "Staff") {
             $staffId = $_SESSION["staffcode"];
             $strWhere = "AND (pr.sr_manager=" . $staffId . " 
@@ -171,7 +174,8 @@ class Client_Class extends Database {
 					OR cl.client_received like '" . $filterstr . "')";
             }
 
-            $qrySel .= " ORDER BY cl.client_id DESC";
+            $qrySel .= " ORDER BY {$order} {$ordertype}";
+            
         }
 
         $fetchResult = mysql_query($qrySel);

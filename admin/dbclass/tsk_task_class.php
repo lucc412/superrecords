@@ -179,6 +179,8 @@ class Task_Class extends Database {
 		global $filterfield;
 		global $wholeonly;
 		global $commonUses;	
+                global $order;
+                global $ordertype;
 
 		$strWhere = "";		
 		if($_SESSION["usertype"] == "Staff") {	
@@ -248,7 +250,8 @@ class Task_Class extends Database {
 					
 			}				
 
-			$qrySel .= " ORDER BY t.task_id DESC";
+			//$qrySel .= " ORDER BY t.task_id DESC";
+                        $qrySel .= " ORDER BY {$order} {$ordertype}";
 				
 		}
 			

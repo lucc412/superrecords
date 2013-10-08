@@ -119,6 +119,8 @@ class Practice_Class extends Database {
 		global $filterfield;
 		global $wholeonly;
 		global $commonUses;	
+                global $order;
+                global $ordertype;
 
 		if($_SESSION['usertype'] == 'Staff')
 			$appendStr = "AND ( pr.sr_manager = {$_SESSION['staffcode']} 
@@ -177,8 +179,8 @@ class Practice_Class extends Database {
 							OR pr.date_signed_up like '". $filterstr ."')";
 					
 			}			
-
-			$qrySel .= " ORDER BY pracId DESC";
+                        $qrySel .= " ORDER BY {$order} {$ordertype}";
+			//$qrySel .= " ORDER BY pracId DESC";
 	
 			$fetchResult = mysql_query($qrySel);		
 			while($rowData = mysql_fetch_assoc($fetchResult)) {

@@ -32,11 +32,11 @@
 	}		
 	
 	?><tr class="fieldheader">
-		<th width="10%" class="fieldheader">Practice Code</th>
-		<th class="fieldheader" align="left">Practice Name</th>
-		<th class="fieldheader" align="left">Type</th>
-		<th class="fieldheader" align="left">SR Manager</th>
-		<th class="fieldheader" align="center">Date Signed Up</th>
+		<th width="10%" class="fieldheader"><a href="pr_practice.php?order=<?php echo "pracId" ?>&type=<?php echo $ordertype; ?>">Practice Code</a></th>
+		<th class="fieldheader" align="left"><a href="pr_practice.php?order=<?php echo "pr.name" ?>&type=<?php echo $ordertype; ?>">Practice Name</a></th>
+		<th class="fieldheader" align="left"><a href="pr_practice.php?order=<?php echo "prt.description" ?>&type=<?php echo $ordertype; ?>">Type</a></th>
+		<th class="fieldheader" align="left"><a href="pr_practice.php?order=<?php echo "pr.sr_manager" ?>&type=<?php echo $ordertype; ?>">SR Manager</a></th>
+		<th class="fieldheader" align="center"><a href="pr_practice.php?order=<?php echo "pr.date_signed_up" ?>&type=<?php echo $ordertype; ?>">Date Signed Up</a></th>
 		<th  class="fieldheader" colspan="3" align="center">Actions</th>
 	</tr><?
 

@@ -33,12 +33,12 @@
 	}
 
 	?><tr class="fieldheader">
-		<th class="fieldheader" align="left">Practice</th>
-		<th width="10%" class="fieldheader">Client Code</th>
-		<th class="fieldheader" align="left">Client Name</th>
-		<th class="fieldheader" align="left">Type</th>
-		<th class="fieldheader" align="left">SR Manager</th>
-		<th class="fieldheader">Date Signed Up</th>
+		<th class="fieldheader" align="left"><a href="cli_client.php?order=<?php echo "pr.name" ?>&type=<?php echo $ordertype; ?>">Practice</a></th>
+		<th width="10%" class="fieldheader"><a href="cli_client.php?order=<?php echo "cl.client_code" ?>&type=<?php echo $ordertype; ?>">Client Code</a></th>
+		<th class="fieldheader" align="left"><a href="cli_client.php?order=<?php echo "cl.client_name" ?>&type=<?php echo $ordertype; ?>">Client Name</a></th>
+		<th class="fieldheader" align="left"><a href="cli_client.php?order=<?php echo "clt.client_type" ?>&type=<?php echo $ordertype; ?>">Type</a></th>
+		<th class="fieldheader" align="left"><a href="cli_client.php?order=<?php echo "pr.sr_manager" ?>&type=<?php echo $ordertype; ?>">SR Manager</a></th>
+		<th class="fieldheader"><a href="cli_client.php?order=<?php echo "cl.client_received" ?>&type=<?php echo $ordertype; ?>">Date Signed Up</a></th>
 		<th  class="fieldheader" colspan="3" align="center">Actions</th>
 	</tr><?
 

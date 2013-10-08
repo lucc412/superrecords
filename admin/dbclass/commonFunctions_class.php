@@ -2,7 +2,6 @@
 include ("includes/class.Database.php");
 include ('includes/varDeclare.php');
 include ('includes/commonFunctionExtends.php');
-include(PHPFUNCTION);
 
 class commonUse extends Database
 {

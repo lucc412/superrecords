@@ -8,6 +8,7 @@
 ob_start();
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/tsk_task_class.php';
+include(PHPFUNCTION);
 include("includes/header.php");
 
 // create class object for class function access

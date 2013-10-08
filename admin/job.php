@@ -9,6 +9,7 @@
 ob_start();
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/job_class.php';
+include(PHPFUNCTION);
 
 if(!isset($_REQUEST['sql'])) $_REQUEST['sql'] = "";
 else $sql = $_REQUEST['sql'];

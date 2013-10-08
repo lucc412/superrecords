@@ -2,6 +2,7 @@
 ob_start();
 include 'dbclass/commonFunctions_class.php';
 include 'dbclass/pr_practice_class.php';
+include(PHPFUNCTION);
 include("includes/header.php");
 
 // create class object for class function access

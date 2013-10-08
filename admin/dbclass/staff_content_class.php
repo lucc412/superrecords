@@ -816,7 +816,7 @@ class staffContentList extends Database
 			<?
 				// error message
 				if(!empty($_REQUEST['flagDuplicate'])) {
-					?><div class="errorMsg"><img src="../images_user/errorIcon.gif"> &nbsp;Login already exists.</div><?	
+					?><div class="errorMsg"><img src="../images/errorIcon.gif"> &nbsp;Login already exists.</div><?	
 				}
 					
 			?>

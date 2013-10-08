@@ -126,7 +126,7 @@ if(isset($error) && $error!="")
 ?>
 <br />
 <div align="center" style="margin-top:20px;padding-bottom:45px;"><a href="index.php">
-	 <img src="../jobtracker/images_user/header-logo.png"></a>
+	 <img src="images/header-logo.png"></a>
 </div>
 
 <form action="index.php" method="post" name="form1" id="form1" onsubmit="return validateLogin()">

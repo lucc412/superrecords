@@ -17,6 +17,15 @@ switch($doAction) {
 	case 'JobType':
 			$returnStr = sql_select_subActivity($itemId);
 			break;
+        case 'search':
+        
+            include($_SERVER['DOCUMENT_ROOT'].'/jobtracker/model/job_class.php');
+            $objJobClass = new Job();
+            $clientsJSON = $objJobClass->search_clients();
+
+            echo $clientsJSON; 
+
+        break;
 }
 
 // fetch Sub Activity

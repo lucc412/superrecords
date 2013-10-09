@@ -11,7 +11,25 @@ $(document).ready(function() {
 	});
 	
 	/* CLOSES ALL DIVS ON PAGE LOAD */	
-	//$("div.accordionContent").hide();
+	
+        $( "#lstClientTypeSearch" ).autocomplete(
+	{
+            source: function(request, response){
+                $.getJSON('/jobtracker/ajax/jobs.php',{ name:$( "#lstClientTypeSearch" ).val(), doAction: 'search' },function(result) {
+                   response(
+                        $.map(result, function(item) {
+                            return item;
+                        })
+                        
+                   );                    
+               })
+            },
+            select: function( event, ui ) {
+                var selectedObj = ui.item.id;
+		$( "#lstClientType" ).val(ui.item ? ui.item.id : " " + this.value );
+            }
+	})
+        
 
 });
 
@@ -45,17 +63,18 @@ function checkValidation() {
 
 	var flagReturn = true;
 	var lstClientType = document.getElementById('lstClientType');
+        var lstClientTypeSearch = document.getElementById('lstClientTypeSearch');
 	var clientType = document.getElementById('lstCliType');
 	var lstJobType = document.getElementById('lstJobType');
 	var txtPeriod = document.getElementById('txtPeriod');
 	var hiddenType = document.getElementById('type');
 
 	if(lstClientType.value == 0) {
-		lstClientType.className = "errclass";
+		lstClientTypeSearch.className = "errclass";
 		flagReturn = false;
 	}
 	else {
-		lstClientType.className = "drop_down_select";
+		lstClientTypeSearch.className = "drop_down_select";
 	}
 
 	if(hiddenType.value == 'COMPLIANCE') {

@@ -18,12 +18,17 @@ include(TOPBAR);
 		<tr>
 			<td><strong>Client</strong></td>
 			<td>
-                            <select name="lstClientType" id="lstClientType" title="Select client" onchange="changeDuplicate()">
+                            
+<!--                            <select name="lstClientType" id="lstClientType" title="Select client" onchange="changeDuplicate()">
 					<option value="0">Select Client</option><?php
-					foreach($arrClients AS $clientId => $clientName){
+					//foreach($arrClients AS $clientId => $clientName){
 						?><option value="<?=$clientId?>"><?=$clientName?></option><?php 
-					}
-				?></select>
+					//}
+				?></select>-->
+                                
+                                <input type="text" name="lstClientTypeSearch" id="lstClientTypeSearch" value=""  />
+                                <input type="hidden" name="lstClientType" id="lstClientType" />
+                                
 			</td>
 		</tr>
 
@@ -123,12 +128,15 @@ include(TOPBAR);
         overflow: hidden !important;
     }
 </style>
+
 <div id="dialog-confirm" title="Warning" style="display: none;">
   <p>
       <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
       You have already submitted the same Job previously. If you would like to upload additional documents for already submitted job, please go to <a style="text-decoration: underline;cursor: pointer;color: #074165;" onclick="javascript:window.location.assign('jobs.php?a=document')">View and upload documents</a> menu under Jobs.
   </p>
 </div>
+
+
     <?
 
 // include footer file

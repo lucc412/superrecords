@@ -140,6 +140,32 @@ class Job {
 		return $arrClients;	
 	}
 
+        public function search_clients() {		
+
+		$qrySel = "SELECT t1.client_id, t1.client_name
+					FROM client t1
+					WHERE id = '{$_SESSION['PRACTICEID']}'
+                                        AND t1.client_name LIKE '%".$_REQUEST['name']."%'
+					ORDER BY t1.client_name";
+
+		$fetchResult = mysql_query($qrySel);		
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrClients[$rowData['client_id']] = $rowData['client_name'];
+                }
+                
+                $result = array();
+                foreach ($arrClients as $key=>$value)
+                array_push($result, array("id"=>$key, "value" =>$value));
+                
+                $clientsJSON = json_encode($result);
+                
+                if(empty($clientsJSON))
+                    $clientsJSON = '';
+                
+                    
+		return $clientsJSON;	
+	}
+        
 	public function fetchClientType() {		
  		$qrySel = "SELECT ma.mas_Code, ma.mas_Description
 					FROM mas_masteractivity ma, sub_subactivity sa

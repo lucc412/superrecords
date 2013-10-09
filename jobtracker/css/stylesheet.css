@@ -60,7 +60,10 @@
     line-height: 0px;
     padding: 9px 4px;       
 }
-
+.wrap ul li { list-style: none;padding: 5px;}
+.wrap ul{ padding-left: 15px;}
+.wrap li a {color: #074263;}
+    
 * {
 	margin:0;
 	padding:0;
@@ -1157,9 +1160,3 @@ button {
         padding: 20px 35px 55px;
       }
 /* Liquid Slider */
-
-
-
-
-
-

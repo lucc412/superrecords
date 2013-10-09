@@ -35,8 +35,9 @@ include(HEADDATA);
 					$docTitle = $uploadDocs['document_title'];
 					if($countRow%2 == 0) $trClass = "trcolor";
 					else $trClass = "";
-					?><tr class="<?=$trClass?>">
-						<td class="tddata"><p><a href="jobs.php?a=download&filePath=<?=urlencode($fileName)?>&flagChecklist=A" title="Click to view this document"><?=$docTitle?></a></p></td>
+					?><tr class="<?=$trClass?>"><?
+                                                $icon = returnFileIcon($fileName);
+						?><td class="tddata"><p><?=$icon?><a href="jobs.php?a=download&filePath=<?=urlencode($fileName)?>&flagChecklist=A" title="Click to view this document"><?=$docTitle?></a></p></td>
 						<td align="center" class="tddata"><?=$uploadedDate?></td>
 					</tr><?
 					$countRow++;

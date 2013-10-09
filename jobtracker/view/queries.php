@@ -79,13 +79,11 @@ include(TOPBAR);
 					<td class="tddata"><?=nl2br($arrInfo['query'])?></td>
 					<td class="tddata"><textarea name="txtResponse<?=$queryId?>"><?=$arrInfo['response']?></textarea></td>
 					
-					<td width="9%" class="<?=$style?> yellowBG"><?
+					<td width="9%" class="tddata"><?
 					if(!empty($arrInfo["report_file_path"]))
 					{
-						/*$arrFileName = stringToArray('~', $arrInfo['report_file_path']);
-						$origFileName = $arrFileName[1];
-						$docTitle = $origFileName;*/
-					?><p><b><a href="queries.php?action=download&flagType=SRQ&filePath=<?=urlencode($arrInfo['report_file_path'])?>" title="Click to view this document">Document</a></b></p><?
+                                            $icon = returnFileIcon($arrInfo['report_file_path']);
+                                            ?><p><?=$icon?><a href="queries.php?action=download&flagType=SRQ&filePath=<?=urlencode($arrInfo['report_file_path'])?>" title="Click to view this document">Document</a></p><?
 					}
 					?></td>
 					
@@ -95,10 +93,8 @@ include(TOPBAR);
 						?><input type="file" name="doc_<?=$queryId?>"><?
 					}
 					else {
-						/*$arrFileName = stringToArray('~', $arrInfo['file_path']);
-						$origFileName = $arrFileName[1];
-						$docTitle = $origFileName;*/
-						?><p><a href="queries.php?action=download&flagType=PRQ&filePath=<?=urlencode($arrInfo['file_path'])?>" title="Click to view this document">Document</a></p><?
+						$icon = returnFileIcon($arrInfo['file_path']);
+						?><p><?=$icon?><a href="queries.php?action=download&flagType=PRQ&filePath=<?=urlencode($arrInfo['file_path'])?>" title="Click to view this document">Document</a></p><?
 					}
 					?></td>
 					<td class="tddata" align="center"><button type="button" style="width:100px;" onclick="javascript:updateQuery(<?=$queryId?>);" value="Save">Save</button></td>

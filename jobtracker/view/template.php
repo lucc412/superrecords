@@ -28,7 +28,8 @@ include(TOPBAR);
 				<td class="tddata" align="center"><?
 					$folderPath = "../uploads/template/" . $templateInfo['tmpl_filepath'];
 					if(file_exists($folderPath) && !empty($templateInfo['tmpl_filepath'])) {
-						?><p><a href="template.php?a=download&filePath=<?=urlencode($templateInfo['tmpl_filepath'])?>" title="Click to download this document">Document</a></p><?
+                                                 $icon = returnFileIcon($templateInfo['tmpl_filepath']);
+						?><p><?=$icon?><a href="template.php?a=download&filePath=<?=urlencode($templateInfo['tmpl_filepath'])?>" title="Click to download this document">Document</a></p><?
 					}
 				?></td>
 			</tr><?

@@ -783,7 +783,7 @@ class Job {
 				header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
 				header("Content-Type: application/force-download");
 				header("Content-type: application/octet-stream");
-				header("Content-Disposition: attachment;filename=checklist.xls");
+				header("Content-Disposition: attachment;filename=checklist.doc");
 				header("Pragma: no-cache");
 				header("Expires: 0");
 			?></body>

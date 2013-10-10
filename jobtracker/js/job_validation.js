@@ -15,18 +15,22 @@ $(document).ready(function() {
         $( "#lstClientTypeSearch" ).autocomplete(
 	{
             source: function(request, response){
-                $.getJSON('/jobtracker/ajax/jobs.php',{ name:$( "#lstClientTypeSearch" ).val(), doAction: 'search' },function(result) {
-                   response(
+                $.getJSON('/jobtracker/ajax/jobs.php',{ name:$( "#lstClientTypeSearch" ).val(), doAction: 'search' },
+                function(result) {
+                    
+                    if(result == '')
+                        $( "#lstClientType" ).val('')
+                    
+                    response(
                         $.map(result, function(item) {
                             return item;
                         })
-                        
-                   );                    
+                    );                    
                })
+               
             },
             select: function( event, ui ) {
-                var selectedObj = ui.item.id;
-		$( "#lstClientType" ).val(ui.item ? ui.item.id : " " + this.value );
+               $( "#lstClientType" ).val(ui.item ? ui.item.id : " " + this.value );
             }
 	})
         

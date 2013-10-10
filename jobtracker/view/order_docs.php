@@ -61,7 +61,7 @@ $(document).ready(function(){
             <li>
                 <div style="width: 550px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?=$frmVal['subform_name']?></span></div>
                 <div style="width: 60px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?='$'.$frmVal['subform_price'];?></span></div><?
-                if($frmVal['subform_id'] == '1' || $frmVal['subform_id'] == '2') {
+                if($frmVal['subform_id'] == '1') {
                     ?><button style="width: 82px;margin: 0" onclick='window.location.href="jobs.php?a=redirect&type=setup&frmId=<?=$frmVal['subform_id']?>"' >Order</button><?
                 }
                 else {

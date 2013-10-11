@@ -10,6 +10,7 @@ define('FOOTER',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/footer.php');
 define('BOTTOMDATA',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/bottomdata.php');
 define('MAIL',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/send_mail.php');
 define('PDF',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/library/tcpdf/tcpdf.php');
+define('WORD',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/library/word/PHPWord.php');
 define('PHPFUNCTION',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/php_functions.php');
 define('MODEL',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/model/');
 define('VIEW',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/view/');

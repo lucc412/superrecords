@@ -362,20 +362,23 @@ class Client_Class extends Database {
 							team_member = '" . $_REQUEST['lstTeamMember'] . "',
 							client_notes = '" . addslashes($_REQUEST['client_notes']) . "',
 							client_received = '" . $dateSignedUp . "',
-                                                        sr_accnt_comp = '" . addslashes($_REQUEST['lstSrAccntComp']) . "',
-                                                        sr_accnt_audit = '" . addslashes($_REQUEST['lstSrAccntAudit']) . "'
+							sr_accnt_comp = '" . addslashes($_REQUEST['lstSrAccntComp']) . "',
+							sr_accnt_audit = '" . addslashes($_REQUEST['lstSrAccntAudit']) . "'
 						WHERE client_id = '" . $_REQUEST['recid'] . "'";
 
                 mysql_query($qryUpd);
             } else {
                 header("location: cli_client.php?a=edit&recid=" . $_REQUEST['recid'] . "&cli_code=" . $_REQUEST['cliCode'] . "&flagError=Y");
             }
-        } else {
+        } 
+		else {
             $qryUpd = "UPDATE client
 						SET client_type_id = '" . $_REQUEST['lstType'] . "',
 							client_name = '" . addslashes($_REQUEST['cliName']) . "',
 							id = '" . $_REQUEST['lstPractice'] . "',
 							team_member = '" . $_REQUEST['lstTeamMember'] . "',
+							sr_accnt_comp = '" . addslashes($_REQUEST['lstSrAccntComp']) . "',
+                            sr_accnt_audit = '" . addslashes($_REQUEST['lstSrAccntAudit']) . "',
 							client_notes = '" . addslashes($_REQUEST['client_notes']) . "',
 							client_received = '" . $dateSignedUp . "'
 						WHERE client_id = '" . $_REQUEST['recid'] . "'";

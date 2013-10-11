@@ -94,7 +94,7 @@ include(TOPBAR);
 
                                 <td class="tddata" style="width:15px" align="center"><?
                                     if ($arrJobDetails['job_genre'] != 'SETUP') {
-                                        ?><a href="jobs.php?a=uploadDoc&lstJob=<?= $jobId ?>&genre=<?= $arrJobDetails['job_genre'] ?>" title="Click to upload additional documents"><?= UPLOAD ?></a><?
+                                        ?><a href="jobs.php?a=uploadDoc&lstJob=<?= $jobId ?>" title="Click to upload additional documents"><?= UPLOAD ?></a><?
                                     }
                                 ?></td>
                                 <td class="tddata" style="width:15px" align="center"><?

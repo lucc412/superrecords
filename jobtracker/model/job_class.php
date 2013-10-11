@@ -460,30 +460,38 @@ class Job {
 		$fileId = $arrInfo['docId'];	
 		$fileId++;
 		$currentTime = date('Y-m-d H:i:s');
-
+                
 		$origFileName = stripslashes($_FILES['fileDoc']['name']);
 		$filePart = pathinfo($origFileName);
 		$fileName =  $fileId . '~' . $filePart['filename'] . '.' . $filePart['extension'];
-
-		if($_REQUEST['genre'] == 'AUDIT')
+                
+                
+                $jobQry = "SELECT job_genre FROM job WHERE job_id = ".$_REQUEST['lstJob'];        
+                $objRes = mysql_query($jobQry);
+		$jobData = mysql_fetch_assoc($objRes);
+                $job_genre = $jobData['job_genre'];
+                                
+		if($job_genre == 'AUDIT')
 			$folderPath = "../uploads/audit/" . $fileName;
-		else if($_REQUEST['genre'] == 'COMPLIANCE')
+		else if($job_genre == 'COMPLIANCE')
 			$folderPath = "../uploads/sourcedocs/" . $fileName;
-
+                
 		if(file_exists($_FILES['fileDoc']['tmp_name']))
 		{
-			if(move_uploaded_file($_FILES['fileDoc']['tmp_name'], $folderPath))
-			{
-				$qryIns = "INSERT INTO documents(job_id, document_title, file_path, date)
-						VALUES(
-						".$_REQUEST['lstJob'].", 
-						'". addslashes($_REQUEST['txtDocTitle']) ."', 
-						'". addslashes($fileName) ."',
-						'" . $currentTime . "'
-						)";
-				mysql_query($qryIns);
-				$docId = mysql_insert_id();
-			}
+                    if(move_uploaded_file($_FILES['fileDoc']['tmp_name'], $folderPath))
+                    {
+                        print $qryIns = "INSERT INTO documents(job_id, document_title, file_path, date)
+                                        VALUES(
+                                        ".$_REQUEST['lstJob'].", 
+                                        '". addslashes($_REQUEST['txtDocTitle']) ."', 
+                                        '". addslashes($fileName) ."',
+                                        '" . $currentTime . "'
+                                        )";
+
+                        
+                        mysql_query($qryIns);
+                        $docId = mysql_insert_id();
+                    }
 		}
 
 		$qrySel = "SELECT date

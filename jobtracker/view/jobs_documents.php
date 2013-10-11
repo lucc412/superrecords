@@ -77,7 +77,6 @@ switch($_REQUEST['a'])
 		
 		<form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertDoc" enctype="multipart/form-data" onSubmit="javascript:return checkDocValidation();">
 			<input type="hidden" name="additionalDoc" value="<?if(!empty($_REQUEST['lstJob'])) echo 'Y'; else echo 'N';?>">
-			<input type="hidden" name="genre" value="<?=$_REQUEST['genre']?>">
 			<table width="60%" class="fieldtable" cellpadding="10px;">
 				<tr>
 					<td><strong> Select Job</strong></td>

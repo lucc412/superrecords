@@ -764,38 +764,34 @@ class Job {
 
 	public function sql_download_checklist($jobId) {
 		$arrSubchecklist = $this->getAuditSubChecklist($jobId, true);
-		ob_start();
-		?><html>
-			<body><?
-				$cntChckLst = A;
-				echo"<table border='1' align='center' bgcolor='#F8F8F8' cellpadding='10'>";
-				foreach($arrSubchecklist AS $checklistName => $subChecklist) {
-					echo"<tr>";
-					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:60px; background-color:#074165;'>".$cntChckLst++."</td>";
-					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:600px; background-color:#074165;'>".stripslashes($checklistName)."</td>";
-					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:100px;background-color:#074165;'>Yes/No/N/A</td>";
-					echo"</tr>";
-					$cntSubchckLst = 1;
-					foreach($subChecklist AS $subChecklistName) {
-						echo"<tr>";
-						echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$cntSubchckLst++."</td>";
-						echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$subChecklistName++."</td>";
-						echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'></td>";
-						echo"</tr>";
-					}
-				}
-				echo"</table>";
+               
+		$cntChckLst = A;
+		echo "<html><body><table border='1' align='center' bgcolor='#F8F8F8' cellpadding='10'>";
+		foreach($arrSubchecklist AS $checklistName => $subChecklist) {
+			echo"<tr>";
+			echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:60px; background-color:#074165;'>".$cntChckLst++."</td>";
+			echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:600px; background-color:#074165;'>".stripslashes($checklistName)."</td>";
+			echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:100px;background-color:#074165;'>Yes/No/NA</td>";
+			echo"</tr>";
+			$cntSubchckLst = 1;
+			foreach($subChecklist AS $subChecklistName) {
+				echo"<tr>";
+				echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$cntSubchckLst++."</td>";
+				echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$subChecklistName++."</td>";
+				echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'></td>";
+				echo"</tr>";
+			}
+		}
+		echo"</table></body></html>";
 
-				header("Pragma: public");
-				header("Expires: 0");
-				header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
-				header("Content-Type: application/force-download");
-				header("Content-type: application/octet-stream");
-				header("Content-Disposition: attachment;filename=checklist.doc");
-				header("Pragma: no-cache");
-				header("Expires: 0");
-			?></body>
-		</html><?
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
+		header("Content-Type: application/force-download");
+		header("Content-type: application/octet-stream");
+		header("Content-Disposition: attachment;filename=checklist.doc");
+		header("Pragma: no-cache");
+		header("Expires: 0");        
 	}
 }
 ?>

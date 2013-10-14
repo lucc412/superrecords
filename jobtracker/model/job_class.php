@@ -764,94 +764,34 @@ class Job {
 
 	public function sql_download_checklist($jobId) {
 		$arrSubchecklist = $this->getAuditSubChecklist($jobId, true);
-                
-		/*?><html>
-			<body><?
-				$cntChckLst = A;
-				echo"<table border='1' align='center' bgcolor='#F8F8F8' cellpadding='10'>";
-				foreach($arrSubchecklist AS $checklistName => $subChecklist) {
-					echo"<tr>";
-					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:60px; background-color:#074165;'>".$cntChckLst++."</td>";
-					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:600px; background-color:#074165;'>".stripslashes($checklistName)."</td>";
-					echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:100px;background-color:#074165;'>Yes/No/NA</td>";
-					echo"</tr>";
-					$cntSubchckLst = 1;
-					foreach($subChecklist AS $subChecklistName) {
-						echo"<tr>";
-						echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$cntSubchckLst++."</td>";
-						echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$subChecklistName++."</td>";
-						echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'></td>";
-						echo"</tr>";
-					}
-				}
-				echo"</table>";
+               
+		$cntChckLst = A;
+		echo "<html><body><table border='1' align='center' bgcolor='#F8F8F8' cellpadding='10'>";
+		foreach($arrSubchecklist AS $checklistName => $subChecklist) {
+			echo"<tr>";
+			echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:60px; background-color:#074165;'>".$cntChckLst++."</td>";
+			echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:600px; background-color:#074165;'>".stripslashes($checklistName)."</td>";
+			echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;width:100px;background-color:#074165;'>Yes/No/NA</td>";
+			echo"</tr>";
+			$cntSubchckLst = 1;
+			foreach($subChecklist AS $subChecklistName) {
+				echo"<tr>";
+				echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$cntSubchckLst++."</td>";
+				echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$subChecklistName++."</td>";
+				echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'></td>";
+				echo"</tr>";
+			}
+		}
+		echo"</table></body></html>";
 
-				header("Pragma: public");
-				header("Expires: 0");
-				header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
-				header("Content-Type: application/force-download");
-				header("Content-type: application/octet-stream");
-				header("Content-Disposition: attachment;filename=checklist.doc");
-				header("Pragma: no-cache");
-				header("Expires: 0");
-			?></body>
-		</html><?*/
-                
-                require_once(WORD);
-
-                // Create a new PHPWord Object
-                $PHPWord = new PHPWord();
-
-                // Every element you want to append to the word document is placed in a section. So you need a section:
-                $sectionStyle = array('orientation' => null,
-                                    'marginLeft' => 400,
-                                    'marginRight' => 400,
-                                    'marginTop' => 400,
-                                    'marginBottom' => 400);
-                $section = $PHPWord->createSection($sectionStyle);
-
-
-                // If you often need the same style again you can create a user defined style to the word document
-                // and give the addText function the name of the style:
-                $PHPWord->addFontStyle('headerStyle', array('name'=>'Times New Roman', 'size'=>16, 'color'=>'#3399CC', 'borderColor'=>'000000', 'borderSize'=>6, 'underline'=>PHPWord_Style_Font::UNDERLINE_SINGLE));
-
-                //$section->addText('Entity Data Report', 'headerStyle');
-
-                // If you often need the same style again you can create a user defined style to the word document
-                // and give the addText function the name of the style:
-                $PHPWord->addFontStyle('myOwnStyle', array('name'=>'Verdana', 'size'=>14, 'color'=>'#F05729'));
-                
-                $cntChckLst = A;
-                foreach($arrSubchecklist AS $checklistName => $subChecklist) {
-                    $styleTable = array('borderColor'=>'000000',
-                                  'borderSize'=>6,
-                                  'cellMargin'=>50);
-                    $styleFirstRow = array('bgColor'=>'#074165');
-                    $PHPWord->addTableStyle('myTable', $styleTable, $styleFirstRow);
-                    $table = $section->addTable('myTable');
-                    $table->addRow(400);
-                    $table->addCell(200)->addText($cntChckLst++);
-                    $table->addCell(200)->addText(stripslashes($checklistName));
-                    $table->addCell(200)->addText('Yes/No/N/A');
-                    
-                    $cntSubchckLst = 1;
-                    foreach($subChecklist AS $subChecklistName) {
-                            $table->addRow(400);
-                            $table->addCell(200)->addText($cntSubchckLst++);
-                            $table->addCell(200)->addText($subChecklistName++);
-                            $table->addCell(200)->addText('');
-                    }
-                }
-
-                // At least write the document to webspace
-                $objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
-                $fileName = "checklist.doc";
-                $objWriter->save('../uploads/'.$fileName);
-                $filePath = $_SERVER['DOCUMENT_ROOT'] . "/uploads/".$fileName;
-                header('Content-type: application/doc');
-                header("Content-Disposition: attachment; filename=".$fileName);
-                readfile($filePath);
-                unlink($filePath);
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
+		header("Content-Type: application/force-download");
+		header("Content-type: application/octet-stream");
+		header("Content-Disposition: attachment;filename=checklist.doc");
+		header("Pragma: no-cache");
+		header("Expires: 0");        
 	}
 }
 ?>

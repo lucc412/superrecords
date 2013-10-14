@@ -915,6 +915,8 @@ switch ($a)
 							<option value="<?="practice"?>"<?if ($_REQUEST['filter_field'] == "practice") { echo "selected"; } ?>>Practice Name</option>
 							<option value="<?="job"?>"<?if ($_REQUEST['filter_field'] == "job") { echo "selected"; } ?>>Job Name</option>
 							<option value="<?="status"?>"<?if ($_REQUEST['filter_field'] == "status") { echo "selected"; } ?>>Job Status</option>
+                                                        <option value="<?="job_received"?>"<?if ($_REQUEST['filter_field'] == "job_received") { echo "selected"; } ?>>Date Received</option>
+							<option value="<?="job_due_date"?>"<?if ($_REQUEST['filter_field'] == "job_due_date") { echo "selected"; } ?>>Due Date</option>
 						</select>
 					</td>
 					<td align="right">

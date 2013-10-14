@@ -15,8 +15,9 @@
 <td><input type="text" name="filter" value="<?php echo $filter ?>"></td>
 <td><select name="filter_field">
 <option value="">All Fields</option>
- <option value="<?php echo "t.task_name" ?>"<?php if ($filterfield == "t.task_name") { echo "selected"; } ?>>Task Name</option>
- <option value="<?php echo "pr.name" ?>"<?php if ($filterfield == "pr.name") { echo "selected"; } ?>>Practice Name</option>
+<option value="<?php echo "pr.name" ?>"<?php if ($filterfield == "pr.name") { echo "selected"; } ?>>Practice Name</option> 
+<option value="<?php echo "t.task_name" ?>"<?php if ($filterfield == "t.task_name") { echo "selected"; } ?>>Task Name</option>
+<option value="<?php echo "ts.description" ?>"<?php if ($filterfield == "ts.description") { echo "selected"; } ?>>Task Status</option>
  <option value="<?php echo "job_name" ?>"<?php if ($filterfield == "job_name") { echo "selected"; } ?>>Job Name</option>
  <option value="<?php echo "sr_manager" ?>"<?php if ($filterfield == "sr_manager") { echo "selected"; } ?>>SR Manager</option>
 </select></td>

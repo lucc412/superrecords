@@ -24,8 +24,8 @@ class Client_Class extends Database {
         return $arrTypes;
     }
 
-    public function fetchPractice() {
-
+    public function fetchPractice() 
+    {
         $qrySel = "SELECT ct.id, ct.name 
 					FROM pr_practice ct 
 					ORDER BY ct.name";
@@ -146,9 +146,13 @@ class Client_Class extends Database {
         } else {
 
             $filterstr = $commonUses->sqlstr($filter);
-
+            if(DateTime::createFromFormat('d/m/Y', $filterstr)) $filterstr = $commonUses->getDateFormat($filterstr)." 00:00:00";
             if (!$wholeonly && isset($wholeonly) && $filterstr != '')
-                $filterstr = "%" . $filterstr . "%";
+            {
+                $filterstr = "%" . $filterstr . "%"; $operator = ' LIKE ';
+            }
+            else
+                $operator = ' = ';
 
             $qrySel = "SELECT cl.*, s.*, cnt.*, pr.sr_manager, pr.india_manager, pr.audit_manager, cl.team_member, pr.sales_person 
 							FROM client cl, pr_practice pr, client_type clt, stf_staff s, con_contact cnt
@@ -158,26 +162,30 @@ class Client_Class extends Database {
 							{$strWhere}";
 
 
-            if (isset($filterstr) && $filterstr != '' && isset($filterfield) && $filterfield != '') {
+            if (isset($filterstr) && $filterstr != '' && isset($filterfield) && $filterfield != '') 
+            {
 
                 if ($commonUses->sqlstr($filterfield) == 'sr_manager') {
-                    $qrySel .= "AND (cnt.con_Firstname like '" . $filterstr . "' OR cnt.con_Middlename like '" . $filterstr . "' OR cnt.con_Lastname like '" . $filterstr . "')";
+                    $qrySel .= "AND (cnt.con_Firstname LIKE '" . $filterstr . "' OR cnt.con_Middlename LIKE '" . $filterstr . "' OR cnt.con_Lastname LIKE '" . $filterstr . "')";
                 } else {
-                    $qrySel .= " AND " . $commonUses->sqlstr($filterfield) . " like '" . $filterstr . "'";
+                    $qrySel .= " AND " . $commonUses->sqlstr($filterfield) . $operator."'" . $filterstr . "'";
                 }
-            } elseif (isset($filterstr) && $filterstr != '') {
+                
+            } 
+            elseif (isset($filterstr) && $filterstr != '') {
 
-                $qrySel .= " AND (cl.client_name like '" . $filterstr . "' 
-					OR pr.name like '" . $filterstr . "'
-					OR clt.client_type like '" . $filterstr . "'
-					OR cnt.con_Firstname like '" . $filterstr . "' OR cnt.con_Middlename like '" . $filterstr . "' OR cnt.con_Lastname like '" . $filterstr . "'
-					OR cl.client_received like '" . $filterstr . "')";
+                $qrySel .= " AND (cl.client_name LIKE '" . $filterstr . "' 
+                                        OR cl.client_code LIKE '" . $filterstr . "'
+					OR pr.name LIKE '" . $filterstr . "'
+					OR clt.client_type LIKE '" . $filterstr . "'
+					OR cnt.con_Firstname LIKE '" . $filterstr . "' OR cnt.con_Middlename LIKE '" . $filterstr . "' OR cnt.con_Lastname LIKE '" . $filterstr . "'
+					OR cl.client_received LIKE '" . $filterstr . "')";
             }
 
             $qrySel .= " ORDER BY {$order} {$ordertype}";
             
         }
-
+        
         $fetchResult = mysql_query($qrySel);
         while ($rowData = mysql_fetch_assoc($fetchResult)) {
             $arrClients[$rowData['client_id']] = $rowData;

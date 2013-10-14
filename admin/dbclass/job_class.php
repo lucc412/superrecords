@@ -53,21 +53,27 @@ class Job_Class extends Database
 	// Function to fetch all Jobs or fetches Jobs based on arguments
 	public function fetchJob() 
         {
+            global $commonUses;
+            
 		if($_REQUEST['filter_field'] == 'all') {
 			//$fromStr = ", pr_practice p1, sub_subactivity sa, job_status s1";
 			if(!$_REQUEST['wholeonly']) {
 				$whereStr = "AND (( p1.name LIKE '%".$_REQUEST['filter']."%')
 						OR ((c1.client_name LIKE '%".$_REQUEST['filter']."%'
 							OR sa.sub_Description LIKE '%".$_REQUEST['filter']."%'
-							OR j1.period LIKE '%".$_REQUEST['filter']."%')) 
+							OR j1.period LIKE '%".$_REQUEST['filter']."%'
+                                                        OR j1.job_received LIKE '%".$commonUses->getDateFormat($_REQUEST['filter'])."%'
+                                                        OR j1.job_due_date LIKE '%".$commonUses->getDateFormat($_REQUEST['filter'])."%')) 
 						OR (s1.job_status LIKE '%".$_REQUEST['filter']."%'))";
 			}
 			else {
-				$whereStr = "AND ((p1.name LIKE '".$_REQUEST['filter']."')
-						OR ((c1.client_name LIKE '".$_REQUEST['filter']."'
-							OR sa.sub_Description LIKE '".$_REQUEST['filter']."'
-							OR j1.period LIKE '".$_REQUEST['filter']."') ) 
-						OR (s1.job_status LIKE '".$_REQUEST['filter']."'))";
+				$whereStr = "AND ((p1.name = '".$_REQUEST['filter']."')
+						OR ((c1.client_name = '".$_REQUEST['filter']."'
+							OR sa.sub_Description = '".$_REQUEST['filter']."'
+							OR j1.period = '".$_REQUEST['filter']."'
+                                                        OR j1.job_received = '".$commonUses->getDateFormat($_REQUEST['filter'])."'
+                                                        OR j1.job_due_date = '".$commonUses->getDateFormat($_REQUEST['filter'])."') ) 
+						OR (s1.job_status = '".$_REQUEST['filter']."'))";
 			}
 		}
 		else if($_REQUEST['filter_field'] == 'practice') {
@@ -99,6 +105,24 @@ class Job_Class extends Database
 			}
 			else {
 				$whereStr = " AND s1.job_status = '".$_REQUEST['filter']."'";
+			}
+		}
+                else if($_REQUEST['filter_field'] == 'job_received') {
+			//$fromStr = ", job_status s1";
+			if(!$_REQUEST['wholeonly']) {
+				$whereStr = " AND j1.job_received LIKE '%".$commonUses->getDateFormat($_REQUEST['filter'])."%'";
+			}
+			else {
+				$whereStr = " AND j1.job_received = '".$commonUses->getDateFormat($_REQUEST['filter'])."'";
+			}
+		}
+                else if($_REQUEST['filter_field'] == 'job_due_date') {
+			//$fromStr = ", job_status s1";
+			if(!$_REQUEST['wholeonly']) {
+				$whereStr = " AND j1.job_due_date LIKE '%".$commonUses->getDateFormat($_REQUEST['filter'])."%'";
+			}
+			else {
+				$whereStr = " AND j1.job_due_date = '".$commonUses->getDateFormat($_REQUEST['filter'])."'";
 			}
 		}
 		

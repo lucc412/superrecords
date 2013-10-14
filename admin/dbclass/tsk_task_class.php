@@ -215,11 +215,12 @@ class Task_Class extends Database {
 			$filterstr = $commonUses->sqlstr($filter);
 			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
 			
-			$qrySel = "SELECT t.*, s.*, cnt.*,j.*, pr.*, c.*, sa.*
-					FROM task t, job j, client c, pr_practice pr, stf_staff s, con_contact cnt, sub_subactivity sa
+			$qrySel = "SELECT t.*, s.*, cnt.*,j.*, pr.*, c.*, sa.*, ts.description
+					FROM task t, task_status ts, job j, client c, pr_practice pr, stf_staff s, con_contact cnt, sub_subactivity sa
 					WHERE t.discontinue_date IS NULL
 					AND j.job_submitted = 'Y'
 					AND t.job_id = j.job_id
+                                        AND t.task_status_id = ts.id
 					AND j.client_id = c.client_id
 					AND c.id = pr.id 
 					AND sa.sub_Code = j.job_type_id
@@ -244,9 +245,12 @@ class Task_Class extends Database {
 			elseif(isset($filterstr) && $filterstr!='') {
 				
 				$qrySel .= " AND (t.task_name like '" .$filterstr ."'
+                                        OR ts.description like '" .$filterstr ."' 
 					OR pr.name like '" .$filterstr ."' 
 					OR j.job_name like '". $filterstr ."'
-					OR cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
+					OR cnt.con_Firstname like '". $filterstr ."'
+                                        OR cnt.con_Middlename like '". $filterstr ."' 
+                                        OR cnt.con_Lastname like '". $filterstr ."')";
 					
 			}				
 

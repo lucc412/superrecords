@@ -8,6 +8,7 @@
 <td><input type="text" name="filter" value="<?php echo $filter ?>"></td>
 <td><select name="filter_field">
 <option value="">All Fields</option>
+ <option value="<?php echo "pr.pr_code" ?>"<?php if ($filterfield == "pr.pr_code") { echo "selected"; } ?>>Practice Code</option>
  <option value="<?php echo "pr.name" ?>"<?php if ($filterfield == "pr.name") { echo "selected"; } ?>>Practice Name</option>
  <option value="<?php echo "type" ?>"<?php if ($filterfield == "type") { echo "selected"; } ?>>Type</option>
  <option value="<?php echo "sr_manager" ?>"<?php if ($filterfield == "sr_manager") { echo "selected"; } ?>>SR Manager</option>

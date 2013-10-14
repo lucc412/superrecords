@@ -8,8 +8,9 @@
 <td><input type="text" name="filter" value="<?php echo stripslashes($filter)?>"></td>
 <td><select name="filter_field">
 <option value="">All Fields</option>
+<option value="<?php echo "pr.name" ?>"<?php if ($filterfield == "pr.name") { echo "selected"; } ?>>Practice</option>
+<option value="<?php echo "cl.client_code" ?>"<?php if ($filterfield == "cl.client_code") { echo "selected"; } ?>>Client Code</option>
  <option value="<?php echo "cl.client_name" ?>"<?php if ($filterfield == "cl.client_name") { echo "selected"; } ?>>Client Name</option>
- <option value="<?php echo "pr.name" ?>"<?php if ($filterfield == "pr.name") { echo "selected"; } ?>>Practice</option>
  <option value="<?php echo "clt.client_type" ?>"<?php if ($filterfield == "clt.client_type") { echo "selected"; } ?>>Type</option>
  <option value="<?php echo "sr_manager" ?>"<?php if ($filterfield == "sr_manager") { echo "selected"; } ?>>SR Manager</option>
  <option value="<?php echo "cl.client_received" ?>"<?php if ($filterfield == "cl.client_received") { echo "selected"; } ?>>Date Signed Up</option>

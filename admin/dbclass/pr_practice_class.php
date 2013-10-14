@@ -144,10 +144,17 @@ class Practice_Class extends Database {
 		}
 		// listing case		
 		else {
-			
+	                
 			$filterstr = $commonUses->sqlstr($filter);
-			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
-			
+                        if(DateTime::createFromFormat('d/m/Y', $filterstr)) $filterstr = $commonUses->getDateFormat($filterstr)." 00:00:00";
+                	if(!$wholeonly && isset($wholeonly) && $filterstr!='') 
+                        {
+                            $filterstr = "%" .$filterstr ."%";
+                            $operator = ' LIKE ';
+                        }
+                        else {
+                                $operator = ' = ';
+                        }
 			$qrySel = "SELECT pr.id pracId, pr.type, pr.name, pr.sr_manager, pr.date_signed_up, pr.pr_code, prt.*, s.*, cnt.* 
 						FROM pr_practice pr, pr_type prt, stf_staff s, con_contact cnt 
 						WHERE pr.type = prt.id 
@@ -159,24 +166,28 @@ class Practice_Class extends Database {
 			if(isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
 				
 				if($commonUses->sqlstr($filterfield) == 'sr_manager') {
-					$qrySel .= "AND (cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
+					$qrySel .= "AND (cnt.con_Firstname LIKE '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname LIKE '". $filterstr ."')";
 				}
 				elseif($commonUses->sqlstr($filterfield) == 'type'){
-					$qrySel .= "AND prt.description like '". $filterstr ."'";
+					$qrySel .= "AND prt.description LIKE '". $filterstr ."'";
 				}
-				else{
-					$qrySel .= "AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
+                                elseif($commonUses->sqlstr($filterfield) == 'date_signed_up'){
+					$qrySel .= "AND pr.date_signed_up ".$operator."'". $filterstr ."'";
+				}
+                                else{
+					$qrySel .= "AND " .$commonUses->sqlstr($filterfield) ." LIKE '" .$filterstr ."'";	
 				}
 			}
 			// filter on all fields
 			elseif(isset($filterstr) && $filterstr!='') {
-				
-				$qrySel .= " AND (pr.name like '" .$filterstr ."'
-							OR prt.description like '" .$filterstr ."' 
-							OR cnt.con_Firstname like '". $filterstr ."' 
-							OR cnt.con_Middlename like '". $filterstr ."' 
-							OR cnt.con_Lastname like '". $filterstr ."'
-							OR pr.date_signed_up like '". $filterstr ."')";
+			
+				$qrySel .= " AND (pr.name LIKE '" .$filterstr ."'
+                                                        OR pr.pr_code LIKE '" .$filterstr ."' 
+							OR prt.description LIKE '" .$filterstr ."' 
+							OR cnt.con_Firstname LIKE '". $filterstr ."' 
+							OR cnt.con_Middlename LIKE '". $filterstr ."' 
+							OR cnt.con_Lastname LIKE '". $filterstr ."'
+							OR pr.date_signed_up LIKE '". $filterstr ."')";
 					
 			}			
                         $qrySel .= " ORDER BY {$order} {$ordertype}";

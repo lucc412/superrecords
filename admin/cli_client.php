@@ -281,6 +281,11 @@ if($_SESSION['validUser']) {
 				$formcode = $commonUses->getFormCode("Manage Client");
 				$access_file_level = $commonUses->checkFileAccess($_SESSION['staffcode'],$formcode);
 
+                                
+//                                // reset filter	
+//				$filter = "";
+//				$filterfield = "";
+//				$wholeonly = "";
 				$checkstr = "";
 				if ($wholeonly) $checkstr = " checked";
                                 if ($ordertype == "ASC") { $ordertype = "DESC"; } else { $ordertype = "ASC"; }

@@ -30,7 +30,7 @@ include(TOPBAR);
 			$checklistId = $checklist['0'];
 			$checklistName = $checklist['1'];
 
-			?><div class="accordionButton bluearrow"><?=$checklistName;?></div>
+			?><div class="accordionButton bluearrow add"><?=$checklistName;?></div>
 			<div class="accordionContent" <?if($_REQUEST['checklistId'] == $checklistId) echo "style='display:block'"; else echo "style='display:none'";?>>
 				<table width="80%" class="resources pdB20">
 					<tbody>

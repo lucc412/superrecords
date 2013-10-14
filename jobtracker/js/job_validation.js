@@ -5,9 +5,20 @@ $(document).ready(function() {
 		if($(this).next().css('display') == 'none'){
 			$('div.accordionContent').slideUp('normal');
 			$(this).next().slideDown('normal');
+                        //$(this).css('background-image','url(../jobtracker/images/minus.png)');
+                        if($(this).hasClass('add'))
+                            $(this).addClass('minus').removeClass('add');
+                        else{
+                            $(this).parent('div').find('div.minus').removeClass('minus');
+                        }
+                            
+                        
 		}else{
+                    
+                        //$(this).css('background-image','url(../jobtracker/images/add.png)');
 			$(this).next().slideUp('normal');
-		}
+                }
+                
 	});
 	
 	/* CLOSES ALL DIVS ON PAGE LOAD */	

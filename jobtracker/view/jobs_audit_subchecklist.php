@@ -24,7 +24,7 @@ include(TOPBAR);
 	else {
 		?><input type="hidden" name="sql" value="updateAudit"><?
 	}
-	?><div><?
+	?><div class="checklist"><?
 		foreach($arrSubchecklist AS $strChecklist => $arrInnerlist) {
 			$checklist = stringToArray(':',$strChecklist);
 			$checklistId = $checklist['0'];

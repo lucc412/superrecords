@@ -567,15 +567,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	font-weight:bold;
 	font-size:13px;
 	display:block;
-	padding:10px 30px;
+	padding:10px 25px;
 /*	background:url(../images/add.png) 5px 6px no-repeat;*/
 	cursor:pointer;
 	color:rgba(7, 65, 96, 0.94);
 	/*text-decoration:underline;*/
 }
 
-.add{ background:url(../images/blue_add.png) 5px 10px no-repeat; }
-.minus{ background:url(../images/blue_minus.png) 5px 10px no-repeat; }
+.add{ background:url(../images/blue_add.png) 5px 12px no-repeat; }
+.minus{ background:url(../images/blue_minus.png) 5px 12px no-repeat; }
 
 .orangearrow {
 	font-weight:bold;

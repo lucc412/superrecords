@@ -50,7 +50,7 @@ include(SETUPNAVIGATION);
 			?><span align="left"><button type="button" onclick="<?=$jsFunc?>" >Back</button></span>
 			<span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">Save & Exit</button></span>
                         <span align="right" style="padding-left:55px;"><button id="btnPreview" class="" type="button" onclick="js:urlRedirect('setup_preview.php');">Preview</button></span>
-			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">Submit</button></span>
+<!--			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">Submit</button></span>-->
 	</div>
         <script>
             $('#btnNext').click(function(){$('#job_submitted').val('N')})

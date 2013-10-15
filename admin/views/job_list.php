@@ -945,7 +945,7 @@ switch ($a)
 				?><tr class="fieldheader">
 					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "p1.name" ?>&type=<?php echo $objCallData->ordertype; ?>">Practice Name</a></th>
 					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "c1.client_name" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Name</a></th>
-					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "j1.job_genre" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Genre</a></th>
+<!--					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "j1.job_genre" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Genre</a></th>-->
 					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "s1.job_status" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Status</a></th>
 					<th class="fieldheader"><a href="job.php?order=<?php echo "j1.job_received" ?>&type=<?php echo $objCallData->ordertype; ?>">Date Received</a></th>
 					<th class="fieldheader"><a href="job.php?order=<?php echo "j1.job_due_date" ?>&type=<?php echo $objCallData->ordertype; ?>">Due Date</a></th><?
@@ -967,7 +967,7 @@ switch ($a)
 					
 					?><td class="<?=$style?>"><?=$objCallData->arrPractice[$arrInfo['id']]['name']?></td>	
 					<td class="<?=$style?>"><?=stripslashes($jobName)?></td>	
-					<td class="<?=$style?>"><?=ucfirst(strtolower($arrInfo['job_genre']))?></td>	
+<!--					<td class="<?=$style?>"><?=ucfirst(strtolower($arrInfo['job_genre']))?></td>	-->
 					<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrJobStatus[$arrInfo["job_status_id"]]["job_status"])?></td><?
 
 					if(!empty($arrInfo["job_received"])){

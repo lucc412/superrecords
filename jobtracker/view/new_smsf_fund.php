@@ -41,7 +41,10 @@ include(SETUPNAVIGATION);
 						else{
 							$regDate='';
 						}
-					}  
+					}
+                                        else {
+                                            $regDate=date("d/m/Y");
+                                        }
 					echo($regDate);
 					?>"/><img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtSetupDate','ddMMyyyy')" align="middle" class="calendar"/>
 				</td>

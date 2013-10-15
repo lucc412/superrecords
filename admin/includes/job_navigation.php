@@ -34,7 +34,7 @@
                 
                 
 		// Reports
-		if($_SESSION['jobGenre'] == 'COMPLIANCE') {
+//		if($_SESSION['jobGenre'] == 'COMPLIANCE') {
                     
                     if($_SESSION["usertype"] == "Staff") {
                         $arrFeatures = $commonUses->getFeatureVisibility(2);
@@ -49,7 +49,7 @@
 				</form>
 			</td><?
                     }
-		}
+//		}
 		
 		// Queries
 		?><td>

@@ -179,19 +179,19 @@ class Task_Class extends Database {
 		global $filterfield;
 		global $wholeonly;
 		global $commonUses;	
-                global $order;
-                global $ordertype;
+		global $order;
+		global $ordertype;
 
 		$strWhere = "";		
 		if($_SESSION["usertype"] == "Staff") {	
 			$userId = $_SESSION["staffcode"];
 			$strWhere .="AND (pr.sr_manager =".$userId." 
-                                        OR pr.india_manager =".$userId." 
-                                        OR pr.audit_manager=" . $userId . " 
-                                        OR c.team_member =".$userId." 
-                                        OR c.sr_accnt_comp =".$userId."
-                                        OR c.sr_accnt_audit =".$userId."
-                                        OR pr.sales_person =".$userId . ")";
+							OR pr.india_manager =".$userId." 
+							OR pr.audit_manager=" . $userId . " 
+							OR c.team_member =".$userId." 
+							OR c.sr_accnt_comp =".$userId."
+							OR c.sr_accnt_audit =".$userId."
+							OR pr.sales_person =".$userId . ")";
 		}
 	
 		if($jobId)
@@ -200,14 +200,14 @@ class Task_Class extends Database {
 		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))) {				
 			
 			$qrySel = "SELECT t.*, pr.sr_manager, pr.india_manager, pr.audit_manager, pr.sales_person, c.team_member, c.sr_accnt_comp, c.sr_accnt_audit
-					FROM task t, job j, client c, pr_practice pr
-					WHERE t.discontinue_date IS NULL 
-					AND t.job_id = j.job_id
-					AND j.client_id = c.client_id
-					AND j.job_submitted = 'Y'
-					AND c.id = pr.id
-					AND t.task_id = ".$recId."
-					ORDER BY t.task_id DESC";
+						FROM task t, job j, client c, pr_practice pr
+						WHERE t.discontinue_date IS NULL 
+						AND t.job_id = j.job_id
+						AND j.client_id = c.client_id
+						AND j.job_submitted = 'Y'
+						AND c.id = pr.id
+						AND t.task_id = ".$recId."
+						ORDER BY t.task_id DESC";
 		}
 		// listing case
 		else {
@@ -216,41 +216,30 @@ class Task_Class extends Database {
 			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
 			
 			$qrySel = "SELECT t.*, s.*, cnt.*,j.*, pr.*, c.*, sa.*, ts.description
-					FROM task t, task_status ts, job j, client c, pr_practice pr, stf_staff s, con_contact cnt, sub_subactivity sa
-					WHERE t.discontinue_date IS NULL
-					AND j.job_submitted = 'Y'
-					AND t.job_id = j.job_id
-                                        AND t.task_status_id = ts.id
-					AND j.client_id = c.client_id
-					AND c.id = pr.id 
-					AND sa.sub_Code = j.job_type_id
-					AND pr.sr_manager = s.stf_Code 
-					AND s.stf_CCode = cnt.con_Code 
-					{$strWhere} ";
+						FROM task t, task_status ts, job j, client c, pr_practice pr, stf_staff s, con_contact cnt, sub_subactivity sa
+						WHERE t.discontinue_date IS NULL
+						AND j.job_submitted = 'Y'
+						AND t.job_id = j.job_id
+											AND t.task_status_id = ts.id
+						AND j.client_id = c.client_id
+						AND c.id = pr.id 
+						AND sa.sub_Code = j.job_type_id
+						AND pr.sr_manager = s.stf_Code 
+						AND s.stf_CCode = cnt.con_Code 
+						{$strWhere} ";
 			
 			if(isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
-				
-				if($commonUses->sqlstr($filterfield) == 'sr_manager') {
-					$qrySel .= "AND (cnt.con_Firstname like '". $filterstr ."' OR cnt.con_Middlename like '". $filterstr ."' OR cnt.con_Lastname like '". $filterstr ."')";
-				}elseif($commonUses->sqlstr($filterfield) == 'job_name'){
-					$qrySel .= "AND (c.client_name like '".$filterstr."'
-								OR sa.sub_Description like '".$filterstr."'
-								OR j.period like '".$filterstr."')";
-					
-				}else{
-					$qrySel .= " AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
-				}
-				
+				$qrySel .= " AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
 			}
 			elseif(isset($filterstr) && $filterstr!='') {
 				
 				$qrySel .= " AND (t.task_name like '" .$filterstr ."'
-                                        OR ts.description like '" .$filterstr ."' 
-					OR pr.name like '" .$filterstr ."' 
-					OR j.job_name like '". $filterstr ."'
-					OR cnt.con_Firstname like '". $filterstr ."'
-                                        OR cnt.con_Middlename like '". $filterstr ."' 
-                                        OR cnt.con_Lastname like '". $filterstr ."')";
+                            OR ts.description like '" .$filterstr ."' 
+							OR pr.name like '" .$filterstr ."' 
+							OR j.job_name like '". $filterstr ."'
+							OR cnt.con_Firstname like '". $filterstr ."'
+							OR cnt.con_Middlename like '". $filterstr ."' 
+							OR cnt.con_Lastname like '". $filterstr ."')";
 					
 			}				
 

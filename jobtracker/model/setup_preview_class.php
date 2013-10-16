@@ -161,6 +161,16 @@ class SETUP_PREVIEW
         return $rowData['trustee_type_name'];
     }
     
+    public function smsfNotes() 
+    {
+        $qryFetch = "SELECT * FROM es_smsf  WHERE job_id = ".$_SESSION['jobId'];
+
+        $fetchResult = mysql_query($qryFetch);
+        $arrNotes = mysql_fetch_assoc($fetchResult);
+
+        return $arrNotes;
+    }
+    
     public function generatePreview($mode=NULL)
     {
         $jobid = $_SESSION['jobId'];
@@ -182,9 +192,8 @@ class SETUP_PREVIEW
                 $arrExtTrsty = SETUP_PREVIEW::extTrustDetails();
 
             $arrCountry = SETUP_PREVIEW::country();
-//            $arrClients = SETUP_PREVIEW::clientDetails($arrJob[$_SESSION['jobId']]['client_id']);
-//            $arrPractice = SETUP_PREVIEW::practiceDetails();
-//            $arrActivity = SETUP_PREVIEW::jobActivityDetails($arrJob[$_SESSION['jobId']]['job_type_id']);
+            $arrNotes = SETUP_PREVIEW::smsfNotes();
+            
         }
 
         $html = '';
@@ -217,6 +226,26 @@ class SETUP_PREVIEW
                                 width:50%;
                         }
                     </style>';
+        
+        if ($_SESSION['frmId'] == 1)
+        {
+            $abn_tfn = ($arrNotes['apply_abntfn'] == 1)? 'Yes':'No'; 
+            $authority_status = ($arrNotes['authority_status'] == 1)? 'Yes':'No';
+            $notes = '<br/>
+                        <div class="test">General</div>
+                        <br />
+                        <table class="first" cellpadding="4" cellspacing="6">
+                            <tr>
+                                <td>If you want us to apply for ABN/TFN for new SMSF ? </td>
+                                <td>'.$abn_tfn.'</td>
+                            </tr>
+                            <tr>
+                                <td>Receieved written authority from client to utilise the services ? </td>
+                                <td>'.$authority_status.'</td>
+                            </tr>
+                        </table>';
+        }
+        
         
         $contact = '<br/>
                         <div class="test">Contact Details</div>
@@ -492,7 +521,7 @@ class SETUP_PREVIEW
         
         
         if ($_SESSION['frmId'] == 1) 
-            $html = $styleCSS.$contact.$fund.$members.$leagalRef.$trustee;
+            $html = $styleCSS.$notes.$contact.$fund.$members.$leagalRef.$trustee;
         elseif ($_SESSION['frmId'] == 2)
             $html = $styleCSS.$contact.$fund;
         

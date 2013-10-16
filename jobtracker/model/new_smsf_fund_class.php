@@ -42,18 +42,22 @@ class NEW_SMSF_FUND {
 	// function to insert fund details of sign up user
 	function editFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus) {
             
-            // delete old member details when no of members field is changed
-               $qrySel = "SELECT members FROM es_fund_details WHERE job_id =". $_SESSION['jobId'];
-               $objResult = mysql_query($qrySel);
-               $rowData = mysql_fetch_assoc($objResult);
-               $prevMember = $rowData['members'];
-               if($members < $prevMember) {
-                   $qryDel = "DELETE em.*, el.*
-                                    FROM es_member_details em, es_legal_references el 
-                                    WHERE em.job_id =". $_SESSION['jobId'] . "
-                                    AND el.job_id = ". $_SESSION['jobId'];
-                   mysql_query($qryDel);
-               }
+			// delete old member details when no of members field is changed
+		   $qrySel = "SELECT members FROM es_fund_details WHERE job_id =". $_SESSION['jobId'];
+		   $objResult = mysql_query($qrySel);
+		   $rowData = mysql_fetch_assoc($objResult);
+		   $prevMember = $rowData['members'];
+		   if($members < $prevMember) {
+			   $qryDel1 = "DELETE em.*
+								FROM es_member_details em
+								WHERE em.job_id =". $_SESSION['jobId'];
+			   mysql_query($qryDel1);
+
+			   $qryDel2 = "DELETE el.*
+								FROM es_legal_references el 
+								WHERE el.job_id = ". $_SESSION['jobId'];
+			   mysql_query($qryDel2);
+		   }
             
            $qryInsert = "UPDATE es_fund_details
 						SET fund_name = '" . addslashes($fundName) . "',

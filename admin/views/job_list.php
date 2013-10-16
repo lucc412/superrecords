@@ -315,7 +315,7 @@ switch ($a)
 					  if($_SESSION['jobGenre'] == 'SETUP') {
 						?><tr>
 							<td class="hr">Setup Details</td>
-							<td class="dr"><a style="color:#073f61" href="javascript:;" onclick="javascript:redirectURL('job.php?sql=download&flagType=ST&filePath=<?=urlencode($filePath)?>&docId=<?=$doc_id?>');" title="Click to view this document" >Download</a></td>
+							<td class="dr"><a style="color:#073f61;font-weight:bold" href="javascript:;" onclick="javascript:redirectURL('job.php?sql=download&flagType=ST&filePath=<?=urlencode($filePath)?>&docId=<?=$doc_id?>');" title="Click to view this document" >Download</a></td>
 						</tr>
 					  <?php } ?>
 					<tr>

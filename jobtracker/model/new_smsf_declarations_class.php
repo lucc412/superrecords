@@ -22,6 +22,32 @@ class DECLARATIONS
             return $arrQues;
 	}
 
+        function checkQuestion()
+        {
+            $qry = "SELECT * FROM es_declarations_details WHERE job_id = ".$_SESSION['jobId'];
+            $fetchResult = mysql_query($qry);
+            
+            $arrData = array();
+            if($fetchResult) 
+            {
+                $arrData = mysql_fetch_assoc($fetchResult);
+            }
+
+            return $arrData;
+        }
+        
+        function insertDeclaration() 
+        {
+            $qry = "INSERT INTO es_declarations_details (job_id, question_id) VALUE(".$_SESSION['jobId'].",'".implode(",", array_keys($_REQUEST['rd']))."')";
+            $fetchResult = mysql_query($qry);
+        }
+        
+        function updateDeclaration()
+        {
+            $qry = "UPDATE es_declarations_details SET question_id = '".implode(",", array_keys($_REQUEST['rd']))."' WHERE job_id = ".$_SESSION['jobId'];
+            $fetchResult = mysql_query($qry);
+        }
+        
         function checkLegalRef()
         {
             $qryFetch = "SELECT * FROM es_member_details WHERE job_id = '" . $_SESSION['jobId'] . "' AND legal_references = 1";
@@ -81,12 +107,6 @@ class DECLARATIONS
 
         }
         
-        function updateTerms($chk)
-        {
-            $chk = ($chk == 'on')?1:0;
-            $qry = "UPDATE es_contact_details SET terms_n_conditn = ".$chk." WHERE job_id = ".$_SESSION['jobId'];
-            mysql_query($qry);
-        }
         
         function fetchTerms()
         {

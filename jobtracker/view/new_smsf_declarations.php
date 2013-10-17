@@ -18,18 +18,15 @@ include(SETUPNAVIGATION);
 						<?=$arrQues[$i]?>
 					</td>
 					<td class="pdB20">
-						<label style="padding-left:30px;"><input class="checkboxClass" type="radio" name="rd<?=$i+1?>" id="rd<?=$i+1?>"/>Yes</label>
-						<label><input class="checkboxClass" type="radio" name="rd<?=$i+1?>" id="rd<?=$i+1?>" checked="checked"/>No</label>
+                                            <label style="padding-left:30px;"><input class="checkboxClass" type="radio" name="rd[<?=$i+1?>]" id="rd<?=$i+1?>" value="on" />Yes</label>
+                                            <label><input class="checkboxClass" type="radio" name="rd[<?=$i+1?>]" id="rd<?=$i+1?>" checked="checked" value="off" />No</label>
 					</td>
 				</tr><?
 			}	
 		?></table>
 
 		</br>
-<!--                <div style="font-weight:bold;">
-                    <input class="checkboxClass" type="checkbox" name="chkAgree" id="chkAgree" <?php echo ($checkTerms=='on')?"checked":""; ?>/> I have read and agree to your 
-			<a href="#" onclick="javascript:popUp('docs/terms_conditions.html');">terms and conditions</a>
-		</div>-->
+
 	</div>
         <input type="hidden" name="job_submitted" id="job_submitted" value="">
         <input type="hidden" name="preview" id="preview" value="">
@@ -46,16 +43,16 @@ include(SETUPNAVIGATION);
                         $jsFunc = "window.location.href='new_smsf_member.php'";
                     }
                 }
-		
+		//onclick="js:urlRedirect('setup_preview.php');"
 			?><span align="left"><button type="button" onclick="<?=$jsFunc?>" >Back</button></span>
 			<span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">Save & Exit</button></span>
-                        <span align="right" style="padding-left:55px;"><button id="btnPreview" class="" type="button" onclick="js:urlRedirect('setup_preview.php');">Preview</button></span>
+                        <span align="right" style="padding-left:55px;"><button id="btnPreview" name="btnPreview" class="" type="submit" value="preview">Preview</button></span>
 <!--			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">Submit</button></span>-->
 	</div>
         <script>
             $('#btnNext').click(function(){$('#job_submitted').val('N')})
-            $('#btnSave').click(function(){$('#job_submitted').val('Y')})
-            
+//            $('#btnSave').click(function(){$('#job_submitted').val('Y')})
+            $('#btnPreview').click(function(){$('#job_submitted').val('')})
         </script>
 </form><?
 

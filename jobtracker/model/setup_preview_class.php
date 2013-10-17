@@ -171,6 +171,35 @@ class SETUP_PREVIEW
         return $arrNotes;
     }
     
+    function checkQuestion()
+    {
+        $qry = "SELECT * FROM es_declarations_details WHERE job_id = ".$_SESSION['jobId'];
+        $fetchResult = mysql_query($qry);
+
+        $arrData = array();
+        if($fetchResult) 
+        {
+            $arrData = mysql_fetch_assoc($fetchResult);
+        }
+
+        return $arrData;
+    }
+    
+    // function to fetch states
+    function fetchQuestions()
+    {
+        $qryFetch = "SELECT * FROM es_declarations";	
+
+        $fetchResult = mysql_query($qryFetch);
+
+        while($rowData = mysql_fetch_assoc($fetchResult))
+        {
+                $arrQues[$rowData['question_id']] = $rowData;
+        }
+
+        return $arrQues;
+    }
+        
     public function generatePreview($mode=NULL)
     {
         $jobid = $_SESSION['jobId'];
@@ -193,6 +222,8 @@ class SETUP_PREVIEW
 
             $arrCountry = SETUP_PREVIEW::country();
             $arrNotes = SETUP_PREVIEW::smsfNotes();
+            $arrQuesAns = SETUP_PREVIEW::checkQuestion();
+            $arrQuestionsList = SETUP_PREVIEW::fetchQuestions();
             
         }
 
@@ -223,7 +254,7 @@ class SETUP_PREVIEW
                                 font-size: 11pt;
                                 font-weight: bold;
                                 padding: 5px;
-                                width:50%;
+                                width:55%;
                         }
                     </style>';
         
@@ -510,6 +541,43 @@ class SETUP_PREVIEW
             }
         }
         
+        if ($_SESSION['frmId'] == 1)
+        {
+            
+            foreach($arrQuestionsList as $value)
+            {	
+                $arrId = stringToArray(",",$value['trustee_type_id']);
+
+                for($i=0; $i<count($arrId); $i++)
+                {
+                    if($_SESSION['TRUSTEETYPE'] == $arrId[$i])
+                        $arrQues[] = $value;
+                }
+            }
+            
+            $QueId = explode(",", $arrQuesAns['question_id']);
+            for($i=0; $i<count($arrQues); $i++)	
+            {
+                if ($QueId[$i] == $arrQues[$i]['question_id'])
+                    $ans = 'No';
+                else
+                    $ans = 'Yes';
+                
+                $question .= '<tr>
+                                <td>'.$arrQues[$i]['question'].'</td>
+                                <td>'.$ans.'</td>
+                            </tr>';
+            }
+            
+            $declarations = '<div class="test">Declarations</div>
+                            <br />
+                            <table class="first" cellpadding="4" cellspacing="6">
+                            '.$question.'
+                            </table>
+                            <br/>
+                            ';
+        }
+                
         $header = ' <table style="margin-bottom: 30px;">
                             <tr>
                                 <td><a href="www.superrecords.com.au" style="float:left;margin-right: 40px;"><img src="images_user/header-logo.png" style="width:250px;" /></a></td>                            
@@ -521,7 +589,7 @@ class SETUP_PREVIEW
         
         
         if ($_SESSION['frmId'] == 1) 
-            $html = $styleCSS.$notes.$contact.$fund.$members.$leagalRef.$trustee;
+            $html = $styleCSS.$notes.$contact.$fund.$members.$leagalRef.$trustee.$declarations;
         elseif ($_SESSION['frmId'] == 2)
             $html = $styleCSS.$contact.$fund;
         
@@ -532,3 +600,4 @@ class SETUP_PREVIEW
 }
 
 ?>
+

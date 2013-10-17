@@ -14,25 +14,22 @@ if(isset($_SESSION['jobId']))
 	// fetch states for drop-down
 	$arrQuestionsList = $objScr->fetchQuestions();
         $arrLegRef = $objScr->checkLegalRef();
-        $checkTerms = $objScr->fetchTerms();
         $arrQuesAns = $objScr->checkQuestion();
 	$arrQues = array();
         
 	if(isset($_REQUEST['job_submitted']))
-	{
-            
-            //$arrData = $objScr->checkQuestion();
-            if(empty($arrQuesAns)) 
-            {
-                $objScr->insertDeclaration();
-            }
-            else
-            {
-                $objScr->updateDeclaration();
-            }
-                
+	{   
             if(isset($_REQUEST['btnPreview']) && $_REQUEST['btnPreview'] == 'preview')
             {
+                if(empty($arrQuesAns)) 
+                {
+                    $objScr->insertDeclaration();
+                }
+                else
+                {
+                    $objScr->updateDeclaration();
+                }
+                
                 header('Location: setup_preview.php');   
             }
             // include view file 
@@ -45,6 +42,15 @@ if(isset($_SESSION['jobId']))
             }
             else if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'N')
             {
+                if(empty($arrQuesAns)) 
+                {
+                    $objScr->insertDeclaration();
+                }
+                else
+                {
+                    $objScr->updateDeclaration();
+                }
+            
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                     header('Location: jobs.php?a=saved');
             }

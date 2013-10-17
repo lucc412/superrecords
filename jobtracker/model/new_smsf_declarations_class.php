@@ -106,17 +106,6 @@ class DECLARATIONS
             createPDF($html,$filename,$title1,$title2);
 
         }
-        
-        
-        function fetchTerms()
-        {
-            $qry = "SELECT terms_n_conditn FROM es_contact_details WHERE job_id = ".$_SESSION['jobId'];
-            $data = mysql_query($qry);
-            $rec = mysql_fetch_assoc($data);
-            $chk = ($rec['terms_n_conditn'] == '1')?"on":"off";
-            
-            return $chk;
-        }
 }
                     
 ?>

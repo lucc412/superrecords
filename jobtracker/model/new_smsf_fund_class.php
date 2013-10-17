@@ -40,22 +40,19 @@ class NEW_SMSF_FUND {
 
 	// function to insert fund details of sign up user
 	function editFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus) {
-            
-            // delete old member details when no of members field is changed
-           $qrySel = "SELECT members FROM es_fund_details WHERE job_id =". $_SESSION['jobId'];
+           
+           // delete old member details when no of members field is changed
+           $qrySel = "SELECT member_id FROM es_member_details WHERE job_id =". $_SESSION['jobId']." ORDER BY member_id desc";
            $objResult = mysql_query($qrySel);
-           $rowData = mysql_fetch_assoc($objResult);
-           $prevMember = $rowData['members'];
-           if($members < $prevMember) {
-                $qrySel = "SELECT member_id FROM es_member_details WHERE job_id =". $_SESSION['jobId']." ORDER BY member_id desc";
-                $objResult = mysql_query($qrySel);
-                while($rowMember = mysql_fetch_assoc($objResult)) {
-                    $arrMemberId[] = $rowMember['member_id'];
-                }
-
-                $cntMember = $members;
+           while($rowMember = mysql_fetch_assoc($objResult)) {
+                $arrMemberId[] = $rowMember['member_id'];
+           }
+           $exstngMember = count($arrMemberId);
+           $delMember = $exstngMember - $members;
+           
+           if($delMember > 0) {
                 foreach ($arrMemberId as $memberId) {
-                    if($cntMember < $prevMember) {
+                    if($delMember > 0) {
                         $qryDel1 = "DELETE em.*
                                     FROM es_member_details em
                                     WHERE em.member_id =". $memberId;
@@ -65,7 +62,7 @@ class NEW_SMSF_FUND {
                                     FROM es_legal_references el 
                                     WHERE el.member_id = ". $memberId;
                         mysql_query($qryDel2);
-                        $cntMember++;
+                        $delMember--;
                     }
                 }
            }

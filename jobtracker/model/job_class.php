@@ -228,7 +228,7 @@ class Job {
 	}
 
 	public function sql_insert($details) {
-            
+            showArray($details);
         $clientId = $details['lstClientType'];
 		$typeId = $details['lstJobType'];
 		$period = $details['txtPeriod'];
@@ -239,17 +239,19 @@ class Job {
 
 		if($jobGenre == 'COMPLIANCE') {
 			$jobSubmitted = 'Y';
-			$jobReceived = 'NOW()';
-		}
+			$jobReceived = date('Y-m-d');
+                        $job_due_date = date('Y-m-d', strtotime("+2 week"));
+                }
 		else {
 			$jobSubmitted = 'N';
 			$jobReceived = 'NULL';
+                        $job_due_date = "0000-00-00 00:00:00";
 		}
 
 		$jobName = $clientId .'::'. $period .'::'. $typeId;
                 if(empty($clientId) && empty($period))$jobName=NULL;
                     
-		$qryIns = "INSERT INTO job(client_id, job_genre, job_submitted, mas_Code, job_type_id, period, notes, job_name, job_status_id, setup_subfrm_id, job_created_date, job_received)
+		$qryIns = "INSERT INTO job(client_id, job_genre, job_submitted, mas_Code, job_type_id, period, notes, job_name, job_status_id, setup_subfrm_id, job_created_date, job_received, job_due_date)
 					VALUES (
 					'" . $clientId . "', 
 					'" . $jobGenre . "', 
@@ -261,9 +263,11 @@ class Job {
 					'" . $jobName . "',  
 					1,   
 					'".$setup_subfrm."',    
-					NOW(),            
-					".$jobReceived."         
+					'".date('Y-m-d')."',            
+					'".$jobReceived."',
+                                        '".$job_due_date."'
 					)";
+                
                 mysql_query($qryIns);
 		$jobId = mysql_insert_id();
                 

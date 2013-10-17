@@ -17,22 +17,35 @@ if(isset($_SESSION['jobId']))
         $checkTerms = $objScr->fetchTerms();
 
 	$arrQues = array();
+        
 	if(isset($_REQUEST['job_submitted']))
 	{
-            $objScr->updateTerms($_REQUEST['chkAgree']);
+            if(isset($_REQUEST['btnPreview']) && $_REQUEST['btnPreview'] == 'preview')
+            {
+                $arrData = $objScr->checkQuestion();
+                if(empty($arrData)) 
+                {
+                    $objScr->insertDeclaration();
+                }
+                else
+                {
+                    $objScr->updateDeclaration();
+                }
 
+                header('Location: setup_preview.php');   
+            }
             // include view file 
-            if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'Y')
+            else if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'Y')
             {
                 // generate PDF
                 $objScr->generatePDF();
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                header('Location: jobs.php?a=pending');
+                    header('Location: jobs.php?a=pending');
             }
             else if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'N')
             {
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                header('Location: jobs.php?a=saved');
+                    header('Location: jobs.php?a=saved');
             }
             
 	}

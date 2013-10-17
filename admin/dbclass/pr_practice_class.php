@@ -146,7 +146,7 @@ class Practice_Class extends Database {
 		else {
 	                
 			$filterstr = $commonUses->sqlstr($filter);
-                        if(DateTime::createFromFormat('d/m/Y', $filterstr)) $filterstr = $commonUses->getDateFormat($filterstr)." 00:00:00";
+                        if(strstr($filterstr, "/"))$filterstr = $commonUses->getDateFormat($filterstr)." 00:00:00";
                 	if(!$wholeonly && isset($wholeonly) && $filterstr!='') 
                         {
                             $filterstr = "%" .$filterstr ."%";

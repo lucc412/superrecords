@@ -303,21 +303,9 @@ switch ($a)
 								$jobDueDate = date("d/m/Y",strtotime($due_date));
 							}
 						} 	
-                        ?><input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$jobDueDate?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+                                        ?><input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$jobDueDate?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 					</td>
-				</tr>
-				<?php $arrInfo = $objCallData->fetchDocument($_REQUEST["jobId"]); 
-					  
-					  foreach ($arrInfo as $key => $value) {
-						$doc_id = $key;  
-						$filePath = $value['file_path'];
-					  }
-					  if($_SESSION['jobGenre'] == 'SETUP') {
-						?><tr>
-							<td class="hr">Setup Details</td>
-							<td class="dr"><a style="color:#073f61" href="javascript:;" onclick="javascript:redirectURL('job.php?sql=download&flagType=ST&filePath=<?=urlencode($filePath)?>&docId=<?=$doc_id?>');" title="Click to view this document" >Download</a></td>
-						</tr>
-					  <?php } ?>
+                                        </tr>
 					<tr>
 						<td class="hr">SR Manager</td>
 						<td class="dr" id="tdSrManager"><?=$srManager?></td>
@@ -409,9 +397,10 @@ switch ($a)
 					}
 					?><td width="10%" align="center" class="<?=$trClass?>" <?=$strView?>><?=$viewed?></td>	
 				  
-					<td width="5%" class="<?=$trClass?>" align="center">
-						<button onclick="javascript:redirectURL('job.php?sql=download&flagType=S&filePath=<?=urlencode($arrInfo['file_path'])?>&docId=<?=$arrInfo['document_id']?>');" title="Click to view this document" >Download</button>
-						
+					<td width="5%" class="<?=$trClass?>" align="center"><?
+                                            if($_SESSION['jobGenre'] == 'COMPLIANCE') $docType = 'S';
+                                            else if($_SESSION['jobGenre'] == 'SETUP') $docType = 'ST';
+                                            ?><button onclick="javascript:redirectURL('job.php?sql=download&flagType=<?=$docType?>&filePath=<?=urlencode($arrInfo['file_path'])?>&docId=<?=$arrInfo['document_id']?>');" title="Click to view this document" >Download</button>
 					</td>
 				</tr><?
 

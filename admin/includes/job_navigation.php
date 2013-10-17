@@ -21,7 +21,7 @@
 			</td><?
 		}
 		// Source Documents
-		else if($_SESSION['jobGenre'] == 'COMPLIANCE') {
+		else if($_SESSION['jobGenre'] != 'AUDIT') {
 			?><td>
 				<form method="POST" name="frmDocuments" action="job.php">
 					<input class="joblstbtn" type="submit" name="btnDocument" value="Documents" style="<?if($_REQUEST['a']=='documents') echo "background-color:#F05729;"?>">
@@ -30,27 +30,22 @@
 				</form>
 			</td><?
 		}
-
-                
                 
 		// Reports
-//		if($_SESSION['jobGenre'] == 'COMPLIANCE') {
-                    
-                    if($_SESSION["usertype"] == "Staff") {
-                        $arrFeatures = $commonUses->getFeatureVisibility(2);
-                    }else
-                        $arrFeatures['stf_visibility'] = 1;
-                    if($arrFeatures['stf_visibility'] == 1){
-			?><td>
-				<form method="POST" name="frmReports" action="job.php">
-					<input class="joblstbtn" type="submit" name="btnReports" value="Reports" style="<?if($_REQUEST['a']=='reports') echo "background-color:#F05729;"?>">
-					<input type="hidden" name="a" value="reports">
-					<input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
-				</form>
-			</td><?
-                    }
-//		}
-		
+                if($_SESSION["usertype"] == "Staff") {
+                    $arrFeatures = $commonUses->getFeatureVisibility(2);
+                }else
+                    $arrFeatures['stf_visibility'] = 1;
+                if($arrFeatures['stf_visibility'] == 1){
+                    ?><td>
+                            <form method="POST" name="frmReports" action="job.php">
+                                    <input class="joblstbtn" type="submit" name="btnReports" value="Reports" style="<?if($_REQUEST['a']=='reports') echo "background-color:#F05729;"?>">
+                                    <input type="hidden" name="a" value="reports">
+                                    <input type="hidden" name="jobId" value="<?=$_REQUEST["jobId"]?>">
+                            </form>
+                    </td><?
+                }
+
 		// Queries
 		?><td>
 			<form method="POST" name="frmQueries" action="job.php">

@@ -18,8 +18,6 @@
 <option value="<?php echo "pr.name" ?>"<?php if ($filterfield == "pr.name") { echo "selected"; } ?>>Practice Name</option> 
 <option value="<?php echo "t.task_name" ?>"<?php if ($filterfield == "t.task_name") { echo "selected"; } ?>>Task Name</option>
 <option value="<?php echo "ts.description" ?>"<?php if ($filterfield == "ts.description") { echo "selected"; } ?>>Task Status</option>
- <option value="<?php echo "job_name" ?>"<?php if ($filterfield == "job_name") { echo "selected"; } ?>>Job Name</option>
- <option value="<?php echo "sr_manager" ?>"<?php if ($filterfield == "sr_manager") { echo "selected"; } ?>>SR Manager</option>
 </select></td>
 <td><input class="checkboxClass" type="checkbox" name="wholeonly"<?php echo $checkstr ?>>Whole words only</td>
 </td></tr>

@@ -22,20 +22,19 @@ class NEW_SMSF_FUND {
 	function addFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus) {
 		$qryInsert = "INSERT INTO es_fund_details(job_id, signup_type, fund_name, street_address, postal_address, date_of_establishment, registration_state, members, trustee_type_id, fund_status)
                       VALUES (
-							'" . addslashes($_SESSION['jobId']) . "',
-							'N',
-							'" . addslashes($fundName) . "',
-							'" . addslashes($streetAdd) . "',	
-							'" . addslashes($postalAdd) . "',	
-							'" . addslashes($regDate) . "',	
-							'" . addslashes($regState) . "',	
-							'" . addslashes($members) . "',	
-							'" . addslashes($trusteeId) . "',
-                                                        '" . addslashes($fundStatus) . "'
-					)";
+                            '" . addslashes($_SESSION['jobId']) . "',
+                            'N',
+                            '" . addslashes($fundName) . "',
+                            '" . addslashes($streetAdd) . "',	
+                            '" . addslashes($postalAdd) . "',	
+                            '" . addslashes($regDate) . "',	
+                            '" . addslashes($regState) . "',	
+                            '" . addslashes($members) . "',	
+                            '" . addslashes($trusteeId) . "',
+                            '" . addslashes($fundStatus) . "'
+			)";
 
             $flagReturn = mysql_query($qryInsert);
-
 	    return $flagReturn;
 	}
 
@@ -43,31 +42,46 @@ class NEW_SMSF_FUND {
 	function editFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus) {
             
             // delete old member details when no of members field is changed
-               $qrySel = "SELECT members FROM es_fund_details WHERE job_id =". $_SESSION['jobId'];
-               $objResult = mysql_query($qrySel);
-               $rowData = mysql_fetch_assoc($objResult);
-               $prevMember = $rowData['members'];
-               if($members < $prevMember) {
-                   $qryDel = "DELETE em.*, el.*
-                                    FROM es_member_details em, es_legal_references el 
-                                    WHERE em.job_id =". $_SESSION['jobId'] . "
-                                    AND el.job_id = ". $_SESSION['jobId'];
-                   mysql_query($qryDel);
-               }
+           $qrySel = "SELECT members FROM es_fund_details WHERE job_id =". $_SESSION['jobId'];
+           $objResult = mysql_query($qrySel);
+           $rowData = mysql_fetch_assoc($objResult);
+           $prevMember = $rowData['members'];
+           if($members < $prevMember) {
+                $qrySel = "SELECT member_id FROM es_member_details WHERE job_id =". $_SESSION['jobId']." ORDER BY member_id desc";
+                $objResult = mysql_query($qrySel);
+                while($rowMember = mysql_fetch_assoc($objResult)) {
+                    $arrMemberId[] = $rowMember['member_id'];
+                }
+
+                $cntMember = $members;
+                foreach ($arrMemberId as $memberId) {
+                    if($cntMember < $prevMember) {
+                        $qryDel1 = "DELETE em.*
+                                    FROM es_member_details em
+                                    WHERE em.member_id =". $memberId;
+                        mysql_query($qryDel1);
+
+                        $qryDel2 = "DELETE el.*
+                                    FROM es_legal_references el 
+                                    WHERE el.member_id = ". $memberId;
+                        mysql_query($qryDel2);
+                        $cntMember++;
+                    }
+                }
+           }
             
            $qryInsert = "UPDATE es_fund_details
-						SET fund_name = '" . addslashes($fundName) . "',
-							street_address = '" . addslashes($streetAdd) . "',
-							postal_address = '" . addslashes($postalAdd) . "',
-							date_of_establishment = '" . addslashes($regDate) . "',
-							registration_state = '" . addslashes($regState) . "',
-							members = '" . addslashes($members) . "',
-							trustee_type_id = '" . addslashes($trusteeId) . "',
-                                                        fund_status = '" . addslashes($fundStatus) . "'
-						WHERE job_id = ". $_SESSION['jobId'];
+                        SET fund_name = '" . addslashes($fundName) . "',
+                                street_address = '" . addslashes($streetAdd) . "',
+                                postal_address = '" . addslashes($postalAdd) . "',
+                                date_of_establishment = '" . addslashes($regDate) . "',
+                                registration_state = '" . addslashes($regState) . "',
+                                members = '" . addslashes($members) . "',
+                                trustee_type_id = '" . addslashes($trusteeId) . "',
+                                fund_status = '" . addslashes($fundStatus) . "'
+                        WHERE job_id = ". $_SESSION['jobId'];
 
             $flagReturn = mysql_query($qryInsert);
-
 	    return $flagReturn;	
 	}
 

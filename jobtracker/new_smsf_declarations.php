@@ -15,23 +15,24 @@ if(isset($_SESSION['jobId']))
 	$arrQuestionsList = $objScr->fetchQuestions();
         $arrLegRef = $objScr->checkLegalRef();
         $checkTerms = $objScr->fetchTerms();
-
+        $arrQuesAns = $objScr->checkQuestion();
 	$arrQues = array();
         
 	if(isset($_REQUEST['job_submitted']))
 	{
+            
+            //$arrData = $objScr->checkQuestion();
+            if(empty($arrQuesAns)) 
+            {
+                $objScr->insertDeclaration();
+            }
+            else
+            {
+                $objScr->updateDeclaration();
+            }
+                
             if(isset($_REQUEST['btnPreview']) && $_REQUEST['btnPreview'] == 'preview')
             {
-                $arrData = $objScr->checkQuestion();
-                if(empty($arrData)) 
-                {
-                    $objScr->insertDeclaration();
-                }
-                else
-                {
-                    $objScr->updateDeclaration();
-                }
-
                 header('Location: setup_preview.php');   
             }
             // include view file 
@@ -58,7 +59,7 @@ if(isset($_SESSION['jobId']))
                 for($i=0; $i<count($arrId); $i++)
                 {
                     if($_SESSION['TRUSTEETYPE'] == $arrId[$i])
-                        $arrQues[] = $value["question"];
+                        $arrQues[] = $value;
                 }
             }
             

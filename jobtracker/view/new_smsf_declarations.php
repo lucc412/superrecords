@@ -12,14 +12,25 @@ include(SETUPNAVIGATION);
 	<input type="hidden" value="<?=$_SESSION['TRUSTEETYPE']?>" id="hdnTrusteeType"/>
 	<div style="padding-top:20px;">
 		<table class="fieldtable"><?
+                    
+                        $QueId = explode(",", $arrQuesAns['question_id']);
 			for($i=0; $i<count($arrQues); $i++)	{
+                            
+                            if ($QueId[$i] == $arrQues[$i]['question_id'])
+                            {
+                                $ansNo = 'checked="1checked"'; $ansYes = '';
+                            }
+                            else
+                            {
+                                $ansNo = ''; $ansYes = 'checked="1checked"';                            }
+                            
 				?><tr>
 					<td class="pdB20">
-						<?=$arrQues[$i]?>
+						<?=$arrQues[$i]['question']?>
 					</td>
 					<td class="pdB20">
-                                            <label style="padding-left:30px;"><input class="checkboxClass" type="radio" name="rd[<?=$i+1?>]" id="rd<?=$i+1?>" value="on" />Yes</label>
-                                            <label><input class="checkboxClass" type="radio" name="rd[<?=$i+1?>]" id="rd<?=$i+1?>" checked="checked" value="off" />No</label>
+                                            <label style="padding-left:30px;"><input class="checkboxClass" type="radio" name="rd[<?=$i+1?>]" <?=$ansYes?> id="rd<?=$i+1?>" value="on" />Yes</label>
+                                            <label><input class="checkboxClass" type="radio" name="rd[<?=$i+1?>]" id="rd<?=$i+1?>" <?=$ansNo?> value="off" />No</label>
 					</td>
 				</tr><?
 			}	
@@ -51,7 +62,6 @@ include(SETUPNAVIGATION);
 	</div>
         <script>
             $('#btnNext').click(function(){$('#job_submitted').val('N')})
-//            $('#btnSave').click(function(){$('#job_submitted').val('Y')})
             $('#btnPreview').click(function(){$('#job_submitted').val('')})
         </script>
 </form><?

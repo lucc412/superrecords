@@ -507,6 +507,7 @@ class Job_Class extends Database
 
 	public function insert_job()
 	{
+            
 		$jobName = $_REQUEST["lstClient"]."::".$_REQUEST["txtPeriod"]."::".$_REQUEST["lstJob"];
 		
 		$client_Id = $_REQUEST["lstClient"];
@@ -514,8 +515,9 @@ class Job_Class extends Database
 		$masCode = $_REQUEST["lstClientType"];
 		$jobType = $_REQUEST["lstJob"];
 		$notes = $_REQUEST['txtNotes'];
+                $job_due_date = date('Y-m-d', strtotime("+2 week"));
 
-		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, notes, job_name, job_status_id, job_submitted, job_received)
+		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, notes, job_name, job_status_id, job_submitted, job_received, job_due_date)
 					VALUES (
 					" . $client_Id . ", 
 					" . $masCode . ", 
@@ -525,7 +527,8 @@ class Job_Class extends Database
 					'" . $jobName . "',  
 					1,  
 					'Y',
-					NOW()
+					'".date('Y-m-d')."',
+                                        '".$job_due_date."'
 					)";
 
 		mysql_query($qryIns);

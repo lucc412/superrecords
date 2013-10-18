@@ -184,7 +184,7 @@ switch ($sql)
 			$strInsert .= "(".$_SESSION['jobId'].",".$subChecklistId.",'".$checklistInfo['status']."','".$checklistInfo['notes']."'),";
 		}
 		$strInsert = stringrtrim($strInsert, ",");
-
+                
 		$objScr->add_audit_details($strInsert);
 		if($_REQUEST['button'] == 'Save') {
 			header('location: jobs.php?a=saved');

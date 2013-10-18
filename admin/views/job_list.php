@@ -216,9 +216,11 @@ switch ($a)
 			}  	
                           
             $due_date = "";
+            var_dump($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"]);
 			if (isset($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"]) && $objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"] != "") {
 				if($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"] != "0000-00-00 00:00:00") {
-					$due_date = date("d/m/Y",strtotime($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"]));
+                                    echo 'A';    
+					print $due_date = date("d/m/Y",strtotime($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"]));
 				}
 			}  	
 
@@ -296,14 +298,20 @@ switch ($a)
 				</tr>
 				<tr>
 					<td class="hr">Job Due Date</td>
-					<td class="dr"><?
-						$jobDueDate = "";
-						if (isset($due_date) && $due_date != "") {
-							if($due_date != "0000-00-00 00:00:00") {
-								$jobDueDate = date("d/m/Y",strtotime($due_date));
-							}
-						} 	
-                                        ?><input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$jobDueDate?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+					<td class="dr">
+                                            <?php 
+                                                if($_SESSION["usertype"] == "Staff") 
+                                                    $arrFeatures = $commonUses->getFeatureVisibility(5);
+                                                else
+                                                    $arrFeatures['stf_visibility'] = 1;
+                                                if($arrFeatures['stf_visibility'] == 1) {
+                                            ?>
+                                                <input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+                                            <?php  }else{
+                                                echo $due_date;
+                                                echo '<input type="hidden" name="dateSignedUp" id="dateSignedUp" value="'.$due_date.'">';
+                                            }
+                                            ?>
 					</td>
                                         </tr>
 					<tr>

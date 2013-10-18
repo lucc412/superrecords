@@ -227,9 +227,10 @@ class Job {
 		return $arrJobStatus;
 	}
 
-	public function sql_insert($details) {
-            showArray($details);
-        $clientId = $details['lstClientType'];
+	public function sql_insert($details) 
+        {
+            
+                $clientId = $details['lstClientType'];
 		$typeId = $details['lstJobType'];
 		$period = $details['txtPeriod'];
 		$cliType = $details['lstCliType'];
@@ -241,6 +242,11 @@ class Job {
 			$jobSubmitted = 'Y';
 			$jobReceived = date('Y-m-d');
                         $job_due_date = date('Y-m-d', strtotime("+2 week"));
+                }
+                else if($jobGenre == 'AUDIT') {
+			$jobSubmitted = 'Y';
+			$jobReceived = date('Y-m-d');
+                        $job_due_date = date('Y-m-d', strtotime("+5 days"));
                 }
 		else {
 			$jobSubmitted = 'N';
@@ -405,6 +411,7 @@ class Job {
 	public function add_audit_details($strInsert) {
 		$qryIns = "INSERT INTO audit_form_status(job_id, subchecklist_id, upload_status, notes)
 					VALUES".$strInsert;
+                
 		mysql_query($qryIns);
 	}
 

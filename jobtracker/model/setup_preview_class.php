@@ -598,6 +598,4 @@ class SETUP_PREVIEW
         
     }
 }
-
 ?>
-

@@ -40,15 +40,69 @@
 				document.getElementById('txtCity'+i).className = "successClass";
 			}
 			
-			if((document.getElementById('txtAddress'+i).value == null) || (document.getElementById('txtAddress'+i).value == ""))
+			if((document.getElementById('StrAddUnit'+i).value == null) || (document.getElementById('StrAddUnit'+i).value == ""))
 			{	
-				document.getElementById('txtAddress'+i).className = "errclass";
-				document.getElementById('txtAddress'+i).focus();
+				document.getElementById('StrAddUnit'+i).className = "errclass";
+				document.getElementById('StrAddUnit'+i).focus();
 				flagReturn = false;
 			}else{
-				document.getElementById('txtAddress'+i).className = "successClass";
+				document.getElementById('StrAddUnit'+i).className = "successClass";
 			}
 			
+                        if((document.getElementById('StrAddBuild'+i).value == null) || (document.getElementById('StrAddBuild'+i).value == ""))
+			{	
+				document.getElementById('StrAddBuild'+i).className = "errclass";
+				document.getElementById('StrAddBuild'+i).focus();
+				flagReturn = false;
+			}else{
+				document.getElementById('StrAddBuild'+i).className = "successClass";
+			}
+                        
+                        if((document.getElementById('StrAddStreet'+i).value == null) || (document.getElementById('StrAddStreet'+i).value == ""))
+			{	
+				document.getElementById('StrAddStreet'+i).className = "errclass";
+				document.getElementById('StrAddStreet'+i).focus();
+				flagReturn = false;
+			}else{
+				document.getElementById('StrAddStreet'+i).className = "successClass";
+			}
+                        
+                        if((document.getElementById('StrAddSubrb'+i).value == null) || (document.getElementById('StrAddSubrb'+i).value == ""))
+			{	
+				document.getElementById('StrAddSubrb'+i).className = "errclass";
+				document.getElementById('StrAddSubrb'+i).focus();
+				flagReturn = false;
+			}else{
+				document.getElementById('StrAddSubrb'+i).className = "successClass";
+			}
+                        
+                        if((document.getElementById('StrAddState'+i).value == 0))
+			{	
+				document.getElementById('StrAddState'+i).className = "errclass";
+				document.getElementById('StrAddState'+i).focus();
+				flagReturn = false;
+			}else{
+				document.getElementById('StrAddState'+i).className = "successClass";
+			}
+                        
+                        if((document.getElementById('StrAddPstCode'+i).value == null) || (document.getElementById('StrAddPstCode'+i).value == ""))
+			{	
+				document.getElementById('StrAddPstCode'+i).className = "errclass";
+				document.getElementById('StrAddPstCode'+i).focus();
+				flagReturn = false;
+			}else{
+				document.getElementById('StrAddPstCode'+i).className = "successClass";
+			}
+                        
+                        if((document.getElementById('StrAddCntry'+i).value == 0))
+			{	
+				document.getElementById('StrAddCntry'+i).className = "errclass";
+				document.getElementById('StrAddCntry'+i).focus();
+				flagReturn = false;
+			}else{
+				document.getElementById('StrAddCntry'+i).className = "successClass";
+			}
+                        
 			if((document.getElementById('txtTfn'+i).value == null) || (document.getElementById('txtTfn'+i).value == ""))
 			{	
 				document.getElementById('txtTfn'+i).className = "errclass";

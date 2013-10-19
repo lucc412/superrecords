@@ -1,4 +1,5 @@
 <?php
+
 //It will Check Given Event is Active or Not it will Return Status Event according Event Id is Givent as Argument to Function
 function getEventStatus($pageCode) 
 {
@@ -590,4 +591,16 @@ function returnFileIcon($fileName)
 	//Return the Status of Given Event Id
     return $icon;
 }
+
+// function to fetch countries
+function fetchCountries() 
+{
+        $qryFetch = "SELECT * FROM es_country";	
+        $fetchResult = mysql_query($qryFetch);
+        while($rowData = mysql_fetch_assoc($fetchResult)) {
+                $arrStates[$rowData['country_id']] = $rowData['country_name'];
+        }
+        return $arrStates;
+}
+
 ?>

@@ -44,14 +44,23 @@ if(isset($_SESSION['jobId'])) {
 			$tfn = $_REQUEST['txtTfn' . $memberCount];
 			$occupation = $_REQUEST['txtOccupation' . $memberCount];
 			$phone = $_REQUEST['txtPhone' . $memberCount];
+                        
+                        $StrAddUnit = $_REQUEST['StrAddUnit' . $memberCount];
+                        $StrAddBuild = $_REQUEST['StrAddBuild' . $memberCount];
+                        $StrAddStreet = $_REQUEST['StrAddStreet' . $memberCount];
+                        $StrAddSubrb = $_REQUEST['StrAddSubrb' . $memberCount];
+                        $StrAddState = $_REQUEST['StrAddState' . $memberCount];
+                        $StrAddPstCode = $_REQUEST['StrAddPstCode' . $memberCount];
+                        $StrAddCntry = $_REQUEST['StrAddCntry' . $memberCount];
+                        
                         //$memberStatus = $_REQUEST['member_status'];
 			
 			// insert member info of sign up user
 			if(empty($refId)) {
-				$flagReturn = $objScr->addLegalReferences($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone);
+				$flagReturn = $objScr->addLegalReferences($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $tfn, $occupation, $phone);
 			}
 			else {
-				$flagReturn = $objScr->editLegalReferences($refId, $memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone);
+				$flagReturn = $objScr->editLegalReferences($refId, $memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $tfn, $occupation, $phone);
 			}
 		}
 
@@ -98,6 +107,9 @@ if(isset($_SESSION['jobId'])) {
 
 	// fetch country for drop-down
 	$arrCountry = $objScr->fetchCountries();
+        
+        // fetch states for drop-down
+        $arrStates = fetchStates();        
 
 	// include view file 
 	include(VIEW . "legal_references.php");

@@ -204,7 +204,7 @@ class Job {
  		$qrySel = "SELECT sa.sub_Code, sa.sub_Description
 					FROM mas_masteractivity ma, sub_subactivity sa
 					WHERE ma.mas_Code = sa.sas_Code
-					AND sa.display_in_practice = 'yes'
+					/*AND sa.display_in_practice = 'yes'*/
 					{$appendStr}
 					ORDER BY sa.sub_Order";
 
@@ -491,7 +491,7 @@ class Job {
 		{
                     if(move_uploaded_file($_FILES['fileDoc']['tmp_name'], $folderPath))
                     {
-                        print $qryIns = "INSERT INTO documents(job_id, document_title, file_path, date)
+                        $qryIns = "INSERT INTO documents(job_id, document_title, file_path, date)
                                         VALUES(
                                         ".$_REQUEST['lstJob'].", 
                                         '". addslashes($_REQUEST['txtDocTitle']) ."', 

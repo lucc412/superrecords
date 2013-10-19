@@ -330,7 +330,7 @@ class SETUP_PREVIEW
                             </tr>
                             <tr>
                                 <td>Street Address : </td>
-                                <td>'.$arrFund[$jobid]['street_address'].' </td>
+                                <td>'.$arrFund[$jobid]['strAddUnit'].', '.$arrFund[$jobid]['strAddBuild'].', '.$arrFund[$jobid]['strAddStreet'].', '.$arrFund[$jobid]['strAddSubrb'].', <br>'.fetchStateName($arrFund[$jobid]['strAddState']).', '.$arrFund[$jobid]['strAddPstCode'].', '.array_search($arrFund[$jobid]['strAddCntry'],$arrCountry).' </td>
                             </tr>
                             <tr>
                                 <td>Postal Address : </td>
@@ -391,7 +391,7 @@ class SETUP_PREVIEW
                             </tr>
                             <tr>
                                 <td>Address : </td>
-                                <td>'.$memberInfo['address'].' </td>
+                                <td>'.$memberInfo['strAddUnit'].', '.$memberInfo['strAddBuild'].', '.$memberInfo['strAddStreet'].', '.$memberInfo['strAddSubrb'].', <br>'.fetchStateName($memberInfo['strAddState']).', '.$memberInfo['strAddPstCode'].', '.array_search($memberInfo['strAddCntry'],$arrCountry).' </td>
                             </tr>
                             <tr>
                                 <td>Tax File Number : </td>
@@ -448,7 +448,7 @@ class SETUP_PREVIEW
                                     </tr>
                                     <tr>
                                             <td>Address : </td>
-                                            <td>'.$legalInfo['address'].'</td>
+                                            <td>'.$legalInfo['strAddUnit'].', '.$legalInfo['strAddBuild'].', '.$legalInfo['strAddStreet'].', '.$legalInfo['strAddSubrb'].', <br>'.fetchStateName($legalInfo['strAddState']).', '.$legalInfo['strAddPstCode'].', '.array_search($legalInfo['strAddCntry'],$arrCountry).' </td>
                                     </tr>
                                     <tr>
                                             <td>Tax File Number : </td>

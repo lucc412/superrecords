@@ -41,7 +41,11 @@ include(SETUPNAVIGATION);
                                             <option value="0">Select Country</option>
                                             <?php foreach($arrCountry AS $countryId => $countryName) {
                                                         $selectStr = "";
-                                                        if($StrAddCntry == $countryId) $selectStr = "selected";
+                                                        var_dump($StrAddCntry);
+                                                        if($StrAddCntry == $countryId) 
+                                                            $selectStr = "selected";
+                                                        else if ($countryId == 9 && $StrAddCntry == 0)
+                                                            $selectStr = "selected";
                                                         ?><option <?=$selectStr?> value="<?=$countryId?>"><?=$countryName?></option><?
                                                 }
                                             ?>

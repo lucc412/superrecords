@@ -13,7 +13,5 @@ $objStpPrvw = new SETUP_PREVIEW();
 
 //showArray($_SESSION);
 $html = $objStpPrvw->generatePreview();
-
-
 include(VIEW . "setup_preview.php");
 ?>

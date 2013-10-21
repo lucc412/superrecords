@@ -17,8 +17,8 @@ class NEW_SMSF_MEMBER {
 	}
 
 	// function to insert member details of sign up user
-	function addMemberInfo($title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus, $ref) {
-		$qryInsert = "INSERT INTO es_member_details(job_id, title, fname, mname, lname, dob, city, country_id, gender, address, tfn, occupation, contact_no, member_status, legal_references)
+	function addMemberInfo($title, $fname, $mname, $lname, $dob, $city, $country, $gender, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $tfn, $occupation, $phone, $memberStatus, $ref) {
+		$qryInsert = "INSERT INTO es_member_details(job_id, title, fname, mname, lname, dob, city, country_id, gender, strAddUnit, strAddBuild, strAddStreet, strAddSubrb, strAddState, strAddPstCode, strAddCntry, tfn, occupation, contact_no, member_status, legal_references)
                       VALUES (
 							'" . addslashes($_SESSION['jobId']) . "',
 							'" . addslashes($title) . "',
@@ -29,23 +29,30 @@ class NEW_SMSF_MEMBER {
 							'" . addslashes($city) . "',
 							'" . addslashes($country) . "',
 							'" . addslashes($gender) . "',
-							'" . addslashes($address) . "',
+							'" . addslashes($StrAddUnit) . "',	
+                                                        '" . addslashes($StrAddBuild) . "',    
+                                                        '" . addslashes($StrAddStreet) . "',
+                                                        '" . addslashes($StrAddSubrb) . "',    
+                                                        '" . addslashes($StrAddState) . "',
+                                                        '" . addslashes($StrAddPstCode) . "',    
+                                                        '" . addslashes($StrAddCntry) . "',
 							'" . addslashes($tfn) . "',
 							'" . addslashes($occupation) . "',
 							'" . addslashes($phone) . "',
                                                         '" . addslashes($memberStatus) . "',
                                                         '". $ref ."'    
 					)";
-
+                
 		$flagReturn = mysql_query($qryInsert);
 
 	    return $flagReturn;
 	}
 
 	// function to edit member details of sign up user
-	function editMemberInfo($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus, $ref) {
-		$qryUpd = "UPDATE es_member_details
-						SET title = '" . addslashes($title) . "',
+	function editMemberInfo($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $tfn, $occupation, $phone, $memberStatus, $ref) 
+        {
+            $qryUpd = "UPDATE es_member_details
+                                                    SET title = '" . addslashes($title) . "',
 							fname = '" . addslashes($fname) . "',
 							mname = '" . addslashes($mname) . "',	 
 							lname = '" . addslashes($lname) . "',
@@ -53,14 +60,20 @@ class NEW_SMSF_MEMBER {
 							city = '" . addslashes($city) . "', 
 							country_id = '" . addslashes($country) . "', 
 							gender = '" . addslashes($gender) . "', 
-							address = '" . addslashes($address) . "', 
+							strAddUnit = '" . addslashes($StrAddUnit) . "',
+                                                        strAddBuild = '" . addslashes($StrAddBuild) . "',
+                                                        strAddStreet = '" . addslashes($StrAddStreet) . "',    
+                                                        strAddSubrb = '" . addslashes($StrAddSubrb) . "',
+                                                        strAddState = '" . addslashes($StrAddState) . "',
+                                                        strAddPstCode = '" . addslashes($StrAddPstCode) . "',
+                                                        strAddCntry = '" . addslashes($StrAddCntry) . "',
 							tfn = '" . addslashes($tfn) . "', 
 							occupation = '" . addslashes($occupation) . "', 
 							contact_no = '" . addslashes($phone) . "',
                                                         member_status = '" . addslashes($memberStatus) . "',
                                                         legal_references = '". $ref ."'
 						WHERE member_id = " . $memberId ." AND job_id = ".$_SESSION['jobId'];
-
+            
 		$flagReturn = mysql_query($qryUpd);
 
 		if(!empty($ref)) {

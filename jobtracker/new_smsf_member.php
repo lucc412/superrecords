@@ -40,18 +40,26 @@ if(isset($_SESSION['jobId'])) {
                     $city = $_REQUEST['txtCity' . $memberCount];
                     $country = $_REQUEST['lstCountry' . $memberCount];
                     $gender = $_REQUEST['lstGender' . $memberCount];
-                    $address = $_REQUEST['txtAddress' . $memberCount];
+
+                    $StrAddUnit = $_REQUEST['StrAddUnit' . $memberCount];
+                    $StrAddBuild = $_REQUEST['StrAddBuild' . $memberCount];
+                    $StrAddStreet = $_REQUEST['StrAddStreet' . $memberCount];
+                    $StrAddSubrb = $_REQUEST['StrAddSubrb' . $memberCount];
+                    $StrAddState = $_REQUEST['StrAddState' . $memberCount];
+                    $StrAddPstCode = $_REQUEST['StrAddPstCode' . $memberCount];
+                    $StrAddCntry = $_REQUEST['StrAddCntry' . $memberCount];
+                    
                     $tfn = $_REQUEST['txtTfn' . $memberCount];
                     $occupation = $_REQUEST['txtOccupation' . $memberCount];
                     $phone = $_REQUEST['txtPhone' . $memberCount];
                     $memberStatus = $_REQUEST['member_status'];
-
+                    
                     // insert member info of sign up user
                     if(empty($memberId)) {
-                            $flagReturn = $objScr->addMemberInfo($title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus, $ref);
+                            $flagReturn = $objScr->addMemberInfo($title, $fname, $mname, $lname, $dob, $city, $country, $gender, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $tfn, $occupation, $phone, $memberStatus, $ref);
                     }
                     else {
-                            $flagReturn = $objScr->editMemberInfo($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone, $memberStatus, $ref);
+                            $flagReturn = $objScr->editMemberInfo($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $tfn, $occupation, $phone, $memberStatus, $ref);
                     }
 		}
                 
@@ -110,6 +118,9 @@ if(isset($_SESSION['jobId'])) {
 
 	// fetch country for drop-down
 	$arrCountry = $objScr->fetchCountries();
+        
+        // fetch states for drop-down
+        $arrStates = fetchStates();
 
 	// include view file 
 	include(VIEW . "new_smsf_member.php");

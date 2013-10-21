@@ -18,34 +18,46 @@ if(isset($_SESSION['jobId'])) {
         }
 
 	// fetch data is available 
-	if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) {
-
-		// fetch existing contact details
+	if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) 
+        {
+        	// fetch existing contact details
 		$arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
-	}
+        }
 
-	if(isset($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'addFundInfo') {
-		$fundName = $_REQUEST['txtFund'];
-		$streetAdd = $_REQUEST['taStreetAdd'];
+	if(isset($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'addFundInfo') 
+        {
+        	$fundName = $_REQUEST['txtFund'];
+                
+                // Street Address
+		$StrAddUnit = $_REQUEST['StrAddUnit'];
+                $StrAddBuild = $_REQUEST['StrAddBuild'];
+                $StrAddStreet = $_REQUEST['StrAddStreet']; 
+                $StrAddSubrb = $_REQUEST['StrAddSubrb'];
+                $StrAddState = $_REQUEST['StrAddState'];
+                $StrAddPstCode = $_REQUEST['StrAddPstCode'];
+                $StrAddCntry = $_REQUEST['StrAddCntry'];
+                
+     //         $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry        
+                
 		$postalAdd = $_REQUEST['taPostalAdd'];
 		$regDate = getDateFormat($_REQUEST['txtSetupDate']);
 		$regState = $_REQUEST['lstRegState'];
 		$members = $_REQUEST['lstMembers'];
 		$trusteeId = $_REQUEST['lstTrustee'];
                 $fundStatus = $_REQUEST['fund_status'];
-
+                
 		// fetch existing contact details
 		$arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
 
 		// insert fund details of sign up user
 		if(empty($arrData)) {
-			$flagReturn = $objScr->addFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus);
+			$flagReturn = $objScr->addFundInfo($fundName, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus);
 			$arrClient = $objScr->checkClients($fundName);
                         
 		}
 		// edit fund details of sign up user
 		else {
-			$flagReturn = $objScr->editFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus);
+			$flagReturn = $objScr->editFundInfo($fundName, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus);
 		}
                  
 		if($flagReturn) 
@@ -73,8 +85,14 @@ if(isset($_SESSION['jobId'])) {
 	// if data is already entered for current session then set variables
 	if(isset($arrData) && !empty($arrData)) {
 		$fundName = $arrData['fund_name'];
-		$streetAdd = $arrData['street_address'];
-		$postalAdd = $arrData['postal_address'];
+		$StrAddUnit = $arrData['strAddUnit'];
+                $StrAddBuild = $arrData['strAddBuild'];
+                $StrAddStreet = $arrData['strAddStreet'];
+                $StrAddSubrb = $arrData['strAddSubrb'];
+                $StrAddState = $arrData['strAddState'];
+                $StrAddPstCode = $arrData['strAddPstCode'];
+                $StrAddCntry = $arrData['strAddCntry'];
+                $postalAdd = $arrData['postal_address'];
 		$regDate = $arrData['date_of_establishment'];
 		$regState = $arrData['registration_state'];
 		$members = $arrData['members'];
@@ -82,7 +100,13 @@ if(isset($_SESSION['jobId'])) {
 	}
 	else {
 		$fundName = "";
-		$streetAdd = "";
+		$StrAddUnit = "";
+                $StrAddBuild = "";
+                $StrAddStreet = "";
+                $StrAddSubrb = "";
+                $StrAddState = "";
+                $StrAddPstCode = "";
+                $StrAddCntry = "";
 		$postalAdd = "";
 		$regDate = "";
 		$regState = "";
@@ -99,6 +123,9 @@ if(isset($_SESSION['jobId'])) {
 	// fetch states for drop-down
 	$arrStates = fetchStates();
 	 
+        // fetch country
+        $arrCountry = $objScr->fetchCountries();
+        
 	// include view file 
 	include(VIEW . "new_smsf_fund.php");
 }

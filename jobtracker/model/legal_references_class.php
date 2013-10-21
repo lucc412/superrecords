@@ -19,9 +19,9 @@ class LEGAL_REFERENCES {
 	}
 
 	// function to insert member details of sign up user
-	function addLegalReferences($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone) 
+	function addLegalReferences($memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $tfn, $occupation, $phone) 
         {
-		$qryInsert = "INSERT INTO es_legal_references (job_id, member_id, title, fname, mname, lname, dob, city, country_id, gender, address, tfn, occupation, contact_no)
+		$qryInsert = "INSERT INTO es_legal_references (job_id, member_id, title, fname, mname, lname, dob, city, country_id, gender, strAddUnit, strAddBuild, strAddStreet, strAddSubrb, strAddState, strAddPstCode, strAddCntry, tfn, occupation, contact_no)
                       VALUES (
 							'" . addslashes($_SESSION['jobId']) . "',
                                                         '" . $memberId . "',    
@@ -33,7 +33,13 @@ class LEGAL_REFERENCES {
 							'" . addslashes($city) . "',
 							'" . addslashes($country) . "',
 							'" . addslashes($gender) . "',
-							'" . addslashes($address) . "',
+							'" . addslashes($StrAddUnit) . "',	
+                                                        '" . addslashes($StrAddBuild) . "',    
+                                                        '" . addslashes($StrAddStreet) . "',
+                                                        '" . addslashes($StrAddSubrb) . "',    
+                                                        '" . addslashes($StrAddState) . "',
+                                                        '" . addslashes($StrAddPstCode) . "',    
+                                                        '" . addslashes($StrAddCntry) . "',
 							'" . addslashes($tfn) . "',
 							'" . addslashes($occupation) . "',
 							'" . addslashes($phone) . "'
@@ -46,7 +52,7 @@ class LEGAL_REFERENCES {
 	}
 
 	// function to edit member details of sign up user
-	function editLegalReferences($refId, $memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $address, $tfn, $occupation, $phone) {
+	function editLegalReferences($refId, $memberId, $title, $fname, $mname, $lname, $dob, $city, $country, $gender, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $tfn, $occupation, $phone) {
 		$qryUpd = "UPDATE es_legal_references
 						SET title = '" . addslashes($title) . "',
 							fname = '" . addslashes($fname) . "',
@@ -56,13 +62,19 @@ class LEGAL_REFERENCES {
 							city = '" . addslashes($city) . "', 
 							country_id = '" . addslashes($country) . "', 
 							gender = '" . addslashes($gender) . "', 
-							address = '" . addslashes($address) . "', 
+							strAddUnit = '" . addslashes($StrAddUnit) . "',
+                                                        strAddBuild = '" . addslashes($StrAddBuild) . "',
+                                                        strAddStreet = '" . addslashes($StrAddStreet) . "',    
+                                                        strAddSubrb = '" . addslashes($StrAddSubrb) . "',
+                                                        strAddState = '" . addslashes($StrAddState) . "',
+                                                        strAddPstCode = '" . addslashes($StrAddPstCode) . "',
+                                                        strAddCntry = '" . addslashes($StrAddCntry) . "',
 							tfn = '" . addslashes($tfn) . "', 
 							occupation = '" . addslashes($occupation) . "', 
 							contact_no = '" . addslashes($phone) . "'
 						WHERE ref_id = ". $refId ." AND member_id = " . $memberId ." AND job_id = ".$_SESSION['jobId'];
                 
-                //exit;
+                
 
 		$flagReturn = mysql_query($qryUpd);
 

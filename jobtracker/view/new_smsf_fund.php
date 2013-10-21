@@ -21,11 +21,41 @@ include(SETUPNAVIGATION);
 			</tr>
 			<tr>
 				<td>Street Address</td>
-				<td><textarea name="taStreetAdd" style="margin-bottom: 5px;"/><?=$streetAdd?></textarea></td>
+				<td>
+                                    <div>
+                                        <input type="text" name="StrAddUnit" style="width:115px;" value="<?=$StrAddUnit?>" placeholder="Unit number" />
+                                        <input type="text" name="StrAddBuild" style="width:115px;" value="<?=$StrAddBuild?>" placeholder="Building" />
+                                        <input type="text" name="StrAddStreet" style="width:115px;" value="<?=$StrAddStreet?>" placeholder="Street"/><br>
+                                        <input type="text" name="StrAddSubrb" style="width:115px;" value="<?=$StrAddSubrb?>" placeholder="Suburb"/>
+                                        <select name="StrAddState" style="margin-bottom: 5px;width:135px;" >
+                                            <option value="0">Select State</option>
+                                            <?php foreach($arrStates AS $stateKey => $stateName) {
+							$selectStr = '';
+							if($StrAddState == $stateKey) $selectStr = 'selected';
+							?><option <?=$selectStr?> value="<?=$stateKey?>"><?=$stateName?></option><?
+						}
+                                            ?>
+                                        </select><br>
+                                        <input type="text" name="StrAddPstCode" style="width:115px;" value="<?=$StrAddPstCode?>" placeholder="Post Code"/>
+                                        <select name="StrAddCntry" style="margin-bottom: 5px;width:135px;" >
+                                            <option value="0">Select Country</option>
+                                            <?php foreach($arrCountry AS $countryId => $countryName) {
+                                                        $selectStr = "";
+                                                        var_dump($StrAddCntry);
+                                                        if($StrAddCntry == $countryId) 
+                                                            $selectStr = "selected";
+                                                        else if ($countryId == 9 && $StrAddCntry == 0)
+                                                            $selectStr = "selected";
+                                                        ?><option <?=$selectStr?> value="<?=$countryId?>"><?=$countryName?></option><?
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </td>
 			</tr>
 			<tr>
 				<td>Postal Address</td>
-				<td><textarea name="taPostalAdd" style="margin-bottom: 5px;" /><?=$postalAdd?></textarea></td>
+				<td><input type="text" name="taPostalAdd" value="<?=$postalAdd?>" /></td>
 			</tr>
 			<tr>
 				<td>Date of establishment </td>

@@ -11,15 +11,71 @@ function formValidation(){
 		document.frmnewsmsffund.txtFund.className = "successClass";
 	}
 	
-	if((document.frmnewsmsffund.taStreetAdd.value == null) || (document.frmnewsmsffund.taStreetAdd.value == ""))
+	if((document.frmnewsmsffund.StrAddUnit.value == null) || (document.frmnewsmsffund.StrAddUnit.value == ""))
 	{	
-		document.frmnewsmsffund.taStreetAdd.className = "errclass";
-		document.frmnewsmsffund.taStreetAdd.focus();
+		document.frmnewsmsffund.StrAddUnit.className = "errclass";
+		document.frmnewsmsffund.StrAddUnit.focus();
 		flagReturn = false;
 	}else{
-		document.frmnewsmsffund.taStreetAdd.className = "successClass";
+		document.frmnewsmsffund.StrAddUnit.className = "successClass";
 	}
 	
+        if((document.frmnewsmsffund.StrAddBuild.value == null) || (document.frmnewsmsffund.StrAddBuild.value == ""))
+	{	
+		document.frmnewsmsffund.StrAddBuild.className = "errclass";
+		document.frmnewsmsffund.StrAddBuild.focus();
+		flagReturn = false;
+	}else{
+		document.frmnewsmsffund.StrAddBuild.className = "successClass";
+	}
+        
+        if((document.frmnewsmsffund.StrAddStreet.value == null) || (document.frmnewsmsffund.StrAddStreet.value == ""))
+	{	
+		document.frmnewsmsffund.StrAddStreet.className = "errclass";
+		document.frmnewsmsffund.StrAddStreet.focus();
+		flagReturn = false;
+	}else{
+		document.frmnewsmsffund.StrAddStreet.className = "successClass";
+	}
+        
+        if((document.frmnewsmsffund.StrAddSubrb.value == null) || (document.frmnewsmsffund.StrAddSubrb.value == ""))
+	{	
+		document.frmnewsmsffund.StrAddSubrb.className = "errclass";
+		document.frmnewsmsffund.StrAddSubrb.focus();
+		flagReturn = false;
+	}else{
+		document.frmnewsmsffund.StrAddSubrb.className = "successClass";
+	}
+        
+        if((document.frmnewsmsffund.StrAddState.value == 0))
+	{	
+		document.frmnewsmsffund.StrAddState.className = "errclass";
+		document.frmnewsmsffund.StrAddState.focus();
+		flagReturn = false;
+	}else{
+		document.frmnewsmsffund.StrAddState.className = "successClass";
+	}
+        
+        if((document.frmnewsmsffund.StrAddPstCode.value == null) || (document.frmnewsmsffund.StrAddPstCode.value == ""))
+	{	
+		document.frmnewsmsffund.StrAddPstCode.className = "errclass";
+		document.frmnewsmsffund.StrAddPstCode.focus();
+		flagReturn = false;
+	}else{
+		document.frmnewsmsffund.StrAddPstCode.className = "successClass";
+	}
+        
+        if((document.frmnewsmsffund.StrAddCntry.value == 0))
+	{	
+		document.frmnewsmsffund.StrAddCntry.className = "errclass";
+		document.frmnewsmsffund.StrAddCntry.focus();
+		flagReturn = false;
+	}else{
+		document.frmnewsmsffund.StrAddCntry.className = "successClass";
+	}
+        
+        
+        
 	if((document.frmnewsmsffund.taPostalAdd.value == null) || (document.frmnewsmsffund.taPostalAdd.value == ""))
 	{	
 		document.frmnewsmsffund.taPostalAdd.className = "errclass";

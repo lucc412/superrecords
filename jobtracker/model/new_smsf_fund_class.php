@@ -19,13 +19,21 @@ class NEW_SMSF_FUND {
 	}
 
 	// function to insert fund details of sign up user
-	function addFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus) {
-		$qryInsert = "INSERT INTO es_fund_details(job_id, signup_type, fund_name, street_address, postal_address, date_of_establishment, registration_state, members, trustee_type_id, fund_status)
+	function addFundInfo($fundName, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus) 
+        {
+            $qryInsert = "INSERT INTO es_fund_details(job_id, signup_type, fund_name, strAddUnit, strAddBuild, strAddStreet, strAddSubrb, strAddState, strAddPstCode, strAddCntry, postal_address, date_of_establishment, registration_state, members, trustee_type_id, fund_status)
+                    
                       VALUES (
                             '" . addslashes($_SESSION['jobId']) . "',
                             'N',
                             '" . addslashes($fundName) . "',
-                            '" . addslashes($streetAdd) . "',	
+                            '" . addslashes($StrAddUnit) . "',	
+                            '" . addslashes($StrAddBuild) . "',    
+                            '" . addslashes($StrAddStreet) . "',
+                            '" . addslashes($StrAddSubrb) . "',    
+                            '" . addslashes($StrAddState) . "',
+                            '" . addslashes($StrAddPstCode) . "',    
+                            '" . addslashes($StrAddCntry) . "',
                             '" . addslashes($postalAdd) . "',	
                             '" . addslashes($regDate) . "',	
                             '" . addslashes($regState) . "',	
@@ -33,13 +41,13 @@ class NEW_SMSF_FUND {
                             '" . addslashes($trusteeId) . "',
                             '" . addslashes($fundStatus) . "'
 			)";
-
+            
             $flagReturn = mysql_query($qryInsert);
 	    return $flagReturn;
 	}
 
 	// function to insert fund details of sign up user
-	function editFundInfo($fundName, $streetAdd, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus) {
+	function editFundInfo($fundName, $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry, $postalAdd, $regDate, $regState, $members, $trusteeId, $fundStatus) {
            
            // delete old member details when no of members field is changed
            $qrySel = "SELECT member_id FROM es_member_details WHERE job_id =". $_SESSION['jobId']." ORDER BY member_id desc";
@@ -69,15 +77,21 @@ class NEW_SMSF_FUND {
             
            $qryInsert = "UPDATE es_fund_details
                         SET fund_name = '" . addslashes($fundName) . "',
-                                street_address = '" . addslashes($streetAdd) . "',
-                                postal_address = '" . addslashes($postalAdd) . "',
+                                strAddUnit = '" . addslashes($StrAddUnit) . "',
+                                strAddBuild = '" . addslashes($StrAddBuild) . "',
+                                strAddStreet = '" . addslashes($StrAddStreet) . "',    
+                                strAddSubrb = '" . addslashes($StrAddSubrb) . "',
+                                strAddState = '" . addslashes($StrAddState) . "',
+                                strAddPstCode = '" . addslashes($StrAddPstCode) . "',
+                                strAddCntry = '" . addslashes($StrAddCntry) . "',
+                                postal_address = '" . addslashes($StrAddCntry) . "',
                                 date_of_establishment = '" . addslashes($regDate) . "',
                                 registration_state = '" . addslashes($regState) . "',
                                 members = '" . addslashes($members) . "',
                                 trustee_type_id = '" . addslashes($trusteeId) . "',
                                 fund_status = '" . addslashes($fundStatus) . "'
                         WHERE job_id = ". $_SESSION['jobId'];
-
+           
             $flagReturn = mysql_query($qryInsert);
 	    return $flagReturn;	
 	}
@@ -139,5 +153,16 @@ class NEW_SMSF_FUND {
             
             return $client_id;
         }
+        
+        // function to fetch countries
+	function fetchCountries() 
+        {
+		$qryFetch = "SELECT * FROM es_country";	
+                $fetchResult = mysql_query($qryFetch);
+                while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrStates[$rowData['country_id']] = $rowData['country_name'];
+		}
+		return $arrStates;
+	}
 }
 ?>

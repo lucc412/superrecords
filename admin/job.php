@@ -145,6 +145,7 @@ if($_SESSION['validUser']) {
 					
 				case "deleteJob":
 					$objCallData->discontinue_job();
+                                        header('Location: job.php');
 					break;
 
 				case "deleteQuery":

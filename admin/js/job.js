@@ -7,6 +7,35 @@
 
 // show hide audit checklist options
 $(function(){
+    // file type validation
+    $('INPUT[type="file"]').change(function () {
+            //var ext = this.value.match(/\.(.+)$/)[1];
+            var fileName = $(this).val().split('/').pop().split('\\').pop();
+            var ext = fileName.split('.').pop();
+            ext = ext.toLowerCase();
+            switch (ext) {
+                    case 'txt':
+                    case 'doc':
+                    case 'docx':
+                    case 'ppt':
+                    case 'pptx':
+                    case 'pdf':
+                    case 'xls':
+                    case 'xlsx':
+                    case 'zip':
+                    case 'rar':
+                    case 'png':
+                    case 'jpg':
+                    case 'jpeg':
+                    case 'msg':
+                            break;
+                    default:
+                            alert('Sorry, This file type is not allowed.');
+                            this.value = '';
+            }
+    });
+    
+   // checklist show/hide case in audit job
    $("span").each(function (i){
 	  (function(i) {
 		  i++;
@@ -16,35 +45,34 @@ $(function(){
 
 	  }(i));
    });
-});
-
-$(function(){
-	$('INPUT[type="file"]').change(function () {
-		//var ext = this.value.match(/\.(.+)$/)[1];
-		var fileName = $(this).val().split('/').pop().split('\\').pop();
-		var ext = fileName.split('.').pop();
-		ext = ext.toLowerCase();
-		switch (ext) {
-			case 'txt':
-			case 'doc':
-			case 'docx':
-			case 'ppt':
-			case 'pptx':
-			case 'pdf':
-			case 'xls':
-			case 'xlsx':
-			case 'zip':
-			case 'rar':
-			case 'png':
-			case 'jpg':
-			case 'jpeg':
-			case 'msg':
-				break;
-			default:
-				alert('Sorry, This file type is not allowed.');
-				this.value = '';
-		}
-	});
+   
+   // show fields when job status is set as completed 
+   $('#lstJobStatus').change(function () {
+        var status = this.value;
+        if(status == '7') {
+            $('#trDtCompleted').show(); 
+            $('#trInvoiceNo').show();
+        }
+        else {
+            $('#trDtCompleted').hide(); 
+            $('#trInvoiceNo').hide();
+        }
+   });
+   
+   $("#objJobDetails").submit(function() {
+        if($("#dateCompleted").val() == '') {
+            alert('Select Date Completed');
+            $("#dateCompleted").focus();
+            return false;
+        }
+        else if($("#invoiceNo").val() == '') {
+            alert('Select Invoice Number');
+            $("#invoiceNo").focus();
+            return false;
+        }
+        return true;
+       
+   });
 });
 
 function validateFormOnSubmit() { 

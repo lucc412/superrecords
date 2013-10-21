@@ -142,7 +142,7 @@ class Job_Class extends Database
 						  OR c1.sr_accnt_audit=".$userId.")";
 		}
 				
-		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id, j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes, j1.job_genre, j1.job_submitted, j1.mas_Code
+		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id, j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes, j1.job_genre, j1.job_submitted, j1.mas_Code, DATE_FORMAT(j1.job_completed_date, '%d/%m/%Y') completedDate, j1.invoiceno
 					FROM job j1, client c1 , pr_practice p1, sub_subactivity sa, job_status s1 
 					WHERE j1.client_id = c1.client_id 
                                         AND c1.id = p1.id	
@@ -422,16 +422,22 @@ class Job_Class extends Database
 		$arrJobName = explode('::',$_REQUEST['hidJobName']);
 		$jobName = $arrJobName[0].'::'.$_REQUEST["txtPeriod"].'::'.$arrJobName[2];
 
-		if($_REQUEST['lstJobStatus'] == '7')
-			$strUpd = ",job_completed_date = NOW()";
-
+		if($_REQUEST['lstJobStatus'] == '7') {
+                    $dateCompleted = $commonUses->getDateFormat($_REQUEST["dateCompleted"]);
+                    $strUpd = ",job_completed_date = '". $dateCompleted ."',
+                                invoiceno='".$_REQUEST["invoiceNo"]."'";
+                }
+                else {
+                    $strUpd = ",job_completed_date = NULL, invoiceno = NULL";
+                }
+			
 		$qryUpd = "UPDATE job 
-					SET job_status_id=".$_REQUEST["lstJobStatus"].", 
-						job_due_date='". $dateSignedUp ."', 
-						job_name='". $jobName ."', 
-						period='". $_REQUEST["txtPeriod"] ."' 
-						".$strUpd."
-				   WHERE job_id=".$jobId;
+                            SET job_status_id=".$_REQUEST["lstJobStatus"].", 
+                                job_due_date='". $dateSignedUp ."', 
+                                job_name='". $jobName ."', 
+                                period='". $_REQUEST["txtPeriod"] ."' 
+                                ".$strUpd."
+                            WHERE job_id=".$jobId;
 				   
 		mysql_query($qryUpd);
 	}

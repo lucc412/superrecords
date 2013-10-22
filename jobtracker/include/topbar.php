@@ -43,7 +43,7 @@ include("path.php");
 					</li>
 					<li><a href="jobs.php?a=order&var=new">Order Documents</a></li> 
 					<li><a href="queries.php">View All Queries</a></li> 
-					<li><a href="template.php">Download Templates</a></li> 
+					<!--<li><a href="template.php">Download Templates</a></li> -->
 				</ul>
 			</div><!--container-->
 		</div><!--nav--><?

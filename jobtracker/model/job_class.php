@@ -204,7 +204,7 @@ class Job {
  		$qrySel = "SELECT sa.sub_Code, sa.sub_Description
 					FROM mas_masteractivity ma, sub_subactivity sa
 					WHERE ma.mas_Code = sa.sas_Code
-					AND sa.display_in_practice = 'yes'
+					/*AND sa.display_in_practice = 'yes'*/
 					{$appendStr}
 					ORDER BY sa.sub_Order";
 
@@ -245,8 +245,8 @@ class Job {
                 }
                 else if($jobGenre == 'AUDIT') {
 			$jobSubmitted = 'N';
-			$jobReceived = date('Y-m-d');
-                        $job_due_date = date('Y-m-d', strtotime("+5 days"));
+			$jobReceived = 'NULL';
+                        $job_due_date = "0000-00-00 00:00:00";
                 }
 		else {
 			$jobSubmitted = 'N';
@@ -386,13 +386,14 @@ class Job {
 		}
 	}
 
-	public function update_job_completed($jobId) {
-		$qryUpd = "Update job
-					SET job_submitted = 'Y',
-					job_received = NOW()
-					WHERE job_id = {$jobId}";
+	public function update_job_completed($jobId) 
+        {
+            $qryUpd = "Update job SET job_submitted = 'Y',
+                                    job_received = '".date('Y-m-d')."',
+                                    job_due_date = '".date('Y-m-d', strtotime("+5 days"))."'    
+                                    WHERE job_id = {$jobId}";
 
-		mysql_query($qryUpd);
+            mysql_query($qryUpd);
 	}
 
 	public function fetch_job_data($jobId) {
@@ -491,7 +492,7 @@ class Job {
 		{
                     if(move_uploaded_file($_FILES['fileDoc']['tmp_name'], $folderPath))
                     {
-                        print $qryIns = "INSERT INTO documents(job_id, document_title, file_path, date)
+                        $qryIns = "INSERT INTO documents(job_id, document_title, file_path, date)
                                         VALUES(
                                         ".$_REQUEST['lstJob'].", 
                                         '". addslashes($_REQUEST['txtDocTitle']) ."', 

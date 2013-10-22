@@ -208,19 +208,17 @@ switch ($a)
 			$srComp = $arrCliPanelInfo[1];
 			$srAudit = $arrCliPanelInfo[2];
 			
-            $rec_date = "";
+                        $rec_date = "";
 			if (isset($objCallData->arrJob[$_REQUEST["jobId"]]["job_received"]) && $objCallData->arrJob[$_REQUEST["jobId"]]["job_received"] != "") {
 				if($objCallData->arrJob[$_REQUEST["jobId"]]["job_received"] != "0000-00-00 00:00:00") {
 					$rec_date = date("d/m/Y",strtotime($objCallData->arrJob[$_REQUEST["jobId"]]["job_received"]));
 				}
 			}  	
                           
-            $due_date = "";
-            var_dump($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"]);
+                        $due_date = "";
 			if (isset($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"]) && $objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"] != "") {
-				if($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"] != "0000-00-00 00:00:00") {
-                                    echo 'A';    
-					print $due_date = date("d/m/Y",strtotime($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"]));
+				if($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"] != "0000-00-00 00:00:00") {   
+					$due_date = date("d/m/Y",strtotime($objCallData->arrJob[$_REQUEST["jobId"]]["job_due_date"]));
 				}
 			}  	
 
@@ -230,7 +228,7 @@ switch ($a)
 				<button name="btnTasks" value="View Associated Tasks" style="width:215px;" onClick="JavaScript:newPopup('tsk_task.php?a=reset&jobId=<?=$_REQUEST["jobId"]?>');">View Associated Tasks</button>
 			</form>
 
-			<form method="POST" name="frmJobDetails" action="job.php?sql=updateJob">
+			<form method="POST" name="frmJobDetails" id="objJobDetails" action="job.php?sql=updateJob">
 			<input type="hidden" name="hidJobName" value="<?=$hidJobName?>">
 			<table class="tbl pdT30" border="0" cellspacing="10" width="70%">
 				<tr>
@@ -286,7 +284,7 @@ switch ($a)
 				<tr>
 					<td class="hr">Job Status</td>
 					<td class="dr">
-						<select name="lstJobStatus">
+						<select name="lstJobStatus" id="lstJobStatus">
 							<option value="">Select Job Status</option><?php
 							foreach($objCallData->arrJobStatus AS $job_status_id => $job_status){
 								$selectStr = '';
@@ -295,6 +293,24 @@ switch ($a)
 							} 
 						?></select>
 					</td>
+				</tr><?
+                                if($objCallData->arrJob[$_REQUEST["jobId"]]["job_status_id"] != '7') {
+                                    $showDateInvoice = "display:none";
+                                }
+                                ?><tr id="trDtCompleted" style="<?=$showDateInvoice?>">
+                                    <td class="hr">Date Completed</td>
+                                    <td class="dr"><?
+                                        if(!empty($objCallData->arrJob[$_REQUEST["jobId"]]["completedDate"])) $completedDate = $objCallData->arrJob[$_REQUEST["jobId"]]["completedDate"];
+                                        else $completedDate = date('d/m/Y');
+                                        ?><input type="text" name="dateCompleted" id="dateCompleted" value="<?=$completedDate?>">&nbsp;
+                                        <a href="javascript:NewCal('dateCompleted','ddmmyyyy',false,24)">
+                                            <img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp">
+                                        </a>
+                                    </td>
+				</tr>
+                                <tr id="trInvoiceNo" style="<?=$showDateInvoice?>">
+					<td class="hr">Invoice Number</td>
+					<td class="dr"><input type="text" name="invoiceNo" id="invoiceNo" value="<?=$objCallData->arrJob[$_REQUEST["jobId"]]["invoiceno"]?>"></td>
 				</tr>
 				<tr>
 					<td class="hr">Job Due Date</td>

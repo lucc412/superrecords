@@ -602,5 +602,69 @@ function fetchCountries()
         }
         return $arrStates;
 }
+// this function is used to insert job details into Job table 
+function insertJobDetails($details) 
+{
+    $clientId = $details['lstClientType'];
+    $typeId = $details['lstJobType'];
+    $period = $details['txtPeriod'];
+    $cliType = $details['lstCliType'];
+    $notes = $details['txtNotes'];
+    $jobGenre = $details['type'];
+    $setup_subfrm = $details['subfrmId'];
 
+    if($jobGenre == 'COMPLIANCE') {
+            $jobSubmitted = 'Y';
+            $jobReceived = date('Y-m-d');
+            $job_due_date = date('Y-m-d', strtotime("+2 week"));
+    }
+    else if($jobGenre == 'AUDIT') {
+            $jobSubmitted = 'N';
+            $jobReceived = date('Y-m-d');
+            $job_due_date = date('Y-m-d', strtotime("+5 days"));
+    }
+    else {
+            $jobSubmitted = 'N';
+            $jobReceived = 'NULL';
+            $job_due_date = "0000-00-00 00:00:00";
+    }
+
+    $jobName = $clientId .'::'. $period .'::'. $typeId;
+        if(empty($clientId) && empty($period))$jobName=NULL;
+
+        $qryIns = "INSERT INTO job(client_id, job_genre, job_submitted, mas_Code, job_type_id, period, notes, job_name, job_status_id, setup_subfrm_id, job_created_date, job_received, job_due_date)
+                                VALUES (
+                                '" . $clientId . "', 
+                                '" . $jobGenre . "', 
+                                '" . $jobSubmitted . "', 
+                                " . $cliType . ", 
+                                " . $typeId . ", 
+                                '" . $period . "',  
+                                '" . $notes . "',
+                                '" . $jobName . "',  
+                                1,   
+                                '".$setup_subfrm."',    
+                                '".date('Y-m-d')."',            
+                                '".$jobReceived."',
+                                '".$job_due_date."'
+                                )";
+
+        mysql_query($qryIns);
+        $jobId = mysql_insert_id();
+        
+        return $jobId;
+}
+
+function fetchSubForm()
+{
+    $qry =  "SELECT * FROM setup_subforms";
+    $data = mysql_query($qry);
+    
+    while($rows = mysql_fetch_assoc($data))
+    {
+        $arrSubfrms[$rows['subform_id']] = $rows;
+    }
+    
+    return $arrSubfrms;
+}
 ?>

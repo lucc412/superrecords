@@ -244,7 +244,7 @@ class Job {
                         $job_due_date = date('Y-m-d', strtotime("+2 week"));
                 }
                 else if($jobGenre == 'AUDIT') {
-			$jobSubmitted = 'Y';
+			$jobSubmitted = 'N';
 			$jobReceived = date('Y-m-d');
                         $job_due_date = date('Y-m-d', strtotime("+5 days"));
                 }

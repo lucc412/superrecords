@@ -1,14 +1,6 @@
 <br>
 <table border="0" cellspacing="1" cellpadding="4" align="left">
 	<tr>
-<!--            <td>
-		<p class="joblstbtn" style="<?if($qryStr=='a=order') echo "background-color:#F05729;"?>" >Order Type</p>
-            </td>-->
-            <?php //if($=1){ ?>
-<!--            <td>
-		<p class="joblstbtn" style="<?if($qryStr=='a=add' || $qryStr=='a=edit') echo "background-color:#F05729;"?>" >Job Details</p>
-            </td>-->
-            <?php //} ?>
             <?php if($_SESSION['frmId'] == '1'){ ?>
             <td>
 		<p class="joblstbtn" style="<?if(basename($_SERVER['PHP_SELF']) == "new_smsf.php") echo "background-color:#F05729;"?>" >New SMSF Details</p>

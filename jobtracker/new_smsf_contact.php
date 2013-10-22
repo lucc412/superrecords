@@ -23,20 +23,15 @@ if(isset($_POST['flaginit']) && $_POST['flaginit'] =='add') {
 	
 	// insert contact details of sign up user
 	if(empty($arrData)) {
-		$lastInsertId = $objScr->addContactDetails($fname, $lname, $email, $phone, $contStatus);
-
-		//set sign up id in session variable
-//		if(!empty($lastInsertId)) {
-//			if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
-//			$_SESSION['jobId'] = $lastInsertId;
-//		}
+            $lastInsertId = $objScr->addContactDetails($fname, $lname, $email, $phone, $contStatus);
 	}
 	// edit contact details of sign up user
 	else {
-		$flagReturn = $objScr->editContactDetails($fname, $lname, $email, $phone, $contStatus);
+            $flagReturn = $objScr->editContactDetails($fname, $lname, $email, $phone, $contStatus);
 	}
 
-	if(!empty($lastInsertId) || $flagReturn) {
+	if(!empty($lastInsertId) || $flagReturn) 
+        {
             if(isset($_POST['cont_status']) && $_POST['cont_status'] == 1)
             {
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
@@ -51,15 +46,16 @@ if(isset($_POST['flaginit']) && $_POST['flaginit'] =='add') {
 }
 
 // fetch data is available 
-if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) {
-
-	// fetch existing contact details
-	$arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
+if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) 
+{
+    // fetch existing contact details
+    $arrData = $objScr->fetchExistingDetails($_SESSION['jobId']);
 }
 
 // declare variables
-if(isset($_REQUEST['txtFname'])) {
-	$fname = $_REQUEST['txtFname'];
+if(isset($_REQUEST['txtFname'])) 
+{
+    $fname = $_REQUEST['txtFname'];
 }
 else if(!empty($arrData['fname'])) {
 	$fname = $arrData['fname'];

@@ -84,7 +84,7 @@ class NEW_SMSF_FUND {
                                 strAddState = '" . addslashes($StrAddState) . "',
                                 strAddPstCode = '" . addslashes($StrAddPstCode) . "',
                                 strAddCntry = '" . addslashes($StrAddCntry) . "',
-                                postal_address = '" . addslashes($StrAddCntry) . "',
+                                postal_address = '" . addslashes($postalAdd) . "',
                                 date_of_establishment = '" . addslashes($regDate) . "',
                                 registration_state = '" . addslashes($regState) . "',
                                 members = '" . addslashes($members) . "',

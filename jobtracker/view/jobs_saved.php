@@ -50,8 +50,9 @@ include(TOPBAR);
 					<td class="tddata"><?=$jobName?></td>
 					<td class="tddata" align="center"><?=$arrJobDetails['job_created_date']?></td>
 					<td class="tddata" align="center"><?
+                                                    //showArray($arrSubforms);//jobs.php?a=edit&recid=<?=$jobId&frmId=<?=$arrJobDetails['setup_subfrm_id']&type=setup
 						if($arrJobDetails['job_genre'] == 'SETUP') {
-							?><a title="click here to edit this job" href='jobs.php?a=edit&recid=<?=$jobId?>&frmId=<?=$arrJobDetails['setup_subfrm_id']?>&type=setup'><?=EDITICON?></a><?
+                                                    ?><a title="click here to edit this job" href='<?=$arrSubforms[$arrJobDetails['setup_subfrm_id']]['subform_url']?>?recid=<?=$jobId?>&frmId=<?=$arrJobDetails['setup_subfrm_id']?>'><?=EDITICON?></a><?
 						}
 						else {
 							?><a title="click here to edit this job" href='jobs.php?a=audit&recid=<?=$jobId?>'><?=EDITICON?></a><?

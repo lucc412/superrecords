@@ -53,16 +53,19 @@ $(document).ready(function(){
 	<span>
 </div>
 <div class="wrap" style="min-height: 350px; ">
-    <?php foreach ($arrForms as $forms => $subforms) { ?>
+    <?php 
+    
+    foreach ($arrForms as $forms => $subforms) { ?>
         <h1 style="font-size: 15px;color: #F05729"><?=$subforms['form_name']?></h1>
         <br>
         <ul>
-        <?php foreach($subforms['subforms'] as $frm => $frmVal){ ?>
+        <?php foreach($subforms['subforms'] as $frm => $frmVal){    ?>
             <li>
                 <div style="width: 550px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?=$frmVal['subform_name']?></span></div>
                 <div style="width: 60px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?='$'.$frmVal['subform_price'];?></span></div><?
                 if($frmVal['subform_id'] == '1') {
-                    ?><button style="width: 82px;margin: 0" onclick='window.location.href="jobs.php?a=redirect&type=setup&frmId=<?=$frmVal['subform_id']?>"' >Order</button><?
+                    //jobs.php?a=redirect&type=setup&frmId=<?=$frmVal['subform_id']
+                    ?><button style="width: 82px;margin: 0" onclick='window.location.href="<?=$frmVal['subform_url']?>?frmId=<?=$frmVal['subform_id']?>"' >Order</button><?
                 }
                 else {
                     ?><button style="width: 82px;margin: 0" class="orderBtn">Order</button><?

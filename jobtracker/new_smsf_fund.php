@@ -36,9 +36,7 @@ if(isset($_SESSION['jobId'])) {
                 $StrAddState = $_REQUEST['StrAddState'];
                 $StrAddPstCode = $_REQUEST['StrAddPstCode'];
                 $StrAddCntry = $_REQUEST['StrAddCntry'];
-                
-     //         $StrAddUnit, $StrAddBuild, $StrAddStreet, $StrAddSubrb, $StrAddState, $StrAddPstCode, $StrAddCntry        
-                
+     
 		$postalAdd = $_REQUEST['taPostalAdd'];
 		$regDate = getDateFormat($_REQUEST['txtSetupDate']);
 		$regState = $_REQUEST['lstRegState'];
@@ -81,7 +79,7 @@ if(isset($_SESSION['jobId'])) {
 			echo "Sorry, Please try later.";
 		}
 	}
-
+        
 	// if data is already entered for current session then set variables
 	if(isset($arrData) && !empty($arrData)) {
 		$fundName = $arrData['fund_name'];

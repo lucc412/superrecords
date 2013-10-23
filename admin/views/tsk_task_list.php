@@ -51,11 +51,11 @@
  
 		?><tr class="<?=$trClass?>">
 			
-			<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrPractice[$arrInfo["id"]])?></td>
+			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["name"])?></td>
 
 			<td class="<?=$style?>"><?=stripslashes($arrInfo["task_name"])?></td>
 
-		  	<td class="<?=$style?>"><?=htmlspecialchars($objCallData->arrTaskStatus[$arrInfo["task_status_id"]])?></td><?
+		  	<td class="<?=$style?>"><?=$arrInfo["description"]?></td><?
 			
 			if($access_file_level['stf_View'] == "Y") {
 				?><td align="center">

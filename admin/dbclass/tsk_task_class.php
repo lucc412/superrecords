@@ -186,12 +186,12 @@ class Task_Class extends Database {
 		if($_SESSION["usertype"] == "Staff") {	
 			$userId = $_SESSION["staffcode"];
 			$strWhere .="AND (pr.sr_manager =".$userId." 
-							OR pr.india_manager =".$userId." 
-							OR pr.audit_manager=" . $userId . " 
-							OR c.team_member =".$userId." 
-							OR c.sr_accnt_comp =".$userId."
-							OR c.sr_accnt_audit =".$userId."
-							OR pr.sales_person =".$userId . ")";
+                                    OR pr.india_manager =".$userId." 
+                                    OR pr.audit_manager=" . $userId . " 
+                                    OR c.team_member =".$userId." 
+                                    OR c.sr_accnt_comp =".$userId."
+                                    OR c.sr_accnt_audit =".$userId."
+                                    OR pr.sales_person =".$userId . ")";
 		}
 	
 		if($jobId)
@@ -215,8 +215,8 @@ class Task_Class extends Database {
 			$filterstr = $commonUses->sqlstr($filter);
 			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
 			
-			$qrySel = "SELECT t.*, j.*, pr.*, c.*, ts.description
-						FROM  job j, client c, pr_practice pr, task t LEFT JOIN task_status ts ON ts.id = t.task_status_id
+			$qrySel = "SELECT t.task_id, t.task_name, pr.name, ts.description, j.job_id
+						FROM  job j, client c, pr_practice pr, task t LEFT JOIN task_status ts ON t.task_status_id = ts.id
 						WHERE t.discontinue_date IS NULL
 						AND j.job_submitted = 'Y'
 						AND t.job_id = j.job_id
@@ -230,12 +230,8 @@ class Task_Class extends Database {
 			elseif(isset($filterstr) && $filterstr!='') {
 				
 				$qrySel .= " AND (t.task_name like '" .$filterstr ."'
-                            OR ts.description like '" .$filterstr ."' 
-							OR pr.name like '" .$filterstr ."' 
-							OR j.job_name like '". $filterstr ."'
-							OR cnt.con_Firstname like '". $filterstr ."'
-							OR cnt.con_Middlename like '". $filterstr ."' 
-							OR cnt.con_Lastname like '". $filterstr ."')";
+                                                OR ts.description like '" .$filterstr ."' 
+						OR pr.name like '" .$filterstr ."')";
 					
 			}				
 

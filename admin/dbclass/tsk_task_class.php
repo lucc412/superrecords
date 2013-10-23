@@ -215,19 +215,15 @@ class Task_Class extends Database {
 			$filterstr = $commonUses->sqlstr($filter);
 			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
 			
-			$qrySel = "SELECT t.*, s.*, cnt.*,j.*, pr.*, c.*, sa.*, ts.description
-						FROM task t, task_status ts, job j, client c, pr_practice pr, stf_staff s, con_contact cnt, sub_subactivity sa
+			$qrySel = "SELECT t.*, j.*, pr.*, c.*, ts.description
+						FROM  job j, client c, pr_practice pr, task t LEFT JOIN task_status ts ON ts.id = t.task_status_id
 						WHERE t.discontinue_date IS NULL
 						AND j.job_submitted = 'Y'
 						AND t.job_id = j.job_id
-											AND t.task_status_id = ts.id
-						AND j.client_id = c.client_id
+                                                AND j.client_id = c.client_id
 						AND c.id = pr.id 
-						AND sa.sub_Code = j.job_type_id
-						AND pr.sr_manager = s.stf_Code 
-						AND s.stf_CCode = cnt.con_Code 
-						{$strWhere} ";
-			
+                                                {$strWhere} ";
+
 			if(isset($filterstr) && $filterstr!='' && isset($filterfield) && $filterfield!='') {
 				$qrySel .= " AND " .$commonUses->sqlstr($filterfield) ." like '" .$filterstr ."'";	
 			}

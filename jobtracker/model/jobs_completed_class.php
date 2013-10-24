@@ -12,7 +12,7 @@ class CompletedJobs {
 			$appendSelStr = "AND t1.client_id = {$_REQUEST['lstClientType']}";
 		} 
 
-		$qrySel = "SELECT t1.job_id, CONCAT_WS(' - ', c1.client_name, t1.period, sa.sub_Description)job_name, t1.job_genre, DATE_FORMAT(t1.job_completed_date, '%d/%m/%Y') job_completed_date
+		$qrySel = "SELECT t1.job_id, t1.client_id, CONCAT_WS(' - ', c1.client_name, t1.period, sa.sub_Description)job_name, t1.job_genre, DATE_FORMAT(t1.job_completed_date, '%d/%m/%Y') job_completed_date
                             FROM client c1, sub_subactivity sa, job t1
                             WHERE c1.id = '{$_SESSION['PRACTICEID']}'
                             AND t1.client_id = c1.client_id
@@ -73,7 +73,6 @@ class CompletedJobs {
                             GROUP BY t1.job_id";
 
 		$fetchResult = mysql_query($qrySel);		
-		$rowData = mysql_fetch_row($fetchResult);
                 while($rowData = mysql_fetch_assoc($fetchResult)) {
 			$arrAllQueryCnt[$rowData['job_id']] = $rowData['qryCount'];
 		}

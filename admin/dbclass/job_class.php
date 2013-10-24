@@ -304,14 +304,8 @@ class Job_Class extends Database
 	
 		$jobId = $_REQUEST["jobId"];
 		$value = $_REQUEST["txtQuery"];
-		var_dump($jobId);
-		echo "--------------";
-		var_dump($value);
 		
 		$qrySel = "INSERT INTO queries(job_id, query,date_added) VALUES({$jobId},'{$value}',NOW())";
-		echo $qrySel;
-		//exit;
-		
 		mysql_query($qrySel);
 		
 		// Fetching last report ID.
@@ -513,9 +507,7 @@ class Job_Class extends Database
 
 	public function insert_job()
 	{
-            
 		$jobName = $_REQUEST["lstClient"]."::".$_REQUEST["txtPeriod"]."::".$_REQUEST["lstJob"];
-		
 		$client_Id = $_REQUEST["lstClient"];
 		$period = $_REQUEST["txtPeriod"];
 		$masCode = $_REQUEST["lstClientType"];
@@ -524,24 +516,22 @@ class Job_Class extends Database
                 $job_due_date = date('Y-m-d', strtotime("+2 week"));
 
 		$qryIns = "INSERT INTO job(client_id, mas_Code, job_type_id, period, notes, job_name, job_status_id, job_submitted, job_received, job_due_date)
-					VALUES (
-					" . $client_Id . ", 
-					" . $masCode . ", 
-					" . $jobType . ", 
-					'" . $period . "',  
-					'" . $notes . "',
-					'" . $jobName . "',  
-					1,  
-					'Y',
-					'".date('Y-m-d')."',
-                                        '".$job_due_date."'
-					)";
+                            VALUES (
+                            " . $client_Id . ", 
+                            " . $masCode . ", 
+                            " . $jobType . ", 
+                            '" . $period . "',  
+                            '" . $notes . "',
+                            '" . $jobName . "',  
+                            1,  
+                            'Y',
+                            '".date('Y-m-d')."',
+                            '".$job_due_date."'
+                            )";
 
 		mysql_query($qryIns);
 		$jobId = mysql_insert_id();
-
 		$this->add_task($jobType, $period, $_REQUEST["lstPractice"], $client_Id, $jobId);
-		
 		$this->add_source_Docs($jobId);
 		
 		return $jobId;

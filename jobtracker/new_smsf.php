@@ -6,7 +6,7 @@ include(MODEL . "new_smsf_class.php");
 $objNewSmsf = new NEW_SMSF();
 
 // update checkbox case.
-if(isset($_SESSION["jobId"]) && $_REQUEST['flagUpdate']=='Y')
+if(!empty($_SESSION["jobId"]) && $_REQUEST['flagUpdate']=='Y')
 {
     $objNewSmsf->updateCheckbox(); 
     header('location: new_smsf_contact.php');

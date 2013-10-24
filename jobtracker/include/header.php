@@ -53,6 +53,14 @@
                     ?><title>Checklist for Audit</title>
                     <script type="text/javascript" src="js/audit_subchecklist_validation.js"></script><?
                 }
+                else if(basename($_SERVER['PHP_SELF']) == 'audit_upload.php') { 
+                    ?><title>Upload multiple documents</title>
+                    <script type="text/javascript" src="js/audit_upload_validation.js"></script><?
+                }
+                else if(basename($_SERVER['PHP_SELF']) == 'subaudit_upload.php') { 
+                    ?><title>Upload documents for checklist</title>
+                    <script type="text/javascript" src="js/subaudit_upload_validation.js"></script><?
+                }
                 else if(basename($_SERVER['PHP_SELF']) == 'setup.php') {
                     ?><title>Order Documents</title><?
 		}
@@ -69,7 +77,7 @@
                     ?><title>View and upload documents</title><?
 		}
                 else if(basename($_SERVER['PHP_SELF']) == 'jobs_doc_upload.php') { 
-                    ?><title>Upload document</title>
+                    ?><title>Upload Documents</title>
                     <script type="text/javascript" src="js/jobs_documents_validation.js"></script><?
                 }
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf.php') {

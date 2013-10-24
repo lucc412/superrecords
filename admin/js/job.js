@@ -60,15 +60,17 @@ $(function(){
    });
    
    $("#objJobDetails").submit(function() {
-        if($("#dateCompleted").val() == '') {
-            alert('Select Date Completed');
-            $("#dateCompleted").focus();
-            return false;
-        }
-        else if($("#invoiceNo").val() == '') {
-            alert('Select Invoice Number');
-            $("#invoiceNo").focus();
-            return false;
+        if($('#lstJobStatus').val() == '7') {
+            if($("#dateCompleted").val() == '') {
+                alert('Select Date Completed');
+                $("#dateCompleted").focus();
+                return false;
+            }
+            else if($("#invoiceNo").val() == '') {
+                alert('Select Invoice Number');
+                $("#invoiceNo").focus();
+                return false;
+            }
         }
         return true;
        

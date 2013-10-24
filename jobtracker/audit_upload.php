@@ -12,11 +12,8 @@ switch ($sql)
             break;
 }
 
-$a = $_REQUEST['a'];
-switch ($a) {
-    default :
-            $arrDocList = $objScr->getAuditDocList($_SESSION['jobId']);
-            include(VIEW.'audit_upload.php');
-            break;
-}
+$arrDocList = $objScr->getAuditDocList($_SESSION['jobId']);
+include(VIEW.'audit_upload.php');
+            
+
 ?>

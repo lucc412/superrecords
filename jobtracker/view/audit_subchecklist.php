@@ -9,8 +9,8 @@ include(TOPBAR);
             <span>
                 <b>Welcome to Super Records Audit checklist section.</b></br>Please click on below selected categories to view the checklists & upload documents against each category as applicable. If you would like to upload multiple documents or files for this particular job, please select <i>Upload Multiple Documents</i> button.
                 <div align="right">
-                        <span class="pdR20"><button style="width:205px" type="button" title="click here to manage documents" onclick="JavaScript:newPopup('audit_upload.php','400','600');">Upload Multiple Documents</button></span>
-                        <button title="click here to download your preferred checklist" type="button" onclick="javascript:urlRedirect('audit.php?sql=dwnldchcklst');">Download Checklist</button>
+                        <span class="pdR20"><button style="width:205px" type="button" title="click here to manage documents" onclick="JavaScript:popUp('audit_upload.php','400','600');">Upload Multiple Documents</button></span>
+                        <button title="click here to download your preferred checklist" type="button" onclick="javascript:urlRedirect('audit_subchecklist.php?sql=dwnldchcklst');">Download Checklist</button>
                 </div>
             </span>
 	</div>
@@ -49,7 +49,7 @@ include(TOPBAR);
 								$strAttached = "";
 								if($arrDocDetails[$subChecklistId]['status'] == 'ATTACHED') $strAttached = "color:#073f61";
 								?><td class="tddata" style="width:400px;<?=$strAttached?>" id="subchecklist"><?=$subChecklistName?></td>
-								<td class="tddata" align="center"><a href="javascript:;" onclick="JavaScript:newPopup('subaudit_upload.php?checklistId=<?=$checklistId?>&subchecklistId=<?=$subChecklistId?>','250','600');" title="click here to upload documents"><?=UPLOAD?></a></td>
+								<td class="tddata" align="center"><a href="javascript:;" onclick="JavaScript:popUp('subaudit_upload.php?checklistId=<?=$checklistId?>&subchecklistId=<?=$subChecklistId?>','250','600');" title="click here to upload documents"><?=UPLOAD?></a></td>
 								<td class="tddata"><?
 									$arrSubDocuments = $arrSubDocList[$subChecklistId];
 									if(!empty($arrSubDocuments)) {

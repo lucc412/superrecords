@@ -31,8 +31,7 @@ class NEW_SMSF
                     'SETUP', 
                     '25', 
                     '21', 
-                    'Year End 30/06/'". date('Y') . "',  
-                    '" . $notes . "',
+                    'Year End 30/06/". date('Y') . "',  
                     1,   
                     1,    
                     '".date('Y-m-d')."'

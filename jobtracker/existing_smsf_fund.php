@@ -61,12 +61,16 @@ if(isset($_SESSION['jobId']))
             if($flagReturn) 
             { 
                 //if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                if(isset($_POST['fund_status']) && $_POST['fund_status'] == 1)
+                if(isset($_POST['fund_status']) && $_POST['fund_status'] == 1) {
+                    if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
                     header('Location: jobs_pending.php');
+                }   
                 else if(isset($_POST['preview']) && $_POST['preview'] == 1) 
                     header('Location: setup_preview.php');
-                else
+                else {
+                    if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
                     header('Location: jobs_saved.php');
+                }
             }
             else {
                 echo "Sorry, Please try later.";
@@ -80,6 +84,7 @@ if(isset($_SESSION['jobId']))
             {
                 $objScr->generatePDF();
             }
+            if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
             header('Location: jobs_pending.php');
         }
         

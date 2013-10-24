@@ -94,16 +94,6 @@ else {
 	$phoneno = "";
 }
 
-//if(isset($_REQUEST['lstState'])) {
-//	$stateId = $_REQUEST['lstState'];
-//}
-//else if(!empty($arrData['state_id'])) {
-//	$stateId = $arrData['state_id'];
-//}
-//else {
-//	$stateId = "";
-//}
-
 // include view file
 include(VIEW . "new_smsf_contact.php");
 ?>

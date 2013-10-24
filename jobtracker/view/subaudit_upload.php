@@ -12,7 +12,7 @@ include(HEADDATA);
 
 // content
 ?><div class="pd10">
-	<form name="objForm" id="objForm" method="post" action="audit.php" onSubmit="javascript:return uploadValidate();" enctype="multipart/form-data">
+	<form name="objForm" id="objForm" method="post" action="subaudit_upload.php" onSubmit="javascript:return uploadValidate();" enctype="multipart/form-data">
 		<span><input type="text" id="fileTitle" name="fileTitle"></span>
 		<span><input type="file" id="fileUpload" name="fileUpload"></span>
 		<span><button style="width:94px;" type="submit" title="click here to add document" value="Add">Add</button></span>

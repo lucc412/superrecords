@@ -19,7 +19,7 @@ $a = $_REQUEST['a'];
 switch ($a) {
     default :
         $subchecklistName = $objScr->getSubChecklistName($_REQUEST['subchecklistId']);
-        include(VIEW.'jobs_subaudit_upload.php');
+        include(VIEW.'subaudit_upload.php');
         break;
 }
 ?>

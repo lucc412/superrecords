@@ -28,20 +28,8 @@ include(SETUPNAVIGATION);
 				<td>Phone Number</td>
 				<td><input type="text" name="txtPhone" value="<?=$phoneno?>" /></td>
 			</tr>
-			
-<!--			<tr>
-				<td>Referral Code</td>
-				<td>
-					<input type="text" name="txtCode" value="<?=$referralCode?>" maxlength="6"/>
-					<a id="iconQuestion" class="tooltip" title="If someone has referred you and has provided a referral code, <br/>please enter the code here.">?</a><?
-
-					if(isset($flaginvalid)){
-						?><span id="msg" style="padding-left:10px;color:red">Please enter a valid referral code</span><? 
-					}
-				?></td>
-			</tr>-->
 		</table>
-            
+           
             <input type="hidden" id="cont_status" name="cont_status" value=""/>
             <div style="padding-top:20px;">
                 <span align="left"><button type="button" onclick="window.location.href='new_smsf.php?flagUpdate=N'" value="BACK"  />Back</button></span>

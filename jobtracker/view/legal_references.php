@@ -147,7 +147,6 @@ include(SETUPNAVIGATION);
 				<tr>
 					<td>Address</td>
 					<td>
-                                            <textarea id="txtAddress<?=$memberCount?>" name="txtAddress<?=$memberCount?>" style="margin-bottom: 5px;" /><?=$address?></textarea>
                                             <div>
                                                 <input type="text" id="StrAddUnit<?=$memberCount?>" name="StrAddUnit<?=$memberCount?>" style="width:115px;" value="<?=$StrAddUnit?>" placeholder="Unit number" />
                                                 <input type="text" id="StrAddBuild<?=$memberCount?>" name="StrAddBuild<?=$memberCount?>" style="width:115px;" value="<?=$StrAddBuild?>" placeholder="Building" />

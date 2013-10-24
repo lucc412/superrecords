@@ -13,16 +13,16 @@ include(TOPBAR);
 	// client drop-down for filter
 	?><table width="100%">
 		<tr>
-			<td align="right">
-				<select style="width:300px;" name="lstClientType" id="lstClientType" onchange="this.form.submit();">
-					<option value="0">Select Client</option><?php
-					foreach($arrClients AS $clientId => $clientName){
-						$selectStr = '';
-						if($clientId == $_REQUEST['lstClientType']) $selectStr = 'selected';
-						?><option <?=$selectStr?> value="<?=$clientId?>"><?=$clientName?></option><?php 
-					}
-				?></select>
-			</td>
+                    <td align="right">
+                        <select style="width:300px;" name="lstClientType" id="lstClientType" onchange="this.form.submit();">
+                                <option value="0">Select Client</option><?php
+                                foreach($arrClients AS $clientId => $clientName){
+                                        $selectStr = '';
+                                        if($clientId == $_REQUEST['lstClientType']) $selectStr = 'selected';
+                                        ?><option <?=$selectStr?> value="<?=$clientId?>"><?=$clientName?></option><?php 
+                                }
+                        ?></select>
+                    </td>
 		</tr>
 	</table><br/><?
 
@@ -34,9 +34,9 @@ include(TOPBAR);
 		// display job data
 		?><table align="center" width="100%" class="resources">
 			<tr>
-				<td width="50%" class="td_title">Job Name</td>
-				<td width="10%" class="td_title" align="center">Creation Date</td>
-				<td width="8%" class="td_title" align="center">Actions</td>
+                            <td width="50%" class="td_title">Job Name</td>
+                            <td width="10%" class="td_title" align="center">Creation Date</td>
+                            <td width="8%" class="td_title" align="center">Actions</td>
 			</tr><?
                         
 			$countRow = 0;
@@ -53,7 +53,7 @@ include(TOPBAR);
                                                 ?><a title="click here to edit this job" href='<?=$arrJobDetails['subform_url']?>?recid=<?=$jobId?>&frmId=<?=$arrJobDetails['subform_id']?>'><?=EDITICON?></a><?
                                             }
                                             else {
-                                                    ?><a title="click here to edit this job" href='audit.php?recid=<?=$jobId?>'><?=EDITICON?></a><?
+                                                ?><a title="click here to edit this job" href='audit.php?recid=<?=$jobId?>'><?=EDITICON?></a><?
                                             }
 					?></td>
 				</tr><?

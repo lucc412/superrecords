@@ -37,13 +37,20 @@ include(TOPBAR);
                                         <td class="tddata"><?
                                             $arrSourceDocs = $arrAllDocs[$jobId];
                                             if(!empty($arrSourceDocs)) {
-                                                    foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-                                                        $icon = returnFileIcon($arrDocInfo['file_path']);
+                                                foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
+                                                    $icon = returnFileIcon($arrDocInfo['file_path']);
+                                                    if($arrJobDetails['job_genre'] == 'AUDIT')
+                                                        $folderPath = "../uploads/audit/" . $arrDocInfo['file_path'];
+                                                        if(file_exists($folderPath)) {
+                                                            ?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?=urlencode($arrDocInfo['file_path'])?>&folderPath=A" title="Click to view this document"><?=$arrDocInfo['document_title'];?></a></p><?
+                                                        }
+                                                    else {
                                                         $folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
                                                         if(file_exists($folderPath)) {
-                                                                ?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?=urlencode($arrDocInfo['file_path'])?>&folderPath=S" title="Click to view this document"><?=$arrDocInfo['document_title'];?></a></p><?
+                                                            ?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?=urlencode($arrDocInfo['file_path'])?>&folderPath=S" title="Click to view this document"><?=$arrDocInfo['document_title'];?></a></p><?
                                                         }
                                                     }
+                                                }
                                             }
                                         ?></td>
                                 </tr><?

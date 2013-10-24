@@ -12,10 +12,10 @@ switch ($sql)
             $_SESSION['jobId'] = $jobId;	
 
             new_job_task_mail();
+            if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
             header('location: jobs_pending.php');
             break;
 }
-
 
 $a = $_REQUEST['a'];
 switch ($a) {
@@ -35,6 +35,7 @@ switch ($a) {
             break;
 
     default :
+            $arrClientType = $objScr->fetchClientType();
             include(VIEW.'compliance.php');
             break;
 }

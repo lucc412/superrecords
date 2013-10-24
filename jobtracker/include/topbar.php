@@ -5,7 +5,6 @@ if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 	}
 }
 include(HEADDATA);
-include("path.php");
 ?><div class="wrapper"><?
 	if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 		?><div class="header">

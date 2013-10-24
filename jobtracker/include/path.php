@@ -20,6 +20,8 @@ define('PDF',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/library/tcpdf/tcpdf.php');
 define('PHPFUNCTION',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/php_functions.php');
 define('MODEL',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/model/');
 define('VIEW',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/view/');
+define('SETUPVIEW',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/setup/');
+define('SETUPMODEL',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/setup/');
 define('UPLOADSETUP',$_SERVER['DOCUMENT_ROOT'].'/uploads/setup/');
 define('DOWNLOAD',DIR.'include/download.php');
 define("SETUPNAVIGATION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/view/setup_navigation.php");

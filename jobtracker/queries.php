@@ -37,8 +37,6 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 				$content = $arrEmailInfo['event_content'];
 				$jobId = $objScr->fetchJobId($_REQUEST["queryId"]);
 				$content = replaceContent($content, NULL, $_SESSION["PRACTICEID"], NULL, $jobId);
-				
-				include_once(MAIL);
 				send_mail($from, $to, $cc, $bcc, $subject, $content);
 			}
 			/* send mail function ends here */
@@ -84,8 +82,6 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 				$content = $arrEmailInfo['event_content'];
 				$content = str_replace('of JOBNAME', '', $content);
 				$content = replaceContent($content, NULL, $_SESSION["PRACTICEID"]);
-				
-				include_once(MAIL);
 				send_mail($from, $to, $cc, $bcc, $subject, $content);
 				
 			}

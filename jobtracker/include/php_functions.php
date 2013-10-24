@@ -324,8 +324,6 @@ function new_job_task_mail()
 		$subject = $arrEmailInfo['event_subject'];
 		$content = $arrEmailInfo['event_content'];
 		$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_SESSION['jobId']);
-
-		include_once(MAIL);
 		send_mail($from, $to, $cc, $bcc, $subject, $content);
 	}
 	/* send mail function ends here */	
@@ -351,8 +349,6 @@ function new_job_task_mail()
 		$subject = $arrEmailInfo['event_subject'];
 		$content = $arrEmailInfo['event_content'];
 		$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_SESSION['jobId']);
-
-		include_once(MAIL);
 		send_mail($from, $to, $cc, $bcc, $subject, $content);
 	}
 	/* send mail function ends here */	

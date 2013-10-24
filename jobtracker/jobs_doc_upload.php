@@ -40,8 +40,6 @@ switch ($sql)
 			$content = str_replace('DATETIME', $uploadedTime, $content);
 
 			$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_REQUEST['lstJob']);
-
-			include_once(MAIL);
 			send_mail($from, $to, $cc, $bcc, $subject, $content);
 		}
 		/* send mail function ends here */		

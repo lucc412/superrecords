@@ -67,7 +67,7 @@ $(function(){
                 return false;
             }
             else if($("#invoiceNo").val() == '') {
-                alert('Select Invoice Number');
+                alert('Specify Invoice Number');
                 $("#invoiceNo").focus();
                 return false;
             }

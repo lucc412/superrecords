@@ -34,14 +34,14 @@ include("path.php");
 					</li>
 					<li class="dropdown"><a href="javascript:;">&nbsp;&nbsp;Jobs&nbsp;&nbsp;</a>
 						<ul class="sub">
-							<li><a href="jobs.php?a=job">Submit new job</a></li>
-							<li><a href="jobs.php?a=saved">Retrieve saved jobs</a></li>
-							<li><a href="jobs.php?a=pending">Pending jobs</a></li>
-							<li><a href="jobs.php?a=completed">Completed jobs</a></li>
-							<li><a href="jobs.php?a=document">View and upload documents</a></li>
+							<li><a href="jobs.php">Submit new job</a></li>
+							<li><a href="jobs_saved.php">Retrieve saved jobs</a></li>
+							<li><a href="jobs_pending.php">Pending jobs</a></li>
+							<li><a href="jobs_completed.php">Completed jobs</a></li>
+							<li><a href="jobs_doc_list.php">View and upload documents</a></li>
 						</ul>
 					</li>
-					<li><a href="jobs.php?a=order&var=new">Order Documents</a></li> 
+					<li><a href="setup.php">Order Documents</a></li> 
 					<li><a href="queries.php">View All Queries</a></li> 
 					<!--<li><a href="template.php">Download Templates</a></li> -->
 				</ul>

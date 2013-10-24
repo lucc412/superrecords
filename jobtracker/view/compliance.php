@@ -11,25 +11,15 @@ include(TOPBAR);
 </div><?
 
 // content
-?><form name="objForm" id="objForm" method="post" action="jobs.php?sql=insertJob" onSubmit="javascript:return checkDuplicateJob();" enctype="multipart/form-data">
+?><form name="objForm" id="objForm" method="post" action="compliance.php?sql=insertJob" onSubmit="javascript:return checkDuplicateJob();" enctype="multipart/form-data">
 	<input type="hidden" name="type" id="type" value="COMPLIANCE">
 	<table align="center" width="90%" class="fieldtable" cellpadding="10px;">
-
 		<tr>
-			<td><strong>Client</strong></td>
-			<td>
-                            
-<!--                            <select name="lstClientType" id="lstClientType" title="Select client" onchange="changeDuplicate()">
-					<option value="0">Select Client</option><?php
-					//foreach($arrClients AS $clientId => $clientName){
-						?><option value="<?=$clientId?>"><?=$clientName?></option><?php 
-					//}
-				?></select>-->
-                                
-                                <input type="text" name="lstClientTypeSearch" id="lstClientTypeSearch" value=""  />
-                                <input type="hidden" name="lstClientType" id="lstClientType" />
-                                
-			</td>
+                    <td><strong>Client</strong></td>
+                    <td>
+                        <input type="text" name="lstClientTypeSearch" id="lstClientTypeSearch" value=""  />
+                        <input type="hidden" name="lstClientType" id="lstClientType" />
+                    </td>
 		</tr>
 
 		<tr><td>&nbsp;</td></tr>
@@ -132,7 +122,7 @@ include(TOPBAR);
 <div id="dialog-confirm" title="Warning" style="display: none;">
   <p>
       <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
-      You have already submitted the same Job previously. If you would like to upload additional documents for already submitted job, please go to <a style="text-decoration: underline;cursor: pointer;color: #074165;" onclick="javascript:window.location.assign('jobs.php?a=document')">View and upload documents</a> menu under Jobs.
+      You have already submitted the same Job previously. If you would like to upload additional documents for already submitted job, please go to <a style="text-decoration: underline;cursor: pointer;color: #074165;" onclick="javascript:window.location.assign('jobs_doc_list.php')">View and upload documents</a> menu under Jobs.
   </p>
 </div>
 

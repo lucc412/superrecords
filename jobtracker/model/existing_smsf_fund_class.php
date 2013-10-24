@@ -19,6 +19,23 @@ class EXISTING_SMSF_FUND
 		return $arrStates;
 	}
 
+	public function add_new_task($practiceId, $jobId) {
+		$arrJobType = $this->fetchType();
+		$arrClients = getclientlist();
+		$arrJobData = $this->fetch_job_data($jobId);
+		$taskName = $arrClients[$arrJobData['client_id']] . ' - ' . $arrJobData['period'] . ' - ' . $arrJobType[$arrJobData['job_type_id']];
+	
+		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code) 
+					VALUES ('" . $taskName . "',
+					'" . $practiceId . "',
+					'" . $arrJobData['client_id'] . "',
+					'" . $jobId . "',
+					'" . $arrJobData['mas_Code'] . "',
+					'" . $arrJobData['job_type_id'] . "'
+					)";
+		mysql_query($qryIns);			
+	}
+
 	// function to existing fetch contact details
 	function fetchExistingDetails($signupId) {
 		$qryFetch = "SELECT * 
@@ -121,8 +138,8 @@ class EXISTING_SMSF_FUND
             mysql_query($stQry);
 
             // add new task
-            include(MODEL."job_class.php");
-            $objJob = new Job();
+            include(MODEL."compliance_class.php");
+            $objJob = new COMPLIANCE();
             $objJob->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
 
             // send mail for new task

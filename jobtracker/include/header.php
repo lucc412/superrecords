@@ -29,93 +29,86 @@
 
 		$arrQryStr = stringToArray('&', $_SERVER['QUERY_STRING']);
                 $qryStr = $arrQryStr[0];
-                $typeStr = $arrQryStr[1];
                 
 		if(basename($_SERVER['PHP_SELF']) == 'jobs.php') {
-			if($typeStr == 'type=comp') {
-				?><title>Submit new compliance job</title><?
-			}
-                        else if($typeStr == 'type=setup') {
-				?><title>Submit new setup job</title><?
-			}
-			else if($qryStr == 'a=audit') {
-				if(isset($typeStr) && strstr($typeStr, 'recid')) {
-					?><title>Edit existing audit job</title><?
-				}
-				else {
-					?><title>Submit new audit job</title><?
-				}
-			}
-			else if($qryStr == 'a=checklist') {
-				?><title>Audit Checklist</title><?
-			}
-			else if($qryStr == 'a=subchecklist' || $qryStr == 'a=uploadAudit' || $qryStr == 'a=uploadSubAudit') {
-				?><title>Checklist for Audit</title><?
-			}
-			else if($qryStr == 'a=edit') {
-				?><title>Edit existing job</title><?
-			}
-			else if($qryStr == 'a=order') {
-				?><title>Order Documents</title><?
-			}
-			else if($qryStr == 'a=saved') {
-				?><title>Retrieve saved jobs</title><?
-			}
-			else if($qryStr == 'a=pending') {
-				?><title>Pending jobs</title><?
-			}
-			else if($qryStr == 'a=completed') {
-				?><title>Completed jobs</title><?
-			}
-			else if($qryStr == 'a=document') {
-				?><title>View and upload documents</title><?
-			}
-			else if($qryStr == 'a=uploadDoc') {
-				?><title>View and upload documents</title><?
-			}
-			else {
-				?><title>Submit new job</title><?
-			}
-			?>
-			<script type="text/javascript" src="js/job_validation.js"></script><?
+                    ?><title>Submit new job</title><?
 		}
+                else if(basename($_SERVER['PHP_SELF']) == 'compliance.php') {
+                    ?><title>Submit new compliance job</title>
+                    <script type="text/javascript" src="js/compliance_validation.js"></script><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'audit.php') {
+                        if(isset($qryStr) && strstr($qryStr, 'recid')) {
+                            ?><title>Edit existing audit job</title><?
+			}
+                        else {
+                            ?><title>Submit new audit job</title><?
+                        }
+                        ?><script type="text/javascript" src="js/audit_validation.js"></script><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'audit_checklist.php') { 
+                    ?><title>Audit Checklist</title><?
+                }
+                else if(basename($_SERVER['PHP_SELF']) == 'audit_subchecklist.php') { 
+                    ?><title>Checklist for Audit</title>
+                    <script type="text/javascript" src="js/audit_subchecklist_validation.js"></script><?
+                }
+                else if(basename($_SERVER['PHP_SELF']) == 'setup.php') {
+                    ?><title>Order Documents</title><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'jobs_saved.php') {
+			?><title>Retrieve saved jobs</title><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'jobs_pending.php') {
+			?><title>Pending jobs</title><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'jobs_completed.php') {
+			?><title>Completed jobs</title><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'jobs_doc_list.php') {  
+                    ?><title>View and upload documents</title><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'jobs_doc_upload.php') { 
+                    ?><title>Upload document</title>
+                    <script type="text/javascript" src="js/jobs_documents_validation.js"></script><?
+                }
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf.php') {
-				?><title>New SMSF Details</title><?
+			?><title>New SMSF Details</title><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_contact.php') {
-				?><title>Contact Details</title>
-				<script type="text/javascript" src="js/new_smsf_contact.js"></script><?
+			?><title>Contact Details</title>
+			<script type="text/javascript" src="js/new_smsf_contact.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_fund.php') {
-				?><title>Fund Details</title>
-				<script type="text/javascript" src="js/new_smsf_fund.js"></script><?
+                        ?><title>Fund Details</title>
+                        <script type="text/javascript" src="js/new_smsf_fund.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_member.php') {
-				?><title>Member Details</title>
-				<script type="text/javascript" src="js/new_smsf_member.js"></script><?
+                        ?><title>Member Details</title>
+                        <script type="text/javascript" src="js/new_smsf_member.js"></script><?
 		}
-        else if(basename($_SERVER['PHP_SELF']) == 'legal_references.php') {
-				?><title>Legal Personal Representative</title>
-				<script type="text/javascript" src="js/legal_references.js"></script><?
+                else if(basename($_SERVER['PHP_SELF']) == 'legal_references.php') {
+                        ?><title>Legal Personal Representative</title>
+                        <script type="text/javascript" src="js/legal_references.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_trustee.php') {
-				?><title>Trustee Details</title>
-				<script type="text/javascript" src="js/new_smsf_trustee.js"></script><?
+                        ?><title>Trustee Details</title>
+                        <script type="text/javascript" src="js/new_smsf_trustee.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_declarations.php') {
-				?><title>Declarations</title>
-				<script type="text/javascript" src="js/new_smsf_declarations.js"></script><?
+                        ?><title>Declarations</title>
+                        <script type="text/javascript" src="js/new_smsf_declarations.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf.php') {
-				?><title>Existing SMSF Details</title><?
+			?><title>Existing SMSF Details</title><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_contact.php') {
-				?><title>Contact Details</title>
-				<script type="text/javascript" src="js/existing_smsf_contact.js"></script><?
+                        ?><title>Contact Details</title>
+                        <script type="text/javascript" src="js/existing_smsf_contact.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_fund.php') {
-				?><title>Fund Details</title>
-				<script type="text/javascript" src="js/existing_smsf_fund.js"></script><?
+                        ?><title>Fund Details</title>
+                        <script type="text/javascript" src="js/existing_smsf_fund.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'setup_preview.php') {
 			?><title>Preview</title><?

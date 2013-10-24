@@ -38,7 +38,7 @@ if(isset($_SESSION['jobId']))
                 // generate PDF
                 $objScr->generatePDF();
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                    header('Location: jobs.php?a=pending');
+                    header('Location: jobs_pending.php');
             }
             else if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'N')
             {
@@ -52,7 +52,7 @@ if(isset($_SESSION['jobId']))
                 }
             
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                    header('Location: jobs.php?a=saved');
+                    header('Location: jobs_saved.php');
             }
             
 	}
@@ -74,6 +74,6 @@ if(isset($_SESSION['jobId']))
 	
 }
 else {
-	header('Location: jobs.php');
+	header('Location: home.php');
 }
 ?>

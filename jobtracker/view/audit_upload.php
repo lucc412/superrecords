@@ -13,7 +13,7 @@ include(HEADDATA);
 
 // content
 ?><div class="pd10">
-	<form name="objForm" id="objForm" method="post" action="jobs.php" onSubmit="javascript:return uploadValidate();" enctype="multipart/form-data">
+	<form name="objForm" id="objForm" method="post" action="audit_upload.php" onSubmit="javascript:return uploadValidate();" enctype="multipart/form-data">
 		<span><input type="text" id="fileTitle" name="fileTitle"></span>
 		<span><input type="file" id="fileUpload" name="fileUpload"></span>
 		<span><button style="width:94px;" type="submit" title="click here to add document" value="Add">Add</button></span>
@@ -37,7 +37,7 @@ include(HEADDATA);
 					else $trClass = "";
 					?><tr class="<?=$trClass?>"><?
                                                 $icon = returnFileIcon($fileName);
-						?><td class="tddata"><p><?=$icon?><a href="jobs.php?a=download&filePath=<?=urlencode($fileName)?>&flagChecklist=A" title="Click to view this document"><?=$docTitle?></a></p></td>
+						?><td class="tddata"><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?=urlencode($fileName)?>&folderPath=A" title="Click to view this document"><?=$docTitle?></a></p></td>
 						<td align="center" class="tddata"><?=$uploadedDate?></td>
 					</tr><?
 					$countRow++;

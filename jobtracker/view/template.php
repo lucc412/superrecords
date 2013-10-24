@@ -29,7 +29,7 @@ include(TOPBAR);
 					$folderPath = "../uploads/template/" . $templateInfo['tmpl_filepath'];
 					if(file_exists($folderPath) && !empty($templateInfo['tmpl_filepath'])) {
                                                  $icon = returnFileIcon($templateInfo['tmpl_filepath']);
-						?><p><?=$icon?><a href="template.php?a=download&filePath=<?=urlencode($templateInfo['tmpl_filepath'])?>" title="Click to download this document">Document</a></p><?
+						?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?=urlencode($templateInfo['tmpl_filepath'])?>&folderPath=T" title="Click to download this document">Document</a></p><?
 					}
 				?></td>
 			</tr><?

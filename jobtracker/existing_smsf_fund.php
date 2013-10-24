@@ -62,11 +62,11 @@ if(isset($_SESSION['jobId']))
             { 
                 //if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
                 if(isset($_POST['fund_status']) && $_POST['fund_status'] == 1)
-                    header('Location: jobs.php?a=pending');
+                    header('Location: jobs_pending.php');
                 else if(isset($_POST['preview']) && $_POST['preview'] == 1) 
                     header('Location: setup_preview.php');
                 else
-                    header('Location: jobs.php?a=saved');
+                    header('Location: jobs_saved.php');
             }
             else {
                 echo "Sorry, Please try later.";
@@ -80,7 +80,7 @@ if(isset($_SESSION['jobId']))
             {
                 $objScr->generatePDF();
             }
-            header('Location: jobs.php?a=pending');
+            header('Location: jobs_pending.php');
         }
         
 	// if data is already entered for current session then set variables

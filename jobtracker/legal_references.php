@@ -71,7 +71,7 @@ if(isset($_SESSION['jobId'])) {
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
                             {
                                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                                header('Location: jobs.php?a=saved');
+                                header('Location: jobs_saved.php');
                             }
                             else
                                 header('Location: new_smsf_declarations.php');
@@ -81,7 +81,7 @@ if(isset($_SESSION['jobId'])) {
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
                             {
                                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                                header('Location: jobs.php?a=saved');
+                                header('Location: jobs_saved.php');
                             }
                             else
                                 header('Location: new_smsf_trustee.php');

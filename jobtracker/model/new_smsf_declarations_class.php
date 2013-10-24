@@ -70,9 +70,8 @@ class DECLARATIONS
             $flagReturn = mysql_query($stQry);
 
             // add new task
-            include(MODEL."job_class.php");
-            $objJob = new Job();
             $objJob->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
+            
             // send mail for new task
             new_job_task_mail();
             

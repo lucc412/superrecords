@@ -95,10 +95,6 @@ if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'update') {
 		header("Location: queries.php?flagUpdate=A&lstJob={$_REQUEST['lstJob']}");
 	}*/
 }
-else if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'download') {
-	$objScr->doc_download($_REQUEST["filePath"]);
-	header("Location: queries.php");
-}
 else if(!empty($_REQUEST["action"]) && $_REQUEST["action"] == 'deleteDoc') {
 	$objScr->delete_doc($_REQUEST["filePath"]);
 	header("Location: queries.php");

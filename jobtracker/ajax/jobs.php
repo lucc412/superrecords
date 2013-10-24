@@ -3,12 +3,12 @@
 //  Task          : Functions to select sub activities of passed master activities
 //  Modified By   : Disha Goyal
 //  Created on    : 05-Feb-13
-//  Last Modified : 05-Feb-13
+//  Last Modified : 22-Oct-13
 //************************************************************************************************
 
 
 include $_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/connection.php';
-//include 'jobtracker/include/connection.php';
+include $_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/php_functions.php';
 
 $doAction = $_REQUEST['doAction'];
 $itemId = $_REQUEST['itemId'];
@@ -18,10 +18,7 @@ switch($doAction) {
 			$returnStr = sql_select_subActivity($itemId);
 			break;
         case 'search':
-        
-            include($_SERVER['DOCUMENT_ROOT'].'/jobtracker/model/job_class.php');
-            $objJobClass = new Job();
-            $clientsJSON = $objJobClass->search_clients();
+            $clientsJSON = search_clients();
 
             echo $clientsJSON; 
 

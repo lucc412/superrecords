@@ -11,7 +11,7 @@ include(TOPBAR);
 </div><?
 
 // content
-?><form name="objForm" id="objForm" method="post" action="jobs.php">
+?><form name="objForm" id="objForm" method="post" action="audit_checklist.php">
 	<input type="hidden" name="sql" value="checklistSelection"><?
 	foreach($arrChecklist AS $checklistId => $checklistInfo) {
 		$arrChcklst = stringToArray(":", $checklistInfo);
@@ -24,7 +24,7 @@ include(TOPBAR);
 		?><p class="pdB8"><input class="checkboxClass" <?=$defaultChckd?> type="checkbox" name="checklist<?=$checklistId?>"><span class="checklistlabel pdL10"><?=$arrChcklst[0];?></span></p><?
 	}
 	?><div class="pdT20">
-		<span class="pdR20"><button type="reset" onclick="window.location.href='jobs.php?a=audit'" value="Reset">Back</button></span>
+		<span class="pdR20"><button type="reset" onclick="window.location.href='audit.php'" value="Reset">Back</button></span>
 		<span><button name="button" type="submit" value="next">Next</button></span>
 	</div>
 </form><?

@@ -1,4 +1,11 @@
 <?
+/* for test site */
+define("ENCRYPTION", "http://");
+
+/* for live site */
+//define("ENCRYPTION", "https://");
+
+define("DIR", ENCRYPTION.$_SERVER['HTTP_HOST']."/jobtracker/");
 define("EDITICON", "<img src='images/edit.png' height='25px' width='22px'>");
 define("QUERY", "<img src='images/q.png'>");
 define("UPLOAD", "<img src='images/upload.jpg'>");
@@ -14,6 +21,7 @@ define('PHPFUNCTION',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/php_function
 define('MODEL',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/model/');
 define('VIEW',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/view/');
 define('UPLOADSETUP',$_SERVER['DOCUMENT_ROOT'].'/uploads/setup/');
+define('DOWNLOAD',DIR.'include/download.php');
 define("SETUPNAVIGATION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/view/setup_navigation.php");
 define("ICOPDF", "<img style='padding-right:2px' src='images/pdf.png'>");
 define("ICOTXT", "<img style='padding-right:2px' src='images/txt.jpg'>");

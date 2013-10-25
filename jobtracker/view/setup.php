@@ -59,12 +59,12 @@ $(document).ready(function(){
         <h1 style="font-size: 15px;color: #F05729"><?=$subforms['form_name']?></h1>
         <br>
         <ul>
-        <?php foreach($subforms['subforms'] as $frm => $frmVal){    ?>
-            <li>
+        <?php foreach($subforms['subforms'] as $frm => $frmVal){    
+            ?><li>
                 <div style="width: 550px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?=$frmVal['subform_name']?></span></div>
                 <div style="width: 60px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?='$'.$frmVal['subform_price'];?></span></div><?
                 if(!empty($frmVal['subform_url'])) {
-                    ?><button style="width: 82px;margin: 0" onclick='window.location.href="setup/holding_trust/<?=$frmVal['subform_url']?>?frmId=<?=$frmVal['subform_id']?>"' >Order</button><?
+                    ?><button style="width: 82px;margin: 0" onclick='window.location.href="<?=$frmVal['subform_url']?>?frmId=<?=$frmVal['subform_id']?>"' >Order</button><?
                 }
                 else {
                     ?><button style="width: 82px;margin: 0" class="orderBtn">Order</button><?

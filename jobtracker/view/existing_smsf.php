@@ -21,7 +21,7 @@ include(SETUPNAVIGATION);
 </div>
 
 <div class="pdT20">
-    <?php if(empty($_SESSION['jobId'])){ ?><span align="left"><button type="button" onclick="window.location.href='jobs.php?a=order'" value="BACK" />Back</button></span><?php } ?>
+    <?php if(empty($_SESSION['jobId'])){ ?><span align="left"><button type="button" onclick="window.location.href='setup.php'" value="BACK" />Back</button></span><?php } ?>
     <span align="right" style="<?php if(!isset($_SESSION['jobId'])){ echo'padding-left:55px;'; } ?>"><button type="submit" id="btnNext" >Next</button></span>
 </div>
 </form>

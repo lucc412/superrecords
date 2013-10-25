@@ -37,8 +37,6 @@ switch ($sql) {
 				$subject = $arrEmailInfo['event_subject'];
 				$content = $arrEmailInfo['event_content'];
 				$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], $clientId);
-				
-				include_once(MAIL);
 				send_mail($from, $to, $cc, $bcc, $subject, $content);
 			}
 			/* send mail function ends here */

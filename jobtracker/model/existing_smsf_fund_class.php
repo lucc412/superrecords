@@ -18,6 +18,35 @@ class EXISTING_SMSF_FUND
 		}
 		return $arrStates;
 	}
+        
+        public function fetch_job_data($jobId) {
+		$qryUpd = "SELECT jb.client_id, jb.mas_Code, jb.job_type_id, CONCAT_WS(' - ', cl.client_name, jb.period, sa.sub_Description)task_name
+                            FROM client cl, sub_subactivity sa, job jb
+                            WHERE jb.job_id = {$_SESSION['jobId']}
+                            AND jb.client_id = cl.client_id
+                            AND jb.job_type_id = sa.sub_Code";
+
+		$objResult = mysql_query($qryUpd);
+		while($rowInfo = mysql_fetch_assoc($objResult)) {
+			$arrJobData = $rowInfo;
+		}
+
+		return $arrJobData;
+	}
+
+	public function add_new_task($practiceId, $jobId) {
+		$arrJobData = $this->fetch_job_data($jobId);
+	
+		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code) 
+                            VALUES ('" . $arrJobData['task_name'] . "',
+                            '" . $practiceId . "',
+                            '" . $arrJobData['client_id'] . "',
+                            '" . $jobId . "',
+                            '" . $arrJobData['mas_Code'] . "',
+                            '" . $arrJobData['job_type_id'] . "'
+                            )";
+		mysql_query($qryIns);			
+	}
 
 	// function to existing fetch contact details
 	function fetchExistingDetails($signupId) {
@@ -121,8 +150,8 @@ class EXISTING_SMSF_FUND
             mysql_query($stQry);
 
             // add new task
-            include(MODEL."job_class.php");
-            $objJob = new Job();
+            include(MODEL."compliance_class.php");
+            $objJob = new COMPLIANCE();
             $objJob->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
 
             // send mail for new task

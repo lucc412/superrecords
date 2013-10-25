@@ -6,7 +6,7 @@ include(MODEL . "new_smsf_class.php");
 $objNewSmsf = new NEW_SMSF();
 
 // update checkbox case.
-if(isset($_SESSION["jobId"]) && $_REQUEST['flagUpdate']=='Y')
+if(!empty($_SESSION["jobId"]) && $_REQUEST['flagUpdate']=='Y')
 {
     $objNewSmsf->updateCheckbox(); 
     header('location: new_smsf_contact.php');
@@ -14,15 +14,7 @@ if(isset($_SESSION["jobId"]) && $_REQUEST['flagUpdate']=='Y')
 // insert Job details
 else if(isset($_REQUEST['job_type']) && $_REQUEST['job_type'] == 'SETUP')
 {
-    // Insert Job Details
-    $arrJobReq['lstClientType'] = NULL;
-    $arrJobReq['lstJobType'] = 21;
-    $arrJobReq['lstCliType'] = 25;
-    $arrJobReq['type'] = $_REQUEST['job_type'];
-    $arrJobReq['subfrmId'] = $_SESSION['frmId'];
-    $arrJobReq['txtPeriod'] = 'Year End 30/06/'. date('Y');
-    
-    $jobId = insertJobDetails($arrJobReq);
+    $jobId = $objNewSmsf->insertJob();
     $objNewSmsf->insertCheckbox($_SESSION['frmId'],$jobId);
     if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
         $_SESSION['jobId'] = $jobId;

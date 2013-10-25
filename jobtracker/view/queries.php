@@ -83,7 +83,7 @@ include(TOPBAR);
 					if(!empty($arrInfo["report_file_path"]))
 					{
                                             $icon = returnFileIcon($arrInfo['report_file_path']);
-                                            ?><p><?=$icon?><a href="queries.php?action=download&flagType=SRQ&filePath=<?=urlencode($arrInfo['report_file_path'])?>" title="Click to view this document">Document</a></p><?
+                                            ?><p><?=$icon?><a href="<?=DOWNLOAD?>?folderPath=SRQ&fileName=<?=urlencode($arrInfo['report_file_path'])?>" title="Click to view this document">Document</a></p><?
 					}
 					?></td>
 					
@@ -94,7 +94,7 @@ include(TOPBAR);
 					}
 					else {
 						$icon = returnFileIcon($arrInfo['file_path']);
-						?><p><?=$icon?><a href="queries.php?action=download&flagType=PRQ&filePath=<?=urlencode($arrInfo['file_path'])?>" title="Click to view this document">Document</a></p><?
+						?><p><?=$icon?><a href="<?=DOWNLOAD?>?folderPath=PRQ&fileName=<?=urlencode($arrInfo['file_path'])?>" title="Click to view this document">Document</a></p><?
 					}
 					?></td>
 					<td class="tddata" align="center"><button type="button" style="width:100px;" onclick="javascript:updateQuery(<?=$queryId?>);" value="Save">Save</button></td>

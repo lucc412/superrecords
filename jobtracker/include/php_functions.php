@@ -324,8 +324,6 @@ function new_job_task_mail()
 		$subject = $arrEmailInfo['event_subject'];
 		$content = $arrEmailInfo['event_content'];
 		$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_SESSION['jobId']);
-
-		include_once(MAIL);
 		send_mail($from, $to, $cc, $bcc, $subject, $content);
 	}
 	/* send mail function ends here */	
@@ -351,8 +349,6 @@ function new_job_task_mail()
 		$subject = $arrEmailInfo['event_subject'];
 		$content = $arrEmailInfo['event_content'];
 		$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_SESSION['jobId']);
-
-		include_once(MAIL);
 		send_mail($from, $to, $cc, $bcc, $subject, $content);
 	}
 	/* send mail function ends here */	
@@ -602,58 +598,6 @@ function fetchCountries()
         }
         return $arrStates;
 }
-// this function is used to insert job details into Job table 
-function insertJobDetails($details) 
-{
-    $clientId = $details['lstClientType'];
-    $typeId = $details['lstJobType'];
-    $period = $details['txtPeriod'];
-    $cliType = $details['lstCliType'];
-    $notes = $details['txtNotes'];
-    $jobGenre = $details['type'];
-    $setup_subfrm = $details['subfrmId'];
-
-    if($jobGenre == 'COMPLIANCE') {
-            $jobSubmitted = 'Y';
-            $jobReceived = date('Y-m-d');
-            $job_due_date = date('Y-m-d', strtotime("+2 week"));
-    }
-    else if($jobGenre == 'AUDIT') {
-            $jobSubmitted = 'N';
-            $jobReceived = date('Y-m-d');
-            $job_due_date = date('Y-m-d', strtotime("+5 days"));
-    }
-    else {
-            $jobSubmitted = 'N';
-            $jobReceived = 'NULL';
-            $job_due_date = "0000-00-00 00:00:00";
-    }
-
-    $jobName = $clientId .'::'. $period .'::'. $typeId;
-        if(empty($clientId) && empty($period))$jobName=NULL;
-
-        $qryIns = "INSERT INTO job(client_id, job_genre, job_submitted, mas_Code, job_type_id, period, notes, job_name, job_status_id, setup_subfrm_id, job_created_date, job_received, job_due_date)
-                                VALUES (
-                                '" . $clientId . "', 
-                                '" . $jobGenre . "', 
-                                '" . $jobSubmitted . "', 
-                                " . $cliType . ", 
-                                " . $typeId . ", 
-                                '" . $period . "',  
-                                '" . $notes . "',
-                                '" . $jobName . "',  
-                                1,   
-                                '".$setup_subfrm."',    
-                                '".date('Y-m-d')."',            
-                                '".$jobReceived."',
-                                '".$job_due_date."'
-                                )";
-
-        mysql_query($qryIns);
-        $jobId = mysql_insert_id();
-        
-        return $jobId;
-}
 
 function fetchSubForm()
 {
@@ -666,5 +610,46 @@ function fetchSubForm()
     }
     
     return $arrSubfrms;
+}
+
+// Client list in json form
+function search_clients() {		
+
+        $qrySel = "SELECT t1.client_id, t1.client_name
+                    FROM client t1
+                    WHERE id = '{$_SESSION['PRACTICEID']}'
+                    AND t1.client_name LIKE '%".$_REQUEST['name']."%'
+                    ORDER BY t1.client_name";
+
+        $fetchResult = mysql_query($qrySel);		
+        while($rowData = mysql_fetch_assoc($fetchResult)) {
+                $arrClients[$rowData['client_id']] = $rowData['client_name'];
+        }
+
+        $result = array();
+        foreach ($arrClients as $key=>$value)
+        array_push($result, array("id"=>$key, "value" =>$value));
+
+        $clientsJSON = json_encode($result);
+
+        if(empty($clientsJSON))
+            $clientsJSON = '';
+
+
+        return $clientsJSON;	
+}
+
+// fetch al clients specific to practice
+function getclientlist() {
+        $qrySel = "SELECT t1.client_id, t1.client_name
+                    FROM client t1
+                    WHERE t1.id = '{$_SESSION['PRACTICEID']}'
+                    ORDER BY t1.client_name";
+
+        $fetchResult = mysql_query($qrySel);		
+        while($rowData = mysql_fetch_assoc($fetchResult)) {
+                $arrClients[$rowData['client_id']] = $rowData['client_name'];
+        }
+        return $arrClients;	
 }
 ?>

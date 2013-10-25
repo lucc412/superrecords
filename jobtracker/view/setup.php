@@ -64,8 +64,12 @@ $(document).ready(function(){
                 <div style="width: 550px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?=$frmVal['subform_name']?></span></div>
                 <div style="width: 60px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?='$'.$frmVal['subform_price'];?></span></div><?
                 if(!empty($frmVal['subform_url'])) {
+<<<<<<< HEAD:jobtracker/view/order_docs.php
                     
                     ?><button style="width: 82px;margin: 0" onclick='window.location.href="setup/<?=$frmVal['subform_url']?>?frmId=<?=$frmVal['subform_id']?>"' >Order</button><?
+=======
+                    ?><button style="width: 82px;margin: 0" onclick='window.location.href="setup/holding_trust/<?=$frmVal['subform_url']?>?frmId=<?=$frmVal['subform_id']?>"' >Order</button><?
+>>>>>>> c88fe14f7d105e1493d38892f6e417e344efa2d4:jobtracker/view/setup.php
                 }
                 else {
                     ?><button style="width: 82px;margin: 0" class="orderBtn">Order</button><?

@@ -23,6 +23,26 @@ class NEW_SMSF
         return $arrSMSF;
     }
     
+    // this function is used to insert job details into Job table 
+    function insertJob($details) 
+    {
+        $qryIns = "INSERT INTO job(job_genre, mas_Code, job_type_id, period, job_status_id, setup_subfrm_id, job_created_date)
+                    VALUES ( 
+                    'SETUP', 
+                    '25', 
+                    '21', 
+                    'Year End 30/06/". date('Y') . "',  
+                    1,   
+                    1,    
+                    '".date('Y-m-d')."'
+                    )";
+
+        mysql_query($qryIns);
+        $jobId = mysql_insert_id();
+
+        return $jobId;
+    }
+    
     public function updateCheckbox()
     {
         $cbVal = 0;

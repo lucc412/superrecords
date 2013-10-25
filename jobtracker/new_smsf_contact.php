@@ -35,7 +35,7 @@ if(isset($_POST['flaginit']) && $_POST['flaginit'] =='add') {
             if(isset($_POST['cont_status']) && $_POST['cont_status'] == 1)
             {
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                header('Location: jobs.php?a=saved');
+                header('Location: jobs_saved.php');
             }
             else    
 		header('Location: new_smsf_fund.php');
@@ -93,16 +93,6 @@ else if(!empty($arrData['phoneno'])) {
 else {
 	$phoneno = "";
 }
-
-//if(isset($_REQUEST['lstState'])) {
-//	$stateId = $_REQUEST['lstState'];
-//}
-//else if(!empty($arrData['state_id'])) {
-//	$stateId = $arrData['state_id'];
-//}
-//else {
-//	$stateId = "";
-//}
 
 // include view file
 include(VIEW . "new_smsf_contact.php");

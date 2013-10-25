@@ -21,7 +21,7 @@ include(TOPBAR);
 </div><?
 
 // content
-?><form name="objForm" id="objForm" method="post" action="jobs.php" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data"><?
+?><form name="objForm" id="objForm" method="post" action="audit.php" onSubmit="javascript:return checkValidation();" enctype="multipart/form-data"><?
 	if(empty($arrJobInfo)) {
 		?><input type="hidden" name="sql" value="insertJob"><?
 	}
@@ -35,16 +35,8 @@ include(TOPBAR);
 		<tr>
 			<td width="225px"><strong>Client</strong></td>
 			<td>
-<!--				<select name="lstClientType" id="lstClientType" title="Select client">
-					<option value="0">Select Client</option><?php
-					foreach($arrClients AS $clientId => $clientName){
-						$selectStr = '';
-						if($clientId == $dbClientId) $selectStr = 'selected';
-						?><option <?=$selectStr?> value="<?=$clientId?>"><?=$clientName?></option><?php 
-					}
-				?></select>-->
-                                <input type="text" name="lstClientTypeSearch" id="lstClientTypeSearch" value="<?=$arrClients[$dbClientId]?>"  />
-                                <input type="hidden" name="lstClientType" id="lstClientType" value="<?=$dbClientId?>"/>
+                            <input type="text" name="lstClientTypeSearch" id="lstClientTypeSearch" value="<?=$dbClientName?>"  />
+                            <input type="hidden" name="lstClientType" id="lstClientType" value="<?=$dbClientId?>"/>
 			</td>
 		</tr>
 

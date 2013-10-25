@@ -79,7 +79,7 @@ include(STND_COMP_NAV);
 </div>
 
 <div class="pdT20">
-    <?php if(empty($_SESSION['jobId'])){ ?><span align="left"><button type="button" onclick="window.location.href='<?=DIR?>jobs.php?a=order'" value="BACK" />Back</button></span><? } ?>
+    <?php if(empty($_SESSION['jobId'])){ ?><span align="left"><button type="button" onclick="window.location.href='<?=DIR?>setup.php'" value="BACK" />Back</button></span><? } ?>
     <span align="right" style="<?php if(!isset($_SESSION['jobId'])){ echo'padding-left:55px;'; } ?>"><button type="submit" id="btnNext" name="btnNext" value="submit">Next</button></span>
 </div>
 </form>

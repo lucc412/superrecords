@@ -117,9 +117,9 @@ class Query {
 
 	public function fetchJobId($queryId) {		
  		$qrySel = "SELECT j.job_id jobId
-					FROM job j, queries q
-					WHERE j.job_id = q.job_id
-					AND q.query_id = {$queryId}";
+                            FROM job j, queries q
+                            WHERE j.job_id = q.job_id
+                            AND q.query_id = {$queryId}";
 
 		$fetchResult = mysql_query($qrySel);		
 		$rowData = mysql_fetch_assoc($fetchResult);
@@ -130,9 +130,9 @@ class Query {
 
 	public function fetchType() {		
  		$qrySel = "SELECT sa.sub_Code, sa.sub_Description
-					FROM mas_masteractivity ma, sub_subactivity sa
-					WHERE ma.mas_Code = sa.sas_Code
-					ORDER BY sa.sub_Order";
+                            FROM mas_masteractivity ma, sub_subactivity sa
+                            WHERE ma.mas_Code = sa.sas_Code
+                            ORDER BY sa.sub_Order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -145,8 +145,8 @@ class Query {
 		$responseDate = date('Y-m-d');
 
 		$qryUpd = "UPDATE queries
-					SET response = '" . addslashes($_REQUEST['txtResponse'.$queryId]) . "',date_answered= '" .$responseDate. "'
-					WHERE query_id = '" . $queryId . "'";
+                            SET response = '" . addslashes($_REQUEST['txtResponse'.$queryId]) . "',date_answered= '" .$responseDate. "'
+                            WHERE query_id = '" . $queryId . "'";
 			
 		mysql_query($qryUpd);
 
@@ -206,32 +206,6 @@ class Query {
 				}
 			}
 		}
-	}
-
-	public function doc_download($fileName)
-	{
-		if($_REQUEST['flagType'] == 'PRQ')
-			$folderPath = "../uploads/queries/" . $fileName;
-		
-		if($_REQUEST['flagType'] == 'SRQ')
-			$folderPath = "../uploads/srqueries/" . $fileName;
-			
-		$arrFileName = stringToArray('~', $fileName);
-		$origFileName = $arrFileName[1];
-		header("Expires: 0");
-		header("Last-Modified: " . gmdate("D, d M Y H:i(worry)") . " GMT");  
-		header("Cache-Control: no-store, no-cache, must-revalidate");  
-		header("Cache-Control: post-check=0, pre-check=0", false);  
-		header("Pragma: no-cache");
-		header("Content-type: application/doc");  
-		// tell file size  
-		header('Content-length: '.filesize($folderPath));  
-		// set file name  
-		header('Content-disposition: attachment; filename="'.$origFileName.'"');  
-		readfile($folderPath);  
-		 
-		// Exit script. So that no useless data is output-ed.  
-		exit;   
 	}
 
 	public function delete_doc($filePath) {

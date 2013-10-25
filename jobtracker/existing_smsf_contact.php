@@ -73,7 +73,7 @@
                     if(isset($_POST['cont_status']) && $_POST['cont_status'] == 1)
                     {
                         if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                        header('Location: jobs.php?a=saved');
+                        header('Location: jobs_saved.php');
                     }
                     else
                         header('Location: existing_smsf_fund.php');

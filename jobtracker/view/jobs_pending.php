@@ -9,9 +9,10 @@ include(TOPBAR);
         <b>Welcome to the Super Records pending job list.</b></br>Below you can see all pending jobs for your practice as well as their current status.
         <span>
             </div><?
-                ?><form name="objForm" method="post" action="jobs.php">
+                ?><form name="objForm" method="post" action="jobs_pending.php">
                 <input type="hidden" name="a" value="pending"><?
-                // client drop-down
+                
+                // client drop-down for filter
                 ?><table width="100%">
                     <tr>
                         <td align="right">
@@ -48,57 +49,56 @@ include(TOPBAR);
                             else
                                 $trClass = "";
                             ?><tr class="<?= $trClass ?>"><?
-                                $arrJobParts = stringToArray('::', $arrJobDetails['job_name']);
-                                $jobName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
+                                $jobName = $arrJobDetails['job_name'];
                                 ?><td class="tddata"><?= $jobName ?></td>
 
-                                <td class="tddata"><?= $arrJobStatus[$arrJobDetails['job_status_id']] ?></td>
+                                <td class="tddata"><?=$arrJobDetails['job_status']?></td>
 
                                 <td class="tddata"><?
-                                    $arrSourceDocs = $objScr->fetch_documents($jobId);
+                                    $arrSourceDocs = $arrAllDocs[$jobId];
                                     if (!empty($arrSourceDocs)) {
                                         foreach ($arrSourceDocs AS $documentId => $arrDocInfo) {
                                             $icon = returnFileIcon($arrDocInfo['file_path']);
                                             if ($arrDocInfo['job_genre'] == 'AUDIT') {
                                                 $folderPath = "../uploads/audit/" . $arrDocInfo['file_path'];
                                                 if (file_exists($folderPath)) {
-                                                    ?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?= urlencode($arrDocInfo['file_path']) ?>&flagChecklist=A" title="Click to view this document"><?= $arrDocInfo['document_title'] ?></a></p><?
+                                                    ?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?= urlencode($arrDocInfo['file_path']) ?>&folderPath=A" title="Click to view this document"><?= $arrDocInfo['document_title'] ?></a></p><?
                                                 }
                                             } else if ($arrDocInfo['job_genre'] == 'SETUP') {
                                                 $folderPath = "../uploads/setup/" . $arrDocInfo['file_path'];
                                                 if (file_exists($folderPath)) {
-                                                    ?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?= urlencode($arrDocInfo['file_path']) ?>&flagChecklist=ST" title="Click to view this document"><?= $arrDocInfo['document_title'] ?></a></p><?
+                                                    ?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?= urlencode($arrDocInfo['file_path']) ?>&folderPath=ST" title="Click to view this document"><?= $arrDocInfo['document_title'] ?></a></p><?
                                                         }
                                                     } else {
                                                         $folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
                                                         if (file_exists($folderPath)) {
-                                                            ?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?= urlencode($arrDocInfo['file_path']) ?>&flagChecklist=S" title="Click to view this document"><?= $arrDocInfo['document_title'] ?></a></p><?
+                                                            ?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?= urlencode($arrDocInfo['file_path']) ?>&folderPath=S" title="Click to view this document"><?= $arrDocInfo['document_title'] ?></a></p><?
                                                         }
                                                     }
                                                 }
                                             }
                                 ?></td>
                                 <td class="tddata"><?
-                                    $arrReports = $objScr->fetch_reports($jobId);
+                                    $arrReports = $arrAllReports[$jobId];
                                     if (!empty($arrReports)) {
                                         foreach ($arrReports AS $reportId => $arrReportInfo) {
                                             $icon = returnFileIcon($arrReportInfo['file_path']);
                                             $folderPath = "../uploads/reports/" . $arrReportInfo['file_path'];
                                             if (file_exists($folderPath)) {
-                                                ?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?= urlencode($arrReportInfo['file_path']) ?>&flagChecklist=R" title="Click to view this document"><?= $arrReportInfo['report_title'] ?></a></p><?
+                                                ?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?= urlencode($arrReportInfo['file_path']) ?>&folderPath=R" title="Click to view this document"><?= $arrReportInfo['report_title'] ?></a></p><?
                                             }
                                         }
                                     }
                                     ?></td>
-                                <td class="tddata" align="center"><?= $arrJobDetails['job_received'] ?></td>
+                                <td class="tddata" align="center"><?=$arrJobDetails['job_received']?></td>
 
                                 <td class="tddata" style="width:15px" align="center"><?
                                     if ($arrJobDetails['job_genre'] != 'SETUP') {
-                                        ?><a href="jobs.php?a=uploadDoc&lstJob=<?= $jobId ?>" title="Click to upload additional documents"><?= UPLOAD ?></a><?
+                                        ?><a href="jobs_doc_upload.php?lstJob=<?= $jobId ?>" title="Click to upload additional documents"><?= UPLOAD ?></a><?
                                     }
                                 ?></td>
                                 <td class="tddata" style="width:15px" align="center"><?
-                                    $flagQueryExists = $objScr->fetch_queries($jobId);
+                                    $flagQueryExists = $arrAllQueryCnt[$jobId];
                                     if (!empty($flagQueryExists)) {
                                         ?><a target="_blank" href="queries.php?lstJob=<?= $jobId ?>&lstCliType=<?= $arrJobDetails['client_id'] ?>" title="Click to view queries"><?= QUERY ?></a><?
                                     }

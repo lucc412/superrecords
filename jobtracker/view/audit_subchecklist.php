@@ -6,18 +6,18 @@ include(TOPBAR);
 ?><div class="pageheader" style="padding-bottom:0px;">
 	<h1>Checklist for Audit</h1>
 	<div>
-		<span>
-			<b>Welcome to Super Records Audit checklist section.</b></br>Please click on below selected categories to view the checklists & upload documents against each category as applicable. If you would like to upload multiple documents or files for this particular job, please select <i>Upload Multiple Documents</i> button.
-			<div align="right">
-				<span class="pdR20"><button style="width:205px" type="button" title="click here to manage documents" onclick="JavaScript:newPopup('jobs.php?a=uploadAudit','400');">Upload Multiple Documents</button></span>
-				<button title="click here to download your preferred checklist" type="button" onclick="javascript:urlRedirect('jobs.php?sql=dwnldchcklst');">Download Checklist</button>
-			</div>
-		</span>
+            <span>
+                <b>Welcome to Super Records Audit checklist section.</b></br>Please click on below selected categories to view the checklists & upload documents against each category as applicable. If you would like to upload multiple documents or files for this particular job, please select <i>Upload Multiple Documents</i> button.
+                <div align="right">
+                        <span class="pdR20"><button style="width:205px" type="button" title="click here to manage documents" onclick="JavaScript:popUp('audit_upload.php','400','600');">Upload Multiple Documents</button></span>
+                        <button title="click here to download your preferred checklist" type="button" onclick="javascript:urlRedirect('audit_subchecklist.php?sql=dwnldchcklst');">Download Checklist</button>
+                </div>
+            </span>
 	</div>
 </div><?
 
 // content
-?><form name="objForm" id="objForm" method="post" action="jobs.php"><?
+?><form name="objForm" id="objForm" method="post" action="audit_subchecklist.php"><?
 	if(empty($arrDocDetails)) {
 		?><input type="hidden" name="sql" value="insertAudit"><?
 	}
@@ -49,7 +49,7 @@ include(TOPBAR);
 								$strAttached = "";
 								if($arrDocDetails[$subChecklistId]['status'] == 'ATTACHED') $strAttached = "color:#073f61";
 								?><td class="tddata" style="width:400px;<?=$strAttached?>" id="subchecklist"><?=$subChecklistName?></td>
-								<td class="tddata" align="center"><a href="javascript:;" onclick="JavaScript:newPopup('jobs.php?a=uploadSubAudit&checklistId=<?=$checklistId?>&subchecklistId=<?=$subChecklistId?>','250');" title="click here to upload documents"><?=UPLOAD?></a></td>
+								<td class="tddata" align="center"><a href="javascript:;" onclick="JavaScript:popUp('subaudit_upload.php?checklistId=<?=$checklistId?>&subchecklistId=<?=$subChecklistId?>','250','600');" title="click here to upload documents"><?=UPLOAD?></a></td>
 								<td class="tddata"><?
 									$arrSubDocuments = $arrSubDocList[$subChecklistId];
 									if(!empty($arrSubDocuments)) {
@@ -60,7 +60,7 @@ include(TOPBAR);
 											$folderPath = "../uploads/audit/" . $docPath;
 											if(file_exists($folderPath)) {
                                                                                                 $icon = returnFileIcon($docPath);
-												?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?=urlencode($docPath)?>&flagChecklist=A" title="Click to view this document"><?=$docName?></a></p><?
+												?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?=urlencode($docPath)?>&folderPath=A" title="Click to view this document"><?=$docName?></a></p><?
 											}
 										}
 									}
@@ -92,7 +92,7 @@ include(TOPBAR);
 			</div><?
 		}
 		?><div class="pdT20">
-			<span class="pdR20"><button type="reset"  onclick="window.location.href='jobs.php?a=checklist'" value="Reset">Back</button></span>
+			<span class="pdR20"><button type="reset"  onclick="window.location.href='audit_checklist.php'" value="Reset">Back</button></span>
 			<span class="pdR20"><button name="button"  type="submit" value="Save">Save & Exit</button></span>
 			<span><button name="button"  type="submit" value="Submit">Submit</button></span>
 		</div>

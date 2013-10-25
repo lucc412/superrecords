@@ -72,7 +72,7 @@ if(isset($_SESSION['jobId'])) {
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
                             {
                                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                                header('Location: jobs.php?a=saved');
+                                header('Location: jobs_saved.php');
                             }
                             elseif ($legRefernces > 0) 
                             {
@@ -86,7 +86,7 @@ if(isset($_SESSION['jobId'])) {
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
                             {
                                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                                header('Location: jobs.php?a=saved');
+                                header('Location: jobs_saved.php');
                             }
                             elseif ($legRefernces > 0) 
                             {

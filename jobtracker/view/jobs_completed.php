@@ -10,7 +10,7 @@ include(TOPBAR);
 	<span>
 </div><?
 
-?><form name="objForm" method="post" action="jobs.php">
+?><form name="objForm" method="post" action="jobs_completed.php">
 	<input type="hidden" name="a" value="completed"><?
 		
 	// client drop-down
@@ -51,46 +51,43 @@ include(TOPBAR);
 			else $trClass = "";
 
 			?><tr class="<?=$trClass?>"><?
-				$arrJobParts = stringToArray('::', $arrJobDetails['job_name']);
-				$jobName = $arrClients[$arrJobParts[0]] . ' - ' . $arrJobParts[1] . ' - ' . $arrJobType[$arrJobParts[2]];
-
-				?><td class="tddata"><?=$jobName?></td>
+				?><td class="tddata"><?=$arrJobDetails['job_name']?></td>
 
 				<td class="tddata"><?
-					$arrSourceDocs = $objScr->fetch_documents($jobId);
-						if(!empty($arrSourceDocs)) {
-							foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
-                                                                $icon = returnFileIcon($arrDocInfo['file_path']);
-								if($arrDocInfo['job_genre'] == 'AUDIT') {
-									$folderPath = "../uploads/audit/" . $arrDocInfo['file_path'];
-									if(file_exists($folderPath)) {
-										?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=A" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
-									}
-								}
-								else if($arrDocInfo['job_genre'] == 'SETUP') {
-									$folderPath = "../uploads/setup/" . $arrDocInfo['file_path'];
-									if(file_exists($folderPath)) {
-										?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=ST" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
-									}
-								}
-								else {
-									$folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
-									if(file_exists($folderPath)) {
-										?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?=urlencode($arrDocInfo['file_path'])?>&flagChecklist=S" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
-									}
-								}
-							}
-						}
+					$arrSourceDocs = $arrAllDocs[$jobId];
+                                        if(!empty($arrSourceDocs)) {
+                                                foreach($arrSourceDocs AS $documentId => $arrDocInfo) {
+                                                        $icon = returnFileIcon($arrDocInfo['file_path']);
+                                                        if($arrDocInfo['job_genre'] == 'AUDIT') {
+                                                                $folderPath = "../uploads/audit/" . $arrDocInfo['file_path'];
+                                                                if(file_exists($folderPath)) {
+                                                                        ?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?=urlencode($arrDocInfo['file_path'])?>&folderPath=A" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+                                                                }
+                                                        }
+                                                        else if($arrDocInfo['job_genre'] == 'SETUP') {
+                                                                $folderPath = "../uploads/setup/" . $arrDocInfo['file_path'];
+                                                                if(file_exists($folderPath)) {
+                                                                        ?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?=urlencode($arrDocInfo['file_path'])?>&folderPath=ST" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+                                                                }
+                                                        }
+                                                        else {
+                                                                $folderPath = "../uploads/sourcedocs/" . $arrDocInfo['file_path'];
+                                                                if(file_exists($folderPath)) {
+                                                                        ?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?=urlencode($arrDocInfo['file_path'])?>&folderPath=S" title="Click to view this document"><?=$arrDocInfo['document_title']?></a></p><?
+                                                                }
+                                                        }
+                                                }
+                                        }
 				?></td>
 
 				<td class="tddata"><?
-					$arrReports = $objScr->fetch_reports($jobId);
+					$arrReports = $arrAllReports[$jobId];
 					if(!empty($arrReports)) {
 						foreach($arrReports AS $reportId => $arrReportInfo) {
                                                         $icon = returnFileIcon($arrReportInfo['file_path']);
 							$folderPath = "../uploads/reports/" . $arrReportInfo['file_path'];
 							if(file_exists($folderPath)) {
-								?><p><?=$icon?><a href="jobs.php?a=download&filePath=<?=urlencode($arrReportInfo['file_path'])?>&flagChecklist=R" title="Click to view this document"><?=$arrReportInfo['report_title']?></a></p><?
+								?><p><?=$icon?><a href="<?=DOWNLOAD?>?fileName=<?=urlencode($arrReportInfo['file_path'])?>&folderPath=R" title="Click to view this document"><?=$arrReportInfo['report_title']?></a></p><?
 							}
 						}
 					}
@@ -98,10 +95,10 @@ include(TOPBAR);
 
 				<td class="tddata" align="center"><?=$arrJobDetails['job_completed_date']?></td>
 
-				<td class="tddata viewquery" align="center"><?
-					$flagQueryExists = $objScr->fetch_queries($jobId);
+				<td class="tddata" align="center"><?
+					$flagQueryExists = $arrAllQueryCnt[$jobId];
 					if(!empty($flagQueryExists)) {
-						?><a target="_blank" href="queries.php?lstJob=<?=$jobId?>&lstCliType=<?=$arrJobDetails['client_id']?>" title="Click to view queries">View Queries</a><?
+						?><a target="_blank" href="queries.php?lstJob=<?=$jobId?>&lstCliType=<?=$arrJobDetails['client_id']?>" title="Click to view queries"><?= QUERY ?></a><?
 					}
 				?></td>
 			</tr><?

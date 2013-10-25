@@ -4,21 +4,21 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=9" />
-		<script src="js/jquery-1.9.1.js"></script>
-		<script src="js/jquery-ui.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/jquery-smoothness/jquery-ui-1.10.3.custom.min.css" />
+		<script src="<?=DIR?>js/jquery-1.9.1.js"></script>
+		<script src="<?=DIR?>js/jquery-ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?=DIR?>css/jquery-smoothness/jquery-ui-1.10.3.custom.min.css" />
 		<!--<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
 		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />-->
-		<link href="images/favicon.ico" rel="shortcut icon" />
+		<link href="<?=DIR?>images/favicon.ico" rel="shortcut icon" />
 		<!-- Main CSS-->
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+		<link rel="stylesheet" type="text/css" href="<?=DIR?>css/stylesheet.css"/>
 		<!-- Google Webfont -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 		<!--<link rel="stylesheet" type="text/css" href="css/tooltip.css"/>-->
-		<link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
-		<script type="text/javascript" src="js/datetimepicker_css.js"></script>
-		<script type="text/javascript" src="js/common.js"></script>
-                <script type="text/javascript" src="js/jquery.tooltipster.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?=DIR?>css/tooltipster.css" />
+		<script type="text/javascript" src="<?=DIR?>js/datetimepicker_css.js"></script>
+		<script type="text/javascript" src="<?=DIR?>js/common.js"></script>
+                <script type="text/javascript" src="<?=DIR?>js/jquery.tooltipster.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function() {
 			 $('.tooltip').tooltipster({
@@ -77,56 +77,56 @@
 				?><title>Submit new job</title><?
 			}
 			?>
-			<script type="text/javascript" src="js/job_validation.js"></script><?
+			<script type="text/javascript" src="<?=DIR?>js/job_validation.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf.php') {
 				?><title>New SMSF Details</title><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_contact.php') {
 				?><title>Contact Details</title>
-				<script type="text/javascript" src="js/new_smsf_contact.js"></script><?
+				<script type="text/javascript" src="<?=DIR?>js/new_smsf_contact.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_fund.php') {
 				?><title>Fund Details</title>
-				<script type="text/javascript" src="js/new_smsf_fund.js"></script><?
+				<script type="text/javascript" src="<?=DIR?>js/new_smsf_fund.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_member.php') {
 				?><title>Member Details</title>
-				<script type="text/javascript" src="js/new_smsf_member.js"></script><?
+				<script type="text/javascript" src="<?=DIR?>js/new_smsf_member.js"></script><?
 		}
         else if(basename($_SERVER['PHP_SELF']) == 'legal_references.php') {
 				?><title>Legal Personal Representative</title>
-				<script type="text/javascript" src="js/legal_references.js"></script><?
+				<script type="text/javascript" src="<?=DIR?>js/legal_references.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_trustee.php') {
 				?><title>Trustee Details</title>
-				<script type="text/javascript" src="js/new_smsf_trustee.js"></script><?
+				<script type="text/javascript" src="<?=DIR?>js/new_smsf_trustee.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_declarations.php') {
 				?><title>Declarations</title>
-				<script type="text/javascript" src="js/new_smsf_declarations.js"></script><?
+				<script type="text/javascript" src="<?=DIR?>js/new_smsf_declarations.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf.php') {
 				?><title>Existing SMSF Details</title><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_contact.php') {
 				?><title>Contact Details</title>
-				<script type="text/javascript" src="js/existing_smsf_contact.js"></script><?
+				<script type="text/javascript" src="<?=DIR?>js/existing_smsf_contact.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_fund.php') {
 				?><title>Fund Details</title>
-				<script type="text/javascript" src="js/existing_smsf_fund.js"></script><?
+				<script type="text/javascript" src="<?=DIR?>js/existing_smsf_fund.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'setup_preview.php') {
 			?><title>Preview</title><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'queries.php') {
 			?><title>View All Queries</title>
-			<script type="text/javascript" src="js/queries_validation.js"></script><?
+			<script type="text/javascript" src="<?=DIR?>js/queries_validation.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'template.php') {
 			?><title>Download Templates</title>
-			<script type="text/javascript" src="js/queries_validation.js"></script><?
+			<script type="text/javascript" src="<?=DIR?>js/queries_validation.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'clients.php') {
 			if($qryStr == 'a=add') {
@@ -138,8 +138,20 @@
 			else {
 				?><title>View My Client List</title><?
 			}
-			?><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-			<script type="text/javascript" src="js/client_validation.js"></script><?
+			?><script type="text/javascript" src="<?=DIR?>js/jquery-1.4.2.min.js"></script>
+			<script type="text/javascript" src="<?=DIR?>js/client_validation.js"></script><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'company_details.php') {
+			?><title>Company Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/company_details.js"></script><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'address_details.php') {
+			?><title>Company Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/address_details.js"></script><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'officer_details.php') {
+			?><title>Officer Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/officer_details.js"></script><?
 		}
 		else {
 			?><title>Home</title><?

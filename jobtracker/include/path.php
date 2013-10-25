@@ -1,4 +1,5 @@
 <?
+define('DIR',"http://".$_SERVER['HTTP_HOST']."/jobtracker/");
 define("EDITICON", "<img src='images/edit.png' height='25px' width='22px'>");
 define("QUERY", "<img src='images/q.png'>");
 define("UPLOAD", "<img src='images/upload.jpg'>");
@@ -15,6 +16,7 @@ define('MODEL',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/model/');
 define('VIEW',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/view/');
 define('UPLOADSETUP',$_SERVER['DOCUMENT_ROOT'].'/uploads/setup/');
 define("SETUPNAVIGATION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/view/setup_navigation.php");
+define("STND_COMP_NAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/include/stnd_comp_nav.php");
 define("ICOPDF", "<img style='padding-right:2px' src='images/pdf.png'>");
 define("ICOTXT", "<img style='padding-right:2px' src='images/txt.jpg'>");
 define("ICODOC", "<img style='padding-right:2px' src='images/doc.png'>");

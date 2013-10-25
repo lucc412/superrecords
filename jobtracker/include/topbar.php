@@ -10,7 +10,7 @@ include(HEADDATA);
 		?><div class="header">
 			<div class="container">
 				<div class="branding">
-					<a href="home.php"><img src="images/header-logo.png" /></a>
+					<a href="home.php"><img src="<?=DIR?>images/header-logo.png" /></a>
 				</div> <!--branding-->
 				<div class="user">        	
 					<span style="color:#074263">Welcome,</span> <span><?=$_SESSION['PRACTICE'];?></span>

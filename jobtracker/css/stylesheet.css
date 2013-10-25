@@ -157,7 +157,8 @@ a img{
 }
 
 /* Header */
-
+.show{ display: '';}
+.hide{ display: none;}
 /* Navigation */
 
 .nav .container ul { 

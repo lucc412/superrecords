@@ -155,6 +155,10 @@
 			?><title>Officer Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/officer_details.js"></script><?
 		}
+                else if(basename($_SERVER['PHP_SELF']) == 'shareholder_details.php') {
+			?><title>Shareholder Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/shareholder_details.js"></script><?
+		}
 		else {
 			?><title>Home</title><?
 		}

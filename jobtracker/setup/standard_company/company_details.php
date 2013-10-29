@@ -6,8 +6,10 @@ include("../../include/common.php");
 include("model/company_details_class.php");
 $objCompDtls = new COMPANY_DETAILS();
 // fetch existing company details from database.
-$_SESSION['jobId'] = 198;
+//$_SESSION['jobId'] = 198;
 
+
+$arrCompDtls = '';
 if(!empty($_SESSION['jobId']) || !empty($_REQUEST['recid']))
 {
     if(!empty($_REQUEST['recid'])) 
@@ -18,16 +20,30 @@ if(!empty($_SESSION['jobId']) || !empty($_REQUEST['recid']))
     
     $arrCompDtls = $objCompDtls->fetchCompDtls();
 }
-else if(!empty($_REQUEST['btnNext']) && $_REQUEST['btnNext'] == 'submit')
+
+if(!empty($_REQUEST['btnNext']) && $_REQUEST['btnNext'] == 'submit')
 {
-    showArray($_REQUEST);
+    
     showArray($arrCompDtls);
-    exit;
-    //$jobId = $objCompDtls->insertJobDetail();
-    if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
-        $_SESSION['jobId'] = $jobId;
+    
+    
+    if(empty($arrCompDtls))
+    {
         
-    $result = $objCompDtls->insertCompanyDetails();
+        //Insert Details to Job
+        $jobId = $objCompDtls->insertJobDetail();
+        if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
+            $_SESSION['jobId'] = $jobId;
+            
+        //Insert Details to Company    
+        $result = $objCompDtls->insertCompanyDetails();
+        
+    }
+    else
+    {
+        //Update Details to Company    
+        $result = $objCompDtls->updateCompanyDetails();             
+    }    
     
     if($result)
         header('location:address_details.php');

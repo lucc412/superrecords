@@ -12,6 +12,16 @@
  */
 class ADDRESS_DETAILS 
 {
+    
+    public function fetchAddrDtls()
+    {
+        $qry = "SELECT * FROM stp_adddress_dtls WHERE job_id = ".$_SESSION['jobId'];
+        $fetchResult = mysql_query($qry);
+        $rowData = mysql_fetch_assoc($fetchResult);
+                
+        return $rowData;
+    } 
+    
     //put your code here
     public function insertAddrDtls()
     {
@@ -44,6 +54,34 @@ class ADDRESS_DETAILS
         
         $result = mysql_query($qry);
         
+        return $result;
+    }
+    
+    public function updateAddrDtls()
+    {
+        $qry = "UPDATE stp_adddress_dtls  SET reg_add_unit = '".$_REQUEST['regAddUnit']."', 
+                                            reg_add_build = '".$_REQUEST['regAddBuild']."', 
+                                            reg_add_street = '".$_REQUEST['regAddStreet']."',
+                                            reg_add_subrb = '".$_REQUEST['regAddSubrb']."',
+                                            reg_add_state = '".$_REQUEST['regAddState']."',
+                                            reg_add_pst_code = '".$_REQUEST['regAddPstCode']."', 
+                                            is_comp_addr = '".$_REQUEST['selCompAddr']."', 
+                                            occp_name = '".$_REQUEST['txtOccpName']."', 
+                                            bsns_add_unit = '".$_REQUEST['busAddUnit']."',
+                                            bsns_add_build = '".$_REQUEST['busAddBuild']."', 
+                                            bsns_add_street = '".$_REQUEST['busAddStreet']."', 
+                                            bsns_add_subrb = '".$_REQUEST['busAddSubrb']."', 
+                                            bsns_add_state = '".$_REQUEST['busAddState']."', 
+                                            bsns_add_pst_code = '".$_REQUEST['busAddPstCode']."',
+                                            met_add_unit = '".$_REQUEST['metAddUnit']."',
+                                            met_add_build = '".$_REQUEST['metAddBuild']."',
+                                            met_add_street = '".$_REQUEST['metAddStreet']."', 
+                                            met_add_subrb = '".$_REQUEST['metAddSubrb']."', 
+                                            met_add_state = '".$_REQUEST['metAddState']."', 
+                                            met_add_pst_code = '".$_REQUEST['metAddPstCode']."'
+                                        WHERE job_id = ".$_SESSION['jobId'];
+        
+        $result = mysql_query($qry);        
         return $result;
     }
     

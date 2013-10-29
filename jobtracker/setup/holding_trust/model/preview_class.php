@@ -107,18 +107,19 @@ class Preview {
                         }
                     </style>';
        
-        // holding trust details for individual trustee type
+        /* Holding trust details starts */
+        // individual
         if($arrTrustDetail['trustee_id'] == '1') {
             $arrIndvdlTrust = $this->fetchIndividualTrustDetails();
-            $fundTrustee = '<tr>
+            $holdingTrustee = '<tr>
                                 <td>No of members :</td>
                                 <td>'.$arrTrustDetail['noofmember'].'</td>
                             </tr>';
             
             $memberCtr = 1;
-            $fundIndividual = "";
+            $trustIndividual = "";
             foreach ($arrIndvdlTrust as $individualInfo) {
-                $fundIndividual .= '<table class="first" cellpadding="4" cellspacing="6">
+                $trustIndividual .= '<table class="first" cellpadding="4" cellspacing="6">
                                     <tr>
                                         <td colspan="2"><u>Member '.$memberCtr.'</u></td>
                                     </tr>
@@ -134,9 +135,9 @@ class Preview {
                 $memberCtr++;
             }
         }
-        // holding trust details for corporate trustee type
+        // corporate
         elseif($arrTrustDetail['trustee_id'] == '2') {
-            $fundTrustee = '<tr>
+            $holdingTrustee = '<tr>
                                 <td>Name of company :</td>
                                 <td>'.$arrTrustDetail['comp_name'].'</td>
                             </tr>
@@ -154,7 +155,6 @@ class Preview {
                             </tr>';
         }
         
-        // holding trust details
         $trust = '<div class="test">Holding Trust Details</div>
                         <br />
                         <table class="first" cellpadding="4" cellspacing="6">
@@ -165,10 +165,13 @@ class Preview {
                             <tr>
                                 <td>Trustee Type :</td>
                                 <td>'.$arrTrustDetail['trustee_name'].'</td>
-                            </tr>'.$fundTrustee.'
-                        </table>'.$fundIndividual.'<br/>';
+                            </tr>'.$holdingTrustee.'
+                        </table>'.$trustIndividual.'<br/>';
+        
+        /* Holding trustee details ends */
        
-        // fund details for individual trustee type
+        /* Fund details starts */
+        // individual 
         if($arrFundDetail['trustee_id'] == '1') {
             $arrIndvdlFund = $this->fetchIndividualFundDetails();
             $fundTrustee = '<tr>
@@ -195,7 +198,7 @@ class Preview {
                 $memberCtr++;
             }
         }
-        // trust fund details for corporate trustee type
+        // corporate
         elseif($arrFundDetail['trustee_id'] == '2') {
             $fundTrustee = '<tr>
                                 <td>Name of company :</td>
@@ -215,7 +218,6 @@ class Preview {
                             </tr>';
         }
         
-        // trust fund details
         $fund = '<div class="test">Fund Details</div>
                         <br />
                         <table class="first" cellpadding="4" cellspacing="6">
@@ -229,6 +231,9 @@ class Preview {
                             </tr>'.$fundTrustee.'
                         </table>'.$fundIndividual.'<br/>';
         
+        /* Fund details ends */
+        
+        /* Asset details starts */
         $asset = '<div class="test">Asset Details</div>
                         <br />
                         <table class="first" cellpadding="4" cellspacing="6">
@@ -237,12 +242,9 @@ class Preview {
                                 <td>'.$assetDetail.'</td>
                             </tr>
                         </table>';
-        
-          /* $fundPart = '<tr>
-                            <td>Fund ABN : </td>
-                            <td>'.$arrFund[$jobid]['abn'].'</td>
-                        </tr>';
+        /* Asset details ends */
                 
+        /*
            $header = ' <table style="margin-bottom: 30px;">
                             <tr>
                                 <td><a href="www.superrecords.com.au" style="float:left;margin-right: 40px;"><img src="images_user/header-logo.png" style="width:250px;" /></a></td>                            
@@ -257,6 +259,33 @@ class Preview {
         
         return $html;
         
+    }
+    
+    function generatePDF() {
+
+        // send mail for new task
+        submitSavedJob();
+        $jobName = returnJobName();
+
+        // Insert into documents table
+        $qrySel = "SELECT max(document_id) docId FROM documents";
+
+        $objResult = mysql_query($qrySel);
+        $arrInfo = mysql_fetch_assoc($objResult);
+        $fileId = $arrInfo['docId'];	
+        $fileId++;
+        $currentTime = date('Y-m-d H:i:s');
+
+        $filename = $fileId."~setup.pdf";
+        $docQry = "INSERT INTO documents (job_id,document_title,date,file_path) VALUES (".$_SESSION['jobId'].",'setup','".$currentTime."','".$filename."')";
+        mysql_query($docQry);
+
+        $html = $this->generatePreview();
+        $title1 = $_SESSION['PRACTICENAME'];
+        $title2 = $jobName;
+
+        // Create PDF
+        createPDF($html,$filename,$title1,$title2);
     }
 }
 ?>

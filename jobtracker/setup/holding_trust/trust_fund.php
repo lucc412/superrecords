@@ -14,101 +14,80 @@ if(!empty($_SESSION['jobId'])) {
         
 // insert & update case
 if(!empty($_REQUEST['saveData'])) {
-    // update holding trust details
-    if(!empty($arrHoldTrust)) {
-        // for individual trust
-        if($_REQUEST['lstType'] == '1') {
-            $cntMember = $_REQUEST['lstMember'];
-            $trust = $_REQUEST['txtFund'];
-            $trusteeId = $_REQUEST['lstType'];
-            
-            foreach($_REQUEST AS $eleName => $eleValue) {
-                if(strstr($eleName, "txtTrusteeName")) $arrTrusteeData[replaceString('txtTrusteeName', '', $eleName)]['name'] = $eleValue; 
-                if(strstr($eleName, "txtResAdd")) $arrTrusteeData[replaceString('txtResAdd', '', $eleName)]['address'] = $eleValue;
-                if(strstr($eleName, "indvdlId")) $arrTrusteeData[replaceString('indvdlId', '', $eleName)]['indvdlId'] = $eleValue;
+    $fund = $_REQUEST['txtFund'];
+    $trusteeId = $_REQUEST['lstType'];
+    $compName = $_REQUEST['txtCompName'];
+    $acn = $_REQUEST['txtAcn'];
+    $address = $_REQUEST['txtAdd'];
+    $cntMember = $_REQUEST['lstMember'];
+    
+    // directors
+    foreach($_REQUEST AS $eleName => $eleValue) {
+        if(!empty($eleValue)) if(strstr($eleName, "dir")) $arrDir[] = $eleValue;
+    }
+    $directors = arrayToString('|', $arrDir);
+    
+    if($trusteeId == '1') {
+        unset($compName);
+        unset($acn);
+        unset($address); 
+        unset($directors);
+    }
+    else if($trusteeId == '2') {
+        unset($cntMember);
+        $objHoldingTrust->deleteAllIndividual();
+    } 
+
+    if(empty($arrHoldTrust))
+        $objHoldingTrust->newHoldingTrust($fund, $trusteeId, $compName, $acn, $address, $directors, $cntMember);
+    else 
+        $objHoldingTrust->updateHoldingTrust($fund, $trusteeId, $compName, $acn, $address, $directors, $cntMember);
+    
+    // individual trust, add members info
+    if($trusteeId == '1') {
+        //Reverse Array for deleting member
+        krsort($arrIndvdlTrust);
+
+        //Deleting officer id
+        $delMember = count($arrIndvdlTrust) - $cntMember;
+        if($delMember > 0) {
+            $deleteMemberId = "";
+            foreach ($arrIndvdlTrust AS $indvdlInfo) {
+                if($delMember > 0) {
+                    $deleteMemberId .= $indvdlInfo['indvdl_id'].',';
+                    $delMember--;
+                }
             }
-            if(!empty($arrIndvdlTrust) && !empty($arrTrusteeData)) {
-                $arrAddMember = array_diff_assoc($arrTrusteeData, $arrIndvdlTrust);
-                $arrRemMember = array_diff_assoc($arrIndvdlTrust, $arrTrusteeData);
-            }
-            else if(empty($arrIndvdlTrust) && !empty($arrTrusteeData)) {
-                $arrAddMember = $arrTrusteeData;
-            }
-            
-            $objHoldingTrust->updateHoldingTrustIndividual($trust, $trusteeId, $cntMember, $arrAddMember, $arrRemMember);
-            if(isset($_REQUEST['next'])) {
-                header('location: trust_asset.php');
-                exit;
-            }
-            else if(isset($_REQUEST['save'])) {
-                header('location: ../../jobs_saved.php');
-                exit;
-            }
+            $deleteMemberId = stringrtrim($deleteMemberId, ',');
+            $objHoldingTrust->deleteIndividual($deleteMemberId);
         }
-        // for corporate trust
-        else if($_REQUEST['lstType'] == '2') {
-            $trust = $_REQUEST['txtFund'];
-            $trusteeId = $_REQUEST['lstType'];
-            $compName = $_REQUEST['txtCompName'];
-            $acn = $_REQUEST['txtAcn'];
-            $address = $_REQUEST['txtAdd'];
-
-            foreach($_REQUEST AS $eleName => $eleValue) {
-                if(!empty($eleValue)) if(strstr($eleName, "dir")) $arrDir[] = $eleValue;
+        
+        //Reverse Array for deleting member
+        krsort($arrIndvdlTrust);
+    
+        for($memberCount=0; $memberCount < $cntMember; $memberCount++) 
+        {
+            $memberId = $_REQUEST['indvdlId'.$memberCount];
+            $trusteeName = $_REQUEST['txtTrusteeName' . $memberCount];
+            $resAdd = $_REQUEST['txtResAdd' . $memberCount];
+            
+            // insert member info of sign up user
+            if(empty($memberId)) {
+                $objHoldingTrust->insertIndividual($trusteeName, $resAdd);
             }
-            $directors = arrayToString('|', $arrDir);
-
-            $objHoldingTrust->updateHoldingTrust($trust, $trusteeId, $compName, $acn, $address, $directors);
-            if(isset($_REQUEST['next'])) {
-                header('location: trust_asset.php');
-                exit;
-            }
-            else if(isset($_REQUEST['save'])) {
-                header('location: ../../jobs_saved.php');
-                exit;
+            else {
+                $objHoldingTrust->updateIndividual($memberId, $trusteeName, $resAdd);
             }
         }
     }
-    // insert holding trust details
-    else {
-        $objHoldingTrust->updateClientName($_REQUEST['txtFund']);
-        
-        // for individual trust
-        if($_REQUEST['lstType'] == '1') {
-            $cntMember = $_REQUEST['lstMember'];
-            $trust = $_REQUEST['txtFund'];
-            $trusteeId = $_REQUEST['lstType'];
-            
-            foreach($_REQUEST AS $eleName => $eleValue) {
-                if(strstr($eleName, "txtFundeeName")) $arrTrusteeData[replaceString('txtFundeeName', '', $eleName)]['name'] = $eleValue; 
-                if(strstr($eleName, "txtResAdd")) $arrTrusteeData[replaceString('txtResAdd', '', $eleName)]['address'] = $eleValue;
-            }
-            $objHoldingTrust->newHoldingTrustIndividual($trust, $trusteeId, $cntMember, $arrTrusteeData);
-        }
-        // for corporate trust
-        else if($_REQUEST['lstType'] == '2') {
-            $trust = $_REQUEST['txtFund'];
-            $trusteeId = $_REQUEST['lstType'];
-            $compName = $_REQUEST['txtCompName'];
-            $acn = $_REQUEST['txtAcn'];
-            $address = $_REQUEST['txtAdd'];
-            
-            foreach($_REQUEST AS $eleName => $eleValue) {
-                if(!empty($eleValue)) if(strstr($eleName, "dir")) $arrDir[] = $eleValue;
-            }
-            $directors = arrayToString('|', $arrDir);
-            
-            $objHoldingTrust->newHoldingTrustCorporate($trust, $trusteeId, $compName, $acn, $address, $directors);
-        }
-        
-        if(isset($_REQUEST['next'])) {
-            header('location: trust_asset.php');
-            exit;
-        }
-        else if(isset($_REQUEST['save'])) {
-            header('location: ../../jobs_saved.php');
-            exit;
-        }
+    
+    if(isset($_REQUEST['next'])) {
+        header('location: trust_asset.php');
+        exit;
+    }
+    else if(isset($_REQUEST['save'])) {
+        header('location: ../../jobs_saved.php');
+        exit;
     }
 }
 

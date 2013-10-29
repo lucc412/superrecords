@@ -24,6 +24,7 @@ class Trust_Fund
         return $arrTrusteeType;
     }
     
+    // update client id and job name
     function updateClientName($fundName)
     {
         $qrySel = "SELECT t1.client_id, t1.client_name 
@@ -59,34 +60,10 @@ class Trust_Fund
         }
     }
     
-    // insert holding trust details & individual details
-    function newHoldingTrustIndividual($trust, $trusteeId, $cntMember, $arrTrusteeData) 
+    // insert fund details
+    function newHoldingTrust($trust, $trusteeId, $compName, $acn, $address, $directors, $cntMember) 
     {
-        $qryIns = "INSERT INTO trust_fund(job_id, trust_name, trustee_id, noofmember)
-                    VALUES ( 
-                    '".$_SESSION['jobId']."', 
-                    '".addslashes($trust)."', 
-                    ".$trusteeId.", 
-                    ".$cntMember."
-                    )";
-
-        mysql_query($qryIns);
-        
-        foreach ($arrTrusteeData AS $trusteeData) {
-           $qryIns = "INSERT INTO indvdl_holding_fund(job_id, trustee_name, res_add)
-                    VALUES ( 
-                    '".$_SESSION['jobId']."', 
-                    '".addslashes($trusteeData['name'])."', 
-                    '".addslashes($trusteeData['address'])."'
-                    )";
-            mysql_query($qryIns);
-        }
-    }
-    
-    // insert holding trust details & corporate trust details
-    function newHoldingTrustCorporate($trust, $trusteeId, $compName, $acn, $address, $directors) 
-    {
-      $qryIns = "INSERT INTO trust_fund(job_id, trust_name, trustee_id, comp_name, acn, reg_address, director)
+      $qryIns = "INSERT INTO trust_fund(job_id, trust_name, trustee_id, comp_name, acn, reg_address, director, noofmember)
                     VALUES ( 
                     '".$_SESSION['jobId']."', 
                     '".addslashes($trust)."', 
@@ -94,9 +71,25 @@ class Trust_Fund
                     '".addslashes($compName)."', 
                     '".addslashes($acn)."', 
                     '".addslashes($address)."', 
-                    '".addslashes($directors)."'
+                    '".addslashes($directors)."',
+                    '".$cntMember."'
                     )";
         mysql_query($qryIns);
+    }
+    
+    // update fund details
+    function updateHoldingTrust($trust, $trusteeId, $compName, $acn, $address, $directors, $cntMember) 
+    {
+      $qryUpd = "UPDATE trust_fund
+                    SET trust_name = '".addslashes($trust)."',
+                        trustee_id = '".$trusteeId."',
+                        comp_name = '".addslashes($compName)."',
+                        acn = '".addslashes($acn)."',
+                        reg_address = '".addslashes($address)."',
+                        director = '".addslashes($directors)."',
+                        noofmember = '".$cntMember."'
+                    WHERE job_id = ".$_SESSION['jobId'];
+        mysql_query($qryUpd);
     }
     
     // fetch holding trust details
@@ -125,50 +118,41 @@ class Trust_Fund
         return $arrIndvdlTrust;
     }
     
-    // update holding trust details & corporate trust details
-    function updateHoldingTrust($trust, $trusteeId, $compName, $acn, $address, $directors) 
+    // delete individual trustee
+    function insertIndividual($trusteeName, $resAdd) 
     {
-      $qryUpd = "UPDATE trust_fund
-                    SET trust_name = '".addslashes($trust)."',
-                        trustee_id = '".$trusteeId."',
-                        comp_name = '".addslashes($compName)."',
-                        acn = '".addslashes($acn)."',
-                        reg_address = '".addslashes($address)."',
-                        director = '".addslashes($directors)."'
-                    WHERE job_id = ".$_SESSION['jobId'];
-        mysql_query($qryUpd);
+        $insMember="INSERT INTO indvdl_holding_fund (job_id, trustee_name, res_add) 
+                    VALUES({$_SESSION['jobId']},'".addslashes($trusteeName)."','".addslashes($resAdd)."')";
+        //print $insMember;
+        mysql_query($insMember);
     }
     
-    // update holding trust details & corporate trust details
-    function updateHoldingTrustIndividual($trust, $trusteeId, $cntMember, $arrAddMember, $arrRemMember) 
+    // delete individual trustee
+    function updateIndividual($memberId, $trusteeName, $resAdd)  
     {
-      $qryUpd = "UPDATE trust_fund
-                    SET trust_name = '".addslashes($trust)."',
-                        trustee_id = '".$trusteeId."',
-                        noofmember = '".$cntMember."'
-                    WHERE job_id = ".$_SESSION['jobId'];
-        mysql_query($qryUpd);
-        
-        if(!empty($arrAddMember)) {
-                $insMember = "INSERT INTO indvdl_holding_fund (job_id, trustee_name, res_add) VALUES";
-                foreach($arrAddMember AS $memberInfo) {
-                        $insMember .= "({$_SESSION['jobId']}, '{$memberInfo['name']}', '{$memberInfo['address']}'),";
-                }
-                $insMember = stringrtrim($insMember, ",");
-                //print $insMember;exit;
-                mysql_query($insMember);	
-        }
-
-        if(!empty($arrRemMember)) {
-                $delMember = "DELETE FROM indvdl_holding_fund WHERE job_id = {$_SESSION['jobId']} AND indvdl_id IN (";
-                foreach($arrRemMember AS $memberInfo) {
-                        $delMember .= "'{$memberInfo['indvdl_id']}',";
-                }
-                $delMember = stringrtrim($delMember, ",");
-                $delMember .= ")";
-                //print $delMember;exit;
-                mysql_query($delMember);	
-        }
+        $updMember = "UPDATE indvdl_holding_fund 
+                        SET trustee_name = '".addslashes($trusteeName)."', 
+                            res_add = '".addslashes($resAdd)."'
+                        WHERE indvdl_id = {$memberId}";
+                            
+        //print $updMember;
+        mysql_query($updMember);
+    }
+    
+    // delete individual trustee
+    function deleteIndividual($deleteMemberId) 
+    {
+        $delMember = "DELETE FROM indvdl_holding_fund WHERE job_id = {$_SESSION['jobId']} AND indvdl_id IN ({$deleteMemberId})";
+        //print $delMember;
+        mysql_query($delMember);
+    }
+    
+    // delete all individual trustee
+    function deleteAllIndividual() 
+    {
+        $delMember = "DELETE FROM indvdl_holding_fund WHERE job_id = {$_SESSION['jobId']}";
+        //print $delMember;
+        mysql_query($delMember);
     }
     
 }

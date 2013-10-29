@@ -10,6 +10,9 @@
         <td>
             <p class="joblstbtn" style="<?if(basename($_SERVER['PHP_SELF']) == "trust_asset.php") echo "background-color:#F05729;"?>" >Asset Details</p>
         </td>
+        <td>
+            <p class="joblstbtn" style="<?if(basename($_SERVER['PHP_SELF']) == "preview.php") echo "background-color:#F05729;"?>" >Preview</p>
+        </td>
     </tr>
 </table>
 <br><br>

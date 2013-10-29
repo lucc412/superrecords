@@ -35,6 +35,9 @@
 		<p class="joblstbtn" style="<?if(basename($_SERVER['PHP_SELF']) == "new_smsf_declarations.php") echo "background-color:#F05729;"?>" >Declarations</p>
             </td>
             <?php  } ?>
+            <td>
+                <p class="joblstbtn" style="<?if(basename($_SERVER['PHP_SELF']) == "setup_preview.php") echo "background-color:#F05729;"?>" >Preview</p>
+            </td>
         </tr>
 </table>
 <br><br>

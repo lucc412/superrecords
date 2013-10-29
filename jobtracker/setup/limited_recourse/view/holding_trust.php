@@ -3,10 +3,10 @@
 include(TOPBAR);
 
 // include navigation
-include(HOLDINGTRUSTNAV);
+include(LIMRECNAV);
 
 // include page content
-include(HOLDINGTRUSTCONTENT);
+include(LIMRECCONTENT);
 
 // page header
 ?><div class="pageheader">

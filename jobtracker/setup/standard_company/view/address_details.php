@@ -13,7 +13,7 @@
 <div>
     <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details for your new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div>
     <form method="post" action="address_details.php" onsubmit="return  checkValidation();">
-        <div style="padding-bottom:20px;color: #F05729;font-size: 14px;">Registered Address</div>
+        <div class="frmMidHeader">Registered Address</div>
         <table class="fieldtable">
             <tr>
                 <td>Address</td>
@@ -78,7 +78,7 @@
             </tr>
         </table>
         <br/>
-        <div style="padding-bottom:20px;color: #F05729;font-size: 14px;">Meeting Address</div>
+        <div class="frmMidHeader">Meeting Address</div>
         <table class="fieldtable">
             <tr>
                 <td style="padding-right: 95px;" >Address</td>

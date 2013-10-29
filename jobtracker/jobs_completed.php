@@ -4,8 +4,9 @@ include("include/common.php");
 
 // include class file
 include(MODEL."jobs_completed_class.php");
-$objScr = new CompletedJobs();        
+$objScr = new CompletedJobs();    
 
+if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
 $arrJobs = $objScr->fetch_completed_jobs();
 $arrAllReports = $objScr->fetch_reports();
 $arrAllDocs = $objScr->fetch_documents();

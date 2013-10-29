@@ -41,23 +41,23 @@ include(TOPBAR);
                         
 			$countRow = 0;
 			foreach($arrJobs AS $jobId => $arrJobDetails) {
-				if($countRow%2 == 0) $trClass = "trcolor";
-				else $trClass = "";
-				$jobName = $arrJobDetails['job_name'];
+                            if($countRow%2 == 0) $trClass = "trcolor";
+                            else $trClass = "";
+                            $jobName = $arrJobDetails['job_name'];
 
-				?><tr class="<?=$trClass?>">
-					<td class="tddata"><?=$jobName?></td>
-					<td class="tddata" align="center"><?=$arrJobDetails['job_created_date']?></td>
-					<td class="tddata" align="center"><?
-                                            if($arrJobDetails['job_genre'] == 'SETUP') {
-                                                ?><a title="click here to edit this job" href='<?=$arrJobDetails['subform_url']?>?recid=<?=$jobId?>&frmId=<?=$arrJobDetails['subform_id']?>'><?=EDITICON?></a><?
-                                            }
-                                            else {
-                                                ?><a title="click here to edit this job" href='audit.php?recid=<?=$jobId?>'><?=EDITICON?></a><?
-                                            }
-					?></td>
-				</tr><?
-				$countRow++;
+                            ?><tr class="<?=$trClass?>">
+                                    <td class="tddata"><?=$jobName?></td>
+                                    <td class="tddata" align="center"><?=$arrJobDetails['job_created_date']?></td>
+                                    <td class="tddata" align="center"><?
+                                        if($arrJobDetails['job_genre'] == 'SETUP') {
+                                            ?><a title="click here to edit this job" href='setup/<?=$arrJobDetails['subform_url']?>?recid=<?=$jobId?>&frmId=<?=$arrJobDetails['subform_id']?>'><?=EDITICON?></a><?
+                                        }
+                                        else {
+                                            ?><a title="click here to edit this job" href='audit.php?recid=<?=$jobId?>'><?=EDITICON?></a><?
+                                        }
+                                    ?></td>
+                            </tr><?
+                            $countRow++;
 			}
 		?></table><?
 	}

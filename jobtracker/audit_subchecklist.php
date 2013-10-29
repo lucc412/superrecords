@@ -31,7 +31,7 @@ switch ($sql)
 		}
 		else {
                     $objScr->update_job_completed($_SESSION['jobId']);
-                    $objScr->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
+                    add_new_task();
                     new_job_task_mail();
                     if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
                     header('location: jobs_pending.php');
@@ -57,7 +57,7 @@ switch ($sql)
 		}
 		else {
 			$objScr->update_job_completed($_SESSION['jobId']);
-			$objScr->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
+			add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
 			new_job_task_mail();
                         if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
 			header('location: jobs_pending.php');

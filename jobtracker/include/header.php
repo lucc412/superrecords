@@ -152,6 +152,11 @@
 			?><title>Officer Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/officer_details.js"></script><?
 		}
+
+                else if(basename($_SERVER['PHP_SELF']) == 'shareholder_details.php') {
+			?><title>Shareholder Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/shareholder_details.js"></script><?
+                }
                 else if(basename($_SERVER['PHP_SELF']) == 'holding_trust.php') {
 			?><title>Holding Trust Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/holding_trust/js/holding_trust.js"></script><?

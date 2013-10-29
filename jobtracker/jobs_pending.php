@@ -5,6 +5,7 @@ include("include/common.php");
 // include class file
 include(MODEL."jobs_pending_class.php");
 $objScr = new PendingJobs();        
+
 if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
 $arrJobs = $objScr->fetch_pending_jobs();
 $arrAllReports = $objScr->fetch_reports();

@@ -14,7 +14,6 @@
 		<link rel="stylesheet" type="text/css" href="<?=DIR?>css/stylesheet.css"/>
 		<!-- Google Webfont -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
-		<!--<link rel="stylesheet" type="text/css" href="css/tooltip.css"/>-->
 		<link rel="stylesheet" type="text/css" href="<?=DIR?>css/tooltipster.css" />
 		<script type="text/javascript" src="<?=DIR?>js/datetimepicker_css.js"></script>
 		<script type="text/javascript" src="<?=DIR?>js/common.js"></script>
@@ -38,13 +37,13 @@
                     <script type="text/javascript" src="<?=DIR?>js/compliance_validation.js"></script><?
 		}
                 else if(basename($_SERVER['PHP_SELF']) == 'audit.php') {
-                        if(isset($qryStr) && strstr($qryStr, 'recid')) {
-                            ?><title>Edit existing audit job</title><?
-			}
-                        else {
-                            ?><title>Submit new audit job</title><?
-                        }
-                        ?><script type="text/javascript" src="<?=DIR?>js/audit_validation.js"></script><?
+                    if(isset($qryStr) && strstr($qryStr, 'recid')) {
+                        ?><title>Edit existing audit job</title><?
+                    }
+                    else {
+                        ?><title>Submit new audit job</title><?
+                    }
+                    ?><script type="text/javascript" src="<?=DIR?>js/audit_validation.js"></script><?
 		}
                 else if(basename($_SERVER['PHP_SELF']) == 'audit_checklist.php') { 
                     ?><title>Audit Checklist</title><?
@@ -84,42 +83,41 @@
 			?><title>New SMSF Details</title><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_contact.php') {
-				?><title>Contact Details</title>
-				<script type="text/javascript" src="<?=DIR?>js/new_smsf_contact.js"></script><?
+                        ?><title>Contact Details</title>
+                        <script type="text/javascript" src="<?=DIR?>js/new_smsf_contact.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_fund.php') {
-				?><title>Fund Details</title>
-				<script type="text/javascript" src="<?=DIR?>js/new_smsf_fund.js"></script><?
+                        ?><title>Fund Details</title>
+                        <script type="text/javascript" src="<?=DIR?>js/new_smsf_fund.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_member.php') {
-				?><title>Member Details</title>
-				<script type="text/javascript" src="<?=DIR?>js/new_smsf_member.js"></script><?
+                        ?><title>Member Details</title>
+                        <script type="text/javascript" src="<?=DIR?>js/new_smsf_member.js"></script><?
 		}
                 else if(basename($_SERVER['PHP_SELF']) == 'legal_references.php') {
-				?><title>Legal Personal Representative</title>
-				<script type="text/javascript" src="<?=DIR?>js/legal_references.js"></script><?
+                        ?><title>Legal Personal Representative</title>
+                        <script type="text/javascript" src="<?=DIR?>js/legal_references.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_trustee.php') {
-				?><title>Trustee Details</title>
-				<script type="text/javascript" src="<?=DIR?>js/new_smsf_trustee.js"></script><?
+                        ?><title>Trustee Details</title>
+                        <script type="text/javascript" src="<?=DIR?>js/new_smsf_trustee.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_declarations.php') {
-				?><title>Declarations</title>
-				<script type="text/javascript" src="<?=DIR?>js/new_smsf_declarations.js"></script><?
+                        ?><title>Declarations</title>
+                        <script type="text/javascript" src="<?=DIR?>js/new_smsf_declarations.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf.php') {
 			?><title>Existing SMSF Details</title><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_contact.php') {
-
-				?><title>Contact Details</title>
-				<script type="text/javascript" src="<?=DIR?>js/existing_smsf_contact.js"></script><?
+                        ?><title>Contact Details</title>
+                        <script type="text/javascript" src="<?=DIR?>js/existing_smsf_contact.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_fund.php') {
-				?><title>Fund Details</title>
-				<script type="text/javascript" src="<?=DIR?>js/existing_smsf_fund.js"></script><?
+                        ?><title>Fund Details</title>
+                        <script type="text/javascript" src="<?=DIR?>js/existing_smsf_fund.js"></script><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'setup_preview.php') {
+		else if(basename($_SERVER['PHP_SELF']) == 'setup_preview.php' || basename($_SERVER['PHP_SELF']) == 'preview.php') {
 			?><title>Preview</title><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'queries.php') {
@@ -127,8 +125,7 @@
 			<script type="text/javascript" src="<?=DIR?>js/queries_validation.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'template.php') {
-			?><title>Download Templates</title>
-			<script type="text/javascript" src="<?=DIR?>js/queries_validation.js"></script><?
+			?><title>Download Templates</title><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'clients.php') {
 			if($qryStr == 'a=add') {
@@ -154,6 +151,18 @@
                 else if(basename($_SERVER['PHP_SELF']) == 'officer_details.php') {
 			?><title>Officer Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/officer_details.js"></script><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'holding_trust.php') {
+			?><title>Holding Trust Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/holding_trust/js/holding_trust.js"></script><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'trust_fund.php') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/holding_trust/js/trust_fund.js"></script><?
+		}
+                else if(basename($_SERVER['PHP_SELF']) == 'trust_asset.php') {
+			?><title>Asset Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/holding_trust/js/trust_asset.js"></script><?
 		}
 		else {
 			?><title>Home</title><?

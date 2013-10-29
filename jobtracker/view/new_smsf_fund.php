@@ -121,7 +121,7 @@ include(SETUPNAVIGATION);
 				</td>
 			</tr>
 		</table>
-            <div style="padding-top:20px;font-weight:bold;color: #074165;font-size: 13px">To learn more about the differences between Individual and Corporate Trustees please click to <a href='new_smsf_fund.php?do=download' onclick="javascript:windows.location.assign('new_smsf_fund.php?do=download')" target="_new" style="color: #F05729;">download guide.</a></div>
+            <div class="txtAboveButton">To learn more about the differences between Individual and Corporate Trustees please click to <a href='new_smsf_fund.php?do=download' onclick="javascript:windows.location.assign('new_smsf_fund.php?do=download')" target="_new" style="color: #F05729;">download guide.</a></div>
                 <input type="hidden" id="fund_status" name="fund_status" value=""/>
 		<div style="padding-top:20px;">
                     <span align="left"><button type="button" onclick="window.location.href='new_smsf_contact.php'" >Back</button></span>

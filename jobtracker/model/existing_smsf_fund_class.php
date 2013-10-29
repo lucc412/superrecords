@@ -121,11 +121,12 @@ class EXISTING_SMSF_FUND
             {
 //                client_code
                 $qryIns = "INSERT INTO client(client_type_id, client_name, recieved_authority, id, client_received)
-					VALUES ( 7, '" . $fundName . "', 1, " . $_SESSION['PRACTICEID'] . ", NOW())";
+					VALUES ( 7, '" . $fundName . "', 1, " . $_SESSION['PRACTICEID'] . ", '".date('Y-m-d')."')";
                 
                 $flagReturn = mysql_query($qryIns);
                 $client_id = mysql_insert_id();
-                
+            
+                generateClientCode($client_id,$fundName);
             }
 
             if(isset($client_id) && $client_id != '')
@@ -138,8 +139,6 @@ class EXISTING_SMSF_FUND
                 
                 mysql_query($updt);
             }
-            
-            generateClientCode($client_id,$fundName);
             
             return $client_id;
         }

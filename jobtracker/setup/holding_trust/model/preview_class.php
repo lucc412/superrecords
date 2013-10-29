@@ -243,29 +243,16 @@ class Preview {
                             </tr>
                         </table>';
         /* Asset details ends */
-                
-        /*
-           $header = ' <table style="margin-bottom: 30px;">
-                            <tr>
-                                <td><a href="www.superrecords.com.au" style="float:left;margin-right: 40px;"><img src="images_user/header-logo.png" style="width:250px;" /></a></td>                            
-                                <td><p>'.$arrPractice['name'].'</p>
-                                    <p>'.$arrClients['client_name'].' - '.$arrJob[$jobid]['period'].' - '.$arrActivity['sub_Description'].'</p>
-                                </td>
-                            </tr>
-                        </table>';*/
-        
         
         $html = $styleCSS.$trust.$fund.$asset;
-        
         return $html;
         
     }
     
-    function generatePDF() {
+    function generatePDF($html) {
 
-        // send mail for new task
+        // process new job
         submitSavedJob();
-        $jobName = returnJobName();
 
         // Insert into documents table
         $qrySel = "SELECT max(document_id) docId FROM documents";
@@ -280,9 +267,8 @@ class Preview {
         $docQry = "INSERT INTO documents (job_id,document_title,date,file_path) VALUES (".$_SESSION['jobId'].",'setup','".$currentTime."','".$filename."')";
         mysql_query($docQry);
 
-        $html = $this->generatePreview();
         $title1 = $_SESSION['PRACTICENAME'];
-        $title2 = $jobName;
+        $title2 = returnJobName();
 
         // Create PDF
         createPDF($html,$filename,$title1,$title2);

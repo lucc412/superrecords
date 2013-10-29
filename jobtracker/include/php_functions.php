@@ -652,4 +652,59 @@ function getclientlist() {
         }
         return $arrClients;	
 }
+
+// get job name
+function returnJobName($jobId=NULL) {
+    if(!empty($_SESSION['jobId'])) $jobId = $_SESSION['jobId'];
+    $qrySel = "SELECT CONCAT_WS(' - ', cl.client_name, jb.period, sa.sub_Description)job_name
+                FROM client cl, sub_subactivity sa, job jb
+                WHERE jb.job_id = {$jobId}
+                AND jb.client_id = cl.client_id
+                AND jb.job_type_id = sa.sub_Code";
+
+    $objResult = mysql_query($qrySel);
+    $rowInfo = mysql_fetch_assoc($objResult); 
+    
+    return $rowInfo['job_name'];
+}
+
+// add new task
+function add_new_task() {
+    $qrySel = "SELECT jb.client_id, jb.mas_Code, jb.job_type_id, CONCAT_WS(' - ', cl.client_name, jb.period, sa.sub_Description)task_name
+                FROM client cl, sub_subactivity sa, job jb
+                WHERE jb.job_id = {$_SESSION['jobId']}
+                AND jb.client_id = cl.client_id
+                AND jb.job_type_id = sa.sub_Code";
+
+    $objResult = mysql_query($qrySel);
+    while($rowInfo = mysql_fetch_assoc($objResult)) {
+            $arrJobData = $rowInfo;
+    }
+
+    $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code) 
+                VALUES ('" . $arrJobData['task_name'] . "',
+                '" . $_SESSION['PRACTICEID'] . "',
+                '" . $arrJobData['client_id'] . "',
+                '" . $_SESSION['jobId'] . "',
+                '" . $arrJobData['mas_Code'] . "',
+                '" . $arrJobData['job_type_id'] . "'
+                )";
+    mysql_query($qryIns);			
+}
+
+// submit saved job - Update job_submitted field, add new task, send mail for new task & new job
+function submitSavedJob() {
+    // update job_submitted
+    $stQry = "UPDATE job 
+                SET job_submitted = 'Y', 
+                    job_received = '".date('Y-m-d')."'
+                WHERE job_id = ".$_SESSION['jobId'];
+    mysql_query($stQry);
+
+    // add new task
+    add_new_task();
+
+    // send mail for new task
+    new_job_task_mail();          		
+}
 ?>

@@ -44,8 +44,10 @@ if(!empty($_REQUEST['saveData'])) {
         $objHoldingTrust->deleteAllIndividual();
     } 
 
-    if(empty($arrHoldTrust))
+    if(empty($arrHoldTrust)) {
+        $_SESSION['jobId'] = $objHoldingTrust->insertNewJob();
         $objHoldingTrust->newHoldingTrust($trust, $trusteeId, $compName, $acn, $address, $directors, $cntMember);
+    }
     else 
         $objHoldingTrust->updateHoldingTrust($trust, $trusteeId, $compName, $acn, $address, $directors, $cntMember);
     

@@ -135,11 +135,7 @@ class COMPLIANCE {
 	}
 
 	public function add_task($typeId, $period, $practiceId, $clientId, $jobId, $cliType) {
-		$arrJobType = $this->fetchType();
-		$arrClients = getclientlist();
-
-		$taskName = $arrClients[$clientId] . ' - ' . $period . ' - ' . $arrJobType[$typeId];
-	
+		$taskName = returnJobName($jobId);
 		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code) 
 					VALUES ('" . $taskName . "',
 					'" . $practiceId . "',
@@ -149,19 +145,6 @@ class COMPLIANCE {
 					'" . $typeId . "'
 					)";
 		mysql_query($qryIns);			
-	}
-
-	public function fetch_job_data($jobId) {
-		$qryUpd = "SELECT jb.period, jb.client_id, jb.mas_Code, jb.job_type_id
-					FROM job jb
-					WHERE jb.job_id = {$_SESSION['jobId']}";
-
-		$objResult = mysql_query($qryUpd);
-		while($rowInfo = mysql_fetch_assoc($objResult)) {
-			$arrJobData = $rowInfo;
-		}
-
-		return $arrJobData;
 	}
         
 	public function add_source_Docs($jobId) {

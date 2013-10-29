@@ -63,54 +63,13 @@ class DECLARATIONS
             return $arrData;
         }
         
-        public function fetch_job_data($jobId) {
-		$qryUpd = "SELECT jb.client_id, jb.mas_Code, jb.job_type_id, CONCAT_WS(' - ', cl.client_name, jb.period, sa.sub_Description)task_name
-                            FROM client cl, sub_subactivity sa, job jb
-                            WHERE jb.job_id = {$_SESSION['jobId']}
-                            AND jb.client_id = cl.client_id
-                            AND jb.job_type_id = sa.sub_Code";
-
-		$objResult = mysql_query($qryUpd);
-		while($rowInfo = mysql_fetch_assoc($objResult)) {
-			$arrJobData = $rowInfo;
-		}
-
-		return $arrJobData;
-	}
-        
-        public function add_new_task($practiceId, $jobId) {
-		$arrJobData = $this->fetch_job_data($jobId);
-	
-		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code) 
-					VALUES ('" . $arrJobData['task_name'] . "',
-					'" . $practiceId . "',
-					'" . $arrJobData['client_id'] . "',
-					'" . $jobId . "',
-					'" . $arrJobData['mas_Code'] . "',
-					'" . $arrJobData['job_type_id'] . "'
-					)";
-		mysql_query($qryIns);			
-	}
-        
         function generatePDF()
         {
-            // for adding task
-            $stQry = "UPDATE job SET job_submitted = '".$_REQUEST['job_submitted']."', job_received = NOW() WHERE job_id = ".$_SESSION['jobId'];
-            $flagReturn = mysql_query($stQry);
-
-            // add new task
-            $this->add_new_task($_SESSION['PRACTICEID'], $_SESSION['jobId']);
-            
-            // send mail for new task
-            new_job_task_mail();
+            // process new job
+            submitSavedJob();
             
             include(MODEL . "setup_preview_class.php");
             $objStpPrvw = new SETUP_PREVIEW();
-            
-            $arrJob = $objStpPrvw->jobDetails();
-            $arrClients = $objStpPrvw->clientDetails($arrJob[$_SESSION['jobId']]['client_id']);
-            $arrPractice = $objStpPrvw->practiceDetails();
-            $arrActivity = $objStpPrvw->jobActivityDetails($arrJob[$_SESSION['jobId']]['job_type_id']);
             
             // Insert into documents table
             $qrySel = "SELECT max(document_id) docId FROM documents";
@@ -127,8 +86,8 @@ class DECLARATIONS
             
 
             $html = $objStpPrvw->generatePreview();
-            $title1 = $arrPractice['name'];
-            $title2 = $arrClients['client_name'].' - '.$arrJob[$_SESSION['jobId']]['period'].' - '.$arrActivity['sub_Description'];
+            $title1 = $_SESSION['PRACTICENAME'];
+            $title2 = returnJobName();
 
             // Create PDF
             createPDF($html,$filename,$title1,$title2);

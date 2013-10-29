@@ -8,6 +8,11 @@ $objPreview = new Preview();
 
 $html = $objPreview->generatePreview();
 
+if(isset($_REQUEST['submit'])) {
+    $objPreview->generatePdf($html);
+    header("Location: ../../jobs_pending.php");
+}
+
 // include view file
 include("view/preview.php");
 

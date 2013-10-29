@@ -38,8 +38,10 @@ if(!empty($_REQUEST['saveData'])) {
         $objHoldingTrust->deleteAllIndividual();
     } 
 
-    if(empty($arrHoldTrust))
+    if(empty($arrHoldTrust)) {
+        $objHoldingTrust->updateClientName($fund);
         $objHoldingTrust->newHoldingTrust($fund, $trusteeId, $compName, $acn, $address, $directors, $cntMember);
+    } 
     else 
         $objHoldingTrust->updateHoldingTrust($fund, $trusteeId, $compName, $acn, $address, $directors, $cntMember);
     

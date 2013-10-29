@@ -13,9 +13,11 @@ echo $html;
 
 ?><div class="txtAboveButton">If you wish to submit the document please use the 'Submit' button below. If you click 'Save & Exit', you will be able to <br/>complete the document later.</div> 
 <div class="pdT20">
-    <span class="pdR20"><button type="button" onclick="window.location='trust_asset.php'" value="Back">Back</button></span>
-    <span class="pdR20"><button type="button" onclick="window.location='../../jobs_saved.php'">Save & Exit</button></span>
-    <span><button type="submit" id="submit" name="next">Submit</button></span>
+    <form name="objForm" action="preview.php">
+        <span class="pdR20"><button type="button" onclick="window.location='trust_asset.php'" value="Back">Back</button></span>
+        <span class="pdR20"><button type="button" onclick="window.location='../../jobs_saved.php'">Save & Exit</button></span>
+        <span><button type="submit" id="submit" name="submit">Submit</button></span>
+    </form>
 </div><?
 
 // include footer file

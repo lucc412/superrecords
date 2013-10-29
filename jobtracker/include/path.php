@@ -36,7 +36,9 @@ define('VIEW',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/view/');
 define('UPLOADSETUP',$_SERVER['DOCUMENT_ROOT'].'/uploads/setup/');
 define('DOWNLOAD',DIR.'include/download.php');
 define("SETUPNAVIGATION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/include/setup_navigation.php");
-define("HOLDINGTRUSTNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/include/holding_trust_navigation.php");
-define("HOLDINGTRUSTCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/include/holding_trust_content.php");
+define("HOLDINGTRUSTNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/holding_trust/include/navigation.php");
+define("HOLDINGTRUSTCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/holding_trust/include/content.php");
+define("LIMRECNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/limited_recourse/include/navigation.php");
+define("LIMRECCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/limited_recourse/include/content.php");
 define("STND_COMP_NAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/include/stnd_comp_nav.php");
 ?>

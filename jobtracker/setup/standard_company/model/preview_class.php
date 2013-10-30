@@ -23,11 +23,11 @@ class Preview {
             return $rowData;
     }
     
-    // fetch company data
+    // fetch address data
     public function fetchAddressData() {
             $qryCom = "SELECT CONCAT_WS(',', tf.reg_add_unit, tf.reg_add_build, tf.reg_add_street, tf.reg_add_subrb, tf.reg_add_pst_code, cs1.cst_Description)regAddres,
-                        CONCAT_WS(',', tf.bsns_add_build, tf.bsns_add_street, tf.bsns_add_subrb, tf.bsns_add_pst_code, cs2.cst_Description)bsnsAddres,
-                        CONCAT_WS(',', tf.met_add_build, tf.met_add_street, tf.met_add_subrb, tf.met_add_pst_code, cs3.cst_Description)metAddres,
+                        CONCAT_WS(',', tf.bsns_add_unit, tf.bsns_add_build, tf.bsns_add_street, tf.bsns_add_subrb, tf.bsns_add_pst_code, cs2.cst_Description)bsnsAddres,
+                        CONCAT_WS(',', tf.met_add_unit, tf.met_add_build, tf.met_add_street, tf.met_add_subrb, tf.met_add_pst_code, cs3.cst_Description)metAddres,
                         IF(tf.is_comp_addr, 'Yes', 'No')is_comp_addr, tf.occp_name
                         FROM stp_adddress_dtls tf, cli_state cs1, cli_state cs2, cli_state cs3
                         WHERE tf.job_id = ".$_SESSION['jobId']."
@@ -39,11 +39,30 @@ class Preview {
             return $rowData;
     }
     
+    // fetch officer data
+    public function fetchOfficerData() {
+            $qryCom = "SELECT CONCAT_WS(' ', of.offcr_fname, of.offcr_mname, of.offcr_lname) officerName, of.offcr_dob, of.offcr_city_birth, of.offcr_state_birth, 
+                        of.offcr_cntry_birth, of.offcr_tfn, CONCAT_WS(',', of.offcr_addr_unit, of.offcr_addr_build, of.offcr_addr_street, of.offcr_addr_subrb, of.offcr_addr_pst_code, cs.cst_Description)offcrAddres
+                        FROM stp_offcr_dtls of LEFT JOIN cli_state cs ON of.offcr_addr_state = cs.cst_Code
+                        WHERE of.job_id = ".$_SESSION['jobId'];
+            $fetchRow = mysql_query($qryCom);
+            $OffcrCntr = 1;
+            while($rowData = mysql_fetch_assoc($fetchRow)) {
+                $arrOfficer[$OffcrCntr++] = $rowData;
+            }
+            return $arrOfficer;
+    }
+    
+    
     // generate preview/pdf code
     public function generatePreview() {
        $arrStates = fetchStates();
+       $arrCountry = fetchCountries();
        $arrCompanyDetail = $this->fetchCompanyData();
        $arrAddressDetail = $this->fetchAddressData();
+       $arrOfficerDetail = $this->fetchOfficerData();
+       
+       showArray($arrOfficerDetail);
        
        $html = '';
        $styleCSS = '<style>
@@ -117,7 +136,7 @@ class Preview {
         $company .= '</table>';
         /* company details ends */
         
-        /* company details starts */
+        /* address details starts */
         $address = '<div class="test">Address Details</div>
                     <br />
                     <table class="first" cellpadding="4" cellspacing="6">
@@ -145,8 +164,50 @@ class Preview {
                         <td>'.$arrAddressDetail['metAddres'].'</td>
                     </tr>
                  </table>';
+        /* address details ends */
         
-        $html = $styleCSS.$company.$address;
+        /* Officer details starts */
+        $officer = '<div class="test">Officer Details</div>
+                    <br />
+                    <table class="first" cellpadding="4" cellspacing="6">';
+        
+        foreach ($arrOfficerDetail AS $officerCtr => $officerInfo) {
+            $officer .= '<tr>
+                            <td colspan="2"><u>Officer '.$officerCtr.'</u></td>
+                        </tr>
+                        <tr>
+                            <td>Name :</td>
+                            <td>'.$officerInfo['officerName'].'</td>
+                        </tr>
+                        <tr>
+                            <td>Date of birth :</td>
+                            <td>'.$officerInfo['offcr_dob'].'</td>
+                        </tr>
+                        <tr>
+                            <td>City of birth :</td>
+                            <td>'.$officerInfo['offcr_city_birth'].'</td>
+                        </tr>
+                        <tr>
+                            <td>State of birth :</td>
+                            <td>'.$arrStates[$officerInfo['offcr_state_birth']].'</td>
+                        </tr>
+                        <tr>
+                            <td>Country of birth :</td>
+                            <td>'.$arrCountry[$officerInfo['offcr_cntry_birth']].'</td>
+                        </tr>
+                        <tr>
+                            <td>Tax File Number :</td>
+                            <td>'.$officerInfo['offcr_tfn'].'</td>
+                        </tr>
+                        <tr>
+                            <td>Residential Address :</td>
+                            <td>'.$officerInfo['offcrAddres'].'</td>
+                        </tr>';
+        }
+        $officer .= '</table>';
+        /* Officer details ends */
+        
+        $html = $styleCSS.$company.$address.$officer;
         return $html;
         
     }

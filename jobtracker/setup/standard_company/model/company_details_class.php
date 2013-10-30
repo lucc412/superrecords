@@ -21,7 +21,7 @@ class COMPANY_DETAILS
     
     public function insertCompanyDetails()
     {        
-        $compPref = implode(',',$_REQUEST['txtCompPref']); 
+        $compPref = arrayToString(',',$_REQUEST['txtCompPref']); 
         $juriReg = $_REQUEST['selJuriReg'];
         $existBusnsName = $_REQUEST['selExtBusName']; 
         $regBusns = $_REQUEST['selRegBusns'];
@@ -90,55 +90,74 @@ class COMPANY_DETAILS
         {
             $regBusns = '';
             $regBusnsABN = '';
-            $regBusnsState = ''; 
+            $regBusnsState = '';
             $regNo = '';
         }
                 
-        $qry = "UPDATE stp_comp_dtls SET comp_pref_name = '".addslashes($compPref)."',  
-                                         comp_juri_reg = '".$juriReg."',
-                                         exst_busns_name = '".$existBusnsName."', 
-                                         reg_busns_name = '".$regBusns."', 
-                                         reg_busns_abn = '".$regBusnsABN."',
-                                         reg_busns_state = '".$regBusnsState."', 
-                                         reg_busns_number = '".$regNo."'
-                                         WHERE job_id = '".$_SESSION['jobId']."' ";
+        $qry = "UPDATE stp_comp_dtls 
+            SET comp_pref_name = '".addslashes($compPref)."',  
+                comp_juri_reg = '".$juriReg."',
+                exst_busns_name = '".$existBusnsName."', 
+                reg_busns_name = '".$regBusns."', 
+                reg_busns_abn = '".$regBusnsABN."',
+                reg_busns_state = '".$regBusnsState."', 
+                reg_busns_number = '".$regNo."'
+                WHERE job_id = '".$_SESSION['jobId']."' ";
         
         
         $result = mysql_query($qry);
         return $result;
     }
     
+    // update client id and job name
+    function updateClientName($cliName)
+    {
+        $qrySel = "SELECT t1.client_id, t1.client_name 
+                    FROM client t1
+                    WHERE id = '{$_SESSION['PRACTICEID']}' 
+                    AND t1.client_name = '".$cliName."'";
+
+        $fetchResult = mysql_query($qrySel);
+        $rowData = mysql_fetch_assoc($fetchResult);
+
+        if($rowData) $client_id = $rowData['client_id'];
+        else
+        {
+            // client_code
+            $qryIns = "INSERT INTO client(client_type_id, client_name, recieved_authority, id, client_received)
+                    VALUES (7, '" . addslashes($cliName) . "', 1, " . $_SESSION['PRACTICEID'] . ", '".date('Y-m-d')."')";
+
+            $flagReturn = mysql_query($qryIns);
+            $client_id = mysql_insert_id();
+
+            generateClientCode($client_id,$cliName);
+        }
+
+        if(!empty($client_id))
+        {
+            $jobName = $client_id .'::Year End 30/06/'. date('Y') .'::21';
+            $updt = "UPDATE job 
+                    SET client_id = ".$client_id.", 
+                    job_name = '".addslashes($jobName)."' 
+                    WHERE job_id = ".$_SESSION['jobId'];
+
+            mysql_query($updt);
+        }
+    }
+    
     function insertJobDetail()
     {
-        $clientId = NULL;
-        $jobtypeId = 21;
-        $cliType = 25;
-        $period = 'Year End 30/06/'. date('Y');
-        $jobGenre = 'SETUP';
-        $setup_subfrm = $_SESSION['frmId'];
+       $qryIns = "INSERT INTO job(job_genre, mas_Code, job_type_id, period, job_status_id, setup_subfrm_id, job_created_date)
+                    VALUES ( 
+                    'SETUP', 
+                    '25', 
+                    '21', 
+                    'Year End 30/06/". date('Y') . "',  
+                    1,   
+                    ".$_REQUEST['frmId'].",    
+                    '".date('Y-m-d')."'
+                    )";
         
-        $jobSubmitted = 'N';
-        $jobReceived = 'NULL';
-        $job_due_date = "0000-00-00 00:00:00";
-        
-        $jobName = $clientId .'::'. $period .'::'. $jobtypeId;
-        if(empty($clientId) && empty($period))$jobName=NULL;
-        
-        $qryIns = "INSERT INTO job(client_id, job_genre, job_submitted, mas_Code, job_type_id, period, job_name, job_status_id, setup_subfrm_id, job_created_date, job_received, job_due_date)
-                                VALUES (
-                                '" . $clientId . "', 
-                                '" . $jobGenre . "', 
-                                '" . $jobSubmitted . "', 
-                                " . $cliType . ", 
-                                " . $jobtypeId . ", 
-                                '" . $period . "',
-                                '" . $jobName . "',  
-                                1,   
-                                '".$setup_subfrm."',    
-                                '".date('Y-m-d')."',            
-                                '".$jobReceived."',
-                                '".$job_due_date."'
-                                )";
         mysql_query($qryIns);
         $jobId = mysql_insert_id();
         

@@ -5,9 +5,6 @@ include("../../include/common.php");
 
 include("model/company_details_class.php");
 $objCompDtls = new COMPANY_DETAILS();
-// fetch existing company details from database.
-//$_SESSION['jobId'] = 198;
-
 
 $arrCompDtls = '';
 if(!empty($_SESSION['jobId']) || !empty($_REQUEST['recid']))
@@ -21,46 +18,33 @@ if(!empty($_SESSION['jobId']) || !empty($_REQUEST['recid']))
     $arrCompDtls = $objCompDtls->fetchCompDtls();
 }
 
-if(!empty($_REQUEST['btnNext']) && $_REQUEST['btnNext'] == 'submit')
+if(!empty($_REQUEST['flagUpdate']))
 {
-    
-    showArray($arrCompDtls);
-    
-    
     if(empty($arrCompDtls))
     {
-        
         //Insert Details to Job
-        $jobId = $objCompDtls->insertJobDetail();
-        if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
-            $_SESSION['jobId'] = $jobId;
+        $_SESSION['jobId'] = $objCompDtls->insertJobDetail();
+        $cliName = $_REQUEST['txtCompPref'][0];
+        $objCompDtls->updateClientName($cliName);
             
         //Insert Details to Company    
-        $result = $objCompDtls->insertCompanyDetails();
-        
+        $objCompDtls->insertCompanyDetails();
     }
     else
     {
         //Update Details to Company    
-        $result = $objCompDtls->updateCompanyDetails();             
+        $objCompDtls->updateCompanyDetails();             
     }    
     
-    if($result)
-        header('location:address_details.php');
+    if(isset($_REQUEST['next'])) {
+        header('location: address_details.php');
+        exit;
+    }
+    else if(isset($_REQUEST['save'])) {
+        header('location: ../../jobs_saved.php');
+        exit;
+    }
 }    
-
-//if(!empty($_REQUEST['recid'])) 
-//{
-//    if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
-//        $_SESSION['jobId'] = $_REQUEST['recid'];
-//}
-
-
-if(!empty($_REQUEST['frmId'])) 
-{
-    if(isset($_SESSION['frmId']))unset($_SESSION['frmId']);
-        $_SESSION['frmId'] = $_REQUEST['frmId'];
-}   
 
 // fetch states for drop-down
 $arrStates = fetchStates();

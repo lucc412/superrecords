@@ -10,18 +10,17 @@ include(STND_COMP_NAV);
 	<span>
 </div>
 
-<form method="post" action="company_details.php" onsubmit="return  checkValidation();">
-    <input type="hidden" name="flagUpdate" id="flagUpdate" value="Y" />
-    <input type="hidden" name="job_type" id="smsf_type" value="SETUP" />
-    <input type="hidden" name="lstClientType" value="25" />
+<form id="frmCompany" method="post" action="company_details.php">
+<input type="hidden" name="flagUpdate" id="flagUpdate" value="Y" />
+<input type="hidden" name="frmId" value="<?=$_REQUEST['frmId']?>">
 <div>
     <table class="fieldtable" >
         <tr>
             <td colspan="3">Proposed name of company</td>
             <?php $pref_name = explode(',', $arrCompDtls['comp_pref_name']); ?>
-            <td><input type="text" name="txtCompPref[]" value="<?=$pref_name[0]?>" placeholder="Preference 1" /><br/>
-            <input type="text" name="txtCompPref[]" value="<?=$pref_name[1]?>" placeholder="Preference 2" /><br/>
-            <input type="text" name="txtCompPref[]" value="<?=$pref_name[2]?>" placeholder="Preference 3" /></td>
+            <td><input type="text" name="txtCompPref[]" id="txtCompPref0" value="<?=$pref_name[0]?>" placeholder="Preference 1" /><br/>
+            <input type="text" name="txtCompPref[]" id="txtCompPref1" value="<?=$pref_name[1]?>" placeholder="Preference 2" /><br/>
+            <input type="text" name="txtCompPref[]" id="txtCompPref2" value="<?=$pref_name[2]?>" placeholder="Preference 3" /></td>
         </tr>
         <tr>
             <td colspan="3">Jurisdiction of registration</td>
@@ -56,7 +55,7 @@ include(STND_COMP_NAV);
         </tr>
         <tr id="trABN" class="hide" >
             <td colspan="3">ABN</td>
-            <td><input type="text" name="txtABN" value="<?=$arrCompDtls['reg_busns_abn']?>" placeholder="ABN Number" /></td>
+            <td><input type="text" name="txtABN" id="txtABN" value="<?=$arrCompDtls['reg_busns_abn']?>" placeholder="ABN Number" /></td>
         </tr>
         <tr id="trState" class="hide" >
             <td colspan="3">State</td>
@@ -73,14 +72,15 @@ include(STND_COMP_NAV);
         </tr>
         <tr id="trRegNo" class="hide" >
             <td colspan="3">Registration Number</td>
-            <td><input type="text" name="txtRegNo" value="<?=$arrCompDtls['reg_busns_number']?>" placeholder="Registration Number" /></td>
+            <td><input type="text" name="txtRegNo" id="txtRegNo" value="<?=$arrCompDtls['reg_busns_number']?>" placeholder="Registration Number" /></td>
         </tr>
     </table>
 </div>
 
 <div class="pdT20">
-    <?php if(empty($_SESSION['jobId'])){ ?><span align="left"><button type="button" onclick="window.location.href='<?=DIR?>setup.php'" value="BACK" />Back</button></span><? } ?>
-    <span align="right" style="<?php if(!isset($_SESSION['jobId'])){ echo'padding-left:55px;'; } ?>"><button type="submit" id="btnNext" name="btnNext" value="submit">Next</button></span>
+    <?php if(empty($_SESSION['jobId'])){ ?><span class="pdR20"><button type="button" onclick="window.location.href='<?=DIR?>setup.php'" value="BACK" />Back</button></span><? } ?>
+    <span class="pdR20"><button type="submit" id="submit" name="save">Save & Exit</button></span>
+    <span><button type="submit" id="btnNext" name="next">Next</button></span>
 </div>
 </form>
 

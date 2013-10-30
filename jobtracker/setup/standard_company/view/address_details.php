@@ -12,18 +12,18 @@
 
 <div>
     <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details for your new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div>
-    <form method="post" action="address_details.php" onsubmit="return  checkValidation();">
+    <form method="post" id="frmAddress" action="address_details.php">
         <div class="frmMidHeader">Registered Address</div>
         <table class="fieldtable">
             <tr>
                 <td>Address</td>
                 <td>
                     <div>
-                        <input type="text" name="regAddUnit" style="width:115px;" value="<?=$arrAddrDtls['reg_add_unit']?>" placeholder="Unit number" />
+                        <input type="text" name="regAddUnit" id="regAddUnit" style="width:115px;" value="<?=$arrAddrDtls['reg_add_unit']?>" placeholder="Unit number" />
                         <input type="text" name="regAddBuild" style="width:115px;" value="<?=$arrAddrDtls['reg_add_build']?>" placeholder="Building" />
                         <input type="text" name="regAddStreet" style="width:115px;" value="<?=$arrAddrDtls['reg_add_street']?>" placeholder="Street"/><br>
                         <input type="text" name="regAddSubrb" style="width:115px;" value="<?=$arrAddrDtls['reg_add_subrb']?>" placeholder="Suburb"/>
-                        <select name="regAddState" style="margin-bottom: 5px;width:180px;" >
+                        <select name="regAddState" id="regAddState" style="margin-bottom: 5px;width:180px;" >
                             <option value="0">Select State</option>
                             <?php foreach($arrStates AS $stateKey => $stateName) {
                                     $selectStr = '';
@@ -32,7 +32,7 @@
                                 }
                             ?>
                         </select><br>
-                        <input type="text" name="regAddPstCode" value="<?=$arrAddrDtls['reg_add_pst_code']?>" placeholder="Post Code"/> 
+                        <input type="text" name="regAddPstCode" id="regAddPstCode" value="<?=$arrAddrDtls['reg_add_pst_code']?>" placeholder="Post Code"/> 
                     </div>
                 </td>
             </tr>
@@ -48,7 +48,7 @@
             <tr id="trOccpName" class="hide">
                 <td>Occupier`s name </td>
                 <td>
-                    <input type="text" name="txtOccpName" value="<?=$arrAddrDtls['occp_name']?>" placeholder="Occupier`s name"/>
+                    <input type="text" name="txtOccpName" value="<?=$arrAddrDtls['occp_name']?>"/>
                 </td>
             </tr>
         </table>
@@ -59,11 +59,11 @@
                 <td style="padding-right: 95px;" >Address</td>
                 <td>
                     <div>
-                        <input type="text" name="busAddUnit" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_unit']?>" placeholder="Unit number" />
+                        <input type="text" name="busAddUnit" id="busAddUnit" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_unit']?>" placeholder="Unit number" />
                         <input type="text" name="busAddBuild" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_build']?>" placeholder="Building" />
                         <input type="text" name="busAddStreet" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_street']?>" placeholder="Street"/><br>
                         <input type="text" name="busAddSubrb" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_subrb']?>" placeholder="Suburb"/>
-                        <select name="busAddState" style="margin-bottom: 5px;width:180px;" >
+                        <select name="busAddState" id="busAddState" style="margin-bottom: 5px;width:180px;" >
                             <option value="0">Select State</option>
                             <?php foreach($arrStates AS $stateKey => $stateName) {
                                         $selectStr = '';
@@ -72,7 +72,7 @@
                                 }
                             ?>
                         </select><br>
-                        <input type="text" name="busAddPstCode" value="<?=$arrAddrDtls['bsns_add_pst_code']?>" placeholder="Post Code"/> 
+                        <input type="text" id="busAddPstCode" name="busAddPstCode" value="<?=$arrAddrDtls['bsns_add_pst_code']?>" placeholder="Post Code"/> 
                     </div>
                 </td>
             </tr>
@@ -84,11 +84,11 @@
                 <td style="padding-right: 95px;" >Address</td>
                 <td>
                     <div>
-                        <input type="text" name="metAddUnit" style="width:115px;" value="<?=$arrAddrDtls['met_add_unit']?>" placeholder="Unit number" />
+                        <input type="text" name="metAddUnit" id="metAddUnit" style="width:115px;" value="<?=$arrAddrDtls['met_add_unit']?>" placeholder="Unit number" />
                         <input type="text" name="metAddBuild" style="width:115px;" value="<?=$arrAddrDtls['met_add_build']?>" placeholder="Building" />
                         <input type="text" name="metAddStreet" style="width:115px;" value="<?=$arrAddrDtls['met_add_street']?>" placeholder="Street"/><br>
                         <input type="text" name="metAddSubrb" style="width:115px;" value="<?=$arrAddrDtls['met_add_subrb']?>" placeholder="Suburb"/>
-                        <select name="metAddState" style="margin-bottom: 5px;width:180px;" >
+                        <select name="metAddState" id="metAddState" style="margin-bottom: 5px;width:180px;" >
                             <option value="0">Select State</option>
                             <?php foreach($arrStates AS $stateKey => $stateName) {
                                         $selectStr = '';
@@ -97,21 +97,17 @@
                                 }
                             ?>
                         </select><br>
-                        <input type="text" name="metAddPstCode" value="<?=$arrAddrDtls['met_add_pst_code']?>" placeholder="Post Code"/> 
+                        <input type="text" id="metAddPstCode" name="metAddPstCode" value="<?=$arrAddrDtls['met_add_pst_code']?>" placeholder="Post Code"/> 
                     </div>
                 </td>
             </tr>
         </table>
-        <input type="hidden" id="sql" name="sql" value="" />
+        <input type="hidden" id="sql" name="sql" value="update"/>
         <div style="padding-top:20px;">
-            <span align="left"><button type="button" onclick="window.location.href='company_details.php'" >Back</button></span>
-            <span align="right" style="padding-left:55px;"><button type="submit"  id='btnNext'>Next</button></span>
-            <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">Save & Exit</button></span>
+            <span class="pdR20"><button type="button" onclick="window.location.href='company_details.php'" >Back</button></span>
+            <span class="pdR20"><button type="submit" name="save" id="btnSave">Save & Exit</button></span>
+            <span class="pdR20"><button type="submit" name="next" id='btnNext'>Next</button></span>
         </div>
     </form>
-    <script>
-        $('#btnNext').click(function(){$('#sql').val('Add')})
-        $('#btnSave').click(function(){$('#sql').val('Save')})
-    </script>
 </div>
 <? include(FOOTER); ?>

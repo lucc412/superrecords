@@ -40,5 +40,5 @@ define("HOLDINGTRUSTNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/holding_
 define("HOLDINGTRUSTCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/holding_trust/include/content.php");
 define("LIMRECNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/limited_recourse/include/navigation.php");
 define("LIMRECCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/limited_recourse/include/content.php");
-define("STND_COMP_NAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/include/stnd_comp_nav.php");
+define("STND_COMP_NAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/standard_company/include/stnd_comp_nav.php");
 ?>

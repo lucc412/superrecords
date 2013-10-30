@@ -54,7 +54,7 @@ if(!empty($_REQUEST['sql']) && $_REQUEST['sql'] == 'Add')
     }
     
     ksort($arrOffcrData);
-    
+
     for($i = 1; $i <= $no_of_offcr; $i++)
     {
         $offcr['selOfficers'] = $_REQUEST['selOfficers'];
@@ -75,7 +75,7 @@ if(!empty($_REQUEST['sql']) && $_REQUEST['sql'] == 'Add')
         $offcr['offAddSubrb'] = $_REQUEST['offAddSubrb'][$i];
         $offcr['offAddState'] = $_REQUEST['offAddState'][$i];
         $offcr['offAddPstCode'] = $_REQUEST['offAddPstCode'][$i];
-        
+
         if(empty($offcr['offcrId']))
             $objOffDtls->insertOffcrDtls($offcr);
         else

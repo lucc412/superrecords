@@ -18,13 +18,22 @@ class OFFICER_DETAILS
     {
         $qry = "SELECT * FROM stp_offcr_dtls WHERE job_id = ".$_SESSION['jobId'];
         
-        $fetchResult = mysql_query($qry);
-        
-        $arrData = array();
-        while($rowData = mysql_fetch_assoc($fetchResult)) {
-                $arrData[$rowData['offcr_id']] = $rowData;
-        }
+//        $fetchResult = mysql_query($qry);
+//        
+//        $arrData = array();
+//        while($rowData = mysql_fetch_assoc($fetchResult)) {
+//                $arrData[$rowData['offcr_id']] = $rowData;
+//        }
 
+         $fetchResult = mysql_query($qry);
+		$count = 1;
+
+		$arrData = array();
+		while($rowData = mysql_fetch_assoc($fetchResult)) {
+			$arrData[$count++] = $rowData;
+		}
+
+        
         return $arrData;
     }
     
@@ -63,6 +72,7 @@ class OFFICER_DETAILS
     
     public function updateOffcrDtls($offcr)
     {
+        
         $qry = "UPDATE stp_offcr_dtls SET job_id = '".$_SESSION['jobId']."', 
                                                 no_of_offcr = '".$offcr['selOfficers']."', 
                                                 offcr_fname = '".$offcr['txtFname']."', 

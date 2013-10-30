@@ -39,8 +39,15 @@ class SHAREHOLDER_DETAILS
         return $arrShrCls;
     }
     
+    public function delShrhldrDtls($shrhldr_id)
+    {
+        $qryDel = "DELETE FROM stp_sharehldr_dtls WHERE shrhldr_id =". $shrhldr_id;
+        mysql_query($qryDel);
+    }
+    
     public function insertShrhldrDtls($shrhldr)
     {
+        
        print $qry = "INSERT INTO stp_sharehldr_dtls (job_id, no_of_shrhldr, shrhldr_type, shrhldr_cmpny_name, shrhldr_acn, shrhldr_reg_addr, no_of_directrs,
                                                 directrs_name, shrhldr_fname, shrhldr_mname, shrhldr_lname, res_addr_unit, res_addr_build, res_addr_street,
                                                 res_addr_subrb, res_addr_state, res_addr_pcode, share_class,is_shars_own_bhlf, shars_own_bhlf, no_of_shares) 
@@ -52,7 +59,7 @@ class SHAREHOLDER_DETAILS
                                                 '".$shrhldr['shrhldr_acn']."',
                                                 '".$shrhldr['shrhldr_reg_addr']."',
                                                 '".$shrhldr['no_of_directrs']."', 
-                                                '".$shrhldr['directrs_name']."',
+                                                '".addslashes($shrhldr['directrs_name'])."',
                                                 '".$shrhldr['shrhldr_fname']."', 
                                                 '".$shrhldr['shrhldr_mname']."', 
                                                 '".$shrhldr['shrhldr_lname']."', 
@@ -66,14 +73,14 @@ class SHAREHOLDER_DETAILS
                                                 '".$shrhldr['is_shars_own_bhlf']."', 
                                                 '".$shrhldr['shars_own_bhlf']."', 
                                                 '".$shrhldr['no_of_shares']."')";
-        
-        //$result = mysql_query($qry);        
+       
+        $result = mysql_query($qry);        
         return $result;
     }
     
     public function updateShrhldrDtls($shrhldr)
     {
-        print $qry = "UPDATE stp_sharehldr_dtls SET
+        PRINT $qry = "UPDATE stp_sharehldr_dtls SET
                                             no_of_shrhldr = '".$shrhldr['no_of_shrhldr']."',
                                             shrhldr_type = '".$shrhldr['shrhldr_type']."',
                                             shrhldr_cmpny_name = '".$shrhldr['shrhldr_cmpny_name']."',
@@ -96,7 +103,7 @@ class SHAREHOLDER_DETAILS
                                             no_of_shares = '".$shrhldr['no_of_shares']."'
                                             WHERE shrhldr_id = ".$shrhldr['shrhldr_id'];
         
-        //$result = mysql_query($qry);        
+        $result = mysql_query($qry);        
         return $result;
         
     }

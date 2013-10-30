@@ -13,6 +13,72 @@ $(document).ready(function(){
     $.getJSON('/jobtracker/setup/standard_company/officer_details.php',{ doAction: 'state' },function(result){
         objStates = result;
     });
+    
+    $('#frmShrhldr').submit(function() 
+    {
+        var flag = true;
+        
+        if($('#selShrHldr').val() == 0)
+        {
+            selShrHldr.className = "errclass";
+            flag = false;
+        }
+        else
+            selShrHldr.className = "";
+        
+        $('[id^=selShrType_]').each(function (){
+            if($(this).val() == 1) 
+            {
+                $('[id^=txtCmpName_]').each(function (){
+                    if(!$(this).val()) {
+                        $(this).addClass('errclass');
+                        flag = false;
+                    }
+                    else {
+                        $(this).removeClass("errclass");
+                    }
+                });
+            }
+            else if($(this).val() == 2) 
+            {
+                $('[id^=txtFname_]').each(function (){
+                    if(!$(this).val()) {
+                        $(this).addClass('errclass');
+                        flag = false;
+                    }
+                    else {
+                        $(this).removeClass("errclass");
+                    }
+                });
+                
+                $('[id^=txtLname_]').each(function (){
+                    if(!$(this).val()) {
+                        $(this).addClass('errclass');
+                        flag = false;
+                    }
+                    else {
+                        $(this).removeClass("errclass");
+                    }
+                });
+            }
+            
+            $('[id^=selShrCls_]').each(function ()
+            {
+                if($(this).val() == 0) {
+                    $(this).addClass('errclass');
+                    flag = false;
+                }
+                else {
+                    $(this).removeClass("errclass");
+                }
+            });
+            
+            
+            
+        });
+        
+        return flag;
+    });
    
 });
 
@@ -57,7 +123,7 @@ function addDirectors(element,cnt)
                                         <table class="fieldtable">\n\
                                             <tr>\n\
                                                 <td>Full Name </td>\n\
-                                                <td><input type="text" id="txtFulName_'+cnt+i+'" name="txtFulName['+cnt+i+']" placeholder="Full Name" /></td>\n\
+                                                <td><input type="text" id="txtFulName_'+cnt+i+'" name="txtFulName['+cnt+']['+i+']" placeholder="Full Name" /></td>\n\
                                             </tr>\n\
                                         </table>\n\
                                     </div>\n\
@@ -215,4 +281,70 @@ function addShrHldr()
                             ');
     }
     
+}
+
+
+
+function checkValidation(shrHldrCnt)
+{
+    
+    var flag = true;
+    
+//    if($('#selShrHldr').val() == 0)
+//    {
+//        alert('Please select number of shareholders')
+//        flag = false;
+//    }
+//    
+//    for(var i = 1; i <= shrHldrCnt; i++)
+//    {
+//        if($('#selShrType_'+i).val() == 1)
+//        {
+//            if($('#txtCmpName_'+i).val() == '')
+//            {
+//                alert('Please enter company name of shareholders')
+//                flag = false;
+//            }
+//            else if($('#txtRegAddr_'+i).val() == '')
+//            {
+//                alert('Please enter registered address of shareholders')
+//                flag = false;
+//            }
+//            else if($('#selNoDirtr_'+i).val() == 0)
+//            {
+//                alert('Please select number of directors')
+//                flag = false;
+//            }
+//            else if($('#selNoDirtr_'+i).val() > 0)
+//            {
+//            
+//                for(var k = 1; k <= parseInt($('#selNoDirtr_'+i).val()); k++)
+//                {
+//                    if($('#txtFulName_'+i+k).val() == '')
+//                    {
+//                        alert('Please enter full name of '+k+' director')
+//                        flag = false;
+//                    }    
+//                }
+//                
+//            }
+//            
+//            
+//        }
+//        else if($('#selShrType_'+i).val() == 2)
+//        {
+//            if($('#txtFname_'+i).val() == '')
+//            {
+//                alert('Please enter full name of '+k+' director')
+//                flag = false;
+//            }    
+//            if($('#txtLname_'+i).val() == '')
+//            {
+//                alert('Please enter full name of '+k+' director')
+//                flag = false;
+//            }
+//        }
+//    }
+    
+    return flag;
 }

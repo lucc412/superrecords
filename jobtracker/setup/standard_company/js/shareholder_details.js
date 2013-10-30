@@ -137,8 +137,7 @@ function addDirectors(element,cnt)
         $('#crpNoDirtr_'+cnt).append('<div id="dvDirtr_'+cnt+i+'" >\n\
                                         <table class="fieldtable">\n\
                                             <tr>\n\
-                                                <td>Full Name </td>\n\
-                                                <td><input type="text" id="txtFulName_'+cnt+i+'" name="txtFulName['+cnt+']['+i+']" placeholder="Full Name" /></td>\n\
+                                                <td><input type="text" id="txtFulName_'+cnt+i+'" name="txtFulName['+cnt+']['+i+']" placeholder="Director Name '+i+'" /></td>\n\
                                             </tr>\n\
                                         </table>\n\
                                     </div>\n\
@@ -226,16 +225,12 @@ function addShrHldr()
     for(var i = cntr;i <= shrHldrCnt; i++)
     {
         $('#dvShrHldr').append('<div id="shrHldr_'+i+'"> \n\
-                                <div style="padding:10px 0;color: #F05729;font-size: 14px;">Shareholder '+i+':</div>\n\
-                                \n\
-                                <table class="fieldtable">\n\
-                                    <tr><td>Type </td>\n\
-                                    <td><select id="selShrType_'+i+'" name="selShrType['+i+']" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,'+i+')" >\n\
-                                            <option value="1">Corporate</option>\n\
-                                            <option value="2">Individual</option>\n\
-                                        </select></td></tr>\n\
-                                </table>\n\
-                                <table id="trCrpShrHldr_'+i+'" class="fieldtable hide">\n\
+                                <div style="padding:20px 0 10px 0;color: #F05729;font-size: 14px;height:30px;width:196px;float:left">Shareholder '+i+': </div><div style="padding:10px 0;font-size:13px;width:500px">Type <select id="selShrType_'+i+'" name="selShrType['+i+']" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,'+i+')" >\n\
+                                                                                                                                                                            <option value="1">Corporate</option>\n\
+                                                                                                                                                                            <option value="2">Individual</option>\n\
+                                                                                                                                                                        </select>\n\
+                                </div><div style="clear:both"></div>\n\
+                                <table id="trCrpShrHldr_'+i+'" class="fieldtable hide" style="width:700px">\n\
                                     <tr>\n\
                                         <td>Company Name</td>\n\
                                         <td><input type="text" id="txtCmpName_'+i+'" name="txtCmpName['+i+']" placeholder="Company Name" /></td>\n\
@@ -255,8 +250,8 @@ function addShrHldr()
                                         </select></td>\n\
                                     </tr>\n\
                                 </table>\n\
-                                <div id="crpNoDirtr_'+i+'" class="hide" ></div>\n\
-                                <table id="trIndShrHldr_'+i+'" class="fieldtable hide">\n\
+                                <div id="crpNoDirtr_'+i+'" class="hide" style="margin-left:228px;width:auto"></div>\n\
+                                <table id="trIndShrHldr_'+i+'" class="fieldtable hide" style="width:1050px">\n\
                                     <tr><td>First name </td>\n\
                                     <td><input type="text" id="txtFname_'+i+'" name="txtFname['+i+']" placeholder="First Name" /></td></tr>\n\
                                     <tr><td>Middle name </td>\n\
@@ -277,7 +272,7 @@ function addShrHldr()
                                 </td>\n\
                             </tr>\n\
                             </table>\n\
-                            <table class="fieldtable">\n\
+                            <table class="fieldtable" style="width:528px">\n\
                                 <tr><td>Share Class </td>\n\
                                 <td>\n\
                                     <select id="selShrCls_'+i+'" name="selShrCls['+i+']" style="margin-bottom:5px; width:180px;" >\n\
@@ -289,9 +284,9 @@ function addShrHldr()
                                         <option value="0">No</option>\n\
                                     </select></td></tr>\n\
                                 <tr id="trShrOwnBhlf_'+i+'" ><td>Shares are owned on behalf </td>\n\
-                                <td><input type="text" id="txtShrOwnBhlf_'+i+'" name="txtShrOwnBhlf['+i+']" placeholder="Shares are owned on behalf" /></td></tr>\n\
+                                <td><input type="text" id="txtShrOwnBhlf_'+i+'" name="txtShrOwnBhlf['+i+']"  /></td></tr>\n\
                                 <tr><td>Number of shares </td>\n\
-                                <td><input type="text" id="txtNoShares_'+i+'" name="txtNoShares['+i+']" placeholder="Number of shares" /></td></tr>\n\
+                                <td><input type="text" id="txtNoShares_'+i+'" name="txtNoShares['+i+']"  /></td></tr>\n\
                             </table></div>\n\
                             ');
     }

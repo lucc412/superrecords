@@ -42,16 +42,15 @@
                         $noOfShrhldr = $value['no_of_shrhldr'];
                     ?>
                         <div id="shrHldr_<?=$cntr?>"> 
-                                <div style="padding:10px 0;color: #F05729;font-size: 14px;">Shareholder <?=$cntr?>:</div>
-                                <input type="hidden" name="shrhldrId[<?=$cntr?>]" id="shrhldrId_<?=$cntr?>" value="<?=$value['shrhldr_id']?>">
-                                <table class="fieldtable">
-                                    <tr><td>Type </td>
-                                    <td><select id="selShrType_<?=$cntr?>" name="selShrType[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,<?=$cntr?>)" >
+                                <div style="padding:20px 0 10px 0;color: #F05729;font-size: 14px;height:30px;width:196px;float:left">Shareholder <?=$cntr?>:</div>
+                                <div style="padding:10px 0;font-size:13px;width:500px"> Type <select id="selShrType_<?=$cntr?>" name="selShrType[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,<?=$cntr?>)" >
                                             <option value="1" <?php if($value['shrhldr_type'] == 1) echo 'selected';?> >Corporate</option>
                                             <option value="2" <?php if($value['shrhldr_type'] == 2) echo 'selected';?> >Individual</option>
-                                        </select></td></tr>
-                                </table>
-                                <table id="trCrpShrHldr_<?=$cntr?>" class="fieldtable <?php if($value['shrhldr_type'] == 1){ echo 'show'; }else echo 'hide'; ?>">
+                                        </select></div>
+                                </div><div style="clear:both"></div>
+                                <input type="hidden" name="shrhldrId[<?=$cntr?>]" id="shrhldrId_<?=$cntr?>" value="<?=$value['shrhldr_id']?>" >
+                                
+                                <table id="trCrpShrHldr_<?=$cntr?>" style="width:700px" class="fieldtable <?php if($value['shrhldr_type'] == 1){ echo 'show'; }else echo 'hide'; ?>">
                                     <tr>
                                         <td>Company Name</td>
                                         <td><input type="text" id="txtCmpName_<?=$cntr?>" name="txtCmpName[<?=$cntr?>]" value="<?=$value['shrhldr_cmpny_name']?>" placeholder="Company Name" /></td>
@@ -78,20 +77,19 @@
                                         </select></td>
                                     </tr>
                                 </table>
-                                <div id="crpNoDirtr_<?=$cntr?>" class="<?php if($value['no_of_directrs'] > 0){ echo 'show'; }else echo 'hide'; ?>">
+                                <div id="crpNoDirtr_<?=$cntr?>" class="<?php if($value['no_of_directrs'] > 0){ echo 'show'; }else echo 'hide'; ?>" style="margin-left:228px;width:auto">
                                     <?php $drctrsName = explode(',', $value['directrs_name']);
                                     foreach ($drctrsName as $fldId => $fldvalue) { $fldId++; ?>                                    
                                     <div id="dvDirtr_<?=$cntr.$fldId?>" >
                                         <table class="fieldtable">
                                             <tr>
-                                                <td>Full Name </td>
-                                                <td><input type="text" id="txtFulName_<?=$cntr.$fldId?>" name="txtFulName[<?=$cntr?>][<?=$fldId?>]" value="<?=$fldvalue?>" placeholder="Full Name" /></td>
+                                                <td><input type="text" id="txtFulName_<?=$cntr.$fldId?>" name="txtFulName[<?=$cntr?>][<?=$fldId?>]" value="<?=$fldvalue?>" placeholder="Director Name <?=$fldId?>" /></td>
                                             </tr>
                                         </table>
                                     </div>
                                     <?php } ?>
                                 </div>
-                                <table id="trIndShrHldr_<?=$cntr?>" class="fieldtable <?php if($value['shrhldr_type'] == 2){ echo 'show'; }else echo 'hide'; ?>">
+                                <table id="trIndShrHldr_<?=$cntr?>" style="width:1050px" class="fieldtable <?php if($value['shrhldr_type'] == 2){ echo 'show'; }else echo 'hide'; ?>">
                                     <tr><td>First name </td>
                                     <td><input type="text" id="txtFname_<?=$cntr?>" name="txtFname[<?=$cntr?>]" value="<?=$value['shrhldr_fname']?>" placeholder="First Name" /></td></tr>
                                     <tr><td>Middle name </td>
@@ -112,7 +110,7 @@
                                 </td>
                             </tr>
                             </table>
-                            <table class="fieldtable">
+                            <table class="fieldtable" style="width:528px">
                                 <tr><td>Share Class </td>
                                 <td>
                                     <select id="selShrCls_<?=$cntr?>" name="selShrCls[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" >

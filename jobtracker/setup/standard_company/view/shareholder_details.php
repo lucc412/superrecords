@@ -47,7 +47,7 @@
                                             <option value="1" <?php if($value['shrhldr_type'] == 1) echo 'selected';?> >Corporate</option>
                                             <option value="2" <?php if($value['shrhldr_type'] == 2) echo 'selected';?> >Individual</option>
                                         </select></div>
-                                </div><div style="clear:both"></div>
+                                <div style="clear:both"></div>
                                 <input type="hidden" name="shrhldrId[<?=$cntr?>]" id="shrhldrId_<?=$cntr?>" value="<?=$value['shrhldr_id']?>" >
                                 
                                 <table id="trCrpShrHldr_<?=$cntr?>" style="width:700px" class="fieldtable <?php if($value['shrhldr_type'] == 1){ echo 'show'; }else echo 'hide'; ?>">

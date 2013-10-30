@@ -229,7 +229,7 @@ function addShrHldr()
                                                                                                                                                                             <option value="1">Corporate</option>\n\
                                                                                                                                                                             <option value="2">Individual</option>\n\
                                                                                                                                                                         </select>\n\
-                                </div><div style="clear:both"></div>\n\
+                                <div style="clear:both"></div>\n\
                                 <table id="trCrpShrHldr_'+i+'" class="fieldtable hide" style="width:700px">\n\
                                     <tr>\n\
                                         <td>Company Name</td>\n\

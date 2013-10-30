@@ -120,39 +120,39 @@ class Preview {
             $trustIndividual = "";
             foreach ($arrIndvdlTrust as $individualInfo) {
                 $trustIndividual .= '<table class="first" cellpadding="4" cellspacing="6">
-                                    <tr>
-                                        <td colspan="2"><u>Member '.$memberCtr.'</u></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Name of Trustee :</td>
-                                        <td>'.$individualInfo['name'].'</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Residential Address :</td>
-                                        <td>'.$individualInfo['address'].'</td>
-                                    </tr>
-                                    </table>';
+                                        <tr>
+                                            <td colspan="2"><u>Member '.$memberCtr.'</u></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Name of Trustee :</td>
+                                            <td>'.$individualInfo['name'].'</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Residential Address :</td>
+                                            <td>'.$individualInfo['address'].'</td>
+                                        </tr>
+                                   </table>';
                 $memberCtr++;
             }
         }
         // corporate
         elseif($arrTrustDetail['trustee_id'] == '2') {
             $holdingTrustee = '<tr>
-                                <td>Name of company :</td>
-                                <td>'.$arrTrustDetail['comp_name'].'</td>
-                            </tr>
-                            <tr>
-                                <td>ACN Number :</td>
-                                <td>'.$arrTrustDetail['acn'].'</td>
-                            </tr>
-                            <tr>
-                                <td>Registered Address :</td>
-                                <td>'.$arrTrustDetail['reg_address'].'</td>
-                            </tr>
-                            <tr>
-                                <td>Directors :</td>
-                                <td>'.  replaceString('|', ',', $arrTrustDetail['director']).'</td>
-                            </tr>';
+                                    <td>Name of company :</td>
+                                    <td>'.$arrTrustDetail['comp_name'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>ACN Number :</td>
+                                    <td>'.$arrTrustDetail['acn'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>Registered Address :</td>
+                                    <td>'.$arrTrustDetail['reg_address'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>Directors :</td>
+                                    <td>'.  replaceString('|', ',', $arrTrustDetail['director']).'</td>
+                                </tr>';
         }
         
         $trust = '<div class="test">Holding Trust Details</div>

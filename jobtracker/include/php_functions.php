@@ -594,9 +594,9 @@ function fetchCountries()
         $qryFetch = "SELECT * FROM es_country";	
         $fetchResult = mysql_query($qryFetch);
         while($rowData = mysql_fetch_assoc($fetchResult)) {
-                $arrStates[$rowData['country_id']] = $rowData['country_name'];
+                $arrCountry[$rowData['country_id']] = $rowData['country_name'];
         }
-        return $arrStates;
+        return $arrCountry;
 }
 
 function fetchSubForm()

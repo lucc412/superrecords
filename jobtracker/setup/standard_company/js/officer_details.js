@@ -57,6 +57,66 @@ $(document).ready(function(){
             }
         });
         
+        $('[id^=offAddUnit]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        $('[id^=offAddBuild]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        $('[id^=offAddStreet]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        $('[id^=offAddSubrb]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        $('[id^=offAddState]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        $('[id^=offAddPstCode]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
         return flagReturn;
     });
 });

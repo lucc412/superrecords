@@ -145,7 +145,7 @@
 			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/company_details.js"></script><?
 		}
                 else if(basename($_SERVER['PHP_SELF']) == 'address_details.php') {
-			?><title>Company Details</title>
+			?><title>Address Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/address_details.js"></script><?
 		}
                 else if(basename($_SERVER['PHP_SELF']) == 'officer_details.php') {

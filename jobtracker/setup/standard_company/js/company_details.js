@@ -5,6 +5,38 @@
 
 $(document).ready(function(){
     checkExistingBusiness();
+    
+    // on submit validation
+    $('#frmCompany').submit(function() {
+        flagReturn = true;
+        $('[id^=txtCompPref]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        if($('#selExtBusName').val() == 1 && $('#selRegBusns').val() == 0) {
+            if($('#txtRegNo').val() == 0) {
+                txtRegNo.className = "errclass";
+                flagReturn = false;
+            }
+            else txtRegNo.className = "";
+        }
+        
+        if($('#selExtBusName').val() == 1 && $('#selRegBusns').val() == 1) {
+            if($('#txtABN').val() == 0) {
+                txtABN.className = "errclass";
+                flagReturn = false;
+            }
+            else txtABN.className = "";
+        }
+       
+        return flagReturn;
+    });
 });
 
 function checkExistingBusiness()

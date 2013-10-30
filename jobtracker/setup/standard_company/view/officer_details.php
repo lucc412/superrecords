@@ -16,7 +16,7 @@
 </div>
 <div>
     <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details for your company. These details will be used to register the company. If you need any help completing this section, please contact us.</div>
-    <form method="post" action="officer_details.php" onsubmit="return  checkValidation();">
+    <form method="post" id="frmOfficer" action="officer_details.php">
         <table class="fieldtable">
             <tr>
                 <td>Number of officers </td>
@@ -107,16 +107,12 @@
                 }
             ?>
         </div>
-        <input type="hidden" id="sql" name="sql" value="" />
+        <input type="hidden" id="sql" name="sql" value="update" />
         <div style="padding-top:20px;"> 
-            <span align="left"><button type="button" onclick="window.location.href='address_details.php'" >Back</button></span>
-            <span align="right" style="padding-left:55px;"><button type="submit"  id='btnNext'>Next</button></span>
-            <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">Save & Exit</button></span>
+            <span class="pdR20"><button type="button" onclick="window.location.href='address_details.php'" >Back</button></span>
+            <span class="pdR20"><button type="submit" name="save" id="btnSave">Save & Exit</button></span>
+            <span><button type="submit" name="next" id='btnNext'>Next</button></span>
         </div>
     </form>
-    <script>
-        $('#btnNext').click(function(){$('#sql').val('Add')})
-        $('#btnSave').click(function(){$('#sql').val('Save')})
-    </script>
 </div>
 <? include(FOOTER); ?>

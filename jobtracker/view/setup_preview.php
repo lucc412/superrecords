@@ -1,6 +1,7 @@
 <?php
 
     include(TOPBAR);
+    include(SETUPNAVIGATION);
     
     // page header
     ?><div class="pageheader">

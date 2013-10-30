@@ -33,9 +33,8 @@ if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) {
     $arrOffcrData = $objOffDtls->fetchOffcrDtls();
 }
 
-if(!empty($_REQUEST['sql']) && $_REQUEST['sql'] == 'Add')
+if(!empty($_REQUEST['sql']))
 {
-
     $no_of_offcr = $_REQUEST['selOfficers'];
     
     //Reverse Array for deleting officer
@@ -82,7 +81,14 @@ if(!empty($_REQUEST['sql']) && $_REQUEST['sql'] == 'Add')
             $objOffDtls->updateOffcrDtls($offcr);
     }
     
-    header("location:shareholder_details.php");
+    if(isset($_REQUEST['next'])) {
+        header('location: shareholder_details.php');
+        exit;
+    }
+    else if(isset($_REQUEST['save'])) {
+        header('location: ../../jobs_saved.php');
+        exit;
+    }
 }
 
 // fetch states for drop-down

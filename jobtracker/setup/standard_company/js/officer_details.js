@@ -15,6 +15,50 @@ $(document).ready(function(){
     $.getJSON('/jobtracker/setup/standard_company/officer_details.php',{ doAction: 'country' },function(result){
         objCntry = result;
     });
+    
+    // on submit validation
+    $('#frmOfficer').submit(function() {
+        flagReturn = true;
+        
+        // Registered Address
+        if($('#selOfficers').val() == 0) {
+            selOfficers.className = "errclass";
+            flagReturn = false;
+        }
+        else selOfficers.className = "";
+        
+        $('[id^=txtFname]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        $('[id^=txtLname]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        $('[id^=txtDob]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        return flagReturn;
+    });
 });
 
 function addOfficers()

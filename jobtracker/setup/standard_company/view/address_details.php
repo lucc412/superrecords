@@ -20,9 +20,9 @@
                 <td>
                     <div>
                         <input type="text" name="regAddUnit" id="regAddUnit" style="width:115px;" value="<?=$arrAddrDtls['reg_add_unit']?>" placeholder="Unit number" />
-                        <input type="text" name="regAddBuild" style="width:115px;" value="<?=$arrAddrDtls['reg_add_build']?>" placeholder="Building" />
-                        <input type="text" name="regAddStreet" style="width:115px;" value="<?=$arrAddrDtls['reg_add_street']?>" placeholder="Street"/><br>
-                        <input type="text" name="regAddSubrb" style="width:115px;" value="<?=$arrAddrDtls['reg_add_subrb']?>" placeholder="Suburb"/>
+                        <input type="text" name="regAddBuild" id="regAddBuild" style="width:115px;" value="<?=$arrAddrDtls['reg_add_build']?>" placeholder="Building" />
+                        <input type="text" name="regAddStreet" id="regAddStreet" style="width:115px;" value="<?=$arrAddrDtls['reg_add_street']?>" placeholder="Street"/><br>
+                        <input type="text" name="regAddSubrb" id="regAddSubrb" style="width:115px;" value="<?=$arrAddrDtls['reg_add_subrb']?>" placeholder="Suburb"/>
                         <select name="regAddState" id="regAddState" style="margin-bottom: 5px;width:180px;" >
                             <option value="0">Select State</option>
                             <?php foreach($arrStates AS $stateKey => $stateName) {
@@ -60,9 +60,9 @@
                 <td>
                     <div>
                         <input type="text" name="busAddUnit" id="busAddUnit" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_unit']?>" placeholder="Unit number" />
-                        <input type="text" name="busAddBuild" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_build']?>" placeholder="Building" />
-                        <input type="text" name="busAddStreet" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_street']?>" placeholder="Street"/><br>
-                        <input type="text" name="busAddSubrb" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_subrb']?>" placeholder="Suburb"/>
+                        <input type="text" name="busAddBuild" id="busAddBuild" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_build']?>" placeholder="Building" />
+                        <input type="text" name="busAddStreet" id="busAddStreet" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_street']?>" placeholder="Street"/><br>
+                        <input type="text" name="busAddSubrb" id="busAddSubrb" style="width:115px;" value="<?=$arrAddrDtls['bsns_add_subrb']?>" placeholder="Suburb"/>
                         <select name="busAddState" id="busAddState" style="margin-bottom: 5px;width:180px;" >
                             <option value="0">Select State</option>
                             <?php foreach($arrStates AS $stateKey => $stateName) {
@@ -85,9 +85,9 @@
                 <td>
                     <div>
                         <input type="text" name="metAddUnit" id="metAddUnit" style="width:115px;" value="<?=$arrAddrDtls['met_add_unit']?>" placeholder="Unit number" />
-                        <input type="text" name="metAddBuild" style="width:115px;" value="<?=$arrAddrDtls['met_add_build']?>" placeholder="Building" />
-                        <input type="text" name="metAddStreet" style="width:115px;" value="<?=$arrAddrDtls['met_add_street']?>" placeholder="Street"/><br>
-                        <input type="text" name="metAddSubrb" style="width:115px;" value="<?=$arrAddrDtls['met_add_subrb']?>" placeholder="Suburb"/>
+                        <input type="text" name="metAddBuild" id="metAddBuild" style="width:115px;" value="<?=$arrAddrDtls['met_add_build']?>" placeholder="Building" />
+                        <input type="text" name="metAddStreet" id="metAddStreet" style="width:115px;" value="<?=$arrAddrDtls['met_add_street']?>" placeholder="Street"/><br>
+                        <input type="text" name="metAddSubrb" id="metAddSubrb" style="width:115px;" value="<?=$arrAddrDtls['met_add_subrb']?>" placeholder="Suburb"/>
                         <select name="metAddState" id="metAddState" style="margin-bottom: 5px;width:180px;" >
                             <option value="0">Select State</option>
                             <?php foreach($arrStates AS $stateKey => $stateName) {

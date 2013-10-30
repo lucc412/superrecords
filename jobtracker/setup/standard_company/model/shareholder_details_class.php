@@ -18,11 +18,19 @@ class SHAREHOLDER_DETAILS
     {
         $qry = "SELECT * FROM stp_sharehldr_dtls WHERE job_id = ".$_SESSION['jobId'];
         
-        $fetchResult = mysql_query($qry);
+//        $fetchResult = mysql_query($qry);
+//        
+//        $arrData = array();
+//        while($rowData = mysql_fetch_assoc($fetchResult)) {
+//        $arrData[$rowData['shrhldr_id']] = $rowData;
+//        }
         
+        $fetchResult = mysql_query($qry);
+        $count = 1;
+
         $arrData = array();
         while($rowData = mysql_fetch_assoc($fetchResult)) {
-        $arrData[$rowData['shrhldr_id']] = $rowData;
+                $arrData[$count++] = $rowData;
         }
 
         return $arrData;

@@ -25,13 +25,13 @@ class OFFICER_DETAILS
 //                $arrData[$rowData['offcr_id']] = $rowData;
 //        }
 
-         $fetchResult = mysql_query($qry);
-		$count = 1;
+        $fetchResult = mysql_query($qry);
+        $count = 1;
 
-		$arrData = array();
-		while($rowData = mysql_fetch_assoc($fetchResult)) {
-			$arrData[$count++] = $rowData;
-		}
+        $arrData = array();
+        while($rowData = mysql_fetch_assoc($fetchResult)) {
+                $arrData[$count++] = $rowData;
+        }
 
         
         return $arrData;

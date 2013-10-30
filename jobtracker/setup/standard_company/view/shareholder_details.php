@@ -43,7 +43,7 @@
                     ?>
                         <div id="shrHldr_<?=$cntr?>"> 
                                 <div style="padding:10px 0;color: #F05729;font-size: 14px;">Shareholder <?=$cntr?>:</div>
-                                <input type="hidden" name="shrhldrId[<?=$cntr?>]" id="shrhldrId" value="<?=$cntr?>">
+                                <input type="hidden" name="shrhldrId[<?=$cntr?>]" id="shrhldrId" value="<?=$value['shrhldr_id']?>">
                                 <table class="fieldtable">
                                     <tr><td>Type </td>
                                     <td><select id="selShrType_<?=$cntr?>" name="selShrType[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,<?=$cntr?>)" >
@@ -138,8 +138,8 @@
         <input type="hidden" id="sql" name="sql" value="" />
         <div style="padding-top:20px;">
             <span align="left"><button type="button" onclick="window.location.href='officer_details.php'" >Back</button></span>
-            <span align="right" style="padding-left:55px;"><button type="submit"  id="btnNext" name="btnNext" value="Next" >Next</button></span>
             <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave" name="btnSave" value="Save" >Save & Exit</button></span>
+            <span align="right" style="padding-left:55px;"><button type="submit"  id="btnNext" name="btnNext" value="Next" >Preview</button></span>
         </div>
     </form>
     <script>

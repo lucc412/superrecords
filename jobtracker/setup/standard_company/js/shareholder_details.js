@@ -14,6 +14,7 @@ $(document).ready(function(){
         objStates = result;
     });
     
+    
     $('#frmShrhldr').submit(function() 
     {
         var flag = true;
@@ -26,27 +27,45 @@ $(document).ready(function(){
         else
             selShrHldr.className = "";
         
-        $('[id^=selShrType_]').each(function (){
+        $('[id^=selShrType_]').each(function ()
+        {
             if($(this).val() == 1) 
             {
-                $('[id^=txtCmpName_]').each(function (){
-                    if(!$(this).val()) {
+                $('[id^=trIndShrHldr_]').filter(':not(.hide)').each(function(){
+                    alert(this.id+' FROM NOT')
+                });
+                
+                $('[id^=txtCmpName_]').each(function ()
+                {
+                    if(!$(this).val()) 
+                    {
                         $(this).addClass('errclass');
                         flag = false;
                     }
-                    else {
+                    else 
+                    {
                         $(this).removeClass("errclass");
                     }
+                });
+                
+                $('[id^=trIndShrHldr_]').filter('.hide').each(function()
+                {
+                    alert(this.id)
+                    $(this).removeClass("errclass");
+                    flag = true;
                 });
             }
             else if($(this).val() == 2) 
             {
-                $('[id^=txtFname_]').each(function (){
-                    if(!$(this).val()) {
+                $('[id^=txtFname_]').each(function ()
+                {
+                    if(!$(this).val()) 
+                    {
                         $(this).addClass('errclass');
                         flag = false;
                     }
-                    else {
+                    else 
+                    {
                         $(this).removeClass("errclass");
                     }
                 });
@@ -59,6 +78,20 @@ $(document).ready(function(){
                     else {
                         $(this).removeClass("errclass");
                     }
+                });
+                
+                $('[id^=trCrpShrHldr_]').filter('.hide').each(function()
+                {
+                    alert(this.id)
+                    $(this).removeClass("errclass");
+                    flag = true;
+                });
+                
+                $('[id^=crpNoDirtr_]').filter('.hide').each(function()
+                {
+                    alert(this.id)
+                    $(this).removeClass("errclass");
+                    flag = true;
                 });
             }
             

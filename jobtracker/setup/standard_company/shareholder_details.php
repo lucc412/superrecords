@@ -94,7 +94,7 @@ if(!empty($_REQUEST['sql']) && $_REQUEST['sql'] == 'Add')
     }
     
     if(!empty($_REQUEST['btnNext']))
-        header("location:declaration_details.php");
+        header("location:preview.php");
     
     if(!empty($_REQUEST['btnSave']))
         header("location:../../job_saved.php");

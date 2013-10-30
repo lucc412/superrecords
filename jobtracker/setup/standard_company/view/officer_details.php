@@ -34,7 +34,7 @@
                 </td>
             </tr>
         </table>
-        <?php showArray($arrOffcrData); ?>
+        
         <div id="dvOfficer">
             <?php
                                     

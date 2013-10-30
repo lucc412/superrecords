@@ -24,7 +24,8 @@
                     <select id="selOfficers" name="selOfficers" style="margin-bottom: 5px;width:180px;" onchange="addOfficers()">
                         <option value="0">Select no of officer`s</option>
                         <?php 
-                            for($i = 1;$i <= 10;$i++) {
+                            for($i = 1;$i <= 10;$i++) 
+                            {
                                 $selectStr = '';
                                 if(count($arrOffcrData) == $i) $selectStr = 'selected';
                                 ?><option <?=$selectStr?> value="<?=$i?>"><?=$i?></option><?

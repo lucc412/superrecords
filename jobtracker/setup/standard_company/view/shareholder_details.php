@@ -43,7 +43,7 @@
                     ?>
                         <div id="shrHldr_<?=$cntr?>"> 
                                 <div style="padding:10px 0;color: #F05729;font-size: 14px;">Shareholder <?=$cntr?>:</div>
-                                <input type="hidden" name="shrhldrId[<?=$cntr?>]" id="shrhldrId" value="<?=$value['shrhldr_id']?>">
+                                <input type="hidden" name="shrhldrId[<?=$cntr?>]" id="shrhldrId_<?=$cntr?>" value="<?=$value['shrhldr_id']?>">
                                 <table class="fieldtable">
                                     <tr><td>Type </td>
                                     <td><select id="selShrType_<?=$cntr?>" name="selShrType[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,<?=$cntr?>)" >

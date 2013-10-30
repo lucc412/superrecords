@@ -46,11 +46,28 @@ class Preview {
                         FROM stp_offcr_dtls of LEFT JOIN cli_state cs ON of.offcr_addr_state = cs.cst_Code
                         WHERE of.job_id = ".$_SESSION['jobId'];
             $fetchRow = mysql_query($qryCom);
-            $OffcrCntr = 1;
+            $offcrCntr = 1;
             while($rowData = mysql_fetch_assoc($fetchRow)) {
-                $arrOfficer[$OffcrCntr++] = $rowData;
+                $arrOfficer[$offcrCntr++] = $rowData;
             }
             return $arrOfficer;
+    }
+    
+    // fetch officer data
+    public function fetchShareholderData() {
+            $qrySel = "SELECT sh.shrhldr_type, IF(sh.shrhldr_type = 1, 'Corporate', 'Individual') shrhldrType, sh.shrhldr_cmpny_name, sh.shrhldr_acn, sh.shrhldr_reg_addr,
+                        sh.no_of_directrs, sh.directrs_name, CONCAT_WS(' ', sh.shrhldr_fname, sh.shrhldr_mname, sh.shrhldr_lname) shrhldrName, 
+                        CONCAT_WS(',', sh.res_addr_unit, sh.res_addr_build, sh.res_addr_street, sh.res_addr_subrb, sh.res_addr_pcode, cs.cst_Description) regAddress, 
+                        sc.shr_desc, IF(sh.is_shars_own_bhlf, 'Yes', 'No')isShrhldr, sh.shars_own_bhlf, sh.no_of_shares
+                        FROM stp_share_class sc, stp_sharehldr_dtls sh LEFT JOIN cli_state cs ON sh.res_addr_state = cs.cst_Code
+                        WHERE sh.job_id = ".$_SESSION['jobId']."
+                        AND sh.share_class = sc.shrclass_id";
+            $fetchRow = mysql_query($qrySel);
+            $shrhldrCntr = 1;
+            while($rowData = mysql_fetch_assoc($fetchRow)) {
+                $arrShareholder[$shrhldrCntr++] = $rowData;
+            }
+            return $arrShareholder;
     }
     
     
@@ -61,8 +78,7 @@ class Preview {
        $arrCompanyDetail = $this->fetchCompanyData();
        $arrAddressDetail = $this->fetchAddressData();
        $arrOfficerDetail = $this->fetchOfficerData();
-       
-       showArray($arrOfficerDetail);
+       $arrSharehldrDetail = $this->fetchShareholderData();
        
        $html = '';
        $styleCSS = '<style>
@@ -173,6 +189,9 @@ class Preview {
         
         foreach ($arrOfficerDetail AS $officerCtr => $officerInfo) {
             $officer .= '<tr>
+                            <td colspan="2"></td>
+                        </tr> 
+                        <tr>
                             <td colspan="2"><u>Officer '.$officerCtr.'</u></td>
                         </tr>
                         <tr>
@@ -207,7 +226,78 @@ class Preview {
         $officer .= '</table>';
         /* Officer details ends */
         
-        $html = $styleCSS.$company.$address.$officer;
+        /* shareholder details starts */
+        $shareHolder .= '<div class="test">Shareholder Details</div><br />
+                    <table class="first" cellpadding="4" cellspacing="6">';
+        
+        foreach ($arrSharehldrDetail AS $shrCtr => $shrHlderInfo) {
+            $shareHolder .= '<tr>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><u>Shareholder '.$shrCtr.'</u></td>
+                            </tr>
+                            <tr>
+                                <td>Type :</td>
+                                <td>'.$shrHlderInfo['shrhldrType'].'</td>
+                            </tr>';
+            if($shrHlderInfo['shrhldr_type'] == '1') {
+                $shareHolder .= '<tr>
+                                    <td>Company Name :</td>
+                                    <td>'.$shrHlderInfo['shrhldr_cmpny_name'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>ACN :</td>
+                                    <td>'.$shrHlderInfo['shrhldr_acn'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>Registered Address :</td>
+                                    <td>'.$shrHlderInfo['shrhldr_reg_addr'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>Number of Director :</td>
+                                    <td>'.$shrHlderInfo['no_of_directrs'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>Directors :</td>
+                                    <td>'.$shrHlderInfo['directrs_name'].'</td>
+                                </tr>';
+            }
+            else if($shrHlderInfo['shrhldr_type'] == '2') {
+                $shareHolder .= '<tr>
+                                    <td>Shareholder Name :</td>
+                                    <td>'.$shrHlderInfo['shrhldrName'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>Residential Address :</td>
+                                    <td>'.$shrHlderInfo['regAddress'].'</td>
+                                </tr>';
+            }
+            
+            $shareHolder .= '<tr>
+                                <td>Share Class :</td>
+                                <td>'.$shrHlderInfo['shr_desc'].'</td>
+                            </tr>
+                            <tr>
+                                <td>Are the shares owned on behalf <br/> of another Company or Trust? :</td>
+                                <td>'.$shrHlderInfo['isShrhldr'].'</td>
+                            </tr>';
+            if($shrHlderInfo['isShrhldr'] == 'Yes') {
+                $shareHolder .= '<tr>
+                                    <td>Shares are owned on behalf :</td>
+                                    <td>'.$shrHlderInfo['shars_own_bhlf'].'</td>
+                                </tr>';
+            }
+            $shareHolder .= '<tr>
+                                <td>Number of shares :</td>
+                                <td>'.$shrHlderInfo['no_of_shares'].'</td>
+                            </tr>';
+        }
+        
+         $shareHolder .= '</table>';
+        /* shareholder details ends */
+        
+        $html = $styleCSS.$company.$address.$officer.$shareHolder;
         return $html;
         
     }

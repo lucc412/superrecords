@@ -17,6 +17,24 @@ $(document).ready(function(){
         }
         else regAddUnit.className = "";
         
+        if(!$('#regAddBuild').val()) {
+            regAddBuild.className = "errclass";
+            flagReturn = false;
+        }
+        else regAddBuild.className = "";
+        
+        if(!$('#regAddStreet').val()) {
+            regAddStreet.className = "errclass";
+            flagReturn = false;
+        }
+        else regAddStreet.className = "";
+        
+        if(!$('#regAddSubrb').val()) {
+            regAddSubrb.className = "errclass";
+            flagReturn = false;
+        }
+        else regAddSubrb.className = "";
+        
         if($('#regAddState').val() == 0) {
             regAddState.className = "errclass";
             flagReturn = false;
@@ -36,6 +54,24 @@ $(document).ready(function(){
         }
         else busAddUnit.className = "";
         
+        if(!$('#busAddBuild').val()) {
+            busAddBuild.className = "errclass";
+            flagReturn = false;
+        }
+        else busAddBuild.className = "";
+        
+        if(!$('#busAddStreet').val()) {
+            busAddStreet.className = "errclass";
+            flagReturn = false;
+        }
+        else busAddStreet.className = "";
+        
+        if(!$('#busAddSubrb').val()) {
+            busAddSubrb.className = "errclass";
+            flagReturn = false;
+        }
+        else busAddSubrb.className = "";
+        
         if($('#busAddState').val() == 0) {
             busAddState.className = "errclass";
             flagReturn = false;
@@ -54,6 +90,24 @@ $(document).ready(function(){
             flagReturn = false;
         }
         else metAddUnit.className = "";
+        
+        if(!$('#metAddBuild').val()) {
+            metAddBuild.className = "errclass";
+            flagReturn = false;
+        }
+        else metAddBuild.className = "";
+        
+        if(!$('#metAddStreet').val()) {
+            metAddStreet.className = "errclass";
+            flagReturn = false;
+        }
+        else metAddStreet.className = "";
+        
+        if(!$('#metAddSubrb').val()) {
+            metAddSubrb.className = "errclass";
+            flagReturn = false;
+        }
+        else metAddSubrb.className = "";
         
         if($('#metAddState').val() == 0) {
             metAddState.className = "errclass";

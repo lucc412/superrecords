@@ -54,15 +54,15 @@
                                 <table id="trCrpShrHldr_<?=$cntr?>" style="width:708px" class="fieldtable <?php if($value['shrhldr_type'] == 1){ echo 'show'; }else echo 'hide'; ?>">
                                     <tr>
                                         <td>Company Name</td>
-                                        <td><input type="text" id="txtCmpName_<?=$cntr?>" name="txtCmpName[<?=$cntr?>]" value="<?=$value['shrhldr_cmpny_name']?>" placeholder="Company Name" /></td>
+                                        <td><input type="text" id="txtCmpName_<?=$cntr?>" name="txtCmpName[<?=$cntr?>]" value="<?=$value['shrhldr_cmpny_name']?>"  /></td>
                                     </tr>
                                     <tr>
                                         <td>ACN </td>
-                                        <td><input type="text" id="txtACN_<?=$cntr?>" name="txtACN[<?=$cntr?>]" value="<?=$value['shrhldr_acn']?>" placeholder="ACN" /></td>
+                                        <td><input type="text" id="txtACN_<?=$cntr?>" name="txtACN[<?=$cntr?>]" value="<?=$value['shrhldr_acn']?>" /></td>
                                     </tr>
                                     <tr>
                                         <td>Registered Address </td>
-                                        <td><input type="text" id="txtRegAddr_<?=$cntr?>" name="txtRegAddr[<?=$cntr?>]" value="<?=$value['shrhldr_reg_addr']?>" placeholder="Registered Address" /></td>
+                                        <td><input type="text" id="txtRegAddr_<?=$cntr?>" name="txtRegAddr[<?=$cntr?>]" value="<?=$value['shrhldr_reg_addr']?>" /></td>
                                     </tr>
                                     <tr>
                                         <td>Number of Director</td>

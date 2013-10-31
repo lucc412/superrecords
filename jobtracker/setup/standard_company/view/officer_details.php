@@ -53,23 +53,23 @@
                             <table class="fieldtable">
                                 <tr>
                                     <td>First name </td>
-                                    <td><input type="text" id="txtFname_<?=$cntr?>" name="txtFname[<?=$cntr?>]" value="<?=$value['offcr_fname']?>" placeholder="First Name" /></td>
+                                    <td><input type="text" id="txtFname_<?=$cntr?>" name="txtFname[<?=$cntr?>]" value="<?=$value['offcr_fname']?>"  /></td>
                                 </tr>
                                 <tr>
                                     <td>Middle name </td>
-                                    <td><input type="text" id="txtMname_<?=$cntr?>" name="txtMname[<?=$cntr?>]" value="<?=$value['offcr_mname']?>" placeholder="Middle Name" /></td>
+                                    <td><input type="text" id="txtMname_<?=$cntr?>" name="txtMname[<?=$cntr?>]" value="<?=$value['offcr_mname']?>" /></td>
                                 </tr>
                                 <tr>
                                     <td>Last name </td>
-                                    <td><input type="text" id="txtLname_<?=$cntr?>" name="txtLname[<?=$cntr?>]" value="<?=$value['offcr_lname']?>" placeholder="Last Name" /></td>
+                                    <td><input type="text" id="txtLname_<?=$cntr?>" name="txtLname[<?=$cntr?>]" value="<?=$value['offcr_lname']?>" /></td>
                                 </tr>
                                 <tr>
                                     <td>Date of birth </td>
-                                    <td><input type="text" id="txtDob_<?=$cntr?>" name="txtDob[<?=$cntr?>]" value="<?=date("d/m/Y",strtotime($value['offcr_dob']))?>" placeholder="Date of birth" readonly="" /><img src="../../images/calendar.png" id="calImgId" onclick="javascript:NewCssCal('txtDob_<?=$cntr?>','ddMMyyyy','dropdown',false,24,false,'past')" align="middle" class="calendar"/></td>
+                                    <td><input type="text" id="txtDob_<?=$cntr?>" name="txtDob[<?=$cntr?>]" value="<?=date("d/m/Y",strtotime($value['offcr_dob']))?>" readonly="" /><img src="../../images/calendar.png" id="calImgId" onclick="javascript:NewCssCal('txtDob_<?=$cntr?>','ddMMyyyy','dropdown',false,24,false,'past')" align="middle" class="calendar"/></td>
                                 </tr>
                                 <tr>
                                     <td>City of birth </td>
-                                    <td><input type="text" id="txtCob_<?=$cntr?>" name="txtCob[<?=$cntr?>]" value="<?=$value['offcr_city_birth']?>" placeholder="City of birth" /><td>
+                                    <td><input type="text" id="txtCob_<?=$cntr?>" name="txtCob[<?=$cntr?>]" value="<?=$value['offcr_city_birth']?>" /><td>
                                 </tr>
                                 <tr>
                                     <td>State and Country of birth </td>
@@ -84,7 +84,7 @@
                                 </tr>
                                 <tr>
                                     <td>Tax File Number </td>
-                                    <td><input type="text" id="txtTFN_<?=$cntr?>" name="txtTFN[<?=$cntr?>]" value="<?=$value['offcr_tfn']?>" placeholder="Tax File Number" /></td>
+                                    <td><input type="text" id="txtTFN_<?=$cntr?>" name="txtTFN[<?=$cntr?>]" value="<?=$value['offcr_tfn']?>"  /></td>
                                 </tr>
                                 <tr>
                                     <td>Residential Address </td>

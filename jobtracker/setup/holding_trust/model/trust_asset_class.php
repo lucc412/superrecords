@@ -15,7 +15,7 @@ class Trust_Asset
     // insert holding trust asset details
     function newTrustAsset($assetDetail) 
     {
-        $qryIns = "INSERT INTO trust_asset(job_id, asset_details)
+        $qryIns = "INSERT INTO hbt_trust_asset(job_id, asset_details)
                     VALUES ( 
                     '".$_SESSION['jobId']."', 
                     '".addslashes($assetDetail)."'
@@ -28,7 +28,7 @@ class Trust_Asset
     public function fetchTrustAsset()
     {
        $selQry="SELECT asset_details
-                FROM trust_asset 
+                FROM hbt_trust_asset 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         $arrHoldTrust = mysql_fetch_assoc($fetchResult);
@@ -39,7 +39,7 @@ class Trust_Asset
     // update trust asset details
     function updateTrustAsset($assetDetail) 
     {
-      $qryUpd = "UPDATE trust_asset
+      $qryUpd = "UPDATE hbt_trust_asset
                     SET asset_details = '".addslashes($assetDetail)."'
                     WHERE job_id = ".$_SESSION['jobId'];
       mysql_query($qryUpd);

@@ -9,6 +9,18 @@ $(document).ready(function() {
         }
         else taAsset.className = "";
         
+        if(!($('#txtLoan').val())) {
+            txtLoan.className = "errclass";
+            flagReturn = false;
+        }
+        else txtLoan.className = "";
+        
+        if(!($('#txtYear').val())) {
+            txtYear.className = "errclass";
+            flagReturn = false;
+        }
+        else txtYear.className = "";
+        
         return flagReturn;
     });
     

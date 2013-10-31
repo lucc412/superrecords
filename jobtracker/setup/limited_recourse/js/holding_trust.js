@@ -36,7 +36,7 @@ $(document).ready(function() {
         }
         
         if(newMemberCnt < oldMemberCnt)  {
-             alert('Are you sure you want to delete existing members ?');
+             //alert('Are you sure you want to delete existing members ?');
              eleCnt = 3;
              while (newMemberCnt < oldMemberCnt) 
              { 
@@ -52,11 +52,6 @@ $(document).ready(function() {
     // on submit validation
     $('#frmTrust').submit(function() {
         flagReturn = true;
-        if(!($('#txtTrust').val())) {
-            txtTrust.className = "errclass";
-            flagReturn = false;
-        }
-        else txtTrust.className = "";
         
         if(!($('#lstType').val())) {
             lstType.className = "errclass";

@@ -3,15 +3,15 @@
 include(TOPBAR);
 
 // include navigation
-include(HOLDINGTRUSTNAV);
+include(LIMRECNAV);
 
 // include page content
-include(HOLDINGTRUSTCONTENT);
+include(LIMRECCONTENT);
 
 // page header
 ?><div class="pageheader">
-    <h1>Fund Details</h1>
-    <span><b>Welcome to the Super Records fund details page.</b><span>
+    <h1>Borrower Details (Fund Details)</h1>
+    <span><b>Welcome to the Super Records borrower details page.</b><span>
 </div><?
 
 // content

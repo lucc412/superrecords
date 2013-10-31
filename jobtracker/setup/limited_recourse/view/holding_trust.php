@@ -10,19 +10,14 @@ include(LIMRECCONTENT);
 
 // page header
 ?><div class="pageheader">
-    <h1>Holding Trust Details</h1>
-    <span><b>Welcome to the Super Records holding trust details page.</b><span>
+    <h1>Lender Details</h1>
+    <span><b>Welcome to the Super Records lender details page.</b><span>
 </div><?
 
 // content
 ?><form id="frmTrust" method="post" action="holding_trust.php">
     <input type="hidden" name="saveData" value="Y">
-    <input type="hidden" name="frmId" value="<?=$_REQUEST['frmId']?>">
     <table class="fieldtable" width="60%" cellpadding="10px;">
-        <tr>
-            <td>Name of Trust</td>
-            <td><input type="text" name="txtTrust" id="txtTrust" value="<?=$arrHoldTrust['trust_name']?>"></td>
-        </tr>
         <tr>
             <td>Holding Trustee</td>
             <td>
@@ -98,9 +93,9 @@ include(LIMRECCONTENT);
         <br/><div id="memberbox"></div>
     </div>
 
-    <div class="pdT20"><?
-        if(empty($_SESSION['jobId'])){?><span class="pdR20"><button type="button" onclick="window.location='setup.php'" value="Back">Back</button></span><?}
-        ?><span><button type="submit" id="submit" name="next">Next</button></span>
+    <div class="pdT20">
+        <span class="pdR20"><button type="button" onclick="window.location='trust.php'" value="Back">Back</button></span>
+        <span><button type="submit" id="submit" name="next">Next</button></span>
     </div>
 </form><?
 

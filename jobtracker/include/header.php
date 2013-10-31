@@ -26,17 +26,23 @@
                 });
 		</script><?
 
+                // get request url
+                $requestUrl = basename($_SERVER['PHP_SELF']);
+                $urlParts = pathinfo($_SERVER['PHP_SELF']);
+                
+                // get request folder path
+                $folderPath = replaceString('/jobtracker/setup/', '', dirname($_SERVER['PHP_SELF']));
 		$arrQryStr = stringToArray('&', $_SERVER['QUERY_STRING']);
                 $qryStr = $arrQryStr[0];
                 
-		if(basename($_SERVER['PHP_SELF']) == 'jobs.php') {
+		if($requestUrl == 'jobs.php') {
                     ?><title>Submit new job</title><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'compliance.php') {
+                else if($requestUrl == 'compliance.php') {
                     ?><title>Submit new compliance job</title>
                     <script type="text/javascript" src="<?=DIR?>js/compliance_validation.js"></script><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'audit.php') {
+                else if($requestUrl == 'audit.php') {
                     if(isset($qryStr) && strstr($qryStr, 'recid')) {
                         ?><title>Edit existing audit job</title><?
                     }
@@ -45,89 +51,89 @@
                     }
                     ?><script type="text/javascript" src="<?=DIR?>js/audit_validation.js"></script><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'audit_checklist.php') { 
+                else if($requestUrl == 'audit_checklist.php') { 
                     ?><title>Audit Checklist</title><?
                 }
-                else if(basename($_SERVER['PHP_SELF']) == 'audit_subchecklist.php') { 
+                else if($requestUrl == 'audit_subchecklist.php') { 
                     ?><title>Checklist for Audit</title>
                     <script type="text/javascript" src="<?=DIR?>js/audit_subchecklist_validation.js"></script><?
                 }
-                else if(basename($_SERVER['PHP_SELF']) == 'audit_upload.php') { 
+                else if($requestUrl == 'audit_upload.php') { 
                     ?><title>Upload multiple documents</title>
                     <script type="text/javascript" src="<?=DIR?>js/audit_upload_validation.js"></script><?
                 }
-                else if(basename($_SERVER['PHP_SELF']) == 'subaudit_upload.php') { 
+                else if($requestUrl == 'subaudit_upload.php') { 
                     ?><title>Upload documents for checklist</title>
                     <script type="text/javascript" src="<?=DIR?>js/subaudit_upload_validation.js"></script><?
                 }
-                else if(basename($_SERVER['PHP_SELF']) == 'setup.php') {
+                else if($requestUrl == 'setup.php') {
                     ?><title>Order Documents</title><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'jobs_saved.php') {
+                else if($requestUrl == 'jobs_saved.php') {
 			?><title>Retrieve saved jobs</title><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'jobs_pending.php') {
+                else if($requestUrl == 'jobs_pending.php') {
 			?><title>Pending jobs</title><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'jobs_completed.php') {
+                else if($requestUrl == 'jobs_completed.php') {
 			?><title>Completed jobs</title><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'jobs_doc_list.php') {  
+                else if($requestUrl == 'jobs_doc_list.php') {  
                     ?><title>View and upload documents</title><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'jobs_doc_upload.php') { 
+                else if($requestUrl == 'jobs_doc_upload.php') { 
                     ?><title>Upload Documents</title>
                     <script type="text/javascript" src="<?=DIR?>js/jobs_documents_validation.js"></script><?
                 }
-		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf.php') {
+		else if($requestUrl == 'new_smsf.php') {
 			?><title>New SMSF Details</title><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_contact.php') {
+		else if($requestUrl == 'new_smsf_contact.php') {
                         ?><title>Contact Details</title>
                         <script type="text/javascript" src="<?=DIR?>js/new_smsf_contact.js"></script><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_fund.php') {
+		else if($requestUrl == 'new_smsf_fund.php') {
                         ?><title>Fund Details</title>
                         <script type="text/javascript" src="<?=DIR?>js/new_smsf_fund.js"></script><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_member.php') {
+		else if($requestUrl == 'new_smsf_member.php') {
                         ?><title>Member Details</title>
                         <script type="text/javascript" src="<?=DIR?>js/new_smsf_member.js"></script><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'legal_references.php') {
+                else if($requestUrl == 'legal_references.php') {
                         ?><title>Legal Personal Representative</title>
                         <script type="text/javascript" src="<?=DIR?>js/legal_references.js"></script><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_trustee.php') {
+		else if($requestUrl == 'new_smsf_trustee.php') {
                         ?><title>Trustee Details</title>
                         <script type="text/javascript" src="<?=DIR?>js/new_smsf_trustee.js"></script><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_declarations.php') {
+		else if($requestUrl == 'new_smsf_declarations.php') {
                         ?><title>Declarations</title>
                         <script type="text/javascript" src="<?=DIR?>js/new_smsf_declarations.js"></script><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf.php') {
+		else if($requestUrl == 'existing_smsf.php') {
 			?><title>Existing SMSF Details</title><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_contact.php') {
+		else if($requestUrl == 'existing_smsf_contact.php') {
                         ?><title>Contact Details</title>
                         <script type="text/javascript" src="<?=DIR?>js/existing_smsf_contact.js"></script><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf_fund.php') {
+		else if($requestUrl == 'existing_smsf_fund.php') {
                         ?><title>Fund Details</title>
                         <script type="text/javascript" src="<?=DIR?>js/existing_smsf_fund.js"></script><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'setup_preview.php' || basename($_SERVER['PHP_SELF']) == 'preview.php') {
+		else if($requestUrl == 'setup_preview.php' || $requestUrl == 'preview.php') {
 			?><title>Preview</title><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'queries.php') {
+		else if($requestUrl == 'queries.php') {
 			?><title>View All Queries</title>
 			<script type="text/javascript" src="<?=DIR?>js/queries_validation.js"></script><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'template.php') {
+		else if($requestUrl == 'template.php') {
 			?><title>Download Templates</title><?
 		}
-		else if(basename($_SERVER['PHP_SELF']) == 'clients.php') {
+		else if($requestUrl == 'clients.php') {
 			if($qryStr == 'a=add') {
 				?><title>Add New Client</title><?
 			}
@@ -140,34 +146,50 @@
 			?><script type="text/javascript" src="<?=DIR?>js/jquery-1.4.2.min.js"></script>
 			<script type="text/javascript" src="<?=DIR?>js/client_validation.js"></script><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'company_details.php') {
+                else if($requestUrl == 'company_details.php') {
 			?><title>Company Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/company_details.js"></script><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'address_details.php') {
+                else if($requestUrl == 'address_details.php') {
 			?><title>Address Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/address_details.js"></script><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'officer_details.php') {
+                else if($requestUrl == 'officer_details.php') {
 			?><title>Officer Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/officer_details.js"></script><?
 		}
 
-                else if(basename($_SERVER['PHP_SELF']) == 'shareholder_details.php') {
+                else if($requestUrl == 'shareholder_details.php') {
 			?><title>Shareholder Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/shareholder_details.js"></script><?
                 }
-                else if(basename($_SERVER['PHP_SELF']) == 'holding_trust.php') {
+                else if($requestUrl == 'holding_trust.php' && $folderPath == 'holding_trust') {
 			?><title>Holding Trust Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/holding_trust/js/holding_trust.js"></script><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'trust_fund.php') {
+                else if($requestUrl == 'trust_fund.php' && $folderPath == 'holding_trust') {
 			?><title>Fund Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/holding_trust/js/trust_fund.js"></script><?
 		}
-                else if(basename($_SERVER['PHP_SELF']) == 'trust_asset.php') {
+                else if($requestUrl == 'trust_asset.php' && $folderPath == 'holding_trust') {
 			?><title>Asset Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/holding_trust/js/trust_asset.js"></script><?
+		}
+                else if($requestUrl == 'trust.php') {
+			?><title>Holding Trust Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/limited_recourse/js/trust.js"></script><?
+		}
+                else if($requestUrl == 'holding_trust.php' && $folderPath == 'limited_recourse') {
+			?><title>Lender Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/limited_recourse/js/holding_trust.js"></script><?
+		}
+                else if($requestUrl == 'trust_fund.php' && $folderPath == 'limited_recourse') {
+			?><title>Borrower Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/limited_recourse/js/trust_fund.js"></script><?
+		}
+                else if($requestUrl == 'trust_asset.php' && $folderPath == 'limited_recourse') {
+			?><title>Limited Recourse Loan Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/limited_recourse/js/trust_asset.js"></script><?
 		}
 		else {
 			?><title>Home</title><?

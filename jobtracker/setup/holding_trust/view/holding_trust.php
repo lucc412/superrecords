@@ -99,7 +99,7 @@ include(HOLDINGTRUSTCONTENT);
     </div>
 
     <div class="pdT20"><?
-        if(empty($_SESSION['jobId'])){?><span class="pdR20"><button type="button" onclick="window.location='setup.php'" value="Back">Back</button></span><?}
+        if(empty($_SESSION['jobId'])){?><span class="pdR20"><button type="button" onclick="window.location='<?=DIR?>setup.php'" value="Back">Back</button></span><?}
         ?><span><button type="submit" id="submit" name="next">Next</button></span>
     </div>
 </form><?

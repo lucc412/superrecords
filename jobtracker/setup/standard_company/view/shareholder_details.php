@@ -135,10 +135,11 @@
             ?>
         </div>
         <input type="hidden" id="sql" name="sql" value="" />
-        <div style="padding-top:20px;">
-            <span align="left"><button type="button" onclick="window.location.href='officer_details.php'" >Back</button></span>
-            <span align="right" style="padding-left:55px;"><button type="submit" id="btnSave" name="btnSave" value="Save" >Save & Exit</button></span>
-            <span align="right" style="padding-left:55px;"><button type="submit"  id="btnNext" name="btnNext" value="Next" >Preview</button></span>
+        <div class="txtAboveButton">Your document details are ready to be submitted. However, prior to doing so, please preview to make sure all details are correct. <p>To preview, please click the 'Preview' button below.</p></div>
+        <div class="pdT20">
+            <span class="pdR20"><button type="button" onclick="window.location.href='officer_details.php'" >Back</button></span>
+            <span class="pdR20"><button type="submit" id="btnSave" name="btnSave" value="Save" >Save & Exit</button></span>
+            <span><button type="submit"  id="btnNext" name="btnNext" value="Next" >Preview</button></span>
         </div>
     </form>
     <script>

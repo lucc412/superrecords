@@ -12,10 +12,20 @@
  */
 class Preview {
     
+     // fetch fund data
+    public function getTrustData() {
+            $qrytrust = "SELECT tf.trust_name
+                        FROM lrl_trust tf
+                        WHERE tf.job_id = ".$_SESSION['jobId'];
+            $fetchTrust = mysql_query($qrytrust);
+            $rowData = mysql_fetch_assoc($fetchTrust);
+            return $rowData;
+    }
+    
     // fetch fund data
     public function fetchTrustData() {
-            $qryfund = "SELECT tf.trust_name, tf.trustee_id, ht.trustee_name, tf.noofmember, tf.comp_name, tf.acn, tf.reg_address, tf.director
-                        FROM holding_trust tf, holding_trustee ht
+            $qryfund = "SELECT tf.trustee_id, ht.trustee_name, tf.noofmember, tf.comp_name, tf.acn, tf.reg_address, tf.director
+                        FROM lrl_holding_trust tf, holding_trustee ht
                         WHERE tf.job_id = ".$_SESSION['jobId']."
                         AND ht.trustee_id = tf.trustee_id";
             $fetchFund = mysql_query($qryfund);
@@ -26,7 +36,7 @@ class Preview {
     // fetch fund data
     public function fetchFundData() {
             $qryfund = "SELECT tf.trust_name, tf.trustee_id, ht.trustee_name, tf.noofmember, tf.comp_name, tf.acn, tf.reg_address, tf.director
-                        FROM trust_fund tf, holding_trustee ht
+                        FROM lrl_trust_fund tf, holding_trustee ht
                         WHERE tf.job_id = ".$_SESSION['jobId']."
                         AND ht.trustee_id = tf.trustee_id";
             $fetchFund = mysql_query($qryfund);
@@ -38,7 +48,7 @@ class Preview {
     public function fetchIndividualTrustDetails()
     {
        $selQry="SELECT indvdl_id, trustee_name name, res_add address
-                FROM indvdl_holding_trust 
+                FROM lrl_indvdl_holding_trust 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -52,7 +62,7 @@ class Preview {
     public function fetchIndividualFundDetails()
     {
        $selQry="SELECT indvdl_id, trustee_name name, res_add address
-                FROM indvdl_holding_fund 
+                FROM lrl_indvdl_holding_fund 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -64,19 +74,22 @@ class Preview {
 
     // fetch asset data
     public function fetchAssetData() {
-            $qryAsset = "SELECT ta.asset_details
-                        FROM trust_asset ta
-                        WHERE ta.job_id = ".$_SESSION['jobId'];
+            $qryAsset = "SELECT asset_details, loan_amount, loan_years, interest, interest_type, loan_type
+                        FROM lrl_trust_asset
+                        WHERE job_id = ".$_SESSION['jobId'];
             $fetchAsset = mysql_query($qryAsset);
             $rowData = mysql_fetch_assoc($fetchAsset);
-            return $rowData['asset_details'];
+            return $rowData;
     }
     
     // generate preview/pdf code
     public function generatePreview() {
+       $arrTrust = $this->getTrustData();
        $arrTrustDetail = $this->fetchTrustData();
        $arrFundDetail = $this->fetchFundData();
-       $assetDetail = $this->fetchAssetData();
+       $arrAssetDetail = $this->fetchAssetData();
+       $arrRateType = array('F'=>'Fixed Rate', 'V'=>'Variable Rate');
+       $arrLoanType = array('I'=>'Interest Only', 'P'=>'Principal and Interest');
        $html = '';
        $styleCSS = '<style>
                         h2 {
@@ -106,6 +119,17 @@ class Preview {
                                 width:55%;
                         }
                     </style>';
+       
+        /* Trust details starts */
+        $trust = '<div class="test">Holding Trust Details</div>
+                        <br />
+                        <table class="first" cellpadding="4" cellspacing="6">
+                            <tr>
+                                <td>Name of Trust :</td>
+                                <td>'.$arrTrust['trust_name'].'</td>
+                            </tr>
+                        </table><br/>';
+        /* Trust details ends */
        
         /* Holding trust details starts */
         // individual
@@ -155,13 +179,9 @@ class Preview {
                             </tr>';
         }
         
-        $trust = '<div class="test">Holding Trust Details</div>
+        $lender = '<div class="test">Lender Details</div>
                         <br />
                         <table class="first" cellpadding="4" cellspacing="6">
-                            <tr>
-                                <td>Name of Trust :</td>
-                                <td>'.$arrTrustDetail['trust_name'].'</td>
-                            </tr>
                             <tr>
                                 <td>Trustee Type :</td>
                                 <td>'.$arrTrustDetail['trustee_name'].'</td>
@@ -218,7 +238,7 @@ class Preview {
                             </tr>';
         }
         
-        $fund = '<div class="test">Fund Details</div>
+        $fund = '<div class="test">Borrower Details</div>
                         <br />
                         <table class="first" cellpadding="4" cellspacing="6">
                             <tr>
@@ -234,17 +254,37 @@ class Preview {
         /* Fund details ends */
         
         /* Asset details starts */
-        $asset = '<div class="test">Asset Details</div>
+        $asset = '<div class="test">Limited Recourse Loan Details</div>
                         <br />
                         <table class="first" cellpadding="4" cellspacing="6">
                             <tr>
-                                <td>Asset Details :</td>
-                                <td>'.$assetDetail.'</td>
+                                <td>Asset :</td>
+                                <td>'.$arrAssetDetail['asset_details'].'</td>
+                            </tr>
+                            <tr>
+                                <td>Loan Amount :</td>
+                                <td>'.$arrAssetDetail['loan_amount'].'</td>
+                            </tr>
+                            <tr>
+                                <td>Term of loan (years) :</td>
+                                <td>'.$arrAssetDetail['loan_years'].'</td>
+                            </tr>
+                            <tr>
+                                <td>Interest Rate % :</td>
+                                <td>'.$arrAssetDetail['interest'].'</td>
+                            </tr>
+                            <tr>
+                                <td>Interest Rate Type :</td>
+                                <td>'.$arrRateType[$arrAssetDetail['interest_type']].'</td>
+                            </tr>
+                            <tr>
+                                <td>Loan Type :</td>
+                                <td>'.$arrLoanType[$arrAssetDetail['loan_type']].'</td>
                             </tr>
                         </table>';
         /* Asset details ends */
         
-        $html = $styleCSS.$trust.$fund.$asset;
+        $html = $styleCSS.$trust.$lender.$fund.$asset;
         return $html;
         
     }

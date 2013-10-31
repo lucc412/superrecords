@@ -1,6 +1,7 @@
 <?php
 // include topbar file
 include(TOPBAR);
+include(LIMRECNAV);
 
 // page header
 ?><div class="pageheader">

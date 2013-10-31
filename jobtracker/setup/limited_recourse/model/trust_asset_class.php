@@ -13,12 +13,17 @@
 class Trust_Asset 
 {
     // insert holding trust asset details
-    function newTrustAsset($assetDetail) 
+    function newTrustAsset($asset, $loan, $loanYear, $loanRate, $rateType, $loanType) 
     {
-        $qryIns = "INSERT INTO trust_asset(job_id, asset_details)
+        $qryIns = "INSERT INTO lrl_trust_asset(job_id, asset_details, loan_amount, loan_years, interest, interest_type, loan_type)
                     VALUES ( 
                     '".$_SESSION['jobId']."', 
-                    '".addslashes($assetDetail)."'
+                    '".addslashes($asset)."',
+                    '".addslashes($loan)."',
+                    '".addslashes($loanYear)."',
+                    '".addslashes($loanRate)."',
+                    '".$rateType."',
+                    '".$loanType."'
                     )";
 
         mysql_query($qryIns);
@@ -27,8 +32,8 @@ class Trust_Asset
     // fetch trust asset details
     public function fetchTrustAsset()
     {
-       $selQry="SELECT asset_details
-                FROM trust_asset 
+       $selQry="SELECT asset_details, loan_amount, loan_years, interest, interest_type, loan_type
+                FROM lrl_trust_asset 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         $arrHoldTrust = mysql_fetch_assoc($fetchResult);
@@ -37,10 +42,15 @@ class Trust_Asset
     }
     
     // update trust asset details
-    function updateTrustAsset($assetDetail) 
+    function updateTrustAsset($asset, $loan, $loanYear, $loanRate, $rateType, $loanType) 
     {
-      $qryUpd = "UPDATE trust_asset
-                    SET asset_details = '".addslashes($assetDetail)."'
+      $qryUpd = "UPDATE lrl_trust_asset
+                    SET asset_details = '".addslashes($asset)."',
+                        loan_amount = '".addslashes($loan)."',
+                        loan_years = '".addslashes($loanYear)."',
+                        interest = '".addslashes($loanRate)."',
+                        interest_type = '".$rateType."',
+                        loan_type = '".$loanType."'
                     WHERE job_id = ".$_SESSION['jobId'];
       mysql_query($qryUpd);
     }

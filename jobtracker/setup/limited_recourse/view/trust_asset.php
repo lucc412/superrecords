@@ -3,24 +3,62 @@
 include(TOPBAR);
 
 // include navigation
-include(HOLDINGTRUSTNAV);
+include(LIMRECNAV);
 
 // include page content
-include(HOLDINGTRUSTCONTENT);
+include(LIMRECCONTENT);
 
 // page header
 ?><div class="pageheader">
-    <h1>Asset Details</h1>
-    <span><b>Welcome to the Super Records holding trust details page.</b><span>
+    <h1>Limited Recourse Loan Details</h1>
+    <span><b>Welcome to the Super Records limited recourse loan details page.</b><span>
 </div><?
 
 // content
 ?><form id="frmTrust" method="post" action="trust_asset.php">
     <input type="hidden" name="saveData" value="Y">
     <table class="fieldtable" width="60%" cellpadding="10px;">
-        <tr>    
-            <td>Asset Details</td>
-            <td><textarea name="taAsset" id="taAsset"><?=$arrHoldTrust['asset_details']?></textarea><a id="iconQuestion" class="tooltip" title="Please provide details of asset to be acquired.">?</a></td>
+        <tr>     
+           <td>Asset</td>
+            <td><textarea name="taAsset" id="taAsset"><?=$arrHoldTrust['asset_details']?></textarea></td>
+        </tr>
+        <tr>
+            <td>Loan Amount</td>
+            <td><input type="text" name="txtLoan" id="txtLoan" value="<?=$arrHoldTrust['loan_amount']?>"></td>
+        </tr>
+        <tr>
+            <td>Term of loan (years)</td>
+            <td><input type="text" name="txtYear" id="txtYear" value="<?=$arrHoldTrust['loan_years']?>"></td>
+        </tr>
+        <tr>
+            <td>Interest Rate %</td>
+            <td><input type="text" name="txtRate" id="txtRate" value="<?=$arrHoldTrust['interest']?>"></td>
+        </tr>
+        <tr>
+            <td>Interest Rate Type</td>
+            <td>
+                <select name="lstRateType" id="lstRateType">
+                    <option value="">Select Interest Rate Type</option><?php
+                    foreach($arrRateType AS $charType => $typeDesc){
+                            $selectStr = "";
+                            if($arrHoldTrust['interest_type'] == $charType) $selectStr = "selected";
+                            ?><option <?=$selectStr?> value="<?=$charType?>"><?=$typeDesc?></option><?php 
+                    }
+                ?></select>
+            </td>
+        </tr>
+        <tr>
+            <td>Loan Type</td>
+            <td>
+                <select name="lstLoanType" id="lstLoanType">
+                    <option value="">Select Loan Type</option><?php
+                    foreach($arrLoanType AS $charType => $typeDesc){
+                            $selectStr = "";
+                            if($arrHoldTrust['loan_type'] == $charType) $selectStr = "selected";
+                            ?><option <?=$selectStr?> value="<?=$charType?>"><?=$typeDesc?></option><?php 
+                    }
+                ?></select>
+            </td>
         </tr>
     </table>
     

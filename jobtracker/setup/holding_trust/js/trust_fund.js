@@ -36,7 +36,7 @@ $(document).ready(function() {
         }
         
         if(newMemberCnt < oldMemberCnt)  {
-             alert('Are you sure you want to delete existing members ?');
+            // alert('Are you sure you want to delete existing members ?');
              eleCnt = 3;
              while (newMemberCnt < oldMemberCnt) 
              { 

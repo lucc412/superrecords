@@ -15,7 +15,7 @@ class Preview {
     // fetch fund data
     public function fetchTrustData() {
             $qryfund = "SELECT tf.trust_name, tf.trustee_id, ht.trustee_name, tf.noofmember, tf.comp_name, tf.acn, tf.reg_address, tf.director
-                        FROM holding_trust tf, holding_trustee ht
+                        FROM hbt_holding_trust tf, holding_trustee ht
                         WHERE tf.job_id = ".$_SESSION['jobId']."
                         AND ht.trustee_id = tf.trustee_id";
             $fetchFund = mysql_query($qryfund);
@@ -26,7 +26,7 @@ class Preview {
     // fetch fund data
     public function fetchFundData() {
             $qryfund = "SELECT tf.trust_name, tf.trustee_id, ht.trustee_name, tf.noofmember, tf.comp_name, tf.acn, tf.reg_address, tf.director
-                        FROM trust_fund tf, holding_trustee ht
+                        FROM hbt_trust_fund tf, holding_trustee ht
                         WHERE tf.job_id = ".$_SESSION['jobId']."
                         AND ht.trustee_id = tf.trustee_id";
             $fetchFund = mysql_query($qryfund);
@@ -38,7 +38,7 @@ class Preview {
     public function fetchIndividualTrustDetails()
     {
        $selQry="SELECT indvdl_id, trustee_name name, res_add address
-                FROM indvdl_holding_trust 
+                FROM hbt_indvdl_holding_trust 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -52,7 +52,7 @@ class Preview {
     public function fetchIndividualFundDetails()
     {
        $selQry="SELECT indvdl_id, trustee_name name, res_add address
-                FROM indvdl_holding_fund 
+                FROM hbt_indvdl_holding_fund 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -65,7 +65,7 @@ class Preview {
     // fetch asset data
     public function fetchAssetData() {
             $qryAsset = "SELECT ta.asset_details
-                        FROM trust_asset ta
+                        FROM hbt_trust_asset ta
                         WHERE ta.job_id = ".$_SESSION['jobId'];
             $fetchAsset = mysql_query($qryAsset);
             $rowData = mysql_fetch_assoc($fetchAsset);

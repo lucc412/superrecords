@@ -38,6 +38,11 @@ $(document).ready(function(){
             
             if($(this).val() == 1) 
             {
+                $(this).addClass("errclass");
+                flag = false;
+            }
+            else if($(this).val() == 1) 
+            {
                 if($('#txtCmpName_'+cntr).val() == 0)
                 {
                     $('#txtCmpName_'+cntr).addClass("errclass");
@@ -225,23 +230,24 @@ function addShrHldr()
     for(var i = cntr;i <= shrHldrCnt; i++)
     {
         $('#dvShrHldr').append('<div id="shrHldr_'+i+'"> \n\
-                                <div style="padding:20px 0 10px 0;color: #F05729;font-size: 14px;height:30px;width:196px;float:left">Shareholder '+i+': </div><div style="padding:10px 0;font-size:13px;width:500px">Type <select id="selShrType_'+i+'" name="selShrType['+i+']" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,'+i+')" >\n\
+                                <div style="padding:20px 0 10px 0;color: #F05729;font-size: 14px;height:30px;width:246px;float:left">Shareholder '+i+': </div><div style="padding:10px 0;font-size:13px;width:500px"><select id="selShrType_'+i+'" name="selShrType['+i+']" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,'+i+')" >\n\
+                                                                                                                                                                            <option value="0">Select Type</option>\n\
                                                                                                                                                                             <option value="1">Corporate</option>\n\
                                                                                                                                                                             <option value="2">Individual</option>\n\
                                                                                                                                                                         </select>\n\
                                 <div style="clear:both"></div>\n\
-                                <table id="trCrpShrHldr_'+i+'" class="fieldtable hide" style="width:700px">\n\
+                                <table id="trCrpShrHldr_'+i+'" class="fieldtable hide" style="width:708px">\n\
                                     <tr>\n\
                                         <td>Company Name</td>\n\
-                                        <td><input type="text" id="txtCmpName_'+i+'" name="txtCmpName['+i+']" placeholder="Company Name" /></td>\n\
+                                        <td><input type="text" id="txtCmpName_'+i+'" name="txtCmpName['+i+']" /></td>\n\
                                     </tr>\n\
                                     <tr>\n\
                                         <td>ACN </td>\n\
-                                        <td><input type="text" id="txtACN_'+i+'" name="txtACN['+i+']" placeholder="ACN" /></td>\n\
+                                        <td><input type="text" id="txtACN_'+i+'" name="txtACN['+i+']" /></td>\n\
                                     </tr>\n\
                                     <tr>\n\
                                         <td>Registered Address </td>\n\
-                                        <td><input type="text" id="txtRegAddr_'+i+'" name="txtRegAddr['+i+']" placeholder="Registered Address" /></td>\n\
+                                        <td><input type="text" id="txtRegAddr_'+i+'" name="txtRegAddr['+i+']" /></td>\n\
                                     </tr>\n\
                                     <tr>\n\
                                         <td>Number of Director</td>\n\
@@ -250,14 +256,14 @@ function addShrHldr()
                                         </select></td>\n\
                                     </tr>\n\
                                 </table>\n\
-                                <div id="crpNoDirtr_'+i+'" class="hide" style="margin-left:228px;width:auto"></div>\n\
+                                <div id="crpNoDirtr_'+i+'" class="hide" style="margin-left:242px;width:auto"></div>\n\
                                 <table id="trIndShrHldr_'+i+'" class="fieldtable hide" style="width:1050px">\n\
                                     <tr><td>First name </td>\n\
-                                    <td><input type="text" id="txtFname_'+i+'" name="txtFname['+i+']" placeholder="First Name" /></td></tr>\n\
+                                    <td><input type="text" id="txtFname_'+i+'" name="txtFname['+i+']" /></td></tr>\n\
                                     <tr><td>Middle name </td>\n\
-                                    <td><input type="text" id="txtMname_'+i+'" name="txtMname['+i+']" placeholder="Middle Name" /></td></tr>\n\
+                                    <td><input type="text" id="txtMname_'+i+'" name="txtMname['+i+']" /></td></tr>\n\
                                     <tr><td>Last name </td>\n\
-                                    <td><input type="text" id="txtLname_'+i+'" name="txtLname['+i+']" placeholder="Last Name" /></td></tr>\n\
+                                    <td><input type="text" id="txtLname_'+i+'" name="txtLname['+i+']" /></td></tr>\n\
                                     <tr><td>Residential Address </td>\n\
                                     <td><div>\n\
                                         <input type="text" id="resAddUnit_'+i+'" name="resAddUnit['+i+']" style="width:115px;" value="" placeholder="Unit number" />\n\

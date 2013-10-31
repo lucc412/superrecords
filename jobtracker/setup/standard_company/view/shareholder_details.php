@@ -42,15 +42,16 @@
                         $noOfShrhldr = $value['no_of_shrhldr'];
                     ?>
                         <div id="shrHldr_<?=$cntr?>"> 
-                                <div style="padding:20px 0 10px 0;color: #F05729;font-size: 14px;height:30px;width:196px;float:left">Shareholder <?=$cntr?>:</div>
-                                <div style="padding:10px 0;font-size:13px;width:500px"> Type <select id="selShrType_<?=$cntr?>" name="selShrType[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,<?=$cntr?>)" >
+                                <div style="padding:20px 0 10px 0;color: #F05729;font-size: 14px;height:30px;width:235px;float:left">Shareholder <?=$cntr?>:</div>
+                                <div style="padding:10px 0;font-size:13px;width:500px"><select id="selShrType_<?=$cntr?>" name="selShrType[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,<?=$cntr?>)" >
+                                            <option value="0" <?php if($value['shrhldr_type'] == 0) echo 'selected';?> >Select Type</option>
                                             <option value="1" <?php if($value['shrhldr_type'] == 1) echo 'selected';?> >Corporate</option>
                                             <option value="2" <?php if($value['shrhldr_type'] == 2) echo 'selected';?> >Individual</option>
                                         </select></div>
                                 <div style="clear:both"></div>
                                 <input type="hidden" name="shrhldrId[<?=$cntr?>]" id="shrhldrId_<?=$cntr?>" value="<?=$value['shrhldr_id']?>" >
                                 
-                                <table id="trCrpShrHldr_<?=$cntr?>" style="width:700px" class="fieldtable <?php if($value['shrhldr_type'] == 1){ echo 'show'; }else echo 'hide'; ?>">
+                                <table id="trCrpShrHldr_<?=$cntr?>" style="width:708px" class="fieldtable <?php if($value['shrhldr_type'] == 1){ echo 'show'; }else echo 'hide'; ?>">
                                     <tr>
                                         <td>Company Name</td>
                                         <td><input type="text" id="txtCmpName_<?=$cntr?>" name="txtCmpName[<?=$cntr?>]" value="<?=$value['shrhldr_cmpny_name']?>" placeholder="Company Name" /></td>
@@ -77,7 +78,7 @@
                                         </select></td>
                                     </tr>
                                 </table>
-                                <div id="crpNoDirtr_<?=$cntr?>" class="<?php if($value['no_of_directrs'] > 0){ echo 'show'; }else echo 'hide'; ?>" style="margin-left:228px;width:auto">
+                                <div id="crpNoDirtr_<?=$cntr?>" class="<?php if($value['no_of_directrs'] > 0){ echo 'show'; }else echo 'hide'; ?>" style="margin-left:230px;width:auto">
                                     <?php $drctrsName = explode(',', $value['directrs_name']);
                                     foreach ($drctrsName as $fldId => $fldvalue) { $fldId++; ?>                                    
                                     <div id="dvDirtr_<?=$cntr.$fldId?>" >
@@ -91,11 +92,11 @@
                                 </div>
                                 <table id="trIndShrHldr_<?=$cntr?>" style="width:1050px" class="fieldtable <?php if($value['shrhldr_type'] == 2){ echo 'show'; }else echo 'hide'; ?>">
                                     <tr><td>First name </td>
-                                    <td><input type="text" id="txtFname_<?=$cntr?>" name="txtFname[<?=$cntr?>]" value="<?=$value['shrhldr_fname']?>" placeholder="First Name" /></td></tr>
+                                    <td><input type="text" id="txtFname_<?=$cntr?>" name="txtFname[<?=$cntr?>]" value="<?=$value['shrhldr_fname']?>"  /></td></tr>
                                     <tr><td>Middle name </td>
-                                    <td><input type="text" id="txtMname_<?=$cntr?>" name="txtMname[<?=$cntr?>]" value="<?=$value['shrhldr_mname']?>" placeholder="Middle Name" /></td></tr>
+                                    <td><input type="text" id="txtMname_<?=$cntr?>" name="txtMname[<?=$cntr?>]" value="<?=$value['shrhldr_mname']?>"  /></td></tr>
                                     <tr><td>Last name </td>
-                                    <td><input type="text" id="txtLname_<?=$cntr?>" name="txtLname[<?=$cntr?>]" value="<?=$value['shrhldr_lname']?>" placeholder="Last Name" /></td></tr>
+                                    <td><input type="text" id="txtLname_<?=$cntr?>" name="txtLname[<?=$cntr?>]" value="<?=$value['shrhldr_lname']?>"  /></td></tr>
                                     <tr><td>Residential Address </td>
                                     <td><div>
                                         <input type="text" id="resAddUnit_<?=$cntr?>" name="resAddUnit[<?=$cntr?>]" style="width:115px;" value="<?=$value['res_addr_unit']?>" placeholder="Unit number" />
@@ -122,9 +123,9 @@
                                         <option value="0" <?php if($value['is_shars_own_bhlf'] == 0) echo 'selected';?>>No</option>
                                     </select></td></tr>
                                 <tr id="trShrOwnBhlf_<?=$cntr?>" class="<?php if($value['is_shars_own_bhlf'] == 1){ echo 'show'; }else echo 'hide'; ?>" ><td>Shares are owned on behalf </td>
-                                    <td><input type="text" id="txtShrOwnBhlf_<?=$cntr?>" name="txtShrOwnBhlf[<?=$cntr?>]" value="<?=$value['shars_own_bhlf']?>" placeholder="Shares are owned on behalf" /></td></tr>
+                                    <td><input type="text" id="txtShrOwnBhlf_<?=$cntr?>" name="txtShrOwnBhlf[<?=$cntr?>]" value="<?=$value['shars_own_bhlf']?>"  /></td></tr>
                                 <tr><td>Number of shares </td>
-                                <td><input type="text" id="txtNoShares_<?=$cntr?>" name="txtNoShares[<?=$cntr?>]" value="<?=$value['no_of_shares']?>" placeholder="Number of shares" /></td></tr>
+                                <td><input type="text" id="txtNoShares_<?=$cntr?>" name="txtNoShares[<?=$cntr?>]" value="<?=$value['no_of_shares']?>"  /></td></tr>
                             </table>
                         </div>
                         

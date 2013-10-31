@@ -148,20 +148,20 @@
 		}
                 else if($requestUrl == 'company_details.php') {
 			?><title>Company Details</title>
-			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/company_details.js"></script><?
+			<script type="text/javascript" src="<?=DIR?>setup/<?=$folderPath?>/js/company_details.js"></script><?
 		}
                 else if($requestUrl == 'address_details.php') {
 			?><title>Address Details</title>
-			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/address_details.js"></script><?
+			<script type="text/javascript" src="<?=DIR?>setup/<?=$folderPath?>/js/address_details.js"></script><?
 		}
                 else if($requestUrl == 'officer_details.php') {
 			?><title>Officer Details</title>
-			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/officer_details.js"></script><?
+			<script type="text/javascript" src="<?=DIR?>setup/<?=$folderPath?>/js/officer_details.js"></script><?
 		}
 
                 else if($requestUrl == 'shareholder_details.php') {
 			?><title>Shareholder Details</title>
-			<script type="text/javascript" src="<?=DIR?>setup/standard_company/js/shareholder_details.js"></script><?
+			<script type="text/javascript" src="<?=DIR?>setup/<?=$folderPath?>/js/shareholder_details.js"></script><?
                 }
                 else if($requestUrl == 'holding_trust.php' && $folderPath == 'holding_trust') {
 			?><title>Holding Trust Details</title>

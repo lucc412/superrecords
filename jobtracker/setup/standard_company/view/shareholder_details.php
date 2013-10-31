@@ -143,7 +143,7 @@
     </form>
     <script>
         $('#btnNext').click(function(){$('#sql').val('Add')})
-//        $('#btnSave').click(function(){$('#sql').val('Save')})
+        $('#btnSave').click(function(){$('#sql').val('Add')})
     </script>
 </div>
 <? include(FOOTER); ?>

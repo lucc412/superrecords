@@ -36,12 +36,16 @@ $(document).ready(function(){
             var splitId = id.split('_');
             var cntr = splitId[1];
             
-            if($(this).val() == 1) 
+            if($(this).val() == 0) 
             {
                 $(this).addClass("errclass");
                 flag = false;
             }
-            else if($(this).val() == 1) 
+            else {
+                $(this).removeClass("errclass");
+            }
+            
+            if($(this).val() == 1) 
             {
                 if($('#txtCmpName_'+cntr).val() == 0)
                 {

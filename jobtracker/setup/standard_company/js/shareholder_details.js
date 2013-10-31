@@ -45,6 +45,7 @@ $(document).ready(function(){
                 $(this).removeClass("errclass");
             }
             
+            // corporate case
             if($(this).val() == 1) 
             {
                 if($('#txtCmpName_'+cntr).val() == 0)
@@ -54,8 +55,17 @@ $(document).ready(function(){
                 }
                 else
                     $('#txtCmpName_'+cntr).removeClass("errclass");
+                
+                if($('#txtRegAddr_'+cntr).val() == 0)
+                {
+                    $('#txtRegAddr_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#txtRegAddr_'+cntr).removeClass("errclass");
 
             }
+            // individual case
             else if($(this).val() == 2) 
             {
                 if($('#txtFname_'+cntr).val() == 0)
@@ -74,30 +84,72 @@ $(document).ready(function(){
                 else
                     $('#txtLname_'+cntr).removeClass("errclass");
                 
+                if($('#resAddUnit_'+cntr).val() == 0)
+                {
+                    $('#resAddUnit_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#resAddUnit_'+cntr).removeClass("errclass");
                 
+                if($('#resAddBuild_'+cntr).val() == 0)
+                {
+                    $('#resAddBuild_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#resAddBuild_'+cntr).removeClass("errclass");
+                
+                if($('#resAddStreet_'+cntr).val() == 0)
+                {
+                    $('#resAddStreet_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#resAddStreet_'+cntr).removeClass("errclass");
+                
+                if($('#resAddSubrb_'+cntr).val() == 0)
+                {
+                    $('#resAddSubrb_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#resAddSubrb_'+cntr).removeClass("errclass");
+                
+                if($('#resAddState_'+cntr).val() == 0)
+                {
+                    $('#resAddState_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#resAddState_'+cntr).removeClass("errclass");
+                
+                if($('#resAddPstCode_'+cntr).val() == 0)
+                {
+                    $('#resAddPstCode_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#resAddPstCode_'+cntr).removeClass("errclass");
             }
-            
-            $('[id^=selShrCls_]').each(function ()
-            {
-                if($(this).val() == 0) {
-                    $(this).addClass('errclass');
+            // default case
+            else {
+                if($('#selShrCls_'+cntr).val() == 0)
+                {
+                    $('#selShrCls_'+cntr).addClass("errclass");
                     flag = false;
                 }
-                else {
-                    $(this).removeClass("errclass");
-                }
-            });
-            
-            $('[id^=txtNoShares_]').each(function ()
-            {
-                if((!$(this).val())) {
-                    $(this).addClass('errclass');
+                else
+                    $('#selShrCls_'+cntr).removeClass("errclass");
+                
+                if($('#txtNoShares_'+cntr).val() == 0)
+                {
+                    $('#txtNoShares_'+cntr).addClass("errclass");
                     flag = false;
                 }
-                else {
-                    $(this).removeClass("errclass");
-                }
-            });
+                else
+                    $('#txtNoShares_'+cntr).removeClass("errclass");
+            }
             
         });
         

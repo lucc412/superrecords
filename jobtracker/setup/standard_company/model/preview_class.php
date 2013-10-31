@@ -70,7 +70,6 @@ class Preview {
             return $arrShareholder;
     }
     
-    
     // generate preview/pdf code
     public function generatePreview() {
        $arrStates = fetchStates();
@@ -257,11 +256,14 @@ class Preview {
                                 <tr>
                                     <td>Number of Director :</td>
                                     <td>'.$shrHlderInfo['no_of_directrs'].'</td>
-                                </tr>
-                                <tr>
-                                    <td>Directors :</td>
-                                    <td>'.$shrHlderInfo['directrs_name'].'</td>
                                 </tr>';
+                
+                if(!empty($shrHlderInfo['no_of_directrs'])) {
+                     $shareHolder .= '<tr>
+                                        <td>Directors :</td>
+                                        <td>'.$shrHlderInfo['directrs_name'].'</td>
+                                    </tr>';
+                }
             }
             else if($shrHlderInfo['shrhldr_type'] == '2') {
                 $shareHolder .= '<tr>

@@ -33,6 +33,7 @@ if(!empty($_REQUEST['sql']) && $_REQUEST['sql'] == 'Add')
     
     $no_of_shrhldr = $_REQUEST['selShrHldr'];
     
+    
     //Reverse Array for deleting officer
     krsort($arrShrhldrDtls);
     
@@ -42,7 +43,7 @@ if(!empty($_REQUEST['sql']) && $_REQUEST['sql'] == 'Add')
         foreach ($arrShrhldrDtls as $key => $value) {
             if($delShrhldr > 0) {
                 
-                $objShrHdlrDtls->delShrhldrDtls($key);
+                $objShrHdlrDtls->delShrhldrDtls($value['shrhldr_id']);
                 $delShrhldr--;
             }
         }
@@ -97,7 +98,7 @@ if(!empty($_REQUEST['sql']) && $_REQUEST['sql'] == 'Add')
         header("location:preview.php");
     
     if(!empty($_REQUEST['btnSave']))
-        header("location:../../job_saved.php");
+        header("location:../../jobs_saved.php");
 }
 
 

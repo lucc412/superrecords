@@ -1,12 +1,12 @@
 <?
 
 // include common file
-include("include/common.php");
+include("../../include/common.php");
 
 if(isset($_SESSION['jobId'])) {
 
 	// include model file
-	include(MODEL . "new_smsf_trustee_class.php");
+	include("model/new_smsf_trustee_class.php");
 
 	// create class object for class function access
 	$objScr = new NEW_SMSF_TRUSTEE();
@@ -41,7 +41,7 @@ if(isset($_SESSION['jobId'])) {
                     if(isset($_POST['newTrust_status']) && $_POST['newTrust_status'] == 1)
                     {
                         if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                        header('Location: jobs_saved.php');
+                        header('Location: ../../jobs_saved.php');
                     }
                     else
 			header('Location: new_smsf_declarations.php');
@@ -80,7 +80,7 @@ if(isset($_SESSION['jobId'])) {
                     if(isset($_POST['extTrust_status']) && $_POST['extTrust_status'] == 1)
                     {
                         if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                        header('Location: jobs_saved.php');
+                        header('Location: ../../jobs_saved.php');
                     }
                     else
 			header('Location: new_smsf_declarations.php');
@@ -140,9 +140,9 @@ if(isset($_SESSION['jobId'])) {
 
 
 	// include view file
-	include(VIEW . "new_smsf_trustee.php");
+	include("view/new_smsf_trustee.php");
 }
 else {
-	header('Location: login.php');
+	header('Location: ../../login.php');
 }
 ?>

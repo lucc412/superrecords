@@ -1,10 +1,10 @@
 <?php
 
 // include common file
-include("include/common.php");
+include("../../include/common.php");
 
 // include model file
-include(MODEL . "new_smsf_contact_class.php");
+include("model/new_smsf_contact_class.php");
 
 // create class object for class function access
 $objScr = new NEW_SMSF_CONTACT();
@@ -35,7 +35,7 @@ if(isset($_POST['flaginit']) && $_POST['flaginit'] =='add') {
             if(isset($_POST['cont_status']) && $_POST['cont_status'] == 1)
             {
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                header('Location: jobs_saved.php');
+                header('Location: ../../jobs_saved.php');
             }
             else    
 		header('Location: new_smsf_fund.php');
@@ -95,5 +95,5 @@ else {
 }
 
 // include view file
-include(VIEW . "new_smsf_contact.php");
+include("view/new_smsf_contact.php");
 ?>

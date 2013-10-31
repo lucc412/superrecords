@@ -78,9 +78,9 @@
                                         </select></td>
                                     </tr>
                                 </table>
-                                <div id="crpNoDirtr_<?=$cntr?>" class="<?php if($value['no_of_directrs'] > 0){ echo 'show'; }else echo 'hide'; ?>" style="margin-left:230px;width:auto">
-                                    <?php $drctrsName = explode(',', $value['directrs_name']);
-                                    foreach ($drctrsName as $fldId => $fldvalue) { $fldId++; ?>                                    
+                                <div id="crpNoDirtr_<?=$cntr?>" class="<?php if($value['shrhldr_type'] == 1){ echo 'show'; }else echo 'hide'; ?>" style="margin-left:230px;width:auto">
+                                    <?php if(!empty($value['directrs_name'])) $drctrsName = explode(',', $value['directrs_name']);                                    
+                                    foreach ($drctrsName as $fldId => $fldvalue) {  $fldId++; ?>                                    
                                     <div id="dvDirtr_<?=$cntr.$fldId?>" >
                                         <table class="fieldtable">
                                             <tr>

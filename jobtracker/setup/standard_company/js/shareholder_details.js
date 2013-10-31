@@ -162,11 +162,17 @@ function changeShrHldrType(element,cnt)
         $('#crpNoDirtr_'+cnt).addClass('show').removeClass('hide');
         $('#trIndShrHldr_'+cnt).addClass('hide').removeClass('show');
     }
-    else
+    else if($(element).val() == 2)
     {
         $('#trCrpShrHldr_'+cnt).addClass('hide').removeClass('show');
         $('#crpNoDirtr_'+cnt).addClass('hide').removeClass('show');
         $('#trIndShrHldr_'+cnt).addClass('show').removeClass('hide');
+    }
+    else
+    {
+        $('#trCrpShrHldr_'+cnt).addClass('hide').removeClass('show');
+        $('#crpNoDirtr_'+cnt).addClass('hide').removeClass('show');
+        $('#trIndShrHldr_'+cnt).addClass('hide').removeClass('show');
     }
 }
 

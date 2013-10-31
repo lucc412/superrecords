@@ -8,7 +8,7 @@
 // include common file
 include("../../include/common.php");
 
-include(MODEL . "setup_preview_class.php");
+include("model/setup_preview_class.php");
 $objStpPrvw = new SETUP_PREVIEW();
 
 $html = $objStpPrvw->generatePreview();

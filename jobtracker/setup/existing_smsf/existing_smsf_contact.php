@@ -1,10 +1,10 @@
 <?php
 
 	// include common file
-	include("include/common.php");
+	include("../../include/common.php");
 
 	// include model file
-	include(MODEL . "existing_smsf_contact_class.php");
+	include("model/existing_smsf_contact_class.php");
 
 	// create class object for class function access
 	$objScr = new EXISTING_SMSF_CONTACT();
@@ -73,7 +73,7 @@
                     if(isset($_POST['cont_status']) && $_POST['cont_status'] == 1)
                     {
                         if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                        header('Location: jobs_saved.php');
+                        header('Location: ../../jobs_saved.php');
                     }
                     else
                         header('Location: existing_smsf_fund.php');
@@ -148,6 +148,6 @@
 	$arrStates = $objScr->fetchStates();
 
 	// include view file 
-	include(VIEW . "existing_smsf_contact.php");
+	include("view/existing_smsf_contact.php");
 
 ?>

@@ -84,19 +84,19 @@
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_contact.php') {
                         ?><title>Contact Details</title>
-                        <script type="text/javascript" src="<?=DIR?>js/new_smsf_contact.js"></script><?
+                        <script type="text/javascript" src="<?=DIR?>setup/new_smsf/js/new_smsf_contact.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_fund.php') {
                         ?><title>Fund Details</title>
-                        <script type="text/javascript" src="<?=DIR?>js/new_smsf_fund.js"></script><?
+                        <script type="text/javascript" src="<?=DIR?>setup/new_smsf/js/new_smsf_fund.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_member.php') {
                         ?><title>Member Details</title>
-                        <script type="text/javascript" src="<?=DIR?>js/new_smsf_member.js"></script><?
+                        <script type="text/javascript" src="<?=DIR?>setup/new_smsf/js/new_smsf_member.js"></script><?
 		}
                 else if(basename($_SERVER['PHP_SELF']) == 'legal_references.php') {
                         ?><title>Legal Personal Representative</title>
-                        <script type="text/javascript" src="<?=DIR?>js/legal_references.js"></script><?
+                        <script type="text/javascript" src="<?=DIR?>setup/new_smsf/js/legal_references.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_trustee.php') {
                         ?><title>Trustee Details</title>
@@ -104,7 +104,7 @@
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'new_smsf_declarations.php') {
                         ?><title>Declarations</title>
-                        <script type="text/javascript" src="<?=DIR?>js/new_smsf_declarations.js"></script><?
+                        <script type="text/javascript" src="<?=DIR?>setup/new_smsf/js/new_smsf_declarations.js"></script><?
 		}
 		else if(basename($_SERVER['PHP_SELF']) == 'existing_smsf.php') {
 			?><title>Existing SMSF Details</title><?

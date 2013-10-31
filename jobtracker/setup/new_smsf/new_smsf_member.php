@@ -123,7 +123,7 @@ if(isset($_SESSION['jobId'])) {
         $arrStates = fetchStates();
 
 	// include view file 
-	include(VIEW . "new_smsf_member.php");
+	include("view/new_smsf_member.php");
 }
 else {
 	header('Location: ../../login.php');

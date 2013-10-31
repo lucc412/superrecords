@@ -68,7 +68,7 @@ class DECLARATIONS
             // process new job
             submitSavedJob();
             
-            include(MODEL . "setup_preview_class.php");
+            include("model/setup_preview_class.php");
             $objStpPrvw = new SETUP_PREVIEW();
             
             // Insert into documents table

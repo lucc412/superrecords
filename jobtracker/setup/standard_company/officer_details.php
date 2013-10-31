@@ -46,7 +46,7 @@ if(!empty($_REQUEST['sql']))
         foreach ($arrOffcrData as $key => $value) {
             if($delOffcr > 0) {
                 
-                $objOffDtls->delOffcrDtls($key);
+                $objOffDtls->delOffcrDtls($value['offcr_id']);
                 $delOffcr--;
             }
         }

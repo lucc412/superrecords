@@ -1,7 +1,7 @@
 <?php
 
 // include common file
-include("include/common.php");
+include("../../include/common.php");
 
 
 if(isset($_SESSION["jobId"]))
@@ -24,7 +24,7 @@ if(isset($_REQUEST) && $_REQUEST['do'] == 'redirect')
         $sql = "insertJob"; 
     }
     
-    header('Location:jobs.php?sql='.$sql.'&type=SETUP&subfrmId=2');
+    header('Location:../../jobs.php?sql='.$sql.'&type=SETUP&subfrmId=2');
 }
 
 // include view file 

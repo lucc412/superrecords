@@ -1,8 +1,8 @@
 <?php
 // include common file
-include("include/common.php");
+include("../../include/common.php");
 
-include(MODEL . "new_smsf_class.php");
+include("model/new_smsf_class.php");
 $objNewSmsf = new NEW_SMSF();
 
 // update checkbox case.
@@ -38,7 +38,7 @@ else
     
     if(isset($_SESSION['jobId'])) $arrSMSF = $objNewSmsf->fetchCheckbox();
         
-    include(VIEW . "new_smsf.php");
+    include("view/new_smsf.php");
 }
 
 ?>

@@ -1,12 +1,12 @@
 <?php
 
 // include common file
-include("include/common.php");
+include("../../include/common.php");
 
 if(isset($_SESSION['jobId'])) 
 {
 	// include model file
-	include(MODEL . "new_smsf_declarations_class.php");
+	include("model/new_smsf_declarations_class.php");
 
 	// create class object for class function access
 	$objScr = new DECLARATIONS();
@@ -38,7 +38,7 @@ if(isset($_SESSION['jobId']))
                 // generate PDF
                 $objScr->generatePDF();
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                    header('Location: jobs_pending.php');
+                    header('Location: ../../jobs_pending.php');
             }
             else if(isset($_REQUEST['job_submitted']) && $_REQUEST['job_submitted'] == 'N')
             {
@@ -52,7 +52,7 @@ if(isset($_SESSION['jobId']))
                 }
             
                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                    header('Location: jobs_saved.php');
+                    header('Location: ../../jobs_saved.php');
             }
             
 	}
@@ -69,11 +69,11 @@ if(isset($_SESSION['jobId']))
                 }
             }
             
-            include(VIEW . "new_smsf_declarations.php");
+            include("view/new_smsf_declarations.php");
         }
 	
 }
 else {
-	header('Location: home.php');
+	header('Location: ../../home.php');
 }
 ?>

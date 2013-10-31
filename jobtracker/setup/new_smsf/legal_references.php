@@ -1,12 +1,12 @@
 <?
 
 // include common file
-include("include/common.php");
+include("../../include/common.php");
 
 if(isset($_SESSION['jobId'])) {
 
 	// include model file
-	include(MODEL . "legal_references_class.php");
+	include("model/legal_references_class.php");
 
 	// create class object for class function access
 	$objScr = new LEGAL_REFERENCES();
@@ -71,7 +71,7 @@ if(isset($_SESSION['jobId'])) {
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
                             {
                                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                                header('Location: jobs_saved.php');
+                                header('Location: ../../jobs_saved.php');
                             }
                             else
                                 header('Location: new_smsf_declarations.php');
@@ -81,7 +81,7 @@ if(isset($_SESSION['jobId'])) {
                             if(isset($_POST['member_status']) && $_POST['member_status'] == 1)
                             {
                                 if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                                header('Location: jobs_saved.php');
+                                header('Location: ../../jobs_saved.php');
                             }
                             else
                                 header('Location: new_smsf_trustee.php');
@@ -112,9 +112,9 @@ if(isset($_SESSION['jobId'])) {
         $arrStates = fetchStates();        
 
 	// include view file 
-	include(VIEW . "legal_references.php");
+	include("view/legal_references.php");
 }
 else {
-	header('Location: login.php');
+	header('Location: ../../login.php');
 }
 ?>

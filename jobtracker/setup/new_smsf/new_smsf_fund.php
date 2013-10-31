@@ -1,12 +1,12 @@
 <?
 
 // include common file
-include("include/common.php");
+include("../../include/common.php");
 
 if(isset($_SESSION['jobId'])) {
 
 	// include model file
-	include(MODEL . "new_smsf_fund_class.php");
+	include("model/new_smsf_fund_class.php");
 
 	// create class object for class function access
 	$objScr = new NEW_SMSF_FUND();
@@ -70,7 +70,7 @@ if(isset($_SESSION['jobId'])) {
                         if(isset($_POST['fund_status']) && $_POST['fund_status'] == 1)
                         {
                             if(isset($_SESSION['jobId']))unset($_SESSION['jobId']);
-                            header('Location: jobs_saved.php');
+                            header('Location: ../../jobs_saved.php');
                         }
 			else
                             header('Location: new_smsf_member.php');
@@ -125,10 +125,10 @@ if(isset($_SESSION['jobId'])) {
         $arrCountry = $objScr->fetchCountries();
         
 	// include view file 
-	include(VIEW . "new_smsf_fund.php");
+	include("view/new_smsf_fund.php");
 }
 else {
-	header('Location: login.php');
+	header('Location: ../../login.php');
 }
 
 ?>

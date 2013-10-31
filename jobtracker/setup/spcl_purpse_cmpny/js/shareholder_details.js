@@ -340,12 +340,19 @@ function addShrHldr()
                                 </td>\n\
                             </tr>\n\
                             </table>\n\
-                            <table class="fieldtable" style="width:758px">\n\
+                            <table class="fieldtable" style="width:528px">\n\
                                 <tr><td>Share Class </td>\n\
                                 <td>\n\
                                     <select id="selShrCls_'+i+'" name="selShrCls['+i+']" style="margin-bottom:5px; width:180px;" >\n\
                                         <option value="0">Select Share class</option>'+shrclass+'\n\
                                     </select></td></tr>\n\
+                                <tr><td>Are the shares owned on behalf </br>of another Company or Trust? </td>\n\
+                                <td><select id="selShrBhlf_'+i+'" name="selShrBhlf['+i+']" style="margin-bottom:5px; width:180px;" onchange="changeShrOwnBhlf(this,'+i+')">\n\
+                                        <option value="1">Yes</option>\n\
+                                        <option value="0">No</option>\n\
+                                    </select></td></tr>\n\
+                                <tr id="trShrOwnBhlf_'+i+'" ><td>Shares are owned on behalf </td>\n\
+                                <td><input type="text" id="txtShrOwnBhlf_'+i+'" name="txtShrOwnBhlf['+i+']"  /></td></tr>\n\
                                 <tr><td>Number of shares </td>\n\
                                 <td><input type="text" id="txtNoShares_'+i+'" name="txtNoShares['+i+']"  /></td></tr>\n\
                             </table></div>\n\

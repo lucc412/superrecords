@@ -12,7 +12,7 @@ class COMPANY_DETAILS
     
     public function fetchCompDtls()
     {
-        $qry = "SELECT * FROM stp_comp_dtls WHERE job_id = ".$_SESSION['jobId'];
+        $qry = "SELECT * FROM spc_comp_dtls WHERE job_id = ".$_SESSION['jobId'];
         $fetchResult = mysql_query($qry);
         $rowData = mysql_fetch_assoc($fetchResult);
                 
@@ -22,21 +22,6 @@ class COMPANY_DETAILS
     public function insertCompanyDetails()
     {        
         $compPref = arrayToString(',',$_REQUEST['txtCompPref']); 
-        $juriReg = $_REQUEST['selJuriReg'];
-                
-        $qry = "INSERT INTO stp_comp_dtls (job_id, comp_pref_name, comp_juri_reg)
-                    VALUES('".$_SESSION['jobId']."',
-                            '".addslashes($compPref)."',
-                            '".$juriReg."'
-                           )";
-        
-        $result = mysql_query($qry);
-        return $result;
-    }
-    
-    public function updateCompanyDetails()
-    {        
-        $compPref = implode(',',$_REQUEST['txtCompPref']); 
         $juriReg = $_REQUEST['selJuriReg'];
         $existBusnsName = $_REQUEST['selExtBusName']; 
         $regBusns = $_REQUEST['selRegBusns'];
@@ -60,18 +45,33 @@ class COMPANY_DETAILS
         {
             $regBusns = '';
             $regBusnsABN = '';
-            $regBusnsState = '';
+            $regBusnsState = ''; 
             $regNo = '';
         }
                 
-        $qry = "UPDATE stp_comp_dtls 
+        $qry = "INSERT INTO spc_comp_dtls (job_id, comp_pref_name, comp_juri_reg, exst_busns_name, reg_busns_name, reg_busns_abn, reg_busns_state, reg_busns_number)
+                    VALUES('".$_SESSION['jobId']."',
+                            '".addslashes($compPref)."',
+                            '".$juriReg."',
+                            '".$existBusnsName."',
+                            '".$regBusns."',
+                            '".$regBusnsABN."',
+                            '".$regBusnsState."',
+                            '".$regNo."'
+                           )";
+        
+        $result = mysql_query($qry);
+        return $result;
+    }
+    
+    public function updateCompanyDetails()
+    {        
+        $compPref = implode(',',$_REQUEST['txtCompPref']); 
+        $juriReg = $_REQUEST['selJuriReg'];
+                
+        $qry = "UPDATE spc_comp_dtls 
             SET comp_pref_name = '".addslashes($compPref)."',  
-                comp_juri_reg = '".$juriReg."',
-                exst_busns_name = '".$existBusnsName."', 
-                reg_busns_name = '".$regBusns."', 
-                reg_busns_abn = '".$regBusnsABN."',
-                reg_busns_state = '".$regBusnsState."', 
-                reg_busns_number = '".$regNo."'
+                comp_juri_reg = '".$juriReg."'
                 WHERE job_id = '".$_SESSION['jobId']."' ";
         
         

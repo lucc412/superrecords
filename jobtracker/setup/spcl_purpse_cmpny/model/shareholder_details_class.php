@@ -56,7 +56,7 @@ class SHAREHOLDER_DETAILS
     public function insertShrhldrDtls($shrhldr)
     {
         
-       print $qry = "INSERT INTO spc_sharehldr_dtls (job_id, no_of_shrhldr, shrhldr_type, shrhldr_cmpny_name, shrhldr_acn, shrhldr_reg_addr, no_of_directrs,
+       $qry = "INSERT INTO spc_sharehldr_dtls (job_id, no_of_shrhldr, shrhldr_type, shrhldr_cmpny_name, shrhldr_acn, shrhldr_reg_addr, no_of_directrs,
                                                 directrs_name, shrhldr_fname, shrhldr_mname, shrhldr_lname, res_addr_unit, res_addr_build, res_addr_street,
                                                 res_addr_subrb, res_addr_state, res_addr_pcode, share_class, no_of_shares) 
                                                 VALUES(

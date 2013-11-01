@@ -48,7 +48,7 @@ class NEW_SMSF
         $cbVal = 0;
         if(!empty($_REQUEST['cbApply'])) $cbVal = 1;
 
-        print $updQry = "UPDATE es_smsf SET apply_abntfn = ".$cbVal." WHERE job_id = ".$_SESSION["jobId"];
+        $updQry = "UPDATE es_smsf SET apply_abntfn = ".$cbVal." WHERE job_id = ".$_SESSION["jobId"];
         mysql_query($updQry);
     }
     

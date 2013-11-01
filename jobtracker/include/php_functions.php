@@ -582,6 +582,9 @@ function returnFileIcon($fileName)
             case 'msg':
                 $icon = ICOMSG;
                 break;
+            default :
+                $icon = ICOTXT;
+                break;
          }
 		
 	//Return the Status of Given Event Id

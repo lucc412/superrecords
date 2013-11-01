@@ -13,7 +13,7 @@ if(isset($_SESSION['jobId']))
 
 	// function to download doc file
         if(isset($_REQUEST['do']) && $_REQUEST['do'] == 'download') {
-	    showPDFViewer('docs/guide.pdf','guide.pdf');	
+	    showPDFViewer('../../docs/guide.pdf','guide.pdf');	
 	}
 
 	// fetch data is available 

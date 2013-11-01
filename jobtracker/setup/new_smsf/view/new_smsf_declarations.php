@@ -41,7 +41,8 @@ include(SETUPNAVIGATION);
 	</div>
         <input type="hidden" name="job_submitted" id="job_submitted" value="">
         <input type="hidden" name="preview" id="preview" value="">
-	<div style="padding-top:20px;"><?
+        <div class="txtAboveButton">Your document details are ready to be submitted. However, prior to doing so, please preview to make sure all details are correct. <p>To preview, please click the 'Preview' button below.</p></div>
+	<div class="pdT20"><?
 
 		if($_SESSION['TRUSTEETYPE'] != 1)
 			$jsFunc = "window.location.href='new_smsf_trustee.php'";
@@ -54,11 +55,9 @@ include(SETUPNAVIGATION);
                         $jsFunc = "window.location.href='new_smsf_member.php'";
                     }
                 }
-		//onclick="js:urlRedirect('setup_preview.php');"
-			?><span align="left"><button type="button" onclick="<?=$jsFunc?>" >Back</button></span>
-			<span align="right" style="padding-left:55px;"><button type="submit" id="btnNext">Save & Exit</button></span>
-                        <span align="right" style="padding-left:55px;"><button id="btnPreview" name="btnPreview" class="" type="submit" value="preview">Preview</button></span>
-<!--			<span align="right" style="padding-left:55px;"><button type="submit" id="btnSave">Submit</button></span>-->
+                ?><span class="pdR20"><button type="button" onclick="<?=$jsFunc?>" >Back</button></span>
+                <span class="pdR20"><button type="submit" id="btnNext">Save & Exit</button></span>
+                <span class="pdR20"><button id="btnPreview" name="btnPreview" class="" type="submit" value="preview">Preview</button></span>
 	</div>
         <script>
             $('#btnNext').click(function(){$('#job_submitted').val('N')})

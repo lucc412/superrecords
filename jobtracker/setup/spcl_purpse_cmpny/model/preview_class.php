@@ -14,8 +14,7 @@ class Preview {
     
     // fetch company data
     public function fetchCompanyData() {
-            $qryCom = "SELECT tf.comp_pref_name, tf.comp_juri_reg, IF(tf.exst_busns_name, 'Yes', 'No')exst_busns_name, 
-                        IF(tf.reg_busns_name, 'Yes', 'No')reg_busns_name, tf.reg_busns_abn, tf.reg_busns_state, tf.reg_busns_number
+            $qryCom = "SELECT tf.comp_pref_name, tf.comp_juri_reg
                         FROM spc_comp_dtls tf
                         WHERE tf.job_id = ".$_SESSION['jobId'];
             $fetchRow = mysql_query($qryCom);
@@ -58,8 +57,8 @@ class Preview {
             $qrySel = "SELECT sh.shrhldr_type, IF(sh.shrhldr_type = 1, 'Corporate', 'Individual') shrhldrType, sh.shrhldr_cmpny_name, sh.shrhldr_acn, sh.shrhldr_reg_addr,
                         sh.no_of_directrs, sh.directrs_name, CONCAT_WS(' ', sh.shrhldr_fname, sh.shrhldr_mname, sh.shrhldr_lname) shrhldrName, 
                         CONCAT_WS(',', sh.res_addr_unit, sh.res_addr_build, sh.res_addr_street, sh.res_addr_subrb, sh.res_addr_pcode, cs.cst_Description) regAddress, 
-                        sc.shr_desc, IF(sh.is_shars_own_bhlf, 'Yes', 'No')isShrhldr, sh.shars_own_bhlf, sh.no_of_shares
-                        FROM spc_share_class sc, spc_sharehldr_dtls sh LEFT JOIN cli_state cs ON sh.res_addr_state = cs.cst_Code
+                        sc.shr_desc, sh.no_of_shares
+                        FROM stp_share_class sc, spc_sharehldr_dtls sh LEFT JOIN cli_state cs ON sh.res_addr_state = cs.cst_Code
                         WHERE sh.job_id = ".$_SESSION['jobId']."
                         AND sh.share_class = sc.shrclass_id";
             $fetchRow = mysql_query($qrySel);
@@ -121,34 +120,7 @@ class Preview {
                             <td>Jurisdiction of registration :</td>
                             <td>'.$arrStates[$arrCompanyDetail['comp_juri_reg']].'</td>
                         </tr>
-                        <tr>
-                            <td>Is the proposed company name an <br/>existing business name ? :</td>
-                            <td>'.$arrCompanyDetail['exst_busns_name'].'</td>
-                        </tr>';
-        
-        if($arrCompanyDetail['exst_busns_name'] == 'Yes') {
-           $company .=  '<tr>
-                            <td>Was the business name registered <br/>on or after 28 May 2012 ? :</td>
-                            <td>'.$arrCompanyDetail['reg_busns_name'].'</td>
-                        </tr>';
-           if($arrCompanyDetail['reg_busns_name'] == 'No') {
-                $company .= '<tr>
-                                <td>State :</td>
-                                <td>'.$arrStates[$arrCompanyDetail['reg_busns_state']].'</td>
-                            </tr>
-                            <tr>
-                                <td>Registration Number :</td>
-                                <td>'.$arrCompanyDetail['reg_busns_number'].'</td>
-                            </tr>';
-           }
-           if($arrCompanyDetail['reg_busns_name'] == 'Yes') {   
-              $company .= '<tr>
-                            <td>ABN :</td>
-                            <td>'.$arrCompanyDetail['reg_busns_abn'].'</td>
-                        </tr>';
-           }
-        }
-        $company .= '</table>';
+                    </table>';
         /* company details ends */
         
         /* address details starts */
@@ -281,16 +253,6 @@ class Preview {
                                 <td>'.$shrHlderInfo['shr_desc'].'</td>
                             </tr>
                             <tr>
-                                <td>Are the shares owned on behalf <br/> of another Company or Trust? :</td>
-                                <td>'.$shrHlderInfo['isShrhldr'].'</td>
-                            </tr>';
-            if($shrHlderInfo['isShrhldr'] == 'Yes') {
-                $shareHolder .= '<tr>
-                                    <td>Shares are owned on behalf :</td>
-                                    <td>'.$shrHlderInfo['shars_own_bhlf'].'</td>
-                                </tr>';
-            }
-            $shareHolder .= '<tr>
                                 <td>Number of shares :</td>
                                 <td>'.$shrHlderInfo['no_of_shares'].'</td>
                             </tr>';

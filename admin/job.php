@@ -156,9 +156,7 @@ if($_SESSION['validUser']) {
 				case "download":
 				
 					if($_REQUEST["filePath"]) {
-						if($_REQUEST['flagType'] == 'S') { 
-							$objCallData->update_document($_REQUEST["docId"]);
-						}
+						$objCallData->update_document($_REQUEST["docId"]);
 						$objCallData->doc_download($_REQUEST["filePath"]);
 						header('Location: job.php?a=documents&jobId='.$_REQUEST["jobId"]);
 					}

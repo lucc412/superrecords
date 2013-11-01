@@ -23,41 +23,11 @@ class COMPANY_DETAILS
     {        
         $compPref = arrayToString(',',$_REQUEST['txtCompPref']); 
         $juriReg = $_REQUEST['selJuriReg'];
-        $existBusnsName = $_REQUEST['selExtBusName']; 
-        $regBusns = $_REQUEST['selRegBusns'];
-        $regBusnsABN = $_REQUEST['txtABN'];
-        $regBusnsState = $_REQUEST['selState']; 
-        $regNo = $_REQUEST['txtRegNo'];
-        
-        if($existBusnsName == 1)
-        {
-            if($regBusns == 1)
-            {
-                $regBusnsState = ''; 
-                $regNo = '';
-            }
-            else
-            {
-                $regBusnsABN = '';
-            }
-        }
-        else
-        {
-            $regBusns = '';
-            $regBusnsABN = '';
-            $regBusnsState = ''; 
-            $regNo = '';
-        }
                 
-        $qry = "INSERT INTO spc_comp_dtls (job_id, comp_pref_name, comp_juri_reg, exst_busns_name, reg_busns_name, reg_busns_abn, reg_busns_state, reg_busns_number)
+        $qry = "INSERT INTO spc_comp_dtls (job_id, comp_pref_name, comp_juri_reg)
                     VALUES('".$_SESSION['jobId']."',
                             '".addslashes($compPref)."',
-                            '".$juriReg."',
-                            '".$existBusnsName."',
-                            '".$regBusns."',
-                            '".$regBusnsABN."',
-                            '".$regBusnsState."',
-                            '".$regNo."'
+                            '".$juriReg."'
                            )";
         
         $result = mysql_query($qry);

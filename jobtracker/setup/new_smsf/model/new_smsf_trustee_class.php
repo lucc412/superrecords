@@ -28,16 +28,15 @@ class NEW_SMSF_TRUSTEE
 	// function to insert trustee details of New trustee
 	function editNewTrustee($cName, $name1, $name2, $regAddress, $priAddress, $newTrstStats) {
 		$qryUpd = "UPDATE es_new_trustee
-						SET company_name = '" . addslashes($cName) . "',
-							alternative_name1 = '" . addslashes($name1) . "',
-							alternative_name2 = '" . addslashes($name2) . "',	
-							office_address = '" . addslashes($regAddress) . "',	
-							business_address = '" . addslashes($priAddress) . "',
-                                                        newTrusty_status = '" . addslashes($newTrstStats) . "',
-						WHERE job_id = " . $_SESSION['jobId'];
+                            SET company_name = '" . addslashes($cName) . "',
+                                    alternative_name1 = '" . addslashes($name1) . "',
+                                    alternative_name2 = '" . addslashes($name2) . "',	
+                                    office_address = '" . addslashes($regAddress) . "',	
+                                    business_address = '" . addslashes($priAddress) . "',
+                                    newTrusty_status = '" . addslashes($newTrstStats) . "'
+                            WHERE job_id = " . $_SESSION['jobId'];
 
-        mysql_query($qryUpd);
-
+            mysql_query($qryUpd);
 	    return true;	
 	}
 	

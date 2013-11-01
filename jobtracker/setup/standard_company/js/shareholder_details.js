@@ -132,24 +132,24 @@ $(document).ready(function(){
                 else
                     $('#resAddPstCode_'+cntr).removeClass("errclass");
             }
+            
             // default case
-            else {
-                if($('#selShrCls_'+cntr).val() == 0)
-                {
-                    $('#selShrCls_'+cntr).addClass("errclass");
-                    flag = false;
-                }
-                else
-                    $('#selShrCls_'+cntr).removeClass("errclass");
-                
-                if($('#txtNoShares_'+cntr).val() == 0)
-                {
-                    $('#txtNoShares_'+cntr).addClass("errclass");
-                    flag = false;
-                }
-                else
-                    $('#txtNoShares_'+cntr).removeClass("errclass");
+            if($('#selShrCls_'+cntr).val() == 0)
+            {
+                $('#selShrCls_'+cntr).addClass("errclass");
+                flag = false;
             }
+            else
+                $('#selShrCls_'+cntr).removeClass("errclass");
+
+            if($('#txtNoShares_'+cntr).val() == 0)
+            {
+                $('#txtNoShares_'+cntr).addClass("errclass");
+                flag = false;
+            }
+            else
+                $('#txtNoShares_'+cntr).removeClass("errclass");
+            
             
         });
         

@@ -106,7 +106,7 @@
 		}
 		else if($requestUrl == 'new_smsf_trustee.php') {
                         ?><title>Trustee Details</title>
-                        <script type="text/javascript" src="<?=DIR?>js/new_smsf_trustee.js"></script><?
+                        <script type="text/javascript" src="<?=DIR?>setup/new_smsf/js/new_smsf_trustee.js"></script><?
 		}
 		else if($requestUrl == 'new_smsf_declarations.php') {
                         ?><title>Declarations</title>
@@ -117,11 +117,11 @@
 		}
 		else if($requestUrl == 'existing_smsf_contact.php') {
                         ?><title>Contact Details</title>
-                        <script type="text/javascript" src="<?=DIR?>js/existing_smsf_contact.js"></script><?
+                        <script type="text/javascript" src="<?=DIR?>setup/new_smsf/js/existing_smsf_contact.js"></script><?
 		}
 		else if($requestUrl == 'existing_smsf_fund.php') {
                         ?><title>Fund Details</title>
-                        <script type="text/javascript" src="<?=DIR?>js/existing_smsf_fund.js"></script><?
+                        <script type="text/javascript" src="<?=DIR?>setup/new_smsf/js/existing_smsf_fund.js"></script><?
 		}
 		else if($requestUrl == 'setup_preview.php' || $requestUrl == 'preview.php') {
 			?><title>Preview</title><?

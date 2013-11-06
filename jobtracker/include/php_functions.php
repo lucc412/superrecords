@@ -244,6 +244,12 @@ function stringToArray($sep, $src){
     return $cs_array;
 }
 
+function stringltrim($source, $sep){
+
+    $string = ltrim($source, $sep);
+    return $string;
+}
+
 function stringrtrim($source, $sep){
 
     $string = rtrim($source, $sep);

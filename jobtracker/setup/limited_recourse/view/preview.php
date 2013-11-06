@@ -6,7 +6,7 @@ include(LIMRECNAV);
 // page header
 ?><div class="pageheader">
     <h1>Preview</h1>
-    <span><b>Welcome to the Super Records preview page for Holding Trust (Bare Trust).</b><span>
+    <span><b>Welcome to the Super Records preview page for Limited Recourse Loan (Related Party).</b><span>
 </div><?
 
 // content

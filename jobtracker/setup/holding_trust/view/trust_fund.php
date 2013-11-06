@@ -26,7 +26,7 @@ include(HOLDINGTRUSTCONTENT);
             <td>Trustee Type</td>
             <td>
                 <select name="lstType" id="lstType">
-                    <option value="">Select Holding Trustee</option><?php
+                    <option value="">Select Trustee Type</option><?php
                     foreach($arrTrusteeType AS $typeId => $typeDesc){
                             $selectStr = "";
                             if($arrHoldTrust['trustee_id'] == $typeId) $selectStr = "selected";
@@ -75,10 +75,10 @@ include(HOLDINGTRUSTCONTENT);
         <div class="frmMidHeader">Individual Fund</div>
         <table class="fieldtable" width="45%" cellpadding="10px;">
           <tr>
-              <td>No of members</td>
+              <td>No of trustees</td>
               <td><select name="lstMember" id="lstMember">
-                    <option value="">Select no of members</option><?
-                    $members=1;
+                    <option value="">Select no of trustees</option><?
+                    $members=2;
                     while($members<=4) {
                         $selectMember="";
                         if($arrHoldTrust['noofmember'] == $members) $selectMember = "selected";

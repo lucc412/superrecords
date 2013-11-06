@@ -15,7 +15,7 @@ $(document).ready(function() {
     // show member details section
     $('#lstMember').change(function() {
         if(!($('#lstMember').val())) {
-            alert('No of members is a compulsory field');
+            alert('No of trustees is a compulsory field');
             lstMember.className = "errclass";
             return false;
         }
@@ -36,7 +36,7 @@ $(document).ready(function() {
         }
         
         if(newMemberCnt < oldMemberCnt)  {
-             //alert('Are you sure you want to delete existing members ?');
+             //alert('Are you sure you want to delete existing trustees ?');
              eleCnt = 3;
              while (newMemberCnt < oldMemberCnt) 
              { 
@@ -78,15 +78,17 @@ $(document).ready(function() {
             }
             else txtAcn.className = "";
             
-            $('[id^=dir]').each(function (){
-                if(!$(this).val()) {
-                    $(this).addClass('errclass');
-                    flagReturn = false;
-                }
-                else {
-                    $(this).removeClass("errclass");
-                }
-            });
+            if(!($('#txtAdd').val())) {
+                txtAdd.className = "errclass";
+                flagReturn = false;
+            }
+            else txtAdd.className = "";
+            
+            if(!($('#dir0').val())) {
+                dir0.className = "errclass";
+                flagReturn = false;
+            }
+            else dir0.className = "";
         }
         
         // validate individual trustee part 

@@ -15,7 +15,7 @@ $(document).ready(function() {
     // show member details section
     $('#lstMember').change(function() {
         if(!($('#lstMember').val())) {
-            alert('No of members is a compulsory field');
+            alert('No of individuals is a compulsory field');
             lstMember.className = "errclass";
             return false;
         }
@@ -30,13 +30,13 @@ $(document).ready(function() {
         
         while (intCnt < newMemberCnt) 
         { 
-            var newSection = '<p style="padding-left:165px;" id="ele'+intCnt+'"><input type="text" name="txtTrusteeName'+intCnt+'" id="txtTrusteeName'+intCnt+'" placeholder="Name of Trustee"/><span class="pdL20"><input type="text" name="txtResAdd'+intCnt+'" id="txtResAdd'+intCnt+'" placeholder="Residential Address"/></span>';
+            var newSection = '<p style="padding-left:165px;" id="ele'+intCnt+'"><input type="text" name="txtTrusteeName'+intCnt+'" id="txtTrusteeName'+intCnt+'" placeholder="Name"/><span class="pdL20"><input type="text" name="txtResAdd'+intCnt+'" id="txtResAdd'+intCnt+'" placeholder="Residential Address"/></span>';
             $('#memberbox').append(newSection);
             intCnt++;
         }
         
         if(newMemberCnt < oldMemberCnt)  {
-             //alert('Are you sure you want to delete existing members ?');
+             //alert('Are you sure you want to delete existing individuals ?');
              eleCnt = 3;
              while (newMemberCnt < oldMemberCnt) 
              { 
@@ -73,15 +73,17 @@ $(document).ready(function() {
             }
             else txtAcn.className = "";
             
-            $('[id^=dir]').each(function (){
-                if(!$(this).val()) {
-                    $(this).addClass('errclass');
-                    flagReturn = false;
-                }
-                else {
-                    $(this).removeClass("errclass");
-                }
-            });
+            if(!($('#txtAdd').val())) {
+                txtAdd.className = "errclass";
+                flagReturn = false;
+            }
+            else txtAdd.className = "";
+            
+            if(!($('#dir0').val())) {
+                dir0.className = "errclass";
+                flagReturn = false;
+            }
+            else dir0.className = "";
         }
         
         // validate individual trustee part 

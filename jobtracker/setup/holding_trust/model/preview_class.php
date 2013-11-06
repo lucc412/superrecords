@@ -112,7 +112,7 @@ class Preview {
         if($arrTrustDetail['trustee_id'] == '1') {
             $arrIndvdlTrust = $this->fetchIndividualTrustDetails();
             $holdingTrustee = '<tr>
-                                <td>No of members :</td>
+                                <td>No of individuals :</td>
                                 <td>'.$arrTrustDetail['noofmember'].'</td>
                             </tr>';
             
@@ -121,7 +121,7 @@ class Preview {
             foreach ($arrIndvdlTrust as $individualInfo) {
                 $trustIndividual .= '<table class="first" cellpadding="4" cellspacing="6">
                                         <tr>
-                                            <td colspan="2"><u>Member '.$memberCtr.'</u></td>
+                                            <td colspan="2"><u>Individual '.$memberCtr.'</u></td>
                                         </tr>
                                         <tr>
                                             <td>Name of Trustee :</td>
@@ -163,7 +163,7 @@ class Preview {
                                 <td>'.$arrTrustDetail['trust_name'].'</td>
                             </tr>
                             <tr>
-                                <td>Trustee Type :</td>
+                                <td>Holding Trustee :</td>
                                 <td>'.$arrTrustDetail['trustee_name'].'</td>
                             </tr>'.$holdingTrustee.'
                         </table>'.$trustIndividual.'<br/>';
@@ -175,7 +175,7 @@ class Preview {
         if($arrFundDetail['trustee_id'] == '1') {
             $arrIndvdlFund = $this->fetchIndividualFundDetails();
             $fundTrustee = '<tr>
-                                <td>No of members :</td>
+                                <td>No of trustees :</td>
                                 <td>'.$arrFundDetail['noofmember'].'</td>
                             </tr>';
             
@@ -184,7 +184,7 @@ class Preview {
             foreach ($arrIndvdlFund as $individualInfo) {
                 $fundIndividual .= '<table class="first" cellpadding="4" cellspacing="6">
                                     <tr>
-                                        <td colspan="2"><u>Member '.$memberCtr.'</u></td>
+                                        <td colspan="2"><u>Trustee '.$memberCtr.'</u></td>
                                     </tr>
                                     <tr>
                                         <td>Name of Trustee :</td>

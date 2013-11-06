@@ -76,9 +76,9 @@ include(HOLDINGTRUSTCONTENT);
         <div class="frmMidHeader">Individual Holding Trustee</div>
         <table class="fieldtable" width="45%" cellpadding="10px;">
           <tr>
-              <td>No of members</td>
+              <td>No of individuals</td>
               <td><select name="lstMember" id="lstMember">
-                    <option value="">Select no of members</option><?
+                    <option value="">Select no of individuals</option><?
                     $members=1;
                     while($members<=4) {
                         $selectMember="";

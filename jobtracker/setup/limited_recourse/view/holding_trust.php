@@ -19,10 +19,10 @@ include(LIMRECCONTENT);
     <input type="hidden" name="saveData" value="Y">
     <table class="fieldtable" width="60%" cellpadding="10px;">
         <tr>
-            <td>Holding Trustee</td>
+            <td>Type of lender</td>
             <td>
                 <select name="lstType" id="lstType">
-                    <option value="">Select Holding Trustee</option><?php
+                    <option value="">Select type of lender</option><?php
                     foreach($arrTrusteeType AS $typeId => $typeDesc){
                             $selectStr = "";
                             if($arrHoldTrust['trustee_id'] == $typeId) $selectStr = "selected";
@@ -36,7 +36,7 @@ include(LIMRECCONTENT);
     $dispCorporate = "style='display:none'";
     if($arrHoldTrust['trustee_id'] == '2') $dispCorporate = "style='display:block'";
     ?><div id="divCorporate" class="pdT10" <?=$dispCorporate?>>
-          <div class="frmMidHeader">Corporate Holding Trustee</div>
+          <div class="frmMidHeader">Company Details</div>
           <table class="fieldtable" width="50%" cellpadding="10px;">
           <tr>
               <td>Name of company</td>
@@ -68,12 +68,12 @@ include(LIMRECCONTENT);
     $dispIndividual = "style='display:none'";
     if($arrHoldTrust['trustee_id'] == '1') $dispIndividual = "style='display:block'";
     ?><div id="divIndividual" class="pdT10" <?=$dispIndividual?>>
-        <div class="frmMidHeader">Individual Holding Trustee</div>
+        <div class="frmMidHeader">Individual Details</div>
         <table class="fieldtable" width="45%" cellpadding="10px;">
           <tr>
-              <td>No of members</td>
+              <td>No of individuals</td>
               <td><select name="lstMember" id="lstMember">
-                    <option value="">Select no of members</option><?
+                    <option value="">Select no of individuals</option><?
                     $members=1;
                     while($members<=4) {
                         $selectMember="";
@@ -86,8 +86,12 @@ include(LIMRECCONTENT);
           </tr>
          </table><?
         foreach ($arrIndvdlTrust AS $fieldKey => $indvdlTrustee){            
-            ?><p style="padding-left:165px;" id="ele<?=$fieldKey?>"><input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>"><input type="text" name="txtTrusteeName<?=$fieldKey?>" id="txtTrusteeName<?=$fieldKey?>" value="<?=$indvdlTrustee['name']?>" placeholder="Name of Trustee"/>
-            <span class="pdL20"><input type="text" name="txtResAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['address']?>" placeholder="Residential Address"/></span><?
+            ?><p style="padding-left:165px;" id="ele<?=$fieldKey?>">
+                    <input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
+                    <input type="text" name="txtTrusteeName<?=$fieldKey?>" id="txtTrusteeName<?=$fieldKey?>" value="<?=$indvdlTrustee['name']?>" placeholder="Name"/>
+                    <span class="pdL20">
+                        <input type="text" name="txtResAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['address']?>" placeholder="Residential Address"/>
+                    </span><?
         } 
         ?><!-- Dynamic div to show textboxes -->
         <br/><div id="memberbox"></div>

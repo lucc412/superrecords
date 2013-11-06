@@ -26,7 +26,7 @@ include(LIMRECCONTENT);
             <td>Trustee Type</td>
             <td>
                 <select name="lstType" id="lstType">
-                    <option value="">Select Holding Trustee</option><?php
+                    <option value="">Select Trustee Type</option><?php
                     foreach($arrTrusteeType AS $typeId => $typeDesc){
                             $selectStr = "";
                             if($arrHoldTrust['trustee_id'] == $typeId) $selectStr = "selected";
@@ -40,7 +40,7 @@ include(LIMRECCONTENT);
     $dispCorporate = "style='display:none'";
     if($arrHoldTrust['trustee_id'] == '2') $dispCorporate = "style='display:block'";
     ?><div id="divCorporate" class="pdT10" <?=$dispCorporate?>>
-          <div class="frmMidHeader">Corporate Fund</div>
+          <div class="frmMidHeader">Trustee Company Details</div>
           <table class="fieldtable" width="50%" cellpadding="10px;">
           <tr>
               <td>Name of company</td>
@@ -72,13 +72,13 @@ include(LIMRECCONTENT);
     $dispIndividual = "style='display:none'";
     if($arrHoldTrust['trustee_id'] == '1') $dispIndividual = "style='display:block'";
     ?><div id="divIndividual" class="pdT10" <?=$dispIndividual?>>
-        <div class="frmMidHeader">Individual Fund</div>
+        <div class="frmMidHeader">Individual Trustee Details</div>
         <table class="fieldtable" width="45%" cellpadding="10px;">
           <tr>
-              <td>No of members</td>
+              <td>No of trustees</td>
               <td><select name="lstMember" id="lstMember">
-                    <option value="">Select no of members</option><?
-                    $members=1;
+                    <option value="">Select no of trustees</option><?
+                    $members=2;
                     while($members<=4) {
                         $selectMember="";
                         if($arrHoldTrust['noofmember'] == $members) $selectMember = "selected";

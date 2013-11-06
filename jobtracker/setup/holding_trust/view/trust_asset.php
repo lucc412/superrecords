@@ -11,7 +11,7 @@ include(HOLDINGTRUSTCONTENT);
 // page header
 ?><div class="pageheader">
     <h1>Asset Details</h1>
-    <span><b>Welcome to the Super Records holding trust details page.</b><span>
+    <span><b>Welcome to the Super Records asset details page.</b><span>
 </div><?
 
 // content

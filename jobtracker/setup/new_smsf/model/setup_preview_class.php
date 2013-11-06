@@ -321,6 +321,10 @@ class SETUP_PREVIEW
                         </tr>';
         }
         
+        $streetAdd = "";
+        if(!empty($arrFund[$jobid]['strAddUnit']))
+            $streetAdd .= $arrFund[$jobid]['strAddUnit'].', ';
+        $streetAdd .= $arrFund[$jobid]['strAddBuild'].', '.$arrFund[$jobid]['strAddStreet'].', '.$arrFund[$jobid]['strAddSubrb'].', <br>'.fetchStateName($arrFund[$jobid]['strAddState']).', '.$arrFund[$jobid]['strAddPstCode'].', '.array_search($arrFund[$jobid]['strAddCntry'],$arrCountry);
         $fund = '<div class="test">Fund Details</div>
                         <br/>
                         <table class="first" cellpadding="4" cellspacing="6">
@@ -330,7 +334,7 @@ class SETUP_PREVIEW
                             </tr>
                             <tr>
                                 <td>Street Address : </td>
-                                <td>'.$arrFund[$jobid]['strAddUnit'].', '.$arrFund[$jobid]['strAddBuild'].', '.$arrFund[$jobid]['strAddStreet'].', '.$arrFund[$jobid]['strAddSubrb'].', <br>'.fetchStateName($arrFund[$jobid]['strAddState']).', '.$arrFund[$jobid]['strAddPstCode'].', '.array_search($arrFund[$jobid]['strAddCntry'],$arrCountry).' </td>
+                                <td>'.$streetAdd.'</td>
                             </tr>
                             <tr>
                                 <td>Postal Address : </td>
@@ -365,6 +369,11 @@ class SETUP_PREVIEW
                     $members .= '<div class="test">Member Details</div><br/>';
 
                 
+                $memberAdd = "";
+                if(!empty($memberInfo['strAddUnit']))
+                    $memberAdd .= $memberInfo['strAddUnit'].', ';
+                $memberAdd .= $memberInfo['strAddBuild'].', '.$memberInfo['strAddStreet'].', '.$memberInfo['strAddSubrb'].', <br>'.fetchStateName($memberInfo['strAddState']).', '.$memberInfo['strAddPstCode'].', '.array_search($memberInfo['strAddCntry'],$arrCountry);
+                
                 $members .= '<table class="first" cellpadding="4" cellspacing="6">
                             <tr>
                                 <td colspan="2"><u>Member '.$memberCtr.'</u></td>
@@ -391,7 +400,7 @@ class SETUP_PREVIEW
                             </tr>
                             <tr>
                                 <td>Address : </td>
-                                <td>'.$memberInfo['strAddUnit'].', '.$memberInfo['strAddBuild'].', '.$memberInfo['strAddStreet'].', '.$memberInfo['strAddSubrb'].', <br>'.fetchStateName($memberInfo['strAddState']).', '.$memberInfo['strAddPstCode'].', '.array_search($memberInfo['strAddCntry'],$arrCountry).' </td>
+                                <td>'.$memberAdd.' </td>
                             </tr>
                             <tr>
                                 <td>Tax File Number : </td>
@@ -422,6 +431,11 @@ class SETUP_PREVIEW
 
                         if ($memberInfo['member_id'] == $memberId) 
                         {
+                            $legalAdd = "";
+                            if(!empty($legalInfo['strAddUnit']))
+                                $legalAdd .= $legalInfo['strAddUnit'].', ';
+                            $legalAdd .= $legalInfo['strAddBuild'].', '.$legalInfo['strAddStreet'].', '.$legalInfo['strAddSubrb'].', <br>'.fetchStateName($legalInfo['strAddState']).', '.$legalInfo['strAddPstCode'].', '.array_search($legalInfo['strAddCntry'],$arrCountry);
+                                    
                             $leagalRef .= '<table class="first" cellpadding="4" cellspacing="6">
                                     <tr>
                                             <td colspan="2"><u>Legal Personal Representative '.$legalCntr.'</u></td>
@@ -448,7 +462,7 @@ class SETUP_PREVIEW
                                     </tr>
                                     <tr>
                                             <td>Address : </td>
-                                            <td>'.$legalInfo['strAddUnit'].', '.$legalInfo['strAddBuild'].', '.$legalInfo['strAddStreet'].', '.$legalInfo['strAddSubrb'].', <br>'.fetchStateName($legalInfo['strAddState']).', '.$legalInfo['strAddPstCode'].', '.array_search($legalInfo['strAddCntry'],$arrCountry).' </td>
+                                            <td>'.$legalAdd.' </td>
                                     </tr>
                                     <tr>
                                             <td>Tax File Number : </td>

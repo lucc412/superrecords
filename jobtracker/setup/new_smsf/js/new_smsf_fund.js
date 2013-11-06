@@ -11,15 +11,6 @@ function formValidation(){
 		document.frmnewsmsffund.txtFund.className = "successClass";
 	}
 	
-	if((document.frmnewsmsffund.StrAddUnit.value == null) || (document.frmnewsmsffund.StrAddUnit.value == ""))
-	{	
-		document.frmnewsmsffund.StrAddUnit.className = "errclass";
-		document.frmnewsmsffund.StrAddUnit.focus();
-		flagReturn = false;
-	}else{
-		document.frmnewsmsffund.StrAddUnit.className = "successClass";
-	}
-	
         if((document.frmnewsmsffund.StrAddBuild.value == null) || (document.frmnewsmsffund.StrAddBuild.value == ""))
 	{	
 		document.frmnewsmsffund.StrAddBuild.className = "errclass";

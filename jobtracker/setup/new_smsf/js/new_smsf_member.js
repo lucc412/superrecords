@@ -40,15 +40,6 @@
 				document.getElementById('txtCity'+i).className = "successClass";
 			}
 			
-			if((document.getElementById('StrAddUnit'+i).value == null) || (document.getElementById('StrAddUnit'+i).value == ""))
-			{	
-				document.getElementById('StrAddUnit'+i).className = "errclass";
-				document.getElementById('StrAddUnit'+i).focus();
-				flagReturn = false;
-			}else{
-				document.getElementById('StrAddUnit'+i).className = "successClass";
-			}
-			
                         if((document.getElementById('StrAddBuild'+i).value == null) || (document.getElementById('StrAddBuild'+i).value == ""))
 			{	
 				document.getElementById('StrAddBuild'+i).className = "errclass";

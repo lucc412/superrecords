@@ -109,6 +109,7 @@ class AuditSubchecklist {
 		$arrSubchecklist = $this->getAuditSubChecklist($jobId, true);
                
 		$cntChckLst = A;
+                ob_start();
 		echo "<html><body><table border='1' align='center' bgcolor='#F8F8F8' cellpadding='10'>";
 		foreach($arrSubchecklist AS $checklistName => $subChecklist) {
 			echo"<tr>";

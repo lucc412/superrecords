@@ -21,7 +21,7 @@ if($_SESSION['validUser']) {
     $wholeonly = false;
     if (isset($_POST["wholeonly"])) $wholeonly = @$_POST["wholeonly"];
     if (isset($_REQUEST["order"])) $order = @$_REQUEST["order"]; else $order = 't.task_id';
-    if (isset($_REQUEST["type"])) $ordertype = @$_REQUEST["type"];
+    if (isset($_REQUEST["type"])) $ordertype = @$_REQUEST["type"]; else $ordertype = 'desc';
 
     if (!isset($filter) && isset($_SESSION["filter"])) $filter = $_SESSION["filter"];
     if (!isset($filterfield) && isset($_SESSION["filter_field"])) $filterfield = $_SESSION["filter_field"];

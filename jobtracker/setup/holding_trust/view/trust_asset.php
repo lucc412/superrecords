@@ -19,8 +19,8 @@ include(HOLDINGTRUSTCONTENT);
     <input type="hidden" name="saveData" value="Y">
     <table class="fieldtable" width="60%" cellpadding="10px;">
         <tr>    
-            <td>Asset Details</td>
-            <td><textarea name="taAsset" id="taAsset"><?=$arrHoldTrust['asset_details']?></textarea><a id="iconQuestion" class="tooltip" title="Please provide details of asset to be acquired.">?</a></td>
+            <td>Asset Details <a id="iconQuestion" class="tooltip" title="Please provide details of asset to be acquired.">?</a></td>
+            <td><textarea name="taAsset" id="taAsset"><?=$arrHoldTrust['asset_details']?></textarea></td>
         </tr>
     </table>
     

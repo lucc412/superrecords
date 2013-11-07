@@ -40,7 +40,7 @@ include(HOLDINGTRUSTCONTENT);
     $dispCorporate = "style='display:none'";
     if($arrHoldTrust['trustee_id'] == '2') $dispCorporate = "style='display:block'";
     ?><div id="divCorporate" class="pdT10" <?=$dispCorporate?>>
-          <div class="frmMidHeader">Corporate Fund</div>
+          <div class="frmMidHeader">Trustee Company Details</div>
           <table class="fieldtable" width="50%" cellpadding="10px;">
           <tr>
               <td>Name of company</td>
@@ -72,7 +72,7 @@ include(HOLDINGTRUSTCONTENT);
     $dispIndividual = "style='display:none'";
     if($arrHoldTrust['trustee_id'] == '1') $dispIndividual = "style='display:block'";
     ?><div id="divIndividual" class="pdT10" <?=$dispIndividual?>>
-        <div class="frmMidHeader">Individual Fund</div>
+        <div class="frmMidHeader">Individual Trustee Details</div>
         <table class="fieldtable" width="45%" cellpadding="10px;">
           <tr>
               <td>No of trustees</td>

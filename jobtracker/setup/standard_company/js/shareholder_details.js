@@ -19,7 +19,6 @@ $(document).ready(function(){
     {
         var flag = true;
         
-
         if($('#selShrHldr').val() == 0)
         {
             selShrHldr.className = "errclass";
@@ -28,10 +27,8 @@ $(document).ready(function(){
         else
             selShrHldr.className = "";
         
-        
         $('[id^=selShrType_]').each(function ()
         {
-            
             var id = this.id;
             var splitId = id.split('_');
             var cntr = splitId[1];
@@ -56,6 +53,14 @@ $(document).ready(function(){
                 else
                     $('#txtCmpName_'+cntr).removeClass("errclass");
                 
+                if(!$('#txtACN_'+cntr).val())
+                {
+                    $('#txtACN_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#txtACN_'+cntr).removeClass("errclass");
+                
                 if($('#txtRegAddr_'+cntr).val() == 0)
                 {
                     $('#txtRegAddr_'+cntr).addClass("errclass");
@@ -63,6 +68,25 @@ $(document).ready(function(){
                 }
                 else
                     $('#txtRegAddr_'+cntr).removeClass("errclass");
+                
+                if($('#selNoDirtr_'+cntr).val() == 0)
+                {
+                    $('#selNoDirtr_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else {
+                    $('#selNoDirtr_'+cntr).removeClass("errclass");
+                    $('[id^=txtFulName]').each(function ()
+                    {
+                        if(!$(this).val()) {
+                            $(this).addClass('errclass');
+                            flag = false;
+                        }
+                        else {
+                            $(this).removeClass("errclass");
+                        }
+                    });
+                }
 
             }
             // individual case
@@ -83,14 +107,6 @@ $(document).ready(function(){
                 }
                 else
                     $('#txtLname_'+cntr).removeClass("errclass");
-                
-                if($('#resAddUnit_'+cntr).val() == 0)
-                {
-                    $('#resAddUnit_'+cntr).addClass("errclass");
-                    flag = false;
-                }
-                else
-                    $('#resAddUnit_'+cntr).removeClass("errclass");
                 
                 if($('#resAddBuild_'+cntr).val() == 0)
                 {
@@ -141,6 +157,19 @@ $(document).ready(function(){
             }
             else
                 $('#selShrCls_'+cntr).removeClass("errclass");
+            
+            if($('#selShrBhlf_'+cntr).val() == 1)
+            {
+                if($('#txtShrOwnBhlf_'+cntr).val() == 0)
+                {
+                    $('#txtShrOwnBhlf_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#txtShrOwnBhlf_'+cntr).removeClass("errclass");
+            }
+            else
+                $('#txtShrOwnBhlf_'+cntr).removeClass("errclass");
 
             if($('#txtNoShares_'+cntr).val() == 0)
             {
@@ -340,82 +369,24 @@ function addShrHldr()
                                 </td>\n\
                             </tr>\n\
                             </table>\n\
-                            <table class="fieldtable" style="width:758px">\n\
+                            <table class="fieldtable" style="width:528px">\n\
                                 <tr><td>Share Class </td>\n\
                                 <td>\n\
                                     <select id="selShrCls_'+i+'" name="selShrCls['+i+']" style="margin-bottom:5px; width:180px;" >\n\
                                         <option value="0">Select Share class</option>'+shrclass+'\n\
                                     </select></td></tr>\n\
+                                <tr><td>Are the shares owned on behalf </br>of another Company or Trust? </td>\n\
+                                <td>\n\
+                                    <select id="selShrBhlf_'+i+'" name="selShrBhlf['+i+']" style="margin-bottom:5px; width:180px;" onchange="changeShrOwnBhlf(this,'+i+')">\n\
+                                        <option value="1">Yes</option>\n\\n\
+                                        <option value="0">No</option>\n\
+                                    </select></td></tr>\n\
+                                <tr id="trShrOwnBhlf_'+i+'"><td>Shares are owned on behalf </td>\n\
+                                <td><input type="text" id="txtShrOwnBhlf_'+i+'" name="txtShrOwnBhlf['+i+']"  /></td></tr>\n\
                                 <tr><td>Number of shares </td>\n\
                                 <td><input type="text" id="txtNoShares_'+i+'" name="txtNoShares['+i+']"  /></td></tr>\n\
                             </table></div>\n\
                             ');
     }
     
-}
-
-
-
-function checkValidation(shrHldrCnt)
-{
-    
-    var flag = true;
-    
-//    if($('#selShrHldr').val() == 0)
-//    {
-//        alert('Please select number of shareholders')
-//        flag = false;
-//    }
-//    
-//    for(var i = 1; i <= shrHldrCnt; i++)
-//    {
-//        if($('#selShrType_'+i).val() == 1)
-//        {
-//            if($('#txtCmpName_'+i).val() == '')
-//            {
-//                alert('Please enter company name of shareholders')
-//                flag = false;
-//            }
-//            else if($('#txtRegAddr_'+i).val() == '')
-//            {
-//                alert('Please enter registered address of shareholders')
-//                flag = false;
-//            }
-//            else if($('#selNoDirtr_'+i).val() == 0)
-//            {
-//                alert('Please select number of directors')
-//                flag = false;
-//            }
-//            else if($('#selNoDirtr_'+i).val() > 0)
-//            {
-//            
-//                for(var k = 1; k <= parseInt($('#selNoDirtr_'+i).val()); k++)
-//                {
-//                    if($('#txtFulName_'+i+k).val() == '')
-//                    {
-//                        alert('Please enter full name of '+k+' director')
-//                        flag = false;
-//                    }    
-//                }
-//                
-//            }
-//            
-//            
-//        }
-//        else if($('#selShrType_'+i).val() == 2)
-//        {
-//            if($('#txtFname_'+i).val() == '')
-//            {
-//                alert('Please enter full name of '+k+' director')
-//                flag = false;
-//            }    
-//            if($('#txtLname_'+i).val() == '')
-//            {
-//                alert('Please enter full name of '+k+' director')
-//                flag = false;
-//            }
-//        }
-//    }
-    
-    return flag;
 }

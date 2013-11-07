@@ -9,15 +9,12 @@ $(document).ready(function(){
     // on submit validation
     $('#frmCompany').submit(function() {
         flagReturn = true;
-        $('[id^=txtCompPref]').each(function (){
-            if(!$(this).val()) {
-                $(this).addClass('errclass');
-                flagReturn = false;
-            }
-            else {
-                $(this).removeClass("errclass");
-            }
-        });
+        
+        if(!$('#txtCompPref0').val()) {
+            txtCompPref0.className = "errclass";
+            flagReturn = false;
+        }
+        else txtCompPref0.className = "";
         
         if($('#selExtBusName').val() == 1 && $('#selRegBusns').val() == 0) {
             if($('#txtRegNo').val() == 0) {

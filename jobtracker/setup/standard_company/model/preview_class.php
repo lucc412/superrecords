@@ -157,7 +157,7 @@ class Preview {
                     <table class="first" cellpadding="4" cellspacing="6">
                         <tr>
                             <td>Registered Address :</td>
-                            <td>'.$arrAddressDetail['regAddres'].'</td>
+                            <td>'.stringltrim($arrAddressDetail['regAddres'], ',').'</td>
                         </tr>
                         <tr>
                             <td>Will this company occupy <br/>registered address? :</td>
@@ -172,11 +172,11 @@ class Preview {
         
         $address .= '<tr>
                         <td>Principal Business Address :</td>
-                        <td>'.$arrAddressDetail['bsnsAddres'].'</td>
+                        <td>'.stringltrim($arrAddressDetail['bsnsAddres'], ',').'</td>
                     </tr>
                     <tr>
                         <td>Meeting Address :</td>
-                        <td>'.$arrAddressDetail['metAddres'].'</td>
+                        <td>'.stringltrim($arrAddressDetail['metAddres'], ',').'</td>
                     </tr>
                  </table>';
         /* address details ends */
@@ -207,7 +207,7 @@ class Preview {
                         </tr>
                         <tr>
                             <td>State of birth :</td>
-                            <td>'.$arrStates[$officerInfo['offcr_state_birth']].'</td>
+                            <td>'.$officerInfo['offcr_state_birth'].'</td>
                         </tr>
                         <tr>
                             <td>Country of birth :</td>
@@ -219,7 +219,7 @@ class Preview {
                         </tr>
                         <tr>
                             <td>Residential Address :</td>
-                            <td>'.$officerInfo['offcrAddres'].'</td>
+                            <td>'.stringltrim($officerInfo['offcrAddres'], ',').'</td>
                         </tr>';
         }
         $officer .= '</table>';
@@ -272,7 +272,7 @@ class Preview {
                                 </tr>
                                 <tr>
                                     <td>Residential Address :</td>
-                                    <td>'.$shrHlderInfo['regAddress'].'</td>
+                                    <td>'.stringltrim($shrHlderInfo['regAddress'], ',').'</td>
                                 </tr>';
             }
             

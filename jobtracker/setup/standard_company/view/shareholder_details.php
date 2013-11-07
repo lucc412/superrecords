@@ -10,8 +10,7 @@
 	<span>
 </div>
 
-<div>
-    <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details for your new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div>
+<div class="pdT20">
     <form method="post" id="frmShrhldr" action="shareholder_details.php" >
        <table class="fieldtable">
             <tr>

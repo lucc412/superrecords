@@ -57,7 +57,37 @@ $(document).ready(function(){
             }
         });
         
-        $('[id^=offAddUnit]').each(function (){
+        $('[id^=txtCob]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        $('[id^=selSob]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        $('[id^=selCntryob]').each(function (){
+            if($(this).val() == 0) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
+        $('[id^=txtTFN]').each(function (){
             if(!$(this).val()) {
                 $(this).addClass('errclass');
                 flagReturn = false;
@@ -98,7 +128,7 @@ $(document).ready(function(){
         });
         
         $('[id^=offAddState]').each(function (){
-            if(!$(this).val()) {
+            if($(this).val() == 0) {
                 $(this).addClass('errclass');
                 flagReturn = false;
             }
@@ -184,10 +214,7 @@ function addOfficers()
                                     <tr><td>City of birth </td>\n\
                                     <td><input type="text" id="txtCob_'+i+'" name="txtCob['+i+']"  /></td></tr>\n\
                                     <tr><td>State and Country of birth </td>\n\
-                                    <td>\n\
-                                    <select id="selSob_'+i+'" name="selSob['+i+']" style="margin-bottom:5px; width:180px;" >\n\
-                                        <option value="0">Select State</option>'+states+'\n\
-                                    </select>\n\
+                                    <td><input type="text" id="selSob_'+i+'" name="selSob['+i+']"  placeholder="State"/>\n\
                                     <select id="selCntryob_'+i+'" name="selCntryob['+i+']" style="margin-bottom:5px; width:180px;" >\n\
                                         <option value="0">Select Country</option>'+country+'\n\
                                     </select><br>\n\

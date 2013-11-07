@@ -6,7 +6,7 @@ include(STND_COMP_NAV);
 ?><div class="pageheader">
 	<h1>Company Details</h1>
 	<span>
-		<b>Welcome to the Super Records Company Details page.</b>
+		<b>Welcome to the Super Records company details page.</b>
 	<span>
 </div>
 

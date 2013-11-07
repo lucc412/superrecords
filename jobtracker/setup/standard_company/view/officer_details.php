@@ -14,8 +14,7 @@
 		<b>Welcome to the Super Records officer details page.</b>
 	<span>
 </div>
-<div>
-    <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details for your company. These details will be used to register the company. If you need any help completing this section, please contact us.</div>
+<div class="pdT20">
     <form method="post" id="frmOfficer" action="officer_details.php">
         <table class="fieldtable">
             <tr>
@@ -46,8 +45,8 @@
                     { 
                         $cntr++;
                         $noOfOffcr = $value['no_of_offcr'];
-                    ?>
-                        <div id="officer_<?=$cntr?>"> 
+                    
+                        ?><div id="officer_<?=$cntr?>"> 
                             <div style="padding:10px 0;color: #F05729;font-size: 14px;">Officer <?=$cntr?>:</div>
                             <input type="hidden" name="offcrId[<?=$cntr?>]" id="offcrId" value="<?=$value['offcr_id']?>">
                             <table class="fieldtable">
@@ -73,10 +72,7 @@
                                 </tr>
                                 <tr>
                                     <td>State and Country of birth </td>
-                                    <td>
-                                        <select id="selSob_<?=$cntr?>" name="selSob[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" >
-                                            <option value="0">Select State</option><?php foreach($arrStates AS $stateKey => $stateName) { $selectStr = ""; if($value['offcr_state_birth'] == $stateKey) $selectStr = "selected"; ?><option <?=$selectStr?> value="<?=$stateKey?>"><?=$stateName?></option><? } ?>
-                                        </select>
+                                    <td><input type="text" id="selSob_<?=$cntr?>" name="selSob[<?=$cntr?>]" value="<?=$value['offcr_state_birth']?>" />
                                         <select id="selCntryob_<?=$cntr?>" name="selCntryob[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" >
                                             <option value="0">Select Country</option><?php foreach($arrCountry AS $cntryKey => $cntryName) { $selectStr = ""; if($value['offcr_cntry_birth'] == $cntryKey) $selectStr = "selected"; ?><option <?=$selectStr?> value="<?=$cntryKey?>"><?=$cntryName?></option><? } ?>
                                         </select>

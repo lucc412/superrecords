@@ -35,10 +35,22 @@ define('MODEL',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/model/');
 define('VIEW',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/view/');
 define('UPLOADSETUP',$_SERVER['DOCUMENT_ROOT'].'/uploads/setup/');
 define('DOWNLOAD',DIR.'include/download.php');
+
+// New SMSF
 define("SETUPNAVIGATION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/new_smsf/include/setup_navigation.php");
+
+// Holding Trust
 define("HOLDINGTRUSTNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/holding_trust/include/navigation.php");
 define("HOLDINGTRUSTCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/holding_trust/include/content.php");
+
+// Limited Recoursce Loan
 define("LIMRECNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/limited_recourse/include/navigation.php");
 define("LIMRECCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/limited_recourse/include/content.php");
-define("STND_COMP_NAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/standard_company/include/stnd_comp_nav.php");
+
+// Standard Company & Special Company
+define("STND_COMP_NAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/standard_company/include/navigation.php");
+
+// Change Trustee
+define("CHNGTRUSTEECONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_trustee/include/content.php");
+define("CHNGTRUSTEENAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_trustee/include/navigation.php");
 ?>

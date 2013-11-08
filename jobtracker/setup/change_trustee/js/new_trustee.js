@@ -15,7 +15,7 @@ $(document).ready(function() {
     // show member details section
     $('#lstMember').change(function() {
         if(!($('#lstMember').val())) {
-            alert('No of trustees is a compulsory field');
+            alert('No of individuals is a compulsory field');
             lstMember.className = "errclass";
             return false;
         }
@@ -30,7 +30,7 @@ $(document).ready(function() {
         
         while (intCnt < newMemberCnt) 
         { 
-            var newSection = '<p style="padding-left:165px;" id="ele'+intCnt+'"><input type="text" name="txtTrusteeName'+intCnt+'" id="txtTrusteeName'+intCnt+'" placeholder="Name of Trustee"/><span class="pdL20"><input type="text" name="txtResAdd'+intCnt+'" id="txtResAdd'+intCnt+'" placeholder="Residential Address"/></span>';
+            var newSection = '<p style="padding-left:165px;" id="ele'+intCnt+'"><input type="text" name="txtTrusteeName'+intCnt+'" id="txtTrusteeName'+intCnt+'" placeholder="Name"/><span class="pdL20"><input type="text" name="txtResAdd'+intCnt+'" id="txtResAdd'+intCnt+'" placeholder="Residential Address"/></span>';
             $('#memberbox').append(newSection);
             intCnt++;
         }
@@ -52,11 +52,6 @@ $(document).ready(function() {
     // on submit validation
     $('#frmTrust').submit(function() {
         flagReturn = true;
-        if(!($('#txtFund').val())) {
-            txtFund.className = "errclass";
-            flagReturn = false;
-        }
-        else txtFund.className = "";
         
         if(!($('#lstType').val())) {
             lstType.className = "errclass";
@@ -77,6 +72,12 @@ $(document).ready(function() {
                 flagReturn = false;
             }
             else txtAcn.className = "";
+            
+            if(!($('#txtTfn').val())) {
+                txtTfn.className = "errclass";
+                flagReturn = false;
+            }
+            else txtTfn.className = "";
             
             if(!($('#txtAdd').val())) {
                 txtAdd.className = "errclass";

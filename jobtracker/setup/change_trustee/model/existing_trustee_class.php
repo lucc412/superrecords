@@ -25,14 +25,15 @@ class Holding_Trust
     }
     
     // insert holding trust details
-    function newHoldingTrust($trusteeId, $compName, $acn, $address, $directors, $cntMember) 
+    function newHoldingTrust($trusteeId, $compName, $acn, $tfn, $address, $directors, $cntMember) 
     {
-      $qryIns = "INSERT INTO lrl_holding_trust(job_id, trustee_id, comp_name, acn, reg_address, director, noofmember)
+      $qryIns = "INSERT INTO cot_exsting_trustee(job_id, trustee_id, comp_name, acn, tfn, reg_address, director, noofmember)
                     VALUES ( 
                     '".$_SESSION['jobId']."', 
                     ".$trusteeId.", 
                     '".addslashes($compName)."', 
                     '".addslashes($acn)."', 
+                    '".addslashes($tfn)."', 
                     '".addslashes($address)."', 
                     '".addslashes($directors)."',
                     '".$cntMember."'
@@ -41,12 +42,13 @@ class Holding_Trust
     }
     
     // update holding trust details & corporate trust details
-    function updateHoldingTrust($trusteeId, $compName, $acn, $address, $directors, $cntMember) 
+    function updateHoldingTrust($trusteeId, $compName, $acn, $tfn, $address, $directors, $cntMember) 
     {
-      $qryUpd = "UPDATE lrl_holding_trust
+      $qryUpd = "UPDATE cot_exsting_trustee
                     SET trustee_id = '".$trusteeId."',
                         comp_name = '".addslashes($compName)."',
                         acn = '".addslashes($acn)."',
+                        tfn = '".addslashes($tfn)."',
                         reg_address = '".addslashes($address)."',
                         director = '".addslashes($directors)."',
                         noofmember = '".$cntMember."'
@@ -57,8 +59,8 @@ class Holding_Trust
     // fetch holding trust details
     public function fetchHoldingTrustDetails()
     {
-       $selQry="SELECT trustee_id, noofmember, comp_name, acn, reg_address, director
-                FROM lrl_holding_trust 
+       $selQry="SELECT trustee_id, noofmember, comp_name, acn, tfn, reg_address, director
+                FROM cot_exsting_trustee 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         $arrHoldTrust = mysql_fetch_assoc($fetchResult);
@@ -70,7 +72,7 @@ class Holding_Trust
     public function fetchIndividualTrustDetails()
     {
        $selQry="SELECT indvdl_id, trustee_name name, res_add address
-                FROM lrl_indvdl_holding_trust 
+                FROM cot_indvdl_exst_trustee 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -83,7 +85,7 @@ class Holding_Trust
     // delete individual trustee
     function insertIndividual($trusteeName, $resAdd) 
     {
-        $insMember="INSERT INTO lrl_indvdl_holding_trust (job_id, trustee_name, res_add) 
+        $insMember="INSERT INTO cot_indvdl_exst_trustee (job_id, trustee_name, res_add) 
                     VALUES({$_SESSION['jobId']},'".addslashes($trusteeName)."','".addslashes($resAdd)."')";
         //print $insMember;
         mysql_query($insMember);
@@ -92,7 +94,7 @@ class Holding_Trust
     // delete individual trustee
     function updateIndividual($memberId, $trusteeName, $resAdd)  
     {
-        $updMember = "UPDATE lrl_indvdl_holding_trust 
+        $updMember = "UPDATE cot_indvdl_exst_trustee 
                         SET trustee_name = '".addslashes($trusteeName)."', 
                             res_add = '".addslashes($resAdd)."'
                         WHERE indvdl_id = {$memberId}";
@@ -104,7 +106,7 @@ class Holding_Trust
     // delete individual trustee
     function deleteIndividual($deleteMemberId) 
     {
-        $delMember = "DELETE FROM lrl_indvdl_holding_trust WHERE job_id = {$_SESSION['jobId']} AND indvdl_id IN ({$deleteMemberId})";
+        $delMember = "DELETE FROM cot_indvdl_exst_trustee WHERE job_id = {$_SESSION['jobId']} AND indvdl_id IN ({$deleteMemberId})";
         //print $delMember;
         mysql_query($delMember);
     }
@@ -112,7 +114,7 @@ class Holding_Trust
     // delete all individual trustee
     function deleteAllIndividual() 
     {
-        $delMember = "DELETE FROM lrl_indvdl_holding_trust WHERE job_id = {$_SESSION['jobId']}";
+        $delMember = "DELETE FROM cot_indvdl_exst_trustee WHERE job_id = {$_SESSION['jobId']}";
         //print $delMember;
         mysql_query($delMember);
     }

@@ -10,20 +10,8 @@
  *
  * @author disha
  */
-class Trust 
+class Fund 
 {
-    // fetch trustee type
-    public function fetchTrusteeType()
-    {
-        $selQry="SELECT trustee_id, trustee_name FROM holding_trustee";
-        $fetchResult = mysql_query($selQry);
-        while($rowResult = mysql_fetch_assoc($fetchResult)) {
-            $arrTrusteeType[$rowResult['trustee_id']] = $rowResult['trustee_name'];
-        }
-        
-        return $arrTrusteeType;
-    }
-    
     // this function is used to insert job details into Job table 
     function insertNewJob() 
     {
@@ -44,31 +32,91 @@ class Trust
         return $jobId;
     }
     
-    // insert holding trust details
-    function newHoldingTrust($trust) 
+    // update client id and job name
+    function updateClientName($fundName)
     {
-      $qryIns = "INSERT INTO lrl_trust(job_id, trust_name)
-                    VALUES ( 
-                    '".$_SESSION['jobId']."', 
-                    '".addslashes($trust)."'
+        $qrySel = "SELECT t1.client_id, t1.client_name 
+                    FROM client t1
+                    WHERE id = '{$_SESSION['PRACTICEID']}' 
+                    AND t1.client_name = '".$fundName."'";
+
+        $fetchResult = mysql_query($qrySel);
+        $rowData = mysql_fetch_assoc($fetchResult);
+
+        if($rowData) $client_id = $rowData['client_id'];
+        else
+        {
+            // client_code
+            $qryIns = "INSERT INTO client(client_type_id, client_name, recieved_authority, id, client_received)
+                    VALUES (7, '" . addslashes($fundName) . "', 1, " . $_SESSION['PRACTICEID'] . ", '".date('Y-m-d')."')";
+
+            $flagReturn = mysql_query($qryIns);
+            $client_id = mysql_insert_id();
+
+            generateClientCode($client_id,$fundName);
+        }
+
+        if(!empty($client_id))
+        {
+            $jobName = $client_id .'::Year End 30/06/'. date('Y') .'::21';
+            $updt = "UPDATE job 
+                    SET client_id = ".$client_id.", 
+                    job_name = '".addslashes($jobName)."' 
+                    WHERE job_id = ".$_SESSION['jobId'];
+
+            mysql_query($updt);
+        }
+    }
+    
+    // insert fund details
+    function newFund($fund, $unit, $build, $street, $suburb, $state, $postCode, $country, $dtEstblshmnt, $actionType, $applCls, $resgCls) 
+    {
+      $qryIns = "INSERT INTO cot_fund(job_id, fund_name, met_add_unit, met_add_build, met_add_street, met_add_subrb, met_add_state, met_add_pst_code, met_add_country, 
+                        dt_estblshmnt, action_type, appointment_clause, resignation_clause)
+                    VALUES (
+                    '".$_SESSION['jobId']."',
+                    '".addslashes($fund)."',
+                    '".addslashes($unit)."',
+                    '".addslashes($build)."',
+                    '".addslashes($street)."',
+                    '".addslashes($suburb)."',
+                    '".$state."',
+                    '".addslashes($postCode)."',
+                    '".$country."',
+                    '".$dtEstblshmnt."',
+                    '".$actionType."',
+                    '".addslashes($applCls)."',
+                    '".addslashes($resgCls)."'
                     )";
         mysql_query($qryIns);
     }
     
-    // update holding trust details
-    function updateHoldingTrust($trust) 
+    // update fund details
+    function updateFund($fund, $unit, $build, $street, $suburb, $state, $postCode, $country, $dtEstblshmnt, $actionType, $applCls, $resgCls) 
     {
-      $qryUpd = "UPDATE lrl_trust
-                    SET trust_name = '".addslashes($trust)."'
+      $qryUpd = "UPDATE cot_fund
+                    SET fund_name = '".addslashes($fund)."',
+                        met_add_unit = '".addslashes($unit)."',
+                        met_add_build = '".addslashes($build)."',
+                        met_add_street = '".addslashes($street)."',
+                        met_add_subrb = '".addslashes($suburb)."',
+                        met_add_state = '".$state."',
+                        met_add_pst_code = '".addslashes($postCode)."',
+                        met_add_country = '".$country."',
+                        dt_estblshmnt = '".$dtEstblshmnt."',
+                        action_type = '".$actionType."',
+                        appointment_clause = '".addslashes($applCls)."',
+                        resignation_clause = '".addslashes($resgCls)."'
                     WHERE job_id = ".$_SESSION['jobId'];
         mysql_query($qryUpd);
     }
     
-    // fetch holding trust details
-    public function fetchHoldingTrustDetails()
+    // fetch fund details
+    public function fetchFundDetails()
     {
-       $selQry="SELECT trust_name
-                FROM lrl_trust 
+       $selQry="SELECT fund_name, met_add_unit, met_add_build, met_add_street, met_add_subrb, met_add_state, met_add_pst_code, met_add_country, 
+                DATE_FORMAT(dt_estblshmnt, '%d/%m/%Y')dt_estblshmnt, action_type, appointment_clause, resignation_clause
+                FROM cot_fund
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         $arrHoldTrust = mysql_fetch_assoc($fetchResult);

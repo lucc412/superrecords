@@ -75,7 +75,7 @@ a img{
 }
 
 .container {
-	width:960px;
+	width:1080px;
 	margin:0 auto;
 	position:relative;
 }
@@ -280,7 +280,7 @@ a img{
 
 .nav .container > ul > li > a {
     color: white;
-	font-size: 21px;
+	font-size: 19px;
 	font-family: 'Open Sans Condensed', 'OpenSansCondensedLight', sans-serif;
 	font-weight: 700;
 	padding: 7px 28px;
@@ -418,7 +418,7 @@ a img{
 .liquid-slider h1 {
 	font-family: 'Open Sans Condensed', 'OpenSansCondensedLight', sans-serif;
 	font-weight:normal;
-	font-size:65px;
+	font-size:35px;
 	text-shadow: 1px 1px 1px #fff;
 	text-transform:uppercase;
 	border-bottom:2px solid #f1592a;

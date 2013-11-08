@@ -3,7 +3,7 @@
 include("../../include/common.php");
 
 // include class file
-include("model/holding_trust_class.php");
+include("model/existing_trustee_class.php");
 $objHoldingTrust = new Holding_Trust();
 
 // set recid in session for Retrieve saved jobs
@@ -23,6 +23,7 @@ if(!empty($_REQUEST['saveData'])) {
     $trusteeId = $_REQUEST['lstType'];
     $compName = $_REQUEST['txtCompName'];
     $acn = $_REQUEST['txtAcn'];
+    $tfn = $_REQUEST['txtTfn'];
     $address = $_REQUEST['txtAdd'];
     $cntMember = $_REQUEST['lstMember'];
     
@@ -35,6 +36,7 @@ if(!empty($_REQUEST['saveData'])) {
     if($trusteeId == '1') {
         unset($compName);
         unset($acn);
+        unset($tfn);
         unset($address); 
         unset($directors);
     }
@@ -43,8 +45,8 @@ if(!empty($_REQUEST['saveData'])) {
         $objHoldingTrust->deleteAllIndividual();
     } 
 
-    if(empty($arrHoldTrust)) $objHoldingTrust->newHoldingTrust($trusteeId, $compName, $acn, $address, $directors, $cntMember);
-    else $objHoldingTrust->updateHoldingTrust($trusteeId, $compName, $acn, $address, $directors, $cntMember);
+    if(empty($arrHoldTrust)) $objHoldingTrust->newHoldingTrust($trusteeId, $compName, $acn, $tfn, $address, $directors, $cntMember);
+    else $objHoldingTrust->updateHoldingTrust($trusteeId, $compName, $acn, $tfn, $address, $directors, $cntMember);
     
     // individual trust, add members info
     if($trusteeId == '1') {
@@ -84,8 +86,14 @@ if(!empty($_REQUEST['saveData'])) {
         }
     }
     
-    header('location: new_trustee.php');
-    exit;
+    if(isset($_REQUEST['next'])) {
+        header('location: new_trustee.php');
+        exit;
+    }
+    else if(isset($_REQUEST['save'])) {
+        header('location: ../../jobs_saved.php');
+        exit;
+    }
 }
 
 // fetch holding trustee types

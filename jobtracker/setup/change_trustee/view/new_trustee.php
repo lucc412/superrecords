@@ -10,18 +10,14 @@ include(CHNGTRUSTEECONTENT);
 
 // page header
 ?><div class="pageheader">
-    <h1>Borrower Details (Fund Details)</h1>
-    <span><b>Welcome to the Super Records borrower details page.</b><span>
+    <h1>New Trustee Details</h1>
+    <span><b>Welcome to the Super Records new trustee details page.</b><span>
 </div><?
 
 // content
 ?><form id="frmTrust" method="post" action="new_trustee.php">
     <input type="hidden" name="saveData" value="Y">
     <table class="fieldtable" width="60%" cellpadding="10px;">
-        <tr>
-            <td>Name of the Fund</td>
-            <td><input type="text" name="txtFund" id="txtFund" value="<?=$arrHoldTrust['trust_name']?>"></td>
-        </tr>
         <tr>
             <td>Trustee Type</td>
             <td>
@@ -51,6 +47,10 @@ include(CHNGTRUSTEECONTENT);
               <td><input type="text" name="txtAcn" id="txtAcn" value="<?=$arrHoldTrust['acn']?>"></td>
           </tr>
           <tr>
+              <td>TFN Number</td>
+              <td><input type="text" name="txtTfn" id="txtTfn" value="<?=$arrHoldTrust['tfn']?>"></td>
+          </tr>
+          <tr>
               <td>Registered Address</td>
               <td><textarea name="txtAdd" id="txtAdd"><?=$arrHoldTrust['reg_address']?></textarea>
           </tr>
@@ -75,9 +75,9 @@ include(CHNGTRUSTEECONTENT);
         <div class="frmMidHeader">Individual Trustee Details</div>
         <table class="fieldtable" width="45%" cellpadding="10px;">
           <tr>
-              <td>No of trustees</td>
+              <td>No of individuals</td>
               <td><select name="lstMember" id="lstMember">
-                    <option value="">Select no of trustees</option><?
+                    <option value="">Select no of individuals</option><?
                     $members=2;
                     while($members<=4) {
                         $selectMember="";
@@ -92,7 +92,7 @@ include(CHNGTRUSTEECONTENT);
         foreach ($arrIndvdlTrust AS $fieldKey => $indvdlTrustee){            
             ?><p style="padding-left:165px;" id="ele<?=$fieldKey?>">
                 <input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
-                <input type="text" name="txtTrusteeName<?=$fieldKey?>" id="txtTrusteeName<?=$fieldKey?>" value="<?=$indvdlTrustee['name']?>" placeholder="Name of Trustee"/>
+                <input type="text" name="txtTrusteeName<?=$fieldKey?>" id="txtTrusteeName<?=$fieldKey?>" value="<?=$indvdlTrustee['name']?>" placeholder="Name"/>
                 <span class="pdL20"><input type="text" name="txtResAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['address']?>" placeholder="Residential Address"/></span><?
         } 
         ?><!-- Dynamic div to show textboxes -->

@@ -85,6 +85,29 @@
                     ?><title>Upload Documents</title>
                     <script type="text/javascript" src="<?=DIR?>js/jobs_documents_validation.js"></script><?
                 }
+		else if($requestUrl == 'setup_preview.php' || $requestUrl == 'preview.php') {
+			?><title>Preview</title><?
+		}
+		else if($requestUrl == 'queries.php') {
+			?><title>View All Queries</title>
+			<script type="text/javascript" src="<?=DIR?>js/queries_validation.js"></script><?
+		}
+		else if($requestUrl == 'template.php') {
+			?><title>Download Templates</title><?
+		}
+		else if($requestUrl == 'clients.php') {
+			if($qryStr == 'a=add') {
+				?><title>Add New Client</title><?
+			}
+			else if($qryStr == 'a=edit') {
+				?><title>Edit Existing Client</title><?
+			}
+			else {
+				?><title>View My Client List</title><?
+			}
+			?><script type="text/javascript" src="<?=DIR?>js/jquery-1.4.2.min.js"></script>
+			<script type="text/javascript" src="<?=DIR?>js/client_validation.js"></script><?
+		}
 		else if($requestUrl == 'new_smsf.php') {
 			?><title>New SMSF Details</title><?
 		}
@@ -123,29 +146,6 @@
                         ?><title>Fund Details</title>
                         <script type="text/javascript" src="<?=DIR?>setup/new_smsf/js/existing_smsf_fund.js"></script><?
 		}
-		else if($requestUrl == 'setup_preview.php' || $requestUrl == 'preview.php') {
-			?><title>Preview</title><?
-		}
-		else if($requestUrl == 'queries.php') {
-			?><title>View All Queries</title>
-			<script type="text/javascript" src="<?=DIR?>js/queries_validation.js"></script><?
-		}
-		else if($requestUrl == 'template.php') {
-			?><title>Download Templates</title><?
-		}
-		else if($requestUrl == 'clients.php') {
-			if($qryStr == 'a=add') {
-				?><title>Add New Client</title><?
-			}
-			else if($qryStr == 'a=edit') {
-				?><title>Edit Existing Client</title><?
-			}
-			else {
-				?><title>View My Client List</title><?
-			}
-			?><script type="text/javascript" src="<?=DIR?>js/jquery-1.4.2.min.js"></script>
-			<script type="text/javascript" src="<?=DIR?>js/client_validation.js"></script><?
-		}
                 else if($requestUrl == 'company_details.php') {
 			?><title>Company Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/<?=$folderPath?>/js/company_details.js"></script><?
@@ -158,7 +158,6 @@
 			?><title>Officer Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/<?=$folderPath?>/js/officer_details.js"></script><?
 		}
-
                 else if($requestUrl == 'shareholder_details.php') {
 			?><title>Shareholder Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/<?=$folderPath?>/js/shareholder_details.js"></script><?
@@ -190,6 +189,22 @@
                 else if($requestUrl == 'trust_asset.php' && $folderPath == 'limited_recourse') {
 			?><title>Limited Recourse Loan Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/limited_recourse/js/trust_asset.js"></script><?
+		}
+                else if($requestUrl == 'fund.php' && $folderPath == 'change_trustee') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/change_trustee/js/fund.js"></script><?
+		}
+                else if($requestUrl == 'existing_trustee.php' && $folderPath == 'change_trustee') {
+			?><title>Existing Trustee Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/change_trustee/js/existing_trustee.js"></script><?
+		}
+                else if($requestUrl == 'new_trustee.php' && $folderPath == 'change_trustee') {
+			?><title>New Trustee Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/change_trustee/js/new_trustee.js"></script><?
+		}
+                else if($requestUrl == 'member.php' && $folderPath == 'change_trustee') {
+			?><title>Member Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/change_trustee/js/member.js"></script><?
 		}
 		else {
 			?><title>Home</title><?

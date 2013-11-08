@@ -10,8 +10,8 @@ include(CHNGTRUSTEECONTENT);
 
 // page header
 ?><div class="pageheader">
-    <h1>Lender Details</h1>
-    <span><b>Welcome to the Super Records lender details page.</b><span>
+    <h1>Existing Trustee Details</h1>
+    <span><b>Welcome to the Super Records existing trustee details page.</b><span>
 </div><?
 
 // content
@@ -19,10 +19,10 @@ include(CHNGTRUSTEECONTENT);
     <input type="hidden" name="saveData" value="Y">
     <table class="fieldtable" width="60%" cellpadding="10px;">
         <tr>
-            <td>Type of lender</td>
+            <td>Trustee Type</td>
             <td>
                 <select name="lstType" id="lstType">
-                    <option value="">Select type of lender</option><?php
+                    <option value="">Select type of trustee</option><?php
                     foreach($arrTrusteeType AS $typeId => $typeDesc){
                             $selectStr = "";
                             if($arrHoldTrust['trustee_id'] == $typeId) $selectStr = "selected";
@@ -36,7 +36,7 @@ include(CHNGTRUSTEECONTENT);
     $dispCorporate = "style='display:none'";
     if($arrHoldTrust['trustee_id'] == '2') $dispCorporate = "style='display:block'";
     ?><div id="divCorporate" class="pdT10" <?=$dispCorporate?>>
-          <div class="frmMidHeader">Company Details</div>
+          <div class="frmMidHeader">Trustee Company Details</div>
           <table class="fieldtable" width="50%" cellpadding="10px;">
           <tr>
               <td>Name of company</td>
@@ -45,6 +45,10 @@ include(CHNGTRUSTEECONTENT);
           <tr>
               <td>ACN Number</td>
               <td><input type="text" name="txtAcn" id="txtAcn" value="<?=$arrHoldTrust['acn']?>"></td>
+          </tr>
+          <tr>
+              <td>TFN Number</td>
+              <td><input type="text" name="txtTfn" id="txtTfn" value="<?=$arrHoldTrust['tfn']?>"></td>
           </tr>
           <tr>
               <td>Registered Address</td>
@@ -68,13 +72,13 @@ include(CHNGTRUSTEECONTENT);
     $dispIndividual = "style='display:none'";
     if($arrHoldTrust['trustee_id'] == '1') $dispIndividual = "style='display:block'";
     ?><div id="divIndividual" class="pdT10" <?=$dispIndividual?>>
-        <div class="frmMidHeader">Individual Details</div>
+        <div class="frmMidHeader">Individual Trustee Details</div>
         <table class="fieldtable" width="45%" cellpadding="10px;">
           <tr>
               <td>No of individuals</td>
               <td><select name="lstMember" id="lstMember">
                     <option value="">Select no of individuals</option><?
-                    $members=1;
+                    $members=2;
                     while($members<=4) {
                         $selectMember="";
                         if($arrHoldTrust['noofmember'] == $members) $selectMember = "selected";
@@ -99,6 +103,7 @@ include(CHNGTRUSTEECONTENT);
 
     <div class="pdT20">
         <span class="pdR20"><button type="button" onclick="window.location='fund.php'" value="Back">Back</button></span>
+        <span class="pdR20"><button type="submit" id="submit" name="save">Save & Exit</button></span>
         <span><button type="submit" id="submit" name="next">Next</button></span>
     </div>
 </form><?

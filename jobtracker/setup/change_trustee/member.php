@@ -1,33 +1,72 @@
 <?php
-// include common file
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */ 
+
 include("../../include/common.php");
 
-// include class file
-include("model/trust_asset_class.php");
-$objHoldingTrust = new Trust_Asset();
+include("model/member_class.php");
+$objMemDtls = new MEMBER();
 
-$arrRateType = array('F'=>'Fixed Rate', 'V'=>'Variable Rate');
-$arrLoanType = array('I'=>'Interest Only', 'P'=>'Principal and Interest');
+$arrOffcrData='';
 
-// fetch existing data [edit case]
-if(!empty($_SESSION['jobId'])) {
-    $arrHoldTrust = $objHoldingTrust->fetchTrustAsset();
+if(!empty($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'country')
+{
+    $arrCountry = fetchCountries();
+    echo $jsonCntry = json_encode($arrCountry);
+    exit;    
 }
+
+// fetch data if available 
+if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) {
+
+    // fetch existing officer details
+    $arrOffcrData = $objMemDtls->fetchOffcrDtls();
+}
+
+if(!empty($_REQUEST['sql']))
+{
+    $no_of_member = $_REQUEST['selOfficers'];
+    
+    //Reverse Array for deleting officer
+    krsort($arrOffcrData);
+    
+    //Deleting officer id
+    $delOffcr = count($arrOffcrData) - $no_of_member;
+    if($delOffcr > 0) {
+        foreach ($arrOffcrData as $key => $value) {
+            if($delOffcr > 0) {
+                
+                $objMemDtls->delMemberDtls($value['member_id']);
+                $delOffcr--;
+            }
+        }
+    }
+    
+    ksort($arrOffcrData);
+
+    for($i = 1; $i <= $no_of_member; $i++)
+    {
+        $offcr['selOfficers'] = $_REQUEST['selOfficers'];
+        $offcr['offcrId'] = $_REQUEST['offcrId'][$i];
+        $offcr['txtFname'] = $_REQUEST['txtFname'][$i];
+        $offcr['txtMname'] = $_REQUEST['txtMname'][$i];
         
-// insert & update case
-if(!empty($_REQUEST['saveData'])) {
-    $asset = $_REQUEST['taAsset'];
-    $loan = $_REQUEST['txtLoan'];
-    $loanYear = $_REQUEST['txtYear'];
-    $loanRate = $_REQUEST['txtRate'];
-    $rateType = $_REQUEST['lstRateType'];
-    $loanType = $_REQUEST['lstLoanType'];
-    
-    // update holding trust asset details
-    if(!empty($arrHoldTrust)) $objHoldingTrust->updateTrustAsset($asset, $loan, $loanYear, $loanRate, $rateType, $loanType);
-    
-    // insert holding trust asset details
-    else $objHoldingTrust->newTrustAsset($asset, $loan, $loanYear, $loanRate, $rateType, $loanType);
+        $offcr['txtLname'] = $_REQUEST['txtLname'][$i];
+        $offcr['txtDob'] = getDateFormat($_REQUEST['txtDob'][$i]);
+        
+        $offcr['txtCob'] = $_REQUEST['txtCob'][$i];
+        $offcr['selCntryob'] = $_REQUEST['selCntryob'][$i];
+        $offcr['txtTFN'] = $_REQUEST['txtTFN'][$i];
+        $offcr['resAdd'] = $_REQUEST['txtResAdd'][$i];
+
+        if(empty($offcr['offcrId']))
+            $objMemDtls->insertMemberDtls($offcr);
+        else
+            $objMemDtls->updateOffcrDtls($offcr);
+    }
     
     if(isset($_REQUEST['next'])) {
         header('location: preview.php');
@@ -39,7 +78,13 @@ if(!empty($_REQUEST['saveData'])) {
     }
 }
 
-// include view file
-include("view/member.php");
+// fetch states for drop-down
+$arrStates = fetchStates();
 
+// fetch country for drop-down
+$arrCountry = fetchCountries();
+
+
+
+include("view/member.php");
 ?>

@@ -3,21 +3,21 @@
 include("../../include/common.php");
 
 // include class file
-include("model/trust_fund_class.php");
-$objHoldingTrust = new Trust_Fund();
+include("model/new_trustee_class.php");
+$objNewTrustee = new Trust_Fund();
 
 // fetch existing data [edit case]
 if(!empty($_SESSION['jobId'])) {
-    $arrHoldTrust = $objHoldingTrust->fetchHoldingTrustDetails();
-    if($arrHoldTrust['trustee_id'] == '1') $arrIndvdlTrust = $objHoldingTrust->fetchIndividualTrustDetails();
+    $arrHoldTrust = $objNewTrustee->fetchNewTrusteeDetails();
+    if($arrHoldTrust['trustee_id'] == '1') $arrIndvdlTrust = $objNewTrustee->fetchIndividualTrustDetails();
 }
         
 // insert & update case
 if(!empty($_REQUEST['saveData'])) {
-    $fund = $_REQUEST['txtFund'];
     $trusteeId = $_REQUEST['lstType'];
     $compName = $_REQUEST['txtCompName'];
     $acn = $_REQUEST['txtAcn'];
+    $tfn = $_REQUEST['txtTfn'];
     $address = $_REQUEST['txtAdd'];
     $cntMember = $_REQUEST['lstMember'];
     
@@ -30,20 +30,20 @@ if(!empty($_REQUEST['saveData'])) {
     if($trusteeId == '1') {
         unset($compName);
         unset($acn);
+        unset($tfn);
         unset($address); 
         unset($directors);
     }
     else if($trusteeId == '2') {
         unset($cntMember);
-        $objHoldingTrust->deleteAllIndividual();
+        $objNewTrustee->deleteAllIndividual();
     } 
 
     if(empty($arrHoldTrust)) {
-        $objHoldingTrust->updateClientName($fund);
-        $objHoldingTrust->newHoldingTrust($fund, $trusteeId, $compName, $acn, $address, $directors, $cntMember);
+        $objNewTrustee->addNewTrustee($trusteeId, $compName, $acn, $tfn, $address, $directors, $cntMember);
     } 
     else 
-        $objHoldingTrust->updateHoldingTrust($fund, $trusteeId, $compName, $acn, $address, $directors, $cntMember);
+        $objNewTrustee->updateNewTrustee($trusteeId, $compName, $acn, $tfn, $address, $directors, $cntMember);
     
     // individual trust, add members info
     if($trusteeId == '1') {
@@ -61,7 +61,7 @@ if(!empty($_REQUEST['saveData'])) {
                 }
             }
             $deleteMemberId = stringrtrim($deleteMemberId, ',');
-            $objHoldingTrust->deleteIndividual($deleteMemberId);
+            $objNewTrustee->deleteIndividual($deleteMemberId);
         }
         
         //Reverse Array for deleting member
@@ -75,10 +75,10 @@ if(!empty($_REQUEST['saveData'])) {
             
             // insert member info of sign up user
             if(empty($memberId)) {
-                $objHoldingTrust->insertIndividual($trusteeName, $resAdd);
+                $objNewTrustee->insertIndividual($trusteeName, $resAdd);
             }
             else {
-                $objHoldingTrust->updateIndividual($memberId, $trusteeName, $resAdd);
+                $objNewTrustee->updateIndividual($memberId, $trusteeName, $resAdd);
             }
         }
     }
@@ -94,7 +94,7 @@ if(!empty($_REQUEST['saveData'])) {
 }
 
 // fetch holding trustee types
-$arrTrusteeType = $objHoldingTrust->fetchTrusteeType();
+$arrTrusteeType = $objNewTrustee->fetchTrusteeType();
 
 // include view file
 include("view/new_trustee.php");

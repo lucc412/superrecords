@@ -6,7 +6,7 @@
  */
 
 /**
- * Description of address_details_class
+ * Description of member_class
  *
  * @author disha
  */
@@ -14,7 +14,7 @@ class MEMBER
 {
     //put your code here
     
-    public function fetchOffcrDtls($offcr)
+    public function fetchMemberDtls($member)
     {
         $qry = "SELECT * FROM cot_member_details WHERE job_id = ".$_SESSION['jobId'];
 
@@ -36,19 +36,19 @@ class MEMBER
         mysql_query($qryDel);
     }
     
-    public function insertMemberDtls($offcr)
+    public function insertMemberDtls($member)
     {
         $qry = "INSERT INTO cot_member_details (job_id, no_of_member, fname, mname, lname, dob, city_birth, cntry_birth, tfn, res_add)
             VALUES ('".$_SESSION['jobId']."',
-                    '".$offcr['selOfficers']."',
-                    '".$offcr['txtFname']."',
-                    '".$offcr['txtMname']."',
-                    '".$offcr['txtLname']."',
-                    '".$offcr['txtDob']."', 
-                    '".$offcr['txtCob']."', 
-                    '".$offcr['selCntryob']."',
-                    '".$offcr['txtTFN']."',
-                    '".$offcr['resAdd']."'                    
+                    '".$member['selMembers']."',
+                    '".$member['txtFname']."',
+                    '".$member['txtMname']."',
+                    '".$member['txtLname']."',
+                    '".$member['txtDob']."', 
+                    '".$member['txtCob']."', 
+                    '".$member['selCntryob']."',
+                    '".$member['txtTFN']."',
+                    '".$member['resAdd']."'                    
                     )";
         
         $result = mysql_query($qry);
@@ -56,20 +56,20 @@ class MEMBER
         return $result;
     }
     
-    public function updateOffcrDtls($offcr)
+    public function updateMemberDtls($member)
     {
         
         $qry = "UPDATE cot_member_details 
-                SET no_of_member = '".$offcr['selOfficers']."', 
-                fname = '".$offcr['txtFname']."', 
-                mname = '".$offcr['txtMname']."', 
-                lname = '".$offcr['txtLname']."', 
-                dob = '".$offcr['txtDob']."', 
-                city_birth = '".$offcr['txtCob']."',                                                
-                cntry_birth = '".$offcr['selCntryob']."',  
-                tfn = '".$offcr['txtTFN']."', 
-                res_add = '".$offcr['resAdd']."'         
-                WHERE member_id = ".$offcr['offcrId'];
+                SET no_of_member = '".$member['selMembers']."', 
+                fname = '".$member['txtFname']."', 
+                mname = '".$member['txtMname']."', 
+                lname = '".$member['txtLname']."', 
+                dob = '".$member['txtDob']."', 
+                city_birth = '".$member['txtCob']."',                                                
+                cntry_birth = '".$member['selCntryob']."',  
+                tfn = '".$member['txtTFN']."', 
+                res_add = '".$member['resAdd']."'         
+                WHERE member_id = ".$member['offcrId'];
         
         $result = mysql_query($qry);
         return $result;

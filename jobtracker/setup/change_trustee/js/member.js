@@ -2,8 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-var objStates
 var objCntry
 
 $(document).ready(function(){
@@ -13,15 +11,15 @@ $(document).ready(function(){
     });
     
     // on submit validation
-    $('#frmOfficer').submit(function() {
+    $('#frmMember').submit(function() {
         flagReturn = true;
         
         // Registered Address
-        if($('#selOfficers').val() == 0) {
-            selOfficers.className = "errclass";
+        if($('#selMembers').val() == 0) {
+            selMembers.className = "errclass";
             flagReturn = false;
         }
-        else selOfficers.className = "";
+        else selMembers.className = "";
         
         $('[id^=txtFname]').each(function (){
             if(!$(this).val()) {
@@ -97,11 +95,11 @@ $(document).ready(function(){
     });
 });
 
-function addOfficers()
+function addMembers()
 {
     
-    var child = $('#dvOfficer').children().length;
-    var offcrCnt = parseInt($('#selOfficers').val());
+    var child = $('#divMember').children().length;
+    var offcrCnt = parseInt($('#selMembers').val());
     var country = '';
     var cntr = 1;    
     
@@ -123,7 +121,7 @@ function addOfficers()
             {
                 for(var k = child; k > offcrCnt; k--)
                 {
-                    $('#officer_'+k).remove();
+                    $('#member_'+k).remove();
                 }
                 return
             }    
@@ -141,7 +139,7 @@ function addOfficers()
     for(var i = cntr;i <= offcrCnt; i++)
     {
         
-        $('#dvOfficer').append('<div id="officer_'+i+'"> <div style="padding:10px 0;color: #F05729;font-size: 14px;">Member '+i+':</div>\n\
+        $('#divMember').append('<div id="member_'+i+'"> <div style="padding:10px 0;color: #F05729;font-size: 14px;">Member '+i+':</div>\n\
                                 <table class="fieldtable">\n\
                                     <tr><td>First name </td>\n\
                                     <td><input type="text" id="txtFname_'+i+'" name="txtFname['+i+']"  /></td></tr>\n\

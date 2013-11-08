@@ -10,7 +10,7 @@ include("../../include/common.php");
 include("model/member_class.php");
 $objMemDtls = new MEMBER();
 
-$arrOffcrData='';
+$arrMembrData='';
 
 if(!empty($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'country')
 {
@@ -23,49 +23,49 @@ if(!empty($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'country')
 if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) {
 
     // fetch existing officer details
-    $arrOffcrData = $objMemDtls->fetchOffcrDtls();
+    $arrMembrData = $objMemDtls->fetchMemberDtls();
 }
 
 if(!empty($_REQUEST['sql']))
 {
-    $no_of_member = $_REQUEST['selOfficers'];
+    $no_of_member = $_REQUEST['selMembers'];
     
     //Reverse Array for deleting officer
-    krsort($arrOffcrData);
+    krsort($arrMembrData);
     
     //Deleting officer id
-    $delOffcr = count($arrOffcrData) - $no_of_member;
-    if($delOffcr > 0) {
-        foreach ($arrOffcrData as $key => $value) {
-            if($delOffcr > 0) {
+    $delMember = count($arrMembrData) - $no_of_member;
+    if($delMember > 0) {
+        foreach ($arrMembrData as $key => $value) {
+            if($delMember > 0) {
                 
                 $objMemDtls->delMemberDtls($value['member_id']);
-                $delOffcr--;
+                $delMember--;
             }
         }
     }
     
-    ksort($arrOffcrData);
+    ksort($arrMembrData);
 
     for($i = 1; $i <= $no_of_member; $i++)
     {
-        $offcr['selOfficers'] = $_REQUEST['selOfficers'];
-        $offcr['offcrId'] = $_REQUEST['offcrId'][$i];
-        $offcr['txtFname'] = $_REQUEST['txtFname'][$i];
-        $offcr['txtMname'] = $_REQUEST['txtMname'][$i];
+        $member['selMembers'] = $_REQUEST['selMembers'];
+        $member['offcrId'] = $_REQUEST['offcrId'][$i];
+        $member['txtFname'] = $_REQUEST['txtFname'][$i];
+        $member['txtMname'] = $_REQUEST['txtMname'][$i];
         
-        $offcr['txtLname'] = $_REQUEST['txtLname'][$i];
-        $offcr['txtDob'] = getDateFormat($_REQUEST['txtDob'][$i]);
+        $member['txtLname'] = $_REQUEST['txtLname'][$i];
+        $member['txtDob'] = getDateFormat($_REQUEST['txtDob'][$i]);
         
-        $offcr['txtCob'] = $_REQUEST['txtCob'][$i];
-        $offcr['selCntryob'] = $_REQUEST['selCntryob'][$i];
-        $offcr['txtTFN'] = $_REQUEST['txtTFN'][$i];
-        $offcr['resAdd'] = $_REQUEST['txtResAdd'][$i];
+        $member['txtCob'] = $_REQUEST['txtCob'][$i];
+        $member['selCntryob'] = $_REQUEST['selCntryob'][$i];
+        $member['txtTFN'] = $_REQUEST['txtTFN'][$i];
+        $member['resAdd'] = $_REQUEST['txtResAdd'][$i];
 
-        if(empty($offcr['offcrId']))
-            $objMemDtls->insertMemberDtls($offcr);
+        if(empty($member['offcrId']))
+            $objMemDtls->insertMemberDtls($member);
         else
-            $objMemDtls->updateOffcrDtls($offcr);
+            $objMemDtls->updateMemberDtls($member);
     }
     
     if(isset($_REQUEST['next'])) {
@@ -84,7 +84,6 @@ $arrStates = fetchStates();
 // fetch country for drop-down
 $arrCountry = fetchCountries();
 
-
-
+// include view file
 include("view/member.php");
 ?>

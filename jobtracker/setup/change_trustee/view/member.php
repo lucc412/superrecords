@@ -16,18 +16,18 @@ include(CHNGTRUSTEECONTENT);
 	<span>
 </div>
 <div class="pdT20">
-    <form method="post" id="frmOfficer" action="member.php">
+    <form method="post" id="frmMember" action="member.php">
         <table class="fieldtable">
             <tr>
                 <td>Number of members </td>
                 <td>
-                    <select id="selOfficers" name="selOfficers" style="margin-bottom: 5px;width:180px;" onchange="addOfficers()">
+                    <select id="selMembers" name="selMembers" style="margin-bottom: 5px;width:180px;" onchange="addMembers()">
                         <option value="0">Select no of members</option>
                         <?php 
-                            for($i = 1;$i <= 10;$i++) 
+                            for($i = 1;$i <= 4;$i++) 
                             {
                                 $selectStr = '';
-                                if(count($arrOffcrData) == $i) $selectStr = 'selected';
+                                if(count($arrMembrData) == $i) $selectStr = 'selected';
                                 ?><option <?=$selectStr?> value="<?=$i?>"><?=$i?></option><?
                             }
                         ?>
@@ -36,18 +36,17 @@ include(CHNGTRUSTEECONTENT);
             </tr>
         </table>
         
-        <div id="dvOfficer">
+        <div id="divMember">
             <?php
                                     
-                if(!empty($arrOffcrData))
+                if(!empty($arrMembrData))
                 {
                      $cntr = 0;
-                    foreach($arrOffcrData as $key => $value) 
+                    foreach($arrMembrData as $key => $value) 
                     { 
                         $cntr++;
-                        $noOfOffcr = $value['no_of_member'];
                     
-                        ?><div id="officer_<?=$cntr?>"> 
+                        ?><div id="member_<?=$cntr?>"> 
                             <div style="padding:10px 0;color: #F05729;font-size: 14px;">Member <?=$cntr?>:</div>
                             <input type="hidden" name="offcrId[<?=$cntr?>]" id="offcrId" value="<?=$value['member_id']?>">
                             <table class="fieldtable">

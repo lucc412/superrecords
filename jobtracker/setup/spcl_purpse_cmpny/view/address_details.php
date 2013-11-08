@@ -10,8 +10,7 @@
 	<span>
 </div>
 
-<div>
-    <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details for your new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div>
+<div class="pdT20">
     <form method="post" id="frmAddress" action="address_details.php">
         <div class="frmMidHeader">Registered Address</div>
         <table class="fieldtable">
@@ -48,7 +47,7 @@
             <tr id="trOccpName" class="hide">
                 <td>Occupier`s name </td>
                 <td>
-                    <input type="text" name="txtOccpName" value="<?=$arrAddrDtls['occp_name']?>"/>
+                    <input type="text" name="txtOccpName" id="txtOccpName" value="<?=$arrAddrDtls['occp_name']?>"/>
                 </td>
             </tr>
         </table>

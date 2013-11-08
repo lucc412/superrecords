@@ -6,7 +6,7 @@ include(STND_COMP_NAV);
 // page header
 ?><div class="pageheader">
     <h1>Preview</h1>
-    <span><b>Welcome to the Super Records preview page for Standard Company (Includes ABN/TFN Application).</b><span>
+    <span><b>Welcome to the Super Records preview page for SMSF Special Purpose Company.</b><span>
 </div><?
 
 // content

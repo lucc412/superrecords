@@ -57,7 +57,7 @@ class Preview {
             $qrySel = "SELECT sh.shrhldr_type, IF(sh.shrhldr_type = 1, 'Corporate', 'Individual') shrhldrType, sh.shrhldr_cmpny_name, sh.shrhldr_acn, sh.shrhldr_reg_addr,
                         sh.no_of_directrs, sh.directrs_name, CONCAT_WS(' ', sh.shrhldr_fname, sh.shrhldr_mname, sh.shrhldr_lname) shrhldrName, 
                         CONCAT_WS(',', sh.res_addr_unit, sh.res_addr_build, sh.res_addr_street, sh.res_addr_subrb, sh.res_addr_pcode, cs.cst_Description) regAddress, 
-                        sc.shr_desc, sh.no_of_shares
+                        sc.shr_desc, IF(sh.is_shars_own_bhlf, 'Yes', 'No')isShrhldr, sh.shars_own_bhlf, sh.no_of_shares
                         FROM stp_share_class sc, spc_sharehldr_dtls sh LEFT JOIN cli_state cs ON sh.res_addr_state = cs.cst_Code
                         WHERE sh.job_id = ".$_SESSION['jobId']."
                         AND sh.share_class = sc.shrclass_id";
@@ -129,7 +129,7 @@ class Preview {
                     <table class="first" cellpadding="4" cellspacing="6">
                         <tr>
                             <td>Registered Address :</td>
-                            <td>'.$arrAddressDetail['regAddres'].'</td>
+                            <td>'.stringltrim($arrAddressDetail['regAddres'], ',').'</td>
                         </tr>
                         <tr>
                             <td>Will this company occupy <br/>registered address? :</td>
@@ -144,11 +144,11 @@ class Preview {
         
         $address .= '<tr>
                         <td>Principal Business Address :</td>
-                        <td>'.$arrAddressDetail['bsnsAddres'].'</td>
+                        <td>'.stringltrim($arrAddressDetail['bsnsAddres'], ',').'</td>
                     </tr>
                     <tr>
                         <td>Meeting Address :</td>
-                        <td>'.$arrAddressDetail['metAddres'].'</td>
+                        <td>'.stringltrim($arrAddressDetail['metAddres'], ',').'</td>
                     </tr>
                  </table>';
         /* address details ends */
@@ -179,7 +179,7 @@ class Preview {
                         </tr>
                         <tr>
                             <td>State of birth :</td>
-                            <td>'.$arrStates[$officerInfo['offcr_state_birth']].'</td>
+                            <td>'.$officerInfo['offcr_state_birth'].'</td>
                         </tr>
                         <tr>
                             <td>Country of birth :</td>
@@ -191,7 +191,7 @@ class Preview {
                         </tr>
                         <tr>
                             <td>Residential Address :</td>
-                            <td>'.$officerInfo['offcrAddres'].'</td>
+                            <td>'.stringltrim($officerInfo['offcrAddres'], ',').'</td>
                         </tr>';
         }
         $officer .= '</table>';
@@ -244,7 +244,7 @@ class Preview {
                                 </tr>
                                 <tr>
                                     <td>Residential Address :</td>
-                                    <td>'.$shrHlderInfo['regAddress'].'</td>
+                                    <td>'.stringltrim($shrHlderInfo['regAddress'], ',').'</td>
                                 </tr>';
             }
             
@@ -253,6 +253,17 @@ class Preview {
                                 <td>'.$shrHlderInfo['shr_desc'].'</td>
                             </tr>
                             <tr>
+                                <td>Are the shares owned on behalf <br/> of another Company or Trust? :</td>
+                                <td>'.$shrHlderInfo['isShrhldr'].'</td>
+                            </tr>';
+            
+            if($shrHlderInfo['isShrhldr'] == 'Yes') {
+                $shareHolder .= '<tr>
+                                    <td>Shares are owned on behalf :</td>
+                                    <td>'.$shrHlderInfo['shars_own_bhlf'].'</td>
+                                </tr>';
+            }
+            $shareHolder .= '<tr>
                                 <td>Number of shares :</td>
                                 <td>'.$shrHlderInfo['no_of_shares'].'</td>
                             </tr>';

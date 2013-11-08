@@ -56,6 +56,14 @@ $(document).ready(function(){
                 else
                     $('#txtCmpName_'+cntr).removeClass("errclass");
                 
+                if(!$('#txtACN_'+cntr).val())
+                {
+                    $('#txtACN_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#txtACN_'+cntr).removeClass("errclass");
+                
                 if($('#txtRegAddr_'+cntr).val() == 0)
                 {
                     $('#txtRegAddr_'+cntr).addClass("errclass");
@@ -63,6 +71,25 @@ $(document).ready(function(){
                 }
                 else
                     $('#txtRegAddr_'+cntr).removeClass("errclass");
+                
+                if($('#selNoDirtr_'+cntr).val() == 0)
+                {
+                    $('#selNoDirtr_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else {
+                    $('#selNoDirtr_'+cntr).removeClass("errclass");
+                    $('[id^=txtFulName]').each(function ()
+                    {
+                        if(!$(this).val()) {
+                            $(this).addClass('errclass');
+                            flag = false;
+                        }
+                        else {
+                            $(this).removeClass("errclass");
+                        }
+                    });
+                }
 
             }
             // individual case
@@ -83,14 +110,6 @@ $(document).ready(function(){
                 }
                 else
                     $('#txtLname_'+cntr).removeClass("errclass");
-                
-                if($('#resAddUnit_'+cntr).val() == 0)
-                {
-                    $('#resAddUnit_'+cntr).addClass("errclass");
-                    flag = false;
-                }
-                else
-                    $('#resAddUnit_'+cntr).removeClass("errclass");
                 
                 if($('#resAddBuild_'+cntr).val() == 0)
                 {
@@ -140,6 +159,19 @@ $(document).ready(function(){
             }
             else
                 $('#selShrCls_'+cntr).removeClass("errclass");
+            
+            if($('#selShrBhlf_'+cntr).val() == 1)
+            {
+                if($('#txtShrOwnBhlf_'+cntr).val() == 0)
+                {
+                    $('#txtShrOwnBhlf_'+cntr).addClass("errclass");
+                    flag = false;
+                }
+                else
+                    $('#txtShrOwnBhlf_'+cntr).removeClass("errclass");
+            }
+            else
+                $('#txtShrOwnBhlf_'+cntr).removeClass("errclass");
 
             if($('#txtNoShares_'+cntr).val() == 0)
             {

@@ -83,8 +83,8 @@ if(!empty($_REQUEST['sql']) && $_REQUEST['sql'] == 'Add')
         $shrhldr['res_addr_pcode'] = $_REQUEST['resAddPstCode'][$i];
         
         $shrhldr['share_class'] = $_REQUEST['selShrCls'][$i];
-//        $shrhldr['is_shars_own_bhlf'] = $_REQUEST['selShrBhlf'][$i];
-//        $shrhldr['shars_own_bhlf'] = $_REQUEST['txtShrOwnBhlf'][$i];
+        $shrhldr['is_shars_own_bhlf'] = $_REQUEST['selShrBhlf'][$i];
+        $shrhldr['shars_own_bhlf'] = $_REQUEST['txtShrOwnBhlf'][$i];
         $shrhldr['no_of_shares'] = $_REQUEST['txtNoShares'][$i];
         
         

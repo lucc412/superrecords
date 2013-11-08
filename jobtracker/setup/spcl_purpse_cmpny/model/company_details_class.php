@@ -21,7 +21,7 @@ class COMPANY_DETAILS
     
     public function insertCompanyDetails()
     {        
-        $compPref = arrayToString(',',$_REQUEST['txtCompPref']); 
+        $compPref = arrayToString(',',  array_filter($_REQUEST['txtCompPref'])); 
         $juriReg = $_REQUEST['selJuriReg'];
                 
         $qry = "INSERT INTO spc_comp_dtls (job_id, comp_pref_name, comp_juri_reg)
@@ -36,7 +36,7 @@ class COMPANY_DETAILS
     
     public function updateCompanyDetails()
     {        
-        $compPref = implode(',',$_REQUEST['txtCompPref']); 
+        $compPref = implode(',',array_filter($_REQUEST['txtCompPref'])); 
         $juriReg = $_REQUEST['selJuriReg'];
                 
         $qry = "UPDATE spc_comp_dtls 

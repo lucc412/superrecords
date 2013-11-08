@@ -11,12 +11,6 @@ $(document).ready(function(){
         flagReturn = true;
         
         // Registered Address
-        if(!$('#regAddUnit').val()) {
-            regAddUnit.className = "errclass";
-            flagReturn = false;
-        }
-        else regAddUnit.className = "";
-        
         if(!$('#regAddBuild').val()) {
             regAddBuild.className = "errclass";
             flagReturn = false;
@@ -47,13 +41,15 @@ $(document).ready(function(){
         }
         else regAddPstCode.className = "";
         
-        // business Address
-        if(!$('#busAddUnit').val()) {
-            busAddUnit.className = "errclass";
-            flagReturn = false;
+        if($('#selCompAddr').val() == 0) {
+            if(!$('#txtOccpName').val()) {
+                txtOccpName.className = "errclass";
+                flagReturn = false;
+            }
+            else txtOccpName.className = "";
         }
-        else busAddUnit.className = "";
         
+        // business Address
         if(!$('#busAddBuild').val()) {
             busAddBuild.className = "errclass";
             flagReturn = false;
@@ -85,12 +81,6 @@ $(document).ready(function(){
         else busAddPstCode.className = "";
         
         // Meeting Address
-        if(!$('#metAddUnit').val()) {
-            metAddUnit.className = "errclass";
-            flagReturn = false;
-        }
-        else metAddUnit.className = "";
-        
         if(!$('#metAddBuild').val()) {
             metAddBuild.className = "errclass";
             flagReturn = false;

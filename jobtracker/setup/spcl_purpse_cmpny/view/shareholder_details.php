@@ -10,8 +10,7 @@
 	<span>
 </div>
 
-<div>
-    <div style="padding-bottom:20px;color: #074263;font-size: 14px;">Please enter the details for your new fund. These details will be used to register the fund. If you need any help completing this section, please contact us.</div>
+<div class="pdT20">
     <form method="post" id="frmShrhldr" action="shareholder_details.php" >
        <table class="fieldtable">
             <tr>
@@ -111,12 +110,20 @@
                                 </td>
                             </tr>
                             </table>
-                            <table class="fieldtable" style="width:758px">
+                            <table class="fieldtable" style="width:528px">
                                 <tr><td>Share Class </td>
                                 <td>
                                     <select id="selShrCls_<?=$cntr?>" name="selShrCls[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" >
                                         <option value="0">Select Share class</option><?php foreach($arrShrCls AS $shrKey => $clsName) { $selectStr = ""; if($value['share_class'] == $shrKey) $selectStr = "selected"; ?><option <?=$selectStr?> value="<?=$shrKey?>"><?=$clsName?></option><? } ?>
                                     </select></td></tr>
+                                <tr><td>Are the shares owned on behalf </br>of another Company or Trust? </td>
+                                <td><select id="selShrBhlf_<?=$cntr?>" name="selShrBhlf[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" onchange="changeShrOwnBhlf(this,<?=$cntr?>)">
+                                        <option value="1" <?php if($value['is_shars_own_bhlf'] == 1) echo 'selected';?>>Yes</option>
+                                        <option value="0" <?php if($value['is_shars_own_bhlf'] == 0) echo 'selected';?>>No</option>
+                                    </select></td></tr>
+                                <tr id="trShrOwnBhlf_<?=$cntr?>" class="<?php if($value['is_shars_own_bhlf'] == 1){ echo 'show'; }else echo 'hide'; ?>" ><td>Shares are owned on behalf </td>
+                                    <td><input type="text" id="txtShrOwnBhlf_<?=$cntr?>" name="txtShrOwnBhlf[<?=$cntr?>]" value="<?=$value['shars_own_bhlf']?>"  /></td>
+                                </tr>
                                 <tr><td>Number of shares </td>
                                 <td><input type="text" id="txtNoShares_<?=$cntr?>" name="txtNoShares[<?=$cntr?>]" value="<?=$value['no_of_shares']?>"  /></td></tr>
                             </table>

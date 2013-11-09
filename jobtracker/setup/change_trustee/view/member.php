@@ -93,10 +93,11 @@ include(CHNGTRUSTEECONTENT);
             ?>
         </div>
         <input type="hidden" id="sql" name="sql" value="update" />
+        <div class="txtAboveButton">Your document details are ready to be submitted. However, prior to doing so, please preview to make sure all details are correct. <p>To preview, please click the 'Preview' button below.</p></div> 
         <div style="padding-top:20px;"> 
             <span class="pdR20"><button type="button" onclick="window.location.href='new_trustee.php'" >Back</button></span>
             <span class="pdR20"><button type="submit" name="save" id="btnSave">Save & Exit</button></span>
-            <span><button type="submit" name="next" id='btnNext'>Next</button></span>
+            <span><button type="submit" name="next" id='btnNext'>Preview</button></span>
         </div>
     </form>
 </div>

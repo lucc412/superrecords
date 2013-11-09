@@ -56,7 +56,7 @@ include(CHNGTRUSTEECONTENT);
             </td>
         </tr>
         <tr>
-            <td>Date of establishment </td>
+            <td>Date of Establishment </td>
             <td>
                 <input type="text" style="width:70px" id="txtDtEstblshmnt" readonly="true" name="txtDtEstblshmnt" size="10" value="<?=$arrFund['dt_estblshmnt']?>"/>
                 <img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDtEstblshmnt','ddMMyyyy')" align="middle" class="calendar"/>

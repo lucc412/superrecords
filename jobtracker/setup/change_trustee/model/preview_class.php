@@ -138,7 +138,7 @@ class Preview {
                         <td>'.stringltrim($arrFund['met_address'], ',').'</td>
                     </tr>
                     <tr>
-                        <td>Date of establishment :</td>
+                        <td>Date of Establishment :</td>
                         <td>'.$arrFund['dt_estblshmnt'].'</td>
                     </tr>
                     <tr>

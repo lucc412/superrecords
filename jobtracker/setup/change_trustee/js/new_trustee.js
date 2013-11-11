@@ -73,12 +73,6 @@ $(document).ready(function() {
             }
             else txtAcn.className = "";
             
-            if(!($('#txtTfn').val())) {
-                txtTfn.className = "errclass";
-                flagReturn = false;
-            }
-            else txtTfn.className = "";
-            
             if(!($('#txtAdd').val())) {
                 txtAdd.className = "errclass";
                 flagReturn = false;

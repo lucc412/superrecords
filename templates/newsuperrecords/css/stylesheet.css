@@ -507,7 +507,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:14px;
 	line-height:21px;
-	margin:10px 0;
+	margin:10px;
 }
 
 .contentgeneral .contenttext p span {
@@ -518,8 +518,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 .contentgeneral .contenttext p.dark-blue{
 	color:#f05927;
-	font-weight:bold;
-	font-size:14px;
+	font-size:13px;
+	font-family: verdana;
 }
 
 
@@ -534,6 +534,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	background-position: 0 .47em; /* .45em from top (vertical) */ 
 	padding-left:14px; /* space between bullet and text */ 
 	margin-left: 20px;
+	margin-top: 15px;
 }
 
 .contentgeneral .contenttext h5{

@@ -223,7 +223,8 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 			<div class="sponsors">
 				<span><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/logos/cpa.jpg" /></span>
 				<span><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/logos/bgl.jpg" /></span>
-				<span><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/logos/banklink.jpg" /></span>
+				<span style="margin-left:40px !important;"><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/logos/logo-cfs.jpg" /></span>
+				<span style="margin-left:65px !important;"><img src="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/images/logos/banklink.jpg" /></span>
 			</div>
 			<!--sponsors End-->
 		</div>
@@ -238,7 +239,7 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 				</div> <!--column-->
 
 				<div class="column-2">
-					<h1>Case Studies</h1>
+					<h1>Our clients</h1>
 					<!-- Bottom Menu module -->
 					<jdoc:include type="modules" name="p3" />	
 				</div> <!--bottom-menu-column-->

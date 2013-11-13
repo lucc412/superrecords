@@ -57,4 +57,7 @@ define("CHNGTRUSTEENAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_tr
 // Format for Trustee and Member Application
 define("FRMTNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/trustee_and_membr_app/include/navigation.php");
 
+// investment strategy
+define("INVSTMNTSTRAGYNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/investment_strategy/include/navigation.php");
+
 ?>

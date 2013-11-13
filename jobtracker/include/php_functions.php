@@ -402,7 +402,7 @@ function createPDF($html,$filename,$title1,$title2)
     }
 
     // set font
-    $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFont('dejavusans', '', 10);
 
     // add a page
     $pdf->AddPage();

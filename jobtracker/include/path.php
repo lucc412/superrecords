@@ -53,4 +53,8 @@ define("STND_COMP_NAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/standard_c
 // Change Trustee
 define("CHNGTRUSTEECONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_trustee/include/content.php");
 define("CHNGTRUSTEENAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_trustee/include/navigation.php");
+
+// Format for Trustee and Member Application
+define("FRMTNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/trustee_and_membr_app/include/navigation.php");
+
 ?>

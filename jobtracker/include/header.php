@@ -206,6 +206,14 @@
 			?><title>Member Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/change_trustee/js/member.js"></script><?
 		}
+                else if($requestUrl == 'fund.php' && $folderPath == 'trustee_and_membr_app') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/trustee_and_membr_app/js/fund.js"></script><?
+		}
+                else if($requestUrl == 'company_details.php' && $folderPath == 'trustee_and_membr_app') {
+			?><title>Company Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/trustee_and_membr_app/js/company_details.js"></script><?
+		}
 		else {
 			?><title>Home</title><?
 		}

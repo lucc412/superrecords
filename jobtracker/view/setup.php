@@ -64,10 +64,10 @@ $(document).ready(function(){
                 <div style="width: 550px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?=$frmVal['subform_name']?></span></div>
                 <div style="width: 60px;float: left;padding: 4px 0 5px;"><span class="checklistlabel"><?='$'.$frmVal['subform_price'];?></span></div><?
                 if(!empty($frmVal['subform_url'])) {
-                    ?><button style="width: 82px;margin: 0" onclick='window.location.href="setup/<?=$frmVal['subform_url']?>?frmId=<?=$frmVal['subform_id']?>"' >Order</button><?
+                    ?><button style="width: 118px;margin: 0" onclick='window.location.href="setup/<?=$frmVal['subform_url']?>?frmId=<?=$frmVal['subform_id']?>"' >Order Now</button><?
                 }
                 else {
-                    ?><button style="width: 82px;margin: 0" class="orderBtn">Order</button><?
+                    ?><button style="width: 118px;margin: 0" class="orderBtn">Coming Soon</button><?
                 }
             ?></li>
         <?php } ?>

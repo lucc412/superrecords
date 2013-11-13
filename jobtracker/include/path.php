@@ -53,4 +53,7 @@ define("STND_COMP_NAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/standard_c
 // Change Trustee
 define("CHNGTRUSTEECONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_trustee/include/content.php");
 define("CHNGTRUSTEENAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_trustee/include/navigation.php");
+
+// investment strategy
+define("INVSTMNTSTRAGYNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/investment_strategy/include/navigation.php");
 ?>

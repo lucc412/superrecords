@@ -206,6 +206,18 @@
 			?><title>Member Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/change_trustee/js/member.js"></script><?
 		}
+                else if($requestUrl == 'fund.php' && $folderPath == 'investment_strategy') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/investment_strategy/js/fund.js"></script><?
+		}
+                else if($requestUrl == 'trust_asset.php' && $folderPath == 'investment_strategy') {
+			?><title>Asset Allocation</title>
+			<script type="text/javascript" src="<?=DIR?>setup/investment_strategy/js/trust_asset.js"></script><?
+		}
+                else if($requestUrl == 'other.php' && $folderPath == 'investment_strategy') {
+			?><title>Other Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/investment_strategy/js/other.js"></script><?
+		}
 		else {
 			?><title>Home</title><?
 		}

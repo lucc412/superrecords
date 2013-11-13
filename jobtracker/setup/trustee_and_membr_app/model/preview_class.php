@@ -5,7 +5,9 @@ class Preview {
    // fetch fund details
     public function fetchFundDetails()
     {
-        $selQry="SELECT cf.*, cs.cst_Description FROM ctm_fund_dtls cf LEFT JOIN cli_state cs ON cf.res_add_state = cs.cst_Code 
+        $selQry="SELECT cf.fund_name, cf.new_director_name, cf.dob, cs.cst_Description, 
+        CONCAT_WS(',', cf.res_add_unit, cf.res_add_build, cf.res_add_street, cf.res_add_subrb, cf.res_add_pst_code, cs.cst_Description) resAddress
+        FROM ctm_fund_dtls cf LEFT JOIN cli_state cs ON cf.res_add_state = cs.cst_Code 
                                                    WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         $arrData = mysql_fetch_assoc($fetchResult);
@@ -59,6 +61,7 @@ class Preview {
                         }
                     </style>';
        
+       
        /* Fund details starts */
         $fund = '<div class="test">Fund Details</div>
                         <br />
@@ -73,11 +76,11 @@ class Preview {
                             </tr>
                             <tr>
                                 <td>Residential Address :</td>
-                                <td>'.$arrFundDetail['res_add_unit'].', '.$arrFundDetail['res_add_build'].', '.$arrFundDetail['res_add_street'].', '.$arrFundDetail['res_add_subrb'].', '.$arrFundDetail['cst_Description'].', '.$arrFundDetail['res_add_pst_code'].'</td>
+                                <td>'.stringltrim($arrFundDetail['resAddress'], ',').'</td>
                             </tr>
                             <tr>
-                                <td>Date of Birth</td>
-                                <td>'.date("d/m/Y",strtotime($arrFundDetail['dob'])).'</td>
+                                <td>Date of Birth :</td>
+                                <td>'.$arrFundDetail['dob'].'</td>
                             </tr>
                         </table><br/>';
         
@@ -91,15 +94,15 @@ class Preview {
                         <br />
                         <table class="first" cellpadding="4" cellspacing="6">
                             <tr>
-                                <td>Name of company</td>
+                                <td>Name of company :</td>
                                 <td>'.$arrCompDetail['comp_name'].'</td>
                             </tr>
                             <tr>
-                                <td>ACN Number</td>
+                                <td>ACN Number :</td>
                                 <td>'.$arrCompDetail['acn'].'</td>
                             </tr>
                             <tr>
-                                <td>Registered Address</td>
+                                <td>Registered Address :</td>
                                 <td>'.$arrCompDetail['reg_addr'].'</td>
                             </tr>
                             <tr>

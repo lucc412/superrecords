@@ -22,11 +22,30 @@ $(document).ready(function()
         }
         else txtRegAddr.className = "";
 
-        if($('#selNoDirtr').val() == 0) {
+        if($('#selNoDirtr').val() == 0) 
+        {
             selNoDirtr.className = "errclass";
             flagReturn = false;
         }
-        else selNoDirtr.className = "";
+        else 
+        {
+            selNoDirtr.className = "";
+            $('[id^=txtDirctrName_]').each(function ()
+            {
+                var id = this.id;
+                var splitId = id.split('_');
+                var cntr = splitId[1];
+
+                if($(this).val() == 0) 
+                {
+                    $(this).addClass("errclass");
+                    flagReturn = false;
+                }
+                else {
+                    $(this).removeClass("errclass");
+                }
+            });
+        }
 
         return flagReturn;
     });

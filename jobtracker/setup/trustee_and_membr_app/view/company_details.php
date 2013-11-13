@@ -55,11 +55,11 @@ include(FRMTNAV);
         </div>
         <?php } ?>
     </div>
-        
+    <div class="txtAboveButton">Your document details are ready to be submitted. However, prior to doing so, please preview to make sure all details are correct. <p>To preview, please click the 'Preview' button below.</p></div> 
     <div class="pdT20">
         <span class="pdR20"><button type="button" onclick="window.location='fund.php'" value="Back">Back</button></span>
         <span class="pdR20" ><button type="submit" id="submit" name="save">Save & Exit</button></span>
-        <span><button type="submit" id="submit" name="next">Next</button></span>
+        <span><button type="submit" id="submit" name="next">Preview</button></span>
     </div>
 </form><?
 // include footer file

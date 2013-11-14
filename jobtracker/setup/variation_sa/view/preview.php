@@ -6,7 +6,7 @@ include(DEEDVARNAV);
 // page header
 ?><div class="pageheader">
     <h1>Preview</h1>
-    <span><b>Welcome to the Super Records preview page for SMSF Deed of Variation.</b><span>
+    <span><b>Welcome to the Super Records preview page for SMSF Variation for SA (South Australia).</b><span>
 </div><?
 
 // content

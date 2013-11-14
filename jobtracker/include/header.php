@@ -238,6 +238,18 @@
 			?><title>Member Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/deed_of_variation/js/member.js"></script><?
 		}
+                else if($requestUrl == 'fund.php' && $folderPath == 'variation_sa') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/variation_sa/js/fund.js"></script><?
+		}
+                else if($requestUrl == 'holding_trust.php' && $folderPath == 'variation_sa') {
+			?><title>Trustee Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/variation_sa/js/holding_trust.js"></script><?
+		}
+                else if($requestUrl == 'member.php' && $folderPath == 'variation_sa') {
+			?><title>Member Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/variation_sa/js/member.js"></script><?
+		}
 		else {
 			?><title>Home</title><?
 		}

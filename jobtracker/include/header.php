@@ -226,6 +226,18 @@
 			?><title>Other Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/investment_strategy/js/other.js"></script><?
 		}
+                else if($requestUrl == 'fund.php' && $folderPath == 'deed_of_variation') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/deed_of_variation/js/fund.js"></script><?
+		}
+                else if($requestUrl == 'holding_trust.php' && $folderPath == 'deed_of_variation') {
+			?><title>Trustee Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/deed_of_variation/js/holding_trust.js"></script><?
+		}
+                else if($requestUrl == 'member.php' && $folderPath == 'deed_of_variation') {
+			?><title>Member Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/deed_of_variation/js/member.js"></script><?
+		}
 		else {
 			?><title>Home</title><?
 		}

@@ -60,4 +60,7 @@ define("FRMTNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/trustee_and_memb
 // investment strategy
 define("INVSTMNTSTRAGYNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/investment_strategy/include/navigation.php");
 
+// Deed of variation
+define("DEEDVARNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/deed_of_variation/include/navigation.php");
+define("DEEDVARCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/deed_of_variation/include/content.php");
 ?>

@@ -98,18 +98,15 @@ include(SETUPNAVIGATION);
                                             <script> var refVal = 0; </script>
 						<input type="text" style="width:70px" id="txtDob<?=$memberCount?>" readonly="true" name="txtDob<?=$memberCount?>" size="10" value="<?
 						if(isset($dob) && $dob != "") {
-							if($dob != "0000-00-00") {
-								$dob = date("d/m/Y",strtotime($dob));
-								if($dob == '1970-01-01') $dob = '';
-							}
-							else{
-								$dob='';
-							}
+                                                    if($dob != "0000-00-00") {
+                                                        if($dob == '1970-01-01') $dob = '';
+                                                    }
+                                                    else{
+                                                            $dob='';
+                                                    }
 						}  
 						echo($dob);
-
-//                                                
-						?>" />
+                                                ?>" />
                                                 <img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$memberCount?>','ddMMyyyy','dropdown',false,24,false,'past')" align="middle" class="calendar"/>
                                                 
 					</td>

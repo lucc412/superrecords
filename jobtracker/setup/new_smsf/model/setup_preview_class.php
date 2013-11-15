@@ -29,7 +29,7 @@ class SETUP_PREVIEW
     
     public function fundDetails() 
     {
-        $fundQry = "SELECT * FROM es_fund_details WHERE job_id = ".$_SESSION['jobId'];
+        $fundQry = "SELECT job_id, signup_type, fund_name, strAddUnit, strAddBuild, strAddStreet, strAddSubrb, strAddState, strAddPstCode, strAddCntry, postal_address, registration_state, members, trustee_type_id, fund_status, DATE_FORMAT(date_of_establishment, '%d/%m/%Y') date_of_establishment FROM es_fund_details WHERE job_id = ".$_SESSION['jobId'];
         $fetchFund = mysql_query($fundQry);
         while($rowData = mysql_fetch_assoc($fetchFund))
         {
@@ -40,7 +40,7 @@ class SETUP_PREVIEW
     
     public function memberDetails()
     {
-        $memberQry = "SELECT * FROM es_member_details WHERE job_id = ".$_SESSION['jobId'];
+        $memberQry = "SELECT member_id, job_id, title, fname, mname, lname, DATE_FORMAT(dob, '%d/%m/%Y') dob, city, country_id, gender, strAddUnit, strAddBuild, strAddStreet, strAddSubrb, strAddState, strAddPstCode, strAddCntry, tfn, occupation, contact_no, member_status, legal_references FROM es_member_details WHERE job_id = ".$_SESSION['jobId'];
         $fetchMembr = mysql_query($memberQry);
         while($rowData = mysql_fetch_assoc($fetchMembr))
         {
@@ -51,7 +51,7 @@ class SETUP_PREVIEW
     
     public function legalrefDetails()
     {
-        $legalQry = "SELECT * FROM es_legal_references WHERE job_id = ".$_SESSION['jobId'];
+        $legalQry = "SELECT ref_id, job_id, member_id, title, fname, mname, lname, DATE_FORMAT(dob, '%d/%m/%Y') dob, city, country_id, gender, strAddUnit, strAddBuild, strAddStreet, strAddSubrb, strAddState, strAddPstCode, strAddCntry, tfn, occupation, contact_no FROM es_legal_references WHERE job_id = ".$_SESSION['jobId'];
         $fetchLegRef = mysql_query($legalQry);
         while($rowData = mysql_fetch_assoc($fetchLegRef))
         {

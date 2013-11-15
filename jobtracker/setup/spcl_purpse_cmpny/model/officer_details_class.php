@@ -16,14 +16,8 @@ class OFFICER_DETAILS
     
     public function fetchOffcrDtls($offcr)
     {
-        $qry = "SELECT * FROM spc_offcr_dtls WHERE job_id = ".$_SESSION['jobId'];
-        
-//        $fetchResult = mysql_query($qry);
-//        
-//        $arrData = array();
-//        while($rowData = mysql_fetch_assoc($fetchResult)) {
-//                $arrData[$rowData['offcr_id']] = $rowData;
-//        }
+        $qry = "SELECT offcr_id, job_id, no_of_offcr, offcr_fname, offcr_mname, offcr_lname, DATE_FORMAT(offcr_dob, '%d/%m/%Y') offcr_dob, offcr_city_birth, offcr_state_birth,
+            offcr_cntry_birth, offcr_tfn, offcr_addr_unit, offcr_addr_build, offcr_addr_street, offcr_addr_subrb, offcr_addr_state, offcr_addr_pst_code FROM spc_offcr_dtls WHERE job_id = ".$_SESSION['jobId'];
 
         $fetchResult = mysql_query($qry);
         $count = 1;

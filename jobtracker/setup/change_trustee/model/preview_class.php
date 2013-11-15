@@ -15,7 +15,7 @@ class Preview {
      // fetch fund data
     public function getFundDetails() {
             $qrySel = "SELECT fund_name, CONCAT_WS(',', met_add_unit, met_add_build, met_add_street, met_add_subrb, cst_Description, met_add_pst_code, country_name) met_address, 
-                        dt_estblshmnt, action_type, appointment_clause, resignation_clause
+                        DATE_FORMAT(dt_estblshmnt, '%d/%m/%Y')dt_estblshmnt, action_type, appointment_clause, resignation_clause
                         FROM cot_fund, es_country, cli_state
                         WHERE job_id = ".$_SESSION['jobId']."
                         AND met_add_country = country_id 
@@ -77,7 +77,7 @@ class Preview {
 
     // fetch member data
     public function fetchMemberData() {
-            $qrySel = "SELECT CONCAT_WS(' ', md.fname, md.mname, md.lname) memberName, md.dob, md.city_birth, md.cntry_birth, md.tfn, md.res_add
+            $qrySel = "SELECT CONCAT_WS(' ', md.fname, md.mname, md.lname) memberName, DATE_FORMAT(md.dob, '%d/%m/%Y')dob, md.city_birth, md.cntry_birth, md.tfn, md.res_add
                         FROM cot_member_details md
                         WHERE md.job_id = ".$_SESSION['jobId'];
             $fetchRow = mysql_query($qrySel);

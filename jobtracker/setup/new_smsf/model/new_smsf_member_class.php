@@ -87,7 +87,7 @@ class NEW_SMSF_MEMBER {
 	// function to existing fetch trustee details
 	function fetchExistingDetails($jobId) {
 
-		$qryFetch = "SELECT * FROM es_member_details WHERE job_id = '" . $jobId . "'";	
+		$qryFetch = "SELECT member_id, job_id, title, fname, mname, lname, DATE_FORMAT(dob, '%d/%m/%Y') dob, city, country_id, gender, strAddUnit, strAddBuild, strAddStreet, strAddSubrb, strAddState, strAddPstCode, strAddCntry, tfn, occupation, contact_no, member_status, legal_references FROM es_member_details WHERE job_id = '" . $jobId . "'";	
 
                 $fetchResult = mysql_query($qryFetch);
 		$count = 1;

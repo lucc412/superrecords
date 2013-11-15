@@ -41,7 +41,7 @@ class Preview {
     
     // fetch officer data
     public function fetchOfficerData() {
-            $qryCom = "SELECT CONCAT_WS(' ', of.offcr_fname, of.offcr_mname, of.offcr_lname) officerName, of.offcr_dob, of.offcr_city_birth, of.offcr_state_birth, 
+            $qryCom = "SELECT CONCAT_WS(' ', of.offcr_fname, of.offcr_mname, of.offcr_lname) officerName, DATE_FORMAT(of.offcr_dob, '%d/%m/%Y')offcr_dob, of.offcr_city_birth, of.offcr_state_birth, 
                         of.offcr_cntry_birth, of.offcr_tfn, CONCAT_WS(',', of.offcr_addr_unit, of.offcr_addr_build, of.offcr_addr_street, of.offcr_addr_subrb, of.offcr_addr_pst_code, cs.cst_Description)offcrAddres
                         FROM stp_offcr_dtls of LEFT JOIN cli_state cs ON of.offcr_addr_state = cs.cst_Code
                         WHERE of.job_id = ".$_SESSION['jobId'];

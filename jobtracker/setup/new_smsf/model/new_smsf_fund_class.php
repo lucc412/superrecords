@@ -97,21 +97,22 @@ class NEW_SMSF_FUND {
 	}
 
 	// function to existing fetch trustee details
-	function fetchExistingDetails($jobId) {
+	function fetchExistingDetails($jobId) 
+        {
 
-		$qryFetch = "SELECT * 
+            $qryFetch = "SELECT  job_id, signup_type, fund_name, strAddUnit, strAddBuild, strAddStreet, strAddSubrb, strAddState, strAddPstCode, strAddCntry, postal_address, registration_state, members, trustee_type_id, fund_status, DATE_FORMAT(date_of_establishment, '%d/%m/%Y') date_of_establishment
 					FROM es_fund_details 
 					WHERE job_id = '" . $jobId . "' 
 					AND signup_type = 'N'";	
 
-        $fetchResult = mysql_query($qryFetch);
+            $fetchResult = mysql_query($qryFetch);
 
-		$arrData = array();
-		if($fetchResult) {
-			$arrData = mysql_fetch_assoc($fetchResult);
-		}
+            $arrData = array();
+            if($fetchResult) {
+                    $arrData = mysql_fetch_assoc($fetchResult);
+            }
 
-		return $arrData;
+            return $arrData;
 	}
         
         function checkClients($fundName)

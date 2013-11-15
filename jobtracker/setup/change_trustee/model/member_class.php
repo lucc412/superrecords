@@ -16,7 +16,7 @@ class MEMBER
     
     public function fetchMemberDtls($member)
     {
-        $qry = "SELECT * FROM cot_member_details WHERE job_id = ".$_SESSION['jobId'];
+        $qry = "SELECT job_id, no_of_member, fname, mname, lname, DATE_FORMAT(dob, '%d/%m/%Y') dob, city_birth, cntry_birth, tfn, res_add FROM cot_member_details WHERE job_id = ".$_SESSION['jobId'];
 
         $fetchResult = mysql_query($qry);
         $count = 1;

@@ -84,7 +84,7 @@ class LEGAL_REFERENCES {
 	// function to existing fetch trustee details
 	function fetchExistingDetails($jobId) {
 
-		$qryFetch = "SELECT * FROM es_legal_references WHERE job_id = '" . $jobId . "'";	
+		$qryFetch = "SELECT ref_id, job_id, member_id, title, fname, mname, lname, DATE_FORMAT(dob, '%d/%m/%Y') dob, city, country_id, gender, strAddUnit, strAddBuild, strAddStreet, strAddSubrb, strAddState, strAddPstCode, strAddCntry, tfn, occupation, contact_no FROM es_legal_references WHERE job_id = '" . $jobId . "'";	
 
                 $fetchResult = mysql_query($qryFetch);
 		$count = 1;

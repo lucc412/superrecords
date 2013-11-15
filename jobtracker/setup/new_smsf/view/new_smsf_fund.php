@@ -60,17 +60,14 @@ include(SETUPNAVIGATION);
 			<tr>
 				<td>Date of establishment </td>
 				<td>
-					<input type="text" style="width:70px" id="txtSetupDate" readonly="true" name="txtSetupDate" size="10" value="<?
-					if(isset($regDate) && $regDate != "") {
-						if($regDate != "0000-00-00") {
-							if($regDate == '1970-01-01') 
-								$regDate = '';
-							else
-								$regDate = date("d/m/Y",strtotime($regDate));
-						}
-						else{
-							$regDate='';
-						}
+                                    <input type="text" style="width:70px" id="txtSetupDate" readonly="true" name="txtSetupDate" size="10" value="<?
+                                    	if(isset($regDate) && $regDate != "") {
+                                            if($regDate != "0000-00-00") {
+                                                    if($regDate == '01/01/1970') $regDate = '';
+                                            }
+                                            else{
+                                                    $regDate='';
+                                            }
 					}
                                         else {
                                             $regDate=date("d/m/Y");
@@ -82,13 +79,13 @@ include(SETUPNAVIGATION);
 			<tr>
 				<td>State of registration</td>
 				<td>
-					<select name="lstRegState" style="margin-bottom: 5px;"><?
-						foreach($arrStates AS $stateKey => $stateName) {
-							$selectStr = '';
-							if($regState == $stateKey) $selectStr = 'selected';
-							?><option <?=$selectStr?> value="<?=$stateKey?>"><?=$stateName?></option><?
-						}
-					?></select>
+                                    <select name="lstRegState" style="margin-bottom: 5px;"><?
+                                        foreach($arrStates AS $stateKey => $stateName) {
+                                            $selectStr = '';
+                                            if($regState == $stateKey) $selectStr = 'selected';
+                                            ?><option <?=$selectStr?> value="<?=$stateKey?>"><?=$stateName?></option><?
+                                        }
+                                    ?></select>
 				</td>
 			</tr>
 

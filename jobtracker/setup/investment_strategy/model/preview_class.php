@@ -14,7 +14,7 @@ class Preview {
     
     // fetch fund data
     public function fetchFundData() {
-            $qryfund = "SELECT tf.fund, tf.dt_estblshmnt, tf.dt_meeting, tf.met_add, tf.trustee_id, ht.trustee_name, tf.noofmember, tf.noofdirector, tf.comp_name, tf.acn, tf.reg_address
+            $qryfund = "SELECT tf.fund, DATE_FORMAT(tf.dt_estblshmnt, '%d/%m/%Y') dt_estblshmnt, DATE_FORMAT(tf.dt_meeting, '%d/%m/%Y') dt_meeting, tf.met_add, tf.trustee_id, ht.trustee_name, tf.noofmember, tf.noofdirector, tf.comp_name, tf.acn, tf.reg_address
                         FROM ins_fund tf, holding_trustee ht
                         WHERE tf.job_id = ".$_SESSION['jobId']."
                         AND ht.trustee_id = tf.trustee_id";
@@ -26,7 +26,7 @@ class Preview {
     // fetch director details
     public function fetchDirectorDetails()
     {
-       $selQry="SELECT indvdl_id, name, res_add address, dob
+       $selQry="SELECT indvdl_id, name, res_add address, DATE_FORMAT(dob, '%d/%m/%Y') dob
                 FROM ins_director 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
@@ -40,7 +40,7 @@ class Preview {
     // fetch individual trust details
     public function fetchIndividualTrustDetails()
     {
-       $selQry="SELECT indvdl_id, name, res_add address, dob
+       $selQry="SELECT indvdl_id, name, res_add address, DATE_FORMAT(dob, '%d/%m/%Y') dob
                 FROM ins_indvdl_member 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);

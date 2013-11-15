@@ -64,7 +64,7 @@
                                 </tr>
                                 <tr>
                                     <td>Date of birth </td>
-                                    <td><input type="text" id="txtDob_<?=$cntr?>" name="txtDob[<?=$cntr?>]" value="<?=date("d/m/Y",strtotime($value['offcr_dob']))?>" readonly="" /><img src="../../images/calendar.png" id="calImgId" onclick="javascript:NewCssCal('txtDob_<?=$cntr?>','ddMMyyyy','dropdown',false,24,false,'past')" align="middle" class="calendar"/></td>
+                                    <td><input type="text" id="txtDob_<?=$cntr?>" name="txtDob[<?=$cntr?>]" value="<?=$value['offcr_dob']?>" readonly="" /><img src="../../images/calendar.png" id="calImgId" onclick="javascript:NewCssCal('txtDob_<?=$cntr?>','ddMMyyyy','dropdown',false,24,false,'past')" align="middle" class="calendar"/></td>
                                 </tr>
                                 <tr>
                                     <td>City of birth </td>

@@ -53,8 +53,7 @@ include(FRMTNAV);
                 {
                     if($dob != "0000-00-00") 
                     {
-                        $dob = date("d/m/Y",strtotime($dob));
-                        if($dob == '1970-01-01') $dob = '';
+                        if($dob == '01/01/1970') $dob = '';
                     }
                     else{
                         $dob='';

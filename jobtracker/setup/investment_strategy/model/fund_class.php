@@ -5,11 +5,6 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of new_smsf_class
- *
- * @author disha
- */
 class Fund 
 {
     // fetch trustee type

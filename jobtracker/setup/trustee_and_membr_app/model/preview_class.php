@@ -5,7 +5,7 @@ class Preview {
    // fetch fund details
     public function fetchFundDetails()
     {
-        $selQry="SELECT cf.fund_name, cf.new_director_name, cf.dob, cs.cst_Description, 
+        $selQry="SELECT cf.fund_name, cf.new_director_name, DATE_FORMAT(cf.dob, '%d/%m/%Y') dob, cs.cst_Description, 
         CONCAT_WS(',', cf.res_add_unit, cf.res_add_build, cf.res_add_street, cf.res_add_subrb, cf.res_add_pst_code, cs.cst_Description) resAddress
         FROM ctm_fund_dtls cf LEFT JOIN cli_state cs ON cf.res_add_state = cs.cst_Code 
                                                    WHERE job_id=".$_SESSION['jobId'];

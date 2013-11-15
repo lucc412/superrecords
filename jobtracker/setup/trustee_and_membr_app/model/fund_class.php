@@ -100,7 +100,7 @@ class Fund
     // fetch fund details
     public function fetchFundDetails()
     {
-        $selQry="SELECT * FROM ctm_fund_dtls WHERE job_id=".$_SESSION['jobId'];
+        $selQry="SELECT job_id, fund_name, new_director_name, res_add_unit, res_add_build, res_add_street, res_add_subrb, res_add_state, res_add_pst_code, DATE_FORMAT(dob, '%d/%m/%Y') dob FROM ctm_fund_dtls WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         $arrData = mysql_fetch_assoc($fetchResult);
             

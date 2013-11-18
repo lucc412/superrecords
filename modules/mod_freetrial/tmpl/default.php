@@ -8,30 +8,30 @@
 
 
 <form action="" method="POST" enctype="multipart/form-data" name="josForm"  id="myForm">
-	<table width="640" border="0" cellspacing="0" cellpadding="10">
+	<table width="400px" border="0" cellspacing="0" cellpadding="10">
 		<tbody>
 			<tr>
-				<td class="text">Your Name <span class="red">*</span></td>
+				<td class="text"><strong>Your Name </strong></td>
                                 <td><input type="text" name="RName" required style="width:180px;" value="<?=$_REQUEST['RName']?>" title="Please enter your name" /></td>
 			</tr>
 			<tr>
-				<td class="text">Practice Name </td>
+				<td class="text"><strong>Practice Name </strong></td>
                                 <td><input type="text" name="RPracticeName"  style="width:180px;" value="<?=$_REQUEST['RPracticeName']?>" /></td>
 			</tr>
                         <tr>
-				<td class="text">Email Address <span class="red">*</span></td>
+                            <td class="text"><strong>Email Address </strong></td>
 				<td><input type="email" name="REmail" required style="width:180px;" value="<?=$_REQUEST['REmail']?>" /></td>
 			</tr>
                         <tr>
-				<td class="text">Phone Number <span class="red">*</span></td>
+                            <td class="text"><strong>Phone Number </strong></td>
 				<td><input type="text" name="Phone" required  style="width:180px;" value="<?=$_REQUEST['Phone']?>" /></td>
 			</tr>
 			<tr>
-				<td class="text">State <span class="red">*</span></td>
+                            <td class="text"><strong>State </strong></td>
                                 <td><select id="state" name="state" style="width:198px;" required><option value="0">--Select State--</option><option value="Australian Capital Territory">Australian Capital Territory</option><option value="New South Wales">New South Wales</option><option value="Northern Territory">Northern Territory</option><option value="Queensland">Queensland</option><option value="South Australia">South Australia</option><option value="Tasmania">Tasmania</option><option value="Victoria">Victoria</option><option value="Western Australia">Western Australia</option></select><br /><span id="val_state" style="color: red; font-size: 11px; font-weight: normal;"></span></td>
 			</tr>
 			<tr>
-                            <td class="text">Enter Captcha <span class="red">*</span></td>
+                            <td class="text"><strong>Enter Captcha </strong></td>
                             <td>
                                 <div style="float: left;">
                                     <div class="row_inner" id="input" >

@@ -18,7 +18,7 @@
         if($cCheck)
         {
             $thankmsg = "Thank You for Registration";
-            $url = 'free-trial-thank-you.html';
+            $url = 'free-trial-thankyou-2.html';
             $app->redirect($url,$thankmsg);
 
         }else{

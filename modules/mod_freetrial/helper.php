@@ -17,7 +17,7 @@ defined ('_JEXEC') or die ('Not Access');
         
         function process_registration_form()
         {
-            $to = "siddhesh.c@befreeit.com.au";
+            $to = "disha.goyal@befreeit.com.au, disha26th@gmail.com";
             $from = "noreply@superrecords.com.au";
             $subject = "Free Trial Registration";
 
@@ -29,17 +29,18 @@ defined ('_JEXEC') or die ('Not Access');
             $captcha = @$_POST['ct_captcha'];
 
             $message = '
-            <table align="center" border="0">
+            <table border="0" width="50%">
+                <tr><td colspan="2">A new enquiry has been submitted for free trial registration.</td></tr>
                 <tr>
-                    <td align="right">
-                        Client Name :
+                    <td>
+                        Name :
                     </td>
                     <td>
                         '.$name.'
                     </td>
                 </tr>
                 <tr>
-                    <td align="right">
+                    <td>
                         Practice Name :
                     </td>
                     <td>
@@ -47,15 +48,15 @@ defined ('_JEXEC') or die ('Not Access');
                     </td>
                 </tr>
                 <tr>
-                    <td align="right">
-                        Email Id :
+                    <td>
+                        Email Address :
                     </td>
                     <td>
                         '.$email.'
                     </td>
                 </tr>
                          <tr>
-                    <td align="right">
+                    <td>
                         Phone Number :
                     </td>
                     <td>
@@ -63,15 +64,14 @@ defined ('_JEXEC') or die ('Not Access');
                     </td>
                 </tr>
                 <tr>
-                    <td align="right">
+                    <td>
                         State :
                     </td>
                     <td>
                         '.$state.'
                     </td>
                 </tr>
-            </table>
-                     ';
+            </table>';
 
             $flagSubmit = TRUE;
 

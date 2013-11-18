@@ -13,13 +13,13 @@
 class Trust_Asset 
 {
     // insert holding trust asset details
-    function newTrustAsset($assetData) 
+    function newTrustAsset($assetData, $financialYr) 
     {
        $qryIns = "INSERT INTO ins_asset(job_id, asset, financial_year, type, amount, asset_range, target)
                     VALUES ( 
                     '".$_SESSION['jobId']."', 
                     '".addslashes($assetData['asset'])."',
-                    '".addslashes($assetData['year'])."',
+                    '".addslashes($financialYr)."',
                     '".addslashes($assetData['type'])."',
                     '".addslashes($assetData['amount'])."',
                     '".addslashes($assetData['range'])."',
@@ -43,12 +43,25 @@ class Trust_Asset
         return $arrHoldTrust;
     }
     
+    // fetch asset financial year
+    public function fetchTrustAssetYear()
+    {
+       $selQry="SELECT financial_year
+                FROM ins_asset 
+                WHERE job_id=".$_SESSION['jobId'];
+        $fetchResult = mysql_query($selQry);
+        $rowInfo = mysql_fetch_assoc($fetchResult);
+        $financialYear = $rowInfo['financial_year'];
+            
+        return $financialYear;
+    }
+    
     // update trust asset details
-    function updateTrustAsset($assetData) 
+    function updateTrustAsset($assetData, $financialYr) 
     {
       $qryUpd = "UPDATE ins_asset
                     SET asset = '".addslashes($assetData['asset'])."',
-                        financial_year = '".addslashes($assetData['year'])."',
+                        financial_year = '".addslashes($financialYr)."',
                         type = '".addslashes($assetData['type'])."',
                         amount = '".addslashes($assetData['amount'])."',
                         asset_range = '".addslashes($assetData['range'])."',

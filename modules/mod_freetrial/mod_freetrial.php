@@ -3,12 +3,13 @@
     defined('_JEXEC') or die('No Access Allowed');
     jimport( 'joomla.filesystem.file' );
     
-    require_once dirname(__FILE__).'/helper.php';
-
+    // Include the syndicate functions only once
+    require_once( dirname(__FILE__).DS.'helper.php' );
     $freetrialhandler = new modFreeTrialHelper();
     $session =& JFactory::getSession();
-    
-    $app = JFactory::getApplication();
+    var_dump($params);
+
+
     
     $freetrialhandler->initialize($params);
     
@@ -16,17 +17,18 @@
     {
         // check Captcha and Mail Functionality
         $cCheck = $freetrialhandler->process_registration_form();
+        $app = JFactory::getApplication();
         
         if($cCheck)
         {
             $thankmsg = "Thank You for Registration";
-            $url = $params->get('success-url');
+            $url = $params->get('success_url');
             $app->redirect($url,$thankmsg);
 
         }else{
 
             $capMsg = "Invalid Code Entered";
-            $url = $params->get('failure-url');
+            $url = $params->get('failure_url');
             $_REQUEST['hidMsg'] = 'Y';
         }
     }    

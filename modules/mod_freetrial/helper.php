@@ -1,16 +1,16 @@
 <?php
 
-defined ('_JEXEC') or die ('Not Access');
-
-    $db = JFactory::getDBO();
-
-    $query = $db->getQuery(true);
-
-    $query->select ('name') -> from ('#__users');
-
-    $db->setQuery($query);
-
-    $rows= $db->loadObjectList();   
+//defined ('_JEXEC') or die ('Not Access');
+//
+//    $db = JFactory::getDBO();
+//
+//    $query = $db->getQuery(true);
+//
+//    $query->select ('name') -> from ('#__users');
+//
+//    $db->setQuery($query);
+//
+//    $rows= $db->loadObjectList();   
 
     class modFreeTrialHelper
     {
@@ -29,6 +29,7 @@ defined ('_JEXEC') or die ('Not Access');
         
         function process_registration_form()
         {
+            
             $to = $this->to_email;
             $from = $this->from_email;
             $subject = $this->subject;

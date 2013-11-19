@@ -14,12 +14,24 @@ defined ('_JEXEC') or die ('Not Access');
 
     class modFreeTrialHelper
     {
+        public function initialize($params) 
+	{
+            $this->to_email =  $params->get('to_email');
+            $this->from_email = $params->get('from_email');
+            $this->subject = $params->get('subject');
+            $this->thankmsg = 'Thank You';
+            $this->success_url = $params->get('success_url');
+            $this->failure_url = $params->get('failure_url');
+            $this->session =& JFactory::getSession();
+
+            return $this;
+	}
         
         function process_registration_form()
         {
-            $to = "siddhesh.c@befreeit.com.au";
-            $from = "noreply@superrecords.com.au";
-            $subject = "Free Trial Registration";
+            $to = $this->to_email;
+            $from = $this->from_email;
+            $subject = $this->subject;
 
             $name = $_POST['RName'];
             $practiceName = $_POST['RPracticeName'];

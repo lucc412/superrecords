@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="1.6.0" client="site" method="install">
+<extension type="module" version="2.5.0" client="site" method="upgrade">
 	<name>Free Trial</name> 
 	<author>Be Free</author> 
 	<creationDate>2013</creationDate> 
 	<copyright>All rights reserved by Tech Guy Web Solutions.</copyright> 
 	<license>GPL 2.0</license> 
-	<authorEmail>
- info@befree.com.au</authorEmail> 
+	<authorEmail>info@befree.com.au</authorEmail> 
 	<authorUrl>www.befree.com.au</authorUrl> 
 	<version>1.0.0</version> 
 	<description>Provides a listing of registered users</description>
@@ -16,8 +15,7 @@
 		<filename module="mod_freetrial">mod_freetrial.php</filename>
 		<filename>index.html</filename>
 		<filename>helper.php</filename>
-		<filename>tmpl/default.php</filename>
-		<filename>tmpl/index.html</filename>
+		<folder>tmpl</folder>
 	</files>
  
     <languages>
@@ -56,11 +54,14 @@
                         default="default" 
                         label="LABEL_USER_LAYOUT" 
                         description="DESC_USER_LAYOUT">
-                       <option
-				value="default">Unordered List</option>
-			<option
-			value="ordered_list">Ordered List</option>
+                        <option value="default">Unordered List</option>
+                        <option	value="ordered_list">Ordered List</option>
                     </field>
+                    <field type="text" size="40" name="to_email" default="" label="To Email" description="To emails. You can add multiple E-mail address separated by commas" ></field>
+                    <field type="text" size="40" name="from_email" default="" label="From Email" description="From emails. You can add multiple E-mail address separated by commas" ></field>
+                    <field type="text" size="40" name="subject" default="" label="Subject" description="Subject for email" ></field>
+                    <field type="text" size="40" name="success_url" default="" label="Success URL" description="Success URL after page submission" ></field>
+                    <field type="text" size="40" name="failure_url" default="" label="Failure URL" description="Failure URL after page submission error" ></field>
                 </fieldset>
             </fields>
     </config>

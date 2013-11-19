@@ -20,7 +20,7 @@
 			</tr>
                         <tr>
                             <td class="text"><strong>Email Address </strong></td>
-				<td><input type="email" name="REmail" required style="width:180px;" value="<?=$_REQUEST['REmail']?>" /></td>
+				<td><input type="text" name="REmail" required style="width:180px;" value="<?=$_REQUEST['REmail']?>" /></td>
 			</tr>
                         <tr>
                             <td class="text"><strong>Phone Number </strong></td>

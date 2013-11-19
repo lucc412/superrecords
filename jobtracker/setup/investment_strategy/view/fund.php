@@ -107,7 +107,7 @@ include(INVSTMNTSTRAGYNAV);
               <td>No of Trustees</td>
               <td><select name="lstMember" id="lstMember">
                     <option value="">Select no of trustees</option><?
-                    $members=1;
+                    $members=2;
                     while($members<=4) {
                         $selectMember="";
                         if($arrFund['noofmember'] == $members) $selectMember = "selected";

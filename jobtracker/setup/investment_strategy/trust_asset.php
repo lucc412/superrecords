@@ -9,13 +9,17 @@ $objAsset = new Trust_Asset();
 // fetch existing data [edit case]
 if(!empty($_SESSION['jobId'])) {
     $arrHoldTrust = $objAsset->fetchTrustAsset();
+    $financialYear = $objAsset->fetchTrustAssetYear();
 }
+
+$assetCnt = 1;
+if(!empty($arrHoldTrust)) $assetCnt = count($arrHoldTrust);
         
 // insert & update case
 if(!empty($_REQUEST['saveData'])) {
+    $financialYr = $_REQUEST['txtYear'];
     foreach ($_REQUEST as $eleName => $eleValue) {
         if(strstr($eleName, "assetId")) $arrAssets[str_replace('assetId', '', $eleName)]['assetId'] = $eleValue;
-        if(strstr($eleName, "txtYear")) $arrAssets[str_replace('txtYear', '', $eleName)]['year'] = $eleValue;
         if(strstr($eleName, "taAsset")) $arrAssets[str_replace('taAsset', '', $eleName)]['asset'] = $eleValue;
         if(strstr($eleName, "txtType")) $arrAssets[str_replace('txtType', '', $eleName)]['type'] = $eleValue;
         if(strstr($eleName, "txtAmt")) $arrAssets[str_replace('txtAmt', '', $eleName)]['amount'] = $eleValue;
@@ -26,11 +30,11 @@ if(!empty($_REQUEST['saveData'])) {
     foreach ($arrAssets AS $assetData) {
         // update asset details
         if(!empty($assetData['assetId'])) {
-                $objAsset->updateTrustAsset($assetData);
+                $objAsset->updateTrustAsset($assetData, $financialYr);
         }
         // insert asset details
         else {
-            $objAsset->newTrustAsset($assetData);
+            $objAsset->newTrustAsset($assetData, $financialYr);
         }
     }
     

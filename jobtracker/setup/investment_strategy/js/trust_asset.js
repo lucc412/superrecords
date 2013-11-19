@@ -3,22 +3,13 @@ $(document).ready(function() {
     // on submit validation
     $('#frmTrust').submit(function() {
         flagReturn = true;
-            
-        if($('#txtYear1').length == '0') {
-            alert("Please add atleast one asset");
+        
+        if(!($('#txtYear').val())) {
+            txtYear.className = "errclass";
             flagReturn = false;
         }
-        
-        $('[id^=txtYear]').each(function (){
-            if(!$(this).val()) {
-                $(this).addClass('errclass');
-                flagReturn = false;
-            }
-            else {
-                $(this).removeClass("errclass");
-            }
-        });
-        
+        else txtYear.className = "";
+
         $('[id^=taAsset]').each(function (){
             if(!$(this).val()) {
                 $(this).addClass('errclass');
@@ -28,7 +19,17 @@ $(document).ready(function() {
                 $(this).removeClass("errclass");
             }
         });
-        
+
+        $('[id^=txtType]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+
         $('[id^=txtAmt]').each(function (){
             if(!$(this).val()) {
                 $(this).addClass('errclass');
@@ -38,6 +39,27 @@ $(document).ready(function() {
                 $(this).removeClass("errclass");
             }
         });
+
+        $('[id^=txtRange]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+
+        $('[id^=txtTarget]').each(function (){
+            if(!$(this).val()) {
+                $(this).addClass('errclass');
+                flagReturn = false;
+            }
+            else {
+                $(this).removeClass("errclass");
+            }
+        });
+        
         
         return flagReturn;
     });
@@ -49,8 +71,6 @@ $(document).ready(function() {
         assetCnt++;
         $('#divAssets').append('<div id="member_'+assetCnt+'"> <div style="padding:10px 0;color: #F05729;font-size: 14px;">Asset '+assetCnt+':</div>\n\
                                 <table class="fieldtable" width="60%" cellpadding="10px">\n\
-                                    <tr><td>Financial Year </td>\n\
-                                    <td><input type="text" id="txtYear'+assetCnt+'" name="txtYear'+assetCnt+'"  /></td></tr>\n\
                                     <tr><td>Asset </td>\n\
                                     <td><textarea id="taAsset'+assetCnt+'" name="taAsset'+assetCnt+'"  /></textarea></td></tr>\n\
                                     <tr><td>Asset Type </td>\n\

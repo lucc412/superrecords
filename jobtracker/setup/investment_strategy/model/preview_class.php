@@ -66,6 +66,19 @@ class Preview {
             
         return $arrAssets;
     }
+    
+    // fetch asset financial year
+    public function fetchTrustAssetYear()
+    {
+       $selQry="SELECT financial_year
+                FROM ins_asset 
+                WHERE job_id=".$_SESSION['jobId'];
+        $fetchResult = mysql_query($selQry);
+        $rowInfo = mysql_fetch_assoc($fetchResult);
+        $financialYear = $rowInfo['financial_year'];
+            
+        return $financialYear;
+    }
 
     // fetch other details
     public function fetchOtherDetails()
@@ -83,6 +96,7 @@ class Preview {
     public function generatePreview() {
        $arrFundDetail = $this->fetchFundData();
        $arrAssets = $this->fetchTrustAsset();
+       $financialYear = $this->fetchTrustAssetYear();
        $arrOtherDetail = $this->fetchOtherDetails();
        $arrInsDetail = stringToArray(',', $arrOtherDetail['insurance_details']);
        $arrInsurancelist = array("1" => "The trustees have considered the members individual insurance requirements and will put in place the required insurance policies.",
@@ -233,7 +247,11 @@ class Preview {
         /* Asset details starts */
         $asset = '<div class="test">Asset Allocation</div>
                     <br />
-                    <table class="first" cellpadding="4" cellspacing="6">';
+                    <table class="first" cellpadding="4" cellspacing="6">
+                        <tr>
+                            <td>Financial Year :</td>
+                            <td>'.$financialYear.'</td>
+                        </tr>';
         
         foreach ($arrAssets AS $assetCtr => $assetInfo) {
             $asset .= '<tr>
@@ -241,10 +259,6 @@ class Preview {
                         </tr> 
                         <tr>
                             <td colspan="2"><u>Asset '.$assetCtr.'</u></td>
-                        </tr>
-                        <tr>
-                            <td>Financial Year :</td>
-                            <td>'.$assetInfo['financial_year'].'</td>
                         </tr>
                         <tr>
                             <td>Asset :</td>

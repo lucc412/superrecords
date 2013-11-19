@@ -14,7 +14,7 @@
 ?>
 
 <div class="quicklink" id="jmcontactform" style="height: 323px;">
-<h1 class="title">Learn More</h1>
+<h1 class="title">Free Trial</h1>
 <form method="post" action="" name="josForm"  id="myForm" class="form-validate" enctype="multipart/form-data"  onSubmit="return validation()" >
 	<input type="hidden" name="hidMsg" id="hidMsg" value="N" />
 	

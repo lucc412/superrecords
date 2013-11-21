@@ -7,9 +7,6 @@
     require_once( dirname(__FILE__).DS.'helper.php' );
     $freetrialhandler = new modFreeTrialHelper();
     $session =& JFactory::getSession();
-    var_dump($params);
-
-
     
     $freetrialhandler->initialize($params);
     

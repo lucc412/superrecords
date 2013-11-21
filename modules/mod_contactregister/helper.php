@@ -12,7 +12,7 @@ class modContactRegisterHelper
 		$this->bcc =          $params->get('bcc-email');*/
 		$this->subject =      $params->get('subject');
 		$this->thankmsg =     'Thank You';
-		$this->session =& JFactory::getSession();
+		//$this->session =& JFactory::getSession();
 		return $this;
 	}
 	

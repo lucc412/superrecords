@@ -8,7 +8,7 @@
 	// Include the syndicate functions only once
 	require_once( dirname(__FILE__).DS.'helper.php' );
 	$contacthandler = new modContactRegisterHelper();
-	$session =& JFactory::getSession();
+	//$session =& JFactory::getSession();
 	
 	$result = $contacthandler->initialize($params);
 	 		

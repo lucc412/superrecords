@@ -13,7 +13,6 @@ class Job_Class extends Database
 	{
             if (isset($_REQUEST["order"])) $this->order = $_REQUEST["order"]; else $this->order = 'j1.job_received';
             if (isset($_REQUEST["type"])) $this->ordertype = $_REQUEST["type"];
-
             if ($this->ordertype == "DESC") { $this->ordertype = "ASC"; } else { $this->ordertype = "DESC"; }
 
             $this->arrJob = $this->fetchJob();
@@ -23,7 +22,6 @@ class Job_Class extends Database
             $this->arrPractice = $this->fetchPractice();
             $this->arrPracticeName = $this->fetchPracticeName();
             $this->arrJobType = $this->fetchJobType();
-            
 	}	
 
 	public function fetchPracticeName() {		
@@ -497,13 +495,6 @@ class Job_Class extends Database
 		$qryDel = "DELETE FROM queries WHERE query_id=".$_REQUEST["queryId"];
 		mysql_query($qryDel);
 	}
-	
-//************************************************************************************************
-//  Task          : Function to Insert new Job
-//  Modified By   : Dhiraj Sahu 
-//  Created on    : 15-Jan-2013
-//  Last Modified : 15-Jan-2013
-//************************************************************************************************  
 
 	public function insert_job()
 	{
@@ -531,7 +522,8 @@ class Job_Class extends Database
 
 		mysql_query($qryIns);
 		$jobId = mysql_insert_id();
-		$this->add_task($jobType, $period, $_REQUEST["lstPractice"], $client_Id, $jobId);
+                add_new_task($jobType, $jobId);
+		//$this->add_task($jobType, $period, $_REQUEST["lstPractice"], $client_Id, $jobId);
 		$this->add_source_Docs($jobId);
 		
 		return $jobId;

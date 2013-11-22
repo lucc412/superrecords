@@ -18,6 +18,8 @@
 <option value="<?php echo "pr.name" ?>"<?php if ($filterfield == "pr.name") { echo "selected"; } ?>>Practice Name</option> 
 <option value="<?php echo "t.task_name" ?>"<?php if ($filterfield == "t.task_name") { echo "selected"; } ?>>Task Name</option>
 <option value="<?php echo "ts.description" ?>"<?php if ($filterfield == "ts.description") { echo "selected"; } ?>>Task Status</option>
+<option value="<?php echo "tg.description" ?>"<?php if ($filterfield == "tg.description") { echo "selected"; } ?>>Task Stage</option>
+<option value="<?php echo "t.start_date" ?>"<?php if ($filterfield == "t.start_date") { echo "selected"; } ?>>Start Date</option>
 </select></td>
 <td><input class="checkboxClass" type="checkbox" name="wholeonly"<?php echo $checkstr ?>>Whole words only</td>
 </td></tr>
@@ -40,8 +42,10 @@
 	?><tr class="fieldheader">
 		<th width="15%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "pr.name" ?>&type=<?php echo $ordertype; ?>">Practice Name</a></th>
 		<th width="30%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.task_name" ?>&type=<?php echo $ordertype; ?>">Task Name</a></th>
-		<th width="30%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.task_status_id" ?>&type=<?php echo $ordertype; ?>">Task Status</a></th>
-		<th width="8%" class="fieldheader" colspan="3" align="center">Actions</th>
+		<th width="10%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.task_status_id" ?>&type=<?php echo $ordertype; ?>">Task Status</a></th>
+                <th width="20%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.task_stage_id" ?>&type=<?php echo $ordertype; ?>">Task Stage</a></th>
+                <th width="15%" align="center" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.start_date" ?>&type=<?php echo $ordertype; ?>">Start Date</a></th>
+		<th width="10%" class="fieldheader" colspan="3" align="center">Actions</th>
 	</tr><?
 
 	$countRow = 0;
@@ -51,11 +55,15 @@
  
 		?><tr class="<?=$trClass?>">
 			
-			<td class="<?=$style?>"><?=htmlspecialchars($arrInfo["name"])?></td>
+			<td><?=htmlspecialchars($arrInfo["name"])?></td>
 
-			<td class="<?=$style?>"><?=stripslashes($arrInfo["task_name"])?></td>
+			<td><?=stripslashes($arrInfo["task_name"])?></td>
 
-		  	<td class="<?=$style?>"><?=$arrInfo["description"]?></td><?
+		  	<td><?=$arrInfo["description"]?></td>
+                        
+		  	<td><?=$arrInfo["stageName"]?></td>
+                            
+                        <td align="center" ><?=$arrInfo["start_date"]?></td><?
 			
 			if($access_file_level['stf_View'] == "Y") {
 				?><td align="center">

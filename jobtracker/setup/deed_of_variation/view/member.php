@@ -24,11 +24,11 @@ include(DEEDVARCONTENT);
                     <select id="selMembers" name="selMembers" style="margin-bottom: 5px;width:180px;" onchange="addMembers()">
                         <option value="0">Select no of members</option>
                         <?php 
-                            for($i = 1;$i <= 4;$i++) 
+                            for($intCnt = $memeberStartCnt;$intCnt <= 4;$intCnt++) 
                             {
                                 $selectStr = '';
-                                if(count($arrMembrData) == $i) $selectStr = 'selected';
-                                ?><option <?=$selectStr?> value="<?=$i?>"><?=$i?></option><?
+                                if(count($arrMembrData) == $intCnt) $selectStr = 'selected';
+                                ?><option <?=$selectStr?> value="<?=$intCnt?>"><?=$intCnt?></option><?
                             }
                         ?>
                     </select>

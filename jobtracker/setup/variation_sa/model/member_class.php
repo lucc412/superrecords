@@ -7,7 +7,18 @@
 
 class MEMBER 
 {
-    //put your code here
+    // fetch holding trust type
+    public function fetchTrustType()
+    {
+       $selQry="SELECT trustee_id
+                FROM vsa_holding_trust
+                WHERE job_id=".$_SESSION['jobId'];
+        $fetchResult = mysql_query($selQry);
+        $rowInfo = mysql_fetch_assoc($fetchResult);
+        $trusteeType = $rowInfo['trustee_id'];
+            
+        return $trusteeType;
+    }
     
     public function fetchMemberDtls($member)
     {

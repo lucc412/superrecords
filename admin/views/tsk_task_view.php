@@ -57,6 +57,11 @@
 		<td class="hr">Task Status</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrTaskStatus[$arrTaskData["task_status_id"]])?></td>
 	</tr>
+        
+        <tr>
+		<td class="hr">Task Stage</td>
+		<td class="dr"><?=htmlspecialchars($arrTaskData["taskStage"])?></td>
+	</tr>
 	
 	<tr>
 		<td class="hr">Priority</td>
@@ -66,6 +71,11 @@
 	<tr>
 		<td class="hr">Process Cycle</td>
 		<td class="dr"><?=htmlspecialchars($objCallData->arrProcessingCycle[$arrTaskData["process_id"]])?></td>
+	</tr>
+        
+        <tr>
+		<td class="hr">Start Date</td>
+		<td class="dr"><?=$arrTaskData["start_date"]?></td>
 	</tr>
         
         <tr>

@@ -678,10 +678,12 @@ function returnJobName($jobId=NULL) {
 }
 
 // add new task
-function add_new_task() {
-    $qrySel = "SELECT jb.client_id, jb.mas_Code, jb.job_type_id, CONCAT_WS(' - ', cl.client_name, jb.period, sa.sub_Description)task_name
+function add_new_task($jobType='21', $jobId) {
+    if(empty($jobId)) $jobId = $_SESSION['jobId'];
+    
+    $qrySel = "SELECT jb.client_id, jb.mas_Code, jb.job_type_id, cl.client_name, jb.period, sa.sub_Description
                 FROM client cl, sub_subactivity sa, job jb
-                WHERE jb.job_id = {$_SESSION['jobId']}
+                WHERE jb.job_id = {$jobId}
                 AND jb.client_id = cl.client_id
                 AND jb.job_type_id = sa.sub_Code";
 
@@ -689,16 +691,84 @@ function add_new_task() {
     while($rowInfo = mysql_fetch_assoc($objResult)) {
             $arrJobData = $rowInfo;
     }
+    
+    switch ($jobType) {
+        // Setup
+        case "21":
+            $startDate = date('Y-m-d H:i:s', strtotime('+12 hours'));
+            $arrTasks = array("Order Document", "Apply ABN/TFN", "Open Bank Account");
+            break;
+            
+        // Audit only
+        case "11":
+            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
+            $arrTasks = array("Audit");
+            break;
+        
+        // Accounts Audit and Tax
+        case "1":
+            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
+            $arrTasks = array("Accounts and Tax", "Audit");
+            break;
+        
+        // Accounts and Audit
+        case "18":
+            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
+            $arrTasks = array("Accounts", "Audit");
+            break;
+        
+        // Accounts and Tax
+        case "22":
+            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
+            $arrTasks = array("Accounts and Tax");
+            break;
+        
+        // Accounts Only
+        case "12":
+            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
+            $arrTasks = array("Accounts");
+            break;
+        
+        // Tax & Audit
+        case "20":
+            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
+            $arrTasks = array("Tax and Audit");
+            break;
+        
+        // ias
+        case "17":
+            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
+            $arrTasks = array("IAS");
+            break;
+        
+        // bas
+        case "4":
+        case "16":
+            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
+            $arrTasks = array("BAS");
+            break;
+        
+        // default case
+        default: 
+            $startDate = NULL;
+            $arrTasks = array($arrJobData['sub_Description']);
+    }
+    
+    foreach($arrTasks AS $tskType) {
+        $taskName = $arrJobData['client_name'].' - '.$arrJobData['period'].' - '.$tskType;
 
-    $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code) 
-                VALUES ('" . $arrJobData['task_name'] . "',
-                '" . $_SESSION['PRACTICEID'] . "',
-                '" . $arrJobData['client_id'] . "',
-                '" . $_SESSION['jobId'] . "',
-                '" . $arrJobData['mas_Code'] . "',
-                '" . $arrJobData['job_type_id'] . "'
-                )";
-    mysql_query($qryIns);			
+        $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, start_date, mas_Code, sub_Code, task_status_id) 
+                    VALUES ('" . addslashes($taskName) . "',
+                    '" . $_SESSION['PRACTICEID'] . "',
+                    '" . $arrJobData['client_id'] . "',
+                    '" . $jobId . "',
+                    '" . $startDate . "',
+                    '" . $arrJobData['mas_Code'] . "',
+                    '" . $arrJobData['job_type_id'] . "',
+                    '1'
+                    )";
+        mysql_query($qryIns);
+    }			
 }
 
 // submit saved job - Update job_submitted field, add new task, send mail for new task & new job

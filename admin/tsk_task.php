@@ -181,6 +181,7 @@ if($_SESSION['validUser']) {
             $arrFewJob = $objCallData->fetchJob($arrTaskData["client_id"]);
             $arrFewSubActivity = $objCallData->fetchSubActivity($arrTaskData["mas_Code"]);
             $arrEmployees = $objCallData->fetchEmployees();
+            $arrStages = $objCallData->fetchTaskStage($arrTaskData['sub_Code']);
             include('views/tsk_task_edit.php');
             break;
 

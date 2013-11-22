@@ -31,7 +31,7 @@ switch ($sql)
 		}
 		else {
                     $objScr->update_job_completed($_SESSION['jobId']);
-                    add_new_task();
+                    add_new_task('11');
                     new_job_task_mail();
                     if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
                     header('location: jobs_pending.php');

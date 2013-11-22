@@ -19,6 +19,10 @@ if(!empty($_REQUEST['doAction']) && $_REQUEST['doAction'] == 'country')
     exit;    
 }
 
+$trusteeType = $objMemDtls->fetchTrustType();
+if($trusteeType == '1') $memeberStartCnt = 2;
+else $memeberStartCnt = 1;
+
 // fetch data if available 
 if(isset($_SESSION['jobId']) && !empty($_SESSION['jobId'])) {
 

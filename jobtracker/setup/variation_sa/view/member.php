@@ -24,7 +24,7 @@ include(DEEDVARCONTENT);
                     <select id="selMembers" name="selMembers" style="margin-bottom: 5px;width:180px;" onchange="addMembers()">
                         <option value="0">Select no of members</option>
                         <?php 
-                            for($i = 1;$i <= 4;$i++) 
+                            for($i = $memeberStartCnt;$i <= 4;$i++) 
                             {
                                 $selectStr = '';
                                 if(count($arrMembrData) == $i) $selectStr = 'selected';

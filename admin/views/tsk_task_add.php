@@ -37,7 +37,7 @@
 				}
 				else {
 			   		?><select id="lstPractice" name="lstPractice" onchange="javascript:selectOptions('Client');selectPanel();">
-						<option value="0">----- Select Practice -----</option><?php
+						<option value="0">Select Practice</option><?php
 						foreach($objCallData->arrPractice AS $practice_id => $practice_name) {
 							?><option value="<?=$practice_id?>"><?=$practice_name?></option><? 
 						} 
@@ -58,7 +58,7 @@
 				{
 			   		?><span id="spanClient">
 						<select id="lstClient" name="lstClient">
-							<option value="0">------------- Select Client -------------</option><?php
+							<option value="0">Select Client</option><?php
 					  ?></select>
 					</span>
 					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Client.</span></a><?
@@ -77,7 +77,7 @@
 				{
 			   		?><span id="spanJob">
 						<select id="lstJob" name="lstJob">
-							<option value="0">----- Select Job -----</option><?php
+							<option value="0">Select Job</option><?php
 					  ?></select>
 					</span>
 					<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Job.</span></a><?
@@ -88,7 +88,7 @@
 		<tr>
 			<td class="hr">Master Activity<font style="color:red;" size="2">*</font></td>
 			<td><select id="lstMasterActivity" name="lstMasterActivity" onchange="javascript:selectOptions('SubActivity');">
-					<option value="0">--- Select Master Activity ---</option><?php
+					<option value="0">Select Master Activity</option><?php
 					foreach($objCallData->arrMasterActivity AS $mas_code => $mas_desc){
 						?><option value="<?=$mas_code?>"><?=$mas_desc?></option><?php 
 					} 
@@ -102,7 +102,7 @@
 			<td>
 				<span id="spanSubActivity">	
 					<select id="lstSubActivity" name="lstSubActivity">
-						<option value="0">--------------- Select Sub Activity ---------------</option>
+						<option value="0">Select Sub Activity</option>
 					</select>
 				</span>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Sub Activity.</span></a>
@@ -111,7 +111,7 @@
 <tr>
 			<td class="hr">Task Status <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstTaskStatus">
-					<option value="0">--- Select Task Status ---</option><?php
+					<option value="0">Select Task Status</option><?php
 					foreach($objCallData->arrTaskStatus AS $id => $desc){
 						?><option value="<?=$id?>"><?=$desc?></option><?php 
 					} 
@@ -123,7 +123,7 @@
 		<tr>
 			<td class="hr">Priority <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstPriority">
-					<option value="0">--- Select Priority ---</option><?php
+					<option value="0">Select Priority</option><?php
 					foreach($objCallData->arrPriority AS $id => $desc){
 						?><option value="<?=$id?>"><?=$desc?></option><?php 
 					} 
@@ -135,7 +135,7 @@
 		<tr>
 			<td class="hr">Process Cycle <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstProcessingCycle">
-					<option value="0">--- Select Process Cycle ---</option><?php
+					<option value="0"Select Process Cycle</option><?php
 					foreach($objCallData->arrProcessingCycle AS $id => $desc){
 						?><option value="<?=$id?>"><?=$desc?></option><?php 
 					} 

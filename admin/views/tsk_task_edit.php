@@ -42,7 +42,7 @@
 				else
 				{
 			   		?><select id="lstPractice" name="lstPractice" onchange="javascript:selectOptions('Client');selectPanel();">
-					<option value="0">----- Select Practice -----</option><?php
+					<option value="0">Select Practice</option><?php
 					foreach($objCallData->arrPractice AS $practice_id => $practice_name){
 						$selectStr = '';
 						if($practice_id == $arrTaskData['id']) $selectStr = 'selected';
@@ -63,7 +63,7 @@
 				else {
 			   		?><span id="spanClient">
 						<select id="lstClient" name="lstClient">
-							<option value="0">------------- Select Client -------------</option><?php
+							<option value="0">Select Client</option><?php
 							foreach($arrFewClient AS $client_id => $client_name){
 								$selectStr = '';
 								if($client_id == $arrTaskData['client_id']) $selectStr = 'selected';
@@ -95,7 +95,7 @@
 						// Code to sort Job Names array in ascending order
 						asort($arrJobNames);
 						?><select id="lstJob" name="lstJob">
-								<option value="0">----- Select Job -----</option><?php
+								<option value="0">Select Job</option><?php
 								foreach($arrJobNames AS $job_id => $job_name)
 								{
 									$selectStr = '';
@@ -113,7 +113,7 @@
 		<tr>
 			<td class="hr">Master Activity<font style="color:red;" size="2">*</font></td>
 			<td><select id="lstMasterActivity" name="lstMasterActivity" onchange="javascript:selectOptions('SubActivity');">
-					<option value="0">--- Select Master Activity ---</option><?php
+					<option value="0">elect Master Activity</option><?php
 					foreach($objCallData->arrMasterActivity AS $mas_code => $mas_desc){
 						$selectStr = '';
 						if($mas_code == $arrTaskData['mas_Code']) $selectStr = 'selected';
@@ -129,7 +129,7 @@
 			<td>
 				<span id="spanSubActivity">
 					<select id="lstSubActivity" name="lstSubActivity">
-							<option value="0">--------------- Select Sub Activity ---------------</option><?php
+							<option value="0">Select Sub Activity</option><?php
 							foreach($arrFewSubActivity AS $sub_code => $sub_desc){
 								$selectStr = '';
 								if($sub_code == $arrTaskData['sub_Code']) $selectStr = 'selected';			
@@ -143,7 +143,7 @@
                 <tr>
 			<td class="hr">Task Status <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstTaskStatus">
-					<option value="0">--- Select Task Status ---</option><?php
+					<option value="0">Select Task Status</option><?php
 					foreach($objCallData->arrTaskStatus AS $id => $desc){
 						$selectStr = '';
 						if($id == $arrTaskData['task_status_id']) $selectStr = 'selected';	
@@ -153,12 +153,26 @@
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select task status.</span></a>
 			</td>
 		</tr>
+                
+                <tr>
+			<td class="hr">Task Stage</td>
+			<td><select name="lstTaskStage">
+					<option value="0">Select Task Stage</option><?php
+					foreach($arrStages AS $id => $desc){
+						$selectStr = '';
+						if($id == $arrTaskData['task_stage_id']) $selectStr = 'selected';	
+						?><option <?=$selectStr?> value="<?=$id?>"><?=$desc?></option><?php 
+					} 
+				?></select>
+				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select task stage.</span></a>
+			</td>
+		</tr>
 		
 		
 		<tr>
 			<td class="hr">Priority <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstPriority">
-					<option value="0">--- Select Priority ---</option><?php
+					<option value="0">Select Priority</option><?php
 					foreach($objCallData->arrPriority AS $id => $desc){
 						$selectStr = '';
 						if($id == $arrTaskData['priority_id']) $selectStr = 'selected';	
@@ -172,7 +186,7 @@
 		<tr>
 			<td class="hr">Process Cycle <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstProcessingCycle">
-					<option value="0">--- Select Process Cycle ---</option><?php
+					<option value="0">Select Process Cycle</option><?php
 					foreach($objCallData->arrProcessingCycle AS $id => $desc){
 						$selectStr = '';
 						if($id == $arrTaskData['process_id']) $selectStr = 'selected';	
@@ -181,6 +195,10 @@
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select process cycle for task.</span></a>
 			</td>
+		</tr>
+                <tr>
+			<td class="hr">Start Date</td>
+				<td class="dr"><?=$arrTaskData["start_date"]?></td>
 		</tr>
                 <tr>
 			<td class="hr">External Due Date</td>

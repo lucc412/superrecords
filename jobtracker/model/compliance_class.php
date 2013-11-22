@@ -127,24 +127,13 @@ class COMPLIANCE {
             mysql_query($qryIns);
             $jobId = mysql_insert_id();
 
-            // add source documents & new task if it is Compliance job
-            $this->add_task($_REQUEST['lstJobType'], $_REQUEST['txtPeriod'], $_SESSION['PRACTICEID'], $_REQUEST['lstClientType'], $jobId, $_REQUEST['lstCliType']);
+            // add new task
+            add_new_task($_REQUEST['lstJobType'], $jobId);
+            
+            // add source documents
             $this->add_source_Docs($jobId);
 
             return $jobId;
-	}
-
-	public function add_task($typeId, $period, $practiceId, $clientId, $jobId, $cliType) {
-		$taskName = returnJobName($jobId);
-		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code) 
-					VALUES ('" . $taskName . "',
-					'" . $practiceId . "',
-					'" . $clientId . "',
-					'" . $jobId . "',
-					'" . $cliType . "',
-					'" . $typeId . "'
-					)";
-		mysql_query($qryIns);			
 	}
         
 	public function add_source_Docs($jobId) {

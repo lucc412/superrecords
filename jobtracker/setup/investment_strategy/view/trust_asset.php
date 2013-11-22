@@ -17,7 +17,7 @@ include(INVSTMNTSTRAGYNAV);
     <input type="hidden" name="assetCnt" id="assetCnt" value="<?=$assetCnt?>">
     <span class="pdR20">Financial Year</span>
     <span class="pdR20"><input type="text" name="txtYear" id="txtYear" value="<?=$financialYear?>" /></span>
-    <span><button type="button" id="btnAdd" style="width:105px">Add Asset</button></span><?
+    <!--<span><button type="button" id="btnAdd" style="width:105px">Add Asset</button></span>--><?
     
     // add case
     if(empty($arrHoldTrust)) {
@@ -79,6 +79,7 @@ include(INVSTMNTSTRAGYNAV);
         }
     }
     ?><div id="divAssets"></div>
+    <span><button type="button" id="btnAdd" style="width:105px">Add Asset</button></span>
     
     <div class="pdT20">
         <span class="pdR20"><button type="button" onclick="window.location='fund.php'" value="Back">Back</button></span>

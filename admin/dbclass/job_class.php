@@ -124,22 +124,22 @@ class Job_Class extends Database
 			}
 		}
 		
-		if($_SESSION["usertype"] == "Staff") {
-			$userId = $_SESSION["staffcode"];
-			
-			if($_REQUEST['filter_field'] != 'practice' && $_REQUEST['filter_field'] != 'all')
-				//$strFrom = ",pr_practice p1";
+		if($_SESSION["usertype"] == "Staff") 
+                {
+                    $userId = $_SESSION["staffcode"];
+                    //if($_REQUEST['filter_field'] != 'practice' && $_REQUEST['filter_field'] != 'all')
+                            //$strFrom = ",pr_practice p1";
 				
-			$strWhere = " AND p1.id = c1.id
-						  AND (p1.sr_manager=".$userId." 
-						  OR p1.india_manager=".$userId." 
-						  OR p1.sales_person=".$userId." 
-						  OR p1.audit_manager=".$userId." 
-						  OR c1.team_member=".$userId."
-						  OR c1.sr_accnt_comp=".$userId."
-						  OR c1.sr_accnt_audit=".$userId.")";
-		}
-				
+                    $strWhere = " AND p1.id = c1.id
+                                      AND (p1.sr_manager=".$userId." 
+                                      OR p1.india_manager=".$userId." 
+                                      OR p1.sales_person=".$userId." 
+                                      OR p1.audit_manager=".$userId." 
+                                      OR c1.team_member=".$userId."
+                                      OR c1.sr_accnt_comp=".$userId."
+                                      OR c1.sr_accnt_audit=".$userId.")";
+                }
+                
 		$qrySel = "SELECT j1.job_id, j1.job_name, j1.client_id, j1.job_status_id, j1.job_type_id, j1.job_due_date, j1.job_received, c1.id, j1.period, j1.notes, j1.job_genre, j1.job_submitted, j1.mas_Code, DATE_FORMAT(j1.job_completed_date, '%d/%m/%Y') completedDate, j1.invoiceno
 					FROM job j1, client c1 , pr_practice p1, sub_subactivity sa, job_status s1 
 					WHERE j1.client_id = c1.client_id 

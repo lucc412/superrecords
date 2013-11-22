@@ -12,16 +12,12 @@
     <!-- Listing of all files that should be installed for the module to function -->
 	<files>
         <!-- The "module" attribute signifies that this is the main controller file -->
+                <filename>mod_freetrial.xml</filename>
 		<filename module="mod_freetrial">mod_freetrial.php</filename>
-		<filename>index.html</filename>
 		<filename>helper.php</filename>
 		<folder>tmpl</folder>
 	</files>
  
-    <languages>
-        <!-- Any language files included with the module -->
-        <language tag="en-GB">en-GB.mod_siteusers.ini</language>
-    </languages>
  
     <!-- Optional parameters -->
 	<config>

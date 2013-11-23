@@ -261,7 +261,7 @@ class Task_Class extends Database {
                         $qrySel .= " ORDER BY {$order} {$ordertype}";
 				
 		}
-                print $qrySel;
+                
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
 			$arrTask[$rowData['task_id']] = $rowData;

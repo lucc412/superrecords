@@ -135,7 +135,7 @@
 		<tr>
 			<td class="hr">Process Cycle <font style="color:red;" size="2">*</font></td>
 			<td><select name="lstProcessingCycle">
-					<option value="0"Select Process Cycle</option><?php
+                                <option value="0">Select Process Cycle</option><?php
 					foreach($objCallData->arrProcessingCycle AS $id => $desc){
 						?><option value="<?=$id?>"><?=$desc?></option><?php 
 					} 
@@ -146,18 +146,18 @@
 		
 		<tr>
 			<td class="hr">External Due Date</td>
-				<td class="dr">						
-					<input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
-					<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+                        <td class="dr">						
+                                <input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
+                                <img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
 			</td>
 		</tr>
 
 		<tr>
-			<td class="hr">Superrecords Due Date</td>
-				<td class="dr">						
-					<input type="text" name="befreeDueDate" id="befreeDueDate" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('befreeDueDate','ddmmyyyy',false,24)">
-					<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
-				</td>
+                        <td class="hr">Superrecords Due Date</td>
+                        <td class="dr">						
+                                <input type="text" name="befreeDueDate" id="befreeDueDate" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('befreeDueDate','ddmmyyyy',false,24)">
+                                <img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+                        </td>
 		</tr>
 		<tr>
 			<td class="hr">SR Manager</td>
@@ -179,7 +179,7 @@
 			<td class="hr">Sr. Accountant Comp</td>
 			<td class="dr" id="tdSrAcntComp"><?=$SrAccntCompEmail?></td>
 		</tr>
-        <tr>
+                <tr>
 			<td class="hr">Sr. Accountant Audit</td>
 			<td class="dr" id="tdSrAcntAudit"><?=$SrAccntAuditEmail?></td>
 		</tr>

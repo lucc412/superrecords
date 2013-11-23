@@ -290,7 +290,7 @@ function selectOptions(listName)
 
 	if(response == 0 )
 	{
-		var selectEmptyStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\''>----------- Select Client -----------</option></select>";
+		var selectEmptyStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\''>Select Client</option></select>";
 		document.getElementById("span"+listName).innerHTML = selectEmptyStr;
 	}
 	else
@@ -299,7 +299,7 @@ function selectOptions(listName)
 		
 		if(listName == 'Client')
 		{
-			var selectStr = "<select onChange=\'javascript:selectTeamMember();\' name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\''>----------- Select Client -----------</option>";
+			var selectStr = "<select onChange=\'javascript:selectTeamMember();\' name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\''>Select Client</option>";
 		}
 		
 		for(var i=0; i<arrData.length; i++)

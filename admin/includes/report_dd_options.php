@@ -95,6 +95,10 @@ switch($selectedColumn) {
 	case "task_status_id":
 		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("task_status", "id", "description", "order");
 	break;
+    
+        case "task_stage_id":
+		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("task_stage", "id", "description", "stg_order");
+	break;
 
 	case "priority_id":
 		$arrDDOptions[$selectedColumn] = $objCallUsers->fetch_dd_options("pri_priority", "pri_Code", "pri_Description", "pri_Order");

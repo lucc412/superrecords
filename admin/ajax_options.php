@@ -4,7 +4,7 @@
 	Created By	: Dhiraj Sahu 
 	Modified By : Disha Goyal
 	Created on  : 29-Dec-2012
-	Modified on : 26-Jan-2013 
+	Modified on : 23-Nov-2013 
 */
 
 include("dbclass/commonFunctions_class.php");
@@ -191,8 +191,8 @@ function fetch_team_member($clientId) {
 function fetchEmployees() {	
 
 	$qrySel = "SELECT ss.stf_Code, CONCAT_WS(' ', cc.con_Firstname, cc.con_Lastname) staffName 
-				 FROM stf_staff ss, con_contact cc
-				 WHERE ss.stf_CCode = cc.con_Code ";
+                    FROM stf_staff ss, con_contact cc
+                    WHERE ss.stf_CCode = cc.con_Code ";
 
 	$fetchResult = mysql_query($qrySel);		
 	while($rowData = mysql_fetch_assoc($fetchResult)) {

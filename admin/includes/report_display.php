@@ -38,10 +38,23 @@ if(!empty($returnSet)) {
 				}
 				$arrReturn[$key][$fieldName] = $dateField;
 			}
+                        
+                        // for datetime control type
+			else if($fieldTypex == 'DT') {
+				$dateField = "";
+				if (isset($fieldValue) && $fieldValue != "") {
+                                    if($fieldValue != "0000-00-00 00:00:00") {
+                                        $dateField = date("d/m/Y H:i:s",strtotime($fieldValue)); 
+                                    }
+				}
+				$arrReturn[$key][$fieldName] = $dateField;
+			}
+                        
 			// for text area control type
 			else if($fieldTypex == 'TA') {
 				$arrReturn[$key][$fieldName] = nl2br($fieldValue);
 			}
+                        
 			else {
 				$arrReturn[$key][$fieldName] = $fieldValue;
 			}

@@ -335,28 +335,28 @@ function new_job_task_mail()
 	/* send mail function ends here */	
 		
 	/* send mail function starts here for ADD NEW TASK */
-	$pageCode = "NWTSK";
-			
-	// check if event is active or inactive [This will return TRUE or FALSE as per result]
-	$flagSet = getEventStatus($pageCode);
-	
-	// if event is active it go for mail function
-	if($flagSet)
-	{
-		//It will Get All Details in array format for Send Email	
-		$arrEmailInfo = get_email_info($pageCode);
-
-		// fetch email id of sr manager
-		$to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
-		$cc = fetch_client_designation($_SESSION['jobId'],true,true,true);
-		if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
-		$bcc = $arrEmailInfo['event_bcc'];
-		$from = $arrEmailInfo['event_from'];
-		$subject = $arrEmailInfo['event_subject'];
-		$content = $arrEmailInfo['event_content'];
-		$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_SESSION['jobId']);
-		send_mail($from, $to, $cc, $bcc, $subject, $content);
-	}
+//	$pageCode = "NWTSK";
+//			
+//	// check if event is active or inactive [This will return TRUE or FALSE as per result]
+//	$flagSet = getEventStatus($pageCode);
+//	
+//	// if event is active it go for mail function
+//	if($flagSet)
+//	{
+//		//It will Get All Details in array format for Send Email	
+//		$arrEmailInfo = get_email_info($pageCode);
+//
+//		// fetch email id of sr manager
+//		$to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
+//		$cc = fetch_client_designation($_SESSION['jobId'],true,true,true);
+//		if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
+//		$bcc = $arrEmailInfo['event_bcc'];
+//		$from = $arrEmailInfo['event_from'];
+//		$subject = $arrEmailInfo['event_subject'];
+//		$content = $arrEmailInfo['event_content'];
+//		$content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_SESSION['jobId']);
+//		send_mail($from, $to, $cc, $bcc, $subject, $content);
+//	}
 	/* send mail function ends here */	
 }
 
@@ -701,10 +701,20 @@ function add_new_task($jobType='21', $jobId) {
             $arrTaskType[$resTaskType['task_type_id']] = $resTaskType;
     }
     
-    foreach ($arrTaskType as $taskTypeId => $taskInfo) {
-        $taskName = $arrJobData['client_name'].' - '.$arrJobData['period'].' - '.$taskInfo['task_type_name'];
-        $startDate = date('Y-m-d H:i:s', strtotime($taskInfo['task_start_hours']));
+    foreach ($arrTaskType as $taskTypeId => $taskInfo) 
+    {
+        if($taskInfo['task_type_name'] == 'Default')
+        {
+            $taskName = $arrJobData['client_name'].' - '.$arrJobData['period'].' - '.$arrJobData['sub_Description'];
+            $startDate = NULL;
+        }
+        else
+        {
+            $taskName = $arrJobData['client_name'].' - '.$arrJobData['period'].' - '.$taskInfo['task_type_name'];
+            $startDate = date('Y-m-d H:i:s', strtotime($taskInfo['task_start_hours']));
+        }
         $mailCode = $taskInfo['task_mail_code'];
+        
         // insert tasks    
         $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, start_date, mas_Code, sub_Code, task_status_id, task_type_id) 
                     VALUES ('" . addslashes($taskName) . "',
@@ -717,9 +727,99 @@ function add_new_task($jobType='21', $jobId) {
                     '1',
                     " . $taskTypeId . "
                     )";
-        mysql_query($qryIns);
         
-        // send mail
+        mysql_query($qryIns);
+        $task_id = mysql_insert_id();
+        /* send mail function starts here for ADD NEW TASK */
+        
+        switch ($jobType) {
+            // Setup
+            case "21":
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
+                $to .= fetch_client_designation($_SESSION['jobId'],false,true,false);
+                break;
+            
+            // Audit only
+            case "11":
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
+                $to .= fetch_client_designation($_SESSION['jobId'],false,false,true);
+                break;
+        
+            // Accounts Audit and Tax
+            case "1":
+                 $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
+                $to .= fetch_client_designation($_SESSION['jobId'],false,false,true);
+                break;
+            
+            // Accounts and Audit
+            case "18":
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
+                $to .= fetch_client_designation($_SESSION['jobId'],false,false,true);
+                break;
+
+            // Accounts and Tax
+            case "22":
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
+                $to .= fetch_client_designation($_SESSION['jobId'],false,true,false);
+                break;
+
+            // Accounts Only
+            case "12":
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
+                $to .= fetch_client_designation($_SESSION['jobId'],false,true,false);
+                break;
+
+            // Tax & Audit
+            case "20":
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
+                $to .= fetch_client_designation($_SESSION['jobId'],false,false,true);
+                break;
+
+            // ias
+            case "17":
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
+                $to .= fetch_client_designation($_SESSION['jobId'],false,true,false);
+                break;
+
+            // bas
+            case "4":
+            case "16":
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
+                $to .= fetch_client_designation($_SESSION['jobId'],false,true,false);
+                break;  
+
+            // default case
+            default: 
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
+                $to .= fetch_client_designation($_SESSION['jobId'],true,true,true);
+                break;
+
+        }
+        
+        // check if event is active or inactive [This will return TRUE or FALSE as per result]
+        $flagSet = getEventStatus($mailCode);
+        
+        // if event is active it go for mail function
+        if($flagSet)
+        {
+            //It will Get All Details in array format for Send Email	
+            $arrEmailInfo = get_email_info($mailCode);
+
+            // fetch email id of sr manager
+    //        $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
+    //        $cc = fetch_client_designation($_SESSION['jobId'],true,true,true);
+            
+            if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
+            $bcc = $arrEmailInfo['event_bcc'];
+            $from = $arrEmailInfo['event_from'];
+            $subject = $arrEmailInfo['event_subject'];
+            $content = $arrEmailInfo['event_content'];
+            $content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_SESSION['jobId'],$task_id);
+            
+            send_mail($from, $to, $cc, $bcc, $subject, $content);
+    
+        }
+        /* send mail function ends here */	  
         
     }
     

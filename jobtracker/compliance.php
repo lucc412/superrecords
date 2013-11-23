@@ -8,9 +8,7 @@ switch ($sql)
 {
     case "insertJob":		
             $jobId = $objScr->sql_insert();
-            if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
-            $_SESSION['jobId'] = $jobId;	
-
+            
             new_job_task_mail();
             if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
             header('location: jobs_pending.php');

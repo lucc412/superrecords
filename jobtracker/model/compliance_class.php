@@ -126,7 +126,9 @@ class COMPLIANCE {
 
             mysql_query($qryIns);
             $jobId = mysql_insert_id();
-
+            if(isset($_SESSION['jobId'])) unset($_SESSION['jobId']);
+            $_SESSION['jobId'] = $jobId;
+            
             // add new task
             add_new_task($_REQUEST['lstJobType'], $jobId);
             

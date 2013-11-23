@@ -692,6 +692,40 @@ function add_new_task($jobType='21', $jobId) {
             $arrJobData = $rowInfo;
     }
     
+    $qryTskType = "SELECT task_type_id, task_type_name, task_start_hours, task_mail_code
+                FROM task_type
+                WHERE sub_Code = {$jobType}";
+
+    $objTskResult = mysql_query($qryTskType);
+    while($resTaskType = mysql_fetch_assoc($objTskResult)) {
+            $arrTaskType[$resTaskType['task_type_id']] = $resTaskType;
+    }
+    
+    foreach ($arrTaskType as $taskTypeId => $taskInfo) {
+        $taskName = $arrJobData['client_name'].' - '.$arrJobData['period'].' - '.$taskInfo['task_type_name'];
+        $startDate = date('Y-m-d H:i:s', strtotime($taskInfo['task_start_hours']));
+        $mailCode = $taskInfo['task_mail_code'];
+        // insert tasks    
+        $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, start_date, mas_Code, sub_Code, task_status_id, task_type_id) 
+                    VALUES ('" . addslashes($taskName) . "',
+                    '" . $_SESSION['PRACTICEID'] . "',
+                    '" . $arrJobData['client_id'] . "',
+                    '" . $jobId . "',
+                    '" . $startDate . "',
+                    '" . $arrJobData['mas_Code'] . "',
+                    '" . $arrJobData['job_type_id'] . "',
+                    '1',
+                    " . $taskTypeId . "
+                    )";
+        mysql_query($qryIns);
+        
+        // send mail
+        
+    }
+    
+    
+   /* exit;
+    
     switch ($jobType) {
         // Setup
         case "21":
@@ -746,7 +780,7 @@ function add_new_task($jobType='21', $jobId) {
         case "16":
             $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
             $arrTasks = array("BAS");
-            break;
+            break;  
         
         // default case
         default: 
@@ -757,7 +791,7 @@ function add_new_task($jobType='21', $jobId) {
     foreach($arrTasks AS $tskType) {
         $taskName = $arrJobData['client_name'].' - '.$arrJobData['period'].' - '.$tskType;
 
-        $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, start_date, mas_Code, sub_Code, task_status_id) 
+        $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, start_date, mas_Code, sub_Code, task_status_id, task_type_id) 
                     VALUES ('" . addslashes($taskName) . "',
                     '" . $_SESSION['PRACTICEID'] . "',
                     '" . $arrJobData['client_id'] . "',
@@ -765,10 +799,11 @@ function add_new_task($jobType='21', $jobId) {
                     '" . $startDate . "',
                     '" . $arrJobData['mas_Code'] . "',
                     '" . $arrJobData['job_type_id'] . "',
-                    '1'
+                    '1',
+                    " . $taskTypeId . "
                     )";
         mysql_query($qryIns);
-    }			
+    }	*/		
 }
 
 // submit saved job - Update job_submitted field, add new task, send mail for new task & new job

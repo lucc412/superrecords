@@ -174,11 +174,11 @@ class Task_Class extends Database {
 		return $arrSubActivity;	
 	}
 
-        public function fetchTaskStage($jobType) {		
+        public function fetchTaskStage($taskTypeId) {		
 
                 // fetch possible task stages as per job type
-		$qrySel1 = "SELECT task_stage_id FROM sub_subactivity WHERE sub_Code = {$jobType}";
-                $fetchResult = mysql_query($qrySel1);	
+		$qrySel1 = "SELECT task_stage_id FROM task_type WHERE task_type_id = {$taskTypeId}";
+                $fetchResult = mysql_query($qrySel1);
                 $rowData = mysql_fetch_assoc($fetchResult);
                 
                 // fetch name of task stages
@@ -234,7 +234,7 @@ class Task_Class extends Database {
                          if(strstr($filterstr, "/"))$filterstr = $commonUses->getDateFormat($filterstr);
 			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
 			
-			$qrySel = "SELECT t.task_id, t.task_name, pr.name, task_stage_id, ts.description, j.job_id, DATE_FORMAT(t.start_date, '%d/%m/%Y %H:%i:%s')start_date, tg.description stageName
+			$qrySel = "SELECT t.task_id, t.task_name, pr.name, t.task_stage_id, t.task_type_id, ts.description, j.job_id, DATE_FORMAT(t.start_date, '%d/%m/%Y %H:%i:%s')start_date, tg.description stageName
 						FROM  job j, client c, pr_practice pr, task_status ts, task t
                                                 LEFT JOIN task_stage tg ON t.task_stage_id = tg.id
 						WHERE t.discontinue_date IS NULL
@@ -284,58 +284,13 @@ class Task_Class extends Database {
 
 	public function sql_insert($jobId, $clientId, $practiceId) {
             
-                // start date
-                switch ($_REQUEST['lstSubActivity']) {
-                    // Setup
-                    case "21":
-                        $startDate = date('Y-m-d H:i:s', strtotime('+12 hours'));
-                        break;
+                $qryTskType = "SELECT task_start_hours
+                                FROM task_type
+                                WHERE sub_Code = {$_REQUEST['lstSubActivity']}";
 
-                    // Audit only
-                    case "11":
-                        $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-                        break;
-
-                    // Accounts Audit and Tax
-                    case "1":
-                        $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-                        break;
-
-                    // Accounts and Audit
-                    case "18":
-                        $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-                        break;
-
-                    // Accounts and Tax
-                    case "22":
-                        $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-                        break;
-
-                    // Accounts Only
-                    case "12":
-                        $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-                        break;
-
-                    // Tax & Audit
-                    case "20":
-                        $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-                        break;
-
-                    // ias
-                    case "17":
-                        $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-                        break;
-
-                    // bas
-                    case "4":
-                    case "16":
-                        $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-                        break;
-
-                    // default case
-                    default: 
-                        $startDate = NULL;
-                }
+                $objTskResult = mysql_query($qryTskType);
+                $arrTaskType = mysql_fetch_assoc($objTskResult);
+                $startDate = date('Y-m-d H:i:s', strtotime($arrTaskType['task_start_hours']));
 
 		// external due date
 		$arrExtDate = explode("/", $_REQUEST["dateSignedUp"]);
@@ -345,22 +300,23 @@ class Task_Class extends Database {
 		$arrBefreeDate = explode("/", $_REQUEST["befreeDueDate"]);
 		$strBefreeDate = $arrBefreeDate[2]."-".$arrBefreeDate[1]."-".$arrBefreeDate[0];
 		
-		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, start_date, due_date, befree_due_date, created_date)
+		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, task_type_id, start_date, due_date, befree_due_date, created_date)
 				VALUES (
 				'" . addslashes($_REQUEST['txtTaskName']) . "', 
 				'" . $practiceId . "', 
 				'" . $clientId . "', 
-				'" . $jobId . "',
+				'" . $jobId . "', 
 				'" . $_REQUEST['lstMasterActivity'] . "', 
 				'" . $_REQUEST['lstSubActivity'] . "', 
 				'" . $_REQUEST['txtNotes'] . "', 
 				'" . $_REQUEST['lstTaskStatus'] . "', 
 				'" . $_REQUEST['lstPriority'] . "', 
 				'" . $_REQUEST['lstProcessingCycle'] . "', 
-				'" . $startDate . "',
-				'" . $strExtDate . "',
-				'" . $strBefreeDate . "',
-				NOW()  
+				'16', 
+				'" . $startDate . "', 
+				'" . $strExtDate . "', 
+				'" . $strBefreeDate . "', 
+				NOW() 
 				)";
 		
 		mysql_query($qryIns);

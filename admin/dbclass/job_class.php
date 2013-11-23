@@ -523,23 +523,9 @@ class Job_Class extends Database
 		mysql_query($qryIns);
 		$jobId = mysql_insert_id();
                 add_new_task($jobType, $jobId);
-		//$this->add_task($jobType, $period, $_REQUEST["lstPractice"], $client_Id, $jobId);
 		$this->add_source_Docs($jobId);
 		
 		return $jobId;
-	}
-	
-	public function add_task($typeId, $period, $practiceId, $clientId, $jobId) {
-		
-		$taskName = $this->arrClient[$clientId]["client_name"] . ' - ' . $period . ' - ' . $this->arrJobType[$typeId];
-	
-		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id) 
-					VALUES ('" . $taskName . "',
-					'" . $practiceId . "',
-					'" . $clientId . "',
-					'" . $jobId . "'
-					)";
-		mysql_query($qryIns);			
 	}
 	
 	public function add_source_Docs($jobId) {

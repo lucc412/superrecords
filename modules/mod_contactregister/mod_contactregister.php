@@ -8,7 +8,7 @@
 	// Include the syndicate functions only once
 	require_once( dirname(__FILE__).DS.'helper.php' );
 	$contacthandler = new modContactRegisterHelper();
-	//$session =& JFactory::getSession();
+	$session =& JFactory::getSession();
 	
 	$result = $contacthandler->initialize($params);
 	 		
@@ -21,7 +21,7 @@
 		if($cCheck)
 		{
 			$thankmsg = $contacthandler->thankyouMessage();
-			$url = 'contact-us/thank-you-contactus.html';
+			$url = 'thank-you-page.html';
 			$app->redirect($url,$thankmsg);
 		
 		}else{

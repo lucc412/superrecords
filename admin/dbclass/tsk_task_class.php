@@ -182,7 +182,7 @@ class Task_Class extends Database {
                 $rowData = mysql_fetch_assoc($fetchResult);
                 
                 // fetch name of task stages
-                $qrySel2 = "SELECT id, description FROM task_stage WHERE id IN ({$rowData['task_stage_id']})";
+                $qrySel2 = "SELECT id, description FROM task_stage WHERE id IN ({$rowData['task_stage_id']}) ORDER BY stg_order";
 
 		$fetchResult = mysql_query($qrySel2);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

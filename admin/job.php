@@ -71,37 +71,11 @@ if($_SESSION['validUser']) {
 						$content = $arrEmailInfo['event_content'];
 						$content = replaceContent($content, NULL, $_REQUEST['lstPractice'], NULL, $jobId);
 						
-						include_once(MAIL);
+						 
 						send_mail($from, $to, $cc, $bcc, $subject, $content);
 					}
 					/* send mail function ends here */
 
-					/* send mail function starts here for ADD NEW TASK */
-					$pageCode = "NWTSK";
-					
-					// check if event is active or inactive [This will return TRUE or FALSE as per result]
-					$flagSet = getEventStatus($pageCode);
-					
-					// if event is active it go for mail function
-					if($flagSet) {
-
-						//It will Get All Details in array format for Send Email	
-						$arrEmailInfo = get_email_info($pageCode);
-
-						// fetch email id of sr manager
-						$to = fetch_prac_designation($_REQUEST['lstPractice'],true,false,true,true);
-						$cc = fetch_client_designation($jobId,true,true,true);
-						if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
-						$bcc = $arrEmailInfo['event_bcc'];
-						$from = $arrEmailInfo['event_from'];
-						$subject = $arrEmailInfo['event_subject'];
-						$content = $arrEmailInfo['event_content'];
-						$content = replaceContent($content, NULL, NULL, NULL, $jobId);
-						
-						include_once(MAIL);
-						send_mail($from, $to, $cc, $bcc, $subject, $content);
-					}
-					/* send mail function ends here */
 					header('location: job.php');
 					break;
 
@@ -132,7 +106,7 @@ if($_SESSION['validUser']) {
 							$content = $arrEmailInfo['event_content'];
 							$content = replaceContent($content,NULL,$practiceId,NULL,$jobId);
 							
-							include_once(MAIL);
+							 
 							send_mail($from, $to, $cc, $bcc, $subject, $content);
 						}
 						/* send mail function ends here */
@@ -190,7 +164,7 @@ if($_SESSION['validUser']) {
 						$content = $arrEmailInfo['event_content'];	
 						$content = replaceContent($content,NULL,$practiceId,NULL,$jobId);
 						
-						include_once(MAIL);
+						 
 						send_mail($from, $to, $cc, $bcc, $subject, $content);
 					}
 					/* send mail function ends here */
@@ -264,7 +238,7 @@ if($_SESSION['validUser']) {
 					$content = $arrEmailInfo['event_content'];	
 					$content = replaceContent($content,NULL,NULL,NULL,$jobId);
 					
-					include_once(MAIL);
+					 
 					send_mail($from, $to, $cc, $bcc, $subject, $content);
 					/* send mail function ends here */
 

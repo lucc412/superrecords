@@ -2,6 +2,7 @@
 include ("includes/class.Database.php");
 include ('includes/varDeclare.php');
 include ('includes/commonFunctionExtends.php');
+include_once(MAIL);
 
 class commonUse extends Database
 {

@@ -62,7 +62,7 @@ if($_SESSION['validUser']) {
 						$subject = $arrEmailInfo['event_subject'];
 						$content = $arrEmailInfo['event_content'];
 						$content = replaceContent($content, $_REQUEST["lstSalesPerson"], $practiceId);
-						include_once(MAIL);
+						 
 						send_mail($from, $to, $cc, $bcc, $subject, $content);
 					}
 
@@ -80,7 +80,7 @@ if($_SESSION['validUser']) {
 							$subject = $arrEmailInfo['event_subject'];
 							$content = $arrEmailInfo['event_content'];
 							$content = replaceContent($content,NULL,$practiceId,NULL,NULL);
-							include_once(MAIL);
+							 
 							send_mail($from, $to, $cc, $bcc, $subject, $content);
 						}
 					}
@@ -99,7 +99,7 @@ if($_SESSION['validUser']) {
 							$subject = $arrEmailInfo['event_subject'];
 							$content = $arrEmailInfo['event_content'];
 							$content = replaceContent($content,NULL,$practiceId,NULL,NULL);
-							include_once(MAIL);
+							 
 							send_mail($from, $to, $cc, $bcc, $subject, $content);
 						}
 					}
@@ -126,7 +126,7 @@ if($_SESSION['validUser']) {
 								$subject = $arrEmailInfo['event_subject'];
 								$content = $arrEmailInfo['event_content'];
 								$content = replaceContent($content,NULL,$_REQUEST['recid'],NULL,NULL);
-								include_once(MAIL);
+								 
 								send_mail($from, $to, $cc, $bcc, $subject, $content);
 							}
 						}
@@ -149,7 +149,7 @@ if($_SESSION['validUser']) {
 								$subject = $arrEmailInfo['event_subject'];
 								$content = $arrEmailInfo['event_content'];
 								$content = replaceContent($content,NULL,$_REQUEST['recid'],NULL,NULL);
-								include_once(MAIL);
+								 
 								send_mail($from, $to, $cc, $bcc, $subject, $content);
 							}
 						}

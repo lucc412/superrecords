@@ -79,7 +79,7 @@ if($_SESSION['validUser']) {
                             $content = $arrEmailInfo['event_content'];
                             $content = replaceContent($content, NULL, NULL, NULL, $jobId);
 
-                            include_once(MAIL);
+                             
                             send_mail($from, $to, $cc, $bcc, $subject, $content);
                     }
                     /* send mail function ends here */
@@ -123,7 +123,7 @@ if($_SESSION['validUser']) {
                                     $content = $arrEmailInfo['event_content'];
                                     $content = replaceContent($content,NULL,NULL,NULL,NULL,$taskId);
 
-                                    include_once(MAIL);
+                                     
                                     send_mail($from, $to, $cc, $bcc, $subject, $content);
                             }
                             /* send mail function ends here */

@@ -787,7 +787,6 @@ function add_new_task($jobType='21', $jobId) {
                 $to = fetch_prac_designation($practice_id,true,false,true,true);
                 $to .= ','.fetch_client_designation($jobId,true,true,true);
                 $cc = fetch_client_designation($jobId,true,true,true);
-                var_dump($to);
                 break;
 
         }

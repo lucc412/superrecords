@@ -148,6 +148,7 @@ function fetch_client_designation($jobId, $flTeamMmbr=false, $flSrAcComp=false, 
 	$arrCcEmail = array_filter($arrCcEmail);
 	$strCcEmail = implode(',',$arrCcEmail);
 
+        
 	return $strCcEmail;
 }
 
@@ -730,68 +731,54 @@ function add_new_task($jobType='21', $jobId) {
         
         mysql_query($qryIns);
         $task_id = mysql_insert_id();
-        /* send mail function starts here for ADD NEW TASK */
         
-        switch ($jobType) {
+        /* send mail function starts here for ADD NEW TASK */
+
+        $cc = "";
+        switch ($mailCode) {
             // Setup
-            case "21":
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
-                $to .= fetch_client_designation($_SESSION['jobId'],false,true,false);
+            case "TOBAC":
+            case "TANTN":
+            case "TSETP":
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
+               // $to .= ','.fetch_client_designation($_SESSION['jobId'],false,true,false);
                 break;
             
             // Audit only
-            case "11":
+            case "TAUDT":
                 $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
-                $to .= fetch_client_designation($_SESSION['jobId'],false,false,true);
+                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,false,true);
                 break;
         
-            // Accounts Audit and Tax
-            case "1":
-                 $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
-                $to .= fetch_client_designation($_SESSION['jobId'],false,false,true);
+            // Audit and Tax
+            case "TTXAD":
+                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
+                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,false,true);
                 break;
             
-            // Accounts and Audit
-            case "18":
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
-                $to .= fetch_client_designation($_SESSION['jobId'],false,false,true);
-                break;
-
-            // Accounts and Tax
-            case "22":
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
-                $to .= fetch_client_designation($_SESSION['jobId'],false,true,false);
-                break;
-
             // Accounts Only
-            case "12":
+            case "TACCT":
                 $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
-                $to .= fetch_client_designation($_SESSION['jobId'],false,true,false);
+                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,true,false);
                 break;
 
             // Tax & Audit
-            case "20":
+            case "TTXAD":
                 $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
-                $to .= fetch_client_designation($_SESSION['jobId'],false,false,true);
+                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,false,true);
                 break;
 
-            // ias
-            case "17":
+            // ias/bas
+            case "TBSIS":
                 $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
-                $to .= fetch_client_designation($_SESSION['jobId'],false,true,false);
+                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,true,false);
                 break;
-
-            // bas
-            case "4":
-            case "16":
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
-                $to .= fetch_client_designation($_SESSION['jobId'],false,true,false);
-                break;  
 
             // default case
             default: 
                 $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
-                $to .= fetch_client_designation($_SESSION['jobId'],true,true,true);
+                $to .= ','.fetch_client_designation($_SESSION['jobId'],true,true,true);
+                $cc = fetch_client_designation($_SESSION['jobId'],true,true,true);
                 break;
 
         }
@@ -805,11 +792,8 @@ function add_new_task($jobType='21', $jobId) {
             //It will Get All Details in array format for Send Email	
             $arrEmailInfo = get_email_info($mailCode);
 
-            // fetch email id of sr manager
-    //        $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
-    //        $cc = fetch_client_designation($_SESSION['jobId'],true,true,true);
-            
-            if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc'];
+            if(!empty($arrEmailInfo['event_cc'])) $cc .= ','.$arrEmailInfo['event_cc']; 
+            $cc = stringltrim($cc,',');
             $bcc = $arrEmailInfo['event_bcc'];
             $from = $arrEmailInfo['event_from'];
             $subject = $arrEmailInfo['event_subject'];
@@ -822,88 +806,6 @@ function add_new_task($jobType='21', $jobId) {
         /* send mail function ends here */	  
         
     }
-    
-    
-   /* exit;
-    
-    switch ($jobType) {
-        // Setup
-        case "21":
-            $startDate = date('Y-m-d H:i:s', strtotime('+12 hours'));
-            $arrTasks = array("Order Document", "Apply ABN/TFN", "Open Bank Account");
-            break;
-            
-        // Audit only
-        case "11":
-            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-            $arrTasks = array("Audit");
-            break;
-        
-        // Accounts Audit and Tax
-        case "1":
-            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-            $arrTasks = array("Accounts and Tax", "Audit");
-            break;
-        
-        // Accounts and Audit
-        case "18":
-            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-            $arrTasks = array("Accounts", "Audit");
-            break;
-        
-        // Accounts and Tax
-        case "22":
-            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-            $arrTasks = array("Accounts and Tax");
-            break;
-        
-        // Accounts Only
-        case "12":
-            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-            $arrTasks = array("Accounts");
-            break;
-        
-        // Tax & Audit
-        case "20":
-            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-            $arrTasks = array("Tax and Audit");
-            break;
-        
-        // ias
-        case "17":
-            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-            $arrTasks = array("IAS");
-            break;
-        
-        // bas
-        case "4":
-        case "16":
-            $startDate = date('Y-m-d H:i:s', strtotime('+24 hours'));
-            $arrTasks = array("BAS");
-            break;  
-        
-        // default case
-        default: 
-            $startDate = NULL;
-            $arrTasks = array($arrJobData['sub_Description']);
-    }
-    
-    foreach($arrTasks AS $tskType) {
-        $taskName = $arrJobData['client_name'].' - '.$arrJobData['period'].' - '.$tskType;
-
-        $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, start_date, mas_Code, sub_Code, task_status_id, task_type_id) 
-                    VALUES ('" . addslashes($taskName) . "',
-                    '" . $_SESSION['PRACTICEID'] . "',
-                    '" . $arrJobData['client_id'] . "',
-                    '" . $jobId . "',
-                    '" . $startDate . "',
-                    '" . $arrJobData['mas_Code'] . "',
-                    '" . $arrJobData['job_type_id'] . "',
-                    '1',
-                    " . $taskTypeId . "
-                    )";
-        mysql_query($qryIns);
-    }	*/		
 }
 
 // submit saved job - Update job_submitted field, add new task, send mail for new task & new job

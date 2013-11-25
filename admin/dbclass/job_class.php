@@ -523,6 +523,7 @@ class Job_Class extends Database
 		mysql_query($qryIns);
 		$jobId = mysql_insert_id();
                 add_new_task($jobType, $jobId);
+                
 		$this->add_source_Docs($jobId);
 		
 		return $jobId;

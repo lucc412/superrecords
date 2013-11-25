@@ -62,7 +62,7 @@ if($_SESSION['validUser']) {
 						$content = $arrEmailInfo['event_content'];
 						$content = replaceContent($content, NULL,$practiceId,NULL,NULL);
 						$content = str_replace('CLIENTNAME',$clientName,$content);
-						include_once(MAIL);
+						 
 						send_mail($from, $to, $cc, $bcc, $subject, $content);
 					}
 
@@ -80,7 +80,7 @@ if($_SESSION['validUser']) {
 							$subject = $arrEmailInfo['event_subject'];
 							$content = $arrEmailInfo['event_content'];
 							$content = str_replace('CLIENTNAME',$clientName,$content);
-							include_once(MAIL);
+							 
 							send_mail($from, $to, $cc, $bcc, $subject, $content);
 						}
 					}
@@ -99,7 +99,7 @@ if($_SESSION['validUser']) {
 							$subject = $arrEmailInfo['event_subject'];
 							$content = $arrEmailInfo['event_content'];
 							$content = str_replace('CLIENTNAME',$clientName,$content);
-							include_once(MAIL);
+							 
 							send_mail($from, $to, $cc, $bcc, $subject, $content);
 						}
 					}
@@ -118,7 +118,7 @@ if($_SESSION['validUser']) {
 							$subject = $arrEmailInfo['event_subject'];
 							$content = $arrEmailInfo['event_content'];
 							$content = str_replace('CLIENTNAME',$clientName,$content);
-							include_once(MAIL);
+							 
 							send_mail($from, $to, $cc, $bcc, $subject, $content);
 						}
 					}
@@ -149,7 +149,7 @@ if($_SESSION['validUser']) {
 								$subject = $arrEmailInfo['event_subject'];
 								$content = $arrEmailInfo['event_content'];
 								$content = replaceContent($content,NULL,NULL,$_REQUEST['recid']);
-								include_once(MAIL);
+								 
 								send_mail($from, $to, $cc, $bcc, $subject, $content);
 							}
 						}
@@ -172,7 +172,7 @@ if($_SESSION['validUser']) {
 								$subject = $arrEmailInfo['event_subject'];
 								$content = $arrEmailInfo['event_content'];
 								$content = replaceContent($content,NULL,NULL,$_REQUEST['recid']);
-								include_once(MAIL);
+								 
 								send_mail($from, $to, $cc, $bcc, $subject, $content);
 							}
 						}
@@ -195,7 +195,7 @@ if($_SESSION['validUser']) {
 								$subject = $arrEmailInfo['event_subject'];
 								$content = $arrEmailInfo['event_content'];
 								$content = replaceContent($content,NULL,NULL,$_REQUEST['recid']);
-								include_once(MAIL);
+								 
 								send_mail($from, $to, $cc, $bcc, $subject, $content);
 							}
 						}

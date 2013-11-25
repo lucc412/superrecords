@@ -682,7 +682,8 @@ function returnJobName($jobId=NULL) {
 function add_new_task($jobType='21', $jobId) {
     if(empty($jobId)) $jobId = $_SESSION['jobId'];
     
-    $qrySel = "SELECT jb.client_id, jb.mas_Code, jb.job_type_id, cl.client_name, jb.period, sa.sub_Description
+    
+    $qrySel = "SELECT jb.client_id, jb.mas_Code, jb.job_type_id, cl.client_name, jb.period, sa.sub_Description, cl.id practice_id
                 FROM client cl, sub_subactivity sa, job jb
                 WHERE jb.job_id = {$jobId}
                 AND jb.client_id = cl.client_id
@@ -692,6 +693,7 @@ function add_new_task($jobType='21', $jobId) {
     while($rowInfo = mysql_fetch_assoc($objResult)) {
             $arrJobData = $rowInfo;
     }
+    $practice_id = $arrJobData['practice_id'];
     
     $qryTskType = "SELECT task_type_id, task_type_name, task_start_hours, task_mail_code
                 FROM task_type
@@ -719,7 +721,7 @@ function add_new_task($jobType='21', $jobId) {
         // insert tasks    
         $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, start_date, mas_Code, sub_Code, task_status_id, task_type_id) 
                     VALUES ('" . addslashes($taskName) . "',
-                    '" . $_SESSION['PRACTICEID'] . "',
+                    '" . $practice_id . "',
                     '" . $arrJobData['client_id'] . "',
                     '" . $jobId . "',
                     '" . $startDate . "',
@@ -740,51 +742,52 @@ function add_new_task($jobType='21', $jobId) {
             case "TOBAC":
             case "TANTN":
             case "TSETP":
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
+                $to = fetch_prac_designation($practice_id,true,false,true,true);
                // $to .= ','.fetch_client_designation($_SESSION['jobId'],false,true,false);
                 break;
             
             // Audit only
             case "TAUDT":
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
-                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,false,true);
+                $to = fetch_prac_designation($practice_id,true,false,false,true);
+                $to .= ','.fetch_client_designation($jobId,false,false,true);
                 break;
         
             // Audit and Tax
             case "TTXAD":
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
-                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,false,true);
+                $to = fetch_prac_designation($practice_id,true,false,false,true);
+                $to .= ','.fetch_client_designation($jobId,false,false,true);
                 break;
             
             // Accounts and Tax
             case "TACTX":
-                 $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
-                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,true,false);
+                 $to = fetch_prac_designation($practice_id,true,false,true,false);
+                $to .= ','.fetch_client_designation($jobId,false,true,false);
                 break;
             
             // Accounts Only
             case "TACCT":
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
-                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,true,false);
+                $to = fetch_prac_designation($practice_id,true,false,true,false);
+                $to .= ','.fetch_client_designation($jobId,false,true,false);
                 break;
 
             // Tax & Audit
             case "TTXAD":
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,false,true);
-                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,false,true);
+                $to = fetch_prac_designation($practice_id,true,false,false,true);
+                $to .= ','.fetch_client_designation($jobId,false,false,true);
                 break;
 
             // ias/bas
             case "TBSIS":
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
-                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,true,false);
+                $to = fetch_prac_designation($practice_id,true,false,true,false);
+                $to .= ','.fetch_client_designation($jobId,false,true,false);
                 break;
 
             // default case
             default: 
-                $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,true);
-                $to .= ','.fetch_client_designation($_SESSION['jobId'],true,true,true);
-                $cc = fetch_client_designation($_SESSION['jobId'],true,true,true);
+                $to = fetch_prac_designation($practice_id,true,false,true,true);
+                $to .= ','.fetch_client_designation($jobId,true,true,true);
+                $cc = fetch_client_designation($jobId,true,true,true);
+                var_dump($to);
                 break;
 
         }
@@ -804,7 +807,7 @@ function add_new_task($jobType='21', $jobId) {
             $from = $arrEmailInfo['event_from'];
             $subject = $arrEmailInfo['event_subject'];
             $content = $arrEmailInfo['event_content'];
-            $content = replaceContent($content, NULL, $_SESSION['PRACTICEID'], NULL, $_SESSION['jobId'],$task_id);
+            $content = replaceContent($content, NULL, $practice_id, NULL, $jobId,$task_id);
             
             send_mail($from, $to, $cc, $bcc, $subject, $content);
     

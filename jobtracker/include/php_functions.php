@@ -756,6 +756,12 @@ function add_new_task($jobType='21', $jobId) {
                 $to .= ','.fetch_client_designation($_SESSION['jobId'],false,false,true);
                 break;
             
+            // Accounts and Tax
+            case "TACTX":
+                 $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);
+                $to .= ','.fetch_client_designation($_SESSION['jobId'],false,true,false);
+                break;
+            
             // Accounts Only
             case "TACCT":
                 $to = fetch_prac_designation($_SESSION['PRACTICEID'],true,false,true,false);

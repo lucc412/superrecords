@@ -110,7 +110,7 @@ a img{
 	background:-ms-linear-gradient(left,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* IE10+ */
 	background:linear-gradient(to right,  rgba(7,65,96,1) 0%,rgba(19,108,144,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#074160', endColorstr='#136c90',GradientType=1 ); /* IE6-9 */	
-	
+	margin-top:15px;
 	background-image:url(../images/acc-arrow.jpg) 254px 11px no-repeat;
 	float: left;
 }
@@ -507,8 +507,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:14px;
 	line-height:21px;
-	/* margin:10px; */
-	margin:0px;
+	margin:10px 0;
 }
 
 .contentgeneral .contenttext p span {
@@ -519,8 +518,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 .contentgeneral .contenttext p.dark-blue{
 	color:#f05927;
-	font-size:13px;
-	font-family: verdana;
+	font-size:14px;
+	font-weight:bold;
 }
 
 
@@ -609,6 +608,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	color:#fff;
 	margin-right:10px;
 	background:none;
+}
+
+.rightmenu li:active {
+	background:url(../images/rightmenu-hover.jpg) 0px 0px no-repeat;
+}
+
+.rightmenu li a:active {
+    color: #FFFFFF;
+    margin-right: 10px;
+    background:url(../images/rightmenu-hover.jpg) 0px 0px no-repeat;
 }
 
 .contactform h1 {

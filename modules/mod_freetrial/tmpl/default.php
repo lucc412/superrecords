@@ -3,11 +3,12 @@
     defined ('_JEXEC') or die ('Not Access');
     $document = &JFactory::getDocument();
     $document->addCustomTag('<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>');
+//    $document->addScript(JURI::root() .'modules/mod_freetrial/tmpl/securimage/js/contactregister.js');
     $exist_url = JURI::root();
 ?>
+<h5>Free Trial Registration</h5></br>
 
-
-<form action="" method="POST" enctype="multipart/form-data" name="josForm"  id="myForm">
+<form action="" method="POST" enctype="multipart/form-data" name="josForm"  id="myForm" onSubmit="return validation()">
 	<table width="400px" border="0" cellspacing="0" cellpadding="10">
 		<tbody>
 			<tr>
@@ -28,7 +29,29 @@
 			</tr>
 			<tr>
                             <td class="text"><strong>State </strong></td>
-                                <td><select id="state" name="state" style="width:198px;" required><option value="0">--Select State--</option><option value="Australian Capital Territory">Australian Capital Territory</option><option value="New South Wales">New South Wales</option><option value="Northern Territory">Northern Territory</option><option value="Queensland">Queensland</option><option value="South Australia">South Australia</option><option value="Tasmania">Tasmania</option><option value="Victoria">Victoria</option><option value="Western Australia">Western Australia</option></select><br /><span id="val_state" style="color: red; font-size: 11px; font-weight: normal;"></span></td>
+                                <td>
+                                    <?php $arrStates = array("Australian Capital Territory"=>"Australian Capital Territory",
+                                                            "New South Wales"=>"New South Wales",
+                                                            "Northern Territory"=>"Northern Territory",
+                                                            "Queensland"=>"Queensland",
+                                                            "South Australia"=>"South Australia",
+                                                            "Tasmania"=>"Tasmania",
+                                                            "Victoria"=>"Victoria",
+                                                            "Western Australia"=>"Western Australia"
+                                                       ); 
+                                    
+                                    ?>
+                                    <select id="state" name="state" style="width:198px;" required>
+                                        <option value="0">--Select State--</option>
+                                        <?php 
+                                            foreach ($arrStates as $key => $value) {
+                                                $sel="";
+                                                if($_REQUEST['state'] == $key) $sel = "selected=''";
+                                                ?><option value="<?=$key?>" <?=$sel?> ><?=$value?></option><?php
+                                            }
+                                        ?>
+                                    </select>
+                                </td>
 			</tr>
 			<tr>
                             <td class="text"><strong>Enter Captcha </strong></td>
@@ -36,7 +59,7 @@
                                 <div style="float: left;">
                                     <div class="row_inner" id="input" >
                                         <img id="siimage" style="border: 1px solid #CCC; margin-right: 15px; border-radius: 4px; height:25px; width:140px; padding: 8px;" src="<?=$exist_url?>modules/mod_freetrial/tmpl/securimage/securimage_show.php?sid=<?php echo md5(uniqid()) ?>" alt="CAPTCHA Image" align="left" />
-                                        <div style="padding: 2px;height: auto;width: auto;position: relative;margin-top: 3px;">
+                                        <div style="height: auto;width: auto;position: relative;margin-top: 3px;">
                                                 <object type="application/x-shockwave-flash" data="<?=$exist_url?>modules/mod_freetrial/tmpl/securimage/securimage_play.swf?bgcol=#ffffff&amp;icon_file=<?=$exist_url?>modules/mod_freetrial/tmpl/securimage/images/audio_icon.png&amp;audio_file=<?=$exist_url?>modules/mod_freetrial/tmpl/securimage/securimage_play.php" height="18" width="18">
                                                 <param name="movie" value="<?=$exist_url?>modules/mod_freetrial/tmpl/securimage/securimage_play.swf?bgcol=#ffffff&amp;icon_file=<?=$exist_url?>modules/mod_freetrial/tmpl/securimage/images/audio_icon.png&amp;audio_file=./securimage_play.php" />
                                                 </object>

@@ -12,7 +12,7 @@ class modContactRegisterHelper
 		$this->bcc =          $params->get('bcc-email');*/
 		$this->subject =      $params->get('subject');
 		$this->thankmsg =     'Thank You';
-		//$this->session =& JFactory::getSession();
+		$this->session =& JFactory::getSession();
 		return $this;
 	}
 	
@@ -58,11 +58,8 @@ class modContactRegisterHelper
 	                     . "Full Name: $name<br />"
 	                     . "Email: $email<br />"
 	                     . "Telephone: $phone<br />"
-	                     . "Comments:<br />"
-	                     . "<p>$message</p>"
-	                     . "<br /><br />IP Address: {$_SERVER['REMOTE_ADDR']}<br />";
-	                     //. "Time: $time<br />";
-	                     //. "Browser: {$_SERVER['HTTP_USER_AGENT']}<br />";
+	                     . "Comments: $message<br />"
+	                     . "IP Address: {$_SERVER['REMOTE_ADDR']}";
 
 	            $headers  = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";

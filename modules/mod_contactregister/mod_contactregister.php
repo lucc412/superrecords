@@ -21,7 +21,7 @@
 		if($cCheck)
 		{
 			$thankmsg = $contacthandler->thankyouMessage();
-			$url = 'thank-you-page.html';
+			$url = '/thank-you-page.html';
 			$app->redirect($url,$thankmsg);
 		
 		}else{

@@ -63,4 +63,9 @@ define("INVSTMNTSTRAGYNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/invest
 // Deed of variation
 define("DEEDVARNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/deed_of_variation/include/navigation.php");
 define("DEEDVARCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/deed_of_variation/include/content.php");
+
+// Change Trustee
+define("CHNGFNDCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_fundname/include/content.php");
+define("CHNGFNDNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_fundname/include/navigation.php");
+
 ?>

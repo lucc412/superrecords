@@ -250,6 +250,17 @@
 			?><title>Member Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/variation_sa/js/member.js"></script><?
 		}
+                else if($requestUrl == 'change_fund.php' && $folderPath == 'change_fundname') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/change_fundname/js/change_fund.js"></script><?
+		}
+                else if($requestUrl == 'trustee.php' && $folderPath == 'change_fundname') {
+			?><title>Trustee Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/change_fundname/js/trustee.js"></script><?
+		}
+                else if($requestUrl == 'preview.php' && $folderPath == 'change_fundname') {
+			?><title>Preview</title><?
+		}
 		else {
 			?><title>Home</title><?
 		}

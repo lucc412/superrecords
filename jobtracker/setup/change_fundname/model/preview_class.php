@@ -11,26 +11,12 @@
  * @author dishag
  */
 class Preview {
-    
-     // fetch fund data
-    public function getFundDetails() {
-            $qrySel = "SELECT fund_name, CONCAT_WS(',', met_add_unit, met_add_build, met_add_street, met_add_subrb, cst_Description, met_add_pst_code, country_name) met_address, 
-                        DATE_FORMAT(dt_estblshmnt, '%d/%m/%Y')dt_estblshmnt, action_type, appointment_clause, resignation_clause
-                        FROM cot_fund, es_country, cli_state
-                        WHERE job_id = ".$_SESSION['jobId']."
-                        AND met_add_country = country_id 
-                        AND met_add_state = cst_Code";
-            $fetchSel = mysql_query($qrySel);
-            $rowData = mysql_fetch_assoc($fetchSel);
-            return $rowData;
-    }
-    
-    
+        
     // fetch fund details
     public function fetchFundDetails()
     {
        
-       $selQry="SELECT job_id, ext_fund_name, new_fund_name, CONCAT_WS(',', metAddUnit, metAddBuild, metAddStreet, metAddSubrb, metAddState, metAddPstCode, metAddCntry) met_address 
+       $selQry="SELECT job_id, ext_fund_name, new_fund_name, CONCAT_WS(',', metAddUnit, metAddBuild, metAddStreet, metAddSubrb, cst_Description, metAddPstCode, country_name) met_address 
                         FROM cfn_fund_dtls, es_country, cli_state
                         WHERE job_id=".$_SESSION['jobId']."
                         AND metAddCntry = country_id 
@@ -122,6 +108,13 @@ class Preview {
                     </style>';
        
         /* Fund details starts */
+       $no_of_individuals = "";
+       if($arrTrusty['trusty_type'] == '1') {
+           $no_of_individuals = '<tr>
+                        <td>No of Individuals :</td>
+                        <td>'.$arrTrusty['no_of_members'].'</td>
+                    </tr>';
+       }
         $fund = '<div class="test">Fund Details</div>
                 <br />
                 <table class="first" cellpadding="4" cellspacing="6">
@@ -136,11 +129,7 @@ class Preview {
                     <tr>
                         <td>Meeting Address :</td>
                         <td>'.stringltrim($arrFund['met_address'], ',').'</td>
-                    </tr>
-                    <tr>
-                        <td>No of Individuals :</td>
-                        <td>'.$arrTrusty['no_of_members'].'</td>
-                    </tr>
+                    </tr>'.$no_of_individuals.'                    
                 </table><br/>';
         /* Fund details ends */
        

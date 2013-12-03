@@ -552,7 +552,7 @@ class Job_Class extends Database
 									VALUES(
 									".$jobId.", 
 									'".$_REQUEST['textSource_'.$uploadCnt]."', 
-									'".$fileName."', 
+									'".addslashes($fileName)."', 
 									NOW() 
 									)";
 						mysql_query($qryIns);
@@ -606,7 +606,7 @@ class Job_Class extends Database
 		// tell file size  
 		header('Content-length: '.filesize($folderPath));  
 		// set file name  
-		header('Content-disposition: attachment; filename="'.$origFileName.'"');  
+		header('Content-disposition: attachment; filename="'.($origFileName).'"');  
 		readfile($folderPath);  
 		 
 		// Exit script. So that no useless data is output-ed.  

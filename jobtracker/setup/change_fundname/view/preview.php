@@ -1,7 +1,7 @@
 <?php
 // include topbar file
 include(TOPBAR);
-include(CHNGTRUSTEENAV);
+include(CHNGFNDNAV);
 
 // page header
 ?><div class="pageheader">

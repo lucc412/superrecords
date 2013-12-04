@@ -97,9 +97,9 @@ include(CHNGFNDCONTENT);
             ?><p style="padding-left:165px;" id="ele<?=$fieldKey?>">
                     <input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
                     <input style="width:170px" type="text" name="txtFName<?=$fieldKey?>" id="txtFName<?=$fieldKey?>" value="<?=$indvdlTrustee['fname']?>" placeholder="First Name"/>
-                    <span class="pdL10"><input style="width:90px" type="text" name="txtMName<?=$fieldKey?>" id="txtMName<?=$fieldKey?>" value="<?=$indvdlTrustee['mname']?>" placeholder="Middle Name"/></span>
+                    <span class="pdL10"><input style="width:95px" type="text" name="txtMName<?=$fieldKey?>" id="txtMName<?=$fieldKey?>" value="<?=$indvdlTrustee['mname']?>" placeholder="Middle Name"/></span>
                     <span class="pdL10"><input style="width:170px" type="text" name="txtLName<?=$fieldKey?>" id="txtLName<?=$fieldKey?>" value="<?=$indvdlTrustee['lname']?>" placeholder="Last Name"/></span>
-                    <span class="pdL10"><input type="text" name="txtResAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['res_add']?>" placeholder="Residential Address"/></span>
+                    <span class="pdL10"><input style="width:170px" type="text" name="txtResAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['res_add']?>" placeholder="Residential Address"/></span>
                     <?
         } 
         ?><!-- Dynamic div to show textboxes -->

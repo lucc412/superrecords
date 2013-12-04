@@ -31,6 +31,8 @@ switch ($_REQUEST['folderPath']) {
 
 $arrFileName = explode('~', $fileName);
 $origFileName = $arrFileName[1];
+$folderPath = stripslashes($folderPath);
+
 header("Expires: 0");  
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");  
 header("Pragma: "); 
@@ -39,7 +41,7 @@ header("Content-Type: application/force-download");
 // tell file size  
 header('Content-length: '.filesize($folderPath));  
 // set file name  
-header('Content-disposition: attachment; filename="'.($origFileName).'"');  
+header('Content-disposition: attachment; filename="'.$origFileName.'"');  
 readfile($folderPath);  
 
 // Exit script. So that no useless data is output-ed.  

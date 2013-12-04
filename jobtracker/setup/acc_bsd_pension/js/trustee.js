@@ -40,9 +40,9 @@ $(document).ready(function() {
         { 
             var newSection = '<p style="padding-left:165px;" id="ele'+intCnt+'">\n\
                               <input style="width:170px" type="text" name="txtFName'+intCnt+'" id="txtFName'+intCnt+'" placeholder="First Name"/>\n\
-                              <span class="pdL10"><input style="width:90px" type="text" name="txtMName'+intCnt+'" id="txtMName'+intCnt+'" placeholder="Middle Name"/></span>\n\
-                              <span class="pdL10"><input style="width:170px" type="text" name="txtLName'+intCnt+'" id="txtLName'+intCnt+'" placeholder="Last Name"/></span>\n\
-                              <span class="pdL10"><input style="width:170px" type="text" name="txtResAdd'+intCnt+'" id="txtResAdd'+intCnt+'" placeholder="Residential Address"/></span>\n\
+                              <span class="pdL10"><input style="width:170px" type="text" name="txtMName'+intCnt+'" id="txtMName'+intCnt+'" placeholder="Middle Name"/></span>\n\
+                              <span class="pdL10"><input style="width:170px" type="text" name="txtLName'+intCnt+'" id="txtLName'+intCnt+'" placeholder="Last Name"/></span><br>\n\
+                              <input type="text" name="txtResAdd'+intCnt+'" id="txtResAdd'+intCnt+'" placeholder="Residential Address"/>\n\
                               </p>';
             $('#memberbox').append(newSection);
             intCnt++;

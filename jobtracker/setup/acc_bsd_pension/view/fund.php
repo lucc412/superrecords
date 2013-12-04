@@ -10,8 +10,8 @@ include(CHNGFNDCONTENT);
 
 // page header
 ?><div class="pageheader">
-    <h1>Fund Details</h1>
-    <span><b>Welcome to the Super Records fund details page.</b><span>
+    <h1>Existing Trustee Details</h1>
+    <span><b>Welcome to the Super Records change fund details page.</b><span>
 </div><?
 
 // content

@@ -108,7 +108,13 @@ class Preview {
                     </style>';
        
         /* Fund details starts */
-      
+       $no_of_individuals = "";
+       if($arrTrusty['trusty_type'] == '1') {
+           $no_of_individuals = '<tr>
+                        <td>No of Individuals :</td>
+                        <td>'.$arrTrusty['no_of_members'].'</td>
+                    </tr>';
+       }
         $fund = '<div class="test">Fund Details</div>
                 <br />
                 <table class="first" cellpadding="4" cellspacing="6">
@@ -123,32 +129,13 @@ class Preview {
                     <tr>
                         <td>Meeting Address :</td>
                         <td>'.stringltrim($arrFund['met_address'], ',').'</td>
-                    </tr>
+                    </tr>'.$no_of_individuals.'                    
                 </table><br/>';
         /* Fund details ends */
+       
+        $newTrustee = '<div class="test">Trustee Details</div>';
         
-       $no_of_individuals = "</table>";
-       $trusteeType = '';
-       if($arrTrusty['trusty_type'] == '1') 
-           $trusteeType = 'Individual';    
-       else
-           $trusteeType = 'Corporate';    
-       
-       
-        $newTrustee = '<div class="test">Trustee Details</div>
-                       <table class="first" cellpadding="4" cellspacing="6">
-                       <tr>
-                            <td>Trustee Type :</td>
-                            <td>'.$trusteeType.'</td>
-                       </tr>';
-                
         if($arrTrusty['trusty_type'] == '1') {
-            
-            $no_of_individuals = '<tr>
-                        <td>No of Individuals :</td>
-                        <td>'.$arrTrusty['no_of_members'].'</td>
-                    </tr>
-                    </table>';
             
             $memberCtr = 1;
             $trustIndividual = "";
@@ -177,11 +164,11 @@ class Preview {
                                     </table>';
                 $memberCtr++;
             }
-            $indvdlTrustee = $no_of_individuals.$trustIndividual;
+            $indvdlTrustee = $trustIndividual;
         }
         // corporate
         elseif($arrTrusty['trusty_type'] == '2') {
-            $corpTrusty = $no_of_individuals.'<table class="first" cellpadding="4" cellspacing="6">
+            $corpTrusty = '<table class="first" cellpadding="4" cellspacing="6">
                             <tr>
                                 <td>Name of company :</td>
                                 <td>'.$arrCorpTrusty['comp_name'].'</td>
@@ -196,7 +183,7 @@ class Preview {
                             </tr>
                             <tr>
                                 <td>Directors :</td>
-                                <td>'.replaceString('|', ',', $arrCorpTrusty['directors']).'</td>
+                                <td>'.  replaceString('|', ',', $arrCorpTrusty['directors']).'</td>
                             </tr>
                             </table>';
         }

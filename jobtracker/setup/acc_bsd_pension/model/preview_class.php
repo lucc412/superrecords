@@ -16,8 +16,8 @@ class Preview {
     public function fetchFundDetails()
     {
        
-       $selQry="SELECT job_id, ext_fund_name, new_fund_name, CONCAT_WS(',', metAddUnit, metAddBuild, metAddStreet, metAddSubrb, cst_Description, metAddPstCode, country_name) met_address 
-                        FROM cfn_fund_dtls, es_country, cli_state
+       $selQry="SELECT job_id, fund_name, CONCAT_WS(',', metAddUnit, metAddBuild, metAddStreet, metAddSubrb, cst_Description, metAddPstCode, country_name) met_address 
+                        FROM abp_fund_dtls, es_country, cli_state
                         WHERE job_id=".$_SESSION['jobId']."
                         AND metAddCntry = country_id 
                         AND metAddState = cst_Code";
@@ -28,9 +28,22 @@ class Preview {
         return $arrFundDtls;
     }
     
+    // fetch Pension details
+    public function fetchPensionDetails()
+    {
+        $selQry="SELECT pension_id, job_id, member_name, DATE_FORMAT(dob, '%d/%m/%Y') dob, DATE_FORMAT(commence_date, '%d/%m/%Y') commence_date, condition_release, pension_acc_bal, currnt_yr_pay, tax_free_percnt, rev_pensn_name, rev_terms_condn
+                        FROM abp_pension_dtls
+                        WHERE job_id=".$_SESSION['jobId'];
+        
+        $fetchResult = mysql_query($selQry);
+        $arrPensionDtls = mysql_fetch_assoc($fetchResult);
+            
+        return $arrPensionDtls;
+    }
+    
     public function fetchTrustee()
     {
-        $selQry="SELECT trusty_id, job_id, trusty_type, no_of_members FROM cfn_trusty_dtls 
+        $selQry="SELECT trusty_id, job_id, trusty_type, no_of_trustees FROM abp_trusty_dtls 
                         WHERE job_id = ".$_SESSION['jobId'];
         
         $fetchResult = mysql_query($selQry);
@@ -43,7 +56,7 @@ class Preview {
     public function fetchCorpTrustDetails()
     {
        $selQry="SELECT corp_id, job_id, comp_name, acn, reg_add, directors
-                FROM cfn_corp_trusty_dtls 
+                FROM abp_corp_trusty_dtls 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         $arrCorpTrust = mysql_fetch_assoc($fetchResult);
@@ -55,7 +68,7 @@ class Preview {
     public function fetchIndividualTrustDetails()
     {
        $selQry="SELECT indvdl_id, job_id, fname, mname, lname, res_add
-                FROM cfn_indvdl_trusty_dtls 
+                FROM abp_indvdl_trusty_dtls 
                 WHERE job_id = ".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -69,12 +82,11 @@ class Preview {
     // generate preview/pdf code
     public function generatePreview() {
        $arrFund = $this->fetchFundDetails();  
-       
        $arrCorpTrusty = $this->fetchCorpTrustDetails();
        $arrIndvdlTrusty = $this->fetchIndividualTrustDetails();
        $arrTrusty = $this->fetchTrustee();
+       $arrPension = $this->fetchPensionDetails();
        
-       $arrCountry = fetchCountries();
        
        
        $html = '';
@@ -108,34 +120,43 @@ class Preview {
                     </style>';
        
         /* Fund details starts */
-       $no_of_individuals = "";
-       if($arrTrusty['trusty_type'] == '1') {
-           $no_of_individuals = '<tr>
-                        <td>No of Individuals :</td>
-                        <td>'.$arrTrusty['no_of_members'].'</td>
-                    </tr>';
-       }
+      
         $fund = '<div class="test">Fund Details</div>
                 <br />
                 <table class="first" cellpadding="4" cellspacing="6">
                     <tr>
-                        <td>Existing name of the fund :</td>
-                        <td>'.$arrFund['ext_fund_name'].'</td>
-                    </tr>
-                    <tr>
-                        <td>New name of the fund :</td>
-                        <td>'.$arrFund['new_fund_name'].'</td>
+                        <td>Name of the fund :</td>
+                        <td>'.$arrFund['fund_name'].'</td>
                     </tr>
                     <tr>
                         <td>Meeting Address :</td>
                         <td>'.stringltrim($arrFund['met_address'], ',').'</td>
-                    </tr>'.$no_of_individuals.'                    
+                    </tr>
                 </table><br/>';
         /* Fund details ends */
-       
-        $newTrustee = '<div class="test">Trustee Details</div>';
         
+       $no_of_individuals = "</table>";
+       $trusteeType = '';
+       if($arrTrusty['trusty_type'] == '1') 
+           $trusteeType = 'Individual';    
+       else
+           $trusteeType = 'Corporate';    
+       
+       
+        $newTrustee = '<div class="test">Trustee Details</div>
+                       <table class="first" cellpadding="4" cellspacing="6">
+                       <tr>
+                            <td>Trustee Type :</td>
+                            <td>'.$trusteeType.'</td>
+                       </tr>';
+                
         if($arrTrusty['trusty_type'] == '1') {
+            
+            $no_of_individuals = '<tr>
+                        <td>No of Individuals :</td>
+                        <td>'.$arrTrusty['no_of_trustees'].'</td>
+                    </tr>
+                    </table>';
             
             $memberCtr = 1;
             $trustIndividual = "";
@@ -164,11 +185,11 @@ class Preview {
                                     </table>';
                 $memberCtr++;
             }
-            $indvdlTrustee = $trustIndividual;
+            $indvdlTrustee = $no_of_individuals.$trustIndividual;
         }
         // corporate
         elseif($arrTrusty['trusty_type'] == '2') {
-            $corpTrusty = '<table class="first" cellpadding="4" cellspacing="6">
+            $corpTrusty = $no_of_individuals.'<table class="first" cellpadding="4" cellspacing="6">
                             <tr>
                                 <td>Name of company :</td>
                                 <td>'.$arrCorpTrusty['comp_name'].'</td>
@@ -183,12 +204,60 @@ class Preview {
                             </tr>
                             <tr>
                                 <td>Directors :</td>
-                                <td>'.  replaceString('|', ',', $arrCorpTrusty['directors']).'</td>
+                                <td>'.replaceString('|', ',', $arrCorpTrusty['directors']).'</td>
                             </tr>
                             </table>';
         }
-       
-        $html = $styleCSS.$fund.$newTrustee.$indvdlTrustee.$corpTrusty;
+
+        //$arrPension
+        $arrCondRel = array(1=>'Retirement',2=>'Reaching Age 65',3=>'Roll-over');
+        $condition = "";
+        foreach ($arrCondRel as $cond_id => $condValue) { 
+            if($arrPension['condition_release'] == $cond_id) $condition = $condValue; 
+        }
+        
+        $Pension = '<div class="test">Pension Details</div>
+                <br />
+                <table class="first" cellpadding="4" cellspacing="6">
+                    <tr>
+                        <td>Name of Member Commencing the Pension : </td>
+                        <td>'.$arrPension['member_name'].'</td>
+                    </tr>
+                    <tr>
+                        <td>Date of Birth : </td>
+                        <td>'.$arrPension['dob'].'</td>
+                    </tr>
+                    <tr>
+                        <td>Commencement Date : </td>
+                        <td>'.$arrPension['commence_date'].'</td>
+                    </tr>
+                    <tr>
+                        <td>Condition of release : </td>
+                        <td>'.$condition.'</td>
+                    </tr>
+                    <tr>
+                        <td>Pension Account Balance : </td>
+                        <td>$'.$arrPension['pension_acc_bal'].'</td>
+                    </tr>
+                    <tr>
+                        <td>Current Year Payment : </td>
+                        <td>$'.$arrPension['currnt_yr_pay'].'</td>
+                    </tr>
+                    <tr>
+                        <td>Tax Free Percentage (%): </td>
+                        <td>'.$arrPension['tax_free_percnt'].'</td>
+                    </tr>
+                    <tr>
+                        <td>Reversionary Pension Name (if applicable) : </td>
+                        <td>'.$arrPension['rev_pensn_name'].'</td>
+                    </tr>
+                    <tr>
+                        <td>Reversionary Terms and Conditions : </td>
+                        <td>'.$arrPension['rev_terms_condn'].'</td>
+                    </tr>
+                </table><br/>';
+        
+        $html = $styleCSS.$fund.$newTrustee.$indvdlTrustee.$corpTrusty.$Pension;
         
         return $html;
         

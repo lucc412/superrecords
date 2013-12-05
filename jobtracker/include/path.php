@@ -64,8 +64,12 @@ define("INVSTMNTSTRAGYNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/invest
 define("DEEDVARNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/deed_of_variation/include/navigation.php");
 define("DEEDVARCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/deed_of_variation/include/content.php");
 
-// Change Trustee
+// Change Fund Name
 define("CHNGFNDCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_fundname/include/content.php");
 define("CHNGFNDNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_fundname/include/navigation.php");
+
+// Format for account based pension
+define("ACCPENSNCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/acc_bsd_pension/include/content.php");
+define("ACCPENSNNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/acc_bsd_pension/include/navigation.php");
 
 ?>

@@ -10,7 +10,7 @@
  *
  * @author siddheshc
  */
-class CHANGE_FUND {
+class FUND {
     //put your code here
     
     function insertNewJob() 
@@ -19,16 +19,15 @@ class CHANGE_FUND {
                     VALUES ( 
                     'SETUP', 
                     '25', 
-                    '21', 
+                    '21',
                     'Year End 30/06/". date('Y') . "',  
                     1,   
                     ".$_REQUEST['frmId'].",    
                     '".date('Y-m-d')."'
                     )";
-
+        
         mysql_query($qryIns);
         $jobId = mysql_insert_id();
-        
         return $jobId;
     }
     
@@ -74,11 +73,10 @@ class CHANGE_FUND {
     // insert fund details
     function newFundName($fundDtls) 
     {
-        $qryIns = "INSERT INTO cfn_fund_dtls(job_id, ext_fund_name, new_fund_name, metAddUnit, metAddBuild, metAddStreet, metAddSubrb, metAddState, metAddPstCode, metAddCntry)
+        $qryIns = "INSERT INTO abp_fund_dtls(job_id, fund_name, metAddUnit, metAddBuild, metAddStreet, metAddSubrb, metAddState, metAddPstCode, metAddCntry)
                     VALUES (
                     '".$_SESSION['jobId']."',
-                    '".addslashes($fundDtls['txtExtFund'])."',
-                    '".addslashes($fundDtls['txtNewFund'])."',
+                    '".addslashes($fundDtls['txtFundName'])."',
                     '".addslashes($fundDtls['metAddUnit'])."',
                     '".addslashes($fundDtls['metAddBuild'])."',
                     '".addslashes($fundDtls['metAddStreet'])."',
@@ -95,9 +93,8 @@ class CHANGE_FUND {
     function updateFundName($fundDtls) 
     {
         
-        $qryUpd = "UPDATE cfn_fund_dtls
-                    SET ext_fund_name = '".addslashes($fundDtls['txtExtFund'])."',
-                        new_fund_name = '".addslashes($fundDtls['txtNewFund'])."',
+        $qryUpd = "UPDATE abp_fund_dtls
+                    SET fund_name = '".addslashes($fundDtls['txtFundName'])."',
                         metAddUnit = '".addslashes($fundDtls['metAddUnit'])."',
                         metAddBuild = '".addslashes($fundDtls['metAddBuild'])."',
                         metAddStreet = '".addslashes($fundDtls['metAddStreet'])."',
@@ -106,7 +103,7 @@ class CHANGE_FUND {
                         metAddPstCode = '".addslashes($fundDtls['metAddPstCode'])."',
                         metAddCntry = '".$fundDtls['metAddCntry']."'
                     WHERE job_id = ".$_SESSION['jobId'];
-      
+        
         mysql_query($qryUpd);
     }
     
@@ -114,8 +111,8 @@ class CHANGE_FUND {
     public function fetchFundDetails()
     {
        
-       $selQry="SELECT job_id, ext_fund_name, new_fund_name, metAddUnit, metAddBuild, metAddStreet, metAddSubrb, metAddState, metAddPstCode, metAddCntry
-                        FROM cfn_fund_dtls
+       $selQry="SELECT job_id, fund_name, metAddUnit, metAddBuild, metAddStreet, metAddSubrb, metAddState, metAddPstCode, metAddCntry
+                        FROM abp_fund_dtls
                         WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         $arrFundDtls = mysql_fetch_assoc($fetchResult);

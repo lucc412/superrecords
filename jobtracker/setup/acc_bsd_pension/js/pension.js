@@ -6,20 +6,14 @@
 
 $(document).ready(function() {
     
-    $('#frmChngFnd').submit(function() {
+    $('#frmPension').submit(function() {
         flagReturn = true;
         
-        if(!($('#txtExtFund').val())) {
-            txtExtFund.className = "errclass";
+        if(!($('#txtFundName').val())) {
+            txtFundName.className = "errclass";
             flagReturn = false;
         }
-        else txtExtFund.className = "";
-        
-        if(!($('#txtNewFund').val())) {
-            txtNewFund.className = "errclass";
-            flagReturn = false;
-        }
-        else txtNewFund.className = "";
+        else txtFundName.className = "";
         
         if(!($('#metAddBuild').val())) {
             metAddBuild.className = "errclass";

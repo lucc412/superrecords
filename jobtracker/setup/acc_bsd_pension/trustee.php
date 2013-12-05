@@ -93,7 +93,7 @@ if(!empty($_REQUEST['saveData']))
     
     
     if(isset($_REQUEST['next'])) {
-        header('location: preview.php');
+        header('location: pension.php');
         exit;
     }
     else if(isset($_REQUEST['save'])) {
@@ -101,9 +101,6 @@ if(!empty($_REQUEST['saveData']))
         exit;
     }
 }
-
-// fetch holding trustee types
-//$arrTrusteeType = $objTrustee->fetchTrusteeType();
 
 // include view file
 include("view/trustee.php");

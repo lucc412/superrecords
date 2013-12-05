@@ -16,7 +16,7 @@ class TRUSTEE
     // fetch trustee type
     public function fetchTrustee()
     {
-        $selQry="SELECT trusty_id, job_id, trusty_type, no_of_members FROM cfn_trusty_dtls 
+        $selQry="SELECT trusty_id, job_id, trusty_type, no_of_trustees FROM abp_trusty_dtls 
                         WHERE job_id = ".$_SESSION['jobId'];
         
         $fetchResult = mysql_query($selQry);
@@ -28,7 +28,7 @@ class TRUSTEE
     // insert holding trust details
     function newTrusty($trustyDtls) 
     {
-      $qryIns = "INSERT INTO cfn_trusty_dtls(job_id, trusty_type, no_of_members)
+      $qryIns = "INSERT INTO abp_trusty_dtls(job_id, trusty_type, no_of_trustees)
                     VALUES ( 
                     '".$_SESSION['jobId']."', 
                     ".$trustyDtls['selTrstyType'].", 
@@ -40,9 +40,9 @@ class TRUSTEE
     // update holding trust details & corporate trust details
     function updateTrusty($trustyDtls) 
     {
-        $qryUpd = "UPDATE cfn_trusty_dtls
+        $qryUpd = "UPDATE abp_trusty_dtls
                     SET trusty_type = '".$trustyDtls['selTrstyType']."',
-                        no_of_members = '".$trustyDtls['selMember']."'
+                        no_of_trustees = '".$trustyDtls['selMember']."'
                     WHERE job_id = ".$_SESSION['jobId'];
         mysql_query($qryUpd);
     }
@@ -51,7 +51,7 @@ class TRUSTEE
     public function fetchCorpTrustDetails()
     {
        $selQry="SELECT corp_id, job_id, comp_name, acn, reg_add, directors
-                FROM cfn_corp_trusty_dtls 
+                FROM abp_corp_trusty_dtls 
                 WHERE job_id=".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         $arrCorpTrust = mysql_fetch_assoc($fetchResult);
@@ -63,7 +63,7 @@ class TRUSTEE
     public function fetchIndividualTrustDetails()
     {
        $selQry="SELECT indvdl_id, job_id, fname, mname, lname, res_add
-                FROM cfn_indvdl_trusty_dtls 
+                FROM abp_indvdl_trusty_dtls 
                 WHERE job_id = ".$_SESSION['jobId'];
         $fetchResult = mysql_query($selQry);
         while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -76,7 +76,7 @@ class TRUSTEE
     // insert individual trustee
     function insertIndividual($FName, $MName, $LName, $ResAdd) 
     {
-        $insMember="INSERT INTO cfn_indvdl_trusty_dtls (job_id, fname, mname, lname, res_add) 
+        $insMember="INSERT INTO abp_indvdl_trusty_dtls (job_id, fname, mname, lname, res_add) 
                                 VALUES({$_SESSION['jobId']},
                                         '".addslashes($FName)."',
                                         '".addslashes($MName)."',
@@ -90,7 +90,7 @@ class TRUSTEE
     // update individual trustee
     function updateIndividual($FName, $MName, $LName, $ResAdd, $indvdlId)  
     {
-        $updMember = "UPDATE cfn_indvdl_trusty_dtls 
+        $updMember = "UPDATE abp_indvdl_trusty_dtls 
                         SET fname = '".addslashes($FName)."', 
                             mname = '".addslashes($MName)."',
                             lname = '".addslashes($LName)."',
@@ -104,7 +104,7 @@ class TRUSTEE
     // insert individual trustee
     function insertCorporate($trustyDtls) 
     {
-        $insMember="INSERT INTO cfn_corp_trusty_dtls (job_id, comp_name, acn, reg_add, directors) 
+        $insMember="INSERT INTO abp_corp_trusty_dtls (job_id, comp_name, acn, reg_add, directors) 
                                 VALUES({$_SESSION['jobId']},
                                         '".addslashes($trustyDtls['txtCompName'])."',
                                         '".addslashes($trustyDtls['txtAcn'])."',
@@ -118,7 +118,7 @@ class TRUSTEE
     // update individual trustee
     function updateCorporate($trustyDtls)  
     {
-        $updMember = "UPDATE cfn_corp_trusty_dtls 
+        $updMember = "UPDATE abp_corp_trusty_dtls 
                         SET comp_name = '".addslashes($trustyDtls['txtCompName'])."', 
                             acn = '".addslashes($trustyDtls['txtAcn'])."',
                             reg_add = '".addslashes($trustyDtls['txtAdd'])."',
@@ -132,7 +132,7 @@ class TRUSTEE
     // delete individual trustee
     function deleteIndividual($deleteMemberId) 
     {
-        $delMember = "DELETE FROM cfn_indvdl_trusty_dtls WHERE job_id = {$_SESSION['jobId']} AND indvdl_id IN ({$deleteMemberId})";
+        $delMember = "DELETE FROM abp_indvdl_trusty_dtls WHERE job_id = {$_SESSION['jobId']} AND indvdl_id IN ({$deleteMemberId})";
        // print $delMember;
         mysql_query($delMember);
     }
@@ -140,7 +140,7 @@ class TRUSTEE
     // delete all individual trustee
     function deleteAllIndividual() 
     {
-        $delMember = "DELETE FROM cfn_indvdl_trusty_dtls WHERE job_id = {$_SESSION['jobId']}";
+        $delMember = "DELETE FROM abp_indvdl_trusty_dtls WHERE job_id = {$_SESSION['jobId']}";
        // print $delMember;
         mysql_query($delMember);
     }

@@ -261,6 +261,21 @@
                 else if($requestUrl == 'preview.php' && $folderPath == 'change_fundname') {
 			?><title>Preview</title><?
 		}
+                else if($requestUrl == 'fund.php' && $folderPath == 'acc_bsd_pension') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/acc_bsd_pension/js/fund.js"></script><?
+		}
+                else if($requestUrl == 'trustee.php' && $folderPath == 'acc_bsd_pension') {
+			?><title>Trustee Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/acc_bsd_pension/js/trustee.js"></script><?
+		}
+                else if($requestUrl == 'pension.php' && $folderPath == 'acc_bsd_pension') {
+			?><title>Trustee Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/acc_bsd_pension/js/pension.js"></script><?
+		}
+                else if($requestUrl == 'preview.php' && $folderPath == 'acc_bsd_pension') {
+			?><title>Preview</title><?
+		}
 		else {
 			?><title>Home</title><?
 		}

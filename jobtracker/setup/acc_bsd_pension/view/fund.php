@@ -3,29 +3,25 @@
 include(TOPBAR);
 
 // include navigation
-include(CHNGFNDNAV);
+include(ACCPENSNNAV);
 
 // include page content
-include(CHNGFNDCONTENT);
+include(ACCPENSNCONTENT);
 
 // page header
 ?><div class="pageheader">
-    <h1>Existing Trustee Details</h1>
-    <span><b>Welcome to the Super Records change fund details page.</b><span>
+    <h1>Fund Details</h1>
+    <span><b>Welcome to the Super Records fund details page.</b><span>
 </div><?
 
 // content
-?><form id="frmChngFnd" method="post" action="change_fund.php">
+?><form id="frmFund" method="post" action="fund.php">
     <input type="hidden" name="saveData" value="Y">
     <input type="hidden" name="frmId" value="<?=$_REQUEST['frmId']?>">
     <table class="fieldtable" width="60%" cellpadding="10px;">
         <tr>
-            <td>Existing Name of the Fund</td>
-            <td><input type="text" name="txtExtFund" id="txtExtFund" value="<?=$arrFund['ext_fund_name']?>"></td>
-        </tr>
-        <tr>
-            <td>New Name of the Fund</td>
-            <td><input type="text" name="txtNewFund" id="txtNewFund" value="<?=$arrFund['new_fund_name']?>"></td>
+            <td>Name of the Fund</td>
+            <td><input type="text" name="txtFundName" id="txtFundName" value="<?=$arrFund['fund_name']?>"></td>
         </tr>
         <tr>
             <td>Meeting Address</td>

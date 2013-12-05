@@ -3,8 +3,8 @@
 include("../../include/common.php");
 
 // include class file
-include("model/change_fund_class.php");
-$objChangeFnd = new CHANGE_FUND();
+include("model/fund_class.php");
+$objFund = new FUND();
 
 $arrStates = fetchStates();
 $arrCountry = fetchCountries();
@@ -17,14 +17,13 @@ if(!empty($_REQUEST['recid'])) {
 
 // fetch existing data [edit case]
 if(!empty($_SESSION['jobId'])) {
-    $arrFund = $objChangeFnd->fetchFundDetails();
+    $arrFund = $objFund->fetchFundDetails();
 }
 
 // insert & update case
 if(!empty($_REQUEST['saveData'])) 
 {
-    $fundDtls['txtExtFund'] = $_REQUEST['txtExtFund']; 
-    $fundDtls['txtNewFund'] = $_REQUEST['txtNewFund']; 
+    $fundDtls['txtFundName'] = $_REQUEST['txtFundName']; 
     $fundDtls['metAddUnit'] = $_REQUEST['metAddUnit']; 
     $fundDtls['metAddBuild'] = $_REQUEST['metAddBuild']; 
     $fundDtls['metAddStreet'] = $_REQUEST['metAddStreet']; 
@@ -34,12 +33,12 @@ if(!empty($_REQUEST['saveData']))
     $fundDtls['metAddCntry'] = $_REQUEST['metAddCntry']; 
     
     if(empty($arrFund)) {
-        $_SESSION['jobId'] = $objChangeFnd->insertNewJob();
-        $objChangeFnd->updateClientName($fundDtls['txtNewFund']);
-        $objChangeFnd->newFundName($fundDtls);
+        $_SESSION['jobId'] = $objFund->insertNewJob();
+        $objFund->updateClientName($fundDtls['txtFundName']);
+        $objFund->newFundName($fundDtls);
     }
     else 
-        $objChangeFnd->updateFundName($fundDtls);
+        $objFund->updateFundName($fundDtls);
     
     if(isset($_REQUEST['next'])) {
         header('location: trustee.php');
@@ -52,6 +51,6 @@ if(!empty($_REQUEST['saveData']))
 }
 
 // include view file
-include("view/change_fund.php");
+include("view/fund.php");
 
 ?>

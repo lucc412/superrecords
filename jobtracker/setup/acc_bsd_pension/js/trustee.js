@@ -88,17 +88,7 @@ $(document).ready(function() {
                     $(this).removeClass("errclass");
                 }
             });
-            
-            $('[id^=txtMName]').each(function (){
-                if(!$(this).val()) {
-                    $(this).addClass('errclass');
-                    flagReturn = false;
-                }
-                else {
-                    $(this).removeClass("errclass");
-                }
-            });
-            
+                        
             $('[id^=txtLName]').each(function (){
                 if(!$(this).val()) {
                     $(this).addClass('errclass');

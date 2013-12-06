@@ -12,12 +12,9 @@ $(document).ready(function() {
         }
         else if($('#selTrstyType').val() == '1') {
             $('#divIndividual').show();
-            $('#divCorporate').hide()
+            $('#divCorporate').hide();
+            
         }
-//        else {
-//            $('#divIndividual').hide();
-//            $('#divCorporate').hide()
-//        }
     }); 
     
     // show member details section
@@ -83,16 +80,6 @@ $(document).ready(function() {
             else selMember.className = "";
             
             $('[id^=txtFName]').each(function (){
-                if(!$(this).val()) {
-                    $(this).addClass('errclass');
-                    flagReturn = false;
-                }
-                else {
-                    $(this).removeClass("errclass");
-                }
-            });
-            
-            $('[id^=txtMName]').each(function (){
                 if(!$(this).val()) {
                     $(this).addClass('errclass');
                     flagReturn = false;

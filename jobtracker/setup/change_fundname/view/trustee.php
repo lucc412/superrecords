@@ -35,7 +35,7 @@ include(CHNGFNDCONTENT);
             </td>
         </tr>
     </table><?
-                    
+    
     $dispCorporate = "style='display:none'";
     if($arrTrusty['trusty_type'] == 2) $dispCorporate = "style='display:block'";
     ?><div id="divCorporate" class="pdT10" <?=$dispCorporate?> >
@@ -49,10 +49,6 @@ include(CHNGFNDCONTENT);
               <td>ACN Number</td>
               <td><input type="text" name="txtAcn" id="txtAcn" value="<?=$arrCorpTrust['acn']?>"></td>
           </tr>
-<!--          <tr>
-              <td>TFN Number</td>
-              <td><input type="text" name="txtTfn" id="txtTfn" value="<?=$arrCorpTrust['tfn']?>"></td>
-          </tr>-->
           <tr>
               <td>Registered Address</td>
               <td><textarea name="txtAdd" id="txtAdd"><?=$arrCorpTrust['reg_add']?></textarea>

@@ -144,6 +144,14 @@ class TRUSTEE
        // print $delMember;
         mysql_query($delMember);
     }
+    
+    // delete all individual trustee
+    function deleteAllCorporate() 
+    {
+        $delMember = "DELETE FROM cfn_corp_trusty_dtls WHERE job_id = {$_SESSION['jobId']}";
+       // print $delMember;
+        mysql_query($delMember);
+    }
 }
 
 ?>

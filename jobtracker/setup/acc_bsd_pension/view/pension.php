@@ -52,15 +52,15 @@ include(ACCPENSNCONTENT);
         </tr>
         <tr>
             <td>Pension Account Balance</td>
-            <td><input type="text" name="txtPenAccBal" id="txtPenAccBal" value="<?=$arrPension['pension_acc_bal']?>" placeholder="$(Dollars)"></td>
+            <td><input type="text" name="txtPenAccBal" id="txtPenAccBal" value="<?=$arrPension['pension_acc_bal']?>" placeholder="$"></td>
         </tr>
         <tr>
             <td>Current Year Payment</td>
-            <td><input type="text" name="txtCurYrPay" id="txtCurYrPay" value="<?=$arrPension['currnt_yr_pay']?>" placeholder="$(Dollars)"></td>
+            <td><input type="text" name="txtCurYrPay" id="txtCurYrPay" value="<?=$arrPension['currnt_yr_pay']?>" placeholder="$"></td>
         </tr>
         <tr>
             <td>Tax Free Percentage</td>
-            <td><input type="text" name="txtTxFrePrcnt" id="txtTxFrePrcnt" value="<?=$arrPension['tax_free_percnt']?>" placeholder="$(Dollars)"></td>
+            <td><input type="text" name="txtTxFrePrcnt" id="txtTxFrePrcnt" value="<?=$arrPension['tax_free_percnt']?>" ></td>
         </tr>
         <tr>
             <td>Reversionary Pension Name (if applicable)</td>

@@ -20,7 +20,7 @@ if(!empty($_SESSION['jobId'])) {
     if($arrTrusty['trusty_type'] == 2) 
     {
         $arrCorpTrust = $objTrustee->fetchCorpTrustDetails();
-        unset($arrTrusty['no_of_members']);
+        unset($arrTrusty['no_of_trustees']);
     }
     
 }

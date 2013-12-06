@@ -18,7 +18,11 @@ if(!empty($_SESSION['jobId'])) {
     if($arrTrusty['trusty_type'] == 1) 
         $arrIndvdlTrust = $objTrustee->fetchIndividualTrustDetails();
     if($arrTrusty['trusty_type'] == 2) 
+    {
         $arrCorpTrust = $objTrustee->fetchCorpTrustDetails();
+        unset($arrTrusty['no_of_members']);
+    }
+    
 }
 
 // insert & update case
@@ -52,6 +56,7 @@ if(!empty($_REQUEST['saveData']))
             }
             $deleteMemberId = stringrtrim($deleteMemberId, ',');
             $objTrustee->deleteIndividual($deleteMemberId);
+            $objTrustee->deleteAllCorporate();
         }
         
         //Reverse Array for deleting member

@@ -13,7 +13,7 @@ $(document).ready(function() {
         else if($('#selTrstyType').val() == '1') {
             $('#divIndividual').show();
             $('#divCorporate').hide();
-            $('#selMember').val(0);
+            
         }
     }); 
     

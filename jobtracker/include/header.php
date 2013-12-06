@@ -270,7 +270,7 @@
 			<script type="text/javascript" src="<?=DIR?>setup/acc_bsd_pension/js/trustee.js"></script><?
 		}
                 else if($requestUrl == 'pension.php' && $folderPath == 'acc_bsd_pension') {
-			?><title>Trustee Details</title>
+			?><title>Pension Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/acc_bsd_pension/js/pension.js"></script><?
 		}
                 else if($requestUrl == 'preview.php' && $folderPath == 'acc_bsd_pension') {

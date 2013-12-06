@@ -153,7 +153,7 @@ class Preview {
         if($arrTrusty['trusty_type'] == '1') {
             
             $no_of_individuals = '<tr>
-                        <td>No of Individuals :</td>
+                        <td>No of Trustees :</td>
                         <td>'.$arrTrusty['no_of_trustees'].'</td>
                     </tr>
                     </table>';
@@ -232,7 +232,7 @@ class Preview {
                         <td>'.$arrPension['commence_date'].'</td>
                     </tr>
                     <tr>
-                        <td>Condition of release : </td>
+                        <td>Condition of Release : </td>
                         <td>'.$condition.'</td>
                     </tr>
                     <tr>
@@ -244,7 +244,7 @@ class Preview {
                         <td>$'.$arrPension['currnt_yr_pay'].'</td>
                     </tr>
                     <tr>
-                        <td>Tax Free Percentage (%): </td>
+                        <td>Tax Free Percentage : </td>
                         <td>'.$arrPension['tax_free_percnt'].'</td>
                     </tr>
                     <tr>

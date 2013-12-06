@@ -7,49 +7,50 @@
 $(document).ready(function() {
     
     $('#frmPension').submit(function() {
-        flagReturn = true;
+        var flagReturn = true;
         
-        if(!($('#txtFundName').val())) {
-            txtFundName.className = "errclass";
+        if(!($('#txtMembrName').val())) {
+            txtMembrName.className = "errclass";
             flagReturn = false;
         }
-        else txtFundName.className = "";
+        else txtMembrName.className = "";
         
-        if(!($('#metAddBuild').val())) {
-            metAddBuild.className = "errclass";
+        if(!($('#txtDob').val())) {
+            txtDob.className = "errclass";
             flagReturn = false;
         }
-        else metAddBuild.className = "";
-        
-        if(!($('#metAddStreet').val())) {
-            metAddStreet.className = "errclass";
+        else txtDob.className = "";
+
+        if(!($('#txtComncDt').val())) {
+            txtComncDt.className = "errclass";
             flagReturn = false;
         }
-        else metAddStreet.className = "";
-        
-        if(!($('#metAddSubrb').val())) {
-            metAddSubrb.className = "errclass";
+        else txtComncDt.className = "";
+
+        if(!($('#txtPenAccBal').val()) || $('#txtPenAccBal').val() == 0) {
+            txtPenAccBal.className = "errclass";
             flagReturn = false;
         }
-        else metAddSubrb.className = "";
-        
-        if($('#metAddState').val() == 0) {
-            metAddState.className = "errclass";
+        else txtPenAccBal.className = "";
+
+        if(!($('#txtCurYrPay').val()) || $('#txtCurYrPay').val() == 0) {
+            txtCurYrPay.className = "errclass";
             flagReturn = false;
         }
-        else metAddState.className = "";
+        else txtCurYrPay.className = "";
         
-        if(!($('#metAddPstCode').val())) {
-            metAddPstCode.className = "errclass";
+        if(!($('#txtTxFrePrcnt').val()) || $('#txtTxFrePrcnt').val() == 0) {
+            txtTxFrePrcnt.className = "errclass";
             flagReturn = false;
         }
-        else metAddPstCode.className = "";
-        
-        if($('#metAddCntry').val() == 0) {
-            metAddCntry.className = "errclass";
-            flagReturn = false;
-        }
-        else metAddCntry.className = "";
+        else txtTxFrePrcnt.className = "";
+
+
+//        if($('#metAddCntry').val() == 0) {
+//            metAddCntry.className = "errclass";
+//            flagReturn = false;
+//        }
+//        else metAddCntry.className = "";
         
         return flagReturn;
         

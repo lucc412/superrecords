@@ -85,7 +85,7 @@ include(ACCPENSNCONTENT);
                     $members=2;
                     while($members<=4) {
                         $selectMember="";
-                        if($arrTrusty['no_of_members'] == $members) $selectMember = "selected";
+                        if($arrTrusty['no_of_trustees'] == $members) $selectMember = "selected";
                         ?><option <?=$selectMember?>><?=$members?></option><?
                         $members++;
                     }
@@ -105,7 +105,6 @@ include(ACCPENSNCONTENT);
         ?><!-- Dynamic div to show textboxes -->
         <br/><div id="memberbox"></div>
     </div>
-    <div class="txtAboveButton">Your document details are ready to be submitted. However, prior to doing so, please preview to make sure all details are correct. <p>To preview, please click the 'Preview' button below.</p></div> 
     <div class="pdT20">
         <span class="pdR20"><button type="button" onclick="window.location='fund.php'" value="Back">Back</button></span>
         <span class="pdR20"><button type="submit" id="submit" name="save">Save & Exit</button></span>

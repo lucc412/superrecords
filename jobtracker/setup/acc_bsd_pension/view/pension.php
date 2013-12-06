@@ -38,7 +38,7 @@ include(ACCPENSNCONTENT);
             </td>
         </tr>
         <tr>
-            <td>Condition of release</td>
+            <td>Condition of Release</td>
             <td>
                 <?php $arrCondRel = array(1=>'Retirement',2=>'Reaching Age 65',3=>'Roll-over') ?>
                 <select id="selCondRel" name="selCondRel" style="margin-bottom: 5px;">
@@ -75,7 +75,7 @@ include(ACCPENSNCONTENT);
     <div class="pdT20">
         <span class="pdR20"><button type="button" onclick="window.location='trustee.php'" value="Back">Back</button></span>
         <span class="pdR20"><button type="submit" id="submit" name="save">Save & Exit</button></span>
-        <span><button type="submit" id="submit" name="next">Next</button></span>
+        <span><button type="submit" id="submit" name="next">Preview</button></span>
     </div>
 </form><?
 

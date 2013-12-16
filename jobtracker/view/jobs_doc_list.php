@@ -23,7 +23,7 @@ include(TOPBAR);
         else {
                 ?><table width="100%" class="resources">
                         <tr>
-                            <td class="td_title">Job Name</td>
+                            <th class="td_title" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Job Name <img id="sort_name" src="images/sort_asc.png"></th>
                             <td class="td_title">Source Documents</td>
                         </tr><?
 

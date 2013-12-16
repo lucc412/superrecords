@@ -1,10 +1,11 @@
-<!--*************************************************************************************************
-//  Task          : Page for Listing details of Task
-//  Modified By   : Dhiraj Sahu 
+<?php
+//*************************************************************************************************
+//  Task          : Add Jquery Shorting For Table Contents
+//  Modified By   : Nishant Bhatt
 //  Created on    : 28-Dec-2012
-//  Last Modified : 01-Jan-2013 
-//************************************************************************************************-->
-
+//  Last Modified : 16-Dec-2013 
+//************************************************************************************************
+?>
 <div class="frmheading">
 	<h1>Task</h1>
 </div>
@@ -39,13 +40,16 @@
 		</tr><?
 	}
 		
-	?><tr class="fieldheader">
-		<th width="15%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "pr.name" ?>&type=<?php echo $ordertype; ?>">Practice Name</a></th>
-		<th width="30%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.task_name" ?>&type=<?php echo $ordertype; ?>">Task Name</a></th>
-		<th width="10%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.task_status_id" ?>&type=<?php echo $ordertype; ?>">Task Status</a></th>
-                <th width="20%" align="left" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.task_stage_id" ?>&type=<?php echo $ordertype; ?>">Task Stage</a></th>
-                <th width="15%" align="center" class="fieldheader"><a href="tsk_task.php?order=<?php echo "t.start_date" ?>&type=<?php echo $ordertype; ?>">Start Date</a></th>
-		<th width="10%" class="fieldheader" colspan="3" align="center">Actions</th>
+	?>
+</table>
+<table class<table class="fieldtable" width="100%" align="center"  border="0" cellspacing="1" cellpadding="5">
+	<tr class="fieldheader">
+		<th width="15%" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');" class="fieldheader">Practice Name <img id="sort_name" src="images/sort_asc.png"></th>
+		<th width="30%" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_task');" class="fieldheader">Task Name <img id="sort_task" src="images/sort_asc.png"></th>
+		<th width="10%" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_task_st');" class="fieldheader">Task Status <img id="sort_task_st" src="images/sort_asc.png"></th>
+		<th width="20%" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_stg');" class="fieldheader">Task Stage <img id="sort_stg" src="images/sort_asc.png"></th>
+		<th width="15%"  style="cursor:pointer;" align="center" onclick="changeSortImage('sort_dt');" class="fieldheader">Start Date <img id="sort_dt" src="images/sort_asc.png"></th>
+		<td width="10%" class="fieldheader" colspan="3" align="center">Actions</td>
 	</tr><?
 
 	$countRow = 0;

@@ -30,15 +30,17 @@
 			<td><a href="pr_practice.php?a=add" class="hlight"><img src="images/add.gif" alt="Add" name="Add" title="Add" align="absbottom">&nbsp;Add Record</a>
 			</td>
 		</tr><?
-	}		
-	
-	?><tr class="fieldheader">
-		<th width="10%" class="fieldheader"><a href="pr_practice.php?order=<?php echo "pracId" ?>&type=<?php echo $ordertype; ?>">Practice Code</a></th>
-		<th class="fieldheader" align="left"><a href="pr_practice.php?order=<?php echo "pr.name" ?>&type=<?php echo $ordertype; ?>">Practice Name</a></th>
-		<th class="fieldheader" align="left"><a href="pr_practice.php?order=<?php echo "prt.description" ?>&type=<?php echo $ordertype; ?>">Type</a></th>
-		<th class="fieldheader" align="left"><a href="pr_practice.php?order=<?php echo "pr.sr_manager" ?>&type=<?php echo $ordertype; ?>">SR Manager</a></th>
-		<th class="fieldheader" align="center"><a href="pr_practice.php?order=<?php echo "pr.date_signed_up" ?>&type=<?php echo $ordertype; ?>">Date Signed Up</a></th>
-		<th  class="fieldheader" colspan="3" align="center">Actions</th>
+	}			
+	?>
+</table>
+<table  class="fieldtable" width="100%" align="center"  border="0" cellspacing="1" cellpadding="5">
+	<tr class="fieldheader">
+		<th width="10%" class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_code');">Practice Code <img id="sort_code" src="images/sort_asc.png"></th>
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Practice Name <img id="sort_name" src="images/sort_asc.png"></th>
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');">Type <img id="sort_type" src="images/sort_asc.png"></th>
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_srm');">SR Manager <img id="sort_srm" src="images/sort_asc.png"></th>
+		<th class="fieldheader date" align="center"  style="cursor:pointer;" onclick="changeSortImage('sort_date');">Date Signed Up <img id="sort_date" src="images/sort_asc.png"></th>
+		<td class="fieldheader" colspan="3" align="center">Actions</td>
 	</tr><?
 
 	$countRow = 0;

@@ -13,5 +13,5 @@
 		Copyright Super Records &copy; 2013
 		</span>
 	</div>
-</div><?
+</div><script type="text/javascript" src="<?=DIR?>js/jquery.sortElements.js"></script><?
 include(BOTTOMDATA);

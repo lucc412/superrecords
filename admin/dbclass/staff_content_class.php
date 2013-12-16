@@ -87,10 +87,10 @@ class staffContentList extends Database
 
 			<table class="fieldtable" align="center" width="100%" border="0" cellspacing="1" cellpadding="5" >
 				<tr class="fieldheader">
-					<th align="left" class="fieldheader"><a href="stf_staff.php?order=<?php echo "lp_stf_CCode" ?>&type=<?php echo $ordtypestr ?>">Contact Name</a></th>
-					<th align="left" class="fieldheader"><a  href="stf_staff.php?order=<?php echo "lp_stf_AccessType" ?>&type=<?php echo $ordtypestr ?>">AccessType</a></th>
-					<th align="left" class="fieldheader"><a  href="stf_staff.php?order=<?php echo "dsg_Description" ?>&type=<?php echo $ordtypestr ?>">Designation</a></th>
-					<th width="12%" class="fieldheader" colspan="3" align="center">Actions</th>
+					<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');" class="fieldheader">Contact Name <img id="sort_name" src="images/sort_asc.png"></th>
+					<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');" class="fieldheader">AccessType <img id="sort_type" src="images/sort_asc.png"></th>
+					<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_desi');" class="fieldheader">Designation <img id="sort_desi" src="images/sort_asc.png"></th>
+					<td width="12%" class="fieldheader" colspan="3" align="center">Actions</td>
 				</tr><?
 
 				$countRow = 0;

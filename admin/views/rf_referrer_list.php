@@ -10,12 +10,15 @@
 		</tr><?
 	}
 			
-	?><tr class="fieldheader">
-		<th class="fieldheader" align="left">Type</th>
-		<th class="fieldheader" align="left">Referrer Name</th>
-		<th class="fieldheader" align="left">SR Manager</th>
-		<th class="fieldheader">Date Signed Up</th>
-		<th width="12%" class="fieldheader" colspan="3" align="center">Actions</th>
+	?>
+</table>
+<table class="fieldtable" width="100%" align="center"  border="0" cellspacing="1" cellpadding="5">
+<tr class="fieldheader">
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');">Type <img id="sort_type" src="images/sort_asc.png"></th>
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Referrer Name <img id="sort_name" src="images/sort_asc.png"></th>
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_manager');">SR Manager <img id="sort_manager" src="images/sort_asc.png"></th>
+		<th class="fieldheader date" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Date Signed Up <img id="sort_date" src="images/sort_asc.png"></th>
+		<td width="12%" class="fieldheader" colspan="3" align="center">Actions</td>
 	</tr><?
 
 	$countRow = 0;

@@ -33,15 +33,19 @@
 		</tr><?
 	}
 
-	?><tr class="fieldheader">
-		<th class="fieldheader" align="left"><a href="cli_client.php?order=<?php echo "pr.name" ?>&type=<?php echo $ordertype; ?>">Practice</a></th>
-		<th width="10%" class="fieldheader"><a href="cli_client.php?order=<?php echo "cl.client_code" ?>&type=<?php echo $ordertype; ?>">Client Code</a></th>
-		<th class="fieldheader" align="left"><a href="cli_client.php?order=<?php echo "cl.client_name" ?>&type=<?php echo $ordertype; ?>">Client Name</a></th>
-		<th class="fieldheader" align="left"><a href="cli_client.php?order=<?php echo "clt.client_type" ?>&type=<?php echo $ordertype; ?>">Type</a></th>
-		<th class="fieldheader" align="left"><a href="cli_client.php?order=<?php echo "pr.sr_manager" ?>&type=<?php echo $ordertype; ?>">SR Manager</a></th>
-		<th class="fieldheader"><a href="cli_client.php?order=<?php echo "cl.client_received" ?>&type=<?php echo $ordertype; ?>">Date Signed Up</a></th>
+	?>
+</table>
+<table class="fieldtable" width="100%" align="center" border="0" cellspacing="1" cellpadding="5">
+	<tr class="fieldheader">
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_practice');">Practice <img id="sort_practice" src="images/sort_asc.png"></th>
+		<th width="10%" class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_code');">Client Code <img id="sort_code" src="images/sort_asc.png"></th>
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Client Name <img id="sort_name" src="images/sort_asc.png"></th>
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');">Type <img id="sort_type" src="images/sort_asc.png"></th>
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_sr');">SR Manager <img id="sort_sr" src="images/sort_asc.png"></th>
+		<th class="fieldheader date" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Date Signed Up <img id="sort_date" src="images/sort_asc.png"></th>
 		<th  class="fieldheader" colspan="3" align="center">Actions</th>
-	</tr><?
+	</tr>
+	<?
 
 	$countRow = 0;
 	foreach($arrClient AS $clientId => $arrInfo) {

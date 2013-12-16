@@ -86,10 +86,10 @@ class empcontactContentList extends Database
                     <br><br>
                     <table width="100%" class="fieldtable" align="center" border="0" cellspacing="1" cellpadding="5" >
                          <tr class="fieldheader">
-                            <th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "con_Firstname" ?>&type=<?php echo $ordtypestr ?>">First Name</a></th>
-                            <th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "con_Lastname" ?>&type=<?php echo $ordtypestr ?>">Last Name</a></th><th align="left" class="fieldheader"><a  href="con_empcontact.php?order=<?php echo "lp_con_Designation" ?>&type=<?php echo $ordtypestr ?>">Designation</a></th
-                            >	
-                            <th align="left" class="fieldheader"><a href="con_empcontact.php?order=<?php echo "con_Email" ?>&type=<?php echo $ordtypestr ?>">Email</a></th>
+                            <th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');" class="fieldheader">First Name <img id="sort_name" src="images/sort_asc.png"></th>
+							<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_lname');" class="fieldheader">Last Name <img id="sort_lname" src="images/sort_asc.png"></th>
+                            <th style="cursor:pointer;" align="left" onclick="changeSortImage('desi');" class="fieldheader">Designation <img id="desi" src="images/sort_asc.png"></th>	
+                            <th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_email');" class="fieldheader">Email <img id="sort_email" src="images/sort_asc.png"></th>
                             <th class="fieldheader" colspan="3" align="center">Actions</th>
                         </tr>
                         <?php

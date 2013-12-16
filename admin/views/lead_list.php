@@ -30,12 +30,15 @@
 		</tr><?
 	}
 		
-	?><tr class="fieldheader">
-		<th class="fieldheader" align="left">Lead Type</th>
-		<th class="fieldheader" align="left">Lead Name</th>
-		<th class="fieldheader" align="left">Sales Person</th>
-		<th class="fieldheader">Date Received</th>
-		<th width="12%" class="fieldheader" colspan="3" align="center">Actions</th>
+	?>
+</table>
+<table class="fieldtable" width="100%" align="center">
+	<tr class="fieldheader">
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');">Lead Type <img id="sort_type" src="images/sort_asc.png"></th>
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Lead Name <img id="sort_name" src="images/sort_asc.png"></th>
+		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_person');">Sales Person <img id="sort_person" src="images/sort_asc.png"></th>
+		<th class="fieldheader date" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Date Received <img id="sort_date" src="images/sort_asc.png"></th>
+		<td width="12%" class="fieldheader" colspan="3" align="center">Actions</td>
 	</tr><?
 
 	$countRow = 0;

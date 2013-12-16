@@ -517,11 +517,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	font-size:14px;
 }
 
-.fieldheader th{
+.fieldheader th, .fieldheader td{
 	background-color:#074165;
 	padding-left:3px;
 	font-size:14px; 
-	color:#fff;
+	color:#fff !important;
 	height:32px;
 	font-weight: bold;
 }

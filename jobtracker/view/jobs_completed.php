@@ -38,10 +38,10 @@ include(TOPBAR);
 		// display job data
 		?><table width="100%" class="resources">
 		<tr>
-			<td width="40%" class="td_title">Job Name</td>
+			<th width="40%" class="td_title" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Job Name <img id="sort_name" src="images/sort_asc.png"></th>
 			<td class="td_title">Source Documents</td>
 			<td class="td_title">Reports</td>
-			<td class="td_title" align="center">Completion Date</td>
+			<th class="td_title date" align="center" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Completion Date <img id="sort_date" src="images/sort_asc.png"></th>
 			<td class="td_title" align="center">Queries</td>
 		</tr><?			
 		

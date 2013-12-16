@@ -11,6 +11,7 @@ DEFINE("REPORTVALUE",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/report_value.p
 DEFINE("REPORTSAVEDREPORT",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/report_savedreports.php");
 DEFINE("REPORTDDOPTIONS",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/report_dd_options.php");
 DEFINE("JOBNAVIGATION",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/job_navigation.php");
+DEFINE("JSSHORITING","../jobtracker/js/jquery.sortElements.js");
 define("ERRORICON", "<img src='images/errorIcon.gif' />");
 // define folder path
 $imgPath = "images/";

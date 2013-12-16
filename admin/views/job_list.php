@@ -13,6 +13,13 @@
 //  Last Modified : 04-Mar-13
 //************************************************************************************************
 
+//*************************************************************************************************
+//  Task          : Add Jquery Shorting For Table Contents
+//  Modified By   : Nishant Bhatt
+//  Created on    : 01-Jan-2013 
+//  Last Modified : 16-Dec-13
+//************************************************************************************************
+
 $client_id = $objCallData->arrJob[$_REQUEST["jobId"]]["client_id"];
 
 if(!empty($a) && $a != 'addJob') {
@@ -955,18 +962,22 @@ switch ($a)
 					</tr><?
 				}
 				
-				?><tr class="fieldheader">
-					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "p1.name" ?>&type=<?php echo $objCallData->ordertype; ?>">Practice Name</a></th>
-					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "c1.client_name" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Name</a></th>
-<!--					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "j1.job_genre" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Genre</a></th>-->
-					<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "s1.job_status" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Status</a></th>
-					<th class="fieldheader"><a href="job.php?order=<?php echo "j1.job_received" ?>&type=<?php echo $objCallData->ordertype; ?>">Date Received</a></th>
-					<th class="fieldheader"><a href="job.php?order=<?php echo "j1.job_due_date" ?>&type=<?php echo $objCallData->ordertype; ?>">Due Date</a></th><?
+				?>
+			</table>
+			<table class="fieldtable" align="center" width="100%">
+				<tr class="fieldheader">
+					<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_code');">Practice Name  <img id="sort_code" src="images/sort_asc.png"></th>
+					<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Job Name  <img id="sort_name" src="images/sort_asc.png"></th>
+<!--				<th class="fieldheader" align="left"><a href="job.php?order=<?php echo "j1.job_genre" ?>&type=<?php echo $objCallData->ordertype; ?>">Job Genre</a></th>-->
+					<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_status');">Job Status <img id="sort_status" src="images/sort_asc.png"></th>
+					<th class="fieldheader date" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Date Received  <img id="sort_date" src="images/sort_asc.png"></th>
+					<th class="fieldheader date" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_due');">Due Date  <img id="sort_due" src="images/sort_asc.png"></th><?
 
 					if($access_file_level['stf_Edit'] == "Y" || $access_file_level['stf_Delete'] == "Y") {
-						?><th class="fieldheader" colspan="2">Actions</th><?
+						?><td class="fieldheader" colspan="2">Actions</td><?
 					}
-				?></tr><?
+				?></tr>
+				<?
 
                 $countRow = 0;                
 				foreach ($objCallData->arrJob AS $jobId => $arrInfo) {

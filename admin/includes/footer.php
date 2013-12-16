@@ -6,6 +6,6 @@
 				Copyright Super Records &copy; 2011
 				</span>
 			</div>
-		</div>
+		</div><script type="text/javascript" src="<?=JSSHORITING?>"></script>
 	</body>
 </html>

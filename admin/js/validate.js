@@ -271,3 +271,22 @@ function selectTeamMember() {
 		xmlhttp.send();
 	}
 }
+
+// function to change image of Asc / Desc
+function changeSortImage(imgId)
+{
+	imgSrc = document.getElementById(imgId).src;
+	val = imgSrc.split("/");
+
+	//rootPath = document.location.hostname;	
+	if(val[val.length-1]=='sort_asc.png')
+	{
+		document.getElementById(imgId).src = 'images/sort_desc.png';
+		imgSrc = document.getElementById(imgId).src;
+	}
+	if(val[val.length-1]=='sort_desc.png')
+	{
+		document.getElementById(imgId).src = 'images/sort_asc.png';
+		imgSrc = document.getElementById(imgId).src;
+	}
+}

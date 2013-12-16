@@ -24,10 +24,11 @@ $_SESSION['timeout'] = time();
         <!-- Google Webfont -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'/>
         <script type="text/javascript" src="<?php echo $javaScript; ?>datetimepicker.js"></script>
-        <script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script><?
+        <script type="text/javascript" src="<?php echo $javaScript; ?>validate.js"></script>
+		<script type="text/javascript" src="<?php echo $javaScript; ?>jquery-1.9.1.js"></script><?
 if (basename($_SERVER['PHP_SELF']) == 'job.php') {
     ?><title>Job List</title>
-            <script type="text/javascript" src="<?php echo $javaScript; ?>jquery-1.4.2.min.js"></script>
+            <!--<script type="text/javascript" src="<?php echo $javaScript; ?>jquery-1.4.2.min.js"></script>-->
             <script type="text/javascript" src="<?php echo $javaScript; ?>job.js"></script><?
         } else if (basename($_SERVER['PHP_SELF']) == 'lead.php') {
             ?><title>Manage Lead</title>

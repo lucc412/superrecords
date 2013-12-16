@@ -43,7 +43,7 @@
 		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');">Type <img id="sort_type" src="images/sort_asc.png"></th>
 		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_sr');">SR Manager <img id="sort_sr" src="images/sort_asc.png"></th>
 		<th class="fieldheader date" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Date Signed Up <img id="sort_date" src="images/sort_asc.png"></th>
-		<th  class="fieldheader" colspan="3" align="center">Actions</th>
+		<td class="fieldheader" colspan="3" align="center">Actions</td>
 	</tr>
 	<?
 

@@ -420,7 +420,7 @@ a img{
 	font-weight:normal;
 	font-size:35px;
 	text-shadow: 1px 1px 1px #fff;
-	text-transform:uppercase;
+	/*text-transform:uppercase;*/
 	border-bottom:2px solid #f1592a;
 	margin-bottom:5px;
 	color: #222;

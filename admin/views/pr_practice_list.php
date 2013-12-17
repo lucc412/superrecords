@@ -35,7 +35,7 @@
 </table>
 <table  class="fieldtable" width="100%" align="center"  border="0" cellspacing="1" cellpadding="5">
 	<tr class="fieldheader">
-		<th width="10%" class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_code');">Practice Code <img id="sort_code" src="images/sort_asc.png"></th>
+		<th width="12%" class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_code');">Practice Code <img id="sort_code" src="images/sort_asc.png"></th>
 		<th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Practice Name <img id="sort_name" src="images/sort_asc.png"></th>
 		<th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');">Type <img id="sort_type" src="images/sort_asc.png"></th>
 		<th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_srm');">SR Manager <img id="sort_srm" src="images/sort_asc.png"></th>

@@ -18,7 +18,7 @@ else {
 	?><table align="center" width="100%">
 		<tr>
 			<th width="60%" class="td_title" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Client Name <img id="sort_name" src="images/sort_asc.png"></th>
-			<th width="18%" class="td_title" style="cursor:pointer;" onclick="changeSortImage('sort_type');">Entity Type <img id="sort_type" src="images/sort_asc.png"></th>
+			<th width="18%" class="td_title" align="left" style="cursor:pointer;" onclick="changeSortImage('sort_type');">Entity Type <img id="sort_type" src="images/sort_asc.png"></th>
 			<th width="12%" class="td_title date" align="center" style="cursor:pointer;" onclick="changeSortImage('sort_date');">Date Created <img id="sort_date" src="images/sort_asc.png"></th>
 			<td width="8%" class="td_title" align="center">Actions</td>
 		</tr><?

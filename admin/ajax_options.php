@@ -62,7 +62,7 @@ function sql_select_client($itemId)
 function sql_select_job($itemId)
 {
 	// fetch Job's details for selected Client
-	$sql = "SELECT job_id, job_name, period
+	$sql = "SELECT job_id, job_name, period, DATE_FORMAT(job_due_date, '%d/%m/%Y')job_due_date
 			FROM job  
 			WHERE client_id=".$itemId." 
 			AND discontinue_date IS NULL
@@ -94,9 +94,10 @@ function sql_select_job($itemId)
 	{
 		while ($rowData = mysql_fetch_assoc($res))
 		{
+                   //echo($rowData['job_due_date']);
 		   $arrJobParts = explode('::', $rowData['job_name']);
 		   $jobName = $arrClient[$arrJobParts[0]] . ' - ' . $arrJobParts[1]. ' - ' . $arrJobType[$arrJobParts[2]];
-		   $arrJobNames[$rowData['job_id']] = $jobName;
+		   $arrJobNames[$rowData['job_id']] = $rowData['job_due_date'].'_'.$jobName;
 		}
 
 		// Sort array of Job names in ascending order		
@@ -107,7 +108,7 @@ function sql_select_job($itemId)
 
 		$strReturn = rtrim($strReturn, '+');
 	}
-	print($strReturn);
+	
 	return $strReturn;
 }
 

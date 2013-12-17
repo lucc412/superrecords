@@ -216,7 +216,7 @@ class Task_Class extends Database {
 
 		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))) {				
 			
-			$qrySel = "SELECT t.*, tg.description taskStage, IF(t.start_date NOT LIKE '0000-00-00 00:00:00',DATE_FORMAT(t.start_date, '%d/%m/%Y %H:%i:%s'),'')start_date, pr.sr_manager, pr.india_manager, pr.audit_manager, pr.sales_person, c.team_member, c.sr_accnt_comp, c.sr_accnt_audit
+			$qrySel = "SELECT t.*, DATE_FORMAT(t.due_date, '%d/%m/%Y')due_date, DATE_FORMAT(t.task_due_date, '%d/%m/%Y')task_due_date, DATE_FORMAT(j.job_due_date, '%d/%m/%Y')job_due_date, tg.description taskStage, IF(t.start_date NOT LIKE '0000-00-00 00:00:00',DATE_FORMAT(t.start_date, '%d/%m/%Y'),'')start_date, pr.sr_manager, pr.india_manager, pr.audit_manager, pr.sales_person, c.team_member, c.sr_accnt_comp, c.sr_accnt_audit
 						FROM job j, client c, pr_practice pr, task t
                                                 LEFT JOIN task_stage tg ON t.task_stage_id = tg.id
 						WHERE t.discontinue_date IS NULL 
@@ -290,17 +290,17 @@ class Task_Class extends Database {
 
                 $objTskResult = mysql_query($qryTskType);
                 $arrTaskType = mysql_fetch_assoc($objTskResult);
-                $startDate = date('Y-m-d H:i:s', strtotime($arrTaskType['task_start_hours']));
+                $startDate = date('Y-m-d H:i:s');
 
-		// external due date
+		// external due date / Job Due Date
 		$arrExtDate = explode("/", $_REQUEST["dateSignedUp"]);
-		$strExtDate = $arrExtDate[2]."-".$arrExtDate[1]."-".$arrExtDate[0];
+		$strJobDueDate = $arrExtDate[2]."-".$arrExtDate[1]."-".$arrExtDate[0];
 
-		// befree due date
-		$arrBefreeDate = explode("/", $_REQUEST["befreeDueDate"]);
-		$strBefreeDate = $arrBefreeDate[2]."-".$arrBefreeDate[1]."-".$arrBefreeDate[0];
+		// befree due date / Task Due Date
+		$arrBefreeDate = explode("/", $_REQUEST["taskDueDate"]);
+		$strTaskDueDate = $arrBefreeDate[2]."-".$arrBefreeDate[1]."-".$arrBefreeDate[0];
 		
-		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, task_type_id, start_date, due_date, befree_due_date, created_date)
+		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, task_type_id, start_date, due_date, task_due_date)
 				VALUES (
 				'" . addslashes($_REQUEST['txtTaskName']) . "', 
 				'" . $practiceId . "', 
@@ -314,9 +314,8 @@ class Task_Class extends Database {
 				'" . $_REQUEST['lstProcessingCycle'] . "', 
 				'16', 
 				'" . $startDate . "', 
-				'" . $strExtDate . "', 
-				'" . $strBefreeDate . "', 
-				NOW() 
+				'" . $strJobDueDate . "', 
+				'" . $strTaskDueDate . "'
 				)";
 		
 		mysql_query($qryIns);
@@ -329,7 +328,7 @@ class Task_Class extends Database {
 		$strExtDate = $arrExtDate[2]."-".$arrExtDate[1]."-".$arrExtDate[0];
 
 		// befree due date
-		$arrBefreeDate = explode("/", $_REQUEST["befreeDueDate"]);
+		$arrBefreeDate = explode("/", $_REQUEST["taskDueDate"]);
 		$strBefreeDate = $arrBefreeDate[2]."-".$arrBefreeDate[1]."-".$arrBefreeDate[0];
 	
 		if($_REQUEST["jobId"]) {
@@ -350,7 +349,7 @@ class Task_Class extends Database {
 					priority_id = '" . $_REQUEST['lstPriority'] . "',
 					process_id = '" . $_REQUEST['lstProcessingCycle'] . "',
 					due_date = '" . $strExtDate . "',
-					befree_due_date = '" . $strBefreeDate . "'
+					task_due_date = '" . $strBefreeDate . "'
 					WHERE task_id = '" . $_REQUEST['recid'] . "'";
 		}
 		else {
@@ -368,7 +367,7 @@ class Task_Class extends Database {
 					priority_id = '" . $_REQUEST['lstPriority'] . "',
 					process_id = '" . $_REQUEST['lstProcessingCycle'] . "',
 					due_date = '" . $strExtDate . "',
-					befree_due_date = '" . $strBefreeDate . "'
+					task_due_date = '" . $strBefreeDate . "'
 					WHERE task_id = '" . $_REQUEST['recid'] . "'";
 		}			
 		mysql_query($qryUpd);	

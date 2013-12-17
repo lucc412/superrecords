@@ -79,22 +79,22 @@
 	</tr>
         
         <tr>
-		<td class="hr">External Due Date</td>
+		<td class="hr">Job Due Date</td>
 		<td class="dr"><?
-                        if (isset($arrTaskData["due_date"]) && $arrTaskData["due_date"] != "") {
-                            if($arrTaskData["due_date"] != "0000-00-00 00:00:00") {
-                                echo $due_date = date("d/m/Y",strtotime( $arrTaskData["due_date"]));
+                        if (isset($arrTaskData["job_due_date"]) && $arrTaskData["job_due_date"] != "") {
+                            if($arrTaskData["job_due_date"] != "00/00/0000") {
+                                echo $due_date = $arrTaskData["job_due_date"];
                             }
-                        }
+                        }  
                 ?></td>
 	</tr>
         
         <tr>
-		<td class="hr">Superrecords Due Date</td>
+		<td class="hr">Task Due Date</td>
 		<td class="dr"><?
-                        if (isset($arrTaskData["befree_due_date"]) && $arrTaskData["befree_due_date"] != "") {
-                            if($arrTaskData["befree_due_date"] != "0000-00-00 00:00:00") {
-                                echo $befree_due_date = date("d/m/Y",strtotime( $arrTaskData["befree_due_date"]));
+                        if (isset($arrTaskData["task_due_date"]) && $arrTaskData["task_due_date"] != "") {
+                            if($arrTaskData["task_due_date"] != "00/00/0000") {
+                                echo $task_due_date = $arrTaskData["task_due_date"];
                             }
                         }  
                 ?></td>

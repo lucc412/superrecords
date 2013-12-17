@@ -51,7 +51,8 @@ if (basename($_SERVER['PHP_SELF']) == 'job.php') {
     } else if (basename($_SERVER['PHP_SELF']) == 'rf_type.php') {
             ?><title>Referrer Type</title><?
         } else if (basename($_SERVER['PHP_SELF']) == 'jobs_rights.php') {
-            ?><title>Job Rights</title><?
+            ?><title>Job Rights</title>
+                <script src="<?php echo $javaScript; ?>jobs_rights.js" type="text/javascript" ></script><?
             } else if (basename($_SERVER['PHP_SELF']) == 'rf_tasklist.php') {
                 ?><title>Referrer Items List</title><?
         } else if (basename($_SERVER['PHP_SELF']) == 'pr_practice.php') {
@@ -100,7 +101,7 @@ if (basename($_SERVER['PHP_SELF']) == 'job.php') {
         } else if (basename($_SERVER['PHP_SELF']) == 'stf_staff.php') {
             ?><title>Users</title>
                 <script type="text/javascript" src="<?php echo $javaScript; ?>staff.js"></script> 
-                <script src="<?php echo $javaScript; ?>jobs_rights.js" type="text/javascript" ></script><?
+                <?
             } else if (basename($_SERVER['PHP_SELF']) == 'dsg_designation.php') {
                 ?><title>Designations</title><?
             } else if (basename($_SERVER['PHP_SELF']) == 'stf_ipaddress.php') {
@@ -115,12 +116,13 @@ if (basename($_SERVER['PHP_SELF']) == 'job.php') {
                 <script type="text/javascript" src="library/ckeditor/ckeditor.js"></script><?
             } else if ((basename($_SERVER['PHP_SELF']) == 'lead_report.php') || (basename($_SERVER['PHP_SELF']) == 'practice_report.php') || (basename($_SERVER['PHP_SELF']) == 'client_report.php') || (basename($_SERVER['PHP_SELF']) == 'job_report.php') || (basename($_SERVER['PHP_SELF']) == 'task_report.php')) {
                 ?><script type="text/javascript" src="<?= $javaScript; ?>report_validation.js"></script><?
-            } else if (basename($_SERVER['PHP_SELF']) == 'index2.php') {
+            }else if (basename($_SERVER['PHP_SELF']) == 'index2.php') {
                 ?><title>Super Records</title><?
             }
             ?></head>
 
     <body><?
+            
             if ($_SESSION['validUser']) {
                 ?><br/>
             <div class="header">

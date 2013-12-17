@@ -21,7 +21,7 @@
 			
 	?><table class="tbl" border="0" cellspacing="10" width="70%">
 		<tr>
-			<td class="hr">Task Name<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Task Name <font style="color:red;" size="2">*</font></td>
 			<td class="dr">
 				<input type="text" name="txtTaskName" size="26" value="">
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Name of Task.</span></a>
@@ -29,7 +29,7 @@
 		</tr>
 		
 		<tr>
-		   <td class="hr">Practice Name<font style="color:red;" size="2">*</font></td>
+		   <td class="hr">Practice Name <font style="color:red;" size="2">*</font></td>
 		   
 		   <td><? 
 			   	if($JobID) {
@@ -48,7 +48,7 @@
 		</tr>
 		
 		<tr>
-			<td class="hr">Client Name<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Client Name <font style="color:red;" size="2">*</font></td>
 			<td><? 
 			   	if($JobID)
 				{
@@ -67,7 +67,7 @@
 		</tr>
 		
 		<tr>
-			<td class="hr">Job Name<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Job Name <font style="color:red;" size="2">*</font></td>
 			<td><? 
 			   	if($JobID)
 				{
@@ -86,7 +86,7 @@
 		</tr>
 		
 		<tr>
-			<td class="hr">Master Activity<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Master Activity <font style="color:red;" size="2">*</font></td>
 			<td><select id="lstMasterActivity" name="lstMasterActivity" onchange="javascript:selectOptions('SubActivity');">
 					<option value="0">Select Master Activity</option><?php
 					foreach($objCallData->arrMasterActivity AS $mas_code => $mas_desc){
@@ -98,7 +98,7 @@
 		</tr>
 		
 		<tr>
-			<td class="hr">Sub Activity<font style="color:red;" size="2">*</font></td>
+			<td class="hr">Sub Activity <font style="color:red;" size="2">*</font></td>
 			<td>
 				<span id="spanSubActivity">	
 					<select id="lstSubActivity" name="lstSubActivity">
@@ -125,7 +125,9 @@
 			<td><select name="lstPriority">
 					<option value="0">Select Priority</option><?php
 					foreach($objCallData->arrPriority AS $id => $desc){
-						?><option value="<?=$id?>"><?=$desc?></option><?php 
+                                            $sel = "";
+                                            if($id == 4)$sel = "selected";    
+                                            ?><option value="<?=$id?>" <?=$sel?> ><?=$desc?></option><?php 
 					} 
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select priority of task.</span></a>
@@ -145,18 +147,31 @@
 		</tr>
 		
 		<tr>
-			<td class="hr">External Due Date</td>
+			<td class="hr">Job Due Date</td>
                         <td class="dr">						
-                                <input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
-                                <img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+<!--                                <input type="text" name="dateSignedUp" id="dateSignedUp" value="">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
+                                <img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>-->
+                            <span name="dateSignedUp" id="dateSignedUp"></span>
 			</td>
 		</tr>
 
 		<tr>
-                        <td class="hr">Superrecords Due Date</td>
-                        <td class="dr">						
-                                <input type="text" name="befreeDueDate" id="befreeDueDate" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('befreeDueDate','ddmmyyyy',false,24)">
+                        <td class="hr">Task Due Date</td>
+                        <td class="dr">		
+                                <?php 
+                                    if($_SESSION["usertype"] == "Staff") {
+                                        $arrFeatures = $commonUses->getFeatureVisibility(6);
+                                    }else
+                                        $arrFeatures['stf_visibility'] = 1;
+                                    
+                                    if($arrFeatures['stf_visibility'] == 1)
+                                    {
+                                ?>
+                                <input type="text" name="taskDueDate" id="taskDueDate" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('taskDueDate','ddmmyyyy',false,24)">
                                 <img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+                                <? }  else { ?>
+                                    
+                                <? } ?>
                         </td>
 		</tr>
 		<tr>

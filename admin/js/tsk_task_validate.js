@@ -160,7 +160,7 @@ function selectOptions(listName)
 	else
 	{
 		var arrData = response.split("+");
-		
+        
 		if(listName == 'Client')
 		{
 			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\' onchange=\'javascript:selectOptions(\"Job\");selectTeamMember();\'><option value=\''\''>Select Client</option>";
@@ -169,6 +169,7 @@ function selectOptions(listName)
 		if(listName == 'Job')
 		{
 			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\'' >Select Job</option>";
+                        
 		}
 		
 		if(listName == 'SubActivity')
@@ -180,12 +181,23 @@ function selectOptions(listName)
 		{
 			var itemInfo = arrData[i];
 			var arrInfo = itemInfo.split("_");
-			var code = arrInfo[0];
-			var name = arrInfo[1];
+                        if(listName == 'Job')
+                        {
+                            var code = arrInfo[0];
+                            var job_due_date = arrInfo[1];
+                            var name = arrInfo[2];
+                            document.getElementById('dateSignedUp').innerHTML = job_due_date;
+                        }
+                        else
+                        {
+                            var code = arrInfo[0];
+                            var name = arrInfo[1];
+                        }
 			selectStr += '<option value=\'' + code + '\'>' + name + '</option>';
 		}
 		selectStr += '</select>';
 
 		document.getElementById("span"+listName).innerHTML = selectStr;
+                
 	}
 }

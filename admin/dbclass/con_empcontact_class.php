@@ -86,10 +86,10 @@ class empcontactContentList extends Database
                     <br><br>
                     <table width="100%" class="fieldtable" align="center" border="0" cellspacing="1" cellpadding="5" >
                          <tr class="fieldheader">
-                            <th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');" class="fieldheader">First Name <img id="sort_name" src="images/sort_asc.png"></th>
-							<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_lname');" class="fieldheader">Last Name <img id="sort_lname" src="images/sort_asc.png"></th>
-                            <th style="cursor:pointer;" align="left" onclick="changeSortImage('desi');" class="fieldheader">Designation <img id="desi" src="images/sort_asc.png"></th>	
-                            <th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_email');" class="fieldheader">Email <img id="sort_email" src="images/sort_asc.png"></th>
+                            <th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');" class="fieldheader sort_column">First Name <img id="sort_name" src="images/sort_asc.png"></th>
+							<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_lname');" class="fieldheader sort_column">Last Name <img id="sort_lname" src="images/sort_asc.png"></th>
+                            <th style="cursor:pointer;" align="left" onclick="changeSortImage('desi');" class="fieldheader sort_column">Designation <img id="desi" src="images/sort_asc.png"></th>	
+                            <th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_email');" class="fieldheader sort_column">Email <img id="sort_email" src="images/sort_asc.png"></th>
                             <th class="fieldheader" colspan="3" align="center">Actions</th>
                         </tr>
                         <?php

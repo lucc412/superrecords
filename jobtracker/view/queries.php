@@ -1,6 +1,7 @@
 <?
 // include topbar file
 include(TOPBAR);
+//include(PHPUPLODER);
 
 // page header
 ?><div class="pageheader">
@@ -57,8 +58,8 @@ include(TOPBAR);
 	else {
 		?><table width="100%" class="resources">
 			<tr>
-				<th class="td_title" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Job <img id="sort_name" src="images/sort_asc.png"></th>
-				<th class="td_title" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_query');">Query <img id="sort_query" src="images/sort_asc.png"></th>
+				<th class="td_title sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Job <img id="sort_name" src="images/sort_asc.png"></th>
+				<th class="td_title sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_query');">Query <img id="sort_query" src="images/sort_asc.png"></th>
 				<td class="td_title" style="cursor:pointer;">Response</td>
 				<td class="td_title" align="center">Uploaded by SR</td>
 				<td class="td_title" align="center">Supporting Doc</td>
@@ -90,14 +91,27 @@ include(TOPBAR);
 					<td class="tddata"><?
 					$folderPath = "../uploads/queries/".$arrInfo['file_path'];
 					if(empty($arrInfo['file_path']) || !file_exists($folderPath)) {
-						?><input type="file" name="doc_<?=$queryId?>"><?
+						?><input type="file" name="doc_<?=$queryId?>">
+						<?php				
+						/*	$uploader=new PhpUploader();
+							$uploader->MaxSizeKB=102400;
+							$uploader->Name="doc_".$queryId;
+							$uploader->InsertText="Select files";
+							$uploader->AllowedFileExtensions="*.jpg,*.png,*.gif,*.txt,*.zip,*.rar";	
+							$uploader->MultipleFilesUpload=false;
+							$uploader->ManualStartUpload=true;
+							//$uploader->InsertButtonID="uploadbutton_".$queryId;
+							$uploader->Render();
+						?>
+						
+						<?*/
 					}
 					else {
 						$icon = returnFileIcon($arrInfo['file_path']);
 						?><p><?=$icon?><a href="<?=DOWNLOAD?>?folderPath=PRQ&fileName=<?=urlencode($arrInfo['file_path'])?>" title="Click to view this document">Document</a></p><?
 					}
 					?></td>
-					<td class="tddata" align="center"><button type="button" style="width:100px;" onclick="javascript:updateQuery(<?=$queryId?>);" value="Save">Save</button></td>
+					<td class="tddata" align="center"><button type="button" id="uploadbutton_<?=$queryId;?>" style="width:100px;" onclick="javascript:updateQuery(<?=$queryId?>);" value="Save">Save</button></td>
 				</tr><?
 				$countRow++;
 			}
@@ -133,7 +147,22 @@ include(TOPBAR);
 			   </script>';
 		}	
 	}
-?></form><?
+?></form>
+<script type="text/javascript">
+	function doStart()
+	{
+		var uploadobj = document.getElementById('myuploader');
+		if (uploadobj.getqueuecount() > 0)
+		{
+			uploadobj.startupload();
+		}
+		else
+		{
+			alert("Please browse files for upload");
+		}
+	}
+</script>
+<?
 
 // include footer file
 include(FOOTER);

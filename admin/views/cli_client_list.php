@@ -37,12 +37,12 @@
 </table>
 <table class="fieldtable" width="100%" align="center" border="0" cellspacing="1" cellpadding="5">
 	<tr class="fieldheader">
-		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_practice');">Practice <img id="sort_practice" src="images/sort_asc.png"></th>
-		<th width="10%" class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_code');">Client Code <img id="sort_code" src="images/sort_asc.png"></th>
-		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Client Name <img id="sort_name" src="images/sort_asc.png"></th>
-		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');">Type <img id="sort_type" src="images/sort_asc.png"></th>
-		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_sr');">SR Manager <img id="sort_sr" src="images/sort_asc.png"></th>
-		<th class="fieldheader date" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Date Signed Up <img id="sort_date" src="images/sort_asc.png"></th>
+		<th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_practice');">Practice <img id="sort_practice" src="images/sort_asc.png"></th>
+		<th width="10%" class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_code');">Client Code <img id="sort_code" src="images/sort_asc.png"></th>
+		<th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Client Name <img id="sort_name" src="images/sort_asc.png"></th>
+		<th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');">Type <img id="sort_type" src="images/sort_asc.png"></th>
+		<th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_sr');">SR Manager <img id="sort_sr" src="images/sort_asc.png"></th>
+		<th class="fieldheader date sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Date Signed Up <img id="sort_date" src="images/sort_asc.png"></th>
 		<td class="fieldheader" colspan="3" align="center">Actions</td>
 	</tr>
 	<?

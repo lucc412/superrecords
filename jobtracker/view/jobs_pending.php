@@ -35,11 +35,11 @@ include(TOPBAR);
                     // display job data
                     ?><table width="100%" class="resources">
                         <tr>
-                            <th class="td_title" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Job Name <img id="sort_name" src="images/sort_asc.png"></th>
-                            <th class="td_title" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_status');">Job Status <img id="sort_status" src="images/sort_asc.png"></th>
+                            <th class="td_title sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Job Name <img id="sort_name" src="images/sort_asc.png"></th>
+                            <th class="td_title sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_status');">Job Status <img id="sort_status" src="images/sort_asc.png"></th>
                             <td class="td_title">Source Documents</td>
                             <td class="td_title">Reports</td>
-                            <th align="center" class="td_title date" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Submission Date <img id="sort_date" src="images/sort_asc.png"></th>
+                            <th align="center" class="td_title date sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Submission Date <img id="sort_date" src="images/sort_asc.png"></th>
                             <td width="12%" class="td_title" colspan="2" align="center">Actions</td>
                         </tr><?
                         $countRow = 0;

@@ -87,10 +87,10 @@ class staffContentList extends Database
 
 			<table class="fieldtable" align="center" width="100%" border="0" cellspacing="1" cellpadding="5" >
 				<tr class="fieldheader">
-					<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');" class="fieldheader">Contact Name <img id="sort_name" src="images/sort_asc.png"></th>
-					<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');" class="fieldheader">AccessType <img id="sort_type" src="images/sort_asc.png"></th>
-					<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_desi');" class="fieldheader">Designation <img id="sort_desi" src="images/sort_asc.png"></th>
-					<td width="12%" class="fieldheader" colspan="3" align="center">Actions</td>
+					<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');" class="fieldheader sort_column">Contact Name <img id="sort_name" src="images/sort_asc.png"></th>
+					<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');" class="fieldheader sort_column">AccessType <img id="sort_type" src="images/sort_asc.png"></th>
+					<th style="cursor:pointer;" align="left" onclick="changeSortImage('sort_desi');" class="fieldheader sort_column">Designation <img id="sort_desi" src="images/sort_asc.png"></th>
+					<th width="12%" class="fieldheader" colspan="3" align="center">Actions</th>
 				</tr><?
 
 				$countRow = 0;

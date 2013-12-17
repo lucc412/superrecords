@@ -34,8 +34,8 @@ include(TOPBAR);
 		// display job data
 		?><table align="center" width="100%" class="resources">
 			<tr>
-                            <th width="50%" class="td_title" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Job Name <img id="sort_name" src="images/sort_asc.png"></th>
-                            <th width="10%" class="td_title date" align="center" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Creation Date <img id="sort_date" src="images/sort_asc.png"></th>
+                            <th width="50%" class="td_title sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Job Name <img id="sort_name" src="images/sort_asc.png"></th>
+                            <th width="10%" class="td_title date sort_column" align="center" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Creation Date <img id="sort_date" src="images/sort_asc.png"></th>
                             <td width="8%" class="td_title" align="center">Actions</td>
 			</tr><?
                         

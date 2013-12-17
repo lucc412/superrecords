@@ -34,10 +34,10 @@
 </table>
 <table class="fieldtable" width="100%" align="center">
 	<tr class="fieldheader">
-		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');">Lead Type <img id="sort_type" src="images/sort_asc.png"></th>
-		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Lead Name <img id="sort_name" src="images/sort_asc.png"></th>
-		<th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_person');">Sales Person <img id="sort_person" src="images/sort_asc.png"></th>
-		<th class="fieldheader date" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Date Received <img id="sort_date" src="images/sort_asc.png"></th>
+		<th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_type');">Lead Type <img id="sort_type" src="images/sort_asc.png"></th>
+		<th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');">Lead Name <img id="sort_name" src="images/sort_asc.png"></th>
+		<th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_person');">Sales Person <img id="sort_person" src="images/sort_asc.png"></th>
+		<th class="fieldheader date sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_date');">Date Received <img id="sort_date" src="images/sort_asc.png"></th>
 		<td width="12%" class="fieldheader" colspan="3" align="center">Actions</td>
 	</tr><?
 

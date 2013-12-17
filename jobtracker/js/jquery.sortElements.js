@@ -44,15 +44,30 @@ jQuery.fn.sortElements = (function(){
 		})();
 		
 
-	    var th = jQuery('th'),
+	    var th = jQuery('.sort_column'),
 	        inverse = false;
 	    
-	    th.click(function(){
-	        
+	    th.click(function(imgId){
+			/*alert(imgId);
+	        imgSrc = document.getElementById(imgId).src;
+			val = imgSrc.split("/");
+		
+			//rootPath = document.location.hostname;	
+			if(val[val.length-1]=='sort_asc.png')
+			{
+				document.getElementById(imgId).src = 'images/sort_desc.png';
+				imgSrc = document.getElementById(imgId).src;
+			}
+			if(val[val.length-1]=='sort_desc.png')
+			{
+				document.getElementById(imgId).src = 'images/sort_asc.png';
+				imgSrc = document.getElementById(imgId).src;
+			}*/
+			
 	        var header = $(this),
 	        index = header.index();
 			var isColDate = $(this).hasClass("date");
-			console.log(isColDate);           
+			//console.log(isColDate);           
 	        header
 	            .closest('table')
 	            .find('td')

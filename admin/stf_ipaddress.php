@@ -200,10 +200,10 @@ header("Location:index.php?msg=timeout");
 <br>
 <table width="100%" class="fieldtable" cellspacing="1" cellpadding="5" align="center"  >
 <tr align="left" class="fieldheader">
-    <th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_own');">Owner of the IP <img id="sort_own" src="images/sort_asc.png"></th>
+    <th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_own');">Owner of the IP <img id="sort_own" src="images/sort_asc.png"></th>
 
- <th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_ip');">From IP Address <img id="sort_ip" src="images/sort_asc.png"></th>
- <th class="fieldheader" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_to');">To IP Address <img id="sort_to" src="images/sort_asc.png"></th>
+ <th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_ip');">From IP Address <img id="sort_ip" src="images/sort_asc.png"></th>
+ <th class="fieldheader sort_column" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_to');">To IP Address <img id="sort_to" src="images/sort_asc.png"></th>
 <td class="fieldheader" colspan="3" align="center">Actions</td>
 </tr>
 <?php

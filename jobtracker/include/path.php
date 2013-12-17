@@ -35,6 +35,7 @@ define('MODEL',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/model/');
 define('VIEW',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/view/');
 define('UPLOADSETUP',$_SERVER['DOCUMENT_ROOT'].'/uploads/setup/');
 define('DOWNLOAD',DIR.'include/download.php');
+define('PHPUPLODER',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/library/phpuploader/include_phpuploader.php');
 
 // New SMSF
 define("SETUPNAVIGATION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/new_smsf/include/setup_navigation.php");

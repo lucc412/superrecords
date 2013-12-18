@@ -212,7 +212,7 @@ function replaceContent($content, $salesPersonId=NULL, $practiceId=NULL, $client
 		$row_subactivity = mysql_fetch_assoc($runActivity);
 		$subactivity_name  = $row_subactivity['sub_Description'];
 				
-		$queryName = $client_name.'-'.$arrJobParts[1].'-'.$subactivity_name;
+		$queryName = $client_name.' - '.$arrJobParts[1].' - '.$subactivity_name;
 		
 		$content = str_replace('JOBNAME', $queryName, $content);
 	}

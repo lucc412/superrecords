@@ -126,7 +126,8 @@
 					<option value="0">Select Priority</option><?php
 					foreach($objCallData->arrPriority AS $id => $desc){
                                             $sel = "";
-                                            if($id == 8)$sel = "selected";    
+                                            if($id == 7)$sel = "selected";    
+
                                             ?><option value="<?=$id?>" <?=$sel?> ><?=$desc?></option><?php 
 					} 
 				?></select>

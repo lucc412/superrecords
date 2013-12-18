@@ -177,7 +177,7 @@
 						$selectStr = '';
                                                 if(isset($arrTaskData['priority_id']) && $id == $arrTaskData['priority_id']) 
                                                     $selectStr = 'selected';
-                                                elseif (empty($arrTaskData['priority_id']) && $id == 8) {
+                                                elseif (empty($arrTaskData['priority_id']) && $id == 7) {
                                                     $selectStr = 'selected';
                                                 }
 						?><option <?=$selectStr?> value="<?=$id?>"><?=$desc?></option><?php 

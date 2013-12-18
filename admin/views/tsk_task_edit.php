@@ -175,7 +175,11 @@
 					<option value="0">Select Priority</option><?php
 					foreach($objCallData->arrPriority AS $id => $desc){
 						$selectStr = '';
-						if($id == $arrTaskData['priority_id']) $selectStr = 'selected';	
+                                                if(isset($arrTaskData['priority_id']) && $id == $arrTaskData['priority_id']) 
+                                                    $selectStr = 'selected';
+                                                elseif (empty($arrTaskData['priority_id']) && $id == 8) {
+                                                    $selectStr = 'selected';
+                                                }
 						?><option <?=$selectStr?> value="<?=$id?>"><?=$desc?></option><?php 
 					} 
 				?></select>

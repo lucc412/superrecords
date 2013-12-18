@@ -20,7 +20,7 @@ include ("includes/header.php");
             <td class="helpBod" colspan="4"><div align="center"><b style="color:#F05729;">View Permissions</b></div></td>
         </tr>
         <tr class="fieldheader">
-            <th align="center" class="fieldheader" style="width:150px;"><input type="checkbox" onclick="CheckAll_View('1|2|3|4')" value="yes" name="Check_ctr_view" class="checkboxClass">
+            <th align="center" class="fieldheader" style="width:150px;"><input type="checkbox" onclick="CheckAll_View('1|2|3|4|5|6')" value="yes" name="Check_ctr_view" class="checkboxClass">
                 &nbsp;&nbsp;<b>View</b>
             </th>
         </tr>

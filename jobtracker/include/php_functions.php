@@ -703,23 +703,23 @@ function add_new_task($jobType='21', $jobId) {
     while($resTaskType = mysql_fetch_assoc($objTskResult)) {
             $arrTaskType[$resTaskType['task_type_id']] = $resTaskType;
     }
-    
+    $startDate = date('Y-m-d H:i:s');
     foreach ($arrTaskType as $taskTypeId => $taskInfo) 
-    {
+    {        
         if($taskInfo['task_type_name'] == 'Default')
         {
             $taskName = $arrJobData['client_name'].' - '.$arrJobData['period'].' - '.$arrJobData['sub_Description'];
-            $startDate = NULL;
+            $tskDueDate = NULL;
         }
         else
         {
             $taskName = $arrJobData['client_name'].' - '.$arrJobData['period'].' - '.$taskInfo['task_type_name'];
-            $startDate = date('Y-m-d H:i:s', strtotime($taskInfo['task_start_hours']));
+            $tskDueDate = date('Y-m-d H:i:s', strtotime($taskInfo['task_start_hours']));
         }
         $mailCode = $taskInfo['task_mail_code'];
         
         // insert tasks    
-        $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, start_date, mas_Code, sub_Code, task_status_id, task_type_id) 
+        $qryIns = "INSERT INTO task(task_name, id, client_id, job_id, start_date, mas_Code, sub_Code, task_status_id, task_type_id, task_due_date) 
                     VALUES ('" . addslashes($taskName) . "',
                     '" . $practice_id . "',
                     '" . $arrJobData['client_id'] . "',
@@ -728,7 +728,8 @@ function add_new_task($jobType='21', $jobId) {
                     '" . $arrJobData['mas_Code'] . "',
                     '" . $arrJobData['job_type_id'] . "',
                     '1',
-                    " . $taskTypeId . "
+                    " . $taskTypeId . ",
+                    '".$tskDueDate."'
                     )";
         
         mysql_query($qryIns);

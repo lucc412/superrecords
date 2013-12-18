@@ -175,7 +175,11 @@
 					<option value="0">Select Priority</option><?php
 					foreach($objCallData->arrPriority AS $id => $desc){
 						$selectStr = '';
-						if($id == $arrTaskData['priority_id']) $selectStr = 'selected';	
+                                                if(isset($arrTaskData['priority_id']) && $id == $arrTaskData['priority_id']) 
+                                                    $selectStr = 'selected';
+                                                elseif (empty($arrTaskData['priority_id']) && $id == 7) {
+                                                    $selectStr = 'selected';
+                                                }
 						?><option <?=$selectStr?> value="<?=$id?>"><?=$desc?></option><?php 
 					} 
 				?></select>
@@ -201,42 +205,46 @@
 				<td class="dr"><?=$arrTaskData["start_date"]?></td>
 		</tr>
                 <tr>
-			<td class="hr">External Due Date</td>
-				<td class="dr">
-					<?						
-						/*$arrDate = explode("-", $arrTaskData['due_date']);
-						$strDate = $arrDate[2]."/".$arrDate[1]."/".$arrDate[0];*/
-						$due_date = "";
-						if (isset($arrTaskData["due_date"]) && $arrTaskData["due_date"] != "") {
-							if($arrTaskData["due_date"] != "0000-00-00 00:00:00") {
-								$due_date = date("d/m/Y",strtotime( $arrTaskData["due_date"]));
-							}
-						}  
-
-					?>
-                    <input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
-				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+                    <td class="hr">Job Due Date</td>
+                    <td class="dr">
+                        <?      
+                            $due_date = "";
+                            if (isset($arrTaskData["job_due_date"]) && $arrTaskData["job_due_date"] != "") {
+                                if($arrTaskData["job_due_date"] != "00/00/0000") {
+                                    echo $due_date = $arrTaskData["job_due_date"];
+                                }
+                            }  
+                        ?>
+<!--                    <input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
+				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>-->
 					
-				</td>
+                    </td>
 		</tr>
 
 		<tr>
-			<td class="hr">Superrecords Due Date</td>
+			<td class="hr">Task Due Date</td>
 				<td class="dr">
 				<?						
-					/*$arrDate = explode("-", $arrTaskData['befree_due_date']);
-					$strDate = $arrDate[2]."/".$arrDate[1]."/".$arrDate[0];*/
-					
-					$befree_due_date = "";
-					if (isset($arrTaskData["befree_due_date"]) && $arrTaskData["befree_due_date"] != "") {
-						if($arrTaskData["befree_due_date"] != "0000-00-00 00:00:00") {
-							$befree_due_date = date("d/m/Y",strtotime( $arrTaskData["befree_due_date"]));
+					$task_due_date = "";
+					if (isset($arrTaskData["task_due_date"]) && $arrTaskData["task_due_date"] != "") {
+						if($arrTaskData["task_due_date"] != "00/00/0000") {
+							$task_due_date = $arrTaskData["task_due_date"];
 						}
 					}  
-			  ?>
-                        <input type="text" name="befreeDueDate" id="befreeDueDate" value="<?=$befree_due_date?>">&nbsp;<a href="javascript:NewCal('befreeDueDate','ddmmyyyy',false,24)">
+                                
+                                        if($_SESSION["usertype"] == "Staff") {
+                                            $arrFeatures = $commonUses->getFeatureVisibility(6);
+                                        }else
+                                            $arrFeatures['stf_visibility'] = 1;
+                                    
+                                        if($arrFeatures['stf_visibility'] == 1)
+                                        {
+                                ?>
+                                <input type="text" name="taskDueDate" id="taskDueDate" value="<?=$task_due_date?>">&nbsp;<a href="javascript:NewCal('taskDueDate','ddmmyyyy',false,24)">
 				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
-					
+                                    <? }  else { ?>
+                                        <span><?=$task_due_date?></span>
+                                   <? }?>	
 				</td>
 		</tr>
 		<tr>

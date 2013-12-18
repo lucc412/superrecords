@@ -1,4 +1,4 @@
-
+var trcolor = 0 ;
 jQuery.fn.sortElements = (function(){
     
 		    var sort = [].sort;
@@ -26,8 +26,17 @@ jQuery.fn.sortElements = (function(){
 		                    throw new Error(
 		                        "You can't sort elements if any one is a descendant of another."
 		                    );
-		                }
-		                
+		                }	
+						//console.log(this);
+						if(trcolor == 0) {
+							$(this).attr('class','trcolor');
+							trcolor = 1;
+						} else {
+							$(this).attr('class','');
+							trcolor = 0;
+						}
+							
+		                //console.log($(this).attr('class','trcolor'));
 		                // Insert before flag:
 		                parentNode.insertBefore(this, nextSibling);
 		                // Remove flag:
@@ -48,22 +57,7 @@ jQuery.fn.sortElements = (function(){
 	        inverse = false;
 	    
 	    th.click(function(imgId){
-			/*alert(imgId);
-	        imgSrc = document.getElementById(imgId).src;
-			val = imgSrc.split("/");
-		
-			//rootPath = document.location.hostname;	
-			if(val[val.length-1]=='sort_asc.png')
-			{
-				document.getElementById(imgId).src = 'images/sort_desc.png';
-				imgSrc = document.getElementById(imgId).src;
-			}
-			if(val[val.length-1]=='sort_desc.png')
-			{
-				document.getElementById(imgId).src = 'images/sort_asc.png';
-				imgSrc = document.getElementById(imgId).src;
-			}*/
-			
+			trcolor = 0;
 	        var header = $(this),
 	        index = header.index();
 			var isColDate = $(this).hasClass("date");

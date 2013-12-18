@@ -66,9 +66,10 @@
 	<tr>
 		<td class="hr">Priority</td>
 		<td class="dr"><?php 
-                                    echo 'Regular';
-                                    if(isset($arrTaskData['priority_id'])) 
-                                        echo htmlspecialchars($objCallData->arrPriority[$arrTaskData["priority_id"]]);
+                                    if(isset($arrTaskData['priority_id']) && $arrTaskData['priority_id'] != 0) 
+                                        echo $objCallData->arrPriority[$arrTaskData["priority_id"]];
+                                    else 
+                                        echo 'Regular';                                    
 //                                    htmlspecialchars($objCallData->arrPriority[$arrTaskData["priority_id"]])
                                 ?></td>
 	</tr>

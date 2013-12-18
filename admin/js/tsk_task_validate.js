@@ -129,7 +129,10 @@ function selectOptions(listName)
 	
 	if(listName == 'Job')
 		var selObj = document.getElementById('lstClient');
-		
+	
+        if(listName == 'JobDueDate')
+		var selObj = document.getElementById('lstJob');
+            
 	if(listName == 'SubActivity')
 		var selObj = document.getElementById('lstMasterActivity');
 		
@@ -168,10 +171,14 @@ function selectOptions(listName)
 		
 		if(listName == 'Job')
 		{
-			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\'' >Select Job</option>";
-                        
-		}
+			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\' onchange=\'javascript:selectOptions(\"JobDueDate\");\' ><option value=\''\'' >Select Job</option>";
+                }
 		
+                if(listName == 'JobDueDate')
+		{
+			var selectStr = "";
+                }
+                
 		if(listName == 'SubActivity')
 		{
 			var selectStr = "<select name=\'lst"+listName+"\' id=\'lst"+listName+"\'><option value=\''\'' >Select Sub Activity</option>";
@@ -181,23 +188,27 @@ function selectOptions(listName)
 		{
 			var itemInfo = arrData[i];
 			var arrInfo = itemInfo.split("_");
-                        if(listName == 'Job')
+                        
+                        if(listName == 'JobDueDate')
                         {
                             var code = arrInfo[0];
                             var job_due_date = arrInfo[1];
-                            var name = arrInfo[2];
                             document.getElementById('dateSignedUp').innerHTML = job_due_date;
                         }
                         else
                         {
                             var code = arrInfo[0];
                             var name = arrInfo[1];
+                            selectStr += '<option value=\'' + code + '\'>' + name + '</option>';
                         }
-			selectStr += '<option value=\'' + code + '\'>' + name + '</option>';
+			
 		}
-		selectStr += '</select>';
-
-		document.getElementById("span"+listName).innerHTML = selectStr;
+                if(listName != 'JobDueDate')
+                {
+                    selectStr += '</select>';
+                    document.getElementById("span"+listName).innerHTML = selectStr;
+                }
+		
                 
 	}
 }

@@ -21,6 +21,10 @@ switch($doAction) {
 	case 'Job':
 			$returnStr = sql_select_job($itemId);
 			break;
+                    
+        case 'JobDueDate':
+			$returnStr = sql_select_job_due_date($itemId);
+			break;
 			
 	case 'SubActivity':
 			$returnStr = sql_select_subActivity($itemId);
@@ -58,11 +62,46 @@ function sql_select_client($itemId)
 	return $strReturn;
 }
 
+// fetch Job Due Date
+function sql_select_job_due_date($itemId)
+{
+	// fetch Job's details for selected Client
+	$sql = "SELECT job_id, DATE_FORMAT(job_due_date, '%d/%m/%Y')job_due_date
+			FROM job  
+			WHERE job_id=".$itemId." 
+			AND discontinue_date IS NULL
+			AND job_submitted = 'Y'
+			ORDER BY job_name";
+	$res = mysql_query($sql) or die(mysql_error());
+	$count = mysql_num_rows($res);
+
+	
+	$strReturn = "";
+	if(!empty($count))
+	{
+		while ($rowData = mysql_fetch_assoc($res))
+		{
+                   //echo($rowData['job_due_date']);
+		   $arrJobDates[$rowData['job_id']] = $rowData['job_due_date'];
+		}
+
+		// Sort array of Job names in ascending order		
+		asort($arrJobDates);
+		
+		foreach($arrJobDates AS $jobId => $jobDate)
+			$strReturn .= $jobId . '_' . $jobDate . '+';
+
+		$strReturn = rtrim($strReturn, '+');
+	}
+	
+	return $strReturn;
+}
+
 // fetch Job Name
 function sql_select_job($itemId)
 {
-	// fetch Job's details for selected Client
-	$sql = "SELECT job_id, job_name, period, DATE_FORMAT(job_due_date, '%d/%m/%Y')job_due_date
+	// fetch Job's details for selected Client , DATE_FORMAT(job_due_date, '%d/%m/%Y')job_due_date
+	$sql = "SELECT job_id, job_name, period
 			FROM job  
 			WHERE client_id=".$itemId." 
 			AND discontinue_date IS NULL
@@ -97,7 +136,7 @@ function sql_select_job($itemId)
                    //echo($rowData['job_due_date']);
 		   $arrJobParts = explode('::', $rowData['job_name']);
 		   $jobName = $arrClient[$arrJobParts[0]] . ' - ' . $arrJobParts[1]. ' - ' . $arrJobType[$arrJobParts[2]];
-		   $arrJobNames[$rowData['job_id']] = $rowData['job_due_date'].'_'.$jobName;
+		   $arrJobNames[$rowData['job_id']] = $jobName;
 		}
 
 		// Sort array of Job names in ascending order		

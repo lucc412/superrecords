@@ -227,7 +227,7 @@
 				<?						
 					$task_due_date = "";
 					if (isset($arrTaskData["task_due_date"]) && $arrTaskData["task_due_date"] != "") {
-						if($arrTaskData["task_due_date"] != "00/00/0000") {
+						if($arrTaskData["task_due_date"] != "00/00/0000 00:00:00") {
 							$task_due_date = $arrTaskData["task_due_date"];
 						}
 					}  
@@ -240,7 +240,7 @@
                                         if($arrFeatures['stf_visibility'] == 1)
                                         {
                                 ?>
-                                <input type="text" name="taskDueDate" id="taskDueDate" value="<?=$task_due_date?>">&nbsp;<a href="javascript:NewCal('taskDueDate','ddmmyyyy',false,24)">
+                                <input type="text" name="taskDueDate" id="taskDueDate" value="<?=$task_due_date?>">&nbsp;<a href="javascript:NewCal('taskDueDate','ddmmyyyy',true,24)">
 				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
                                     <? }  else { ?>
                                         <span><?=$task_due_date?></span>

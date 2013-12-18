@@ -292,15 +292,11 @@ class Task_Class extends Database {
                 $arrTaskType = mysql_fetch_assoc($objTskResult);
                 $startDate = date('Y-m-d H:i:s');
 
-		// external due date / Job Due Date
-		$arrExtDate = explode("/", $_REQUEST["dateSignedUp"]);
-		$strJobDueDate = $arrExtDate[2]."-".$arrExtDate[1]."-".$arrExtDate[0];
-
 		// befree due date / Task Due Date
-		$arrBefreeDate = explode("/", $_REQUEST["taskDueDate"]);
-		$strTaskDueDate = $arrBefreeDate[2]."-".$arrBefreeDate[1]."-".$arrBefreeDate[0];
+                global $commonUses;                
+		$strTaskDueDate = $commonUses->getDateFormat($_REQUEST["taskDueDate"],'Y');
 		
-		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, task_type_id, start_date, due_date, task_due_date)
+		$qryIns = "INSERT INTO task(task_name, id, client_id, job_id, mas_Code, sub_Code, notes, task_status_id, priority_id, process_id, task_type_id, start_date, task_due_date)
 				VALUES (
 				'" . addslashes($_REQUEST['txtTaskName']) . "', 
 				'" . $practiceId . "', 
@@ -314,7 +310,6 @@ class Task_Class extends Database {
 				'" . $_REQUEST['lstProcessingCycle'] . "', 
 				'16', 
 				'" . $startDate . "', 
-				'" . $strJobDueDate . "', 
 				'" . $strTaskDueDate . "'
 				)";
 		
@@ -324,12 +319,8 @@ class Task_Class extends Database {
 	public function sql_update()
 	{	
 		// external due date
-		$arrExtDate = explode("/", $_REQUEST["dateSignedUp"]);
-		$strExtDate = $arrExtDate[2]."-".$arrExtDate[1]."-".$arrExtDate[0];
-
-		// befree due date
-		$arrBefreeDate = explode("/", $_REQUEST["taskDueDate"]);
-		$strBefreeDate = $arrBefreeDate[2]."-".$arrBefreeDate[1]."-".$arrBefreeDate[0];
+                global $commonUses;
+		$strBefreeDate = $commonUses->getDateFormat($_REQUEST["taskDueDate"],'Y');
 	
 		if($_REQUEST["jobId"]) {
 
@@ -348,7 +339,6 @@ class Task_Class extends Database {
 					task_stage_id = '" . $_REQUEST['lstTaskStage'] . "',
 					priority_id = '" . $_REQUEST['lstPriority'] . "',
 					process_id = '" . $_REQUEST['lstProcessingCycle'] . "',
-					due_date = '" . $strExtDate . "',
 					task_due_date = '" . $strBefreeDate . "'
 					WHERE task_id = '" . $_REQUEST['recid'] . "'";
 		}
@@ -366,7 +356,6 @@ class Task_Class extends Database {
 					task_stage_id = '" . $_REQUEST['lstTaskStage'] . "',
 					priority_id = '" . $_REQUEST['lstPriority'] . "',
 					process_id = '" . $_REQUEST['lstProcessingCycle'] . "',
-					due_date = '" . $strExtDate . "',
 					task_due_date = '" . $strBefreeDate . "'
 					WHERE task_id = '" . $_REQUEST['recid'] . "'";
 		}			

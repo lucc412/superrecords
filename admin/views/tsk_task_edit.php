@@ -215,8 +215,6 @@
                                 }
                             }  
                         ?>
-<!--                    <input type="text" name="dateSignedUp" id="dateSignedUp" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
-				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>-->
 					
                     </td>
 		</tr>

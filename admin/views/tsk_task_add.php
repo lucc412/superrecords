@@ -150,8 +150,6 @@
 		<tr>
 			<td class="hr">Job Due Date</td>
                         <td class="dr">						
-<!--                                <input type="text" name="dateSignedUp" id="dateSignedUp" value="">&nbsp;<a href="javascript:NewCal('dateSignedUp','ddmmyyyy',false,24)">
-                                <img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>-->
                             <span name="dateSignedUp" id="dateSignedUp"></span>
 			</td>
 		</tr>

@@ -35,14 +35,30 @@ class commonUse extends Database
             {
               return str_replace("'", "''", $val);
             }
-            function getDateFormat($dateformat)
+            function getDateFormat($dateVal, $flTime=NULL)
             {
-                    $date=explode("/",$dateformat);
-                    $year=$date[2];
-                    $month=$date[1];
-                    $day=$date[0];
-                    $mysql=$year."-".$month."-".$day;
-                    return $mysql;
+                    // date with time case
+                    if(!empty($flTime)) {
+                        $arrDateParts = explode(' ', $dateVal);
+                        $strDate = $arrDateParts[0];
+                        $strTime = $arrDateParts[1];
+                    }
+                    // only date case
+                    else {
+                        $strDate = $dateVal;
+                    }
+                    
+                    // convert date into mysql format
+                    $arrDate = explode("/",$strDate);
+                    $year=$arrDate[2];
+                    $month=$arrDate[1];
+                    $day=$arrDate[0];
+                    $convertedDate = $year."-".$month."-".$day;
+                    
+                    // append time string if available
+                    if(!empty($strTime)) $convertedDate .= ' '.$strTime;
+                    
+                    return $convertedDate;
             }
             function showGridDateFormat($dateformat)
             {

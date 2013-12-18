@@ -166,7 +166,7 @@
                                     if($arrFeatures['stf_visibility'] == 1)
                                     {
                                 ?>
-                                <input type="text" name="taskDueDate" id="taskDueDate" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('taskDueDate','ddmmyyyy',true,24)">
+                            <input type="text" name="taskDueDate" readonly="" id="taskDueDate" value="<?=$due_date?>">&nbsp;<a href="javascript:NewCal('taskDueDate','ddmmyyyy',true,24)">
                                 <img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
                                 <? }  else { ?>
                                     

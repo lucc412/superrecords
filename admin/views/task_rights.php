@@ -1,6 +1,6 @@
 <?php include ("includes/header.php");?>
 <div class="frmheading">
-    <h1>JOBS</h1>
+    <h1>Task</h1>
 </div>
 <form name="jobRights" method="post" action="task_rights.php" >
 <input type="hidden" value="<?=$_REQUEST['xstaffcode']?>" name="xstaffcode">

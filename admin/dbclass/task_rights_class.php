@@ -64,11 +64,12 @@ class task_rights_class extends Database
     
     public function removeJobRights($data,$disp_id)
     {
-        $qry = "DELETE FROM stf_staff_features WHERE stf_SCode = '".$data['xstaffcode']."' 
-                                                     AND disp_id IN ({$disp_id})";
-                                                     //exit;
+        $qry = "DELETE s FROM stf_staff_features s INNER JOIN stf_display_features d WHERE s.disp_id = d.disp_id AND s.stf_SCode = '".$data['xstaffcode']."'
+                                                     AND d.stf_FCode = '".$_REQUEST['frmcode']."'
+                                                     AND s.disp_id IN ({$disp_id})";
+        
         $res = mysql_query($qry);
-        //$data = mysql_fetch_assoc($res);
+        
         return $data;
     }
     

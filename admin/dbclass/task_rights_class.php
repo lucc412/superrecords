@@ -10,7 +10,7 @@
  *
  * @author siddheshc
  */
-class jobs_rights_class extends Database
+class task_rights_class extends Database
 {
     //put your code here
     

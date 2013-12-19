@@ -47,8 +47,9 @@
 		<th width="15%" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_name');" class="fieldheader sort_column">Practice Name <img id="sort_name" src="images/sort_asc.png"></th>
 		<th width="30%" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_task');" class="fieldheader sort_column">Task Name <img id="sort_task" src="images/sort_asc.png"></th>
 		<th width="10%" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_task_st');" class="fieldheader sort_column">Task Status <img id="sort_task_st" src="images/sort_asc.png"></th>
-		<th width="20%" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_stg');" class="fieldheader sort_column">Task Stage <img id="sort_stg" src="images/sort_asc.png"></th>
+		<th width="15%" style="cursor:pointer;" align="left" onclick="changeSortImage('sort_stg');" class="fieldheader sort_column">Task Stage <img id="sort_stg" src="images/sort_asc.png"></th>
 		<th width="15%"  style="cursor:pointer;" align="center" onclick="changeSortImage('sort_dt');" class="fieldheader sort_column">Start Date <img id="sort_dt" src="images/sort_asc.png"></th>
+                <th width="15%"  style="cursor:pointer;" align="center" onclick="changeSortImage('sort_dt');" class="fieldheader sort_column">Task Due Date <img id="sort_dt" src="images/sort_asc.png"></th>
 		<td width="10%" class="fieldheader" colspan="3" align="center">Actions</td>
 	</tr><?
 
@@ -67,7 +68,8 @@
                         
 		  	<td><?=$arrInfo["stageName"]?></td>
                             
-                        <td align="center" ><?=$arrInfo["start_date"]?></td><?
+                        <td align="center" ><?=$arrInfo["start_date"]?></td>
+                        <td align="center" ><?=$arrInfo["task_due_date"]?></td><?
 			
 			if($access_file_level['stf_View'] == "Y") {
 				?><td align="center">

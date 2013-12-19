@@ -639,6 +639,7 @@ class staffContentList extends Database
 							else if($row_perm['frm_Description']=="Staff") echo "Users";
 							else if($row_perm['frm_Description']=="Cases") echo "Tickets";
                                                         else if($row_perm['frm_Code']==95) echo '<a style="color:#073F61;cursor:pointer;font-weight:bold;" onclick="window.location.href=\'jobs_rights.php?frmcode='.$row_perm['frm_Code'].'&xstaffcode='.$row["stf_Code"].'&recid='.$recid.'\'" >'.$row_perm['frm_Description'].'</a> <a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click on the link to set rights for Job List page</span></a>';
+                                                        else if($row_perm['frm_Code']==96) echo '<a style="color:#073F61;cursor:pointer;font-weight:bold;" onclick="window.location.href=\'task_rights.php?frmcode='.$row_perm['frm_Code'].'&xstaffcode='.$row["stf_Code"].'&recid='.$recid.'\'" >'.$row_perm['frm_Description'].'</a> <a class="tooltip" href="#"><img src="images/help.png"><span class="help">Click on the link to set rights for Task page</span></a>';
 							else{ echo $row_perm['frm_Description']; }
 
                                                         ?> </div></span>

@@ -76,7 +76,10 @@ if (basename($_SERVER['PHP_SELF']) == 'job.php') {
             ?><title>Task</title>
             <script type="text/javascript" src="<?= $javaScript; ?>jquery-1.4.2.min.js"></script>
             <script type="text/javascript" src="<?= $javaScript; ?>tsk_task_validate.js"></script><?
-        } else if (basename($_SERVER['PHP_SELF']) == 'template.php') {
+        } else if (basename($_SERVER['PHP_SELF']) == 'task_rights.php') {
+            ?><title>Task Rights</title>
+                <script src="<?php echo $javaScript; ?>task_rights.js" type="text/javascript" ></script><?
+        }else if (basename($_SERVER['PHP_SELF']) == 'template.php') {
             ?><title>Template</title><?
         } else if (basename($_SERVER['PHP_SELF']) == 'tsk_status.php') {
             ?><title>Task Status</title>

@@ -2,7 +2,7 @@
 <div class="frmheading">
     <h1>JOBS</h1>
 </div>
-<form name="jobRights" method="post" action="jobs_rights.php" >
+<form name="jobRights" method="post" action="task_rights.php" >
 <input type="hidden" value="<?=$_REQUEST['xstaffcode']?>" name="xstaffcode">
 <input type="hidden" value="<?=$_REQUEST['recid']?>" name="recid">
 <input type="hidden" value="N" name="sql" id="sql">
@@ -36,14 +36,9 @@
                 </td>
             </tr>
         <? } ?>
-        
-        
-        
     </tbody>
 </table>
     <button onclick="return ConfirmCancel();" value="Cancel" type="button" style="margin-right:32px;">Cancel</button>
     <button class="button" style="width:115px;" value="Submit" name="action" id="btnSubmit" type="submit">Submit</button>
 </form>
-<?php
-include("includes/footer.php");
-?>
+<?php include("includes/footer.php");?>

@@ -231,10 +231,6 @@ class Preview {
                         <td>'.$arrPension['commence_date'].'</td>
                     </tr>
                     <tr>
-                        <td>Condition of Release : </td>
-                        <td>'.$condition.'</td>
-                    </tr>
-                    <tr>
                         <td>Pension Account Balance : </td>
                         <td>$'.$arrPension['pension_acc_bal'].'</td>
                     </tr>

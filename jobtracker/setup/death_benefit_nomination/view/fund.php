@@ -75,6 +75,7 @@ include(DEATHBENEFITNOMINATIONCONTENT);
 			<p style="padding-left:165px;" id="direle<?=$fieldKey?>">
                 <input type="text" name="txtDirName<?=$fieldKey?>" id="txtDirName<?=$fieldKey?>" value="<?=$director['name']?>" placeholder="Name of Director"/>
                 <span class="pdL20"><input type="text" name="txtDirAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$director['address']?>" placeholder="Residential Address"/></span>
+				</p>
                 <?
         } 
         ?><!-- Dynamic div to show directors -->
@@ -107,6 +108,7 @@ include(DEATHBENEFITNOMINATIONCONTENT);
 				<input type="text" name="txtTrusteeMName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeMName<?=$fieldKey?>" value="<?=$indvdlTrustee['mname']?>" placeholder="Name of Trustee"/>
 				<input type="text" name="txtTrusteeLName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeLName<?=$fieldKey?>" value="<?=$indvdlTrustee['lname']?>" placeholder="Name of Trustee"/>
                 <input type="text" name="txtResAdd<?=$fieldKey?>" style="width:185px;" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['address']?>" placeholder="Residential Address"/>
+				</p>
 				<?
         } 
         ?><!-- Dynamic div to show textboxes -->

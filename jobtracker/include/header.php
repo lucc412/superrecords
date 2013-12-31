@@ -64,7 +64,14 @@
                 }
                 else if($requestUrl == 'subaudit_upload.php') { 
                     ?><title>Upload documents for checklist</title>
-                    <script type="text/javascript" src="<?=DIR?>js/subaudit_upload_validation.js"></script><?
+                    <script type="text/javascript" src="<?=DIR?>js/subaudit_upload_validation.js"></script>
+					<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+					<script src="<?=DIR?>js/jquery-fileupload/vendor/jquery.ui.widget.js"></script>
+					<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+					<script src="<?=DIR?>js/jquery-fileupload/jquery.iframe-transport.js"></script>
+					<!-- The basic File Upload plugin -->
+					<script src="<?=DIR?>js/jquery-fileupload/jquery.fileupload.js"></script>
+					<?
                 }
                 else if($requestUrl == 'setup.php') {
                     ?><title>Order Documents</title><?
@@ -83,14 +90,27 @@
 		}
                 else if($requestUrl == 'jobs_doc_upload.php') { 
                     ?><title>Upload Documents</title>
-                    <script type="text/javascript" src="<?=DIR?>js/jobs_documents_validation.js"></script><?
+                    <script type="text/javascript" src="<?=DIR?>js/jobs_documents_validation.js"></script>
+					<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+					<script src="<?=DIR?>js/jquery-fileupload/vendor/jquery.ui.widget.js"></script>
+					<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+					<script src="<?=DIR?>js/jquery-fileupload/jquery.iframe-transport.js"></script>
+					<!-- The basic File Upload plugin -->
+					<script src="<?=DIR?>js/jquery-fileupload/jquery.fileupload.js"></script><?
                 }
 		else if($requestUrl == 'setup_preview.php' || $requestUrl == 'preview.php') {
 			?><title>Preview</title><?
 		}
 		else if($requestUrl == 'queries.php') {
 			?><title>View All Queries</title>
-			<script type="text/javascript" src="<?=DIR?>js/queries_validation.js"></script><?
+			<script type="text/javascript" src="<?=DIR?>js/queries_validation.js"></script>					
+			<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+			<script src="<?=DIR?>js/jquery-fileupload/vendor/jquery.ui.widget.js"></script>
+			<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+			<script src="<?=DIR?>js/jquery-fileupload/jquery.iframe-transport.js"></script>
+			<!-- The basic File Upload plugin -->
+			<script src="<?=DIR?>js/jquery-fileupload/jquery.fileupload.js"></script>
+			<?
 		}
 		else if($requestUrl == 'template.php') {
 			?><title>Download Templates</title><?
@@ -275,6 +295,13 @@
 		}
                 else if($requestUrl == 'preview.php' && $folderPath == 'acc_bsd_pension') {
 			?><title>Preview</title><?
+		}
+				else if($requestUrl == 'fund.php' && $folderPath == 'death_benefit_nomination') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/death_benefit_nomination/js/fund.js"></script><?
+		}		else if($requestUrl == 'nomination.php' && $folderPath == 'death_benefit_nomination') {
+			?><title>Nomination Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/death_benefit_nomination/js/nomination.js"></script><?
 		}
 		else {
 			?><title>Home</title><?

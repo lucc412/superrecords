@@ -276,6 +276,21 @@
                 else if($requestUrl == 'preview.php' && $folderPath == 'acc_bsd_pension') {
 			?><title>Preview</title><?
 		}
+                else if($requestUrl == 'fund.php' && $folderPath == 'trans_retrmnt_pension') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/trans_retrmnt_pension/js/fund.js"></script><?
+		}
+                else if($requestUrl == 'trustee.php' && $folderPath == 'trans_retrmnt_pension') {
+			?><title>Trustee Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/trans_retrmnt_pension/js/trustee.js"></script><?
+		}
+                else if($requestUrl == 'pension.php' && $folderPath == 'trans_retrmnt_pension') {
+			?><title>Pension Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/trans_retrmnt_pension/js/pension.js"></script><?
+		}
+                else if($requestUrl == 'preview.php' && $folderPath == 'trans_retrmnt_pension') {
+			?><title>Preview</title><?
+		}
 		else {
 			?><title>Home</title><?
 		}

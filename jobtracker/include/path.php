@@ -73,4 +73,7 @@ define("CHNGFNDNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_fundna
 define("ACCPENSNCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/acc_bsd_pension/include/content.php");
 define("ACCPENSNNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/acc_bsd_pension/include/navigation.php");
 
+// Format for transition to Retirement Pension
+define("RETPENSNNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/trans_retrmnt_pension/include/navigation.php");
+
 ?>

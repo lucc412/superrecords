@@ -73,4 +73,8 @@ define("CHNGFNDNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_fundna
 define("ACCPENSNCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/acc_bsd_pension/include/content.php");
 define("ACCPENSNNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/acc_bsd_pension/include/navigation.php");
 
+// death nomination
+define("DEATHBENEFITNOMINATION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/death_benefit_nomination/include/navigation.php");
+// death nomination content
+define("DEATHBENEFITNOMINATIONCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/death_benefit_nomination/include/content.php");
 ?>

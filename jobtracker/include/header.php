@@ -303,6 +303,9 @@
 			?><title>Nomination Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/death_benefit_nomination/js/nomination.js"></script><?
 		}
+				else if($requestUrl == 'preview.php' && $folderPath == 'death_benefit_nomination') {
+			?><title>Preview</title><?
+		}
                 else if($requestUrl == 'fund.php' && $folderPath == 'trans_retrmnt_pension') {
 			?><title>Fund Details</title>
 			<script type="text/javascript" src="<?=DIR?>setup/trans_retrmnt_pension/js/fund.js"></script><?
@@ -316,6 +319,21 @@
 			<script type="text/javascript" src="<?=DIR?>setup/trans_retrmnt_pension/js/pension.js"></script><?
 		}
                 else if($requestUrl == 'preview.php' && $folderPath == 'trans_retrmnt_pension') {
+			?><title>Preview</title><?
+		}
+				else if($requestUrl == 'fund.php' && $folderPath == 'mkt_linked_pension') {
+			?><title>Fund Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/mkt_linked_pension/js/fund.js"></script><?
+		}
+                else if($requestUrl == 'trustee.php' && $folderPath == 'mkt_linked_pension') {
+			?><title>Trustee Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/mkt_linked_pension/js/trustee.js"></script><?
+		}
+                else if($requestUrl == 'pension.php' && $folderPath == 'mkt_linked_pension') {
+			?><title>Pension Details</title>
+			<script type="text/javascript" src="<?=DIR?>setup/mkt_linked_pension/js/pension.js"></script><?
+		}
+                else if($requestUrl == 'preview.php' && $folderPath == 'mkt_linked_pension') {
 			?><title>Preview</title><?
 		}
 		else {

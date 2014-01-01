@@ -82,4 +82,9 @@ define("DEATHBENEFITNOMINATION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/d
 // death nomination content
 define("DEATHBENEFITNOMINATIONCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/death_benefit_nomination/include/content.php");
 
+// death nomination
+define("MARKETLINKEDPENSION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/mkt_linked_pension/include/navigation.php");
+// death nomination content
+define("MARKETLINKEDPENSIONCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/mkt_linked_pension/include/content.php");
+
 ?>

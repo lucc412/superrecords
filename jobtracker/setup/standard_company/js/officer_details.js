@@ -154,13 +154,13 @@ $(document).ready(function(){
 function addOfficers()
 {
     
-    var child = $('#dvOfficer').children().length;
+    var child = $('#dvOfficer > div').length;
     var offcrCnt = parseInt($('#selOfficers').val());
     var states = '';
     var country = '';
     var cntr = 1;    
     
-    if ((child + (offcrCnt-child)) > 10)
+    /*if ((child + (offcrCnt-child)) > 10)
     {
         alert("you cannot enter more than 10 officer")
         return
@@ -187,9 +187,22 @@ function addOfficers()
                 cntr = child++;
             }    
         }
-    }   
-    
-    
+    }   */
+	
+	if($('#selOfficers').val() == 0)
+		return;
+		
+    // remove member if select less
+	if(offcrCnt < child)  {        
+         while (offcrCnt < child) 
+         { 
+             if($('#officer_'+child).length > 0) {
+                $('#officer_'+child).remove();
+                child--;
+             }
+         }
+    }
+	   
     $.each( objStates, function( key, val ) {
         states += '<option value="'+key+'">'+val+'</option>';
     });
@@ -198,7 +211,7 @@ function addOfficers()
         country += '<option value="'+key+'">'+val+'</option>';
     });
 
-    for(var i = cntr;i <= offcrCnt; i++)
+    for(var i = child+1;i <= offcrCnt; i++)
     {
         
         $('#dvOfficer').append('<div id="officer_'+i+'"> <div style="padding:10px 0;color: #F05729;font-size: 14px;">Officer '+i+':</div>\n\

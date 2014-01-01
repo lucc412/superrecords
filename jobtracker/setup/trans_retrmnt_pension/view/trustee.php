@@ -101,7 +101,7 @@ include(RETPENSNNAV);
                     <?
         } 
         ?><!-- Dynamic div to show textboxes -->
-        <br/><div id="memberbox"></div>
+        <div id="memberbox"></div>
     </div>
     <div class="txtAboveButton">Your document details are ready to be submitted. However, prior to doing so, please preview to make sure all details are correct. <p>To preview, please click the 'Preview' button below.</p></div> 
     <div class="pdT20">

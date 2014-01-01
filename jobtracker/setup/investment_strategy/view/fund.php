@@ -86,14 +86,13 @@ include(INVSTMNTSTRAGYNAV);
           </tr>
       </table><?
         foreach ($arrDirectors AS $fieldKey => $director){            
-            ?><p style="padding-left:165px;" id="direle<?=$fieldKey?>">
-                <input type="hidden" name="dirId<?=$fieldKey?>" value="<?=$director['indvdl_id']?>">
+            ?><input type="hidden" name="dirId<?=$fieldKey?>" value="<?=$director['indvdl_id']?>"><p style="padding-left:165px;" id="direle<?=$fieldKey?>">                
                 <input type="text" name="txtDirName<?=$fieldKey?>" id="txtDirName<?=$fieldKey?>" value="<?=$director['name']?>" placeholder="Name of Director"/>
                 <span class="pdL20"><input type="text" name="txtDirAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$director['address']?>" placeholder="Residential Address"/></span>
                 <span class="pdL20">
                     <input type="text" name="txtDirDob<?=$fieldKey?>" id="txtDirDob<?=$fieldKey?>" style="width:70px;" value="<?=$director['dob']?>" placeholder="Dob" readonly/>
                     <img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDirDob<?=$fieldKey?>','ddMMyyyy')" align="middle" class="calendar"/>
-                </span><?
+                </span></p><?
         } 
         ?><!-- Dynamic div to show directors -->
         <br/><div id="directorbox"></div>
@@ -119,14 +118,15 @@ include(INVSTMNTSTRAGYNAV);
           </tr>
          </table><?
         foreach ($arrIndvdlTrust AS $fieldKey => $indvdlTrustee){            
-            ?><p style="padding-left:165px;" id="ele<?=$fieldKey?>">
-                <input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
+            ?><input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
+			<p style="padding-left:165px;" id="ele<?=$fieldKey?>">                
                 <input type="text" name="txtTrusteeName<?=$fieldKey?>" id="txtTrusteeName<?=$fieldKey?>" value="<?=$indvdlTrustee['name']?>" placeholder="Name of Trustee"/>
                 <span class="pdL20"><input type="text" name="txtResAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['address']?>" placeholder="Residential Address"/></span>
                 <span class="pdL20">
                     <input type="text" name="txtDob<?=$fieldKey?>" id="txtDob<?=$fieldKey?>" style="width:70px;" value="<?=$indvdlTrustee['dob']?>" placeholder="Dob" readonly/>
                     <img src="<?=CALENDARICON?>" id="calImgId" onclick="javascript:NewCssCal('txtDob<?=$fieldKey?>','ddMMyyyy')" align="middle" class="calendar"/>
-                </span><?
+                </span>
+				</p><?
         } 
         ?><!-- Dynamic div to show textboxes -->
         <br/><div id="memberbox"></div>

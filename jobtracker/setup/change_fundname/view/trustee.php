@@ -90,16 +90,17 @@ include(CHNGFNDCONTENT);
           </tr>
          </table><?
         foreach ($arrIndvdlTrust AS $fieldKey => $indvdlTrustee){            
-            ?><p style="padding-left:165px;" id="ele<?=$fieldKey?>">
-                    <input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
+            ?>
+			<input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
+			<p style="padding-left:165px;" id="ele<?=$fieldKey?>">                    
                     <input style="width:170px" type="text" name="txtFName<?=$fieldKey?>" id="txtFName<?=$fieldKey?>" value="<?=$indvdlTrustee['fname']?>" placeholder="First Name"/>
                     <span class="pdL10"><input style="width:95px" type="text" name="txtMName<?=$fieldKey?>" id="txtMName<?=$fieldKey?>" value="<?=$indvdlTrustee['mname']?>" placeholder="Middle Name"/></span>
                     <span class="pdL10"><input style="width:170px" type="text" name="txtLName<?=$fieldKey?>" id="txtLName<?=$fieldKey?>" value="<?=$indvdlTrustee['lname']?>" placeholder="Last Name"/></span>
                     <span class="pdL10"><input style="width:170px" type="text" name="txtResAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['res_add']?>" placeholder="Residential Address"/></span>
-                    <?
+                    </p><?
         } 
         ?><!-- Dynamic div to show textboxes -->
-        <br/><div id="memberbox"></div>
+        <div id="memberbox"></div>
     </div>
     <div class="txtAboveButton">Your document details are ready to be submitted. However, prior to doing so, please preview to make sure all details are correct. <p>To preview, please click the 'Preview' button below.</p></div> 
     <div class="pdT20">

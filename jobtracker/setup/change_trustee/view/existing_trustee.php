@@ -90,15 +90,16 @@ include(CHNGTRUSTEECONTENT);
           </tr>
          </table><?
         foreach ($arrIndvdlTrust AS $fieldKey => $indvdlTrustee){            
-            ?><p style="padding-left:165px;" id="ele<?=$fieldKey?>">
-                    <input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
+            ?>
+			<input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
+			<p style="padding-left:165px;" id="ele<?=$fieldKey?>">                    
                     <input type="text" name="txtTrusteeName<?=$fieldKey?>" id="txtTrusteeName<?=$fieldKey?>" value="<?=$indvdlTrustee['name']?>" placeholder="Name"/>
                     <span class="pdL20">
                         <input type="text" name="txtResAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['address']?>" placeholder="Residential Address"/>
-                    </span><?
+                    </span></p><?
         } 
         ?><!-- Dynamic div to show textboxes -->
-        <br/><div id="memberbox"></div>
+        <div id="memberbox"></div>
     </div>
 
     <div class="pdT20">

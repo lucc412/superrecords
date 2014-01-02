@@ -9,7 +9,7 @@ include(DEATHBENEFITNOMINATION);
 include(DEATHBENEFITNOMINATIONCONTENT);
 // page header
 ?><div class="pageheader">
-    <h1>Death Benefit Nomination - Fund Details</h1>
+    <h1>Fund Details</h1>
     <span><b>Welcome to the Super Records fund details page.</b><span>
 </div>
 <?
@@ -116,7 +116,7 @@ include(DEATHBENEFITNOMINATIONCONTENT);
     </div>
 
     <div class="pdT20"><?
-        if(!empty($_SESSION['jobId'])){?><span class="pdR20"><button type="button" onclick="window.location='<?=DIR?>setup.php'" value="Back">Back</button></span><?}
+        if(empty($_SESSION['jobId'])){?><span class="pdR20"><button type="button" onclick="window.location='<?=DIR?>setup.php'" value="Back">Back</button></span><?}
         ?><span class="pdR20"><button type="submit" id="submit" name="save">Save & Exit</button></span>
         <span><button type="submit" id="submit" name="next">Next</button></span>
     </div>

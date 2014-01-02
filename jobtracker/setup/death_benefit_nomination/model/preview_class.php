@@ -103,7 +103,7 @@ class Preview {
                                 font-size: 11pt;
                                 font-weight: bold;
                                 padding: 5px;
-                                /*width:55%;*/
+                                width:55%;
                         }
                     </style>';
        

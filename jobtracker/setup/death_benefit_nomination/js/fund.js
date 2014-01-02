@@ -15,7 +15,7 @@ $(document).ready(function() {
     // show director details section
     $('#lstDirector').change(function() {
         if(!($('#lstDirector').val())) {
-            alert('No of directors is a compulsory field');
+            alert('No of beneficiaries is a compulsory field');
             lstDirector.className = "errclass";
             return false;
         }

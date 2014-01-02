@@ -15,9 +15,9 @@ class SR_Report {
 	// This will fetch all fields and it's typex / title
 	public function fetch_field_details($reportPageName, $fieldInfo) {
 		$qrySel = "SELECT rf.field_name, rf.{$fieldInfo}
-					FROM report_fields rf
-					WHERE rf.page_name = '{$reportPageName}'
-					ORDER BY rf.field_order ";
+                            FROM report_fields rf
+                            WHERE rf.page_name = '{$reportPageName}'
+                            ORDER BY rf.field_order ";
 		$fetchResult = mysql_query($qrySel);
 		
 		while($row = mysql_fetch_assoc($fetchResult))
@@ -197,12 +197,12 @@ class SR_Report {
 	public function fetchEmployees($designationId) {
 	
 		$qrySel = "SELECT stf_Code, CONCAT_WS(' ',c1.con_Firstname, c1.con_Lastname) empName 
-					 FROM stf_staff t1, aty_accesstype t2, con_contact c1
-					 WHERE t1.stf_AccessType = t2.aty_Code 
-					 AND t1.stf_CCode = c1.con_Code 
-					 AND t2.aty_Description like 'Staff'
-					 AND c1.con_Designation = '{$designationId}'
-					 ORDER BY c1.con_Firstname";
+                            FROM stf_staff t1, aty_accesstype t2, con_contact c1
+                            WHERE t1.stf_AccessType = t2.aty_Code 
+                            AND t1.stf_CCode = c1.con_Code 
+                            AND t2.aty_Description like 'Staff'
+                            AND c1.con_Designation = '{$designationId}'
+                            ORDER BY c1.con_Firstname";
 		 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {
@@ -215,11 +215,11 @@ class SR_Report {
 	// This will fetch job names
 	public function fetchJobName($selectedColumn) {
 	
-		$qrySel = "SELECT j.job_id, CONCAT_WS(' - ', c.client_name, j.period, m.mas_Description) jobName, j.job_name
-					 FROM job j, client c, mas_masteractivity m
-					 WHERE j.client_id = c.client_id
-					 AND j.mas_Code = m.mas_Code
-					 AND j.discontinue_date IS NULL";
+		$qrySel = "SELECT j.job_id, CONCAT_WS(' - ', c.client_name, j.period, m.sub_Description) jobName, j.job_name
+                            FROM job j, client c, sub_subactivity m
+                            WHERE j.client_id = c.client_id
+                            AND j.job_type_id = m.sub_code
+                            AND j.discontinue_date IS NULL";
 		 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult))
@@ -232,10 +232,10 @@ class SR_Report {
 	// This will fetch all saved reports
 	public function fetch_saved_reports($reportPageName) {
 		$qrySel = "SELECT * 
-				FROM sr_savereport
-				WHERE user_id = ".$_SESSION['staffcode']."
-				AND report_page_name = '{$reportPageName}'
-				ORDER BY report_name";
+                            FROM sr_savereport
+                            WHERE user_id = ".$_SESSION['staffcode']."
+                            AND report_page_name = '{$reportPageName}'
+                            ORDER BY report_name";
 	
 		$fetchResult = mysql_query($qrySel);
 		while($rowInfo = mysql_fetch_assoc($fetchResult)) {
@@ -249,14 +249,14 @@ class SR_Report {
 	public function saveReport($userId, $repName, $repFields, $repConditions, $repValues, $repOutputFields, $reportPageName) {
 
 		$qrySel = "INSERT INTO sr_savereport(user_id, report_name, report_fields, report_conditions, report_values, report_outputfields, report_page_name)
-					VALUES('{$userId}', 
-						'" . addslashes($repName) . "', 
-						'{$repFields}', 
-						'{$repConditions}', 
-						'" . addslashes($repValues) . "', 
-						'{$repOutputFields}',
-						'{$reportPageName}'
-					)";
+                            VALUES('{$userId}', 
+                                    '" . addslashes($repName) . "', 
+                                    '{$repFields}', 
+                                    '{$repConditions}', 
+                                    '" . addslashes($repValues) . "', 
+                                    '{$repOutputFields}',
+                                    '{$reportPageName}'
+                            )";
 			
 		mysql_query($qrySel);
 	}
@@ -265,12 +265,12 @@ class SR_Report {
 	public function updateSaveReport($reportId, $repName, $repFields, $repConditions, $repValues, $repOutputFields) {
 
 		$qryUpd = "UPDATE sr_savereport
-					SET report_fields = '{$repFields}',
-					report_conditions = '{$repConditions}',
-					report_values = '" . addslashes($repValues) . "', 
-					report_outputfields = '{$repOutputFields}',
-					report_name = '" . addslashes($repName) . "'
-					WHERE report_id = '{$reportId}'";
+                            SET report_fields = '{$repFields}',
+                            report_conditions = '{$repConditions}',
+                            report_values = '" . addslashes($repValues) . "', 
+                            report_outputfields = '{$repOutputFields}',
+                            report_name = '" . addslashes($repName) . "'
+                            WHERE report_id = '{$reportId}'";
 
 		mysql_query($qryUpd);
 	}

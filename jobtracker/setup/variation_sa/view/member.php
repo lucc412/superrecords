@@ -45,10 +45,10 @@ include(DEEDVARCONTENT);
                     foreach($arrMembrData as $key => $value) 
                     { 
                         $cntr++;
-                    
-                        ?><div id="member_<?=$cntr?>"> 
+						?>
+ 						<input type="hidden" name="offcrId[<?=$cntr?>]" id="offcrId" value="<?=$value['member_id']?>">                   
+                        <div id="member_<?=$cntr?>"> 
                             <div style="padding:10px 0;color: #F05729;font-size: 14px;">Member <?=$cntr?>:</div>
-                            <input type="hidden" name="offcrId[<?=$cntr?>]" id="offcrId" value="<?=$value['member_id']?>">
                             <table class="fieldtable">
                                 <tr>
                                     <td>First name </td>

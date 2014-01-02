@@ -73,4 +73,18 @@ define("CHNGFNDNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/change_fundna
 define("ACCPENSNCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/acc_bsd_pension/include/content.php");
 define("ACCPENSNNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/acc_bsd_pension/include/navigation.php");
 
+
+// Format for transition to Retirement Pension
+define("RETPENSNNAV",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/trans_retrmnt_pension/include/navigation.php");
+
+// death nomination
+define("DEATHBENEFITNOMINATION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/death_benefit_nomination/include/navigation.php");
+// death nomination content
+define("DEATHBENEFITNOMINATIONCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/death_benefit_nomination/include/content.php");
+
+// death nomination
+define("MARKETLINKEDPENSION",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/mkt_linked_pension/include/navigation.php");
+// death nomination content
+define("MARKETLINKEDPENSIONCONTENT",$_SERVER['DOCUMENT_ROOT'] . "/jobtracker/setup/mkt_linked_pension/include/content.php");
+
 ?>

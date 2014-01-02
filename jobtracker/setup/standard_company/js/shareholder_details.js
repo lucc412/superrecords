@@ -268,14 +268,14 @@ function changeShrOwnBhlf(element,cnt)
 function addShrHldr()
 {
     
-    var child = $('#dvShrHldr').children().length;
+    var child = $('#dvShrHldr > div').length;
     var shrHldrCnt = parseInt($('#selShrHldr').val());
     var shrclass = '';
     var noDirtr = ''; 
     var states = '';
     var cntr = 1;    
     
-    if ((child + (shrHldrCnt-child)) > 10)
+    /*if ((child + (shrHldrCnt-child)) > 10)
     {
         alert("you cannot enter more than 10 Share holder")
         return
@@ -301,9 +301,22 @@ function addShrHldr()
                 cntr = child++;
             }    
         }
-    } 
+    } */
     //
     
+	if($('#selShrHldr').val() == 0)
+		return;
+		
+    // remove member if select less
+	if(shrHldrCnt < child)  {        
+         while (shrHldrCnt < child) 
+         { 
+             if($('#shrHldr_'+child).length > 0) {
+                $('#shrHldr_'+child).remove();
+                child--;
+             }
+         }
+    }	
     $.each( objShrCls, function( key, val ) {
         shrclass += '<option value="'+key+'">'+val+'</option>';
     });
@@ -318,7 +331,7 @@ function addShrHldr()
     }
     
     //shrclass
-    for(var i = cntr;i <= shrHldrCnt; i++)
+    for(var i = child+1;i <= shrHldrCnt; i++)
     {
         $('#dvShrHldr').append('<div id="shrHldr_'+i+'"> \n\
                                 <div style="padding:20px 0 10px 0;color: #F05729;font-size: 14px;height:30px;width:246px;float:left">Shareholder '+i+': </div><div style="padding:10px 0;font-size:13px;width:500px"><select id="selShrType_'+i+'" name="selShrType['+i+']" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,'+i+')" >\n\

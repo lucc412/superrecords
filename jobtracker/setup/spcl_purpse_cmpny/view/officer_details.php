@@ -46,9 +46,10 @@
                         $cntr++;
                         $noOfOffcr = $value['no_of_offcr'];
                     ?>
+					<input type="hidden" name="offcrId[<?=$cntr?>]" id="offcrId" value="<?=$value['offcr_id']?>">
                         <div id="officer_<?=$cntr?>"> 
                             <div style="padding:10px 0;color: #F05729;font-size: 14px;">Officer <?=$cntr?>:</div>
-                            <input type="hidden" name="offcrId[<?=$cntr?>]" id="offcrId" value="<?=$value['offcr_id']?>">
+                            
                             <table class="fieldtable">
                                 <tr>
                                     <td>First name </td>

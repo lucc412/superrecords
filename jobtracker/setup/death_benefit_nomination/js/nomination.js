@@ -3,7 +3,7 @@ $(document).ready(function() {
     // show director details section
     $('#beneficiaries').change(function() {
         if(!($('#beneficiaries').val())) {
-            alert('No of directors is a compulsory field');
+            alert('No of beneficiaries is a compulsory field');
             beneficiaries.className = "errclass";
             return false;
         }

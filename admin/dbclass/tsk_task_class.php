@@ -216,7 +216,10 @@ class Task_Class extends Database {
 
 		if(isset($mode) && (($mode == 'view') || ($mode == 'edit'))) {				
 			
-			$qrySel = "SELECT t.*, DATE_FORMAT(t.task_due_date, '%d/%m/%Y %H:%i:%s')task_due_date, DATE_FORMAT(j.job_due_date, '%d/%m/%Y')job_due_date, tg.description taskStage, IF(t.start_date NOT LIKE '0000-00-00 00:00:00',DATE_FORMAT(t.start_date, '%d/%m/%Y %H:%i:%s'),'')start_date, pr.sr_manager, pr.india_manager, pr.audit_manager, pr.sales_person, c.team_member, c.sr_accnt_comp, c.sr_accnt_audit
+			$qrySel = "SELECT t.*, DATE_FORMAT(j.job_due_date, '%d/%m/%Y')job_due_date, tg.description taskStage, 
+                                                IF(t.start_date NOT LIKE '0000-00-00 00:00:00',DATE_FORMAT(t.start_date, '%d/%m/%Y %H:%i:%s'),'')start_date, 
+                                                IF(t.task_due_date NOT LIKE '0000-00-00 00:00:00',DATE_FORMAT(t.task_due_date, '%d/%m/%Y %H:%i:%s'),'')task_due_date, 
+                                                pr.sr_manager, pr.india_manager, pr.audit_manager, pr.sales_person, c.team_member, c.sr_accnt_comp, c.sr_accnt_audit
 						FROM job j, client c, pr_practice pr, task t
                                                 LEFT JOIN task_stage tg ON t.task_stage_id = tg.id
 						WHERE t.discontinue_date IS NULL 
@@ -234,7 +237,7 @@ class Task_Class extends Database {
                          if(strstr($filterstr, "/"))$filterstr = $commonUses->getDateFormat($filterstr);
 			if(!$wholeonly && isset($wholeonly) && $filterstr!='') $filterstr = "%" .$filterstr ."%";
 			
-			$qrySel = "SELECT t.task_id, t.task_name, pr.name, t.task_stage_id, DATE_FORMAT(t.task_due_date, '%d/%m/%Y %H:%i:%s')task_due_date, t.task_type_id, ts.description, j.job_id, IF(t.start_date NOT LIKE '0000-00-00 00:00:00',DATE_FORMAT(t.start_date, '%d/%m/%Y %H:%i:%s'),'')start_date, tg.description stageName
+			$qrySel = "SELECT t.task_id, t.task_name, pr.name, t.task_stage_id, IF(t.task_due_date NOT LIKE '0000-00-00 00:00:00',DATE_FORMAT(t.task_due_date, '%d/%m/%Y %H:%i:%s'),'')task_due_date, t.task_type_id, ts.description, j.job_id, IF(t.start_date NOT LIKE '0000-00-00 00:00:00',DATE_FORMAT(t.start_date, '%d/%m/%Y %H:%i:%s'),'')start_date, tg.description stageName
 						FROM  job j, client c, pr_practice pr, task_status ts, task t
                                                 LEFT JOIN task_stage tg ON t.task_stage_id = tg.id
 						WHERE t.discontinue_date IS NULL
@@ -253,6 +256,7 @@ class Task_Class extends Database {
                                                 OR ts.description like '" .$filterstr ."' 
                                                 OR tg.description like '" .$filterstr ."' 
 						OR pr.name like '" .$filterstr ."'
+						OR t.task_due_date like '" .$filterstr ."'
                                                 OR t.start_date like '" .$filterstr ."')";
 					
 			}				

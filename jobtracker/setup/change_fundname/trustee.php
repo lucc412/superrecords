@@ -72,7 +72,7 @@ if(!empty($_REQUEST['saveData']))
             $ResAdd = $_REQUEST['txtResAdd'.$i];
             $indvdlId = $_REQUEST['indvdlId'.$i];
             
-            if(empty($arrIndvdlTrust))
+            if(empty($indvdlId))
                 $objTrustee->insertIndividual($FName, $MName, $LName, $ResAdd);
             else
                 $objTrustee->updateIndividual($FName, $MName, $LName, $ResAdd, $indvdlId);

@@ -15,7 +15,7 @@ $(document).ready(function() {
     // show director details section
     $('#lstDirector').change(function() {
         if(!($('#lstDirector').val())) {
-            alert('No of directors is a compulsory field');
+			alert('No of directors is a compulsory field');            
             lstDirector.className = "errclass";
             return false;
         }
@@ -68,9 +68,9 @@ $(document).ready(function() {
         
         while (intCnt < newMemberCnt) 
         { 
-            var newSection = '<p style="padding-left:165px;" id="ele'+intCnt+'"><input style="width:185px;" type="text" name="txtTrusteeFName'+intCnt+'" id="txtTrusteeFName'+intCnt+'" placeholder="First Name of Trustee"/>\n\
-			<input style="width:185px;" type="text" name="txtTrusteeMName'+intCnt+'" id="txtTrusteeMName'+intCnt+'" placeholder="Middle Name of Trustee"/>\n\
-			<input style="width:185px;" type="text" name="txtTrusteeLName'+intCnt+'" id="txtTrusteeLName'+intCnt+'" placeholder="Last Name of Trustee"/>\n\
+            var newSection = '<p style="padding-left:165px;" id="ele'+intCnt+'"><input style="width:185px;" type="text" name="txtTrusteeFName'+intCnt+'" id="txtTrusteeFName'+intCnt+'" placeholder="First Name"/>\n\
+			<input style="width:185px;" type="text" name="txtTrusteeMName'+intCnt+'" id="txtTrusteeMName'+intCnt+'" placeholder="Middle Name"/>\n\
+			<input style="width:185px;" type="text" name="txtTrusteeLName'+intCnt+'" id="txtTrusteeLName'+intCnt+'" placeholder="Last Name"/>\n\
 			<input style="width:185px;" type="text" name="txtResAdd'+intCnt+'" id="txtResAdd'+intCnt+'" placeholder="Residential Address"/></p>';
             $('#memberbox').append(newSection);
             intCnt++;
@@ -144,7 +144,7 @@ $(document).ready(function() {
                 }
             });
             
-			$('[id^=txtTrusteeMName]').each(function (){
+			/*$('[id^=txtTrusteeMName]').each(function (){
                 if(!$(this).val()) {
                     $(this).addClass('errclass');
                     flagReturn = false;
@@ -152,7 +152,7 @@ $(document).ready(function() {
                 else {
                     $(this).removeClass("errclass");
                 }
-            });
+            });*/
 			$('[id^=txtTrusteeLName]').each(function (){
                 if(!$(this).val()) {
                     $(this).addClass('errclass');

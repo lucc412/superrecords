@@ -101,7 +101,7 @@ include(RETPENSNNAV);
                     <?
         } 
         ?><!-- Dynamic div to show textboxes -->
-        <br/><div id="memberbox"></div>
+        <div id="memberbox"></div>
     </div>
     <div class="pdT20">
         <span class="pdR20"><button type="button" onclick="window.location='fund.php'" value="Back">Back</button></span>

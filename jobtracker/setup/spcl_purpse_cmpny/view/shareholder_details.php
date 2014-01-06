@@ -40,6 +40,7 @@
                         $cntr++;
                         $noOfShrhldr = $value['no_of_shrhldr'];
                     ?>
+					<input type="hidden" name="shrhldrId[<?=$cntr?>]" id="shrhldrId_<?=$cntr?>" value="<?=$value['shrhldr_id']?>" >
                         <div id="shrHldr_<?=$cntr?>"> 
                                 <div style="padding:20px 0 10px 0;color: #F05729;font-size: 14px;height:30px;width:235px;float:left">Shareholder <?=$cntr?>:</div>
                                 <div style="padding:10px 0;font-size:13px;width:500px"><select id="selShrType_<?=$cntr?>" name="selShrType[<?=$cntr?>]" style="margin-bottom:5px; width:180px;" onchange="changeShrHldrType(this,<?=$cntr?>)" >
@@ -48,7 +49,7 @@
                                             <option value="2" <?php if($value['shrhldr_type'] == 2) echo 'selected';?> >Individual</option>
                                         </select></div>
                                 <div style="clear:both"></div>
-                                <input type="hidden" name="shrhldrId[<?=$cntr?>]" id="shrhldrId_<?=$cntr?>" value="<?=$value['shrhldr_id']?>" >
+                                
                                 
                                 <table id="trCrpShrHldr_<?=$cntr?>" style="width:708px" class="fieldtable <?php if($value['shrhldr_type'] == 1){ echo 'show'; }else echo 'hide'; ?>">
                                     <tr>

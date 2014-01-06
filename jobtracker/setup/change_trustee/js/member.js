@@ -98,12 +98,12 @@ $(document).ready(function(){
 function addMembers()
 {
     
-    var child = $('#divMember').children().length;
+    var child = $('#divMember > div').length;
     var offcrCnt = parseInt($('#selMembers').val());
     var country = '';
     var cntr = 1;    
     
-    if ((child + (offcrCnt-child)) > 10)
+    /*if ((child + (offcrCnt-child)) > 10)
     {
         alert("you cannot enter more than 10 officer")
         return
@@ -130,13 +130,27 @@ function addMembers()
                 cntr = child++;
             }    
         }
-    }   
-    
+    } */
+	if($('#selMembers').val() == 0)
+		return;
+    // remove member if select less
+	if(offcrCnt < child)  {        
+         eleCnt = 4;
+         while (offcrCnt < child) 
+         { 
+             if($('#member_'+eleCnt).length > 0) {
+                $('#member_'+eleCnt).remove();
+                child--;
+             }
+             eleCnt--;
+         }
+    }
+	
     $.each( objCntry, function( key, val ) {
         country += '<option value="'+key+'">'+val+'</option>';
     });
 
-    for(var i = cntr;i <= offcrCnt; i++)
+    for(var i = child+1;i <= offcrCnt; i++)
     {
         
         $('#divMember').append('<div id="member_'+i+'"> <div style="padding:10px 0;color: #F05729;font-size: 14px;">Member '+i+':</div>\n\

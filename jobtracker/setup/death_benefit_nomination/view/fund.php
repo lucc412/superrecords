@@ -9,7 +9,7 @@ include(DEATHBENEFITNOMINATION);
 include(DEATHBENEFITNOMINATIONCONTENT);
 // page header
 ?><div class="pageheader">
-    <h1>Death Benefit Nomination - Fund Details</h1>
+    <h1>Fund Details</h1>
     <span><b>Welcome to the Super Records fund details page.</b><span>
 </div>
 <?
@@ -104,19 +104,19 @@ include(DEATHBENEFITNOMINATIONCONTENT);
         foreach ($arrIndvdlTrust AS $fieldKey => $indvdlTrustee){            
             ?><input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
 				<p style="padding-left:165px;" id="ele<?=$fieldKey?>">                
-                <input type="text" name="txtTrusteeFName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeFName<?=$fieldKey?>" value="<?=$indvdlTrustee['fname']?>" placeholder="Name of Trustee"/>
-				<input type="text" name="txtTrusteeMName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeMName<?=$fieldKey?>" value="<?=$indvdlTrustee['mname']?>" placeholder="Name of Trustee"/>
-				<input type="text" name="txtTrusteeLName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeLName<?=$fieldKey?>" value="<?=$indvdlTrustee['lname']?>" placeholder="Name of Trustee"/>
+                <input type="text" name="txtTrusteeFName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeFName<?=$fieldKey?>" value="<?=$indvdlTrustee['fname']?>" placeholder="First Name"/>
+				<input type="text" name="txtTrusteeMName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeMName<?=$fieldKey?>" value="<?=$indvdlTrustee['mname']?>" placeholder="Middle Name"/>
+				<input type="text" name="txtTrusteeLName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeLName<?=$fieldKey?>" value="<?=$indvdlTrustee['lname']?>" placeholder="Last Name"/>
                 <input type="text" name="txtResAdd<?=$fieldKey?>" style="width:185px;" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['address']?>" placeholder="Residential Address"/>
 				</p>
 				<?
         } 
         ?><!-- Dynamic div to show textboxes -->
-        <br/><div id="memberbox"></div>
+        <div id="memberbox"></div>
     </div>
 
     <div class="pdT20"><?
-        if(!empty($_SESSION['jobId'])){?><span class="pdR20"><button type="button" onclick="window.location='<?=DIR?>setup.php'" value="Back">Back</button></span><?}
+        if(empty($_SESSION['jobId'])){?><span class="pdR20"><button type="button" onclick="window.location='<?=DIR?>setup.php'" value="Back">Back</button></span><?}
         ?><span class="pdR20"><button type="submit" id="submit" name="save">Save & Exit</button></span>
         <span><button type="submit" id="submit" name="next">Next</button></span>
     </div>

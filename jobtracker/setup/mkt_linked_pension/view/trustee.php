@@ -3,10 +3,10 @@
 include(TOPBAR);
 
 // include navigation
-include(CHNGFNDNAV);
+include(MARKETLINKEDPENSION);
 
-// include page content
-include(CHNGFNDCONTENT);
+//Content
+include(MARKETLINKEDPENSIONCONTENT);
 
 // page header
 ?><div class="pageheader">
@@ -90,23 +90,26 @@ include(CHNGFNDCONTENT);
           </tr>
          </table><?
         foreach ($arrIndvdlTrust AS $fieldKey => $indvdlTrustee){            
+            
             ?>
-			<input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
-			<p style="padding-left:165px;" id="ele<?=$fieldKey?>">                    
+        <input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
+        <p style="padding-left:165px;" id="ele<?=$fieldKey?>">
+                    
                     <input style="width:170px" type="text" name="txtFName<?=$fieldKey?>" id="txtFName<?=$fieldKey?>" value="<?=$indvdlTrustee['fname']?>" placeholder="First Name"/>
                     <span class="pdL10"><input style="width:95px" type="text" name="txtMName<?=$fieldKey?>" id="txtMName<?=$fieldKey?>" value="<?=$indvdlTrustee['mname']?>" placeholder="Middle Name"/></span>
                     <span class="pdL10"><input style="width:170px" type="text" name="txtLName<?=$fieldKey?>" id="txtLName<?=$fieldKey?>" value="<?=$indvdlTrustee['lname']?>" placeholder="Last Name"/></span>
                     <span class="pdL10"><input style="width:170px" type="text" name="txtResAdd<?=$fieldKey?>" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['res_add']?>" placeholder="Residential Address"/></span>
-                    </p><?
+        </p>            
+                    <?
         } 
         ?><!-- Dynamic div to show textboxes -->
         <div id="memberbox"></div>
     </div>
     <div class="txtAboveButton">Your document details are ready to be submitted. However, prior to doing so, please preview to make sure all details are correct. <p>To preview, please click the 'Preview' button below.</p></div> 
     <div class="pdT20">
-        <span class="pdR20"><button type="button" onclick="window.location='change_fund.php'" value="Back">Back</button></span>
+        <span class="pdR20"><button type="button" onclick="window.location='fund.php'" value="Back">Back</button></span>
         <span class="pdR20"><button type="submit" id="submit" name="save">Save & Exit</button></span>
-        <span><button type="submit" id="submit" name="next">Preview</button></span>
+        <span><button type="submit" id="submit" name="next">Next</button></span>
     </div>
 </form><?
 

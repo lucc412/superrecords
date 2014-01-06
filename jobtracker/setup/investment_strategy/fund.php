@@ -96,7 +96,7 @@ if(!empty($_REQUEST['saveData'])) {
         krsort($arrDirectors);
 
         //Deleting officer id
-        $delDirector = count($arrIndvdlTrust) - $cntDirector;
+        $delDirector = count($arrDirectors) - $cntDirector;
         if($delDirector > 0) {
             $deleteMemberId = "";
             foreach ($arrDirectors AS $indvdlInfo) {

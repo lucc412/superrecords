@@ -20,7 +20,7 @@ $(document).ready(function() {
     // show member details section
     $('#selMember').change(function() {
         if(!($('#selMember').val())) {
-            alert('No of trustee is a compulsory field');
+            alert('No of trustees is a compulsory field');
             selMember.className = "errclass";
             return false;
         }

@@ -1,7 +1,7 @@
 <?
 if(basename($_SERVER['PHP_SELF']) != 'login.php') {
 	if(!isset($_SESSION['PRACTICE'])) {
-		header('Location: login.php');
+		header('Location: '.DIR.'login.php');
 	}
 }
 include(HEADDATA);

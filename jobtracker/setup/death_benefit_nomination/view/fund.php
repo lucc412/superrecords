@@ -104,15 +104,15 @@ include(DEATHBENEFITNOMINATIONCONTENT);
         foreach ($arrIndvdlTrust AS $fieldKey => $indvdlTrustee){            
             ?><input type="hidden" name="indvdlId<?=$fieldKey?>" value="<?=$indvdlTrustee['indvdl_id']?>">
 				<p style="padding-left:165px;" id="ele<?=$fieldKey?>">                
-                <input type="text" name="txtTrusteeFName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeFName<?=$fieldKey?>" value="<?=$indvdlTrustee['fname']?>" placeholder="Name of Trustee"/>
-				<input type="text" name="txtTrusteeMName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeMName<?=$fieldKey?>" value="<?=$indvdlTrustee['mname']?>" placeholder="Name of Trustee"/>
-				<input type="text" name="txtTrusteeLName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeLName<?=$fieldKey?>" value="<?=$indvdlTrustee['lname']?>" placeholder="Name of Trustee"/>
+                <input type="text" name="txtTrusteeFName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeFName<?=$fieldKey?>" value="<?=$indvdlTrustee['fname']?>" placeholder="First Name"/>
+				<input type="text" name="txtTrusteeMName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeMName<?=$fieldKey?>" value="<?=$indvdlTrustee['mname']?>" placeholder="Middle Name"/>
+				<input type="text" name="txtTrusteeLName<?=$fieldKey?>" style="width:185px;" id="txtTrusteeLName<?=$fieldKey?>" value="<?=$indvdlTrustee['lname']?>" placeholder="Last Name"/>
                 <input type="text" name="txtResAdd<?=$fieldKey?>" style="width:185px;" id="txtResAdd<?=$fieldKey?>" value="<?=$indvdlTrustee['address']?>" placeholder="Residential Address"/>
 				</p>
 				<?
         } 
         ?><!-- Dynamic div to show textboxes -->
-        <br/><div id="memberbox"></div>
+        <div id="memberbox"></div>
     </div>
 
     <div class="pdT20"><?

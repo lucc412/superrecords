@@ -72,7 +72,7 @@ class Nomination
     // update benef
     function updatebenef($benef_id, $name,$dob,$address, $relationship, $portion)  
     {
-        echo $updMember = "UPDATE dbn_nomination_benef 
+        $updMember = "UPDATE dbn_nomination_benef 
                         SET name = '".addslashes($name)."', 
 							dob = '".$dob."',
 							res_add = '".addslashes($address)."', 							

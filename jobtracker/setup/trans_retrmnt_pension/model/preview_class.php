@@ -15,7 +15,7 @@ class Preview {
     // fetch fund details
     public function fetchFundDetails()
     {
-       $selQry="SELECT job_id, fund_name, CONCAT_WS(',', mt_add_unit, mt_add_build, mt_add_street, cst_Description, mt_add_pst_code, country_name) mt_address 
+       $selQry="SELECT job_id, fund_name, CONCAT_WS(',', mt_add_unit, mt_add_build, mt_add_subrb, mt_add_street, cst_Description, mt_add_pst_code, country_name) mt_address 
                         FROM trp_fund_dtls, es_country, cli_state
                         WHERE job_id=".$_SESSION['jobId']."
                         AND mt_add_cntry = country_id 
@@ -163,7 +163,7 @@ class Preview {
             foreach ($arrIndvdlTrusty as $individualInfo) {
                 $trustIndividual .= '<table class="first" cellpadding="4" cellspacing="6">
                                     <tr>
-                                        <td colspan="2"><u>Individual '.$memberCtr.'</u></td>
+                                        <td colspan="2"><u>Trustee '.$memberCtr.'</u></td>
                                     </tr>
                                     <tr>
                                         <td>First Name :</td>

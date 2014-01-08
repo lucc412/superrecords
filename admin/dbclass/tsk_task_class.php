@@ -383,7 +383,7 @@ class Task_Class extends Database {
 	function sql_delete($recid) {
 
 		// set discontinue date of task 
-		$qryDel = "UPDATE task SET discontinue_date=NOW() WHERE task_id=".$recid;
+		$qryDel = "UPDATE task SET discontinue_date='".date('Y-m-d')."' WHERE task_id=".$recid;
 		mysql_query($qryDel);
 	}
 

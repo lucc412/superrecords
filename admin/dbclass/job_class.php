@@ -303,7 +303,7 @@ class Job_Class extends Database
 		$jobId = $_REQUEST["jobId"];
 		$value = $_REQUEST["txtQuery"];
 		
-		$qrySel = "INSERT INTO queries(job_id, query,date_added) VALUES({$jobId},'{$value}',NOW())";
+		$qrySel = "INSERT INTO queries(job_id, query,date_added) VALUES({$jobId},'{$value}','".date("Y-m-d")."')";
 		mysql_query($qrySel);
 		
 		// Fetching last report ID.
@@ -472,11 +472,11 @@ class Job_Class extends Database
 	public function discontinue_job($queryId)
 	{
 		// set discontinue date of jobs 
-		$qryUpdate = "UPDATE job SET discontinue_date=NOW() WHERE job_id=".$_REQUEST["jobId"];
+		$qryUpdate = "UPDATE job SET discontinue_date='".date("Y-m-d")."' WHERE job_id=".$_REQUEST["jobId"];
 		mysql_query($qryUpdate);
 
 		// set discontinue date of task 
-		$qryDel = "UPDATE task SET discontinue_date=NOW() WHERE job_id=".$_REQUEST["jobId"];
+		$qryDel = "UPDATE task SET discontinue_date='".date("Y-m-d")."' WHERE job_id=".$_REQUEST["jobId"];
 		mysql_query($qryDel);
 	}
 	
@@ -553,7 +553,7 @@ class Job_Class extends Database
 									".$jobId.", 
 									'".$_REQUEST['textSource_'.$uploadCnt]."', 
 									'".addslashes($fileName)."', 
-									NOW() 
+									'".date('Y-m-d')."' 
 									)";
 						mysql_query($qryIns);
 					}
@@ -653,7 +653,7 @@ class Job_Class extends Database
 	public function send_mail_practice($jobId)
 	{
 		 $query ="UPDATE job
-				  SET sent_mail_date=NOW()
+				  SET sent_mail_date='".date('Y-m-d')."'
 				  WHERE job_id='$jobId'
   				 ";
 		$runQuery = mysql_query($query);

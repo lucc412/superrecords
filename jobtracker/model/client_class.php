@@ -55,7 +55,7 @@ class Client {
 					'" . $_REQUEST['txtName'] . "', 
 					" . $_REQUEST['cbAuthority'] . ",
 					" . $_SESSION['PRACTICEID'] . ", 
-					NOW()
+					'".date('Y-m-d')."'
 					)";
 
 		mysql_query($qryIns);

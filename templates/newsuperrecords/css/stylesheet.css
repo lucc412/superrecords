@@ -591,7 +591,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 }
 
-.rightmenu li:hover {
+.rightmenu li:hover , .rightmenu li.active {
 	background:url(../images/rightmenu-hover.jpg) 0px 0px no-repeat;
 }
 
@@ -606,7 +606,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 }
 
-.rightmenu li a:hover {
+.rightmenu li a:hover, .rightmenu li.active a {
 	color:#fff;
 	margin-right:10px;
 	background:none;

@@ -63,11 +63,17 @@ class Fund
     // insert fund details
     function insertFund() 
     {
-      $qryIns = "INSERT INTO mkt_fund_dtls(job_id, fund_name, mt_add)
+      $qryIns = "INSERT INTO mkt_fund_dtls(job_id, fund_name, metAddUnit,metAddBuild,metAddStreet,metAddSubrb,metAddState,metAddPstCode,metAddCntry)
                     VALUES ( 
                     '".$_SESSION['jobId']."', 
                     '".addslashes($_REQUEST['txtFund'])."', 
-                    '".addslashes($_REQUEST['mtAdd'])."'
+                    '".addslashes($_REQUEST['metAddUnit'])."',
+					'".addslashes($_REQUEST['metAddBuild'])."',
+					'".addslashes($_REQUEST['metAddStreet'])."',
+					'".addslashes($_REQUEST['metAddSubrb'])."',
+					'".addslashes($_REQUEST['metAddState'])."',
+					'".addslashes($_REQUEST['metAddPstCode'])."',
+					'".addslashes($_REQUEST['metAddCntry'])."'
                     )";
       
         mysql_query($qryIns);
@@ -78,7 +84,13 @@ class Fund
     {
       $qryUpd = "UPDATE mkt_fund_dtls
                     SET fund_name = '".addslashes($_REQUEST['txtFund'])."',
-                        mt_add = '".addslashes($_REQUEST['mtAdd'])."' 
+                        metAddUnit = '".addslashes($_REQUEST['metAddUnit'])."' ,
+						metAddBuild = '".addslashes($_REQUEST['metAddBuild'])."' ,
+						metAddStreet = '".addslashes($_REQUEST['metAddStreet'])."' ,
+						metAddSubrb = '".addslashes($_REQUEST['metAddSubrb'])."' ,
+						metAddState = '".addslashes($_REQUEST['metAddState'])."' ,
+						metAddPstCode = '".addslashes($_REQUEST['metAddPstCode'])."' ,
+						metAddCntry = '".addslashes($_REQUEST['metAddCntry'])."' 
                     WHERE job_id = ".$_SESSION['jobId'];
         mysql_query($qryUpd);
     }
@@ -86,7 +98,7 @@ class Fund
     // fetch fund details
     public function fetchFundDetails()
     {
-        $selQry="SELECT job_id, fund_name, mt_add FROM mkt_fund_dtls WHERE job_id=".$_SESSION['jobId'];
+        $selQry="SELECT job_id, fund_name, metAddUnit,metAddBuild,metAddStreet,metAddSubrb,metAddState,metAddPstCode,metAddCntry FROM mkt_fund_dtls WHERE job_id=".$_SESSION['jobId'];
         
         $fetchResult = mysql_query($selQry);
         $arrData = mysql_fetch_assoc($fetchResult);

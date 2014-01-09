@@ -20,7 +20,7 @@ if(!empty($_SESSION['jobId'])) {
         
 // insert & update case
 if(!empty($_REQUEST['saveData'])) {
-	echo "<pre>";	print_r($_REQUEST);//exit;
+	//echo "<pre>";	print_r($_REQUEST);//exit;
     $name = $_REQUEST['txtName'];
     $address = $_REQUEST['txtAdd'];
     $dob = getDateFormat($_REQUEST['txtDob']);

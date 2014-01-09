@@ -11,7 +11,7 @@ include(MARKETLINKEDPENSIONCONTENT);
 // page header
 ?><div class="pageheader">
     <h1>Fund Details</h1>
-    <span><b>Welcome to the Super Records Market Linked Pension fund details page.</b><span>
+    <span><b>Welcome to the Super Records fund details page.</b><span>
 </div>
 
 <form id="frmFund" method="post" action="fund.php">
@@ -25,7 +25,33 @@ include(MARKETLINKEDPENSIONCONTENT);
         <tr>
             <td>Meeting Address</td>
             <td>
-                <textarea name="mtAdd" id="mtAdd"><?=isset($arrFund['mt_add'])?$arrFund['mt_add']:"";?></textarea>
+				<div>
+                    <input type="text" id="metAddUnit" name="metAddUnit" style="width:115px;" value="<?=$arrFund['metAddUnit']?>" placeholder="Unit number" />
+                    <input type="text" id="metAddBuild" name="metAddBuild" style="width:115px;" value="<?=$arrFund['metAddBuild']?>" placeholder="Building" />
+                    <input type="text" id="metAddStreet" name="metAddStreet" style="width:115px;" value="<?=$arrFund['metAddStreet']?>" placeholder="Street"/><br>
+                    <input type="text" id="metAddSubrb" name="metAddSubrb" style="width:115px;" value="<?=$arrFund['metAddSubrb']?>" placeholder="Suburb"/>
+                    <select id="metAddState" name="metAddState" style="margin-bottom: 5px;width:135px;" >
+                        <option value="0">Select State</option>
+                        <?php foreach($arrStates AS $stateKey => $stateName) {
+                                    $selectStr = '';
+                                    if($arrFund['metAddState'] == $stateKey) $selectStr = 'selected';
+                                    ?><option <?=$selectStr?> value="<?=$stateKey?>"><?=$stateName?></option><?
+                            }
+                        ?>
+                    </select><br>
+                    <input type="text" id="metAddPstCode" name="metAddPstCode" style="width:115px;" value="<?=$arrFund['metAddPstCode']?>" placeholder="Post Code"/>
+                    <select id="metAddCntry" name="metAddCntry" style="margin-bottom: 5px;width:135px;" >
+                        <option value="0">Select Country</option>
+                        <?php foreach($arrCountry AS $countryId => $countryName) {
+                                    $selectStr = "";
+                                    if($arrFund['metAddCntry'] == $countryId) $selectStr = "selected";
+                                    else if ($countryId == 9 && $arrFund['met_add_country'] == 0)
+                                        $selectStr = "selected";
+                                    ?><option <?=$selectStr?> value="<?=$countryId?>"><?=$countryName?></option><?
+                            }
+                        ?>
+                    </select>
+                </div>
             </td>
         </tr>        
     </table>

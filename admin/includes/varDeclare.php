@@ -12,10 +12,14 @@ DEFINE("REPORTSAVEDREPORT",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/report_s
 DEFINE("REPORTDDOPTIONS",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/report_dd_options.php");
 DEFINE("JOBNAVIGATION",$_SERVER['DOCUMENT_ROOT'] . "/admin/includes/job_navigation.php");
 DEFINE("JSSHORITING","../jobtracker/js/jquery.sortElements.js");
+DEFINE("JOBTRACKERJS","../jobtracker/js/");
 define("ERRORICON", "<img src='images/errorIcon.gif' />");
 // define folder path
 $imgPath = "images/";
 $styleSheet = "css/";
 $javaScript = "js/";
+
+//Define Constant path
+define("CSS_ROOT",$_SERVER['DOCUMENT_ROOT']."/admin/css/");
 
 ?>

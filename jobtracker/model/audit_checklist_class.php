@@ -12,7 +12,7 @@ class AuditChecklist {
                             FROM audit_subchecklist aus, audit_checklist ac
                             LEFT JOIN audit_checklist_status acs ON ac.checklist_id = acs.checklist_id AND acs.job_id = '{$jobId}'
                             WHERE ac.checklist_id = aus.checklist_id
-                            GROUP BY ac.checklist_order, aus.subchecklist_order";
+                            ORDER BY ac.checklist_order, ac.checklist_id, aus.subchecklist_order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

@@ -15,9 +15,11 @@ class Preview {
     // fetch fund details
     public function fetchFundDetails()
     {
-       $selQry="SELECT job_id, fund_name, mt_add
-                        FROM mkt_fund_dtls
-                        WHERE job_id=".$_SESSION['jobId'];
+       $selQry="SELECT job_id, fund_name, CONCAT_WS(',', metAddUnit, metAddBuild, metAddStreet, metAddSubrb, cst_Description, metAddPstCode, country_name) met_address 
+                        FROM mkt_fund_dtls, es_country, cli_state
+                        WHERE job_id=".$_SESSION['jobId']."
+                        AND metAddCntry = country_id 
+                        AND metAddState = cst_Code";
        
         $fetchResult = mysql_query($selQry);
         $arrFundDtls = mysql_fetch_assoc($fetchResult);
@@ -127,7 +129,7 @@ class Preview {
                     </tr>
                     <tr>
                         <td>Meeting Address :</td>
-                        <td>'.$arrFund['mt_add'].'</td>
+                        <td>'.$arrFund['met_address'].'</td>
                     </tr>
                 </table><br/>';
         /* Fund details ends */
@@ -161,7 +163,7 @@ class Preview {
             foreach ($arrIndvdlTrusty as $individualInfo) {
                 $trustIndividual .= '<table class="first" cellpadding="4" cellspacing="6">
                                     <tr>
-                                        <td colspan="2"><u>Individual '.$memberCtr.'</u></td>
+                                        <td colspan="2"><u>Trustee '.$memberCtr.'</u></td>
                                     </tr>
                                     <tr>
                                         <td>First Name :</td>

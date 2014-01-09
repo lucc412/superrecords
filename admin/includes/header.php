@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+error_reporting(1);
 ob_start();
 session_start();
 //2 hours
@@ -18,7 +18,7 @@ $_SESSION['timeout'] = time();
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=9" />
         <!-- Main CSS-->
-        <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css?v=<?php echo filemtime(CSS_ROOT."stylesheet.css"); ?>"/>
         <link rel="stylesheet" type="text/css" href="css/tooltip.css"/>
         <link href="images/favicon.ico" rel="shortcut icon" />
         <!-- Google Webfont -->
@@ -30,6 +30,14 @@ if (basename($_SERVER['PHP_SELF']) == 'job.php') {
     ?><title>Job List</title>
             <!--<script type="text/javascript" src="<?php echo $javaScript; ?>jquery-1.4.2.min.js"></script>-->
             <script type="text/javascript" src="<?php echo $javaScript; ?>job.js"></script><?
+			if(isset($_REQUEST['a']) && $_REQUEST['a'] == "addQueries") {?>
+			<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+			<script src="<?=JOBTRACKERJS?>jquery-fileupload/vendor/jquery.ui.widget.js"></script>
+			<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+			<script src="<?=JOBTRACKERJS?>jquery-fileupload/jquery.iframe-transport.js"></script>
+			<!-- The basic File Upload plugin -->
+			<script src="<?=JOBTRACKERJS?>jquery-fileupload/jquery.fileupload.js"></script>		
+			<?}
         } else if (basename($_SERVER['PHP_SELF']) == 'lead.php') {
             ?><title>Manage Lead</title>
             <script type="text/javascript" src="<?php echo $javaScript; ?>lead_validate.js"></script><?
@@ -353,18 +361,26 @@ if (basename($_SERVER['PHP_SELF']) == 'job.php') {
                                     }
 
                                     // Templates Submenu (Check access by passing $_SESSION of staff code and form code)
-                                    $access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'], 102, 1);
+                                    /*$access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'], 102, 1);
                                     if (is_array($access_submenu_level) == 1) {
                                         if (in_array("Y", $access_submenu_level)) {
                                             ?><li><a href="template.php?a=reset">Template</a></li><?
                                                 }
-                                            }
+                                            }*/
 
                                             // Task Status Submenu (Check access by passing $_SESSION of staff code and form code)
                                             $access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'], 97, 1);
                                             if (is_array($access_submenu_level) == 1) {
                                                 if (in_array("Y", $access_submenu_level)) {
                                                     ?><li><a href="task_status.php?a=reset">Task Status</a></li><?
+                                                }
+                                            }
+											
+											// Audit Checklist (Check access by passing $_SESSION of staff code and form code)
+                                            $access_submenu_level = $commonUses->checkSubMenuAccess($_SESSION['staffcode'], 102, 1);
+                                            if (is_array($access_submenu_level) == 1) {
+                                                if (in_array("Y", $access_submenu_level)) {
+                                                    ?><li><a href="audit_checklist.php">Audit Checklist</a></li><?
                                                 }
                                             }
 

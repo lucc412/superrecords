@@ -196,7 +196,7 @@ class Fund
     // update individual trustee
     function updateIndividual($memberId, $trusteeFName,$trusteeLName, $trusteeMName, $resAdd)  
     {
-        echo $updMember = "UPDATE dbn_indvdl_member 
+        $updMember = "UPDATE dbn_indvdl_member 
                         SET fname = '".addslashes($trusteeFName)."', 
 							mname = '".addslashes($trusteeMName)."', 						
 							lname = '".addslashes($trusteeLName)."', 							

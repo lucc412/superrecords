@@ -6,7 +6,8 @@ include("../../include/common.php");
 // include class file
 include("model/fund_class.php");
 $objFund = new Fund();
-
+$arrStates = fetchStates();
+$arrCountry = fetchCountries();
 // set recid in session for Retrieve saved jobs
 if(!empty($_REQUEST['recid'])) 
 {

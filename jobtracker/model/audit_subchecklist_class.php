@@ -91,7 +91,7 @@ class AuditSubchecklist {
                             WHERE ac.checklist_id = aus.checklist_id
                             AND ac.checklist_id = acs.checklist_id
                             AND acs.job_id = '{$jobId}'
-                            GROUP BY ac.checklist_order, aus.subchecklist_order";
+                            ORDER BY ac.checklist_order, ac.checklist_id , aus.subchecklist_order";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

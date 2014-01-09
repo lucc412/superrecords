@@ -264,7 +264,7 @@ switch ($a)
 						{?><select name="txtPeriod" id="txtPeriod" title="Select period">
 							<option value="">Select Period</option><?
 							while($optionYear <= date("Y")) {
-								if(time() < strtotime("01 July ".$optionYear)) break;
+								//if(time() < strtotime("01 July ".$optionYear)) break;
 								$optPeriod = "Year End 30/06/".$optionYear++;
 								$strPeriod = '';
 								if($dbPeriod == $optPeriod) $strPeriod = 'selected';

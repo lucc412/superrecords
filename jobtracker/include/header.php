@@ -10,13 +10,13 @@
 		<!--<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" /> 
 		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />-->
 		<link href="<?=DIR?>images/favicon.ico" rel="shortcut icon" />
-		<!-- Main CSS-->
-		<link rel="stylesheet" type="text/css" href="<?=DIR?>css/stylesheet.css"/>
+		<!-- Main CSS-->		
+		<link rel="stylesheet" type="text/css" href="<?=DIR?>css/stylesheet.css?v=<?php echo filemtime(CSS_ROOT."stylesheet.css"); ?>"/>
 		<!-- Google Webfont -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="<?=DIR?>css/tooltipster.css" />
 		<script type="text/javascript" src="<?=DIR?>js/datetimepicker_css.js"></script>
-		<script type="text/javascript" src="<?=DIR?>js/common.js"></script>
+		<script type="text/javascript" src="<?=DIR?>js/common.js?v=<?php echo filemtime(JS_ROOT."common.js"); ?>"></script>
                 <script type="text/javascript" src="<?=DIR?>js/jquery.tooltipster.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function() {

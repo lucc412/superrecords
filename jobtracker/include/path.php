@@ -23,6 +23,10 @@ define("ICOIMG", "<img style='padding-right:2px' src='images/jpg.png'>");
 define("ICOPPT", "<img style='padding-right:2px' src='images/ppt.png'>");
 define("TICK", "<img src='images/yes.png'>");
 
+//Define Constant path
+define("CSS_ROOT",$_SERVER['DOCUMENT_ROOT']."/jobtracker/css/");
+define("JS_ROOT",$_SERVER['DOCUMENT_ROOT']."/jobtracker/js/");
+
 // file path constants
 define('TOPBAR',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/topbar.php');
 define('HEADDATA',$_SERVER['DOCUMENT_ROOT'].'/jobtracker/include/header.php');

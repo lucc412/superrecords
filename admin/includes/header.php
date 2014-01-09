@@ -18,7 +18,7 @@ $_SESSION['timeout'] = time();
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=9" />
         <!-- Main CSS-->
-        <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css?v=<?php echo filemtime(CSS_ROOT."stylesheet.css"); ?>"/>
         <link rel="stylesheet" type="text/css" href="css/tooltip.css"/>
         <link href="images/favicon.ico" rel="shortcut icon" />
         <!-- Google Webfont -->

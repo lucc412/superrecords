@@ -113,7 +113,9 @@
 			<td><select name="lstTaskStatus">
 					<option value="0">Select Task Status</option><?php
 					foreach($objCallData->arrTaskStatus AS $id => $desc){
-						?><option value="<?=$id?>"><?=$desc?></option><?php 
+                                            $sel = "";
+                                            if($id == 1)$sel = "selected";
+						?><option value="<?=$id?>" <?=$sel?>><?=$desc?></option><?php 
 					} 
 				?></select>
 				<a class="tooltip" href="#"><img src="images/help.png"><span class="help">Select task status.</span></a>

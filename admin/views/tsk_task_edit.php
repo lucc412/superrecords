@@ -146,6 +146,7 @@
 					<option value="0">Select Task Status</option><?php
 					foreach($objCallData->arrTaskStatus AS $id => $desc){
 						$selectStr = '';
+                                                if(empty($arrTaskData['task_status_id']) && $id == 1) $selectStr = 'selected';
 						if($id == $arrTaskData['task_status_id']) $selectStr = 'selected';	
 						?><option <?=$selectStr?> value="<?=$id?>"><?=$desc?></option><?php 
 					} 

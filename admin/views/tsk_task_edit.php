@@ -243,6 +243,7 @@
 				<img src="images/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
                                     <? }  else { ?>
                                         <span><?=$task_due_date?></span>
+                                        <input type="hidden" name="taskDueDate" id="taskDueDate" value="<?=$task_due_date?>">
                                    <? }?>	
 				</td>
 		</tr>

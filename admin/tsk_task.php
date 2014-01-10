@@ -103,7 +103,7 @@ if($_SESSION['validUser']) {
                     $oldTaskStatus = $objCallData->getTaskStatus($taskId);
                     $newTaskStatus = $_POST['lstTaskStatus'];
 
-                    if($oldTaskStatus != $newTaskStatus && $newTaskStatus == '16')
+                    if($oldTaskStatus != $newTaskStatus && $newTaskStatus == '2')
                     {
                             /* send mail function starts here */	
                             $pageCode = 'TSKDN';

@@ -33,7 +33,7 @@ $(function(){
         }
     });
         
-    $('INPUT[type="file"]').change(function () {
+    $('INPUT[type="file"]').change(function (e) {
         //var ext = this.value.match(/\.(.+)$/)[1];
         var fileName = $(this).val().split('/').pop().split('\\').pop();
         var ext = fileName.split('.').pop();
@@ -58,6 +58,20 @@ $(function(){
                         alert('Sorry, This file type is not allowed.');
                         this.value = '';
         }
+		var file_list = e.target.files;
+		for (var i = 0, file; file = file_list[i]; i++) {
+		    var sFileName = file.name;
+		    var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
+		    var iFileSize = file.size;
+		    var iConvert = (file.size / 1048576).toFixed(2);
+			if(iConvert > 100) {
+				alert('Sorry, Maximum 100MB file is allowed.');
+				this.value = '';
+				/*$("#uploads").html("");
+				document.getElementById('fileUpload').value = "";
+				filestoupload = 0;*/
+			}
+		}
     });
 });
 

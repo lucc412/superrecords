@@ -11,7 +11,7 @@ include(TOPBAR);
 </div>
 
 <form name="objForm" id="objForm" method="post" action="jobs_doc_upload.php?sql=insertDoc" enctype="multipart/form-data" onSubmit="javascript:return checkDocValidation();">
-        <input type="hidden" name="additionalDoc" value="<?if(!empty($_REQUEST['lstJob'])) echo 'Y'; else echo 'N';?>">
+        <input type="hidden" name="additionalDoc" id="additionalDoc" value="<?if(!empty($_REQUEST['lstJob'])) echo 'Y'; else echo 'N';?>">
         <table width="60%" class="fieldtable" cellpadding="10px;">
                 <tr>
                         <td><strong> Select Job</strong></td>
@@ -41,8 +41,10 @@ include(TOPBAR);
                 <tr><td>&nbsp;</td></tr>
 
                 <tr>
-                        <td><strong> Source Document</strong></td>
-                        <td> <input type="file" name="fileDoc" id="fileDoc" size="30px" /> </td>
+                        <td valign="top"><strong> Source Document</strong></td>
+                        <td> <input type="file" name="fileDoc" id="fileDoc" size="30px" class="fileupload" />
+							<br><div id="uploads"></div>
+						</td>
                 </tr>
 
                 <tr><td>&nbsp;</td></tr>
@@ -53,7 +55,7 @@ include(TOPBAR);
                         </td>
 
                         <td>
-                                <button class="button" type="submit" name="btnSubmit" value="Submit">Submit</button>
+                                <button class="button" type="button" onclick="javascript:return checkDocValidation();" name="btnSubmit" value="Submit">Submit</button>
                         </td>
                 </tr>
         </table>

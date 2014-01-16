@@ -6,8 +6,9 @@ $objScr = new AuditMultiupload();
 $sql = $_REQUEST['sql'];
 switch ($sql)
 {    
-    case "uploadAuditDocs":
+    case "uploadAuditDocs":			
             $objScr->add_audit_Docs($_SESSION['jobId']);
+			exit;
             header('location: audit_upload.php');
             break;
 }

@@ -8,10 +8,11 @@ switch ($sql)
 {
 	case "uploadSubAuditDocs":
 		$objScr->add_audit_Docs($_SESSION['jobId'],$_REQUEST['checklistId'],$_REQUEST['subchecklistId']);
-		echo "<script>
+		/*echo "<script>
 			opener.parent.location.href = 'audit_subchecklist.php?checklistId=".$_REQUEST['checklistId']."';
 			self.close();
-		</script>";
+		</script>";*/
+		exit;
 		break;
 }
 

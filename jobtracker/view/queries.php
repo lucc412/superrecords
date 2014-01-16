@@ -1,10 +1,9 @@
 <?
 // include topbar file
 include(TOPBAR);
-//include(PHPUPLODER);
-
 // page header
-?><div class="pageheader">
+?>
+<div class="pageheader">
 	<h1>View All Queries</h1>
 	<span>
 		<b>Welcome to the Super Records pending query list.</b></br>Below you can see all pending queries for your practice.
@@ -91,20 +90,9 @@ include(TOPBAR);
 					<td class="tddata"><?
 					$folderPath = "../uploads/queries/".$arrInfo['file_path'];
 					if(empty($arrInfo['file_path']) || !file_exists($folderPath)) {
-						?><input type="file" name="doc_<?=$queryId?>">
-						<?php				
-						/*	$uploader=new PhpUploader();
-							$uploader->MaxSizeKB=102400;
-							$uploader->Name="doc_".$queryId;
-							$uploader->InsertText="Select files";
-							$uploader->AllowedFileExtensions="*.jpg,*.png,*.gif,*.txt,*.zip,*.rar";	
-							$uploader->MultipleFilesUpload=false;
-							$uploader->ManualStartUpload=true;
-							//$uploader->InsertButtonID="uploadbutton_".$queryId;
-							$uploader->Render();
-						?>
-						
-						<?*/
+						?><input type="file" class="fileupload" name="doc_<?=$queryId?>" id="doc_<?=$queryId?>">
+						<div class="uploads" id="upload_<?=$queryId?>"></div>
+						<?php
 					}
 					else {
 						$icon = returnFileIcon($arrInfo['file_path']);
@@ -147,22 +135,7 @@ include(TOPBAR);
 			   </script>';
 		}	
 	}
-?></form>
-<script type="text/javascript">
-	function doStart()
-	{
-		var uploadobj = document.getElementById('myuploader');
-		if (uploadobj.getqueuecount() > 0)
-		{
-			uploadobj.startupload();
-		}
-		else
-		{
-			alert("Please browse files for upload");
-		}
-	}
-</script>
-<?
+?></form><?
 
 // include footer file
 include(FOOTER);

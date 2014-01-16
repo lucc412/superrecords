@@ -1,4 +1,5 @@
 // This function is used to perform validations for upload
+var filestoupload =0;
 function uploadValidate() {
 
 	var flagReturn = true;
@@ -9,10 +10,14 @@ function uploadValidate() {
 		eleFileTitle.className = "errclass";
 		flagReturn = false;
 	}
-	else if(eleFileUpload.value == 0) {
+	else if(filestoupload == 0) {
 		eleFileUpload.className = "errclass";
+		eleFileTitle.className = "";
 		flagReturn = false;
+	} else{
+		eleFileTitle.className = "";
+		eleFileUpload.className = "";
+		$(".fileUpload").click(); //Upload File & Submit Form Using Ajax
 	}
-
 	return flagReturn;
 }

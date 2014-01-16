@@ -342,7 +342,7 @@ class empcontactContentList extends Database
                         <td class="dr"><input type="text" name="con_Fax" maxlength="20" value="<?php echo stripslashes($row["con_Fax"]) ?>" onkeypress='return isNumberKey(event)'></td>
                     </tr>
                     <tr>
-                        <td class="hr">Email</td>
+                        <td class="hr">Email<font style="color:red;" size="2">*</font></td>
                         <td class="dr"><input type="text" name="con_Email" maxlength="100" value="<?php echo stripslashes($row["con_Email"]) ?>"  size="39"></td>
                     </tr>
                     <tr>

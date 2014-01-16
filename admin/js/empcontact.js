@@ -24,8 +24,8 @@
 				document.contact.con_Build.focus();
 				return(false);
 			}*/
-			else if (document.contact.con_Email.value != "" )
-			{
+			/*else if (document.contact.con_Email.value != "" )
+			{*/
 			var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
 
 				 if (filter.test(document.contact.con_Email.value)==false)
@@ -34,7 +34,7 @@
 						  document.contact.con_Email.focus();
 							var a = true; return false;
 				  }
-  			}
+  			//}
 			else {
 				document.contact.submit();
 				return(true);

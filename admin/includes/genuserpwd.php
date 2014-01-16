@@ -1,5 +1,5 @@
 <?php 
-include("../common/class.Database.php");
+include("class.Database.php");
 $conn=new Database();
 if($_GET['contactname']!="")
 {

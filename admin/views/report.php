@@ -9,8 +9,6 @@ include("includes/header.php");
 	<title><?=$reportPageTitle?></title>
 	
 <?
-		
-
 		// error message if field name already exists
 		if(isset($_REQUEST['flagDuplicate']) &&  $_REQUEST['flagDuplicate'] == 'Y') {
 			?><div class="errorMsg" style="margin-top:-5px;">Sorry, This <strong>Report Name</strong> already exists. Please specify another name.</div><br/><br/><?
@@ -135,12 +133,18 @@ include("includes/header.php");
 							?><tr class="fieldheader">
 								<th class="fieldheader" align="left" width="25px;">S.No.</th><?
 								foreach($arrData AS $columnName => $columnValue) {
+									//For Edit Report Link By Nishant
+									if($columnName == "edit_id" || $columnName=="edit_job_genre"){
+										continue;
+									}
 									?><th class="fieldheader" align="left"><?=strtoupper($_SESSION['ARRDISPFIELDS'][$columnName])?></th><?
 								}
 								$flagDisplay = false;
-							?></tr><?
+							?>
+								<th class="fieldheader" align="left" width="25px;">Action</th>
+							</tr><?
 						}
-					}
+					}				
 					
 					$srNoCount = 1;
                     // display column values
@@ -156,10 +160,52 @@ include("includes/header.php");
 							$srNoCount++;
 
 							foreach($arrData AS $columnName => $columnValue) {
+								//For Edit Report Link By Nishant
+								if($columnName == "edit_id"){
+									$editLinkId = $columnValue;
+									continue;
+								}
+								if($columnName == "edit_job_genre") {
+									$editJobGen = $columnValue;
+									continue;
+								}
 								?><td <?=$tdColor?>><?=stripslashes($columnValue)?></td><?
 								$tdColor ='';
+								
 							}
-						?></tr><?
+							
+							//For Edit Link URL Genrate By Nishant
+							//echo $reportPageName;
+							switch($reportPageName) {
+								//For Practice
+								case "pr_practice":
+									$url_href = "pr_practice.php?a=edit&amp;recid=".$editLinkId;
+								break;
+								
+								//For Client
+								case "client":
+									$url_href = "cli_client.php?a=edit&amp;recid=".$editLinkId;
+								break;
+								
+								//For Task
+								case "task":
+									$url_href = "tsk_task.php?a=edit&recid=".$editLinkId;
+								break;
+								
+								//For Job
+								case "job":
+									$url_href = "job.php?a=editJob&jobId=".$editLinkId."&jobGenre=".$editJobGen;
+									//$url_href = "tsk_task.php?a=edit&recid=".$editLinkId;
+								break;
+							}
+							
+						?>
+							<td>
+								<a target="_blank" href="<?=$url_href;?>">
+									<img src="images/edit.png" border="0" alt="Edit" name="Edit" title="Edit" align="middle">										
+								</a>
+							</td>
+						</tr><?
 					}
 					?></table><?
 				}

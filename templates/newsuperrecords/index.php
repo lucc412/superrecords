@@ -52,10 +52,9 @@ $root_path = "http://".$_SERVER['SERVER_NAME']; ?>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
 		<!-- Main CSS-->
-		
-		<link rel="stylesheet" href="<?php echo $root_path ?>/templates/system/css/system.css" type="text/css" />
+		<link rel="stylesheet" href="<?php echo $root_path ?>/templates/system/css/system.css?v=<?=filemtime($_SERVER['DOCUMENT_ROOT']."/templates/system/css/system.css");?>" type="text/css" />
 		<link rel="stylesheet" href="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/css/accordion.css" type="text/css"  />
-		<link rel="stylesheet" href="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/css/stylesheet.css" type="text/css" />
+		<link rel="stylesheet" href="<?php echo $root_path ?>/templates/<?php echo $this->template; ?>/css/stylesheet.css?v=<?=filemtime($_SERVER['DOCUMENT_ROOT']."/templates/".$this->template."/css/stylesheet.css");?>" type="text/css" />
 
 		<!--[if IE]>
 		<link rel="stylesheet" type="text/css" href="ie.css" />

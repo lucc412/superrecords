@@ -120,32 +120,41 @@ class SR_Report {
 			// for lead page report case
 			case "lead":
 				$orderBy = "ORDER BY tbl.id desc";
+				///For edit report
+				
 				break;
 			
 			// for client page report case
 			case "client":
 					$orderBy = "ORDER BY tbl.client_id desc";
+					///For edit report
+					$tbl_col_name = ", tbl.client_id edit_id";
 				break;	
 			
 			// for job page report case
 			case "job":
 					$strFirstWhr = "AND tbl.discontinue_date IS NULL AND tbl.job_submitted = 'Y'";
 					$orderBy = "ORDER BY tbl.job_id desc";
+					///For edit report
+					$tbl_col_name = ", tbl.job_id edit_id, tbl.job_genre edit_job_genre";
 				break;			  
 				 
 			// for practice page report case
 			case "pr_practice":
 					$orderBy = "ORDER BY tbl.id desc";
+					///For edit report
+					$tbl_col_name = ", tbl.id edit_id";
 				break;	
 				
 			// for task page report case
 			case "task":
 					$strFirstWhr = "AND tbl.discontinue_date = '0000-00-00' ";
 					$orderBy = "ORDER BY tbl.task_id desc";
+					$tbl_col_name = ", tbl.task_id edit_id";
 				break;
 		}
 
-		$qrySel = "SELECT {$strColumns}
+		$qrySel = "SELECT {$strColumns} $tbl_col_name
 				   FROM {$reportPageName} tbl {$otherTable}
 				   WHERE 1
 				   {$strFirstWhr}

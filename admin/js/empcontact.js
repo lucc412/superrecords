@@ -19,11 +19,11 @@
 				document.contact.con_Lastname.focus();
 				return(false);
 			}
-			else if(document.contact.con_Build.value == "") {
+			/*else if(document.contact.con_Build.value == "") {
 				alert( "Enter Unit Number" );
 				document.contact.con_Build.focus();
 				return(false);
-			}
+			}*/
 			else if (document.contact.con_Email.value != "" )
 			{
 			var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i

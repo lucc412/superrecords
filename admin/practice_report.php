@@ -74,6 +74,10 @@ if($_SESSION['validUser']) {
 						if($flagDisplay) {
 							echo"<tr><td style='font-weight:bold;font-size:15PX;color:#F05729;background-color:#074165;'>S.No.</td>";
 							foreach($arrData AS $columnName => $columnValue) {
+								//For Edit Report Link Not Need to display in excel By Nishant
+								if($columnName == "edit_id"){
+									continue;
+								}								
 								$columnName = strtoupper($_SESSION['ARRDISPFIELDS'][$columnName]);
 								echo"<td style='font-weight:bold;font-size:15PX;color:#F05729;background-color:#074165;'>".$columnName."</td>";
 							}
@@ -86,6 +90,10 @@ if($_SESSION['validUser']) {
 					foreach($arrReportData AS $userId => $arrData) {
 						echo"<tr><td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".$srNoCount++."</td>";
 						foreach($arrData AS $columnName => $columnValue) {
+							//For Edit Report Link Not Need to display in excel By Nishant
+							if($columnName == "edit_id"){
+								continue;
+							}
 							echo"<td style='background-color:#ffffff;color:rgb(0, 0, 0);font-weight:normal;font-size:11pt;'>".stripslashes($columnValue)."</td>";
 						}
 						echo"</tr>";

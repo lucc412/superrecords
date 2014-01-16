@@ -284,7 +284,7 @@ class empcontactContentList extends Database
                         </td>
                     </tr>
                     <tr>
-                        <td class="hr" nowrap>Unit Number<font style="color:red;" size="2">*</font></td>
+                        <td class="hr" nowrap>Unit Number</td>
                         <td class="dr">
                         <input type="text" name="con_Build" maxlength="50" value="<?php echo stripslashes($row["con_Build"]) ?>">
                         <a class="tooltip" href="#"><img src="images/help.png"><span class="help">Street Number</span></a>

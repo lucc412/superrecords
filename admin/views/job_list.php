@@ -248,7 +248,26 @@ switch ($a)
 				</tr>
 				<tr>
 					<td class="hr">Job Type</td>
-					<td class="dr"><?=$objCallData->arrJobType[$objCallData->arrJob[$_REQUEST["jobId"]]["job_type_id"]]?></td>
+					<td class="dr">
+					<?php
+						if($_SESSION["usertype"] == "Staff")
+	                        $arrFeatures = $commonUses->getFeatureVisibility(7);
+						else
+							$arrFeatures['stf_visibility'] = 1;
+	                            
+						if($arrFeatures['stf_visibility'] == 1 && $objCallData->arrJob[$_REQUEST["jobId"]]['job_genre'] == "COMPLIANCE") {?>
+								<select id="lstJob" name="lstJob">
+									<option value="">Select Job Type</option><?php
+									foreach($objCallData->arrJobType AS $type_id => $job_type) {
+										?><option value="<?=$type_id?>" <?=($objCallData->arrJob[$_REQUEST["jobId"]]["job_type_id"]==$type_id)?"selected":"";?>><?=$job_type?></option><?php 
+									} 
+								?></select>
+						<?php
+							} else { ?>
+							<?=$objCallData->arrJobType[$objCallData->arrJob[$_REQUEST["jobId"]]["job_type_id"]]?></td>
+						<?php							
+							}
+					?>						
 				</tr>
 				<tr>
 					<td class="hr">Period</td>

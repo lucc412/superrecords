@@ -412,7 +412,7 @@ class Job_Class extends Database
 		$dateSignedUp = $commonUses->getDateFormat($_REQUEST["dateSignedUp"]);
 
 		$arrJobName = explode('::',$_REQUEST['hidJobName']);
-		$jobName = $arrJobName[0].'::'.$_REQUEST["txtPeriod"].'::'.$arrJobName[2];
+		$jobName = $arrJobName[0].'::'.$_REQUEST["txtPeriod"].'::'.$_REQUEST['lstJob'];
 
 		if($_REQUEST['lstJobStatus'] == '7') {
                     $dateCompleted = $commonUses->getDateFormat($_REQUEST["dateCompleted"]);
@@ -427,7 +427,8 @@ class Job_Class extends Database
                             SET job_status_id=".$_REQUEST["lstJobStatus"].", 
                                 job_due_date='". $dateSignedUp ."', 
                                 job_name='". $jobName ."', 
-                                period='". $_REQUEST["txtPeriod"] ."' 
+                                period='". $_REQUEST["txtPeriod"] ."',
+								job_type_id = ".$_REQUEST['lstJob']."
                                 ".$strUpd."
                             WHERE job_id=".$jobId;
 				   

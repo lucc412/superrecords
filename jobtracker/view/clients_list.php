@@ -1,4 +1,6 @@
 <?
+if($sql != "ajaxsearch") {
+	
 // include topbar file
 include(TOPBAR);
 
@@ -8,8 +10,13 @@ include(TOPBAR);
 	<span>
 		<b>Welcome to the Super Records client list for your practice.</b></br>Here you can see a list of clients you have set up with Super Records as well as add new clients. Please note you will need to add the client before submitting any jobs for that client.
 	<span>
-</div><?
-
+</div>
+<div>
+	<input style="float: right;" type="text" name="clientSearch" id="clientSearch" value="" class="ui-autocomplete-input" placeholder="Search Client">
+</div>
+<div id="clientListData">
+<?
+} //not Ajax Search
 // content
 if(count($arrClients) == 0) {
 	?><div class="errorMsg">You don't have any clients added yet.</div><?	
@@ -35,10 +42,15 @@ else {
 			</tr><?
 			$countRow++;
 		}
-	?></table>
+?></table>
 	<?
 }
 
-// include footer file
-include(FOOTER);
+if($sql != "ajaxsearch") { //Not AjaxSearch
+	?>
+	</div>
+	<?php	
+	// include footer file
+	include(FOOTER);
+	}
 ?>

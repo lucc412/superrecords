@@ -5,11 +5,14 @@ class Client {
   
 	}
   
-	public function sql_select() {		
+	public function sql_select($name = "") {		
 
+		if($name!=""){
+			$searchName = " AND t1.client_name LIKE '".$name."%'";
+		}
 		$qrySel = "SELECT t1.client_name, t1.client_id, DATE_FORMAT(t1.client_received, '%d/%m/%Y') client_received, t1.recieved_authority, t1.client_type_id
 					FROM client t1
-					WHERE id = '{$_SESSION['PRACTICEID']}'";
+					WHERE id = '{$_SESSION['PRACTICEID']}' $searchName ";
 
 		$fetchResult = mysql_query($qrySel);		
 		while($rowData = mysql_fetch_assoc($fetchResult)) {

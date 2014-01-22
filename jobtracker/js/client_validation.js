@@ -71,3 +71,12 @@ function checkUnique(inputValue, entityId) {
 		xmlhttp.send();
 	}
 }
+$( document ).ready(function() {
+	$( "#clientSearch" ).keyup(function() {
+		$.post("clients.php", { clientNameSearch: $( this ).val(), sql:"ajaxsearch"}, function(data) {
+			$("#clientListData").html(data);
+			sortingbyfields();
+			//alert("Data Loaded: " + data);
+		});
+	});
+});

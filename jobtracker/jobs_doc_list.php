@@ -5,5 +5,6 @@ $objScr = new DOCUMENT();
 
 $arrjobs = $objScr->fetchJobs();
 $arrAllDocs = $objScr->fetch_documents();
+$arrClients = getclientlist();
 include(VIEW.'jobs_doc_list.php');
 ?>

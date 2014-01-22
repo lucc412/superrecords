@@ -1,3 +1,5 @@
+function sortingbyfields() {
+
 var trcolor = 0 ;
 jQuery.fn.sortElements = (function(){
     
@@ -109,3 +111,6 @@ jQuery.fn.sortElements = (function(){
 	        inverse = !inverse;
 	    });
 		
+}
+	
+sortingbyfields(); //For Auto call reuse

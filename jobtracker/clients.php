@@ -61,6 +61,13 @@ switch ($sql) {
 	case "delete":
 		$objScr->sql_delete($_REQUEST['recid']);
 		break;
+		
+	case "ajaxsearch":
+		$arrClients = $objScr->sql_select($_REQUEST['clientNameSearch']);
+		$arrClientType = $objScr->fetchType();
+		include(VIEW.'clients_list.php');
+		exit;
+		break;
 }
 
 switch ($a) {

@@ -8,13 +8,33 @@ include(TOPBAR);
         <span>
                 <b>Welcome to the Super Records documents list for your jobs.</b></br>Below you can see all documents for your jobs.
         <span>
-</div><?
-
-?><form name="objForm" method="post" action="jobs_doc_list.php">
-        <input type="hidden" name="a" value="pending">
-
+</div>
+<form name="objForm" method="post" action="jobs_doc_list.php"><?
+	// client drop-down for filter
+	?><table width="100%">
+		<tr>
+		<td>
+			
         <button style="width:94px;" type="button" onclick="javascript:urlRedirect('jobs_doc_upload.php');" title="Click here to upload new source document" value="Add">Add</button>
-        </br></br><?
+		</td>
+                    <td align="right">
+                        <select style="width:300px;" name="lstClientType" id="lstClientType" onchange="this.form.submit();">
+                                <option value="0">Select Client</option><?php
+                                foreach($arrClients AS $clientId => $clientName){
+                                        $selectStr = '';
+                                        if($clientId == $_REQUEST['lstClientType']) $selectStr = 'selected';
+                                        ?><option <?=$selectStr?> value="<?=$clientId?>"><?=$clientName?></option><?php 
+                                }
+                        ?></select>
+                    </td>
+		</tr>
+	</table>
+	</form>
+	<br/>
+	
+	<form name="objForm" method="post" action="jobs_doc_list.php">
+        <input type="hidden" name="a" value="pending">
+		<?
 
         // content
         if(count($arrjobs) == 0) {

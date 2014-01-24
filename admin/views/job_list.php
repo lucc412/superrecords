@@ -264,10 +264,12 @@ switch ($a)
 								?></select>
 						<?php
 							} else { ?>
-							<?=$objCallData->arrJobType[$objCallData->arrJob[$_REQUEST["jobId"]]["job_type_id"]]?></td>
+							<?=$objCallData->arrJobType[$objCallData->arrJob[$_REQUEST["jobId"]]["job_type_id"]]?>
+							<input type="hidden" value="<?=$objCallData->arrJob[$_REQUEST["jobId"]]["job_type_id"];?>" name="lstJob" />
 						<?php							
 							}
 					?>						
+					</td>
 				</tr>
 				<tr>
 					<td class="hr">Period</td>

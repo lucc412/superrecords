@@ -55,7 +55,7 @@ class Client {
 		$qryIns = "INSERT INTO client(client_type_id, client_name, recieved_authority, id, client_received)
 					VALUES (
 					" . $_REQUEST['lstType'] . ", 
-					'" . $_REQUEST['txtName'] . "', 
+					'" . addslashes($_REQUEST['txtName']) . "', 
 					" . $_REQUEST['cbAuthority'] . ",
 					" . $_SESSION['PRACTICEID'] . ", 
 					'".date('Y-m-d')."'
@@ -88,7 +88,7 @@ class Client {
 
 		$qryUpd = "UPDATE client
 				SET client_type_id = '" . $_REQUEST['lstType'] . "',
-				client_name = '" . $_REQUEST['txtName'] . "',
+				client_name = '" . addslashes($_REQUEST['txtName']) . "',
 				recieved_authority = ".$_REQUEST['cbAuthority']."
 				WHERE client_id = '" . $_REQUEST['recid'] . "'";
 
